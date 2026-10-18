@@ -7,10 +7,12 @@ on:
   push:
     branches: [main]
 
-# A newer push to the same branch makes the in-flight run pointless.
+# A newer push to a pull request makes its in-flight run pointless. On main a run is never
+# cancelled: pushes land faster than a run finishes, so cancelling would leave main without
+# a finished run. Only the newest waiting run is kept, so main catches up with its latest push.
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
