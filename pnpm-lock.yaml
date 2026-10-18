@@ -228,8 +228,8 @@ catalogs:
       specifier: 6.9.0
       version: 6.9.0
     '@lingui/react':
-      specifier: 6.9.0
-      version: 6.9.0
+      specifier: 6.9.1
+      version: 6.9.1
     '@lingui/vite-plugin':
       specifier: 6.9.0
       version: 6.9.0
@@ -571,7 +571,7 @@ importers:
         version: 6.9.0(@babel/core@7.29.7(supports-color@7.2.0))
       '@lingui/react':
         specifier: 'catalog:'
-        version: 6.9.0(@babel/core@7.29.7(supports-color@7.2.0))(react@19.3.0)
+        version: 6.9.1(@babel/core@7.29.7(supports-color@7.2.0))(react@19.3.0)
       '@puckeditor/core':
         specifier: 'catalog:'
         version: 0.23.0(@floating-ui/dom@1.8.0)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(use-sync-external-store@1.7.0(react@19.3.0))
@@ -3142,6 +3142,15 @@ packages:
       '@babel/core':
         optional: true
 
+  '@lingui/babel-plugin-lingui-macro@6.9.1':
+    resolution: {integrity: sha512-KhOXhdBoWbyCAb76r49+9QojBkWyMfFqD5PF9Irl0av4x0rGdxknm/bj3PzB8nx1tq2+b3mAgyQCJAMwdvY2Jg==}
+    engines: {node: '>=22.19.0'}
+    peerDependencies:
+      '@babel/core': ^7.20.12 || ^8.0.0
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+
   '@lingui/cli@6.9.0':
     resolution: {integrity: sha512-/fO982w4GsMsxs5kTf/MnvkpD5/hm3c5uFaPmTWilvf5lnaJbjA3aBaBYliRocYDhvD71xMvLqcsfITB4wC4NA==}
     engines: {node: '>=22.19.0'}
@@ -3159,8 +3168,21 @@ packages:
     resolution: {integrity: sha512-1fwYejoGLeoy5P1/mop0WP35fDRXkB7fUFxyPV5E+vBbgOXtw+QDRt1y9WtyqjI+dz9zQtNYmND3+tBSeAADfw==}
     engines: {node: '>=22.19.0'}
 
+  '@lingui/conf@6.9.1':
+    resolution: {integrity: sha512-9kDH5v9AToFOemUzNrhDO9NjDngu0mvTUjdO4r9gSOUO7xydpKh0oL7itHGT2PKx1HIbpDXUJxkIzGZ7FcW2GQ==}
+    engines: {node: '>=22.19.0'}
+
   '@lingui/core@6.9.0':
     resolution: {integrity: sha512-woQCOsmbG3LxhqTyECcpxn6t3V5tQOgYOG7LL424a/dmpKttyqtJ1/qq3/U7H+ZG+ewFHh56UvQrXSJVnjCf2g==}
+    engines: {node: '>=22.19.0'}
+    peerDependencies:
+      babel-plugin-macros: 2 || 3
+    peerDependenciesMeta:
+      babel-plugin-macros:
+        optional: true
+
+  '@lingui/core@6.9.1':
+    resolution: {integrity: sha512-/WsHqJMxx1ONTI9i8iWMJmWodZhV6GjS93JziTmot2x18fF2WlmVQBjDAzGLK3ZcX/2D/6SF7vv72MIJip3Jkg==}
     engines: {node: '>=22.19.0'}
     peerDependencies:
       babel-plugin-macros: 2 || 3
@@ -3174,6 +3196,10 @@ packages:
 
   '@lingui/message-utils@6.9.0':
     resolution: {integrity: sha512-LaFvx9Vc/lx4EPbbDaiDtyumDM4aAglRA3yvFQsJkhs1UWrCgDaaUBWhkXKYcmVe9gb7qeGYCqmGWOL84N9xDw==}
+    engines: {node: '>=22.19.0'}
+
+  '@lingui/message-utils@6.9.1':
+    resolution: {integrity: sha512-pEfdWUhZoNrE8+06KOsv1r8VTKkdRvaT0gcXVO/FEVfphGiszSMQtoNhv3ftFbet7HKen2xx0LrzJ93mx3zVAw==}
     engines: {node: '>=22.19.0'}
 
   '@lingui/native-tools-android-arm64@0.1.5':
@@ -3240,8 +3266,8 @@ packages:
     peerDependencies:
       '@lingui/conf': ^6.0.1
 
-  '@lingui/react@6.9.0':
-    resolution: {integrity: sha512-0oSy/GpQUzMrylviy/IiDg6b0DH4HwGusSD8ht2dsDCdunH+wX8bfJ/njo7qtjyaawTjEbdyLCUzlZc2Gd2kVQ==}
+  '@lingui/react@6.9.1':
+    resolution: {integrity: sha512-mc0yX+unl9hLzpoYQZ4IsuhCdU0zTlUpZXqM9ElGS/SZTPA2BVV7CmcVpQ8hXm/GomGn2ewQRg2jNDkB+P/R6Q==}
     engines: {node: '>=22.19.0'}
     peerDependencies:
       babel-plugin-macros: 2 || 3
@@ -9332,6 +9358,14 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.29.7(supports-color@7.2.0)
 
+  '@lingui/babel-plugin-lingui-macro@6.9.1(@babel/core@7.29.7(supports-color@7.2.0))':
+    dependencies:
+      '@babel/types': 7.29.8
+      '@lingui/conf': 6.9.1
+      '@lingui/message-utils': 6.9.1
+    optionalDependencies:
+      '@babel/core': 7.29.7(supports-color@7.2.0)
+
   '@lingui/cli@6.9.0(rolldown@1.2.12)(supports-color@7.2.0)':
     dependencies:
       '@babel/core': 7.29.7(supports-color@7.2.0)
@@ -9369,10 +9403,24 @@ snapshots:
       lilconfig: 3.1.3
       normalize-path: 3.0.0
 
+  '@lingui/conf@6.9.1':
+    dependencies:
+      jest-validate: 29.7.0
+      jiti: 2.7.0
+      lilconfig: 3.1.3
+      normalize-path: 3.0.0
+
   '@lingui/core@6.9.0(@babel/core@7.29.7(supports-color@7.2.0))':
     dependencies:
       '@lingui/babel-plugin-lingui-macro': 6.9.0(@babel/core@7.29.7(supports-color@7.2.0))
       '@lingui/message-utils': 6.9.0
+    transitivePeerDependencies:
+      - '@babel/core'
+
+  '@lingui/core@6.9.1(@babel/core@7.29.7(supports-color@7.2.0))':
+    dependencies:
+      '@lingui/babel-plugin-lingui-macro': 6.9.1(@babel/core@7.29.7(supports-color@7.2.0))
+      '@lingui/message-utils': 6.9.1
     transitivePeerDependencies:
       - '@babel/core'
 
@@ -9383,6 +9431,12 @@ snapshots:
       pofile-ts: 4.0.3
 
   '@lingui/message-utils@6.9.0':
+    dependencies:
+      '@messageformat/date-skeleton': 1.1.0
+      '@messageformat/parser': 5.1.1
+      js-sha256: 0.10.1
+
+  '@lingui/message-utils@6.9.1':
     dependencies:
       '@messageformat/date-skeleton': 1.1.0
       '@messageformat/parser': 5.1.1
@@ -9430,10 +9484,10 @@ snapshots:
       '@lingui/native-tools-win32-arm64-msvc': 0.1.5
       '@lingui/native-tools-win32-x64-msvc': 0.1.5
 
-  '@lingui/react@6.9.0(@babel/core@7.29.7(supports-color@7.2.0))(react@19.3.0)':
+  '@lingui/react@6.9.1(@babel/core@7.29.7(supports-color@7.2.0))(react@19.3.0)':
     dependencies:
-      '@lingui/babel-plugin-lingui-macro': 6.9.0(@babel/core@7.29.7(supports-color@7.2.0))
-      '@lingui/core': 6.9.0(@babel/core@7.29.7(supports-color@7.2.0))
+      '@lingui/babel-plugin-lingui-macro': 6.9.1(@babel/core@7.29.7(supports-color@7.2.0))
+      '@lingui/core': 6.9.1(@babel/core@7.29.7(supports-color@7.2.0))
       react: 19.3.0
       use-sync-external-store: 1.7.0(react@19.3.0)
     transitivePeerDependencies:
