@@ -112,6 +112,7 @@ describe('what the in-app assistant is composed with', () => {
       'updateCalendar',
       'updateCalendarAvailability',
       'publishAutomation',
+      'updateDeal',
       'publishForm',
     ]);
     const publish = assistantConfirmations['publishForm'];

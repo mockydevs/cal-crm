@@ -248,7 +248,7 @@ function StageColumn({
         />
       ))}
       {deals.length === 0 && !highlighted ? (
-        <p className="flex h-20 items-center justify-center rounded-lg border-2 border-dashed border-border text-sm text-muted-foreground">
+        <p className="flex h-20 items-center justify-center rounded-lg border-2 border-dashed border-border text-sm text-body">
           <Trans>No opportunities</Trans>
         </p>
       ) : null}
