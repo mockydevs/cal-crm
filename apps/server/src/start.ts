@@ -100,6 +100,8 @@ import {
   queueCalendarConfirmation,
   smsDeliveryAvailable,
   createVoiceCallbackWorker,
+  createPointVoiceNumbersTask,
+  createNumberTransport,
   readEmailableIntegration,
   readMailboxIntegration,
   readTwilioIntegration,
@@ -511,6 +513,13 @@ export async function start(
                     publicUrl: config.publicUrl,
                     fetcher: outside.twilioFetch,
                   }),
+                  createPointVoiceNumbersTask(
+                    vault.opening,
+                    createNumberTransport(
+                      outside.twilioFetch === undefined ? {} : { fetcher: outside.twilioFetch },
+                    ),
+                    config.publicUrl,
+                  ),
                 ]
               : resolvedTasks,
           ...(vault === undefined ? {} : { mailboxVault: vault.sealing }),

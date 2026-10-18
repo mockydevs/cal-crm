@@ -130,6 +130,8 @@ export {
   setUpCallingReference,
   VOICE_SIGNING_KEY,
 } from './voice-setup.js';
+export { createPointVoiceNumbersTask, pointVoiceNumbersReference } from './voice/number-voice.js';
+export { createNumberTransport, type NumberTransport } from './voice/number-provider.js';
 export { parseVoiceCallbackPath, voiceWebhookUrl } from './voice/voice-url.js';
 export {
   createVerifySmsConnectionTask,
@@ -165,7 +167,7 @@ export {
 } from './inbox-proposals.js';
 export type { InboxOptions } from './inbox-list.js';
 export { createTemplateRoutes } from './template-routes.js';
-// Formatted email: the cleaner, the composer a workflow's send and the preview
+// Formatted email (ADR-092): the cleaner, the composer a workflow's send and the preview
 // share, and what a template input stores.
 export {
   cleanEmailStyle,
@@ -185,7 +187,7 @@ export {
   type EmailParts,
 } from './email-compose.js';
 export { readEmailPreview, type PreviewOptions } from './template-preview.js';
-// Email campaigns: the routes where the API runs, the tasks and the sweep where
+// Email campaigns (ADR-090): the routes where the API runs, the tasks and the sweep where
 // the worker does.
 export { createCampaignRoutes } from './campaign-routes.js';
 export {
@@ -197,7 +199,7 @@ export {
 export { createSendCampaignTestTask, sendCampaignTestReference } from './campaign-tests.js';
 export { createCampaignCommands, type CampaignCommands } from './campaigns.js';
 export type { CampaignOptions } from './campaign-store.js';
-// Snippets and trigger links.
+// Snippets and trigger links (F3.02, F3.03, ADR-070).
 export { createSnippetRoutes, triggerLinkRoutes } from './conversation-extras-routes.js';
 export type { ReadSnippetValues, SnippetOptions } from './snippets.js';
 export {

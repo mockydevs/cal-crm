@@ -14,6 +14,7 @@ import { ConflictError, NotFoundError, parsePublicId, toPublicId } from '@repo/k
 import * as z from 'zod';
 
 import { syncSmsNumbersReference } from './sms-connect.js';
+import { pointVoiceNumbersReference } from './voice/number-voice.js';
 
 /**
  * The connection, only if it is this business's own. messaging.phone_numbers points at a
@@ -206,6 +207,17 @@ export const registerPhoneNumberCommand: Command<typeof registerPhoneNumberInput
         subject: { kind: 'phone_number', id: number.id },
         payload: { connectionId: connection.id },
       });
+      if (listed.capabilities.includes('voice')) {
+        const setup = await trx
+          .selectFrom('messaging.voice_setups')
+          .select('status')
+          .where('connection_id', '=', connection.id)
+          .where('business_id', '=', businessId)
+          .executeTakeFirst();
+        if (setup?.status === 'ready') {
+          command.enqueue(pointVoiceNumbersReference, { connectionId: connection.id });
+        }
+      }
       return present({ ...number, name: channel.name, status: channel.status });
     },
   });

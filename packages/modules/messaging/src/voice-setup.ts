@@ -24,6 +24,7 @@ import { sql } from 'kysely';
 import * as z from 'zod';
 
 import { openSmsCredentials } from './sms-connect.js';
+import { enqueuePointVoiceNumbers } from './voice/number-voice.js';
 import type { VoiceTransport } from './voice/twilio-voice.js';
 import { createVoiceSigningKey } from './voice/voice-signing-key.js';
 
@@ -294,6 +295,7 @@ export function createSetUpCallingTask(
             key_sid: result.key.sid,
             secret_id: secretId,
           });
+          await enqueuePointVoiceNumbers(trx, connectionId);
         } else if (result.outcome === 'rejected')
           await finish(trx, connectionId, {
             status: 'failed',

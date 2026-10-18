@@ -74,6 +74,8 @@ const ALLOWED: readonly {
   { host: 'api', method: 'GET', path: exact(OWNED) },
   // The only DELETE: one owned number, by its own SID.
   { host: 'api', method: 'DELETE', path: exact(OWNED) },
+  // The only POST to an owned number, used to set where its calls go.
+  { host: 'api', method: 'POST', path: exact(OWNED) },
   { host: 'api', method: 'GET', path: exact(`${ACCOUNT}/OutgoingCallerIds\\.json${QUERY}`) },
   { host: 'api', method: 'POST', path: exact(`${ACCOUNT}/OutgoingCallerIds\\.json`) },
 ];
@@ -671,6 +673,48 @@ export async function releaseNumber(
   if (response?.status === 204) return { outcome: 'released' };
   if (response?.status === 404) return { outcome: 'not_found' };
   return writeFailure(response);
+}
+
+const configureVoiceInput = z.strictObject({
+  voiceUrl: httpsUrl,
+  statusCallback: httpsUrl,
+});
+export type ConfigureNumberVoiceInput = z.input<typeof configureVoiceInput>;
+
+export type ConfigureNumberVoiceResult =
+  { readonly outcome: 'accepted' } | NumberRejected | NumberUnknown;
+
+// Updating an owned number is POST /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{PhoneNumberSid}.json
+// with form fields VoiceUrl, VoiceMethod, StatusCallback, StatusCallbackMethod.
+// Verified in installed twilio@6.1.2 incomingPhoneNumber.js and incomingPhoneNumber.d.ts
+// (IncomingPhoneNumberContextUpdateOptions). Docs:
+// https://www.twilio.com/docs/phone-numbers/api/incomingphonenumber-resource#update-an-incomingphonenumber-resource
+export async function configureNumberVoice(
+  transport: NumberTransport,
+  credentials: TwilioCredentials,
+  sid: string,
+  input: ConfigureNumberVoiceInput,
+): Promise<ConfigureNumberVoiceResult> {
+  const parsed = configureVoiceInput.safeParse(input);
+  if (!ACCOUNT_SID.test(credentials.accountSid) || !NUMBER_SID.test(sid) || !parsed.success)
+    return invalid;
+  const value = parsed.data;
+  const form = new URLSearchParams([
+    ['VoiceUrl', value.voiceUrl],
+    ['VoiceMethod', 'POST'],
+    ['StatusCallback', value.statusCallback],
+    ['StatusCallbackMethod', 'POST'],
+  ]);
+  const response = await exchange(
+    transport,
+    credentials,
+    'api',
+    'POST',
+    `${accountPath(credentials)}/IncomingPhoneNumbers/${sid}.json`,
+    form,
+  );
+  if (!isSuccess(response)) return writeFailure(response);
+  return { outcome: 'accepted' };
 }
 
 // --- Verified caller IDs -------------------------------------------------------------------

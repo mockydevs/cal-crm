@@ -8,6 +8,7 @@ import { describe, expect, it, vi } from 'vitest';
 import type { TwilioCredentials, TwilioResponse } from '../twilio-api.js';
 import {
   CALLER_ID_PAGE_LIMIT,
+  configureNumberVoice,
   createNumberTransport,
   fetchNumberPricing,
   fetchOwnedNumber,
@@ -85,6 +86,7 @@ describe('number request boundary', () => {
     ['api', 'GET', `${BASE}/IncomingPhoneNumbers.json?PhoneNumber=%2B14155550101&PageSize=50`],
     ['api', 'GET', instance],
     ['api', 'DELETE', instance],
+    ['api', 'POST', instance],
     ['api', 'GET', `${BASE}/OutgoingCallerIds.json?PageSize=1000`],
     ['api', 'POST', `${BASE}/OutgoingCallerIds.json`],
   ] as const)('allows %s %s %s', (host, method, path) => {
@@ -96,8 +98,7 @@ describe('number request boundary', () => {
     ['api', 'DELETE', `${BASE}/IncomingPhoneNumbers.json`],
     ['api', 'DELETE', `${BASE}/OutgoingCallerIds/${NUMBER_SID}.json`],
     ['api', 'DELETE', `/2010-04-01/Accounts/${ACCOUNT}.json`],
-    // Reconfiguring an owned number or a caller ID is not part of this boundary.
-    ['api', 'POST', instance],
+    // Reconfiguring a caller ID is not part of this boundary.
     ['api', 'POST', `${BASE}/OutgoingCallerIds/${NUMBER_SID}.json`],
     ['api', 'POST', `${BASE}/IncomingPhoneNumbers.json?AreaCode=415`],
     ['api', 'GET', `${BASE}/AvailablePhoneNumbers/US/National.json`],
@@ -732,6 +733,71 @@ describe('releaseNumber', () => {
   });
 });
 
+describe('configureNumberVoice', () => {
+  const input = {
+    voiceUrl: 'https://crm.example.test/webhooks/twilio/voice/token123/inbound',
+    statusCallback: 'https://crm.example.test/webhooks/twilio/voice/token123/ended',
+  };
+
+  it('updates the number on Twilio with the exact path and the exact four form fields', async () => {
+    const { transport, sent } = recording(ok('', 200));
+    const result = await configureNumberVoice(transport, withKey, NUMBER_SID, input);
+    expect(sent).toHaveLength(1);
+    expect(sent[0]?.host).toBe('api');
+    expect(sent[0]?.method).toBe('POST');
+    expect(sent[0]?.path).toBe(`${BASE}/IncomingPhoneNumbers/${NUMBER_SID}.json`);
+    expect(sent[0]?.headers['content-type']).toBe('application/x-www-form-urlencoded');
+    expect([...new URLSearchParams(sent[0]?.body)]).toEqual([
+      ['VoiceUrl', input.voiceUrl],
+      ['VoiceMethod', 'POST'],
+      ['StatusCallback', input.statusCallback],
+      ['StatusCallbackMethod', 'POST'],
+    ]);
+    expect(result).toEqual({ outcome: 'accepted' });
+  });
+
+  it('refuses a malformed SID without reaching the transport', async () => {
+    const { transport, sent } = recording(ok('', 200));
+    for (const sid of [`PN${'1'.repeat(31)}`, `AC${'1'.repeat(32)}`, `${NUMBER_SID}/..`, ''])
+      expect(await configureNumberVoice(transport, withToken, sid, input)).toEqual(refusedInput);
+    expect(
+      await configureNumberVoice(
+        transport,
+        { accountSid: 'AC1', authToken: AUTH_TOKEN },
+        NUMBER_SID,
+        input,
+      ),
+    ).toEqual(refusedInput);
+    expect(sent).toHaveLength(0);
+  });
+
+  it.each([
+    ['a plain-http voice URL', { ...input, voiceUrl: 'http://crm.example.test/v' }],
+    ['a plain-http status callback', { ...input, statusCallback: 'http://crm.example.test/s' }],
+    ['a URL with credentials', { ...input, voiceUrl: 'https://u:p@crm.example.test/v' }],
+    ['a URL with fragment', { ...input, statusCallback: 'https://crm.example.test/s#x' }],
+  ])('refuses %s without a request', async (_name, badInput) => {
+    const { transport, sent } = recording(ok('', 200));
+    expect(await configureNumberVoice(transport, withToken, NUMBER_SID, badInput)).toEqual(
+      refusedInput,
+    );
+    expect(sent).toHaveLength(0);
+  });
+
+  it.each([
+    [twilioError(400, 21_422), { outcome: 'rejected', httpStatus: 400, code: 21_422 }],
+    [twilioError(404, 20_404), { outcome: 'rejected', httpStatus: 404, code: 20_404 }],
+    [ok('', 401), { outcome: 'rejected', httpStatus: 401, code: null }],
+    [ok('', 500), { outcome: 'unknown', reason: 'server_error' }],
+    [ok('', 302), { outcome: 'unknown', reason: 'unexpected_status' }],
+    [new Error('timeout'), { outcome: 'unknown', reason: 'no_response' }],
+  ])('sorts answer %# into %o', async (answer, expected) => {
+    const { transport, sent } = recording(answer);
+    expect(await configureNumberVoice(transport, withToken, NUMBER_SID, input)).toEqual(expected);
+    expect(sent).toHaveLength(1);
+  });
+});
+
 describe('listVerifiedCallerIds', () => {
   it('follows this account’s own pages and returns every verified caller ID', async () => {
     const { transport, sent } = recording(
@@ -918,6 +984,10 @@ describe('outputs', () => {
         withKey,
         { e164: '+12025550125' },
       ),
+      configureNumberVoice(recording(ok('', 200)).transport, withKey, NUMBER_SID, {
+        voiceUrl: 'https://crm.example.test/v',
+        statusCallback: 'https://crm.example.test/s',
+      }),
     ]);
     const text = JSON.stringify(results);
     expect(text).not.toContain(AUTH_TOKEN);
