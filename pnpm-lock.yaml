@@ -348,8 +348,8 @@ catalogs:
       specifier: 6.1.2
       version: 6.1.2
     '@vitest/coverage-v8':
-      specifier: 5.0.3
-      version: 5.0.3
+      specifier: 5.0.5
+      version: 5.0.5
     altcha-lib:
       specifier: 2.6.0
       version: 2.6.0
@@ -704,7 +704,7 @@ importers:
         version: 6.1.2(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       jsdom:
         specifier: 'catalog:'
         version: 30.1.2(@noble/hashes@2.4.0)
@@ -719,7 +719,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   apps/server:
     dependencies:
@@ -861,7 +861,7 @@ importers:
         version: 8.23.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       jsdom:
         specifier: 'catalog:'
         version: 30.1.2(@noble/hashes@2.4.0)
@@ -879,7 +879,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   e2e:
     devDependencies:
@@ -928,7 +928,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -937,7 +937,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/adapters/mail:
     dependencies:
@@ -965,7 +965,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -974,7 +974,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/adapters/mail-checks:
     dependencies:
@@ -987,7 +987,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -996,7 +996,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/adapters/storage:
     dependencies:
@@ -1015,7 +1015,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1024,7 +1024,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/commands:
     dependencies:
@@ -1055,7 +1055,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1064,7 +1064,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/contracts:
     dependencies:
@@ -1092,7 +1092,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1101,7 +1101,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/db:
     dependencies:
@@ -1129,7 +1129,7 @@ importers:
         version: 8.23.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       kysely-codegen:
         specifier: 'catalog:'
         version: 0.20.0(kysely@0.29.6)(pg@8.23.1)(typescript@6.0.3)
@@ -1141,13 +1141,13 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/kernel:
     devDependencies:
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       fast-check:
         specifier: 'catalog:'
         version: 4.10.2
@@ -1159,7 +1159,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/mcp:
     dependencies:
@@ -1181,7 +1181,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1190,7 +1190,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/ai:
     dependencies:
@@ -1218,7 +1218,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1227,7 +1227,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/auth:
     dependencies:
@@ -1264,7 +1264,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1273,7 +1273,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/automation:
     dependencies:
@@ -1310,7 +1310,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1319,7 +1319,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/calendar:
     dependencies:
@@ -1365,7 +1365,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       fast-check:
         specifier: 'catalog:'
         version: 4.10.2
@@ -1377,7 +1377,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/commerce:
     dependencies:
@@ -1429,7 +1429,7 @@ importers:
         version: 0.3.3
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1441,7 +1441,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/crm:
     dependencies:
@@ -1475,7 +1475,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1484,7 +1484,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/files:
     dependencies:
@@ -1518,7 +1518,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1527,7 +1527,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/forms:
     dependencies:
@@ -1570,7 +1570,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1579,7 +1579,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/integrations:
     dependencies:
@@ -1613,7 +1613,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1622,7 +1622,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/messaging:
     dependencies:
@@ -1674,7 +1674,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       imapflow:
         specifier: 'catalog:'
         version: 2.2.10
@@ -1689,7 +1689,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/notifications:
     dependencies:
@@ -1720,7 +1720,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1729,7 +1729,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/reporting:
     dependencies:
@@ -1769,7 +1769,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1778,7 +1778,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/sites:
     dependencies:
@@ -1812,7 +1812,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1821,7 +1821,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/tenancy:
     dependencies:
@@ -1852,7 +1852,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1861,7 +1861,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/modules/vault:
     dependencies:
@@ -1886,7 +1886,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1895,7 +1895,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/sdk:
     dependencies:
@@ -1908,7 +1908,7 @@ importers:
     devDependencies:
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1917,7 +1917,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/site-render:
     dependencies:
@@ -1930,7 +1930,7 @@ importers:
         version: 24.19.1
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       axe-core:
         specifier: 'catalog:'
         version: 4.13.0
@@ -1948,7 +1948,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   packages/testing:
     dependencies:
@@ -2031,7 +2031,7 @@ importers:
         version: 19.3.0(@types/react@19.3.0)
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 5.0.3(vitest@5.0.3)
+        version: 5.0.5(vitest@5.0.3)
       fast-check:
         specifier: 'catalog:'
         version: 4.10.2
@@ -2046,7 +2046,7 @@ importers:
         version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
       vitest:
         specifier: 'catalog:'
-        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
 packages:
 
@@ -4576,11 +4576,11 @@ packages:
       oxc-transform-react:
         optional: true
 
-  '@vitest/coverage-v8@5.0.3':
-    resolution: {integrity: sha512-+klsyz7BvT1vCU28Zkfzms1Ia78XD0V41U3FUtRaa3S+vOr/EXvK1O6BvVD7l1RzEjm6SONR2aybOvDDf9u0mQ==}
+  '@vitest/coverage-v8@5.0.5':
+    resolution: {integrity: sha512-4KpkGdIrSqBihx/JyP/e+S+IKB98etg1XDQiLAxksLfcShnwi1VReGeOT9NI43hLHbknosKp/1CCLn9Zgcs8mg==}
     peerDependencies:
-      '@vitest/browser': 5.0.3
-      vitest: 5.0.3
+      '@vitest/browser': 5.0.5
+      vitest: 5.0.5
     peerDependenciesMeta:
       '@vitest/browser':
         optional: true
@@ -10922,17 +10922,17 @@ snapshots:
       '@rolldown/pluginutils': 1.0.1
       vite: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
 
-  '@vitest/coverage-v8@5.0.3(vitest@5.0.3)':
+  '@vitest/coverage-v8@5.0.5(vitest@5.0.3)':
     dependencies:
       '@bcoe/v8-coverage': 1.0.2
       '@vitest/istanbul-lib-coverage': 1.0.2
       '@vitest/istanbul-lib-report': 1.0.2
       ast-v8-to-istanbul: 1.0.7
       magicast: 0.5.5
-      obug: 2.2.1
+      obug: 3.0.0
       std-env: 4.3.0
       tinyrainbow: 3.2.0
-      vitest: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+      vitest: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
 
   '@vitest/istanbul-lib-coverage@1.0.2': {}
 
@@ -11206,7 +11206,7 @@ snapshots:
       pg: 8.23.1
       react: 19.3.0
       react-dom: 19.3.0(react@19.3.0)
-      vitest: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+      vitest: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
     transitivePeerDependencies:
       - '@opentelemetry/api'
 
@@ -14114,7 +14114,7 @@ snapshots:
       jiti: 2.7.0
       yaml: 2.9.1
 
-  vitest@5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)):
+  vitest@5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.5)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/mocker': 5.0.3(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
@@ -14133,7 +14133,7 @@ snapshots:
     optionalDependencies:
       '@opentelemetry/api': 1.9.1
       '@types/node': 24.19.1
-      '@vitest/coverage-v8': 5.0.3(vitest@5.0.3)
+      '@vitest/coverage-v8': 5.0.5(vitest@5.0.3)
       happy-dom: 20.14.6
       jsdom: 30.1.2(@noble/hashes@2.4.0)
     transitivePeerDependencies:
