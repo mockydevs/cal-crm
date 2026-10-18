@@ -1,1 +1,11 @@
 # Findings that are not secrets, by gitleaks fingerprint (commit:file:rule:line).
+# A made-up provider key in the API isolation suite's fixture ("sk-ant-fixture-reached-from-a-0000").
+b41f6afc03e6d867325734c70db48e306085e8c6:apps/server/src/businesses.int.test.ts:generic-api-key:1777
+# Fake webhook signing key; DNS and HTTPS are injected fakes in this unit test.
+b41f6afc03e6d867325734c70db48e306085e8c6:packages/modules/automation/src/webhook.test.ts:generic-api-key:34
+# Reply idempotency identifier in a contract-only validation test, not a credential.
+b41f6afc03e6d867325734c70db48e306085e8c6:packages/contracts/src/inbox-public-contract.test.ts:generic-api-key:21
+# Placeholder client credentials in the developer guide's curl examples ('mapp_01k8…:crm_cs_…').
+b41f6afc03e6d867325734c70db48e306085e8c6:docs/APP-DEVELOPERS.md:curl-auth-user:78
+b41f6afc03e6d867325734c70db48e306085e8c6:docs/APP-DEVELOPERS.md:curl-auth-user:124
+b41f6afc03e6d867325734c70db48e306085e8c6:docs/APP-DEVELOPERS.md:curl-auth-user:142
