@@ -18,7 +18,7 @@ import { Textarea } from '@repo/ui/components/textarea';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useId, useState, type ReactElement, type ReactNode } from 'react';
 import { apiIn } from './api';
-import { Labeled, SwitchRow } from './calendar-settings-parts';
+import { Labeled, NotYet, SwitchRow } from './calendar-settings-parts';
 import {
   phoneNumbersKey,
   phoneSettingsKey,
@@ -158,6 +158,12 @@ export function VoiceSettingsForm({
           </Labeled>
         </Group>
         <Group title={t`Incoming calls`}>
+          <NotYet>
+            <Trans>
+              Calls to this business's numbers aren't put through to anyone yet. What you set here
+              is saved and used once they are.
+            </Trans>
+          </NotYet>
           <SwitchRow
             label={t`Ring the assigned person first`}
             description={t`A call to a number assigned to someone rings them before anyone else.`}
@@ -198,6 +204,12 @@ export function VoiceSettingsForm({
           </Labeled>
         </Group>
         <Group title={t`Outgoing calls`}>
+          <NotYet>
+            <Trans>
+              None of these are used on calls yet. What you set here is saved and used once they
+              are.
+            </Trans>
+          </NotYet>
           <Labeled
             label={t`Caller ID`}
             description={t`The number a call shows when the person calling picks none.`}
@@ -246,6 +258,12 @@ export function VoiceSettingsForm({
           />
         </Group>
         <Group title={t`Recording and transcription`}>
+          <NotYet>
+            <Trans>
+              Calls aren't recorded or transcribed yet. What you set here is saved and used once
+              they are.
+            </Trans>
+          </NotYet>
           <SwitchRow
             label={t`Delete old recordings`}
             description={t`Turned off, recordings are kept. Each number chooses whether it records.`}
@@ -289,6 +307,11 @@ export function VoiceSettingsForm({
           />
         </Group>
         <Group title={t`Missed-call text`}>
+          <NotYet>
+            <Trans>
+              Missed-call texts aren't sent yet. What you set here is saved and used once they are.
+            </Trans>
+          </NotYet>
           <SwitchRow
             label={t`Text a caller back after a missed call`}
             description={t`One text, sent with the same consent and quiet-hours checks as any message.`}

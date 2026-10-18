@@ -288,6 +288,14 @@ export function NumberEditor({
                       <legend className="px-1 text-sm font-medium">
                         <Trans>Call recording</Trans>
                       </legend>
+                      {calling?.available === true ? (
+                        <NotYet>
+                          <Trans>
+                            Calls aren't recorded yet. What you set here is saved and used once they
+                            are.
+                          </Trans>
+                        </NotYet>
+                      ) : null}
                       <SwitchRow
                         label={t`Record calls`}
                         description={t`Calls to and from this number are recorded.`}
@@ -361,6 +369,14 @@ export function NumberEditor({
                           the outside number, then the business fallback number.
                         </Trans>
                       </p>
+                      {calling?.available === true ? (
+                        <NotYet>
+                          <Trans>
+                            Calls to this number aren't put through to anyone yet. What you set here
+                            is saved and used once they are.
+                          </Trans>
+                        </NotYet>
+                      ) : null}
                       <MemberSelect
                         label={t`First, a team member`}
                         none={t`No one`}
@@ -472,6 +488,14 @@ export function NumberEditor({
                       hidden={section !== 'advanced'}
                       className="flex min-w-0 flex-col gap-5"
                     >
+                      {calling?.available === true ? (
+                        <NotYet>
+                          <Trans>
+                            None of these are used on calls yet. What you set here is saved and used
+                            once they are.
+                          </Trans>
+                        </NotYet>
+                      ) : null}
                       <SwitchRow
                         label={t`Call connect`}
                         description={t`Whoever answers presses a key to take the call, so a voicemail can't take it.`}

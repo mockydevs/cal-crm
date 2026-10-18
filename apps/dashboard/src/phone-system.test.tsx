@@ -775,6 +775,20 @@ describe('a number configuration', () => {
     const dialog = await edit(user, 'Front desk');
     expect(within(dialog).getByText(/Calls can't be made or taken yet/)).toBeDefined();
   });
+
+  it('says which call settings are not used yet once calls can be made', async () => {
+    serve({
+      getPhoneSystemSettings: () => settingsOf({ calling: { available: true, unavailable: null } }),
+    });
+    const user = open();
+    const dialog = await edit(user, 'Front desk');
+    expect(within(dialog).queryByText(/Calls can't be made or taken yet/)).toBeNull();
+    expect(within(dialog).getByText(/Calls aren't recorded yet\./)).toBeDefined();
+    expect(
+      within(dialog).getByText(/Calls to this number aren't put through to anyone yet\./),
+    ).toBeDefined();
+    expect(within(dialog).getByText(/None of these are used on calls yet\./)).toBeDefined();
+  });
 });
 
 describe('the voice settings', () => {
@@ -849,6 +863,32 @@ describe('the voice settings', () => {
       'No default number',
       'Front desk (+14155550123)',
     ]);
+  });
+
+  it('says which defaults are not used on calls yet, and promises nothing for them', async () => {
+    serve({
+      getPhoneSystemSettings: () => settingsOf({ calling: { available: true, unavailable: null } }),
+    });
+    const user = open();
+    const form = await voiceTab(user);
+    const group = (name: string): HTMLElement => within(form).getByRole('region', { name });
+    expect(within(group('Default number')).queryByText(/yet\./)).toBeNull();
+    expect(
+      within(group('Incoming calls')).getByText(
+        /Calls to this business's numbers aren't put through to anyone yet\./,
+      ),
+    ).toBeDefined();
+    expect(
+      within(group('Outgoing calls')).getByText(/None of these are used on calls yet\./),
+    ).toBeDefined();
+    expect(
+      within(group('Recording and transcription')).getByText(
+        /Calls aren't recorded or transcribed yet\./,
+      ),
+    ).toBeDefined();
+    expect(
+      within(group('Missed-call text')).getByText(/Missed-call texts aren't sent yet\./),
+    ).toBeDefined();
   });
 
   it('asks for the missed-call text before sending', async () => {

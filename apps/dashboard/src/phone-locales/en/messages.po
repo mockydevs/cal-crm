@@ -186,6 +186,14 @@ msgstr "Calls"
 msgid "Calls aren't available yet"
 msgstr "Calls aren't available yet"
 
+#: src/phone-system-voice.tsx
+msgid "Calls aren't recorded or transcribed yet. What you set here is saved and used once they are."
+msgstr "Calls aren't recorded or transcribed yet. What you set here is saved and used once they are."
+
+#: src/phone-system-number.tsx
+msgid "Calls aren't recorded yet. What you set here is saved and used once they are."
+msgstr "Calls aren't recorded yet. What you set here is saved and used once they are."
+
 #: src/phone-system-parts.tsx
 msgid "Calls can be made from this business's numbers. Calls to them aren't answered here yet."
 msgstr "Calls can be made from this business's numbers. Calls to them aren't answered here yet."
@@ -217,6 +225,14 @@ msgstr "Calls to and from the business's numbers, newest first."
 #: src/phone-system-number.tsx
 msgid "Calls to and from this number are recorded."
 msgstr "Calls to and from this number are recorded."
+
+#: src/phone-system-voice.tsx
+msgid "Calls to this business's numbers aren't put through to anyone yet. What you set here is saved and used once they are."
+msgstr "Calls to this business's numbers aren't put through to anyone yet. What you set here is saved and used once they are."
+
+#: src/phone-system-number.tsx
+msgid "Calls to this number aren't put through to anyone yet. What you set here is saved and used once they are."
+msgstr "Calls to this number aren't put through to anyone yet. What you set here is saved and used once they are."
 
 #: src/phone-system.tsx
 msgid "Can't take calls"
@@ -499,6 +515,10 @@ msgstr "Make default"
 msgid "Missed-call text"
 msgstr "Missed-call text"
 
+#: src/phone-system-voice.tsx
+msgid "Missed-call texts aren't sent yet. What you set here is saved and used once they are."
+msgstr "Missed-call texts aren't sent yet. What you set here is saved and used once they are."
+
 #: src/sms-settings.tsx
 msgid "Name"
 msgstr "Name"
@@ -568,6 +588,11 @@ msgstr "No Twilio account is connected yet. Connect one below to set up calling.
 #: src/phone-system.tsx
 msgid "Nobody"
 msgstr "Nobody"
+
+#: src/phone-system-number.tsx
+#: src/phone-system-voice.tsx
+msgid "None of these are used on calls yet. What you set here is saved and used once they are."
+msgstr "None of these are used on calls yet. What you set here is saved and used once they are."
 
 #: src/phone-system-calling.tsx
 msgid "None of this account's registered numbers can take calls."
