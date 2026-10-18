@@ -2162,6 +2162,19 @@ export interface MessagingCallProgress {
   status: string;
 }
 
+export interface MessagingCallRoutes {
+  business_id: string;
+  call_id: string;
+  caller_id: string;
+  created_at: Generated<Timestamp>;
+  finished_at: Timestamp | null;
+  step: Generated<number>;
+  steps: Json;
+  timeout_seconds: number;
+  updated_at: Generated<Timestamp>;
+  voicemail: boolean;
+}
+
 export interface MessagingCalls {
   business_id: string;
   connected_at: Timestamp | null;
@@ -3408,6 +3421,7 @@ export interface DB {
   "integrations.external_ids": IntegrationsExternalIds;
   "messaging.call_legs": MessagingCallLegs;
   "messaging.call_progress": MessagingCallProgress;
+  "messaging.call_routes": MessagingCallRoutes;
   "messaging.calls": MessagingCalls;
   "messaging.channel_accounts": MessagingChannelAccounts;
   "messaging.consents": MessagingConsents;

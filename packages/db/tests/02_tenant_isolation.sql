@@ -287,13 +287,13 @@ begin
     values (b, check_run, 'dmarc', 'fail', 0, 14, '{"fix": {"type": "TXT", "name": "_dmarc"}}');
   insert into messaging.phone_numbers (business_id, id, e164, provider_connection_id, provider_number_ref)
     values (b, sms_account, '+14155550100', connection, 'PN0001');
-  -- Phone System settings (0108): the business's calling defaults, and the
+  -- Phone System settings (0108, ADR-108): the business's calling defaults, and the
   -- number's own routing to the member.
   insert into messaging.phone_system_settings (business_id, default_phone_number_id, inbound_fallback_e164)
     values (b, sms_account, '+14155550199');
   insert into messaging.phone_number_settings (business_id, phone_number_id, owner_user_id, primary_user_id)
     values (b, sms_account, u, u);
-  -- A call record, its provider leg and a progress report (0110).
+  -- A call record, its provider leg and a progress report (0110, ADR-110).
   insert into messaging.calls (business_id, direction, phone_number_id, provider_connection_id, local_e164,
                                remote_e164, contact_id, user_id, requested_by_kind, requested_by_id, state,
                                idempotency_key, request_hash, reserved_at)
@@ -304,6 +304,18 @@ begin
     from messaging.calls where business_id = b;
   insert into messaging.call_progress (business_id, leg_id, sequence, status)
     select b, id, 1, 'ringing' from messaging.call_legs where business_id = b;
+  -- An incoming call ringing its first step: Dana's browser (0133).
+  with inbound as (
+    insert into messaging.calls (business_id, direction, phone_number_id, provider_connection_id, local_e164,
+                                 remote_e164, contact_id, requested_by_kind, state)
+      values (b, 'inbound', sms_account, connection, '+14155550100', '+14155550124', contact_1, 'contact',
+              'ringing')
+      returning id
+  )
+  insert into messaging.call_routes (business_id, call_id, steps, voicemail, timeout_seconds, caller_id)
+    select b, id, '[[{"kind": "client", "address": "dana", "membershipId": "00000000-0000-0000-0000-000000000000"}]]',
+           true, 15, '+14155550124'
+    from inbound;
   -- Browser calling set up on the connection: its key's SID, the secret in the vault (0114).
   insert into messaging.voice_setups (business_id, connection_id, status, key_sid, secret_id, requested_by, finished_at)
     values (b, connection, 'ready', 'SK' || substr(md5(b::text), 1, 32), business_secret, u, now());
@@ -350,14 +362,14 @@ begin
   insert into messaging.message_attachments (business_id, message_id, file_id) values (b, outbound, logo);
   insert into messaging.consents (business_id, contact_id, channel, purpose, status, source, recorded_by_kind)
     values (b, contact_1, 'email', 'marketing', 'granted', 'form', 'form');
-  -- An address's withdrawal, and the unsubscribe link that recorded it (0099).
+  -- An address's withdrawal, and the unsubscribe link that recorded it (0099, ADR-098).
   insert into messaging.consents (business_id, contact_id, channel, purpose, status, address_normalized,
                                   source, recorded_by_kind)
     values (b, contact_1, 'email', 'marketing', 'withdrawn', 'unsubscribed@example.com',
             'unsubscribe_link', 'contact');
   insert into messaging.unsubscribe_links (business_id, digest, address_normalized, message_id, contact_id)
     values (b, repeat('d', 64), 'unsubscribed@example.com', outbound, contact_1);
-  -- A named secret a webhook step's header can use (0101).
+  -- A named secret a webhook step's header can use (0101, ADR-097).
   insert into automation.webhook_secrets (business_id, name, secret_id, rotated_by_kind)
     values (b, 'crm_key', business_secret, 'user');
   insert into messaging.suppressions (business_id, channel, address_normalized, reason, source_message_id)
@@ -419,7 +431,7 @@ begin
   insert into calendar.user_date_overrides (business_id, user_id, on_date) values (b, u, current_date + 14);
   insert into calendar.blocked_slots (business_id, user_id, starts_at, ends_at, title)
     values (b, u, now() + interval '30 days', now() + interval '31 days', 'Annual leave');
-  -- The member's Google Calendar (0106): the connection, an attempt, a calendar,
+  -- The member's Google Calendar (0106, ADR-106): the connection, an attempt, a calendar,
   -- busy time with its window, a fresh look, and the appointment written to Google.
   insert into calendar.google_connections
     (business_id, user_id, status, google_sub, google_email, secret_id, write_calendar_id)
@@ -1028,7 +1040,7 @@ begin
   raise notice 'ok: partition upkeep and inbound routing work through private functions';
 end $$;
 
--- Contact search reads its indexes as the owner, outside row-level security, so
+-- Contact search reads its indexes as the owner, outside row-level security (ADR-028), so
 -- it keeps to the request's business itself. Both businesses have a Jordan at
 -- jordan@example.com: business 1's search finds only its own, and no business, no search.
 do $$
@@ -1053,7 +1065,7 @@ begin
   raise notice 'ok: contact search finds only the business the request works in, and needs one';
 end $$;
 
--- Company and deal search work the same way. Business 1 has the Lee Family and
+-- Company and deal search work the same way (ADR-033). Business 1 has the Lee Family and
 -- the Lee wedding; business 2 has neither, so its search finds nothing, and no business,
 -- no search.
 do $$
@@ -1128,7 +1140,7 @@ begin
   raise notice 'ok: custom record search finds only the business the request works in, and needs one';
 end $$;
 
--- Task lists page newest first through their indexes under row-level security.
+-- Task lists page newest first through their indexes under row-level security (ADR-034).
 -- With sequential scans and sorts discouraged, each list's plan must read an index in order:
 -- one with no index that gives the order still sorts, and fails here.
 do $$
@@ -1190,7 +1202,7 @@ begin
   raise notice 'ok: task lists page newest first through their indexes, under row-level security';
 end $$;
 
--- Saved views: tenant isolation keeps businesses apart, and restrictive policies
+-- Saved views (ADR-035): tenant isolation keeps businesses apart, and restrictive policies
 -- keep a private view its owner's alone. Only the owner acting as themselves counts: agency
 -- staff, an API key and an actor carrying the owner's id on their behalf see shared views
 -- only, and nobody writes a view for someone else or makes someone else's view private.
@@ -1303,7 +1315,7 @@ begin
   raise notice 'ok: a private saved view is its owner''s alone, and only people write views';
 end $$;
 
--- Notifications (0056): scoped isolation keeps agencies and businesses apart, and
+-- Notifications (0056, ADR-065): scoped isolation keeps agencies and businesses apart, and
 -- restrictive policies make a notification its person's alone, while they belong to the
 -- business. Only that person acting themselves reads and marks it; only the worker writes
 -- one, and only for someone who belongs; nobody else reads a person's preferences.
@@ -1451,7 +1463,7 @@ begin
   raise notice 'ok: a notification is its person''s alone while they belong, and only the worker writes one';
 end $$;
 
--- The in-app assistant's conversations (0084): tenant isolation keeps businesses
+-- The in-app assistant's conversations (0084, ADR-084): tenant isolation keeps businesses
 -- apart, and a restrictive policy on each table makes a thread, its turns and its messages
 -- their person's alone. Only that person acting themselves, and the worker that runs the
 -- turn, read or write them.
