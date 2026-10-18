@@ -114,7 +114,7 @@ catalog:
   tailwind-merge: 3.7.0
   tailwindcss: 4.3.3
   testcontainers: 12.2.0
-  turbo: 2.11.7
+  turbo: 2.11.8
   # 6.0 until typescript-eslint supports 7 (its peer range is ">=4.8.4 <6.1.0").
   typescript: 6.0.3
   typescript-eslint: 8.71.1
