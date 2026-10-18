@@ -3,13 +3,16 @@ import type { Vault } from '@repo/module-vault';
 import { ForbiddenError } from '@repo/kernel';
 import * as z from 'zod';
 import {
+  addCallLeg,
   recordCallProgress,
   recordInboundTerminal,
   type CallProgressResult,
+  type ReadCallGrants,
 } from '../call-ledger.js';
 import { endCallReference } from '../call-requests.js';
 import { lockBusiness } from '../outbound.js';
 import { webhookDigest } from '../sms-webhook-url.js';
+import { createInboundCallCommand } from './inbound-call.js';
 import { authenticateVoiceCallback } from './voice-context.js';
 import { parseVoiceProgress } from './voice-progress.js';
 import { parseVoiceTerminal } from './voice-terminal.js';
@@ -98,9 +101,12 @@ export function createVoiceCallbackWorker(
   services: Services,
   vault: Vault,
   publicUrl: string,
+  readGrants: ReadCallGrants,
+  addLeg: typeof addCallLeg = addCallLeg,
 ): {
   handle(request: Parameters<typeof verifyVoiceRequest>[0]): Promise<VoiceCallbackReply>;
 } {
+  const inboundCall = createInboundCallCommand(publicUrl, readGrants, addLeg);
   return {
     async handle(request) {
       const checked = await authenticateVoiceCallback(services.db, vault, publicUrl, request);
@@ -109,6 +115,23 @@ export function createVoiceCallbackWorker(
       // The browser and the other party have finished: the call ends with the dial.
       if (target.kind === 'dial-result')
         return { statusCode: 200, contentType: 'application/xml', body: renderHangup() };
+      if (target.kind === 'inbound') {
+        const { call } = checked.verified;
+        if (!call.from || !call.to || call.direction !== 'inbound') return reply(400);
+        return runCommand(
+          services,
+          inboundCall,
+          {
+            connectionId: checked.connectionId,
+            digest: webhookDigest(target.token),
+            webhookToken: target.token,
+            callSid: call.callSid,
+            from: call.from,
+            to: call.to,
+          },
+          { context: checked.context, permissions: 'all' },
+        );
+      }
       if (target.kind !== 'progress' && target.kind !== 'ended') return reply(503);
       return runCommand(
         services,

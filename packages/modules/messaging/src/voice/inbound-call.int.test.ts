@@ -1,0 +1,613 @@
+import { randomBytes, randomUUID } from 'node:crypto';
+import { allowEveryone, type Services } from '@repo/commands';
+import type { Permission } from '@repo/contracts';
+import { connectDatabase, withTenant, type Database } from '@repo/db';
+import { toPublicId } from '@repo/kernel';
+import { createVault, newSecretsKey, parseSecretsKeys, type Vault } from '@repo/module-vault';
+import { testDatabase, type TestDatabase } from '@repo/testing';
+import { afterAll, beforeAll, expect, inject, it } from 'vitest';
+import { addCallLeg, type ReadCallGrants } from '../call-ledger.js';
+import { SMS_CREDENTIALS } from '../sms-connect.js';
+import { newWebhookToken, webhookDigest } from '../sms-webhook-url.js';
+import { expectedSignature } from '../twilio-signature.js';
+import { voiceIdentity } from './voice-identity.js';
+import { renderHangup } from './voice-twiml.js';
+import { createVoiceCallbackWorker } from './voice-worker.js';
+
+let database: TestDatabase;
+let db: Database;
+let vault: Vault;
+let services: Services;
+const publicUrl = 'https://crm.example.test';
+const sid = (prefix: string) => `${prefix}${randomBytes(16).toString('hex')}`;
+let numberSequence = 200;
+
+beforeAll(async () => {
+  database = await testDatabase(inject('databaseServer'));
+  db = connectDatabase({
+    connectionString: database.url('crm_app'),
+    onConnectionError: () => undefined,
+  });
+  vault = await createVault(parseSecretsKeys((await newSecretsKey(1)).secretsKey));
+  services = { db, authorize: allowEveryone };
+});
+
+afterAll(async () => {
+  await db.destroy();
+  await database.close();
+});
+
+const defaultGrants: ReadCallGrants = async (trx, context, userId) => {
+  const row = await trx
+    .selectFrom('tenancy.memberships as m')
+    .innerJoin('tenancy.roles as r', 'r.id', 'm.role_id')
+    .select('r.permissions')
+    .where('m.business_id', '=', context.businessId ?? '')
+    .where('m.user_id', '=', userId)
+    .executeTakeFirst();
+  return row === undefined
+    ? undefined
+    : new Set(row.permissions.filter((each): each is Permission => each === 'calls.place'));
+};
+
+async function world(
+  options: {
+    readonly allowAnonymous?: boolean;
+    readonly grants?: ReadCallGrants;
+    readonly addLeg?: typeof addCallLeg;
+  } = {},
+) {
+  const agency = await database.fixtures.agency();
+  const business = await database.fixtures.business(agency.id);
+  const token = newWebhookToken();
+  const accountSid = sid('AC');
+  const authToken = 'synthetic-inbound-auth-token';
+  const callSid = sid('CA');
+  const from = '+12025550199';
+  const to = `+1202555${String(numberSequence++).padStart(4, '0')}`;
+
+  const user = await database.fixtures.user();
+  const role = await database.as('crm_owner', (sql) =>
+    sql.one<{ id: string }>(
+      `insert into tenancy.roles (agency_id, scope, key, name, permissions) values ($1, 'business', $2, 'Team', array['calls.place']) returning id`,
+      [agency.id, `team_${randomUUID().replaceAll('-', '_')}`],
+    ),
+  );
+  const membership = await database.as('crm_owner', (sql) =>
+    sql.one<{ id: string }>(
+      `insert into tenancy.memberships (agency_id, business_id, user_id, role_id) values ($1, $2, $3, $4) returning id`,
+      [agency.id, business.id, user.id, role.id],
+    ),
+  );
+  const memberPublicId = toPublicId('membership', membership.id);
+
+  const made = await withTenant(db, business.context, async (trx) => {
+    const secretId = await vault.store(
+      trx,
+      {
+        agencyId: agency.id,
+        businessId: business.id,
+        purpose: SMS_CREDENTIALS,
+      },
+      JSON.stringify({ accountSid, authToken, webhookToken: token }),
+    );
+    const connection = await trx
+      .insertInto('messaging.provider_connections')
+      .values({
+        agency_id: agency.id,
+        business_id: business.id,
+        provider: 'twilio',
+        label: 'Inbound Twilio',
+        account_ref: accountSid,
+        secret_id: secretId,
+        status: 'connected',
+        webhook_digest: webhookDigest(token),
+      })
+      .returning('id')
+      .executeTakeFirstOrThrow();
+
+    await trx
+      .insertInto('messaging.voice_setups')
+      .values({
+        business_id: business.id,
+        connection_id: connection.id,
+        status: 'ready',
+        key_sid: sid('SK'),
+        secret_id: secretId,
+        finished_at: new Date(),
+      })
+      .execute();
+
+    const channel = await trx
+      .insertInto('messaging.channel_accounts')
+      .values({
+        business_id: business.id,
+        channel: 'sms',
+        name: 'Inbound Line',
+        status: 'active',
+      })
+      .returning('id')
+      .executeTakeFirstOrThrow();
+
+    await trx
+      .insertInto('messaging.phone_numbers')
+      .values({
+        id: channel.id,
+        business_id: business.id,
+        e164: to,
+        provider_connection_id: connection.id,
+        provider_number_ref: sid('PN'),
+        capabilities: ['voice'],
+      })
+      .execute();
+
+    await trx
+      .insertInto('messaging.phone_number_settings')
+      .values({
+        business_id: business.id,
+        phone_number_id: channel.id,
+        primary_user_id: user.id,
+        ring_timeout_seconds: 30,
+        voicemail_backup: true,
+        use_business_fallback: false,
+        ring_also_user_ids: [],
+        prefer_contact_owner: false,
+        forwarded_caller_id: 'business_number',
+      })
+      .execute();
+
+    await trx
+      .insertInto('messaging.phone_system_settings')
+      .values({
+        business_id: business.id,
+        inbound_allow_anonymous: options.allowAnonymous ?? true,
+        inbound_prefer_assigned_user: true,
+      })
+      .execute();
+
+    return {
+      connectionId: connection.id,
+      phoneNumberId: channel.id,
+    };
+  });
+
+  const worker = createVoiceCallbackWorker(
+    services,
+    vault,
+    publicUrl,
+    options.grants ?? defaultGrants,
+    options.addLeg,
+  );
+
+  const request = (patch: Record<string, string> = {}) => {
+    const path = `/webhooks/twilio/voice/${token}/inbound`;
+    const params = {
+      AccountSid: accountSid,
+      CallSid: callSid,
+      From: from,
+      To: to,
+      Direction: 'inbound',
+      CallStatus: 'ringing',
+      ...patch,
+    };
+    return {
+      path,
+      body: Buffer.from(new URLSearchParams(params).toString()),
+      signature: expectedSignature(authToken, publicUrl + path, params),
+    };
+  };
+
+  const query = <T extends object>(text: string, values: readonly unknown[] = []) =>
+    database.withTenant(business.context, (sql) => sql.query<T>(text, values));
+
+  return {
+    ...made,
+    agency,
+    business,
+    user,
+    role,
+    membership,
+    memberPublicId,
+    token,
+    accountSid,
+    authToken,
+    callSid,
+    from,
+    to,
+    worker,
+    request,
+    query,
+  };
+}
+
+it("rings the number's team member in the browser, and stores the route at its first step", async () => {
+  const b = await world();
+  const res = await b.worker.handle(b.request());
+  expect(res.statusCode).toBe(200);
+  expect(res.contentType).toBe('application/xml');
+
+  const expectedIdentity = voiceIdentity(b.business.id, b.user.id);
+  expect(res.body).toContain(`<Client statusCallback=`);
+  expect(res.body).toContain(`>${expectedIdentity}</Client>`);
+  expect(res.body).toContain(
+    `action="https://crm.example.test/webhooks/twilio/voice/${b.token}/dial-result?step=`,
+  );
+
+  const calls = await b.query<{ id: string; state: string }>(
+    'select id, state from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls).toHaveLength(1);
+  const firstCall = calls[0];
+  expect(firstCall?.state).toBe('ringing');
+  if (firstCall === undefined) throw new Error('Expected call');
+  const callId = firstCall.id;
+
+  const routes = await b.query<{ step: number; steps: string; caller_id: string }>(
+    'select step, steps::text, caller_id from messaging.call_routes where business_id = $1 and call_id = $2',
+    [b.business.id, callId],
+  );
+  expect(routes).toHaveLength(1);
+  expect(routes[0]?.step).toBe(0);
+  expect(routes[0]?.steps).toContain(expectedIdentity);
+  expect(routes[0]?.caller_id).toBe(b.to);
+
+  const legs = await b.query<{ party: string; user_id: string | null; to_address: string }>(
+    'select party, user_id, to_address from messaging.call_legs where call_id = $1 order by created_at asc',
+    [callId],
+  );
+  expect(legs).toHaveLength(2);
+  expect(legs[0]).toMatchObject({ party: 'remote', user_id: null, to_address: b.to });
+  expect(legs[1]).toMatchObject({
+    party: 'member',
+    user_id: b.user.id,
+    to_address: expectedIdentity,
+  });
+});
+
+it("rings the contact's owner first when the number says so", async () => {
+  const b = await world();
+  const ownerUser = await database.fixtures.user();
+  await database.as('crm_owner', (sql) =>
+    sql.query(
+      `insert into tenancy.memberships (agency_id, business_id, user_id, role_id) values ($1, $2, $3, $4)`,
+      [b.agency.id, b.business.id, ownerUser.id, b.role.id],
+    ),
+  );
+
+  const contact = await database.fixtures.contact(b.business.context);
+  await b.query('update crm.contacts set owner_user_id = $1 where id = $2', [
+    ownerUser.id,
+    contact.id,
+  ]);
+  await b.query(
+    `insert into crm.contact_identities (business_id, contact_id, kind, value, value_normalized)
+     values ($1, $2, 'phone', $3, $3)`,
+    [b.business.id, contact.id, b.from],
+  );
+
+  await b.query(
+    'update messaging.phone_number_settings set prefer_contact_owner = true where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+
+  const res = await b.worker.handle(b.request());
+  expect(res.statusCode).toBe(200);
+
+  const ownerIdentity = voiceIdentity(b.business.id, ownerUser.id);
+  const primaryIdentity = voiceIdentity(b.business.id, b.user.id);
+  expect(res.body).toContain(ownerIdentity);
+  expect(res.body).not.toContain(primaryIdentity);
+
+  interface StoredStepDest {
+    readonly kind: string;
+    readonly address: string;
+  }
+  const routes = await b.query<{
+    step: number;
+    steps: readonly (readonly StoredStepDest[])[];
+  }>('select step, steps from messaging.call_routes where business_id = $1', [b.business.id]);
+  expect(routes).toHaveLength(1);
+  const routeRow = routes[0];
+  expect(routeRow?.step).toBe(0);
+  expect(routeRow?.steps).toHaveLength(2);
+  expect(routeRow?.steps[0]?.[0]?.address).toBe(ownerIdentity);
+  expect(routeRow?.steps[1]?.[0]?.address).toBe(primaryIdentity);
+});
+
+it('rings the outside number when no team member is set', async () => {
+  const b = await world();
+  const forwardE164 = '+12025550888';
+  await b.query(
+    'update messaging.phone_number_settings set primary_user_id = null, forward_to_e164 = $1 where phone_number_id = $2',
+    [forwardE164, b.phoneNumberId],
+  );
+
+  const res = await b.worker.handle(b.request());
+  expect(res.statusCode).toBe(200);
+  expect(res.body).toContain(`<Number statusCallback=`);
+  expect(res.body).toContain(`>${forwardE164}</Number>`);
+
+  const legs = await b.query<{ party: string; user_id: string | null; to_address: string }>(
+    'select party, user_id, to_address from messaging.call_legs where party = $1',
+    ['remote'],
+  );
+  expect(legs.some((leg) => leg.to_address === forwardE164)).toBe(true);
+});
+
+it('never rings someone without permission to take calls, or who left the business', async () => {
+  const customGrants: ReadCallGrants = () => Promise.resolve(new Set());
+  const b = await world({ grants: customGrants });
+
+  const res = await b.worker.handle(b.request());
+  expect(res.statusCode).toBe(200);
+  expect(res.body).toBe(renderHangup());
+
+  const calls = await b.query<{ state: string; failure_code: string | null }>(
+    'select state, failure_code from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls[0]).toMatchObject({
+    state: 'refused',
+    failure_code: 'member_unavailable',
+  });
+
+  const b2 = await world();
+  await database.as('crm_owner', (sql) =>
+    sql.query('update auth.users set disabled_at = now() where id = $1', [b2.user.id]),
+  );
+
+  const res2 = await b2.worker.handle(b2.request());
+  expect(res2.statusCode).toBe(200);
+  expect(res2.body).toBe(renderHangup());
+  expect(res2.body).not.toContain(voiceIdentity(b2.business.id, b2.user.id));
+
+  const calls2 = await b2.query<{ state: string; failure_code: string | null }>(
+    'select state, failure_code from messaging.calls where business_id = $1',
+    [b2.business.id],
+  );
+  expect(calls2[0]).toMatchObject({
+    state: 'refused',
+    failure_code: 'member_unavailable',
+  });
+});
+
+it('hangs up on a caller the contact blocked with do not disturb, and records the refusal', async () => {
+  const b = await world();
+  const contact = await database.fixtures.contact(b.business.context);
+  await b.query('update crm.contacts set dnd_inbound = true where id = $1', [contact.id]);
+  await b.query(
+    `insert into crm.contact_identities (business_id, contact_id, kind, value, value_normalized)
+     values ($1, $2, 'phone', $3, $3)`,
+    [b.business.id, contact.id, b.from],
+  );
+
+  const res = await b.worker.handle(b.request());
+  expect(res.statusCode).toBe(200);
+  expect(res.body).toBe(renderHangup());
+
+  const calls = await b.query<{ state: string; failure_code: string | null }>(
+    'select state, failure_code from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls[0]).toMatchObject({
+    state: 'refused',
+    failure_code: 'do_not_call',
+  });
+
+  const routes = await b.query('select 1 from messaging.call_routes where business_id = $1', [
+    b.business.id,
+  ]);
+  expect(routes).toHaveLength(0);
+});
+
+it('hangs up on a hidden number when the business refuses them', async () => {
+  const b = await world({ allowAnonymous: false });
+  const res = await b.worker.handle(b.request({ From: 'anonymous' }));
+  expect(res.statusCode).toBe(200);
+  expect(res.body).toBe(renderHangup());
+
+  const calls = await b.query<{ state: string; failure_code: string | null }>(
+    'select state, failure_code from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls[0]).toMatchObject({
+    state: 'refused',
+    failure_code: 'contact_unavailable',
+  });
+});
+
+it('hangs up when nobody can be rung, and records why', async () => {
+  const b = await world();
+  await b.query(
+    'update messaging.phone_number_settings set primary_user_id = null, forward_to_e164 = null where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+
+  const res = await b.worker.handle(b.request());
+  expect(res.statusCode).toBe(200);
+  expect(res.body).toBe(renderHangup());
+
+  const calls = await b.query<{ state: string; failure_code: string | null }>(
+    'select state, failure_code from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls[0]).toMatchObject({
+    state: 'refused',
+    failure_code: 'member_unavailable',
+  });
+});
+
+it('answers a repeated request with the same Dial, without a second route or new legs', async () => {
+  const b = await world();
+  const first = await b.worker.handle(b.request());
+  expect(first.statusCode).toBe(200);
+
+  const second = await b.worker.handle(b.request());
+  expect(second.statusCode).toBe(200);
+  expect(second.body).toBe(first.body);
+
+  const routes = await b.query('select 1 from messaging.call_routes where business_id = $1', [
+    b.business.id,
+  ]);
+  expect(routes).toHaveLength(1);
+
+  const legs = await b.query('select 1 from messaging.call_legs where business_id = $1', [
+    b.business.id,
+  ]);
+  expect(legs).toHaveLength(2);
+});
+
+it("hangs up on a number that is not this connection's, and records nothing", async () => {
+  const b = await world();
+  const res = await b.worker.handle(b.request({ To: '+12025559999' }));
+  expect(res.statusCode).toBe(200);
+  expect(res.body).toBe(renderHangup());
+
+  const calls = await b.query('select 1 from messaging.calls where business_id = $1', [
+    b.business.id,
+  ]);
+  expect(calls).toHaveLength(0);
+
+  const routes = await b.query('select 1 from messaging.call_routes where business_id = $1', [
+    b.business.id,
+  ]);
+  expect(routes).toHaveLength(0);
+});
+
+it("keeps the caller's number out of the audit log and events", async () => {
+  const b = await world();
+  await b.worker.handle(b.request());
+
+  const audits = await b.query<{ input: string }>(
+    "select input::text from audit.commands where command = 'call.answer_inbound'",
+  );
+  expect(audits).toHaveLength(1);
+  expect(audits[0]?.input).not.toContain(b.from);
+  expect(audits[0]?.input).not.toContain(b.to);
+
+  const events = await b.query<{ payload: string }>(
+    "select payload::text from events.events where type = 'call.progressed'",
+  );
+  expect(events.length).toBeGreaterThan(0);
+  for (const event of events) {
+    expect(event.payload).not.toContain(b.from);
+    expect(event.payload).not.toContain(b.to);
+  }
+});
+
+it("keeps two businesses' calls apart when Twilio reuses a CallSid", async () => {
+  const b1 = await world();
+  const b2 = await world();
+  const sharedCallSid = sid('CA');
+
+  const res1 = await b1.worker.handle(b1.request({ CallSid: sharedCallSid }));
+  const res2 = await b2.worker.handle(b2.request({ CallSid: sharedCallSid }));
+
+  expect(res1.statusCode).toBe(200);
+  expect(res2.statusCode).toBe(200);
+
+  const id1 = voiceIdentity(b1.business.id, b1.user.id);
+  const id2 = voiceIdentity(b2.business.id, b2.user.id);
+
+  expect(res1.body).toContain(id1);
+  expect(res1.body).not.toContain(id2);
+
+  expect(res2.body).toContain(id2);
+  expect(res2.body).not.toContain(id1);
+
+  const calls1 = await b1.query('select 1 from messaging.calls where business_id = $1', [
+    b1.business.id,
+  ]);
+  const calls2 = await b2.query('select 1 from messaging.calls where business_id = $1', [
+    b2.business.id,
+  ]);
+  expect(calls1).toHaveLength(1);
+  expect(calls2).toHaveLength(1);
+});
+
+it('answers a retry of a refused call with a hang-up, and changes nothing', async () => {
+  const b = await world();
+  const contact = await database.fixtures.contact(b.business.context);
+  await b.query('update crm.contacts set dnd_inbound = true where id = $1', [contact.id]);
+  await b.query(
+    `insert into crm.contact_identities (business_id, contact_id, kind, value, value_normalized)
+     values ($1, $2, 'phone', $3, $3)`,
+    [b.business.id, contact.id, b.from],
+  );
+
+  const first = await b.worker.handle(b.request());
+  expect(first.statusCode).toBe(200);
+  expect(first.body).toBe(renderHangup());
+
+  const firstCalls = await b.query<{ state: string; failure_code: string | null }>(
+    'select state, failure_code from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(firstCalls).toHaveLength(1);
+  expect(firstCalls[0]).toMatchObject({ state: 'refused', failure_code: 'do_not_call' });
+
+  // Turn DND off before the retry
+  await b.query('update crm.contacts set dnd_inbound = false where id = $1', [contact.id]);
+
+  const retry = await b.worker.handle(b.request());
+  expect(retry.statusCode).toBe(200);
+  expect(retry.body).toBe(renderHangup());
+
+  const retryCalls = await b.query<{ state: string; failure_code: string | null }>(
+    'select state, failure_code from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(retryCalls).toHaveLength(1);
+  expect(retryCalls[0]).toMatchObject({ state: 'refused', failure_code: 'do_not_call' });
+
+  const events = await b.query<{ payload: string }>(
+    "select payload::text from events.events where type = 'call.progressed'",
+  );
+  expect(events).toHaveLength(1);
+
+  const routes = await b.query('select 1 from messaging.call_routes where business_id = $1', [
+    b.business.id,
+  ]);
+  expect(routes).toHaveLength(0);
+});
+
+it('never dials a destination whose leg was not stored, and hangs up when none succeed', async () => {
+  const standInAddLeg: typeof addCallLeg = () => Promise.resolve(null);
+  const b = await world({ addLeg: standInAddLeg });
+
+  const res = await b.worker.handle(b.request());
+  expect(res.statusCode).toBe(200);
+  expect(res.body).toBe(renderHangup());
+
+  const calls = await b.query<{ state: string; failure_code: string | null }>(
+    'select state, failure_code from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls).toHaveLength(1);
+  expect(calls[0]).toMatchObject({
+    state: 'refused',
+    failure_code: 'member_unavailable',
+  });
+
+  const routes = await b.query('select 1 from messaging.call_routes where business_id = $1', [
+    b.business.id,
+  ]);
+  expect(routes).toHaveLength(0);
+});
+
+it('answers with a hang-up when stored route steps fail schema validation', async () => {
+  const b = await world();
+  const first = await b.worker.handle(b.request());
+  expect(first.statusCode).toBe(200);
+
+  // Corrupt the stored steps
+  await b.query(
+    `update messaging.call_routes set steps = '[{"kind": "unknown_kind", "address": "invalid"}]' where business_id = $1`,
+    [b.business.id],
+  );
+
+  const retry = await b.worker.handle(b.request());
+  expect(retry.statusCode).toBe(200);
+  expect(retry.body).toBe(renderHangup());
+});

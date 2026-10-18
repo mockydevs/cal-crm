@@ -1,8 +1,8 @@
 // Inbound do not disturb, as GoHighLevel has it: one switch on a contact for what they
 // send in. Text messages from them are blocked (sms-inbound.ts): not shown in conversations,
 // not passed on to the team, and they start nothing, while a STOP, START or HELP still
-// changes their consent. Their calls are not blocked yet: the phone system does not check
-// this when a call comes in. It stops nothing the business sends them; the outbound policy
+// changes their consent. Their calls are also blocked: the phone system checks this when an
+// incoming call arrives. It stops nothing the business sends them; the outbound policy
 // (outbound-policy.ts) is for that.
 //
 // It is a block on a number, read when something arrives from it.

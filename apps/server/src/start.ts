@@ -819,7 +819,14 @@ export async function start(
     ...(media === undefined ? {} : { publicMedia: { media, db, rateLimit: publicIntakeLimit } }),
     ...(serveApi ? { smsWebhooks: { accept: (request) => acceptSmsWebhook(db, request) } } : {}),
     ...(vault?.opening !== undefined
-      ? { voiceWebhooks: createVoiceCallbackWorker(services, vault.opening, config.publicUrl) }
+      ? {
+          voiceWebhooks: createVoiceCallbackWorker(
+            services,
+            vault.opening,
+            config.publicUrl,
+            readPersonGrants,
+          ),
+        }
       : config.role === 'app' && config.voiceWorkerOrigin !== undefined
         ? {
             voiceWebhooks: { handle: createVoiceRelay({ workerOrigin: config.voiceWorkerOrigin }) },

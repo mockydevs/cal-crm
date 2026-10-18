@@ -4,7 +4,7 @@ import { connectDatabase, withTenant, type Database } from '@repo/db';
 import { createVault, newSecretsKey, parseSecretsKeys, type Vault } from '@repo/module-vault';
 import { testDatabase, type TestDatabase } from '@repo/testing';
 import { afterAll, beforeAll, expect, inject, it } from 'vitest';
-import { recordInboundCall } from '../call-ledger.js';
+import { recordInboundCall, type ReadCallGrants } from '../call-ledger.js';
 import { SMS_CREDENTIALS } from '../sms-connect.js';
 import { newWebhookToken, webhookDigest } from '../sms-webhook-url.js';
 import { expectedSignature } from '../twilio-signature.js';
@@ -15,6 +15,7 @@ let database: TestDatabase;
 let db: Database;
 let vault: Vault;
 let services: Services;
+const allowCalls: ReadCallGrants = () => Promise.resolve(new Set(['calls.place']));
 const publicUrl = 'https://crm.example.test';
 const sid = (prefix: string) => `${prefix}${randomBytes(16).toString('hex')}`;
 let numberSequence = 100;
@@ -130,7 +131,7 @@ async function world(matchContact = true) {
 
 it('authenticates progress and final notifications before audited, replay-safe ledger updates', async () => {
   const b = await world();
-  const worker = createVoiceCallbackWorker(services, vault, publicUrl);
+  const worker = createVoiceCallbackWorker(services, vault, publicUrl, allowCalls);
   const report = b.request(
     'progress',
     { CallbackSource: 'call-progress-events', SequenceNumber: '1' },
@@ -173,7 +174,7 @@ it('rechecks connection state after opening the signature secret and before comm
       return plaintext;
     },
   };
-  const worker = createVoiceCallbackWorker(services, opening, publicUrl);
+  const worker = createVoiceCallbackWorker(services, opening, publicUrl, allowCalls);
   const report = b.request(
     'progress',
     { CallbackSource: 'call-progress-events', SequenceNumber: '1' },
@@ -188,7 +189,7 @@ it('rechecks connection state after opening the signature secret and before comm
 it('refuses malformed, unbound and disconnected callbacks without changing a call', async () => {
   const b = await world();
   const other = await world();
-  const worker = createVoiceCallbackWorker(services, vault, publicUrl);
+  const worker = createVoiceCallbackWorker(services, vault, publicUrl, allowCalls);
   expect((await worker.handle(b.request('progress'))).statusCode).toBe(400);
   expect(
     (
@@ -213,7 +214,7 @@ it('refuses malformed, unbound and disconnected callbacks without changing a cal
       )
     ).statusCode,
   ).toBe(404);
-  expect((await worker.handle(b.request('inbound'))).statusCode).toBe(503);
+  expect((await worker.handle(b.request('voicemail'))).statusCode).toBe(503);
   await b.query("update messaging.provider_connections set status='disconnected' where id=$1", [
     b.connectionId,
   ]);
@@ -228,7 +229,7 @@ it('refuses malformed, unbound and disconnected callbacks without changing a cal
 it('queues a waiting hang-up once when new verified progress binds the provider call', async () => {
   const b = await world(false);
   await b.query('update messaging.calls set hangup_requested_at=now() where id=$1', [b.callId]);
-  const worker = createVoiceCallbackWorker(services, vault, publicUrl);
+  const worker = createVoiceCallbackWorker(services, vault, publicUrl, allowCalls);
   const request = b.request(
     'progress',
     { CallbackSource: 'call-progress-events', SequenceNumber: '1' },
@@ -248,7 +249,7 @@ it('queues a waiting hang-up once when new verified progress binds the provider 
 
 it('answers a verified dial-result callback with hangup instructions', async () => {
   const b = await world();
-  const worker = createVoiceCallbackWorker(services, vault, publicUrl);
+  const worker = createVoiceCallbackWorker(services, vault, publicUrl, allowCalls);
   const callback = b.request('dial-result', { DialCallStatus: 'completed' }, b.legId);
   expect(await worker.handle(callback)).toEqual({
     statusCode: 200,
