@@ -1,0 +1,45 @@
+Return-Path: <>
+Date: Thu, 08 Oct 2026 09:30:05 +0000
+From: Mail Delivery System <MAILER-DAEMON@mx.example.test>
+To: inbox@example.test
+Subject: WARNING: message delayed
+Message-ID: <20261008093005.4F2A1@mx.example.test>
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="B7"
+
+This is a MIME-encapsulated message.
+
+--B7
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+The following message has not been delivered to the intended recipient:
+
+    someone@example.com
+
+despite repeated delivery attempts over the past 24 hours. Delivery will
+continue to be attempted.
+
+--B7
+content-type: message/delivery-status
+
+Reporting-MTA: dns; mx.example.test
+
+Final-Recipient: rfc822;someone@example.com
+Status: 4.0.0 (unknown temporary failure)
+Action: delayed
+
+--B7
+content-type: text/rfc822-headers
+
+Date: Thu, 08 Oct 2026 09:30:00 +0000
+From: Example Shop <inbox@example.test>
+To: someone@example.com
+Subject: Your order
+Message-ID: <crm-outbound.0199c0de-0000-7000-8000-000000000001@crm.invalid>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+--B7--

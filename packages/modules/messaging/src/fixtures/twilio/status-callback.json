@@ -1,0 +1,13 @@
+{
+  "$source": "Parameters of a status callback as documented at https://www.twilio.com/docs/messaging/guides/track-outbound-message-status and https://www.twilio.com/docs/messaging/api/message-resource#twilios-request-to-the-statuscallback-url. Twilio sends them as application/x-www-form-urlencoded; tests encode and sign them. Made up, not captured.",
+  "params": {
+    "AccountSid": "AC00000000000000000000000000000001",
+    "ApiVersion": "2010-04-01",
+    "From": "+15017122661",
+    "MessageSid": "SM00000000000000000000000000000001",
+    "MessageStatus": "delivered",
+    "SmsSid": "SM00000000000000000000000000000001",
+    "SmsStatus": "delivered",
+    "To": "+15558675310"
+  }
+}

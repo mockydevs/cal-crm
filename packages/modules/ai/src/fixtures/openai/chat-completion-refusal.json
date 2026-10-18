@@ -1,0 +1,15 @@
+{
+  "id": "chatcmpl-fixture-refusal",
+  "object": "chat.completion",
+  "created": 1760000000,
+  "model": "fixture-model",
+  "choices": [
+    {
+      "index": 0,
+      "message": { "role": "assistant", "content": null, "refusal": "A fixture refusal." },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": { "prompt_tokens": 21, "completion_tokens": 6, "total_tokens": 27 }
+}

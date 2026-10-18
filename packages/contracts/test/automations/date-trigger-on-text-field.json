@@ -1,0 +1,30 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "birthday",
+        "type": "date.reached",
+        "config": {
+          "field": "contact.firstName"
+        }
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/triggers/0/config/field",
+      "code": "wrong_field_type",
+      "message": "contact.firstName isn't a date."
+    }
+  ]
+}

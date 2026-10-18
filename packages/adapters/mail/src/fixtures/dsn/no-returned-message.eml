@@ -1,0 +1,29 @@
+Return-Path: <>
+Date: Thu, 08 Oct 2026 09:30:05 +0000
+From: Mail Delivery System <MAILER-DAEMON@mx.example.test>
+To: inbox@example.test
+Subject: Status of: Your order
+Message-ID: <20261008093005.4F2A1@mx.example.test>
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="B9"
+
+This is a MIME-encapsulated message.
+
+--B9
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+Invalid address - nobody@example.com
+
+--B9
+content-type: message/delivery-status
+
+Reporting-MTA: dns; mx.example.test
+
+Final-Recipient: rfc822;nobody@example.com
+Status: 5.1.1 (unknown user)
+Action: failed
+
+--B9--

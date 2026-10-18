@@ -1,0 +1,171 @@
+/*
+ * The design system's tokens, in three layers:
+ *   1. the palette: raw values, used only by layer 2;
+ *   2. meanings, named as in FRONTEND.md; branding changes only these;
+ *   3. the Tailwind theme: the class names components use.
+ *
+ * Layer 3 uses shadcn/ui's vocabulary, so components added with the shadcn CLI pick up
+ * the tokens as they are. Two names differ between the two vocabularies:
+ *   - the brand accent (--accent) is `primary` in class names (bg-primary);
+ *   - muted text (--muted) is `muted-foreground` (text-muted-foreground).
+ */
+@import 'tailwindcss' source(none);
+@import '@fontsource-variable/roboto';
+
+@source '..';
+
+/* 1. Palette ----------------------------------------------------------------------- */
+/* The gray, blue, green, amber and red steps are the ones GoHighLevel's page defines;
+   the rest were measured on its surfaces. */
+:root {
+  --palette-white: #ffffff;
+  --palette-off-white: #f8f9fa;
+  --palette-blue-gray-50: #f7f9fd;
+  --palette-blue-gray-100: #eceef2;
+  --palette-gray-100: #f2f4f7;
+  --palette-gray-200: #eaecf0;
+  --palette-gray-300: #d0d5dd;
+  --palette-gray-500: #667085;
+  --palette-gray-700: #344054;
+  --palette-gray-900: #101828;
+  --palette-slate-700: #2d3748;
+  --palette-slate-900: #1a202c;
+  --palette-blue-50: #eff4ff;
+  --palette-blue-100: #d1e0ff;
+  --palette-blue-700: #004eeb;
+  --palette-green-50: #ecfdf3;
+  --palette-green-100: #d1fadf;
+  --palette-green-300: #6ce9a6;
+  --palette-green-700: #027a48;
+  --palette-amber-50: #fffaeb;
+  --palette-amber-700: #b54708;
+  --palette-red-700: #b42318;
+  --palette-peach-200: #fbd9c0;
+  --palette-violet-100: #dcd3f5;
+}
+
+/* 2. Meanings ---------------------------------------------------------------------- */
+:root {
+  --ground: var(--palette-off-white);
+  --surface: var(--palette-white);
+  --panel: var(--palette-blue-gray-50);
+  --well: var(--palette-blue-gray-100);
+  --ink: var(--palette-gray-900);
+  --body: var(--palette-gray-700);
+  --muted: var(--palette-gray-500);
+  --line: var(--palette-gray-200);
+  --control-line: var(--palette-gray-300);
+  --column: var(--palette-gray-100);
+  --attention: var(--palette-amber-50);
+  --attention-ink: var(--palette-amber-700);
+  --neutral-pill: var(--palette-gray-100);
+  --neutral-pill-ink: var(--palette-gray-700);
+  --assistant-pill: var(--palette-blue-50);
+  --assistant-pill-ink: var(--palette-blue-700);
+  --success: var(--palette-green-700);
+  --success-subtle: var(--palette-green-50);
+  --success-line: var(--palette-green-300);
+  --danger: var(--palette-red-700);
+  --avatar-1: var(--palette-peach-200);
+  --avatar-2: var(--palette-blue-100);
+  --avatar-3: var(--palette-violet-100);
+  --avatar-4: var(--palette-green-100);
+  --sidebar: var(--palette-slate-700);
+  --sidebar-active: var(--palette-slate-900);
+  --sidebar-ink: var(--palette-white);
+
+  /* The agency's accent. applyBrand() in lib/brand.ts replaces these at runtime; the
+     defaults are what brandColors('#155EEF') returns (a test keeps them in step). */
+  --accent: #155eef;
+  --accent-ink: #ffffff;
+  --accent-hover: #114bbf;
+  --accent-subtle: #eff4fe;
+  --accent-text: #155eef;
+
+  /* Component sizes. */
+  --sidebar-width: 224px;
+  --card-radius: 12px;
+}
+
+/* 3. Tailwind theme ------------------------------------------------------------------ */
+@theme {
+  /* Only token colors exist: no hard-coded color can sneak past white-labeling. */
+  --color-*: initial;
+
+  --font-sans: 'Roboto Variable', ui-sans-serif, system-ui, sans-serif;
+  /* Body text: 14px on a 20px line. */
+  --text-md: 14px;
+  --text-md--line-height: calc(20 / 14);
+}
+
+@theme inline {
+  /* shadcn/ui's vocabulary. */
+  --color-background: var(--ground);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-ink);
+  --color-secondary: var(--neutral-pill);
+  --color-secondary-foreground: var(--neutral-pill-ink);
+  --color-muted: var(--column);
+  --color-muted-foreground: var(--muted);
+  --color-accent: var(--accent-subtle);
+  --color-accent-foreground: var(--ink);
+  --color-border: var(--line);
+  --color-input: var(--control-line);
+  --color-ring: var(--accent);
+  --color-destructive: var(--danger);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-ink);
+
+  /* Ours, for what shadcn/ui has no word for. */
+  --color-surface: var(--surface);
+  --color-panel: var(--panel);
+  --color-well: var(--well);
+  --color-body: var(--body);
+  --color-primary-hover: var(--accent-hover);
+  --color-link: var(--accent-text);
+  --color-attention: var(--attention);
+  --color-attention-foreground: var(--attention-ink);
+  --color-assistant: var(--assistant-pill);
+  --color-assistant-foreground: var(--assistant-pill-ink);
+  --color-success: var(--success);
+  --color-success-subtle: var(--success-subtle);
+  --color-success-line: var(--success-line);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-avatar-1: var(--avatar-1);
+  --color-avatar-2: var(--avatar-2);
+  --color-avatar-3: var(--avatar-3);
+  --color-avatar-4: var(--avatar-4);
+
+  --radius-card: var(--card-radius);
+  --radius-control: 6px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background font-sans text-md text-foreground antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

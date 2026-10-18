@@ -1,0 +1,5 @@
+{
+  "type": "error",
+  "error": { "type": "authentication_error", "message": "A fixture error." },
+  "request_id": "req_011CFixture00000000000000"
+}

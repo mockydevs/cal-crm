@@ -1,0 +1,42 @@
+{
+  "name": "@repo/module-forms",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint . --max-warnings=0",
+    "test": "vitest run --coverage --config vitest.unit.config.js",
+    "test:integration": "vitest run --coverage --config vitest.integration.config.js"
+  },
+  "dependencies": {
+    "@repo/commands": "workspace:*",
+    "@repo/contracts": "workspace:*",
+    "@repo/db": "workspace:*",
+    "@repo/kernel": "workspace:*",
+    "@repo/module-crm": "workspace:*",
+    "@repo/module-messaging": "workspace:*",
+    "@repo/module-tenancy": "workspace:*",
+    "altcha-lib": "catalog:",
+    "kysely": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/testing": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

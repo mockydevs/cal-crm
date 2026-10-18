@@ -1,0 +1,1269 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-15 15:20+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/phone-system.tsx
+msgid "{name} is now the default number."
+msgstr "{name} is now the default number."
+
+#: src/phone-system.tsx
+msgid "{name} saved."
+msgstr "{name} saved."
+
+#: src/phone-system.tsx
+msgid "{seconds} seconds"
+msgstr "{seconds} seconds"
+
+#: src/phone-system-number.tsx
+msgid "A call rings the first that is set, in this order: the team member, then the outside number, then the business fallback number."
+msgstr "A call rings the first that is set, in this order: the team member, then the outside number, then the business fallback number."
+
+#: src/phone-system-voice.tsx
+msgid "A call to a number assigned to someone rings them before anyone else."
+msgstr "A call to a number assigned to someone rings them before anyone else."
+
+#: src/phone-system-parts.tsx
+msgid "A call to this number reaches nobody and leaves no voicemail."
+msgstr "A call to this number reaches nobody and leaves no voicemail."
+
+#: src/phone-system-number.tsx
+msgid "A forwarded call shows"
+msgstr "A forwarded call shows"
+
+#: src/phone-system-voice.tsx
+msgid "A number that is no longer registered"
+msgstr "A number that is no longer registered"
+
+#: src/phone-system-voice.tsx
+msgid "A number with the contact's area code"
+msgstr "A number with the contact's area code"
+
+#: src/calls.tsx
+#: src/phone-system.tsx
+msgid "A team member"
+msgstr "A team member"
+
+#: src/sms-settings.tsx
+msgid "Account SID"
+msgstr "Account SID"
+
+#: src/phone-system-parts.tsx
+#: src/sms-settings.tsx
+msgid "Active"
+msgstr "Active"
+
+#: src/sms-settings.tsx
+msgid "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+msgstr "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+#: src/phone-system-number.tsx
+msgid "Advanced settings"
+msgstr "Advanced settings"
+
+#: src/phone-system-voice.tsx
+msgid "After the recording announcement"
+msgstr "After the recording announcement"
+
+#: src/calls.tsx
+msgid "All calls"
+msgstr "All calls"
+
+#: src/phone-system-voice.tsx
+msgid "Allow callers who hide their number"
+msgstr "Allow callers who hide their number"
+
+#: src/phone-system-number.tsx
+msgid "Announcement"
+msgstr "Announcement"
+
+#: src/calls.tsx
+msgid "Answered"
+msgstr "Answered"
+
+#: src/sms-settings.tsx
+msgid "API key"
+msgstr "API key"
+
+#: src/phone-system-number.tsx
+#: src/phone-system.tsx
+msgid "Assigned to"
+msgstr "Assigned to"
+
+#: src/sms-settings.tsx
+msgid "Auth Token"
+msgstr "Auth Token"
+
+#: src/phone-system-number.tsx
+msgid "Basic details"
+msgstr "Basic details"
+
+#: src/phone-system-voice.tsx
+msgid "Before the recording announcement"
+msgstr "Before the recording announcement"
+
+#: src/calls.tsx
+msgid "Being placed"
+msgstr "Being placed"
+
+#: src/phone-system-voice.tsx
+msgid "Business fallback number"
+msgstr "Business fallback number"
+
+#: src/calls.tsx
+msgid "Business number"
+msgstr "Business number"
+
+#: src/calls.tsx
+msgid "Busy"
+msgstr "Busy"
+
+#: src/calls.tsx
+msgid "Call back"
+msgstr "Call back"
+
+#: src/phone-system-number.tsx
+msgid "Call connect"
+msgstr "Call connect"
+
+#: src/calls.tsx
+msgid "Call details"
+msgstr "Call details"
+
+#: src/phone-system-number.tsx
+msgid "Call forwarding"
+msgstr "Call forwarding"
+
+#: src/calls.tsx
+msgid "Call ID"
+msgstr "Call ID"
+
+#: src/calls.tsx
+msgid "Call legs"
+msgstr "Call legs"
+
+#: src/calls.tsx
+msgid "Call legs table"
+msgstr "Call legs table"
+
+#: src/phone-system-number.tsx
+msgid "Call recording"
+msgstr "Call recording"
+
+#: src/phone-system-voice.tsx
+msgid "Caller ID"
+msgstr "Caller ID"
+
+#: src/phone-system-number.tsx
+msgid "Callers hear it before the call is connected."
+msgstr "Callers hear it before the call is connected."
+
+#: src/phone-system-calling.tsx
+msgid "Calling"
+msgstr "Calling"
+
+#: src/phone-system-voice.tsx
+msgid "Calling a contact during their quiet hours asks first."
+msgstr "Calling a contact during their quiet hours asks first."
+
+#: src/phone-system-parts.tsx
+msgid "Calling is being set up on your Twilio account. This takes a moment."
+msgstr "Calling is being set up on your Twilio account. This takes a moment."
+
+#: src/phone-system-parts.tsx
+msgid "Calling isn't set up on the Twilio account your numbers come from. Set it up under Calling below. Everything set here is saved and used once calls work."
+msgstr "Calling isn't set up on the Twilio account your numbers come from. Set it up under Calling below. Everything set here is saved and used once calls work."
+
+#: src/calls.tsx
+msgid "Calls"
+msgstr "Calls"
+
+#: src/phone-system-parts.tsx
+msgid "Calls aren't available yet"
+msgstr "Calls aren't available yet"
+
+#: src/phone-system-parts.tsx
+msgid "Calls can be made from this business's numbers. Calls to them aren't answered here yet."
+msgstr "Calls can be made from this business's numbers. Calls to them aren't answered here yet."
+
+#: src/phone-system-number.tsx
+msgid "Calls can't be made or taken yet. What you set here is saved and used once they can."
+msgstr "Calls can't be made or taken yet. What you set here is saved and used once they can."
+
+#: src/phone-system.tsx
+msgid "Calls go first to"
+msgstr "Calls go first to"
+
+#: src/phone-system-voice.tsx
+msgid "Calls go out from"
+msgstr "Calls go out from"
+
+#: src/phone-system-calling.tsx
+msgid "Calls go through your Twilio account. Set up calling once on each account whose numbers should make and take calls: it creates a key named “CRM browser calling” in Twilio."
+msgstr "Calls go through your Twilio account. Set up calling once on each account whose numbers should make and take calls: it creates a key named “CRM browser calling” in Twilio."
+
+#: src/calls.tsx
+msgid "Calls table"
+msgstr "Calls table"
+
+#: src/calls.tsx
+msgid "Calls to and from the business's numbers, newest first."
+msgstr "Calls to and from the business's numbers, newest first."
+
+#: src/phone-system-number.tsx
+msgid "Calls to and from this number are recorded."
+msgstr "Calls to and from this number are recorded."
+
+#: src/phone-system.tsx
+msgid "Can't take calls"
+msgstr "Can't take calls"
+
+#: src/phone-system-number.tsx
+#: src/sms-settings.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/calls.tsx
+msgid "Cancel the call"
+msgstr "Cancel the call"
+
+#: src/calls.tsx
+msgid "Cancel this call?"
+msgstr "Cancel this call?"
+
+#: src/calls.tsx
+msgid "Canceled"
+msgstr "Canceled"
+
+#: src/phone-system.tsx
+msgid "Capabilities"
+msgstr "Capabilities"
+
+#: src/sms-settings.tsx
+msgid "Checking the Twilio account…"
+msgstr "Checking the Twilio account…"
+
+#: src/phone-system-number.tsx
+#: src/sms-settings.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/calls.tsx
+msgid "Completed"
+msgstr "Completed"
+
+#: src/sms-settings.tsx
+msgid "Connect a Twilio account to send and receive SMS, then register the numbers you want to use."
+msgstr "Connect a Twilio account to send and receive SMS, then register the numbers you want to use."
+
+#: src/phone-system-voice.tsx
+msgid "Connect the person calling"
+msgstr "Connect the person calling"
+
+#: src/sms-settings.tsx
+msgid "Connect Twilio"
+msgstr "Connect Twilio"
+
+#: src/calls.tsx
+#: src/sms-settings.tsx
+msgid "Connected"
+msgstr "Connected"
+
+#: src/phone-system.tsx
+msgid "Connecting a Twilio account and registering numbers needs permission to manage SMS. Ask someone who has it to add the numbers you need."
+msgstr "Connecting a Twilio account and registering numbers needs permission to manage SMS. Ask someone who has it to add the numbers you need."
+
+#: src/phone-system.tsx
+msgid "Default"
+msgstr "Default"
+
+#: src/phone-system-voice.tsx
+msgid "Default number"
+msgstr "Default number"
+
+#: src/phone-system-voice.tsx
+msgid "Delete old recordings"
+msgstr "Delete old recordings"
+
+#: src/phone-system-voice.tsx
+msgid "Delete recordings older than (days)"
+msgstr "Delete recordings older than (days)"
+
+#: src/calls.tsx
+msgid "Details"
+msgstr "Details"
+
+#: src/calls.tsx
+msgid "Details of the call with {remote}, {when}"
+msgstr "Details of the call with {remote}, {when}"
+
+#: src/calls.tsx
+msgid "Dialing"
+msgstr "Dialing"
+
+#: src/calls.tsx
+msgid "Direction"
+msgstr "Direction"
+
+#: src/phone-system-voice.tsx
+msgid "Discard changes"
+msgstr "Discard changes"
+
+#: src/phone-system-parts.tsx
+#: src/sms-settings.tsx
+msgid "Disconnected"
+msgstr "Disconnected"
+
+#: src/calls.tsx
+msgid "Duration"
+msgstr "Duration"
+
+#: src/phone-system-number.tsx
+#: src/phone-system.tsx
+msgid "Edit configuration"
+msgstr "Edit configuration"
+
+#: src/phone-system.tsx
+msgid "Edit configuration of {name}"
+msgstr "Edit configuration of {name}"
+
+#: src/calls.tsx
+msgid "Ended"
+msgstr "Ended"
+
+#: src/calls.tsx
+msgid "Ended: busy"
+msgstr "Ended: busy"
+
+#: src/calls.tsx
+msgid "Ended: canceled"
+msgstr "Ended: canceled"
+
+#: src/calls.tsx
+msgid "Ended: completed"
+msgstr "Ended: completed"
+
+#: src/calls.tsx
+msgid "Ended: failed"
+msgstr "Ended: failed"
+
+#: src/calls.tsx
+msgid "Ended: no answer"
+msgstr "Ended: no answer"
+
+#: src/calls.tsx
+#: src/phone-system-calling.tsx
+msgid "Failed"
+msgstr "Failed"
+
+#: src/phone-system-parts.tsx
+#: src/sms-settings.tsx
+msgid "Failing"
+msgstr "Failing"
+
+#: src/phone-system-number.tsx
+msgid "First, a team member"
+msgstr "First, a team member"
+
+#: src/phone-system-number.tsx
+msgid "Friendly name"
+msgstr "Friendly name"
+
+#: src/phone-system-voice.tsx
+msgid "From 1 to 3,650 days."
+msgstr "From 1 to 3,650 days."
+
+#: src/phone-system-number.tsx
+msgid "From 5 to 120 seconds. 20 or more is advised, so there is time to answer."
+msgstr "From 5 to 120 seconds. 20 or more is advised, so there is time to answer."
+
+#: src/phone-system-parts.tsx
+msgid "Give the number a name."
+msgstr "Give the number a name."
+
+#: src/calls.tsx
+msgid "Hang up"
+msgstr "Hang up"
+
+#: src/calls.tsx
+msgid "Hang up this call?"
+msgstr "Hang up this call?"
+
+#: src/calls.tsx
+msgid "Hang-up requested. The call ends when the provider reports it has."
+msgstr "Hang-up requested. The call ends when the provider reports it has."
+
+#: src/calls.tsx
+msgid "Hidden number"
+msgstr "Hidden number"
+
+#: src/calls.tsx
+msgid "In progress"
+msgstr "In progress"
+
+#: src/sms-settings.tsx
+msgid "Inbound webhook URL"
+msgstr "Inbound webhook URL"
+
+#: src/calls.tsx
+msgid "Incoming"
+msgstr "Incoming"
+
+#: src/phone-system-voice.tsx
+msgid "Incoming calls"
+msgstr "Incoming calls"
+
+#: src/calls.tsx
+msgid "Initiated"
+msgstr "Initiated"
+
+#: src/phone-system-parts.tsx
+msgid "It falls back to the business fallback number, which isn't set."
+msgstr "It falls back to the business fallback number, which isn't set."
+
+#: src/calls.tsx
+msgid "It hasn't been placed yet, so it won't be."
+msgstr "It hasn't been placed yet, so it won't be."
+
+#: src/phone-system-parts.tsx
+msgid "It rings for under 20 seconds, which can be too short to answer."
+msgstr "It rings for under 20 seconds, which can be too short to answer."
+
+#: src/sms-settings.tsx
+msgid "Key secret"
+msgstr "Key secret"
+
+#: src/sms-settings.tsx
+msgid "Key SID"
+msgstr "Key SID"
+
+#: src/sms-settings.tsx
+msgid "Label"
+msgstr "Label"
+
+#: src/sms-settings.tsx
+msgid "Last checked"
+msgstr "Last checked"
+
+#: src/calls.tsx
+msgid "Loading call legs…"
+msgstr "Loading call legs…"
+
+#: src/calls.tsx
+msgid "Loading calls…"
+msgstr "Loading calls…"
+
+#: src/sms-settings.tsx
+msgid "Loading numbers…"
+msgstr "Loading numbers…"
+
+#: src/phone-system.tsx
+#: src/sms-settings.tsx
+msgid "Loading phone numbers…"
+msgstr "Loading phone numbers…"
+
+#: src/sms-settings.tsx
+msgid "Loading SMS connections…"
+msgstr "Loading SMS connections…"
+
+#: src/phone-system-number.tsx
+msgid "Loading team members…"
+msgstr "Loading team members…"
+
+#: src/phone-system.tsx
+msgid "Loading voice settings…"
+msgstr "Loading voice settings…"
+
+#: src/phone-system-calling.tsx
+msgid "Loading your Twilio accounts…"
+msgstr "Loading your Twilio accounts…"
+
+#: src/calls.tsx
+#: src/phone-system.tsx
+msgid "Loading…"
+msgstr "Loading…"
+
+#: src/phone-system.tsx
+msgid "Make {name} the default number"
+msgstr "Make {name} the default number"
+
+#: src/phone-system.tsx
+msgid "Make default"
+msgstr "Make default"
+
+#: src/phone-system-voice.tsx
+msgid "Missed-call text"
+msgstr "Missed-call text"
+
+#: src/sms-settings.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/calls.tsx
+msgid "Needs checking with the provider"
+msgstr "Needs checking with the provider"
+
+#: src/sms-settings.tsx
+msgid "Never checked."
+msgstr "Never checked."
+
+#: src/calls.tsx
+msgid "Next"
+msgstr "Next"
+
+#: src/calls.tsx
+msgid "Next page"
+msgstr "Next page"
+
+#: src/calls.tsx
+msgid "No answer"
+msgstr "No answer"
+
+#: src/calls.tsx
+msgid "No call legs yet."
+msgstr "No call legs yet."
+
+#: src/calls.tsx
+msgid "No calls match."
+msgstr "No calls match."
+
+#: src/calls.tsx
+msgid "No calls yet."
+msgstr "No calls yet."
+
+#: src/phone-system-voice.tsx
+msgid "No default number"
+msgstr "No default number"
+
+#: src/phone-system.tsx
+msgid "No numbers match “{searched}”."
+msgstr "No numbers match “{searched}”."
+
+#: src/phone-system.tsx
+msgid "No numbers registered yet. Connect your Twilio account below, then register the numbers you want to use."
+msgstr "No numbers registered yet. Connect your Twilio account below, then register the numbers you want to use."
+
+#: src/calls.tsx
+#: src/phone-system-number.tsx
+msgid "No one"
+msgstr "No one"
+
+#: src/sms-settings.tsx
+msgid "No phone numbers registered yet. Register one from a connection above."
+msgstr "No phone numbers registered yet. Register one from a connection above."
+
+#: src/sms-settings.tsx
+msgid "No SMS connections yet. Connect Twilio to get started."
+msgstr "No SMS connections yet. Connect Twilio to get started."
+
+#: src/phone-system-calling.tsx
+msgid "No Twilio account is connected yet. Connect one below to set up calling."
+msgstr "No Twilio account is connected yet. Connect one below to set up calling."
+
+#: src/phone-system-number.tsx
+#: src/phone-system.tsx
+msgid "Nobody"
+msgstr "Nobody"
+
+#: src/phone-system-calling.tsx
+msgid "None of this account's registered numbers can take calls."
+msgstr "None of this account's registered numbers can take calls."
+
+#: src/phone-system-parts.tsx
+msgid "None of this business's registered numbers can take calls, so no call can be made or taken yet. Register a number with voice from your Twilio account to start. Everything set here is saved and used once one is registered."
+msgstr "None of this business's registered numbers can take calls, so no call can be made or taken yet. Register a number with voice from your Twilio account to start. Everything set here is saved and used once one is registered."
+
+#: src/phone-system.tsx
+msgid "Not applicable"
+msgstr "Not applicable"
+
+#: src/phone-system-calling.tsx
+msgid "Not set up"
+msgstr "Not set up"
+
+#: src/calls.tsx
+msgid "Number"
+msgstr "Number"
+
+#: src/phone-system-number.tsx
+msgid "Number settings"
+msgstr "Number settings"
+
+#: src/sms-settings.tsx
+msgid "Numbers from Twilio"
+msgstr "Numbers from Twilio"
+
+#: src/phone-system-voice.tsx
+msgid "One text, sent with the same consent and quiet-hours checks as any message."
+msgstr "One text, sent with the same consent and quiet-hours checks as any message."
+
+#: src/phone-system-voice.tsx
+msgid "Only calls that are recorded are transcribed."
+msgstr "Only calls that are recorded are transcribed."
+
+#: src/calls.tsx
+msgid "Open contact"
+msgstr "Open contact"
+
+#: src/calls.tsx
+msgid "Other party"
+msgstr "Other party"
+
+#: src/calls.tsx
+msgid "Outcome unknown"
+msgstr "Outcome unknown"
+
+#: src/calls.tsx
+msgid "Outgoing"
+msgstr "Outgoing"
+
+#: src/phone-system-voice.tsx
+msgid "Outgoing calls"
+msgstr "Outgoing calls"
+
+#: src/calls.tsx
+msgid "Page {pageNumber}"
+msgstr "Page {pageNumber}"
+
+#: src/calls.tsx
+msgid "Pages"
+msgstr "Pages"
+
+#: src/sms-settings.tsx
+msgid "Paste this into Twilio's number configuration as the webhook for incoming messages. It is shown only this once and can't be read back later."
+msgstr "Paste this into Twilio's number configuration as the webhook for incoming messages. It is shown only this once and can't be read back later."
+
+#: src/phone-system-parts.tsx
+#: src/sms-settings.tsx
+msgid "Paused"
+msgstr "Paused"
+
+#: src/phone-system.tsx
+msgid "Phone numbers"
+msgstr "Phone numbers"
+
+#: src/phone-system.tsx
+msgid "Phone System"
+msgstr "Phone System"
+
+#: src/calls.tsx
+msgid "Placing"
+msgstr "Placing"
+
+#: src/phone-system-number.tsx
+msgid "Play a recording announcement"
+msgstr "Play a recording announcement"
+
+#: src/calls.tsx
+msgid "Previous"
+msgstr "Previous"
+
+#: src/calls.tsx
+msgid "Previous page"
+msgstr "Previous page"
+
+#: src/calls.tsx
+msgid "Queued"
+msgstr "Queued"
+
+#: src/calls.tsx
+msgid "Reaches"
+msgstr "Reaches"
+
+#: src/phone-system-calling.tsx
+msgid "Ready"
+msgstr "Ready"
+
+#: src/phone-system-number.tsx
+msgid "Record calls"
+msgstr "Record calls"
+
+#: src/phone-system-voice.tsx
+msgid "Recording and transcription"
+msgstr "Recording and transcription"
+
+#: src/sms-settings.tsx
+msgid "Refresh numbers"
+msgstr "Refresh numbers"
+
+#: src/sms-settings.tsx
+msgid "Refreshing from Twilio…"
+msgstr "Refreshing from Twilio…"
+
+#: src/calls.tsx
+msgid "Refused"
+msgstr "Refused"
+
+#: src/sms-settings.tsx
+msgid "Register"
+msgstr "Register"
+
+#: src/sms-settings.tsx
+msgid "Registered"
+msgstr "Registered"
+
+#: src/phone-system.tsx
+msgid "Registered numbers"
+msgstr "Registered numbers"
+
+#: src/sms-settings.tsx
+msgid "Registered phone numbers"
+msgstr "Registered phone numbers"
+
+#: src/sms-settings.tsx
+msgid "Registering…"
+msgstr "Registering…"
+
+#: src/calls.tsx
+msgid "Rejected"
+msgstr "Rejected"
+
+#: src/calls.tsx
+msgid "Rejected by the provider"
+msgstr "Rejected by the provider"
+
+#: src/phone-system-number.tsx
+msgid "Reload number"
+msgstr "Reload number"
+
+#: src/phone-system-voice.tsx
+msgid "Reload settings"
+msgstr "Reload settings"
+
+#: src/calls.tsx
+msgid "Reports disagree"
+msgstr "Reports disagree"
+
+#: src/calls.tsx
+msgid "Requested"
+msgstr "Requested"
+
+#: src/phone-system-number.tsx
+msgid "Ring for (seconds)"
+msgstr "Ring for (seconds)"
+
+#: src/phone-system-number.tsx
+msgid "Ring more team members"
+msgstr "Ring more team members"
+
+#: src/phone-system-voice.tsx
+msgid "Ring the assigned person first"
+msgstr "Ring the assigned person first"
+
+#: src/phone-system-number.tsx
+msgid "Ring the contact's owner first"
+msgstr "Ring the contact's owner first"
+
+#: src/calls.tsx
+msgid "Ringing"
+msgstr "Ringing"
+
+#: src/phone-system.tsx
+msgid "Rings for"
+msgstr "Rings for"
+
+#: src/phone-system-number.tsx
+msgid "Save"
+msgstr "Save"
+
+#: src/phone-system-voice.tsx
+msgid "Save changes"
+msgstr "Save changes"
+
+#: src/phone-system-number.tsx
+#: src/phone-system-voice.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/phone-system.tsx
+msgid "Search by name, number or person"
+msgstr "Search by name, number or person"
+
+#: src/phone-system.tsx
+msgid "Search numbers"
+msgstr "Search numbers"
+
+#: src/phone-system-number.tsx
+msgid "Second, an outside number"
+msgstr "Second, an outside number"
+
+#: src/phone-system-number.tsx
+msgid "Set in Voice settings, for every number that falls back."
+msgstr "Set in Voice settings, for every number that falls back."
+
+#: src/phone-system-calling.tsx
+msgid "Set up again"
+msgstr "Set up again"
+
+#: src/phone-system-calling.tsx
+msgid "Set up calling"
+msgstr "Set up calling"
+
+#: src/phone-system-parts.tsx
+msgid "Setting up calling on your Twilio account failed. See why under Calling below, then try again."
+msgstr "Setting up calling on your Twilio account failed. See why under Calling below, then try again."
+
+#: src/phone-system-calling.tsx
+msgid "Setting up failed."
+msgstr "Setting up failed."
+
+#: src/phone-system-calling.tsx
+msgid "Setting up…"
+msgstr "Setting up…"
+
+#: src/phone-system-voice.tsx
+msgid "Settings saved."
+msgstr "Settings saved."
+
+#: src/sms-settings.tsx
+msgid "SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+msgstr "SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+#: src/sms-settings.tsx
+msgid "SMS connections"
+msgstr "SMS connections"
+
+#: src/phone-system-parts.tsx
+msgid "Someone chosen here left the team and is no longer rung."
+msgstr "Someone chosen here left the team and is no longer rung."
+
+#: src/calls.tsx
+msgid "Started"
+msgstr "Started"
+
+#: src/sms-settings.tsx
+msgid "Starting refresh…"
+msgstr "Starting refresh…"
+
+#: src/calls.tsx
+msgid "Status"
+msgstr "Status"
+
+#: src/phone-system-number.tsx
+msgid "Take a voicemail when nobody answers."
+msgstr "Take a voicemail when nobody answers."
+
+#: src/calls.tsx
+msgid "Team member"
+msgstr "Team member"
+
+#: src/sms-settings.tsx
+msgid "Test and connect"
+msgstr "Test and connect"
+
+#: src/phone-system-voice.tsx
+msgid "Text"
+msgstr "Text"
+
+#: src/phone-system-voice.tsx
+msgid "Text a caller back after a missed call"
+msgstr "Text a caller back after a missed call"
+
+#: src/sms-settings.tsx
+msgid "Text messages can't be sent or received on this install yet. Twilio reports deliveries and incoming messages to the install's public address, and it only reports to a secure one: an https address with no underscore in its name. Ask whoever runs this install to set its public address (PUBLIC_URL) to one. You can still connect an account and register numbers now; they will start working once the address is set."
+msgstr "Text messages can't be sent or received on this install yet. Twilio reports deliveries and incoming messages to the install's public address, and it only reports to a secure one: an https address with no underscore in its name. Ask whoever runs this install to set its public address (PUBLIC_URL) to one. You can still connect an account and register numbers now; they will start working once the address is set."
+
+#: src/phone-system-number.tsx
+msgid "That's the most: {most} more people."
+msgstr "That's the most: {most} more people."
+
+#: src/phone-system.tsx
+msgid "The business fallback number"
+msgstr "The business fallback number"
+
+#: src/calls.tsx
+msgid "The business number can't make calls now, so the call was not placed."
+msgstr "The business number can't make calls now, so the call was not placed."
+
+#: src/calls.tsx
+msgid "The call's latest details couldn't be loaded."
+msgstr "The call's latest details couldn't be loaded."
+
+#: src/phone-system-number.tsx
+msgid "The caller's number"
+msgstr "The caller's number"
+
+#: src/calls.tsx
+msgid "The calls couldn't be loaded."
+msgstr "The calls couldn't be loaded."
+
+#: src/sms-settings.tsx
+msgid "The connection attempt expired. Enter your credentials and try again."
+msgstr "The connection attempt expired. Enter your credentials and try again."
+
+#: src/sms-settings.tsx
+msgid "The connection couldn't start. Check your connection and try again."
+msgstr "The connection couldn't start. Check your connection and try again."
+
+#: src/calls.tsx
+msgid "The contact asked not to be called, so the call was not placed."
+msgstr "The contact asked not to be called, so the call was not placed."
+
+#: src/calls.tsx
+msgid "The contact or their number is no longer available, so the call was not placed."
+msgstr "The contact or their number is no longer available, so the call was not placed."
+
+#: src/calls.tsx
+msgid "The contact withdrew consent to calls, so the call was not placed."
+msgstr "The contact withdrew consent to calls, so the call was not placed."
+
+#: src/sms-settings.tsx
+msgid "The credentials couldn't be opened. Enter your credentials and try again."
+msgstr "The credentials couldn't be opened. Enter your credentials and try again."
+
+#: src/phone-system-voice.tsx
+msgid "The default number"
+msgstr "The default number"
+
+#: src/phone-system.tsx
+msgid "The default number wasn't changed. Check your connection and try again."
+msgstr "The default number wasn't changed. Check your connection and try again."
+
+#: src/phone-system-voice.tsx
+msgid "The default number, used when nothing else chooses one. Only a number that takes calls can be the default."
+msgstr "The default number, used when nothing else chooses one. Only a number that takes calls can be the default."
+
+#: src/calls.tsx
+msgid "The hang-up wasn't sent. Check your connection and try again."
+msgstr "The hang-up wasn't sent. Check your connection and try again."
+
+#: src/phone-system-voice.tsx
+msgid "The number a call shows when the person calling picks none."
+msgstr "The number a call shows when the person calling picks none."
+
+#: src/phone-system-voice.tsx
+msgid "The number assigned to the person calling"
+msgstr "The number assigned to the person calling"
+
+#: src/sms-settings.tsx
+msgid "The number wasn't registered. Check your connection and try again."
+msgstr "The number wasn't registered. Check your connection and try again."
+
+#: src/calls.tsx
+msgid "The other party"
+msgstr "The other party"
+
+#: src/phone-system-number.tsx
+msgid "The person answering hears it before the caller is connected."
+msgstr "The person answering hears it before the caller is connected."
+
+#: src/phone-system-number.tsx
+msgid "The person this number belongs to. Calls ring them first when the business settings prefer the assigned person."
+msgstr "The person this number belongs to. Calls ring them first when the business settings prefer the assigned person."
+
+#: src/calls.tsx
+msgid "The person who asked for the call can no longer place calls, so it was not placed."
+msgstr "The person who asked for the call can no longer place calls, so it was not placed."
+
+#: src/calls.tsx
+msgid "The provider is asked to end it. It shows as ended once the provider reports so."
+msgstr "The provider is asked to end it. It shows as ended once the provider reports so."
+
+#: src/calls.tsx
+msgid "The provider refused to place the call."
+msgstr "The provider refused to place the call."
+
+#: src/calls.tsx
+msgid "The provider's answer was lost, so this call may or may not have rung. It is never placed again by itself."
+msgstr "The provider's answer was lost, so this call may or may not have rung. It is never placed again by itself."
+
+#: src/calls.tsx
+msgid "The provider's reports disagree with this record. Check the call in your Twilio console."
+msgstr "The provider's reports disagree with this record. Check the call in your Twilio console."
+
+#: src/sms-settings.tsx
+msgid "The refresh couldn't start. Check your connection and try again."
+msgstr "The refresh couldn't start. Check your connection and try again."
+
+#: src/phone-system-number.tsx
+msgid "The team couldn't be loaded, so nobody can be chosen now. Saving keeps the people already set."
+msgstr "The team couldn't be loaded, so nobody can be chosen now. Saving keeps the people already set."
+
+#: src/calls.tsx
+msgid "The Twilio connection isn't working, so the call was not placed."
+msgstr "The Twilio connection isn't working, so the call was not placed."
+
+#: src/phone-system.tsx
+msgid "The voice settings changed since they were loaded. They have been read again: try once more."
+msgstr "The voice settings changed since they were loaded. They have been read again: try once more."
+
+#: src/phone-system-voice.tsx
+msgid "These settings changed since you opened them. Reload them, then make your change again."
+msgstr "These settings changed since you opened them. Reload them, then make your change again."
+
+#: src/phone-system-number.tsx
+msgid "They ring at the same time as the first person: up to {most} more people."
+msgstr "They ring at the same time as the first person: up to {most} more people."
+
+#: src/phone-system-number.tsx
+msgid "Third, the business fallback number"
+msgstr "Third, the business fallback number"
+
+#: src/phone-system-calling.tsx
+msgid "This account isn't connected. Connect it again before setting up calling."
+msgstr "This account isn't connected. Connect it again before setting up calling."
+
+#: src/calls.tsx
+msgid "This contact's calls."
+msgstr "This contact's calls."
+
+#: src/sms-settings.tsx
+msgid "This is a Twilio trial account. Sending may be limited to verified numbers."
+msgstr "This is a Twilio trial account. Sending may be limited to verified numbers."
+
+#: src/phone-system-number.tsx
+msgid "This number"
+msgstr "This number"
+
+#: src/sms-settings.tsx
+msgid "This number can't send or receive SMS."
+msgstr "This number can't send or receive SMS."
+
+#: src/phone-system-parts.tsx
+msgid "This number can't take calls, so it can't be the default."
+msgstr "This number can't take calls, so it can't be the default."
+
+#: src/phone-system-number.tsx
+msgid "This number can't take calls, so it has no call settings. It still sends and receives text messages."
+msgstr "This number can't take calls, so it has no call settings. It still sends and receives text messages."
+
+#: src/phone-system-number.tsx
+msgid "This number is no longer registered to this business."
+msgstr "This number is no longer registered to this business."
+
+#: src/phone-system-number.tsx
+msgid "This number's settings changed since you opened them. Reload them, then make your change again."
+msgstr "This number's settings changed since you opened them. Reload them, then make your change again."
+
+#: src/phone-system-parts.tsx
+msgid "This person isn't on the team any more. Choose someone else."
+msgstr "This person isn't on the team any more. Choose someone else."
+
+#: src/sms-settings.tsx
+msgid "This Twilio account is already connected."
+msgstr "This Twilio account is already connected."
+
+#: src/sms-settings.tsx
+msgid "This Twilio account isn't active."
+msgstr "This Twilio account isn't active."
+
+#: src/sms-settings.tsx
+msgid "This Twilio account isn't active. Check it in the Twilio console."
+msgstr "This Twilio account isn't active. Check it in the Twilio console."
+
+#: src/sms-settings.tsx
+msgid "Through"
+msgstr "Through"
+
+#: src/phone-system-voice.tsx
+msgid "Transcribe recorded calls"
+msgstr "Transcribe recorded calls"
+
+#: src/phone-system-calling.tsx
+#: src/phone-system-number.tsx
+#: src/phone-system.tsx
+#: src/sms-settings.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/phone-system-number.tsx
+msgid "Turn recording on to play one."
+msgstr "Turn recording on to play one."
+
+#: src/phone-system-voice.tsx
+msgid "Turned off, a private or anonymous caller isn't put through."
+msgstr "Turned off, a private or anonymous caller isn't put through."
+
+#: src/phone-system-voice.tsx
+msgid "Turned off, recordings are kept. Each number chooses whether it records."
+msgstr "Turned off, recordings are kept. Each number chooses whether it records."
+
+#: src/sms-settings.tsx
+msgid "Twilio connected."
+msgstr "Twilio connected."
+
+#: src/phone-system.tsx
+msgid "Twilio connections"
+msgstr "Twilio connections"
+
+#: src/sms-settings.tsx
+msgid "Twilio couldn't be reached. Check your connection and try again."
+msgstr "Twilio couldn't be reached. Check your connection and try again."
+
+#: src/phone-system-parts.tsx
+msgid "Twilio didn't confirm whether calling was set up. Check under Calling below before setting it up again."
+msgstr "Twilio didn't confirm whether calling was set up. Check under Calling below before setting it up again."
+
+#: src/phone-system-calling.tsx
+msgid "Twilio didn't confirm whether the key was created. In Twilio, look under API keys for “CRM browser calling” and delete it if it is there, then set up again."
+msgstr "Twilio didn't confirm whether the key was created. In Twilio, look under API keys for “CRM browser calling” and delete it if it is there, then set up again."
+
+#: src/sms-settings.tsx
+msgid "Twilio rejected the Account SID or token."
+msgstr "Twilio rejected the Account SID or token."
+
+#: src/sms-settings.tsx
+msgid "Twilio reports no numbers on this account."
+msgstr "Twilio reports no numbers on this account."
+
+#: src/phone-system-number.tsx
+#: src/phone-system.tsx
+msgid "Unavailable member"
+msgstr "Unavailable member"
+
+#: src/phone-system-calling.tsx
+msgid "Unconfirmed"
+msgstr "Unconfirmed"
+
+#: src/calls.tsx
+msgid "Unknown"
+msgstr "Unknown"
+
+#: src/phone-system-parts.tsx
+msgid "Use 1 to 3,650 days."
+msgstr "Use 1 to 3,650 days."
+
+#: src/phone-system-parts.tsx
+msgid "Use 5 to 120 seconds."
+msgstr "Use 5 to 120 seconds."
+
+#: src/phone-system-parts.tsx
+msgid "Use a number outside this business: a call can't be sent on to one of its own numbers."
+msgstr "Use a number outside this business: a call can't be sent on to one of its own numbers."
+
+#: src/sms-settings.tsx
+msgid "Use an API key instead of the Auth Token for sending and reading"
+msgstr "Use an API key instead of the Auth Token for sending and reading"
+
+#: src/phone-system-parts.tsx
+msgid "Use at most {most} characters."
+msgstr "Use at most {most} characters."
+
+#: src/sms-settings.tsx
+msgid "Use the Account SID and Auth Token from your Twilio console. Twilio's Auth Token signs webhooks even if you also add an API key for sending."
+msgstr "Use the Account SID and Auth Token from your Twilio console. Twilio's Auth Token signs webhooks even if you also add an API key for sending."
+
+#: src/phone-system-parts.tsx
+msgid "Use the full number with its country code, such as +14155550123."
+msgstr "Use the full number with its country code, such as +14155550123."
+
+#: src/phone-system-voice.tsx
+#: src/phone-system.tsx
+msgid "Voice settings"
+msgstr "Voice settings"
+
+#: src/phone-system.tsx
+msgid "Voicemail"
+msgstr "Voicemail"
+
+#: src/phone-system-number.tsx
+msgid "Voicemail backup"
+msgstr "Voicemail backup"
+
+#: src/phone-system-voice.tsx
+msgid "Warn before calling in quiet hours"
+msgstr "Warn before calling in quiet hours"
+
+#: src/phone-system-number.tsx
+msgid "Warnings"
+msgstr "Warnings"
+
+#: src/phone-system.tsx
+msgid "Warnings for {name}"
+msgstr "Warnings for {name}"
+
+#: src/phone-system.tsx
+msgid "We couldn't check what you may change here."
+msgstr "We couldn't check what you may change here."
+
+#: src/calls.tsx
+msgid "We couldn't check what you may see here."
+msgstr "We couldn't check what you may see here."
+
+#: src/phone-system.tsx
+msgid "We couldn't load the phone numbers."
+msgstr "We couldn't load the phone numbers."
+
+#: src/phone-system.tsx
+msgid "We couldn't load the voice settings."
+msgstr "We couldn't load the voice settings."
+
+#: src/sms-settings.tsx
+msgid "We couldn't load these numbers."
+msgstr "We couldn't load these numbers."
+
+#: src/sms-settings.tsx
+msgid "We couldn't load your phone numbers."
+msgstr "We couldn't load your phone numbers."
+
+#: src/sms-settings.tsx
+msgid "We couldn't load your SMS connections."
+msgstr "We couldn't load your SMS connections."
+
+#: src/phone-system-calling.tsx
+msgid "We couldn't load your Twilio accounts."
+msgstr "We couldn't load your Twilio accounts."
+
+#: src/sms-settings.tsx
+msgid "We couldn't read the connection result."
+msgstr "We couldn't read the connection result."
+
+#: src/phone-system-voice.tsx
+msgid "We couldn't save the settings. Check your connection and try again."
+msgstr "We couldn't save the settings. Check your connection and try again."
+
+#: src/phone-system-number.tsx
+msgid "We couldn't save this number. Check your connection and try again."
+msgstr "We couldn't save this number. Check your connection and try again."
+
+#: src/phone-system-calling.tsx
+msgid "We couldn't start setting up calling. Try again."
+msgstr "We couldn't start setting up calling. Try again."
+
+#: src/phone-system-number.tsx
+msgid "When a contact with an owner calls, their owner rings before this number's own routing."
+msgstr "When a contact with an owner calls, their owner rings before this number's own routing."
+
+#: src/phone-system-voice.tsx
+msgid "Where a number set to fall back sends a call nobody took. With its country code, and not one of this business's own numbers."
+msgstr "Where a number set to fall back sends a call nobody took. With its country code, and not one of this business's own numbers."
+
+#: src/phone-system-number.tsx
+msgid "Whisper"
+msgstr "Whisper"
+
+#: src/phone-system-number.tsx
+msgid "Whisper message"
+msgstr "Whisper message"
+
+#: src/phone-system-number.tsx
+msgid "Whoever answers presses a key to take the call, so a voicemail can't take it."
+msgstr "Whoever answers presses a key to take the call, so a voicemail can't take it."
+
+#: src/phone-system-number.tsx
+msgid "With its country code, such as +14155550123. Not one of this business's own numbers."
+msgstr "With its country code, such as +14155550123. Not one of this business's own numbers."
+
+#: src/sms-settings.tsx
+msgid "You need permission to manage SMS."
+msgstr "You need permission to manage SMS."
+
+#: src/phone-system.tsx
+msgid "You need permission to manage the phone system or SMS to use this page."
+msgstr "You need permission to manage the phone system or SMS to use this page."
+
+#: src/phone-system.tsx
+msgid "You need permission to manage the phone system."
+msgstr "You need permission to manage the phone system."
+
+#: src/calls.tsx
+msgid "You need permission to read calls."
+msgstr "You need permission to read calls."
+
+#: src/phone-system.tsx
+msgid "Your business's phone numbers, how their calls are handled, and the Twilio account they come from."
+msgstr "Your business's phone numbers, how their calls are handled, and the Twilio account they come from."

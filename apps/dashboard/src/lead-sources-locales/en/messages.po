@@ -1,0 +1,891 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-14 03:25+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "“{name}” is now rule {place} of {total}."
+msgstr "“{name}” is now rule {place} of {total}."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "“{name}” is off."
+msgstr "“{name}” is off."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "“{name}” is on."
+msgstr "“{name}” is on."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "“{name}” was added last."
+msgstr "“{name}” was added last."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "“{name}” was deleted."
+msgstr "“{name}” was deleted."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "“{name}” was saved."
+msgstr "“{name}” was saved."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "“{removingName}” will no longer be tried. Leads it already named keep their Source and tags."
+msgstr "“{removingName}” will no longer be tried. Leads it already named keep their Source and tags."
+
+#: src/lead-sources/rule-words.tsx
+msgid "“{value}”"
+msgstr "“{value}”"
+
+#: src/link-check-result.tsx
+msgid "(made by the first such lead)"
+msgstr "(made by the first such lead)"
+
+#: src/link-check-result.tsx
+msgid "(names the lead)"
+msgstr "(names the lead)"
+
+#: src/link-check-result.tsx
+msgid "(not used: a rule of yours names the lead)"
+msgstr "(not used: a rule of yours names the lead)"
+
+#: src/link-check-result.tsx
+msgid "(only if the contact has none yet)"
+msgstr "(only if the contact has none yet)"
+
+#: src/lead-sources/links-tab.tsx
+msgid "(opens in a new tab)"
+msgstr "(opens in a new tab)"
+
+#: src/lead-sources/links-tab.tsx
+msgid "(read {when})"
+msgstr "(read {when})"
+
+#. placeholder {0}: choices.options.length
+#: src/tag-picker.tsx
+msgid "{0, plural, one {# tag to add} other {# tags to add}}"
+msgstr "{0, plural, one {# tag to add} other {# tags to add}}"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "{count} of {limit}, which is the most. Delete a rule to add another."
+msgstr "{count} of {limit}, which is the most. Delete a rule to add another."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "{count} of {limit}. Tried from the top: the first that names a Source decides it, and every rule that matches adds its tags and fills its fields."
+msgstr "{count} of {limit}. Tried from the top: the first that names a Source decides it, and every rule that matches adds its tags and fills its fields."
+
+#: src/lead-sources/links-tab.tsx
+msgid "{fills} ({name})"
+msgstr "{fills} ({name})"
+
+#: src/lead-sources/links-tab.tsx
+msgid "{fills}. {platformName} fills it in when the ad is clicked."
+msgstr "{fills}. {platformName} fills it in when the ad is clicked."
+
+#: src/lead-sources/links-tab.tsx
+msgid "{fills}. Always these words."
+msgstr "{fills}. Always these words."
+
+#: src/lead-sources/links-tab.tsx
+msgid "{fills}. An example: write your own above."
+msgstr "{fills}. An example: write your own above."
+
+#: src/lead-sources/links-tab.tsx
+msgid "{fills}. Your own words."
+msgstr "{fills}. Your own words."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "{limit} rules is the most"
+msgstr "{limit} rules is the most"
+
+#: src/tag-picker.tsx
+msgid "{limit} tags are chosen, which is the most. Remove one to add another."
+msgstr "{limit} tags are chosen, which is the most. Remove one to add another."
+
+#: src/lead-sources/check-tab.tsx
+msgid "{name} (draft)"
+msgstr "{name} (draft)"
+
+#: src/link-check-result.tsx
+msgid "{position}."
+msgstr "{position}."
+
+#: src/search-picker.tsx
+msgid "{shownCount, plural, one {# choice} other {# choices}}"
+msgstr "{shownCount, plural, one {# choice} other {# choices}}"
+
+#: src/lead-sources/links-tab.tsx
+msgid "A click as it would arrive, with sample values where the platform fills its own in:"
+msgstr "A click as it would arrive, with sample values where the platform fills its own in:"
+
+#: src/lead-sources/rule-words.tsx
+msgid "a deleted tag"
+msgstr "a deleted tag"
+
+#: src/link-check-result.tsx
+msgid "a deleted tag (skipped)"
+msgstr "a deleted tag (skipped)"
+
+#: src/lead-sources/rule-words.tsx
+#: src/link-check-result.tsx
+msgid "a field that is gone"
+msgstr "a field that is gone"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "A field that is gone"
+msgstr "A field that is gone"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "A rule fills at most {fieldLimit} fields."
+msgstr "A rule fills at most {fieldLimit} fields."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "A rule holds at most {conditionLimit} conditions."
+msgstr "A rule holds at most {conditionLimit} conditions."
+
+#: src/search-picker.tsx
+msgid "Add “{own}”"
+msgstr "Add “{own}”"
+
+#: src/tag-picker.tsx
+msgid "Add a tag"
+msgstr "Add a tag"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Add condition"
+msgstr "Add condition"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Add field"
+msgstr "Add field"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Add rule"
+msgstr "Add rule"
+
+#: src/tag-picker.tsx
+msgid "Add tag"
+msgstr "Add tag"
+
+#: src/tag-picker.tsx
+msgid "Added {name}."
+msgstr "Added {name}."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Adding a rule needs permission to manage forms."
+msgstr "Adding a rule needs permission to manage forms."
+
+#: src/lead-sources/rule-words.tsx
+msgid "address parameter {name}"
+msgstr "address parameter {name}"
+
+#: src/lead-sources/check-tab.tsx
+msgid "Also shows the Source and tags that form would write, as last saved."
+msgstr "Also shows the Source and tags that form would write, as last saved."
+
+#: src/lead-sources/links-tab.tsx
+msgid "An ad tells us which campaign a lead came from only when its link says so. Choose where the ad runs, copy the text, and paste it where the platform asks for it."
+msgstr "An ad tells us which campaign a lead came from only when its link says so. Choose where the ad runs, copy the text, and paste it where the platform asks for it."
+
+#: src/lead-sources/rule-words.tsx
+msgid "an address parameter"
+msgstr "an address parameter"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Before you paste it"
+msgstr "Before you paste it"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Build it"
+msgstr "Build it"
+
+#: src/link-check-result.tsx
+msgid "Built-in rule"
+msgstr "Built-in rule"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Built-in rules"
+msgstr "Built-in rules"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/lead-sources/check-tab.tsx
+msgid "Check"
+msgstr "Check"
+
+#: src/lead-sources/check-tab.tsx
+msgid "Check a link"
+msgstr "Check a link"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Checked: the placeholders, and the box they go in, were read in the platform's own documentation."
+msgstr "Checked: the placeholders, and the box they go in, were read in the platform's own documentation."
+
+#: src/lead-sources/check-tab.tsx
+msgid "Checking…"
+msgstr "Checking…"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Choose a field"
+msgstr "Choose a field"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Choose one"
+msgstr "Choose one"
+
+#: src/link-check-result.tsx
+msgid "Click ids in the link"
+msgstr "Click ids in the link"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Condition {number}: how it is compared"
+msgstr "Condition {number}: how it is compared"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Condition {number}: is it in the link"
+msgstr "Condition {number}: is it in the link"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Condition {number}: parameter name"
+msgstr "Condition {number}: parameter name"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Condition {number}: value"
+msgstr "Condition {number}: value"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Condition {number}: values"
+msgstr "Condition {number}: values"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Condition {number}: values, separated by commas"
+msgstr "Condition {number}: values, separated by commas"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Condition {number}: what to look at"
+msgstr "Condition {number}: what to look at"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Copied"
+msgstr "Copied"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Copied."
+msgstr "Copied."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "copy"
+msgstr "copy"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Copy"
+msgstr "Copy"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Copy: {output}"
+msgstr "Copy: {output}"
+
+#: src/tag-picker.tsx
+msgid "Create tag “{createName}”"
+msgstr "Create tag “{createName}”"
+
+#: src/tag-picker.tsx
+msgid "Creating “{createName}”…"
+msgstr "Creating “{createName}”…"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Custom fields to fill"
+msgstr "Custom fields to fill"
+
+#: src/link-check-result.tsx
+msgid "Decided by"
+msgstr "Decided by"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Delete"
+msgstr "Delete"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Delete “{name}”"
+msgstr "Delete “{name}”"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Delete rule"
+msgstr "Delete rule"
+
+#: src/tag-picker.tsx
+msgid "Deleted tag"
+msgstr "Deleted tag"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Does not hold:"
+msgstr "Does not hold:"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Duplicate"
+msgstr "Duplicate"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Duplicate “{name}”"
+msgstr "Duplicate “{name}”"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Edit"
+msgstr "Edit"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Edit “{name}”"
+msgstr "Edit “{name}”"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Edit rule"
+msgstr "Edit rule"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Edit rule {ruleName}"
+msgstr "Edit rule {ruleName}"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Email"
+msgstr "Email"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Enter a web address, starting with https://."
+msgstr "Enter a web address, starting with https://."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Every lead that arrives by a form, a booking page or a web chat is given a lead source by the built-in rules below, with nothing to set up. Rules of your own are tried first: they can give the lead another Source, add tags or fill a custom field."
+msgstr "Every lead that arrives by a form, a booking page or a web chat is given a lead source by the built-in rules below, with nothing to set up. Rules of your own are tried first: they can give the lead another Source, add tags or fill a custom field."
+
+#: src/tag-picker.tsx
+msgid "Every tag is already chosen."
+msgstr "Every tag is already chosen."
+
+#: src/tag-picker.tsx
+msgid "Every tag is already chosen. Type a name to make a new one."
+msgstr "Every tag is already chosen. Type a name to make a new one."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Field {number}: text to write"
+msgstr "Field {number}: text to write"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Field {number}: which field"
+msgstr "Field {number}: which field"
+
+#: src/lead-sources/rule-words.tsx
+msgid "fills {field}:"
+msgstr "fills {field}:"
+
+#: src/lead-sources/rule-words.tsx
+#: src/link-check-result.tsx
+msgid "fills {field}: {value}"
+msgstr "fills {field}: {value}"
+
+#: src/lead-sources/check-tab.tsx
+msgid "Form to check against (optional)"
+msgstr "Form to check against (optional)"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Google Ads"
+msgstr "Google Ads"
+
+#: src/lead-sources/rule-words.tsx
+msgid "has a {label}"
+msgstr "has a {label}"
+
+#: src/lead-sources/rule-words.tsx
+msgid "has no {label}"
+msgstr "has no {label}"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Holds:"
+msgstr "Holds:"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "It wasn't deleted. Check your connection and try again."
+msgstr "It wasn't deleted. Check your connection and try again."
+
+#: src/lead-sources/links-tab.tsx
+msgid "Landing page address"
+msgstr "Landing page address"
+
+#: src/link-check-result.tsx
+msgid "Lead source"
+msgstr "Lead source"
+
+#: src/lead-sources/frame.tsx
+msgid "Lead Sources"
+msgstr "Lead Sources"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Left empty, this rule names no Source: it only adds its tags and fills its fields, and the next rule or the built-in rules name the lead."
+msgstr "Left empty, this rule names no Source: it only adds its tags and fills its fields, and the next rule or the built-in rules name the lead."
+
+#: src/lead-sources/check-tab.tsx
+msgid "Link they follow"
+msgstr "Link they follow"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Link to try"
+msgstr "Link to try"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Link to use in the ad"
+msgstr "Link to use in the ad"
+
+#: src/lead-sources/links-tab.tsx
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: src/tag-picker.tsx
+msgid "Loading tags…"
+msgstr "Loading tags…"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Loading your rules…"
+msgstr "Loading your rules…"
+
+#: src/search-picker.tsx
+msgid "Loading…"
+msgstr "Loading…"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Meta"
+msgstr "Meta"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Microsoft Advertising"
+msgstr "Microsoft Advertising"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Move “{name}” down"
+msgstr "Move “{name}” down"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Move “{name}” up"
+msgstr "Move “{name}” up"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Move down"
+msgstr "Move down"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Move up"
+msgstr "Move up"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Name the Source"
+msgstr "Name the Source"
+
+#: src/link-check-result.tsx
+msgid "Names no Source"
+msgstr "Names no Source"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "New rule"
+msgstr "New rule"
+
+#: src/lead-sources/check-tab.tsx
+msgid "No form"
+msgstr "No form"
+
+#: src/tag-picker.tsx
+msgid "No tags chosen."
+msgstr "No tags chosen."
+
+#: src/tag-picker.tsx
+msgid "No tags match."
+msgstr "No tags match."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "No, it is not"
+msgstr "No, it is not"
+
+#: src/link-check-result.tsx
+msgid "None"
+msgstr "None"
+
+#: src/link-check-result.tsx
+msgid "None of your rules match this link."
+msgstr "None of your rules match this link."
+
+#: src/link-check-result.tsx
+msgid "None: this form writes no source."
+msgstr "None: this form writes no source."
+
+#: src/lead-sources/links-tab.tsx
+msgid "Not fully confirmed: a placeholder, or the box it goes in, could not be read in the platform's own documentation, so this template is as commonly used. The notes say which part. Test one ad before using it widely."
+msgstr "Not fully confirmed: a placeholder, or the box it goes in, could not be read in the platform's own documentation, so this template is as commonly used. The notes say which part. Test one ad before using it widely."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Off"
+msgstr "Off"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Optional. Left empty, {platformName} fills it in itself: {filled}"
+msgstr "Optional. Left empty, {platformName} fills it in itself: {filled}"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Optional. Left empty, it is “{filled}”."
+msgstr "Optional. Left empty, it is “{filled}”."
+
+#: src/lead-sources/links-tab.tsx
+msgid "Other"
+msgstr "Other"
+
+#: src/tag-picker.tsx
+msgid "Other tags"
+msgstr "Other tags"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Parameters to add to the address"
+msgstr "Parameters to add to the address"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Parameters to paste"
+msgstr "Parameters to paste"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Paste an address a visitor would land on to see whether this rule, as it stands here, would match it. Nothing is stored."
+msgstr "Paste an address a visitor would land on to see whether this rule, as it stands here, would match it. Nothing is stored."
+
+#: src/lead-sources/check-tab.tsx
+msgid "Paste the address an ad or a post sends people to, with everything after the question mark, and see what a lead arriving that way would be. Nothing is stored."
+msgstr "Paste the address an ad or a post sends people to, with everything after the question mark, and see what a lead arriving that way would be. Nothing is stored."
+
+#: src/lead-sources/links-tab.tsx
+msgid "Read on the platform's own pages"
+msgstr "Read on the platform's own pages"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Reload saved version"
+msgstr "Reload saved version"
+
+#: src/tag-picker.tsx
+msgid "Remove {name}"
+msgstr "Remove {name}"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Remove condition {number}"
+msgstr "Remove condition {number}"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Remove field {number}"
+msgstr "Remove field {number}"
+
+#: src/tag-picker.tsx
+msgid "Removed {name}."
+msgstr "Removed {name}."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Rule {place}: {name}. {said}"
+msgstr "Rule {place}: {name}. {said}"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Save rule"
+msgstr "Save rule"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/tag-picker.tsx
+msgid "Search or create a tag"
+msgstr "Search or create a tag"
+
+#: src/tag-picker.tsx
+msgid "Search tags"
+msgstr "Search tags"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Separate the values with commas."
+msgstr "Separate the values with commas."
+
+#: src/link-check-result.tsx
+msgid "Session source"
+msgstr "Session source"
+
+#: src/search-picker.tsx
+msgid "Showing {shownCount} of {all}. Type to narrow the list."
+msgstr "Showing {shownCount} of {all}. Type to narrow the list."
+
+#: src/tag-picker.tsx
+msgid "Showing {shownCount} of {matchingCount}. Type to narrow the list."
+msgstr "Showing {shownCount} of {matchingCount}. Type to narrow the list."
+
+#: src/link-check-result.tsx
+msgid "Source written on the contact"
+msgstr "Source written on the contact"
+
+#: src/lead-sources/rule-words.tsx
+msgid "Source:"
+msgstr "Source:"
+
+#: src/lead-sources/rule-words.tsx
+msgid "Source: {source}"
+msgstr "Source: {source}"
+
+#: src/link-check-result.tsx
+msgid "Source: {source} (not used: an earlier rule named it)"
+msgstr "Source: {source} (not used: an earlier rule named it)"
+
+#: src/link-check-result.tsx
+msgid "Source: <0>{source}</0> (used)"
+msgstr "Source: <0>{source}</0> (used)"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "spring, summer"
+msgstr "spring, summer"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Such as Spring promo"
+msgstr "Such as Spring promo"
+
+#: src/link-check-result.tsx
+msgid "Tags added"
+msgstr "Tags added"
+
+#: src/lead-sources/rule-editor.tsx
+#: src/tag-picker.tsx
+msgid "Tags to add"
+msgstr "Tags to add"
+
+#: src/lead-sources/rule-words.tsx
+msgid "tags:"
+msgstr "tags:"
+
+#: src/lead-sources/rule-words.tsx
+#: src/link-check-result.tsx
+msgid "tags: {tags}"
+msgstr "tags: {tags}"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Template"
+msgstr "Template"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Text to paste"
+msgstr "Text to paste"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "The copy wasn't made. Check your connection and try again."
+msgstr "The copy wasn't made. Check your connection and try again."
+
+#: src/lead-sources/check-tab.tsx
+msgid "The forms couldn't be loaded. The link can still be checked."
+msgstr "The forms couldn't be loaded. The link can still be checked."
+
+#: src/lead-sources/check-tab.tsx
+#: src/lead-sources/links-tab.tsx
+msgid "The link couldn't be checked. Check your connection and try again."
+msgstr "The link couldn't be checked. Check your connection and try again."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "The link couldn't be tried. Check your connection and try again."
+msgstr "The link couldn't be tried. Check your connection and try again."
+
+#: src/search-picker.tsx
+msgid "The list couldn't be loaded."
+msgstr "The list couldn't be loaded."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "The name in the link"
+msgstr "The name in the link"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "The order wasn't saved. Check your connection and try again."
+msgstr "The order wasn't saved. Check your connection and try again."
+
+#: src/lead-sources/links-tab.tsx
+msgid "The page the link leads to. Left empty, you get the parameters to add to an address yourself."
+msgstr "The page the link leads to. Left empty, you get the parameters to add to an address yourself."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "The rule wasn't changed. Check your connection and try again."
+msgstr "The rule wasn't changed. Check your connection and try again."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "The rule wasn't saved: see what is marked above."
+msgstr "The rule wasn't saved: see what is marked above."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "The rule wasn't saved. Check your connection and try again."
+msgstr "The rule wasn't saved. Check your connection and try again."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "The rules changed since this page read them. They were read again: try once more."
+msgstr "The rules changed since this page read them. They were read again: try once more."
+
+#: src/lead-sources/check-tab.tsx
+msgid "The site the link is on, when you know it."
+msgstr "The site the link is on, when you know it."
+
+#: src/tag-picker.tsx
+msgid "The tag wasn't made. Check your connection and try again."
+msgstr "The tag wasn't made. Check your connection and try again."
+
+#: src/tag-picker.tsx
+msgid "The tags couldn't be loaded."
+msgstr "The tags couldn't be loaded."
+
+#: src/tag-picker.tsx
+msgid "The tags couldn't be loaded. Reload the page to see the chosen tags."
+msgstr "The tags couldn't be loaded. Reload the page to see the chosen tags."
+
+#: src/lead-sources/rule-words.tsx
+msgid "then"
+msgstr "then"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Then"
+msgstr "Then"
+
+#: src/tag-picker.tsx
+msgid "There are no tags yet. Make them in Settings, under Custom Fields & Tags."
+msgstr "There are no tags yet. Make them in Settings, under Custom Fields & Tags."
+
+#: src/tag-picker.tsx
+msgid "There are no tags yet. Type a name to make the first one."
+msgstr "There are no tags yet. Type a name to make the first one."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "There are no text custom fields of contacts to fill yet. Make one in Settings, under Custom Fields."
+msgstr "There are no text custom fields of contacts to fill yet. Make one in Settings, under Custom Fields."
+
+#: src/link-check-result.tsx
+msgid "This link carries nothing that tells us where the visitor came from, so it would be recorded as Direct. Add tracking to your ad links, such as utm_source and utm_medium, so each lead says where it came from."
+msgstr "This link carries nothing that tells us where the visitor came from, so it would be recorded as Direct. Add tracking to your ad links, such as utm_source and utm_medium, so each lead says where it came from."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "This rule would match this link."
+msgstr "This rule would match this link."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "This rule would not match this link."
+msgstr "This rule would not match this link."
+
+#: src/tag-picker.tsx
+msgid "This tag is already chosen."
+msgstr "This tag is already chosen."
+
+#: src/lead-sources/links-tab.tsx
+msgid "TikTok"
+msgstr "TikTok"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Tracking template to paste"
+msgstr "Tracking template to paste"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Tried as a form on that page would take the lead. Every condition must hold for the rule to do anything."
+msgstr "Tried as a form on that page would take the lead. Every condition must hold for the rule to do anything."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Tried as a form on that page would take the lead. Saved, the rule would do what is set under “Then”, in its place among your rules."
+msgstr "Tried as a form on that page would take the lead. Saved, the rule would do what is set under “Then”, in its place among your rules."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Tried from the top, after your rules: the first that fits names the lead source. They cannot be changed or reordered here."
+msgstr "Tried from the top, after your rules: the first that fits names the lead source. They cannot be changed or reordered here."
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Try"
+msgstr "Try"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Try a link"
+msgstr "Try a link"
+
+#: src/search-picker.tsx
+#: src/tag-picker.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Trying…"
+msgstr "Trying…"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Use “{name}”"
+msgstr "Use “{name}”"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Used only for the example below: {platformName} adds the ad's own address itself, so it is not part of the text to paste."
+msgstr "Used only for the example below: {platformName} adds the ad's own address itself, so it is not part of the text to paste."
+
+#: src/lead-sources/checked-link.tsx
+msgid "What a lead arriving by this link would be"
+msgstr "What a lead arriving by this link would be"
+
+#: src/lead-sources/links-tab.tsx
+msgid "What each parameter is"
+msgstr "What each parameter is"
+
+#: src/lead-sources/links-tab.tsx
+msgid "What this link will record"
+msgstr "What this link will record"
+
+#: src/lead-sources/rule-words.tsx
+msgid "When"
+msgstr "When"
+
+#: src/lead-sources/rule-words.tsx
+msgid "When {when}"
+msgstr "When {when}"
+
+#: src/lead-sources/rule-words.tsx
+msgid "When {when} → {then}"
+msgstr "When {when} → {then}"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "When all of these hold"
+msgstr "When all of these hold"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Where the ad or the link runs"
+msgstr "Where the ad or the link runs"
+
+#: src/lead-sources/check-tab.tsx
+msgid "Where they came from (optional)"
+msgstr "Where they came from (optional)"
+
+#: src/lead-sources/links-tab.tsx
+msgid "Where to paste it"
+msgstr "Where to paste it"
+
+#: src/link-check-result.tsx
+msgid "would fill {field}: {value} (skipped)"
+msgstr "would fill {field}: {value} (skipped)"
+
+#: src/lead-sources/rule-editor.tsx
+msgid "Yes, it is there"
+msgstr "Yes, it is there"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "You can look at these rules. Changing them needs permission to manage forms."
+msgstr "You can look at these rules. Changing them needs permission to manage forms."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "You have no rules of your own, and most businesses need none: the built-in rules already tell Google Ads from Facebook Ads from a search. A rule is worth having when you want a name they cannot know, such as “Spring promo” for one campaign, a tag for every lead of one funnel, or a custom field filled from a link."
+msgstr "You have no rules of your own, and most businesses need none: the built-in rules already tell Google Ads from Facebook Ads from a search. A rule is worth having when you want a name they cannot know, such as “Spring promo” for one campaign, a tag for every lead of one funnel, or a custom field filled from a link."
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Your rules"
+msgstr "Your rules"
+
+#: src/lead-sources/rules-tab.tsx
+msgid "Your rules couldn't be loaded."
+msgstr "Your rules couldn't be loaded."
+
+#: src/link-check-result.tsx
+msgid "Your rules that match"
+msgstr "Your rules that match"

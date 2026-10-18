@@ -1,0 +1,104 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-18 04:02+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/softphone-active.tsx
+msgid "A calling token could not be obtained."
+msgstr "A calling token could not be obtained."
+
+#: src/softphone-active.tsx
+msgid "Answer"
+msgstr "Answer"
+
+#: src/softphone-active.tsx
+msgid "Connecting…"
+msgstr "Connecting…"
+
+#: src/softphone-active.tsx
+msgid "Decline"
+msgstr "Decline"
+
+#: src/softphone-active.tsx
+msgid "Dial pad"
+msgstr "Dial pad"
+
+#: src/softphone-active.tsx
+msgid "Hang up"
+msgstr "Hang up"
+
+#: src/softphone-active.tsx
+msgid "In call"
+msgstr "In call"
+
+#: src/softphone-active.tsx
+msgid "Incoming call"
+msgstr "Incoming call"
+
+#: src/softphone-active.tsx
+msgid "Incoming call from {caller}"
+msgstr "Incoming call from {caller}"
+
+#: src/softphone-active.tsx
+msgid "Keypad"
+msgstr "Keypad"
+
+#: src/softphone-active.tsx
+msgid "Microphone permission was denied."
+msgstr "Microphone permission was denied."
+
+#: src/softphone-active.tsx
+msgid "Mute"
+msgstr "Mute"
+
+#: src/softphone-active.tsx
+msgid "Network connection failed."
+msgstr "Network connection failed."
+
+#: src/softphone-active.tsx
+msgid "No microphone is available."
+msgstr "No microphone is available."
+
+#: src/softphone-active.tsx
+msgid "Phone call"
+msgstr "Phone call"
+
+#: src/softphone-active.tsx
+msgid "Phone problem"
+msgstr "Phone problem"
+
+#: src/softphone-active.tsx
+msgid "Reconnecting…"
+msgstr "Reconnecting…"
+
+#: src/softphone-active.tsx
+msgid "The call couldn't be requested. Try again."
+msgstr "The call couldn't be requested. Try again."
+
+#: src/softphone-active.tsx
+msgid "The call provider reported an error."
+msgstr "The call provider reported an error."
+
+#: src/softphone-active.tsx
+msgid "The calling software could not be loaded."
+msgstr "The calling software could not be loaded."
+
+#: src/softphone-active.tsx
+msgid "The calling token was rejected."
+msgstr "The calling token was rejected."
+
+#: src/softphone-active.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/softphone-active.tsx
+msgid "Unknown caller"
+msgstr "Unknown caller"
+
+#: src/softphone-active.tsx
+msgid "Your browser does not support calling."
+msgstr "Your browser does not support calling."

@@ -1,0 +1,29 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "tell",
+    "steps": {
+      "tell": {
+        "type": "team.notify",
+        "config": {
+          "message": "A new lead came in."
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/tell",
+      "code": "step_unavailable",
+      "message": "Notify the team steps are not available yet.",
+      "suggestion": "Remove this step, or use a step that is available."
+    }
+  ]
+}

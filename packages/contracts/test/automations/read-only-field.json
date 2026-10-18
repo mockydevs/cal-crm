@@ -1,0 +1,30 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "contact.update",
+        "config": {
+          "fields": {
+            "contact.createdAt": "2026-01-01"
+          }
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello/config/fields/contact.createdAt",
+      "code": "read_only_field",
+      "message": "contact.createdAt can't be set by an automation."
+    }
+  ]
+}

@@ -1,0 +1,1011 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-17 21:24+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#. placeholder {0}: counts.current
+#: src/contact-bulk/verify.tsx
+msgid "{0, plural, one {# already has a current result: kept as it is, at no cost.} other {# already have a current result: kept as they are, at no cost.}}"
+msgstr "{0, plural, one {# already has a current result: kept as it is, at no cost.} other {# already have a current result: kept as they are, at no cost.}}"
+
+#. placeholder {0}: counts.contacts
+#: src/contact-bulk/verify.tsx
+msgid "{0, plural, one {# contact in the selection.} other {# contacts in the selection.}}"
+msgstr "{0, plural, one {# contact in the selection.} other {# contacts in the selection.}}"
+
+#. placeholder {0}: action.requested
+#: src/contact-bulk-bar.tsx
+msgid "{0, plural, one {# contact} other {# contacts}}"
+msgstr "{0, plural, one {# contact} other {# contacts}}"
+
+#. placeholder {0}: counts.noEmail
+#: src/contact-bulk/verify.tsx
+msgid "{0, plural, one {# has no email address} other {# have no email address}}"
+msgstr "{0, plural, one {# has no email address} other {# have no email address}}"
+
+#. placeholder {0}: counts.excluded
+#: src/contact-bulk/verify.tsx
+msgid "{0, plural, one {# is excluded from email verification} other {# are excluded from email verification}}"
+msgstr "{0, plural, one {# is excluded from email verification} other {# are excluded from email verification}}"
+
+#. placeholder {0}: counts.overLimit
+#: src/contact-bulk/verify.tsx
+msgid "{0, plural, one {# is over today's verification limit} other {# are over today's verification limit}}"
+msgstr "{0, plural, one {# is over today's verification limit} other {# are over today's verification limit}}"
+
+#. placeholder {0}: counts.remainingToday
+#: src/contact-bulk/verify.tsx
+msgid "{0, plural, one {# provider check left today.} other {# provider checks left today.}}"
+msgstr "{0, plural, one {# provider check left today.} other {# provider checks left today.}}"
+
+#. placeholder {0}: choices.options.length
+#: src/tag-picker.tsx
+msgid "{0, plural, one {# tag to add} other {# tags to add}}"
+msgstr "{0, plural, one {# tag to add} other {# tags to add}}"
+
+#: src/contact-bulk/verify.tsx
+msgid "{checks} will be checked, {credits} of them using a provider credit."
+msgstr "{checks} will be checked, {credits} of them using a provider credit."
+
+#: src/contact-bulk/verify.tsx
+msgid "{checks} will be checked, none using a provider credit."
+msgstr "{checks} will be checked, none using a provider credit."
+
+#: src/contact-bulk/parts.tsx
+msgid "{count, plural, one {# contact is selected.} other {# contacts are selected.}}"
+msgstr "{count, plural, one {# contact is selected.} other {# contacts are selected.}}"
+
+#: src/contact-bulk/parts.tsx
+msgid "{count, plural, one {# contact} other {# contacts}}"
+msgstr "{count, plural, one {# contact} other {# contacts}}"
+
+#: src/tag-picker.tsx
+msgid "{limit} tags are chosen, which is the most. Remove one to add another."
+msgstr "{limit} tags are chosen, which is the most. Remove one to add another."
+
+#: src/contact-bulk-actions.tsx
+msgid "{name} (you)"
+msgstr "{name} (you)"
+
+#: src/contact-bulk-actions.tsx
+msgid "{settled} of {requested}"
+msgstr "{settled} of {requested}"
+
+#: src/contact-bulk-bar.tsx
+msgid "{shown} selected"
+msgstr "{shown} selected"
+
+#: src/contact-bulk/verify.tsx
+msgid "{skipped} skipped:"
+msgstr "{skipped} skipped:"
+
+#: src/contact-bulk/sms.tsx
+msgid "{typed} of {CONTACT_BULK_SMS_MAX} characters. Merge fields such as {mergeField} are filled in for each contact."
+msgstr "{typed} of {CONTACT_BULK_SMS_MAX} characters. Merge fields such as {mergeField} are filled in for each contact."
+
+#: src/contact-bulk-actions.tsx
+msgid "Action"
+msgstr "Action"
+
+#: src/contact-bulk-actions.tsx
+msgid "Action label"
+msgstr "Action label"
+
+#: src/contact-bulk/parts.tsx
+msgid "Action name (optional)"
+msgstr "Action name (optional)"
+
+#: src/contact-bulk-actions.tsx
+msgid "Action stopped. What was already done stays done."
+msgstr "Action stopped. What was already done stays done."
+
+#: src/contact-bulk-actions.tsx
+msgid "Actions"
+msgstr "Actions"
+
+#: src/tag-picker.tsx
+msgid "Add a tag"
+msgstr "Add a tag"
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Add opportunity"
+msgstr "Add opportunity"
+
+#: src/contact-bulk-actions.tsx
+#: src/tag-picker.tsx
+msgid "Add tag"
+msgstr "Add tag"
+
+#: src/contact-bulk-bar.tsx
+msgid "Add Tag"
+msgstr "Add Tag"
+
+#: src/contact-bulk/tags.tsx
+msgid "Add tags"
+msgstr "Add tags"
+
+#: src/contact-bulk-actions.tsx
+msgid "Add to workflow"
+msgstr "Add to workflow"
+
+#: src/contact-bulk-bar.tsx
+msgid "Add to Workflow"
+msgstr "Add to Workflow"
+
+#: src/tag-picker.tsx
+msgid "Added {name}."
+msgstr "Added {name}."
+
+#: src/contact-bulk-actions.tsx
+msgid "All"
+msgstr "All"
+
+#: src/contact-bulk-bar.tsx
+msgid "All {shown} contacts selected"
+msgstr "All {shown} contacts selected"
+
+#: src/contact-bulk-bar.tsx
+msgid "All {shown}+ contacts selected"
+msgstr "All {shown}+ contacts selected"
+
+#: src/contact-bulk-actions.tsx
+msgid "All actions"
+msgstr "All actions"
+
+#: src/contact-bulk/dnd.tsx
+msgid "All channels"
+msgstr "All channels"
+
+#: src/contact-bulk/parts.tsx
+msgid "all contacts"
+msgstr "all contacts"
+
+#: src/contact-bulk-actions.tsx
+msgid "All statuses"
+msgstr "All statuses"
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Allow duplicates: add one even to a contact that already has one"
+msgstr "Allow duplicates: add one even to a contact that already has one"
+
+#: src/contact-bulk-actions.tsx
+msgid "Already as asked"
+msgstr "Already as asked"
+
+#: src/contact-bulk/parts.tsx
+msgid "Apply to {contacts}"
+msgstr "Apply to {contacts}"
+
+#: src/contact-bulk-actions.tsx
+msgid "Assign owner"
+msgstr "Assign owner"
+
+#: src/contact-bulk/parts.tsx
+msgid "Batch quantity"
+msgstr "Batch quantity"
+
+#: src/contact-bulk-actions.tsx
+msgid "Bulk action stats"
+msgstr "Bulk action stats"
+
+#: src/contact-bulk-actions.tsx
+#: src/contact-bulk-bar.tsx
+msgid "Bulk actions"
+msgstr "Bulk actions"
+
+#: src/contact-bulk-actions.tsx
+msgid "Bulk actions table"
+msgstr "Bulk actions table"
+
+#: src/contact-bulk/export.tsx
+msgid "Business name"
+msgstr "Business name"
+
+#: src/contact-bulk/dnd.tsx
+msgid "Calls"
+msgstr "Calls"
+
+#: src/contact-bulk/parts.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/contact-bulk-actions.tsx
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#: src/contact-bulk-bar.tsx
+#: src/contact-bulk/owner.tsx
+msgid "Change owner"
+msgstr "Change owner"
+
+#: src/contact-bulk-actions.tsx
+msgid "Changed"
+msgstr "Changed"
+
+#: src/contact-bulk/dnd.tsx
+msgid "Channels"
+msgstr "Channels"
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Choose a pipeline."
+msgstr "Choose a pipeline."
+
+#: src/contact-bulk/dnd.tsx
+msgid "Choose at least one channel."
+msgstr "Choose at least one channel."
+
+#: src/contact-bulk/export.tsx
+msgid "Choose at least one column."
+msgstr "Choose at least one column."
+
+#: src/contact-bulk/tags.tsx
+msgid "Choose at least one tag."
+msgstr "Choose at least one tag."
+
+#: src/contact-bulk/parts.tsx
+msgid "Choose when to start."
+msgstr "Choose when to start."
+
+#: src/contact-bulk-bar.tsx
+msgid "Clear selection"
+msgstr "Clear selection"
+
+#: src/contact-bulk-actions.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/contact-bulk/export.tsx
+msgid "Columns in the file"
+msgstr "Columns in the file"
+
+#: src/contact-bulk-actions.tsx
+msgid "Complete"
+msgstr "Complete"
+
+#: src/contact-bulk-actions.tsx
+msgid "Completed"
+msgstr "Completed"
+
+#: src/contact-bulk-actions.tsx
+msgid "Contact"
+msgstr "Contact"
+
+#: src/contact-bulk/export.tsx
+msgid "Contact name"
+msgstr "Contact name"
+
+#: src/contact-bulk-actions.tsx
+msgid "Contact not found"
+msgstr "Contact not found"
+
+#: src/contact-bulk-actions.tsx
+msgid "Contacts"
+msgstr "Contacts"
+
+#: src/contact-bulk-actions.tsx
+msgid "Contacts in this action"
+msgstr "Contacts in this action"
+
+#: src/contact-bulk/sms.tsx
+msgid "Contacts without a phone number, consent or with do not disturb on are skipped, each with its reason."
+msgstr "Contacts without a phone number, consent or with do not disturb on are skipped, each with its reason."
+
+#: src/contact-bulk/email.tsx
+msgid "Contacts without an email address, consent or with do not disturb on are skipped, each with its reason."
+msgstr "Contacts without an email address, consent or with do not disturb on are skipped, each with its reason."
+
+#: src/contact-bulk/verify.tsx
+msgid "Counting the email addresses…"
+msgstr "Counting the email addresses…"
+
+#: src/tag-picker.tsx
+msgid "Create tag “{createName}”"
+msgstr "Create tag “{createName}”"
+
+#: src/contact-bulk-actions.tsx
+#: src/contact-bulk/export.tsx
+msgid "Created"
+msgstr "Created"
+
+#: src/tag-picker.tsx
+msgid "Creating “{createName}”…"
+msgstr "Creating “{createName}”…"
+
+#: src/contact-bulk/parts.tsx
+msgid "Days"
+msgstr "Days"
+
+#: src/contact-bulk-bar.tsx
+msgid "Delete"
+msgstr "Delete"
+
+#: src/contact-bulk/parts.tsx
+msgid "Delete {contacts}"
+msgstr "Delete {contacts}"
+
+#: src/contact-bulk/trash.tsx
+msgid "Delete contacts"
+msgstr "Delete contacts"
+
+#: src/tag-picker.tsx
+msgid "Deleted tag"
+msgstr "Deleted tag"
+
+#: src/contact-bulk-actions.tsx
+#: src/contact-bulk-bar.tsx
+#: src/contact-bulk/dnd.tsx
+msgid "Do not disturb"
+msgstr "Do not disturb"
+
+#: src/contact-bulk-bar.tsx
+msgid "Done: {changed} changed, {unchanged} already as asked, {skipped} skipped."
+msgstr "Done: {changed} changed, {unchanged} already as asked, {skipped} skipped."
+
+#: src/contact-bulk-actions.tsx
+msgid "Download"
+msgstr "Download"
+
+#: src/contact-bulk-actions.tsx
+msgid "Download {filename}"
+msgstr "Download {filename}"
+
+#: src/contact-bulk-bar.tsx
+msgid "Download it from Bulk Actions"
+msgstr "Download it from Bulk Actions"
+
+#: src/contact-bulk-actions.tsx
+msgid "Drip mode: {batch} contacts every {every} minutes."
+msgstr "Drip mode: {batch} contacts every {every} minutes."
+
+#: src/contact-bulk/parts.tsx
+msgid "Drip mode: in batches"
+msgstr "Drip mode: in batches"
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Each contact's name"
+msgstr "Each contact's name"
+
+#: src/contact-bulk/verify.tsx
+msgid "Each contact's primary email address is checked unless it has a current result: valid, risky or invalid from the last 90 days, and from the mailbox while a provider is connected."
+msgstr "Each contact's primary email address is checked unless it has a current result: valid, risky or invalid from the last 90 days, and from the mailbox while a provider is connected."
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Each gets an opportunity of its own."
+msgstr "Each gets an opportunity of its own."
+
+#: src/contact-bulk/owner.tsx
+msgid "Each gets the owner chosen, as a change on the contact page does."
+msgstr "Each gets the owner chosen, as a change on the contact page does."
+
+#: src/contact-bulk/tags.tsx
+msgid "Each gets the tags it doesn't have yet."
+msgstr "Each gets the tags it doesn't have yet."
+
+#: src/contact-bulk-actions.tsx
+#: src/contact-bulk/dnd.tsx
+#: src/contact-bulk/export.tsx
+msgid "Email"
+msgstr "Email"
+
+#: src/contact-bulk-actions.tsx
+msgid "Email verification"
+msgstr "Email verification"
+
+#: src/contact-bulk/verify.tsx
+msgid "Email verification is off."
+msgstr "Email verification is off."
+
+#: src/contact-bulk/verify.tsx
+msgid "Email verification is off. Turn it on in Settings → Email Services → Email Verification."
+msgstr "Email verification is off. Turn it on in Settings → Email Services → Email Verification."
+
+#: src/contact-bulk/parts.tsx
+msgid "Enter a date and time."
+msgstr "Enter a date and time."
+
+#: src/contact-bulk/email.tsx
+msgid "Enter a subject."
+msgstr "Enter a subject."
+
+#: src/contact-bulk/parts.tsx
+msgid "Estimated duration: {durationWords} from the first batch to the last."
+msgstr "Estimated duration: {durationWords} from the first batch to the last."
+
+#: src/tag-picker.tsx
+msgid "Every tag is already chosen."
+msgstr "Every tag is already chosen."
+
+#: src/tag-picker.tsx
+msgid "Every tag is already chosen. Type a name to make a new one."
+msgstr "Every tag is already chosen. Type a name to make a new one."
+
+#: src/contact-bulk-actions.tsx
+#: src/contact-bulk-bar.tsx
+msgid "Export"
+msgstr "Export"
+
+#: src/contact-bulk/parts.tsx
+msgid "Export {contacts}"
+msgstr "Export {contacts}"
+
+#: src/contact-bulk/export.tsx
+msgid "Export contacts"
+msgstr "Export contacts"
+
+#: src/contact-bulk-actions.tsx
+msgid "Failed"
+msgstr "Failed"
+
+#: src/contact-bulk/email.tsx
+msgid "From mailbox"
+msgstr "From mailbox"
+
+#: src/contact-bulk/email.tsx
+msgid "From name (optional)"
+msgstr "From name (optional)"
+
+#: src/contact-bulk/sms.tsx
+msgid "From number"
+msgstr "From number"
+
+#: src/contact-bulk/parts.tsx
+msgid "Hours"
+msgstr "Hours"
+
+#: src/contact-bulk/dnd.tsx
+msgid "It is kept in the audit log."
+msgstr "It is kept in the audit log."
+
+#: src/contact-bulk/export.tsx
+msgid "Last activity"
+msgstr "Last activity"
+
+#: src/contact-bulk-actions.tsx
+msgid "Load more"
+msgstr "Load more"
+
+#: src/contact-bulk-actions.tsx
+msgid "Loading bulk actions…"
+msgstr "Loading bulk actions…"
+
+#: src/contact-bulk-actions.tsx
+msgid "Loading contacts…"
+msgstr "Loading contacts…"
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Loading pipelines…"
+msgstr "Loading pipelines…"
+
+#: src/tag-picker.tsx
+msgid "Loading tags…"
+msgstr "Loading tags…"
+
+#: src/contact-bulk/verify.tsx
+msgid "Mailbox checks need a verification provider. Domain checks still run."
+msgstr "Mailbox checks need a verification provider. Domain checks still run."
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Mark as won"
+msgstr "Mark as won"
+
+#: src/contact-bulk/email.tsx
+#: src/contact-bulk/sms.tsx
+msgid "Message"
+msgstr "Message"
+
+#: src/contact-bulk/parts.tsx
+msgid "Minutes"
+msgstr "Minutes"
+
+#: src/contact-bulk-bar.tsx
+msgid "More"
+msgstr "More"
+
+#: src/contact-bulk/parts.tsx
+msgid "More than {count} contacts are selected: the action counts them when it starts."
+msgstr "More than {count} contacts are selected: the action counts them when it starts."
+
+#: src/contact-bulk-actions.tsx
+msgid "Move to trash"
+msgstr "Move to trash"
+
+#: src/contact-bulk/owner.tsx
+msgid "New owner"
+msgstr "New owner"
+
+#: src/contact-bulk-actions.tsx
+msgid "Next"
+msgstr "Next"
+
+#: src/contact-bulk-actions.tsx
+msgid "Next batch {next}"
+msgstr "Next batch {next}"
+
+#: src/contact-bulk-actions.tsx
+msgid "Next page"
+msgstr "Next page"
+
+#: src/contact-bulk-actions.tsx
+msgid "No bulk actions match."
+msgstr "No bulk actions match."
+
+#: src/contact-bulk-actions.tsx
+msgid "No bulk actions yet. Select contacts in a smart list to change many at once."
+msgstr "No bulk actions yet. Select contacts in a smart list to change many at once."
+
+#: src/contact-bulk-actions.tsx
+msgid "No contacts match."
+msgstr "No contacts match."
+
+#: src/contact-bulk/owner.tsx
+msgid "No owner"
+msgstr "No owner"
+
+#: src/tag-picker.tsx
+msgid "No tags chosen."
+msgstr "No tags chosen."
+
+#: src/tag-picker.tsx
+msgid "No tags match."
+msgstr "No tags match."
+
+#: src/contact-bulk-actions.tsx
+msgid "Not yet"
+msgstr "Not yet"
+
+#: src/contact-bulk/verify.tsx
+msgid "Nothing to check: every address is current or skipped."
+msgstr "Nothing to check: every address is current or skipped."
+
+#: src/contact-bulk-actions.tsx
+msgid "Operation"
+msgstr "Operation"
+
+#: src/contact-bulk-actions.tsx
+#: src/contact-bulk-bar.tsx
+msgid "Opportunity"
+msgstr "Opportunity"
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Opportunity name (optional)"
+msgstr "Opportunity name (optional)"
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Opportunity source (optional)"
+msgstr "Opportunity source (optional)"
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Opportunity value (optional)"
+msgstr "Opportunity value (optional)"
+
+#: src/tag-picker.tsx
+msgid "Other tags"
+msgstr "Other tags"
+
+#: src/contact-bulk-actions.tsx
+msgid "Page {pageNumber}"
+msgstr "Page {pageNumber}"
+
+#: src/contact-bulk-actions.tsx
+msgid "Pages"
+msgstr "Pages"
+
+#: src/contact-bulk/owner.tsx
+msgid "People couldn't be loaded."
+msgstr "People couldn't be loaded."
+
+#: src/contact-bulk/export.tsx
+msgid "Phone"
+msgstr "Phone"
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Pipeline"
+msgstr "Pipeline"
+
+#: src/contact-bulk/email.tsx
+msgid "Plain text. Merge fields such as {mergeField} are filled in for each contact."
+msgstr "Plain text. Merge fields such as {mergeField} are filled in for each contact."
+
+#: src/contact-bulk-actions.tsx
+msgid "Previous"
+msgstr "Previous"
+
+#: src/contact-bulk-actions.tsx
+msgid "Previous page"
+msgstr "Previous page"
+
+#: src/contact-bulk-actions.tsx
+msgid "Processing"
+msgstr "Processing"
+
+#: src/contact-bulk-actions.tsx
+msgid "Queued"
+msgstr "Queued"
+
+#: src/contact-bulk/parts.tsx
+msgid "Reach between 1 and 10,000 contacts a batch."
+msgstr "Reach between 1 and 10,000 contacts a batch."
+
+#: src/contact-bulk/dnd.tsx
+msgid "Reason"
+msgstr "Reason"
+
+#: src/tag-picker.tsx
+msgid "Remove {name}"
+msgstr "Remove {name}"
+
+#: src/contact-bulk/tags.tsx
+msgid "Remove every tag each contact has"
+msgstr "Remove every tag each contact has"
+
+#: src/contact-bulk-actions.tsx
+msgid "Remove tag"
+msgstr "Remove tag"
+
+#: src/contact-bulk-bar.tsx
+msgid "Remove Tag"
+msgstr "Remove Tag"
+
+#: src/contact-bulk/tags.tsx
+msgid "Remove tags"
+msgstr "Remove tags"
+
+#: src/tag-picker.tsx
+msgid "Removed {name}."
+msgstr "Removed {name}."
+
+#: src/contact-bulk/parts.tsx
+msgid "Repeat after"
+msgstr "Repeat after"
+
+#: src/contact-bulk-actions.tsx
+msgid "Result"
+msgstr "Result"
+
+#: src/contact-bulk/parts.tsx
+msgid "Run now"
+msgstr "Run now"
+
+#: src/contact-bulk/dnd.tsx
+msgid "Say why, in at least {DO_NOT_CONTACT_REASON_MIN} characters."
+msgstr "Say why, in at least {DO_NOT_CONTACT_REASON_MIN} characters."
+
+#: src/contact-bulk-bar.tsx
+msgid "Scheduled for {contacts}."
+msgstr "Scheduled for {contacts}."
+
+#: src/tag-picker.tsx
+msgid "Search or create a tag"
+msgstr "Search or create a tag"
+
+#: src/tag-picker.tsx
+msgid "Search tags"
+msgstr "Search tags"
+
+#: src/contact-bulk-bar.tsx
+msgid "See each contact in Bulk Actions"
+msgstr "See each contact in Bulk Actions"
+
+#: src/contact-bulk-actions.tsx
+msgid "Seeing the bulk actions needs permission to manage contacts."
+msgstr "Seeing the bulk actions needs permission to manage contacts."
+
+#: src/contact-bulk-bar.tsx
+msgid "Select all {listCount} contacts"
+msgstr "Select all {listCount} contacts"
+
+#: src/contact-bulk-bar.tsx
+msgid "Select all {listCount}+ contacts"
+msgstr "Select all {listCount}+ contacts"
+
+#: src/contact-bulk/email.tsx
+msgid "Send email"
+msgstr "Send email"
+
+#: src/contact-bulk-bar.tsx
+msgid "Send Email"
+msgstr "Send Email"
+
+#: src/contact-bulk-bar.tsx
+#: src/contact-bulk/sms.tsx
+msgid "Send SMS"
+msgstr "Send SMS"
+
+#: src/contact-bulk/parts.tsx
+msgid "Send to {contacts}"
+msgstr "Send to {contacts}"
+
+#: src/contact-bulk-actions.tsx
+msgid "Show"
+msgstr "Show"
+
+#: src/contact-bulk-actions.tsx
+msgid "Show stats"
+msgstr "Show stats"
+
+#: src/contact-bulk-actions.tsx
+msgid "Show stats for {label}"
+msgstr "Show stats for {label}"
+
+#: src/tag-picker.tsx
+msgid "Showing {shownCount} of {matchingCount}. Type to narrow the list."
+msgstr "Showing {shownCount} of {matchingCount}. Type to narrow the list."
+
+#: src/contact-bulk/parts.tsx
+msgid "Shown in Bulk Actions, to tell this one from others."
+msgstr "Shown in Bulk Actions, to tell this one from others."
+
+#: src/contact-bulk-actions.tsx
+msgid "Skipped"
+msgstr "Skipped"
+
+#: src/contact-bulk-actions.tsx
+msgid "SMS"
+msgstr "SMS"
+
+#: src/contact-bulk/opportunity.tsx
+msgid "Stage"
+msgstr "Stage"
+
+#: src/contact-bulk/parts.tsx
+msgid "Start at a set time"
+msgstr "Start at a set time"
+
+#: src/contact-bulk/parts.tsx
+msgid "Start on"
+msgstr "Start on"
+
+#: src/contact-bulk/parts.tsx
+msgid "Start on (optional)"
+msgstr "Start on (optional)"
+
+#: src/contact-bulk-bar.tsx
+msgid "Started in the background for {contacts}."
+msgstr "Started in the background for {contacts}."
+
+#: src/contact-bulk-actions.tsx
+msgid "Starts {next}"
+msgstr "Starts {next}"
+
+#: src/contact-bulk-actions.tsx
+msgid "Status"
+msgstr "Status"
+
+#: src/contact-bulk-actions.tsx
+msgid "Stop"
+msgstr "Stop"
+
+#: src/contact-bulk-actions.tsx
+msgid "Stop {label}"
+msgstr "Stop {label}"
+
+#: src/contact-bulk/email.tsx
+msgid "Subject"
+msgstr "Subject"
+
+#: src/contact-bulk/email.tsx
+msgid "Subject (optional)"
+msgstr "Subject (optional)"
+
+#: src/contact-bulk/export.tsx
+msgid "Tags"
+msgstr "Tags"
+
+#: src/contact-bulk/tags.tsx
+#: src/tag-picker.tsx
+msgid "Tags to add"
+msgstr "Tags to add"
+
+#: src/contact-bulk/tags.tsx
+msgid "Tags to remove"
+msgstr "Tags to remove"
+
+#: src/contact-bulk/owner.tsx
+msgid "Team member"
+msgstr "Team member"
+
+#: src/contact-bulk/email.tsx
+msgid "Template"
+msgstr "Template"
+
+#: src/contact-bulk/dnd.tsx
+msgid "Text messages"
+msgstr "Text messages"
+
+#: src/contact-bulk-actions.tsx
+msgid "The action had already ended."
+msgstr "The action had already ended."
+
+#: src/contact-bulk-actions.tsx
+msgid "The action wasn't stopped. Check your connection and try again."
+msgstr "The action wasn't stopped. Check your connection and try again."
+
+#: src/contact-bulk/parts.tsx
+msgid "The bulk action wasn't started."
+msgstr "The bulk action wasn't started."
+
+#: src/contact-bulk/parts.tsx
+msgid "The bulk action wasn't started. Check your connection and try again."
+msgstr "The bulk action wasn't started. Check your connection and try again."
+
+#: src/contact-bulk-actions.tsx
+msgid "The bulk actions couldn't be loaded."
+msgstr "The bulk actions couldn't be loaded."
+
+#: src/contact-bulk/sms.tsx
+msgid "The business's only number"
+msgstr "The business's only number"
+
+#: src/contact-bulk/email.tsx
+msgid "The business's only working mailbox"
+msgstr "The business's only working mailbox"
+
+#: src/contact-bulk/dnd.tsx
+msgid "The change is made on each contact, as on its page."
+msgstr "The change is made on each contact, as on its page."
+
+#: src/contact-bulk-actions.tsx
+msgid "The contacts couldn't be loaded."
+msgstr "The contacts couldn't be loaded."
+
+#: src/contact-bulk/verify.tsx
+msgid "The counts couldn't be loaded."
+msgstr "The counts couldn't be loaded."
+
+#: src/contact-bulk-bar.tsx
+msgid "The export of {contacts} is being written."
+msgstr "The export of {contacts} is being written."
+
+#: src/contact-bulk-actions.tsx
+msgid "The file couldn't be downloaded. Check your connection and try again."
+msgstr "The file couldn't be downloaded. Check your connection and try again."
+
+#: src/contact-bulk/export.tsx
+msgid "The file is written in the background; download it from Bulk Actions."
+msgstr "The file is written in the background; download it from Bulk Actions."
+
+#: src/contact-bulk/opportunity.tsx
+msgid "The pipeline's first stage"
+msgstr "The pipeline's first stage"
+
+#: src/tag-picker.tsx
+msgid "The tag wasn't made. Check your connection and try again."
+msgstr "The tag wasn't made. Check your connection and try again."
+
+#: src/contact-bulk/tags.tsx
+msgid "The tags are taken off each contact that has them."
+msgstr "The tags are taken off each contact that has them."
+
+#: src/tag-picker.tsx
+msgid "The tags couldn't be loaded."
+msgstr "The tags couldn't be loaded."
+
+#: src/tag-picker.tsx
+msgid "The tags couldn't be loaded. Reload the page to see the chosen tags."
+msgstr "The tags couldn't be loaded. Reload the page to see the chosen tags."
+
+#: src/contact-bulk/verify.tsx
+msgid "The verification provider's connection is failing. Check it in Settings → Email Services → Email Verification."
+msgstr "The verification provider's connection is failing. Check it in Settings → Email Services → Email Verification."
+
+#: src/tag-picker.tsx
+msgid "There are no tags yet. Make them in Settings, under Custom Fields & Tags."
+msgstr "There are no tags yet. Make them in Settings, under Custom Fields & Tags."
+
+#: src/tag-picker.tsx
+msgid "There are no tags yet. Type a name to make the first one."
+msgstr "There are no tags yet. Type a name to make the first one."
+
+#: src/contact-bulk/opportunity.tsx
+msgid "There is no pipeline with a stage in use yet. Add one in Settings."
+msgstr "There is no pipeline with a stage in use yet. Add one in Settings."
+
+#: src/contact-bulk/trash.tsx
+msgid "They move to the trash, where each can be restored."
+msgstr "They move to the trash, where each can be restored."
+
+#: src/contact-bulk-actions.tsx
+msgid "This action was stopped. Contacts it had not reached were left as they were."
+msgstr "This action was stopped. Contacts it had not reached were left as they were."
+
+#: src/tag-picker.tsx
+msgid "This tag is already chosen."
+msgstr "This tag is already chosen."
+
+#: src/contact-bulk-bar.tsx
+msgid "Tick at most {CONTACT_BULK_INLINE_LIMIT} contacts, or select all the list holds."
+msgstr "Tick at most {CONTACT_BULK_INLINE_LIMIT} contacts, or select all the list holds."
+
+#: src/contact-bulk-actions.tsx
+msgid "Track progress and results for bulk actions."
+msgstr "Track progress and results for bulk actions."
+
+#: src/contact-bulk/verify.tsx
+#: src/tag-picker.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/contact-bulk/dnd.tsx
+msgid "Turn off"
+msgstr "Turn off"
+
+#: src/contact-bulk/dnd.tsx
+msgid "Turn on"
+msgstr "Turn on"
+
+#: src/contact-bulk/parts.tsx
+msgid "Unit"
+msgstr "Unit"
+
+#: src/contact-bulk-actions.tsx
+msgid "Unnamed"
+msgstr "Unnamed"
+
+#: src/contact-bulk-actions.tsx
+msgid "User"
+msgstr "User"
+
+#: src/contact-bulk/parts.tsx
+msgid "Verify {contacts}"
+msgstr "Verify {contacts}"
+
+#: src/contact-bulk-bar.tsx
+#: src/contact-bulk/verify.tsx
+msgid "Verify emails"
+msgstr "Verify emails"
+
+#: src/contact-bulk/parts.tsx
+msgid "Wait between a minute and 30 days between batches."
+msgstr "Wait between a minute and 30 days between batches."
+
+#: src/contact-bulk-actions.tsx
+msgid "Waiting"
+msgstr "Waiting"
+
+#: src/contact-bulk/dnd.tsx
+msgid "Web chat"
+msgstr "Web chat"
+
+#: src/contact-bulk/dnd.tsx
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+#: src/contact-bulk/parts.tsx
+msgid "When"
+msgstr "When"
+
+#: src/contact-bulk/parts.tsx
+msgid "Working…"
+msgstr "Working…"
+
+#: src/contact-bulk/email.tsx
+msgid "Write my own email"
+msgstr "Write my own email"
+
+#: src/contact-bulk/email.tsx
+msgid "Write the email, or choose a template."
+msgstr "Write the email, or choose a template."
+
+#: src/contact-bulk/sms.tsx
+msgid "Write the message."
+msgstr "Write the message."
+
+#: src/contact-bulk/owner.tsx
+msgid "You"
+msgstr "You"
+
+#: src/contact-bulk/parts.tsx
+msgid "You don't have permission to do this to contacts."
+msgstr "You don't have permission to do this to contacts."
+
+#: src/contact-bulk-actions.tsx
+msgid "You don't have permission to download exports."
+msgstr "You don't have permission to download exports."
+
+#: src/contact-bulk-actions.tsx
+msgid "You don't have permission to stop this action."
+msgstr "You don't have permission to stop this action."

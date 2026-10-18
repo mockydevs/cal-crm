@@ -1,0 +1,263 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-17 21:24+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/task-recurrence-mark.tsx
+msgid "{every, plural, one {Repeats every day} other {Repeats every # days}}"
+msgstr "{every, plural, one {Repeats every day} other {Repeats every # days}}"
+
+#: src/task-recurrence-mark.tsx
+msgid "{every, plural, one {Repeats every hour} other {Repeats every # hours}}"
+msgstr "{every, plural, one {Repeats every hour} other {Repeats every # hours}}"
+
+#: src/task-recurrence-mark.tsx
+msgid "{every, plural, one {Repeats every month} other {Repeats every # months}}"
+msgstr "{every, plural, one {Repeats every month} other {Repeats every # months}}"
+
+#: src/task-recurrence-mark.tsx
+msgid "{every, plural, one {Repeats every week} other {Repeats every # weeks}}"
+msgstr "{every, plural, one {Repeats every week} other {Repeats every # weeks}}"
+
+#: src/task-recurrence-mark.tsx
+msgid "{every, plural, one {Repeats every year} other {Repeats every # years}}"
+msgstr "{every, plural, one {Repeats every year} other {Repeats every # years}}"
+
+#: src/task-recurrence-mark.tsx
+msgid "{rule}. Next due {next}."
+msgstr "{rule}. Next due {next}."
+
+#: src/task-recurrence-mark.tsx
+msgid "{rule}. The series has ended."
+msgstr "{rule}. The series has ended."
+
+#: src/notification-settings.tsx
+msgid "A contact I follow writes"
+msgstr "A contact I follow writes"
+
+#: src/notification-settings.tsx
+msgid "A contact writes in any other conversation"
+msgstr "A contact writes in any other conversation"
+
+#: src/notification-settings.tsx
+msgid "A contact writes in my conversation"
+msgstr "A contact writes in my conversation"
+
+#: src/notification-settings.tsx
+msgid "A conversation is assigned to me"
+msgstr "A conversation is assigned to me"
+
+#: src/notification-settings.tsx
+msgid "A reminder before an upcoming task assigned to me"
+msgstr "A reminder before an upcoming task assigned to me"
+
+#: src/notification-settings.tsx
+msgid "A task assigned to me is due"
+msgstr "A task assigned to me is due"
+
+#: src/notification-settings.tsx
+msgid "A task gets assigned to me"
+msgstr "A task gets assigned to me"
+
+#: src/notification-settings.tsx
+msgid "A workflow notifies the team"
+msgstr "A workflow notifies the team"
+
+#: src/task-recurrence-fields.tsx
+msgid "After a set number of occurrences"
+msgstr "After a set number of occurrences"
+
+#: src/task-recurrence-mark.tsx
+msgid "Also delete all upcoming tasks in this series"
+msgstr "Also delete all upcoming tasks in this series"
+
+#: src/notification-settings.tsx
+msgid "An appointment of mine is booked"
+msgstr "An appointment of mine is booked"
+
+#: src/notification-settings.tsx
+msgid "An appointment of mine is cancelled"
+msgstr "An appointment of mine is cancelled"
+
+#: src/notification-settings.tsx
+msgid "An appointment of mine is moved"
+msgstr "An appointment of mine is moved"
+
+#: src/task-recurrence-fields.tsx
+msgid "Apply changes to"
+msgstr "Apply changes to"
+
+#: src/notification-settings.tsx
+msgid "before the task is due. Leave it empty for no reminder."
+msgstr "before the task is due. Leave it empty for no reminder."
+
+#: src/task-recurrence-fields.tsx
+msgid "Choose the last day."
+msgstr "Choose the last day."
+
+#: src/notification-settings.tsx
+msgid "Choose what you are told of inside the app in this business. Only you see these choices."
+msgstr "Choose what you are told of inside the app in this business. Only you see these choices."
+
+#: src/task-recurrence-fields.tsx
+msgid "Create a new task even if the previous one is overdue"
+msgstr "Create a new task even if the previous one is overdue"
+
+#: src/task-recurrence-fields.tsx
+msgid "Custom Date"
+msgstr "Custom Date"
+
+#: src/notification-settings.tsx
+#: src/task-recurrence-fields.tsx
+msgid "Days"
+msgstr "Days"
+
+#: src/task-recurrence-fields.tsx
+msgid "Each next task is made on schedule, as long before it is due as this one is, whether or not the last one was completed."
+msgstr "Each next task is made on schedule, as long before it is due as this one is, whether or not the last one was completed."
+
+#: src/task-recurrence-fields.tsx
+msgid "End date"
+msgstr "End date"
+
+#: src/task-recurrence-mark.tsx
+msgid "Ended"
+msgstr "Ended"
+
+#: src/task-recurrence-fields.tsx
+msgid "Ends on"
+msgstr "Ends on"
+
+#: src/task-recurrence-fields.tsx
+msgid "Every scheduled task counts, one not made because the task before it was overdue included, so the series always ends."
+msgstr "Every scheduled task counts, one not made because the task before it was overdue included, so the series always ends."
+
+#: src/task-recurrence-fields.tsx
+msgid "Give a recurring task a due date and time."
+msgstr "Give a recurring task a due date and time."
+
+#: src/notification-settings.tsx
+msgid "Give a whole number of minutes, hours or days, up to 30 days."
+msgstr "Give a whole number of minutes, hours or days, up to 30 days."
+
+#: src/notification-settings.tsx
+#: src/task-recurrence-fields.tsx
+msgid "Hours"
+msgstr "Hours"
+
+#: src/notification-settings.tsx
+msgid "Inside the app"
+msgstr "Inside the app"
+
+#: src/task-recurrence-fields.tsx
+msgid "Keep repeating"
+msgstr "Keep repeating"
+
+#: src/notification-settings.tsx
+msgid "Loading…"
+msgstr "Loading…"
+
+#: src/notification-settings.tsx
+msgid "Minutes"
+msgstr "Minutes"
+
+#: src/task-recurrence-fields.tsx
+msgid "Months"
+msgstr "Months"
+
+#: src/notification-settings.tsx
+msgid "My Google Calendar is disconnected"
+msgstr "My Google Calendar is disconnected"
+
+#: src/notification-settings.tsx
+msgid "My Notifications"
+msgstr "My Notifications"
+
+#: src/task-recurrence-fields.tsx
+msgid "Never"
+msgstr "Never"
+
+#: src/task-recurrence-mark.tsx
+msgid "Next {next}"
+msgstr "Next {next}"
+
+#: src/task-recurrence-fields.tsx
+msgid "Occurrences"
+msgstr "Occurrences"
+
+#: src/notification-settings.tsx
+msgid "Off"
+msgstr "Off"
+
+#: src/task-recurrence-fields.tsx
+msgid "Recurring Task"
+msgstr "Recurring Task"
+
+#: src/notification-settings.tsx
+msgid "Remind me"
+msgstr "Remind me"
+
+#: src/task-recurrence-fields.tsx
+msgid "Repeats every"
+msgstr "Repeats every"
+
+#: src/notification-settings.tsx
+msgid "Save"
+msgstr "Save"
+
+#: src/notification-settings.tsx
+msgid "Someone fills in a form I manage"
+msgstr "Someone fills in a form I manage"
+
+#: src/notification-settings.tsx
+msgid "The monthly AI spending limit is reached"
+msgstr "The monthly AI spending limit is reached"
+
+#: src/notification-settings.tsx
+msgid "They weren't saved. Check your connection and try again."
+msgstr "They weren't saved. Check your connection and try again."
+
+#: src/notification-settings.tsx
+msgid "They weren't saved. Try again."
+msgstr "They weren't saved. Try again."
+
+#: src/task-recurrence-fields.tsx
+msgid "This and all future tasks"
+msgstr "This and all future tasks"
+
+#: src/task-recurrence-fields.tsx
+msgid "This task only"
+msgstr "This task only"
+
+#: src/notification-settings.tsx
+#: src/task-recurrence-fields.tsx
+msgid "Unit"
+msgstr "Unit"
+
+#: src/task-recurrence-fields.tsx
+msgid "Use a whole number from 1 to 1000."
+msgstr "Use a whole number from 1 to 1000."
+
+#: src/task-recurrence-fields.tsx
+msgid "Use a whole number from 1 to 999."
+msgstr "Use a whole number from 1 to 999."
+
+#: src/task-recurrence-fields.tsx
+msgid "Weeks"
+msgstr "Weeks"
+
+#: src/task-recurrence-fields.tsx
+msgid "Years"
+msgstr "Years"
+
+#: src/notification-settings.tsx
+msgid "Your notification settings are saved."
+msgstr "Your notification settings are saved."
+
+#: src/notification-settings.tsx
+msgid "Your notification settings couldn't be loaded."
+msgstr "Your notification settings couldn't be loaded."

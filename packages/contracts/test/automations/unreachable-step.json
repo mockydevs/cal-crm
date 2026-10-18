@@ -1,0 +1,35 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      },
+      "orphan": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/orphan",
+      "code": "unreachable_step",
+      "message": "No path leads to orphan.",
+      "suggestion": "Point a step's next at orphan, or remove it."
+    }
+  ]
+}

@@ -1,0 +1,1073 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-13 21:18+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/email-editor/rich-text.tsx
+msgid "“{privatePicture}” is private, so a mail app could not load it. Make it public in Media Storage, then choose it again."
+msgstr "“{privatePicture}” is private, so a mail app could not load it. Make it public in Media Storage, then choose it again."
+
+#: src/email-step/panel.tsx
+msgid "“{templateName}” is copied into this action when you save it. After that, a later edit to the template doesn't change it."
+msgstr "“{templateName}” is copied into this action when you save it. After that, a later edit to the template doesn't change it."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "{contactName} has no value for {missing}. A send to them would stop there rather than leave a gap."
+msgstr "{contactName} has no value for {missing}. A send to them would stop there rather than leave a gap."
+
+#: src/email-step/template-screen.tsx
+msgid "{count, plural, one {Used in # workflow or more} other {Used in # workflows or more}}"
+msgstr "{count, plural, one {Used in # workflow or more} other {Used in # workflows or more}}"
+
+#: src/email-step/template-screen.tsx
+msgid "{count, plural, one {Used in # workflow} other {Used in # workflows}}"
+msgstr "{count, plural, one {Used in # workflow} other {Used in # workflows}}"
+
+#: src/email-step/panel.tsx
+msgid "{heldMailbox} (not found)"
+msgstr "{heldMailbox} (not found)"
+
+#: src/search-picker.tsx
+msgid "{shownCount, plural, one {# choice} other {# choices}}"
+msgstr "{shownCount, plural, one {# choice} other {# choices}}"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "{suggested} (copy)"
+msgstr "{suggested} (copy)"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "{used} of {limit} characters"
+msgstr "{used} of {limit} characters"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "{used} of {limit} characters: close to the most an email can hold."
+msgstr "{used} of {limit} characters: close to the most an email can hold."
+
+#: src/email-editor/rich-text.tsx
+msgid "{width} pixels"
+msgstr "{width} pixels"
+
+#: src/email-step/template-picker.tsx
+msgid "{written} (not found)"
+msgstr "{written} (not found)"
+
+#: src/email-step/rules.ts
+msgid "A mail server accepting an email is not proof it reached the inbox."
+msgstr "A mail server accepting an email is not proof it reached the inbox."
+
+#: src/email-step/panel.tsx
+msgid "A new template for your library. Once saved, it is chosen for this action."
+msgstr "A new template for your library. Once saved, it is chosen for this action."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "A value in the subject holds a line break, which a subject can't. A send would stop."
+msgstr "A value in the subject holds a line break, which a subject can't. A send would stop."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "A workflow email leaves with a footer: your postal address, when your business profile has one, and an unsubscribe line. A message that has an unsubscribe link of its own gets no second one."
+msgstr "A workflow email leaves with a footer: your postal address, when your business profile has one, and an unsubscribe line. A message that has an unsubscribe link of its own gets no second one."
+
+#: src/email-step/rules.ts
+msgid "Accepted by the mail server."
+msgstr "Accepted by the mail server."
+
+#: src/search-picker.tsx
+msgid "Add “{own}”"
+msgstr "Add “{own}”"
+
+#: src/email-step/panel.tsx
+msgid "Add attachments"
+msgstr "Add attachments"
+
+#: src/email-step/panel.tsx
+msgid "Add formatting"
+msgstr "Add formatting"
+
+#: src/email-editor/rich-text.tsx
+msgid "Align centre"
+msgstr "Align centre"
+
+#: src/email-editor/rich-text.tsx
+msgid "Align left"
+msgstr "Align left"
+
+#: src/email-editor/rich-text.tsx
+msgid "Align right"
+msgstr "Align right"
+
+#: src/email-step/rules.ts
+msgid "All time"
+msgstr "All time"
+
+#: src/email-step/rules.ts
+msgid "An earlier email bounced"
+msgstr "An earlier email bounced"
+
+#: src/email-step/panel.tsx
+msgid "An email is sent from one of your connected mailboxes: choose which. With From name empty, the mailbox's own name is used."
+msgstr "An email is sent from one of your connected mailboxes: choose which. With From name empty, the mailbox's own name is used."
+
+#: src/email-step/panel.tsx
+msgid "An email is sent from your connected mailbox. With From name empty, the mailbox's own name is used."
+msgstr "An email is sent from your connected mailbox. With From name empty, the mailbox's own name is used."
+
+#: src/email-step/rules.ts
+msgid "Another reason"
+msgstr "Another reason"
+
+#: src/email-editor/rich-text.tsx
+msgid "Apply link"
+msgstr "Apply link"
+
+#: src/email-step/panel.tsx
+msgid "At most {most} addresses."
+msgstr "At most {most} addresses."
+
+#: src/email-step/panel.tsx
+msgid "Attach a file"
+msgstr "Attach a file"
+
+#: src/email-step/panel.tsx
+msgid "Attachments"
+msgstr "Attachments"
+
+#: src/email-step/panel.tsx
+msgid "Bcc"
+msgstr "Bcc"
+
+#: src/email-editor/rules.ts
+msgid "Black"
+msgstr "Black"
+
+#: src/email-editor/rich-text.tsx
+#: src/email-editor/rules.ts
+msgid "Blue"
+msgstr "Blue"
+
+#: src/email-editor/rich-text.tsx
+msgid "Bold"
+msgstr "Bold"
+
+#: src/email-step/rules.ts
+msgid "Bounced"
+msgstr "Bounced"
+
+#: src/email-editor/rich-text.tsx
+msgid "Brand colour {value}"
+msgstr "Brand colour {value}"
+
+#: src/email-editor/rich-text.tsx
+msgid "Bulleted list"
+msgstr "Bulleted list"
+
+#: src/email-editor/rich-text.tsx
+msgid "Button"
+msgstr "Button"
+
+#: src/email-editor/rich-text.tsx
+msgid "Button label"
+msgstr "Button label"
+
+#: src/email-editor/rich-text.tsx
+msgid "Button link"
+msgstr "Button link"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-editor/rich-text.tsx
+#: src/email-step/panel.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/email-step/panel.tsx
+msgid "Cc"
+msgstr "Cc"
+
+#: src/email-step/panel.tsx
+msgid "Choose a mailbox"
+msgstr "Choose a mailbox"
+
+#: src/email-editor/rich-text.tsx
+msgid "Choose a picture"
+msgstr "Choose a picture"
+
+#: src/email-step/template-picker.tsx
+msgid "Choose a template"
+msgstr "Choose a template"
+
+#: src/email-step/check.ts
+msgid "Choose a template, or write the email with Quick compose."
+msgstr "Choose a template, or write the email with Quick compose."
+
+#: src/email-step/panel.tsx
+msgid "Clear"
+msgstr "Clear"
+
+#: src/email-editor/rich-text.tsx
+msgid "Clear formatting"
+msgstr "Clear formatting"
+
+#: src/email-step/rules.ts
+msgid "Clicked"
+msgstr "Clicked"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/email-editor/rich-text.tsx
+msgid "Colour"
+msgstr "Colour"
+
+#: src/email-step/template-screen.tsx
+msgid "Contact"
+msgstr "Contact"
+
+#: src/email-step/template-screen.tsx
+msgid "Contact custom fields"
+msgstr "Contact custom fields"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Contact to preview with"
+msgstr "Contact to preview with"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Convert to formatted"
+msgstr "Convert to formatted"
+
+#: src/email-step/statistics.tsx
+msgid "Counts cover every version of this workflow, for contacts who reached the action in these dates. Each email this action tried to send is listed in the Execution logs tab, under this action."
+msgstr "Counts cover every version of this workflow, for contacts who reached the action in these dates. Each email this action tried to send is listed in the Execution logs tab, under this action."
+
+#: src/email-step/template-picker.tsx
+msgid "Create a template"
+msgstr "Create a template"
+
+#: src/email-step/panel.tsx
+msgid "Create email"
+msgstr "Create email"
+
+#: src/email-step/statistics.tsx
+msgid "Dates"
+msgstr "Dates"
+
+#: src/email-step/rules.ts
+msgid "Delivered"
+msgstr "Delivered"
+
+#: src/email-editor/rich-text.tsx
+msgid "Describe the picture: the description is read aloud, and shown when pictures are off."
+msgstr "Describe the picture: the description is read aloud, and shown when pictures are off."
+
+#: src/email-editor/rich-text.tsx
+msgid "Description (alt text)"
+msgstr "Description (alt text)"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Desktop"
+msgstr "Desktop"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Discard changes"
+msgstr "Discard changes"
+
+#: src/email-editor/rich-text.tsx
+msgid "Divider"
+msgstr "Divider"
+
+#: src/email-step/rules.ts
+msgid "Do not contact is on"
+msgstr "Do not contact is on"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Done renaming"
+msgstr "Done renaming"
+
+#: src/email-step/panel.tsx
+msgid "Edit"
+msgstr "Edit"
+
+#: src/email-step/panel.tsx
+msgid "Edit a copy in this action"
+msgstr "Edit a copy in this action"
+
+#: src/email-step/tabs.tsx
+msgid "Edit action"
+msgstr "Edit action"
+
+#: src/email-step/panel.tsx
+msgid "Edit the email"
+msgstr "Edit the email"
+
+#: src/email-step/panel.tsx
+msgid "Edit the template"
+msgstr "Edit the template"
+
+#: src/email-step/panel.tsx
+msgid "Email"
+msgstr "Email"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Email body"
+msgstr "Email body"
+
+#: src/email-step/panel.tsx
+msgid "Email options"
+msgstr "Email options"
+
+#: src/email-step/statistics.tsx
+msgid "Email statistics"
+msgstr "Email statistics"
+
+#: src/email-step/panel.tsx
+msgid "Email template"
+msgstr "Email template"
+
+#: src/email-step/rules.ts
+msgid "Failed"
+msgstr "Failed"
+
+#: src/email-step/panel.tsx
+msgid "File not found"
+msgstr "File not found"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Fill the fields in for"
+msgstr "Fill the fields in for"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Folder"
+msgstr "Folder"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-step/template-picker.tsx
+#: src/email-step/template-screen.tsx
+msgid "Formatted"
+msgstr "Formatted"
+
+#: src/email-editor/rich-text.tsx
+msgid "Formatting"
+msgstr "Formatting"
+
+#: src/email-step/panel.tsx
+msgid "From email"
+msgstr "From email"
+
+#: src/email-step/panel.tsx
+msgid "From name"
+msgstr "From name"
+
+#: src/email-editor/rich-text.tsx
+msgid "Full width"
+msgstr "Full width"
+
+#: src/email-editor/rich-text.tsx
+msgid "Give a web address, an email address, a phone link or one merge field."
+msgstr "Give a web address, an email address, a phone link or one merge field."
+
+#: src/email-step/panel.tsx
+msgid "Give an email address, or insert one field that holds one."
+msgstr "Give an email address, or insert one field that holds one."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Give it a name."
+msgstr "Give it a name."
+
+#: src/email-editor/rich-text.tsx
+msgid "Give the button its words and a link to open."
+msgstr "Give the button its words and a link to open."
+
+#: src/email-step/check.ts
+msgid "Give the email a subject."
+msgstr "Give the email a subject."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Give the template a name."
+msgstr "Give the template a name."
+
+#: src/email-editor/rules.ts
+msgid "Green"
+msgstr "Green"
+
+#: src/email-editor/rules.ts
+msgid "Grey"
+msgstr "Grey"
+
+#: src/email-editor/rich-text.tsx
+msgid "Heading {level}"
+msgstr "Heading {level}"
+
+#: src/email-step/rules.ts
+msgid "Held for quiet hours, a daily limit or the sending pace."
+msgstr "Held for quiet hours, a daily limit or the sending pace."
+
+#: src/email-editor/rich-text.tsx
+msgid "Highlight"
+msgstr "Highlight"
+
+#: src/email-step/rules.ts
+msgid "holds a copy"
+msgstr "holds a copy"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-editor/field-picker.tsx
+#: src/email-step/panel.tsx
+msgid "Insert a field"
+msgstr "Insert a field"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Insert a field into the subject"
+msgstr "Insert a field into the subject"
+
+#: src/email-step/panel.tsx
+msgid "Insert a field into: {label}"
+msgstr "Insert a field into: {label}"
+
+#: src/email-step/panel.tsx
+msgid "Insert a field into: {name}"
+msgstr "Insert a field into: {name}"
+
+#: src/email-step/panel.tsx
+msgid "Insert a field into: Message"
+msgstr "Insert a field into: Message"
+
+#: src/email-editor/rich-text.tsx
+msgid "Insert an unsubscribe link"
+msgstr "Insert an unsubscribe link"
+
+#: src/email-editor/rich-text.tsx
+msgid "Insert button"
+msgstr "Insert button"
+
+#: src/email-editor/rich-text.tsx
+msgid "Insert picture"
+msgstr "Insert picture"
+
+#: src/email-editor/rich-text.tsx
+msgid "Italic"
+msgstr "Italic"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Keep editing"
+msgstr "Keep editing"
+
+#: src/email-step/rules.ts
+msgid "Last 30 days"
+msgstr "Last 30 days"
+
+#: src/email-step/rules.ts
+msgid "Last 7 days"
+msgstr "Last 7 days"
+
+#: src/email-step/rules.ts
+msgid "Last 90 days"
+msgstr "Last 90 days"
+
+#: src/email-step/panel.tsx
+msgid "Leave this empty to use the template's own subject."
+msgstr "Leave this empty to use the template's own subject."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Leave without saving?"
+msgstr "Leave without saving?"
+
+#: src/email-editor/rich-text.tsx
+msgid "Line height"
+msgstr "Line height"
+
+#: src/email-editor/rich-text.tsx
+msgid "Line height: {height}"
+msgstr "Line height: {height}"
+
+#: src/email-editor/rich-text.tsx
+msgid "Line height: normal"
+msgstr "Line height: normal"
+
+#: src/email-editor/rich-text.tsx
+msgid "Link"
+msgstr "Link"
+
+#: src/email-editor/rich-text.tsx
+msgid "Link address"
+msgstr "Link address"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-step/panel.tsx
+#: src/email-step/template-screen.tsx
+msgid "Loading the editor…"
+msgstr "Loading the editor…"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-step/panel.tsx
+msgid "Loading the preview…"
+msgstr "Loading the preview…"
+
+#: src/email-step/statistics.tsx
+msgid "Loading the statistics…"
+msgstr "Loading the statistics…"
+
+#: src/search-picker.tsx
+msgid "Loading…"
+msgstr "Loading…"
+
+#: src/email-step/other-uses.tsx
+msgid "Looking for other workflows that use this template…"
+msgstr "Looking for other workflows that use this template…"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Mail apps that show no formatting show this instead. It is written from the formatted message each time you save."
+msgstr "Mail apps that show no formatting show this instead. It is written from the formatted message each time you save."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Mail apps that show no formatting show this instead. It no longer follows the formatted message: keep the two saying the same."
+msgstr "Mail apps that show no formatting show this instead. It no longer follows the formatted message: keep the two saying the same."
+
+#: src/email-step/panel.tsx
+msgid "Make a copy in this action"
+msgstr "Make a copy in this action"
+
+#: src/email-step/template-picker.tsx
+msgid "Manage templates"
+msgstr "Manage templates"
+
+#: src/email-step/rules.ts
+msgid "Marked an earlier email as spam"
+msgstr "Marked an earlier email as spam"
+
+#: src/email-step/panel.tsx
+msgid "Marketing"
+msgstr "Marketing"
+
+#: src/email-step/panel.tsx
+msgid "Marketing email needs marketing consent and ends with your address and an unsubscribe link. A transactional email, such as an appointment reminder, goes to people who agreed to booking notifications. Only a workflow that starts from an appointment can send one."
+msgstr "Marketing email needs marketing consent and ends with your address and an unsubscribe link. A transactional email, such as an appointment reminder, goes to people who agreed to booking notifications. Only a workflow that starts from an appointment can send one."
+
+#: src/email-step/panel.tsx
+msgid "Message"
+msgstr "Message"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Message (plain text)"
+msgstr "Message (plain text)"
+
+#: src/email-step/panel.tsx
+msgid "Message type"
+msgstr "Message type"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Mobile"
+msgstr "Mobile"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/email-step/panel.tsx
+msgid "name@example.com"
+msgstr "name@example.com"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "New template name"
+msgstr "New template name"
+
+#: src/email-editor/rich-text.tsx
+msgid "No colour"
+msgstr "No colour"
+
+#: src/email-step/rules.ts
+msgid "No consent to marketing email"
+msgstr "No consent to marketing email"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "No contacts match."
+msgstr "No contacts match."
+
+#: src/email-step/rules.ts
+msgid "No email address"
+msgstr "No email address"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-editor/field-picker.tsx
+#: src/email-step/panel.tsx
+msgid "No fields match."
+msgstr "No fields match."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "No folder"
+msgstr "No folder"
+
+#: src/email-editor/rich-text.tsx
+msgid "No highlight"
+msgstr "No highlight"
+
+#: src/email-step/panel.tsx
+msgid "No mailbox is connected"
+msgstr "No mailbox is connected"
+
+#: src/email-step/other-uses.tsx
+msgid "No other workflow action uses this template."
+msgstr "No other workflow action uses this template."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "No send can fill in {unknownList}. A send stops at a field it can't fill in."
+msgstr "No send can fill in {unknownList}. A send stops at a field it can't fill in."
+
+#: src/email-editor/rich-text.tsx
+msgid "No send can fill this field in here."
+msgstr "No send can fill this field in here."
+
+#: src/email-step/template-picker.tsx
+msgid "No templates match."
+msgstr "No templates match."
+
+#: src/email-step/rules.ts
+msgid "No time zone to keep quiet hours by"
+msgstr "No time zone to keep quiet hours by"
+
+#: src/email-step/rules.ts
+msgid "No unsubscribe link could be made"
+msgstr "No unsubscribe link could be made"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Nobody: fields as written"
+msgstr "Nobody: fields as written"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Not filled in here: {missing}. Choose a contact to see their values."
+msgstr "Not filled in here: {missing}. Choose a contact to see their values."
+
+#: src/email-step/rules.ts
+msgid "Not measured"
+msgstr "Not measured"
+
+#: src/email-step/rules.ts
+msgid "Not tracked yet"
+msgstr "Not tracked yet"
+
+#: src/email-step/template-screen.tsx
+msgid "Not used in a workflow"
+msgstr "Not used in a workflow"
+
+#: src/email-editor/rich-text.tsx
+msgid "Numbered list"
+msgstr "Numbered list"
+
+#: src/email-step/rules.ts
+msgid "On the suppression list"
+msgstr "On the suppression list"
+
+#: src/email-step/panel.tsx
+msgid "One email address, or one field that holds one. Empty, replies go to the mailbox."
+msgstr "One email address, or one field that holds one. Empty, replies go to the mailbox."
+
+#: src/email-editor/rich-text.tsx
+#: src/email-step/panel.tsx
+msgid "Open in the editor"
+msgstr "Open in the editor"
+
+#: src/email-step/rules.ts
+msgid "Opened"
+msgstr "Opened"
+
+#: src/email-editor/rules.ts
+msgid "Orange"
+msgstr "Orange"
+
+#: src/email-step/other-uses.tsx
+msgid "Other workflow actions that use this template"
+msgstr "Other workflow actions that use this template"
+
+#: src/email-editor/rich-text.tsx
+msgid "Paragraph"
+msgstr "Paragraph"
+
+#: src/email-editor/rich-text.tsx
+msgid "Paragraph style"
+msgstr "Paragraph style"
+
+#: src/email-editor/rich-text.tsx
+msgid "Picture"
+msgstr "Picture"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-step/template-picker.tsx
+#: src/email-step/template-screen.tsx
+msgid "Plain text"
+msgstr "Plain text"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Plain text: sent exactly as written, with merge fields filled in."
+msgstr "Plain text: sent exactly as written, with merge fields filled in."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Plain-text part"
+msgstr "Plain-text part"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Preview"
+msgstr "Preview"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-step/panel.tsx
+msgid "Preview of the email"
+msgstr "Preview of the email"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Preview text"
+msgstr "Preview text"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-step/panel.tsx
+msgid "Preview text (optional)"
+msgstr "Preview text (optional)"
+
+#: src/email-step/panel.tsx
+msgid "Preview with a contact…"
+msgstr "Preview with a contact…"
+
+#: src/email-editor/rules.ts
+msgid "Purple"
+msgstr "Purple"
+
+#: src/email-step/panel.tsx
+msgid "Quick compose"
+msgstr "Quick compose"
+
+#: src/email-step/rules.ts
+msgid "Reached this action"
+msgstr "Reached this action"
+
+#: src/email-editor/rules.ts
+msgid "Red"
+msgstr "Red"
+
+#: src/email-editor/rich-text.tsx
+msgid "Redo"
+msgstr "Redo"
+
+#: src/email-step/panel.tsx
+msgid "Remove {address}"
+msgstr "Remove {address}"
+
+#: src/email-step/panel.tsx
+msgid "Remove {name}"
+msgstr "Remove {name}"
+
+#: src/email-editor/rich-text.tsx
+msgid "Remove link"
+msgstr "Remove link"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Rename"
+msgstr "Rename"
+
+#: src/email-step/panel.tsx
+msgid "Replace with a template"
+msgstr "Replace with a template"
+
+#: src/email-step/panel.tsx
+msgid "Reply-To"
+msgstr "Reply-To"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Save"
+msgstr "Save"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Save as new template"
+msgstr "Save as new template"
+
+#: src/email-step/panel.tsx
+msgid "Save puts the email into this action. Save the action, then the workflow, to keep it."
+msgstr "Save puts the email into this action. Save the action, then the workflow, to keep it."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Save template"
+msgstr "Save template"
+
+#: src/email-step/panel.tsx
+msgid "Save the action to link it. After that, the template can be edited from here."
+msgstr "Save the action to link it. After that, the template can be edited from here."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Saved “{newName}” as a new template. This email is unchanged."
+msgstr "Saved “{newName}” as a new template. This email is unchanged."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Saved."
+msgstr "Saved."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/email-step/template-picker.tsx
+msgid "Search by name or subject"
+msgstr "Search by name or subject"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Search contacts"
+msgstr "Search contacts"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-editor/field-picker.tsx
+#: src/email-step/panel.tsx
+msgid "Search fields"
+msgstr "Search fields"
+
+#: src/email-step/panel.tsx
+msgid "Select existing template"
+msgstr "Select existing template"
+
+#: src/email-step/rules.ts
+msgid "sends it as it is"
+msgstr "sends it as it is"
+
+#: src/email-step/rules.ts
+msgid "Sent"
+msgstr "Sent"
+
+#: src/search-picker.tsx
+msgid "Showing {shownCount} of {all}. Type to narrow the list."
+msgstr "Showing {shownCount} of {all}. Type to narrow the list."
+
+#: src/email-step/template-picker.tsx
+msgid "Showing the first {shown} templates. Type more of the name or subject to find the rest."
+msgstr "Showing the first {shown} templates. Type more of the name or subject to find the rest."
+
+#: src/email-step/template-picker.tsx
+msgid "Showing the first {shown} templates. Type to search them all."
+msgstr "Showing the first {shown} templates. Type to search them all."
+
+#: src/email-step/rules.ts
+msgid "Skipped"
+msgstr "Skipped"
+
+#: src/email-step/panel.tsx
+msgid "Some mail apps show this after the subject."
+msgstr "Some mail apps show this after the subject."
+
+#: src/email-step/panel.tsx
+msgid "Some mail apps show this after the subject. Empty, the template's own is used; a plain-text template has none."
+msgstr "Some mail apps show this after the subject. Empty, the template's own is used; a plain-text template has none."
+
+#: src/email-step/tabs.tsx
+msgid "Statistics"
+msgstr "Statistics"
+
+#: src/email-editor/rich-text.tsx
+msgid "Strikethrough"
+msgstr "Strikethrough"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-step/panel.tsx
+msgid "Subject"
+msgstr "Subject"
+
+#: src/email-step/panel.tsx
+msgid "Subject (optional)"
+msgstr "Subject (optional)"
+
+#: src/email-step/panel.tsx
+msgid "Sync edits to template"
+msgstr "Sync edits to template"
+
+#: src/email-step/panel.tsx
+msgid "Sync with the template?"
+msgstr "Sync with the template?"
+
+#: src/email-step/panel.tsx
+msgid "Syncing with “{templateName}”: every send uses the template as it is then."
+msgstr "Syncing with “{templateName}”: every send uses the template as it is then."
+
+#: src/email-step/rules.ts
+msgid "syncs with it"
+msgstr "syncs with it"
+
+#: src/email-step/panel.tsx
+msgid "Template “{createdName}” saved, and copied into this action."
+msgstr "Template “{createdName}” saved, and copied into this action."
+
+#: src/email-editor/rich-text.tsx
+msgid "Text colour"
+msgstr "Text colour"
+
+#: src/email-step/panel.tsx
+msgid "That address is already listed."
+msgstr "That address is already listed."
+
+#: src/email-step/rules.ts
+msgid "The contact was deleted"
+msgstr "The contact was deleted"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "The email as it is written"
+msgstr "The email as it is written"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "The email wasn't saved. Check your connection and try again."
+msgstr "The email wasn't saved. Check your connection and try again."
+
+#: src/search-picker.tsx
+msgid "The list couldn't be loaded."
+msgstr "The list couldn't be loaded."
+
+#: src/email-step/rules.ts
+msgid "The mailbox wasn't available"
+msgstr "The mailbox wasn't available"
+
+#: src/email-step/other-uses.tsx
+msgid "The other workflows that use this template couldn't be listed."
+msgstr "The other workflows that use this template couldn't be listed."
+
+#: src/email-step/template-screen.tsx
+msgid "The plain text is now formatted content. It stays plain text until you save."
+msgstr "The plain text is now formatted content. It stays plain text until you save."
+
+#: src/email-step/preview.tsx
+msgid "The preview couldn't be loaded. Check your connection and try again."
+msgstr "The preview couldn't be loaded. Check your connection and try again."
+
+#: src/email-step/statistics.tsx
+msgid "The statistics couldn't be loaded. Check your connection and try again."
+msgstr "The statistics couldn't be loaded. Check your connection and try again."
+
+#: src/email-step/panel.tsx
+msgid "The template couldn't be read. Check your connection and try again."
+msgstr "The template couldn't be read. Check your connection and try again."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "The template wasn't saved. Check your connection and try again."
+msgstr "The template wasn't saved. Check your connection and try again."
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-editor/field-picker.tsx
+#: src/email-step/panel.tsx
+msgid "There are no fields to insert."
+msgstr "There are no fields to insert."
+
+#: src/email-step/template-picker.tsx
+msgid "There are no templates yet."
+msgstr "There are no templates yet."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "There is no message to preview yet."
+msgstr "There is no message to preview yet."
+
+#: src/email-step/panel.tsx
+msgid "These files are over 15 MB together, which is the most one email can carry. Remove one."
+msgstr "These files are over 15 MB together, which is the most one email can carry. Remove one."
+
+#: src/email-step/panel.tsx
+msgid "This action holds its own copy of “{templateName}”. A later edit to the template doesn't change it."
+msgstr "This action holds its own copy of “{templateName}”. A later edit to the template doesn't change it."
+
+#: src/email-step/panel.tsx
+msgid "This action sends “{templateName}” as the template is at each send."
+msgstr "This action sends “{templateName}” as the template is at each send."
+
+#: src/email-step/panel.tsx
+msgid "This action syncs with the template “{syncedName}”. Saving here changes the template, for every workflow action that syncs with it, and saves this workflow's draft."
+msgstr "This action syncs with the template “{syncedName}”. Saving here changes the template, for every workflow action that syncs with it, and saves this workflow's draft."
+
+#: src/email-step/panel.tsx
+msgid "This action's own email is replaced by “{templateName}” as the template is now. The template itself isn't changed. Who the email is from, its Cc, Bcc, attachments and your own subject stay."
+msgstr "This action's own email is replaced by “{templateName}” as the template is now. The template itself isn't changed. Who the email is from, its Cc, Bcc, attachments and your own subject stay."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "This email has changes that aren't saved. Close without them?"
+msgstr "This email has changes that aren't saved. Close without them?"
+
+#: src/email-step/panel.tsx
+msgid "Transactional: about the appointment they booked"
+msgstr "Transactional: about the appointment they booked"
+
+#: src/email-step/panel.tsx
+msgid "Trigger links"
+msgstr "Trigger links"
+
+#: src/email-step/preview.tsx
+#: src/email-step/statistics.tsx
+#: src/search-picker.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/email-step/panel.tsx
+msgid "Turn on sync"
+msgstr "Turn on sync"
+
+#: src/email-editor/rich-text.tsx
+msgid "Underline"
+msgstr "Underline"
+
+#: src/email-editor/rich-text.tsx
+msgid "Undo"
+msgstr "Undo"
+
+#: src/email-editor/rich-text.tsx
+msgid "Unsubscribe"
+msgstr "Unsubscribe"
+
+#: src/email-step/rules.ts
+msgid "Unsubscribed"
+msgstr "Unsubscribed"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Untitled email"
+msgstr "Untitled email"
+
+#: src/email-step/panel.tsx
+msgid "Up to {mostFiles} files from Media Storage, 15 MB together."
+msgstr "Up to {mostFiles} files from Media Storage, 15 MB together."
+
+#: src/email-editor/rich-text.tsx
+msgid "Update button"
+msgstr "Update button"
+
+#: src/email-editor/rich-text.tsx
+msgid "Update picture"
+msgstr "Update picture"
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Views of the email"
+msgstr "Views of the email"
+
+#: src/email-step/rules.ts
+msgid "Waiting to send"
+msgstr "Waiting to send"
+
+#: src/email-step/panel.tsx
+msgid "While this is on, the action holds no email of its own: every send uses the template as it is then. An edit to the template reaches this action, and an edit made here is an edit to the template. Turning it off copies the template into this action when you save it."
+msgstr "While this is on, the action holds no email of its own: every send uses the template as it is then. An edit to the template reaches this action, and an edit made here is an edit to the template. Turning it off copies the template into this action when you save it."
+
+#: src/email-step/statistics.tsx
+msgid "Why emails were skipped"
+msgstr "Why emails were skipped"
+
+#: src/email-editor/editor-dialog.tsx
+#: src/email-editor/rich-text.tsx
+msgid "Width"
+msgstr "Width"
+
+#: src/email-step/template-screen.tsx
+msgid "Workflows that sync with this template, or send it by name, send what you save here from then on. Workflow actions that hold their own copy don't change."
+msgstr "Workflows that sync with this template, or send it by name, send what you save here from then on. Workflow actions that hold their own copy don't change."
+
+#: src/email-step/check.ts
+msgid "Write the message, or choose a template."
+msgstr "Write the message, or choose a template."
+
+#: src/email-editor/editor-dialog.tsx
+msgid "Write the plain-text part myself"
+msgstr "Write the plain-text part myself"
+
+#: src/email-editor/rules.ts
+msgid "Yellow"
+msgstr "Yellow"
+
+#: src/email-step/panel.tsx
+msgid "Your mailbox: {onlyMailboxName}"
+msgstr "Your mailbox: {onlyMailboxName}"

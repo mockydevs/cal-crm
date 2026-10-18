@@ -1,0 +1,19 @@
+# Only the source goes into the build: everything below is either rebuilt inside the
+# image or has no place in it.
+**/node_modules
+**/dist
+**/.turbo
+**/coverage
+**/reports
+**/playwright-report
+**/test-results
+**/*.tsbuildinfo
+.git
+.github
+design
+docs
+# Environment files hold secrets; configuration reaches the container at run time.
+.env
+.env.*
+!.env.example
+install.env

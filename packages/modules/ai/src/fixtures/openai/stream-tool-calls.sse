@@ -1,0 +1,16 @@
+data: {"id":"chatcmpl-fixture-stream-tools","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[{"index":0,"delta":{"role":"assistant","content":null},"logprobs":null,"finish_reason":null}],"usage":null}
+
+data: {"id":"chatcmpl-fixture-stream-tools","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"id":"call_fixture0001","type":"function","function":{"name":"find_contacts","arguments":""}}]},"logprobs":null,"finish_reason":null}],"usage":null}
+
+data: {"id":"chatcmpl-fixture-stream-tools","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":"{\"query\":"}}]},"logprobs":null,"finish_reason":null}],"usage":null}
+
+data: {"id":"chatcmpl-fixture-stream-tools","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":"\"wedding in June\","}}]},"logprobs":null,"finish_reason":null}],"usage":null}
+
+data: {"id":"chatcmpl-fixture-stream-tools","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":"\"limit\":5}"}},{"index":1,"id":"call_fixture0002","type":"function","function":{"name":"count_deals","arguments":""}}]},"logprobs":null,"finish_reason":null}],"usage":null}
+
+data: {"id":"chatcmpl-fixture-stream-tools","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[{"index":0,"delta":{},"logprobs":null,"finish_reason":"tool_calls"}],"usage":null}
+
+data: {"id":"chatcmpl-fixture-stream-tools","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[],"usage":{"prompt_tokens":82,"completion_tokens":17,"total_tokens":99,"prompt_tokens_details":{"cached_tokens":64}}}
+
+data: [DONE]
+

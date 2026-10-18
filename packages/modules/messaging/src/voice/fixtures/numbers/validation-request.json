@@ -1,0 +1,9 @@
+{
+  "$source": "Built by hand from the OpenAPI schema named in \"schema\" (twilio-oai, spec/json/twilio_api_v2010.json, commit 141f1201b55abcc16b3aa8089e71c4a927326975, unchanged on main at 2026-10-15) and cross-checked with twilio@6.1.2. Not captured from any account: every SID is made up and every number is a 555 example.",
+  "schema": "api.v2010.account.validation_request (CreateValidationRequest 200)",
+  "account_sid": "AC00000000000000000000000000000001",
+  "call_sid": "CA00000000000000000000000000000301",
+  "friendly_name": "Owner cell",
+  "phone_number": "+12025550125",
+  "validation_code": "123456"
+}

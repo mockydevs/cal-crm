@@ -1,0 +1,863 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-17 21:24+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/ai-settings-providers.tsx
+msgid "{agency}’s {name}"
+msgstr "{agency}’s {name}"
+
+#: src/ai-settings-providers.tsx
+msgid "{agency}’s keys"
+msgstr "{agency}’s keys"
+
+#: src/ai-settings.tsx
+msgid "{agencyName} pays the provider and bills you for what you use."
+msgstr "{agencyName} pays the provider and bills you for what you use."
+
+#: src/ai-settings.tsx
+msgid "{agencyName}’s keys"
+msgstr "{agencyName}’s keys"
+
+#: src/ai-settings.tsx
+msgid "{amount} this month"
+msgstr "{amount} this month"
+
+#: src/ai-settings.tsx
+msgid "{name} (no key)"
+msgstr "{name} (no key)"
+
+#: src/ai-settings-providers.tsx
+msgid "{name} API key"
+msgstr "{name} API key"
+
+#: src/ai-settings.tsx
+msgid "{seconds} seconds"
+msgstr "{seconds} seconds"
+
+#: src/ai-settings.tsx
+msgid "{spentText} of {limitText}"
+msgstr "{spentText} of {limitText}"
+
+#: src/ai-settings.tsx
+msgid "{stored, plural, one {What was sent and answered is kept for # day, always with phone numbers and email addresses hidden, then cleared.} other {What was sent and answered is kept for # days, always with phone numbers and email addresses hidden, then cleared.}}"
+msgstr "{stored, plural, one {What was sent and answered is kept for # day, always with phone numbers and email addresses hidden, then cleared.} other {What was sent and answered is kept for # days, always with phone numbers and email addresses hidden, then cleared.}}"
+
+#: src/ai-settings.tsx
+msgid "{unknown, plural, one {# call this month has no known cost and isn't in this total: its model has no price, or the server reported no usage.} other {# calls this month have no known cost and aren't in this total: their models have no price, or the server reported no usage.}}"
+msgstr "{unknown, plural, one {# call this month has no known cost and isn't in this total: its model has no price, or the server reported no usage.} other {# calls this month have no known cost and aren't in this total: their models have no price, or the server reported no usage.}}"
+
+#: src/ai-settings.tsx
+msgid "{why} The backup model took over."
+msgstr "{why} The backup model took over."
+
+#: src/ai-settings.tsx
+msgid "50"
+msgstr "50"
+
+#: src/ai-settings-rules.ts
+msgid "A price is set for the whole agency, and it can be zero for a server of your own. Or choose \"Keep going\" at the limit."
+msgstr "A price is set for the whole agency, and it can be zero for a server of your own. Or choose \"Keep going\" at the limit."
+
+#: src/ai-settings-providers.tsx
+msgid "Add {name}"
+msgstr "Add {name}"
+
+#: src/ai-settings-providers.tsx
+msgid "Add {name} key"
+msgstr "Add {name} key"
+
+#: src/ai-settings-agency.tsx
+msgid "Add a price"
+msgstr "Add a price"
+
+#: src/ai-settings-rules.ts
+msgid "Add credit or fix the payment with the provider, then test again."
+msgstr "Add credit or fix the payment with the provider, then test again."
+
+#: src/ai-settings-providers.tsx
+msgid "Add server"
+msgstr "Add server"
+
+#: src/ai-settings-rules.ts
+msgid "Add the model's name."
+msgstr "Add the model's name."
+
+#: src/ai-settings-providers.tsx
+msgid "added by {who} on {added}"
+msgstr "added by {who} on {added}"
+
+#: src/ai-settings-providers.tsx
+msgid "added on {added}"
+msgstr "added on {added}"
+
+#: src/ai-settings.tsx
+msgid "AI is turned off for this business. Nothing is sent to any provider until you turn it back on under Privacy."
+msgstr "AI is turned off for this business. Nothing is sent to any provider until you turn it back on under Privacy."
+
+#: src/ai-settings-agency.tsx
+msgid "AI models"
+msgstr "AI models"
+
+#: src/ai-settings.tsx
+msgid "AI Models"
+msgstr "AI Models"
+
+#: src/ai-settings.tsx
+msgid "AI spending this month"
+msgstr "AI spending this month"
+
+#: src/ai-settings-rules.ts
+msgid "An address must be a public https one, or a model server that whoever runs the install has listed in AI_LOCAL_SERVERS with the same host and port."
+msgstr "An address must be a public https one, or a model server that whoever runs the install has listed in AI_LOCAL_SERVERS with the same host and port."
+
+#: src/ai-settings.tsx
+msgid "Answered"
+msgstr "Answered"
+
+#: src/ai-settings-rules.ts
+msgid "Anthropic"
+msgstr "Anthropic"
+
+#: src/ai-settings-providers.tsx
+msgid "API key (if the server needs one)"
+msgstr "API key (if the server needs one)"
+
+#: src/ai-settings-providers.tsx
+msgid "As OpenAI lists it"
+msgstr "As OpenAI lists it"
+
+#: src/ai-settings-agency.tsx
+msgid "As the provider lists it"
+msgstr "As the provider lists it"
+
+#: src/ai-settings-providers.tsx
+msgid "As your server lists it"
+msgstr "As your server lists it"
+
+#: src/ai-settings.tsx
+msgid "Backup model"
+msgstr "Backup model"
+
+#: src/ai-settings-rules.ts
+msgid "Briefings and reports"
+msgstr "Briefings and reports"
+
+#: src/ai-settings-rules.ts
+msgid "Building automations"
+msgstr "Building automations"
+
+#: src/ai-settings-agency.tsx
+msgid "Cache reads {read} · cache writes {write} for 5 minutes, {write1h} for 1 hour"
+msgstr "Cache reads {read} · cache writes {write} for 5 minutes, {write1h} for 1 hour"
+
+#: src/ai-settings-agency.tsx
+msgid "Cache reads {read} · cache writes {write} for 5 minutes, no 1-hour price"
+msgstr "Cache reads {read} · cache writes {write} for 5 minutes, no 1-hour price"
+
+#: src/ai-settings-agency.tsx
+msgid "Cache reads, in US dollars for a million tokens"
+msgstr "Cache reads, in US dollars for a million tokens"
+
+#: src/ai-settings-agency.tsx
+msgid "Cache writes for 1 hour, in US dollars for a million tokens"
+msgstr "Cache writes for 1 hour, in US dollars for a million tokens"
+
+#: src/ai-settings-agency.tsx
+msgid "Cache writes for 5 minutes, in US dollars for a million tokens"
+msgstr "Cache writes for 5 minutes, in US dollars for a million tokens"
+
+#: src/ai-settings-agency.tsx
+#: src/ai-settings-providers.tsx
+#: src/ai-settings.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/ai-settings-providers.tsx
+msgid "Change {name}"
+msgstr "Change {name}"
+
+#: src/ai-settings-agency.tsx
+msgid "Change a price"
+msgstr "Change a price"
+
+#: src/ai-settings.tsx
+msgid "Change limit"
+msgstr "Change limit"
+
+#: src/ai-settings-providers.tsx
+msgid "Change the key, the address or the model first."
+msgstr "Change the key, the address or the model first."
+
+#: src/ai-settings-agency.tsx
+msgid "Change the price of {name}"
+msgstr "Change the price of {name}"
+
+#: src/ai-settings-rules.ts
+msgid "Check that the address ends where the server's API starts. For Ollama that is /v1."
+msgstr "Check that the address ends where the server's API starts. For Ollama that is /v1."
+
+#: src/ai-settings-rules.ts
+msgid "Check that the whole key was copied and that it hasn't been revoked, then replace it."
+msgstr "Check that the whole key was copied and that it hasn't been revoked, then replace it."
+
+#: src/ai-settings-rules.ts
+msgid "Check the model's name: it must be exactly as the provider lists it. For your own server, also check the address."
+msgstr "Check the model's name: it must be exactly as the provider lists it. For your own server, also check the address."
+
+#: src/ai-settings-rules.ts
+msgid "Check the model's name. If you set a spending limit in the provider's own account, it may have been reached."
+msgstr "Check the model's name. If you set a spending limit in the provider's own account, it may have been reached."
+
+#: src/ai-settings.tsx
+msgid "Choose the AI providers this business uses and which model does each job. Keys are stored encrypted on this server and are only ever sent to the provider they belong to."
+msgstr "Choose the AI providers this business uses and which model does each job. Keys are stored encrypted on this server and are only ever sent to the provider they belong to."
+
+#: src/ai-settings-agency.tsx
+msgid "Claude only. Left empty, this model never keeps its instructions cached for an hour, only for 5 minutes."
+msgstr "Claude only. Left empty, this model never keeps its instructions cached for an hour, only for 5 minutes."
+
+#: src/ai-settings-providers.tsx
+msgid "Connected"
+msgstr "Connected"
+
+#: src/ai-settings-rules.ts
+msgid "Connection test"
+msgstr "Connection test"
+
+#: src/ai-settings.tsx
+msgid "Cost {cost}"
+msgstr "Cost {cost}"
+
+#: src/ai-settings.tsx
+msgid "Cost unknown"
+msgstr "Cost unknown"
+
+#: src/ai-settings-agency.tsx
+msgid "Costs are worked out from these prices, in US dollars for a million tokens. A model with no price has no known cost, and is paused in any business whose limit pauses AI. For a model that runs on your own server, enter zero."
+msgstr "Costs are worked out from these prices, in US dollars for a million tokens. A model with no price has no known cost, and is paused in any business whose limit pauses AI. For a model that runs on your own server, enter zero."
+
+#: src/ai-settings.tsx
+msgid "Days to keep the log"
+msgstr "Days to keep the log"
+
+#: src/ai-settings-rules.ts
+msgid "Drafts replies in Conversations and campaign emails"
+msgstr "Drafts replies in Conversations and campaign emails"
+
+#: src/ai-settings.tsx
+msgid "Enter a whole number of days from 1 to {most}."
+msgstr "Enter a whole number of days from 1 to {most}."
+
+#: src/ai-settings-providers.tsx
+msgid "For a model server on your own network, ask whoever runs this install to add <0>{listed}</0> to the setting AI_LOCAL_SERVERS and restart. Then save this address again, with the same host and port."
+msgstr "For a model server on your own network, ask whoever runs this install to add <0>{listed}</0> to the setting AI_LOCAL_SERVERS and restart. Then save this address again, with the same host and port."
+
+#: src/ai-settings-providers.tsx
+msgid "For a model server on your own network, ask whoever runs this install to add its host and port to the setting AI_LOCAL_SERVERS and restart, then save the address again."
+msgstr "For a model server on your own network, ask whoever runs this install to add its host and port to the setting AI_LOCAL_SERVERS and restart, then save the address again."
+
+#: src/ai-settings.tsx
+msgid "For replies to messages in Conversations. A contact can have a setting of their own, chosen in their conversation."
+msgstr "For replies to messages in Conversations. A contact can have a setting of their own, chosen in their conversation."
+
+#: src/ai-settings-providers.tsx
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+#: src/ai-settings.tsx
+msgid "Hide phone numbers and email addresses from AI"
+msgstr "Hide phone numbers and email addresses from AI"
+
+#: src/ai-settings.tsx
+msgid "How much your assistant does on its own"
+msgstr "How much your assistant does on its own"
+
+#: src/ai-settings-providers.tsx
+msgid "http://ollama:11434/v1"
+msgstr "http://ollama:11434/v1"
+
+#: src/ai-settings.tsx
+msgid "In progress"
+msgstr "In progress"
+
+#: src/ai-settings-agency.tsx
+msgid "Input {input} · output {output} for a million tokens"
+msgstr "Input {input} · output {output} for a million tokens"
+
+#: src/ai-settings-agency.tsx
+msgid "Input, in US dollars for a million tokens"
+msgstr "Input, in US dollars for a million tokens"
+
+#: src/ai-settings.tsx
+msgid "It failed."
+msgstr "It failed."
+
+#: src/ai-settings-providers.tsx
+msgid "It is stored encrypted and can't be shown again, here or anywhere else."
+msgstr "It is stored encrypted and can't be shown again, here or anywhere else."
+
+#: src/ai-settings-providers.tsx
+msgid "It wasn't removed. Check your connection and try again."
+msgstr "It wasn't removed. Check your connection and try again."
+
+#: src/ai-settings-providers.tsx
+msgid "It wasn't saved. Check your connection and try again."
+msgstr "It wasn't saved. Check your connection and try again."
+
+#: src/ai-settings.tsx
+msgid "Keep a log of AI requests"
+msgstr "Keep a log of AI requests"
+
+#: src/ai-settings.tsx
+msgid "Keep going and tell me"
+msgstr "Keep going and tell me"
+
+#: src/ai-settings-providers.tsx
+msgid "Key ending {ending}"
+msgstr "Key ending {ending}"
+
+#: src/ai-settings-providers.tsx
+msgid "Key saved"
+msgstr "Key saved"
+
+#: src/ai-settings-agency.tsx
+msgid "Keys added here serve every business that chooses to use {agencyName}’s keys. Each business picks its models, its spending limit and its privacy settings in its own Settings."
+msgstr "Keys added here serve every business that chooses to use {agencyName}’s keys. Each business picks its models, its spending limit and its privacy settings in its own Settings."
+
+#: src/ai-settings-rules.ts
+msgid "Leave out everything after the path: no ? and no #."
+msgstr "Leave out everything after the path: no ? and no #."
+
+#: src/ai-settings-rules.ts
+msgid "Leave the user name and password out of the address. If the server needs a key, it goes in the key field."
+msgstr "Leave the user name and password out of the address. If the server needs a key, it goes in the key field."
+
+#: src/ai-settings-providers.tsx
+msgid "Leave this empty to keep the key that is saved now."
+msgstr "Leave this empty to keep the key that is saved now."
+
+#: src/ai-settings-agency.tsx
+msgid "Left empty, a cache write costs what fresh input does."
+msgstr "Left empty, a cache write costs what fresh input does."
+
+#: src/ai-settings-agency.tsx
+msgid "Left empty, cached input costs what fresh input does."
+msgstr "Left empty, cached input costs what fresh input does."
+
+#: src/ai-settings-agency.tsx
+#: src/ai-settings.tsx
+msgid "Loading AI settings…"
+msgstr "Loading AI settings…"
+
+#: src/ai-settings-providers.tsx
+msgid "Loading providers…"
+msgstr "Loading providers…"
+
+#: src/ai-settings.tsx
+msgid "Loading this month's spending…"
+msgstr "Loading this month's spending…"
+
+#: src/ai-settings.tsx
+msgid "Loading this setting…"
+msgstr "Loading this setting…"
+
+#: src/ai-settings-agency.tsx
+#: src/ai-settings-providers.tsx
+msgid "Model name"
+msgstr "Model name"
+
+#: src/ai-settings-agency.tsx
+msgid "Model prices"
+msgstr "Model prices"
+
+#: src/ai-settings.tsx
+msgid "Monthly limit"
+msgstr "Monthly limit"
+
+#: src/ai-settings.tsx
+msgid "Monthly limit in US dollars"
+msgstr "Monthly limit in US dollars"
+
+#: src/ai-settings-providers.tsx
+msgid "New {name} API key"
+msgstr "New {name} API key"
+
+#: src/ai-settings.tsx
+msgid "No backup"
+msgstr "No backup"
+
+#: src/ai-settings.tsx
+msgid "No calls yet. Test a provider to see the first one here."
+msgstr "No calls yet. Test a provider to see the first one here."
+
+#: src/ai-settings-providers.tsx
+msgid "No key needed"
+msgstr "No key needed"
+
+#: src/ai-settings.tsx
+msgid "No limit"
+msgstr "No limit"
+
+#: src/ai-settings-providers.tsx
+msgid "Not available in this version yet."
+msgstr "Not available in this version yet."
+
+#: src/ai-settings-providers.tsx
+msgid "Not connected"
+msgstr "Not connected"
+
+#: src/ai-settings-providers.tsx
+#: src/ai-settings.tsx
+msgid "Not tested yet"
+msgstr "Not tested yet"
+
+#: src/ai-settings-rules.ts
+msgid "Not tested: AI is turned off for this business."
+msgstr "Not tested: AI is turned off for this business."
+
+#: src/ai-settings-rules.ts
+msgid "Not tested: this model has no price, and your limit pauses AI, so no call was made."
+msgstr "Not tested: this model has no price, and your limit pauses AI, so no call was made."
+
+#: src/ai-settings-rules.ts
+msgid "Not tested: this month's AI spending limit has been reached, so no call was made."
+msgstr "Not tested: this month's AI spending limit has been reached, so no call was made."
+
+#: src/ai-settings-providers.tsx
+msgid "Not working"
+msgstr "Not working"
+
+#: src/ai-settings.tsx
+msgid "Nothing of what is sent or answered is kept. Each call's cost still is."
+msgstr "Nothing of what is sent or answered is kept. Each call's cost still is."
+
+#: src/ai-settings.tsx
+msgid "of {limitText} this month"
+msgstr "of {limitText} this month"
+
+#: src/ai-settings-providers.tsx
+msgid "Ollama, or any server that works like the OpenAI API"
+msgstr "Ollama, or any server that works like the OpenAI API"
+
+#: src/ai-settings-rules.ts
+msgid "OpenAI"
+msgstr "OpenAI"
+
+#: src/ai-settings-agency.tsx
+msgid "Output, in US dollars for a million tokens"
+msgstr "Output, in US dollars for a million tokens"
+
+#: src/ai-settings.tsx
+msgid "Pause AI and tell me"
+msgstr "Pause AI and tell me"
+
+#: src/ai-settings.tsx
+msgid "Paused automations with AI steps wait until you raise the limit. Costs are estimated from each provider's published prices, in US dollars."
+msgstr "Paused automations with AI steps wait until you raise the limit. Costs are estimated from each provider's published prices, in US dollars."
+
+#: src/ai-settings.tsx
+msgid "Privacy"
+msgstr "Privacy"
+
+#: src/ai-settings-agency.tsx
+msgid "Provider"
+msgstr "Provider"
+
+#: src/ai-settings-providers.tsx
+msgid "Providers"
+msgstr "Providers"
+
+#: src/ai-settings-rules.ts
+msgid "Raise the limit, then test again."
+msgstr "Raise the limit, then test again."
+
+#: src/ai-settings.tsx
+msgid "Recent calls"
+msgstr "Recent calls"
+
+#: src/ai-settings-providers.tsx
+msgid "Remove {name}"
+msgstr "Remove {name}"
+
+#: src/ai-settings-providers.tsx
+msgid "Remove {name} and destroy its key? Jobs that use its models will stop until you choose others."
+msgstr "Remove {name} and destroy its key? Jobs that use its models will stop until you choose others."
+
+#: src/ai-settings-providers.tsx
+msgid "Remove {name}? Jobs that use its models will stop until you choose others."
+msgstr "Remove {name}? Jobs that use its models will stop until you choose others."
+
+#: src/ai-settings.tsx
+msgid "Remove limit"
+msgstr "Remove limit"
+
+#: src/ai-settings-agency.tsx
+msgid "Remove the price of {name}"
+msgstr "Remove the price of {name}"
+
+#: src/ai-settings-providers.tsx
+msgid "Removing…"
+msgstr "Removing…"
+
+#: src/ai-settings-providers.tsx
+msgid "Replace {name} key"
+msgstr "Replace {name} key"
+
+#: src/ai-settings-rules.ts
+msgid "Replace the key."
+msgstr "Replace the key."
+
+#: src/ai-settings-rules.ts
+msgid "Replies and messages"
+msgstr "Replies and messages"
+
+#: src/ai-settings.tsx
+msgid "Requests go straight from this server to the provider you chose. Nothing passes through anyone else."
+msgstr "Requests go straight from this server to the provider you chose. Nothing passes through anyone else."
+
+#: src/ai-settings-providers.tsx
+msgid "Save and test"
+msgstr "Save and test"
+
+#: src/ai-settings.tsx
+msgid "Save days"
+msgstr "Save days"
+
+#: src/ai-settings.tsx
+msgid "Save limit"
+msgstr "Save limit"
+
+#: src/ai-settings-agency.tsx
+msgid "Save price"
+msgstr "Save price"
+
+#: src/ai-settings.tsx
+msgid "Saved."
+msgstr "Saved."
+
+#: src/ai-settings-agency.tsx
+#: src/ai-settings-providers.tsx
+#: src/ai-settings.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/ai-settings-providers.tsx
+msgid "Server address"
+msgstr "Server address"
+
+#: src/ai-settings-agency.tsx
+msgid "Set by your agency: {source}, on {checkedOn}"
+msgstr "Set by your agency: {source}, on {checkedOn}"
+
+#: src/ai-settings-agency.tsx
+msgid "Shipped with this version, from {source}, checked on {checkedOn}"
+msgstr "Shipped with this version, from {source}, checked on {checkedOn}"
+
+#: src/ai-settings-agency.tsx
+msgid "Shown beside the price, with today's date, so the next person knows."
+msgstr "Shown beside the price, with today's date, so the next person knows."
+
+#: src/ai-settings-providers.tsx
+msgid "Smaller models can struggle with bigger jobs like building automations. Every automation is checked before it can be published, whichever model wrote it."
+msgstr "Smaller models can struggle with bigger jobs like building automations. Every automation is checked before it can be published, whichever model wrote it."
+
+#: src/ai-settings.tsx
+msgid "Someone else changed these settings while you had them open. The latest are shown here: make your change again."
+msgstr "Someone else changed these settings while you had them open. The latest are shown here: make your change again."
+
+#: src/ai-settings-rules.ts
+msgid "Sorting and filling fields"
+msgstr "Sorting and filling fields"
+
+#: src/ai-settings.tsx
+msgid "Spending"
+msgstr "Spending"
+
+#: src/ai-settings-rules.ts
+msgid "Tags conversations, fills in fields and spots duplicates"
+msgstr "Tags conversations, fills in fields and spots duplicates"
+
+#: src/ai-settings.tsx
+msgid "Takes over when a model is down or busy"
+msgstr "Takes over when a model is down or busy"
+
+#: src/ai-settings-providers.tsx
+msgid "Test {name}"
+msgstr "Test {name}"
+
+#: src/ai-settings-rules.ts
+msgid "Test again in a moment. For your own server, check that it is running and that this install can reach it."
+msgstr "Test again in a moment. For your own server, check that it is running and that this install can reach it."
+
+#: src/ai-settings-rules.ts
+msgid "Test again. A model server of your own may still be loading the model."
+msgstr "Test again. A model server of your own may still be loading the model."
+
+#: src/ai-settings.tsx
+msgid "Tested"
+msgstr "Tested"
+
+#: src/ai-settings.tsx
+msgid "Tested means the model passed our tests for that job. You can pick any model you've connected."
+msgstr "Tested means the model passed our tests for that job. You can pick any model you've connected."
+
+#: src/ai-settings-providers.tsx
+msgid "Testing…"
+msgstr "Testing…"
+
+#: src/ai-settings-rules.ts
+msgid "That isn't a web address. It should look like https://models.example.com/v1."
+msgstr "That isn't a web address. It should look like https://models.example.com/v1."
+
+#: src/ai-settings-rules.ts
+msgid "The call was cut off before it finished."
+msgstr "The call was cut off before it finished."
+
+#: src/ai-settings.tsx
+msgid "The latest calls to a model, tests included. What was said in a call is not shown here."
+msgstr "The latest calls to a model, tests included. What was said in a call is not shown here."
+
+#: src/ai-settings.tsx
+msgid "The model declined"
+msgstr "The model declined"
+
+#: src/ai-settings.tsx
+msgid "The month is the calendar month, by the clock in UTC."
+msgstr "The month is the calendar month, by the clock in UTC."
+
+#: src/ai-settings-rules.ts
+msgid "The part of this install that does background work may not be running. Ask whoever runs the install, then test again."
+msgstr "The part of this install that does background work may not be running. Ask whoever runs the install, then test again."
+
+#: src/ai-settings-agency.tsx
+msgid "The price wasn't removed. Check your connection and try again."
+msgstr "The price wasn't removed. Check your connection and try again."
+
+#: src/ai-settings-agency.tsx
+msgid "The price wasn't saved. Check your connection and try again."
+msgstr "The price wasn't saved. Check your connection and try again."
+
+#: src/ai-settings-providers.tsx
+msgid "The provider accepted the key. No model was called, so this cost nothing; to try a real answer, press Test in a business's own settings."
+msgstr "The provider accepted the key. No model was called, so this cost nothing; to try a real answer, press Test in a business's own settings."
+
+#: src/ai-settings.tsx
+msgid "The provider bills {businessName} directly."
+msgstr "The provider bills {businessName} directly."
+
+#: src/ai-settings-rules.ts
+msgid "The provider didn't accept this key."
+msgstr "The provider didn't accept this key."
+
+#: src/ai-settings-rules.ts
+msgid "The provider has nothing by that name."
+msgstr "The provider has nothing by that name."
+
+#: src/ai-settings-rules.ts
+msgid "The provider is turning requests away: the key has reached a rate limit or the account's own spending cap."
+msgstr "The provider is turning requests away: the key has reached a rate limit or the account's own spending cap."
+
+#: src/ai-settings-rules.ts
+msgid "The provider refused the request."
+msgstr "The provider refused the request."
+
+#: src/ai-settings-rules.ts
+msgid "The provider says this account can't be charged: it has no credit, or a payment problem."
+msgstr "The provider says this account can't be charged: it has no credit, or a payment problem."
+
+#: src/ai-settings-rules.ts
+msgid "The provider took longer than 30 seconds to answer."
+msgstr "The provider took longer than 30 seconds to answer."
+
+#: src/ai-settings-agency.tsx
+msgid "The provider's pricing page, or \"runs on our own server\""
+msgstr "The provider's pricing page, or \"runs on our own server\""
+
+#: src/ai-settings-rules.ts
+msgid "The saved key couldn't be opened."
+msgstr "The saved key couldn't be opened."
+
+#: src/ai-settings-rules.ts
+msgid "The server answered, but not in the way the OpenAI API does."
+msgstr "The server answered, but not in the way the OpenAI API does."
+
+#: src/ai-settings-providers.tsx
+msgid "The test couldn't start. Check your connection and try again."
+msgstr "The test couldn't start. Check your connection and try again."
+
+#: src/ai-settings-rules.ts
+msgid "The test wasn't run within two minutes."
+msgstr "The test wasn't run within two minutes."
+
+#: src/ai-settings-providers.tsx
+msgid "These are managed in the agency's settings. You can use and test them, but not see or change them."
+msgstr "These are managed in the agency's settings. You can use and test them, but not see or change them."
+
+#: src/ai-settings.tsx
+msgid "They are replaced before a request is sent. This catches the usual ways of writing them, not every one."
+msgstr "They are replaced before a request is sent. This catches the usual ways of writing them, not every one."
+
+#: src/ai-settings.tsx
+msgid "This business's own keys"
+msgstr "This business's own keys"
+
+#: src/ai-settings.tsx
+msgid "This can't run yet: the keys this business uses have none for {name}. Add one under Providers, switch whose keys to use, or pick another model."
+msgstr "This can't run yet: the keys this business uses have none for {name}. Add one under Providers, switch whose keys to use, or pick another model."
+
+#: src/ai-settings-rules.ts
+msgid "This connection has no model to test with."
+msgstr "This connection has no model to test with."
+
+#: src/ai-settings-rules.ts
+msgid "This install can't call that address. It calls addresses that start with https://, and model servers that whoever runs the install has listed."
+msgstr "This install can't call that address. It calls addresses that start with https://, and model servers that whoever runs the install has listed."
+
+#: src/ai-settings-rules.ts
+msgid "This install can't call that port. It calls the standard https port, and model servers that whoever runs the install has listed."
+msgstr "This install can't call that port. It calls the standard https port, and model servers that whoever runs the install has listed."
+
+#: src/ai-settings-rules.ts
+msgid "This install isn't allowed to call that address."
+msgstr "This install isn't allowed to call that address."
+
+#: src/ai-settings.tsx
+msgid "This is paused: the model has no price, so its cost can't be held to your limit. Ask {agency} to set its price in the agency's AI settings (it can be zero for a server of your own), or choose \"Keep going\" when the limit is reached."
+msgstr "This is paused: the model has no price, so its cost can't be held to your limit. Ask {agency} to set its price in the agency's AI settings (it can be zero for a server of your own), or choose \"Keep going\" when the limit is reached."
+
+#: src/ai-settings.tsx
+msgid "this month"
+msgstr "this month"
+
+#: src/ai-settings.tsx
+msgid "This month's limit of {limitText} has been reached, so AI is paused. Raise the limit to carry on."
+msgstr "This month's limit of {limitText} has been reached, so AI is paused. Raise the limit to carry on."
+
+#: src/ai-settings.tsx
+msgid "This month's limit of {limitText} has been reached. AI keeps going, as you chose."
+msgstr "This month's limit of {limitText} has been reached. AI keeps going, as you chose."
+
+#: src/ai-settings-rules.ts
+msgid "This provider can't be used in this version yet."
+msgstr "This provider can't be used in this version yet."
+
+#: src/ai-settings-providers.tsx
+msgid "This test call cost {cost}."
+msgstr "This test call cost {cost}."
+
+#: src/ai-settings-providers.tsx
+msgid "This test call's cost is unknown: the model has no price."
+msgstr "This test call's cost is unknown: the model has no price."
+
+#: src/ai-settings-agency.tsx
+#: src/ai-settings-providers.tsx
+#: src/ai-settings.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/ai-settings.tsx
+msgid "Turn AI back on"
+msgstr "Turn AI back on"
+
+#: src/ai-settings-rules.ts
+msgid "Turn AI back on under Privacy, then test again."
+msgstr "Turn AI back on under Privacy, then test again."
+
+#: src/ai-settings.tsx
+msgid "Turn off AI for this business"
+msgstr "Turn off AI for this business"
+
+#: src/ai-settings-rules.ts
+msgid "Wait a minute and test again. If it keeps happening, check the limits on the provider's account."
+msgstr "Wait a minute and test again. If it keeps happening, check the limits on the provider's account."
+
+#: src/ai-settings-agency.tsx
+#: src/ai-settings.tsx
+msgid "We couldn't load the AI settings."
+msgstr "We couldn't load the AI settings."
+
+#: src/ai-settings-providers.tsx
+msgid "We couldn't load the providers."
+msgstr "We couldn't load the providers."
+
+#: src/ai-settings.tsx
+msgid "We couldn't load this month's spending."
+msgstr "We couldn't load this month's spending."
+
+#: src/ai-settings.tsx
+msgid "We couldn't load this setting."
+msgstr "We couldn't load this setting."
+
+#: src/ai-settings-rules.ts
+msgid "We couldn't reach the provider, or it was too busy to answer."
+msgstr "We couldn't reach the provider, or it was too busy to answer."
+
+#: src/ai-settings-providers.tsx
+msgid "We couldn't read the test's result."
+msgstr "We couldn't read the test's result."
+
+#: src/ai-settings.tsx
+msgid "When the limit is reached"
+msgstr "When the limit is reached"
+
+#: src/ai-settings-providers.tsx
+msgid "Where the server's API starts. A public address must start with https://. A server on your own network must first be listed by whoever runs this install."
+msgstr "Where the server's API starts. A public address must start with https://. A server on your own network must first be listed by whoever runs this install."
+
+#: src/ai-settings-agency.tsx
+msgid "Where this price comes from"
+msgstr "Where this price comes from"
+
+#: src/ai-settings.tsx
+msgid "Which model does each job"
+msgstr "Which model does each job"
+
+#: src/ai-settings.tsx
+msgid "Whose keys to use"
+msgstr "Whose keys to use"
+
+#: src/ai-settings-providers.tsx
+msgid "Working"
+msgstr "Working"
+
+#: src/ai-settings-providers.tsx
+msgid "Working · answered in {seconds} seconds"
+msgstr "Working · answered in {seconds} seconds"
+
+#: src/ai-settings-rules.ts
+msgid "Writes and changes automations when you ask"
+msgstr "Writes and changes automations when you ask"
+
+#: src/ai-settings-rules.ts
+msgid "Writes your Dashboard briefing and answers questions about your data"
+msgstr "Writes your Dashboard briefing and answers questions about your data"
+
+#: src/ai-settings-providers.tsx
+msgid "Yes, remove {name}"
+msgstr "Yes, remove {name}"
+
+#: src/ai-settings-agency.tsx
+#: src/ai-settings.tsx
+msgid "You need permission to manage AI settings."
+msgstr "You need permission to manage AI settings."
+
+#: src/ai-settings.tsx
+msgid "Your backup uses the same provider. Add a second provider so an outage at {sharedName} can’t stop your automations."
+msgstr "Your backup uses the same provider. Add a second provider so an outage at {sharedName} can’t stop your automations."
+
+#: src/ai-settings.tsx
+msgid "Your change wasn't saved. Check your connection and try again."
+msgstr "Your change wasn't saved. Check your connection and try again."
+
+#: src/ai-settings.tsx
+msgid "Your own keys stay saved but aren't used while this is selected."
+msgstr "Your own keys stay saved but aren't used while this is selected."
+
+#: src/ai-settings-rules.ts
+msgid "Your own model server"
+msgstr "Your own model server"

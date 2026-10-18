@@ -1,0 +1,30 @@
+{
+  "$source": "Built by hand from the OpenAPI schema named in \"schema\" (twilio-oai, spec/json/twilio_pricing_v1.json, commit 141f1201b55abcc16b3aa8089e71c4a927326975, unchanged on main at 2026-10-15) and cross-checked with twilio@6.1.2. Not captured from any account: every SID is made up and every number is a 555 example.",
+  "schema": "pricing.v1.phone_number.phone_number_country-instance (FetchPhoneNumberCountry). Prices are strings, per the x-twilio overrideType and the docs example; these amounts are made up and are not real prices.",
+  "country": "United States",
+  "iso_country": "US",
+  "phone_number_prices": [
+    {
+      "number_type": "local",
+      "base_price": "9.25",
+      "current_price": "8.50"
+    },
+    {
+      "number_type": "toll free",
+      "base_price": "9.75",
+      "current_price": "9.75"
+    },
+    {
+      "number_type": "mobile",
+      "base_price": "9.50",
+      "current_price": "9.50"
+    },
+    {
+      "number_type": "national",
+      "base_price": "9.00",
+      "current_price": "9.00"
+    }
+  ],
+  "price_unit": "USD",
+  "url": "https://pricing.twilio.com/v1/PhoneNumbers/Countries/US"
+}

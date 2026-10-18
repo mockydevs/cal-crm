@@ -1,0 +1,29 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "quote",
+        "type": "form.submited",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/triggers/0/type",
+      "code": "unknown_type",
+      "message": "form.submited is not a trigger type.",
+      "suggestion": "Did you mean form.submitted?"
+    }
+  ]
+}

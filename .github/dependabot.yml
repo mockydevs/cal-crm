@@ -1,0 +1,51 @@
+version: 2
+updates:
+  # Versions are pinned once, in pnpm-workspace.yaml's catalog. CI installs with
+  # --frozen-lockfile, so an update whose lockfile doesn't match can't pass.
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    open-pull-requests-limit: 10
+    labels:
+      - 'dependencies'
+    # Dependabot appends the scope itself, giving chore(deps): or chore(deps-dev):.
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+    groups:
+      development-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'minor'
+          - 'patch'
+    ignore:
+      # typescript-eslint doesn't support TypeScript 7 yet. Remove this
+      # once its peer range includes 7.
+      - dependency-name: 'typescript'
+        versions: ['>=7']
+
+  # Workflows pin actions to commit SHAs; Dependabot moves the SHA and its version comment together.
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+
+  # The Dockerfile's base image is pinned by digest; Dependabot moves the tag and digest together.
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'

@@ -1,0 +1,29 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "deal.move",
+        "config": {
+          "stage": "Quote sent"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello/config/stage",
+      "code": "ambiguous_reference",
+      "message": "More than one stage is named \"Quote sent\".",
+      "suggestion": "Use its id instead."
+    }
+  ]
+}

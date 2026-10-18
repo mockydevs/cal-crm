@@ -1,0 +1,40 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "whatsapp.send",
+        "config": {
+          "template": "Hello"
+        },
+        "next": "done"
+      },
+      "done": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello/config/template",
+      "code": "unknown_reference",
+      "message": "There's no WhatsApp template \"Hello\"."
+    },
+    {
+      "path": "/steps/hello",
+      "code": "no_provider",
+      "message": "Connect WhatsApp before sending from this step."
+    }
+  ]
+}

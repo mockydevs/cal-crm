@@ -1,0 +1,4 @@
+@import '@repo/ui/globals.css';
+
+/* The design system scans its own source; the dashboard adds its own. */
+@source '.';

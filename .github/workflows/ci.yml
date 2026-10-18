@@ -1,0 +1,462 @@
+name: CI
+
+on:
+  pull_request:
+    # ready_for_review: a draft runs nothing, and runs everything it needs once it's ready.
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [main]
+
+# A newer push to the same branch makes the in-flight run pointless.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+# The account's Actions minutes are limited, and GitHub bills each job by the whole minute.
+# So a pull request runs only the jobs its changes concern. main runs every job, because
+# publish needs them all.
+jobs:
+  changes:
+    # A draft has the local gate, pnpm run check; CI runs when it's marked ready.
+    if: github.event_name == 'push' || !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # On pull requests gitleaks lists the PR's commits through the API.
+      pull-requests: read
+    outputs:
+      code: ${{ steps.changed.outputs.code }}
+      image: ${{ steps.changed.outputs.image }}
+      dev: ${{ steps.changed.outputs.dev }}
+      database: ${{ steps.changed.outputs.database }}
+      docs: ${{ steps.changed.outputs.docs }}
+    steps:
+      # Full history, so every commit in the push or pull request is scanned.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Here rather than in a job of its own, which would cost a minute of its own.
+      - name: Secrets in the commits
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Findings go to the job summary; commenting would need write access.
+          GITLEAKS_ENABLE_COMMENTS: false
+
+      # A pull request is checked out as its merge into the base branch, so the merge's
+      # first parent is the base, and the difference is the pull request's. On main, the
+      # difference is the push's, and any change to code runs everything, since publish
+      # needs every job. A change to this workflow runs everything too.
+      - name: What the changes concern
+        id: changed
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          everything() {
+            printf '%s=true\n' code image dev database docs | tee -a "$GITHUB_OUTPUT"
+            exit 0
+          }
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then base=HEAD^1; else base=$BEFORE; fi
+          changed=$(git diff --name-only "$base" HEAD) || everything
+          printf '%s\n' "$changed"
+          matches() { grep -qE "$1" <<< "$changed" && echo true || echo false; }
+          # Anything but documentation.
+          code=$(grep -qvE '\.md$|^(docs|tasks|design)/' <<< "$changed" && echo true || echo false)
+          if [ "$(matches '^\.github/workflows/ci\.yml$')" = true ]; then everything; fi
+          if [ "$GITHUB_EVENT_NAME" = push ] && [ "$code" = true ]; then everything; fi
+          dependencies='(^|/)package\.json$|^pnpm-(lock|workspace)\.yaml$|^\.nvmrc$|^turbo\.json$'
+          {
+            echo "code=$code"
+            # The image's own tests: packaging, both roles, the first start on Compose, and
+            # a scan of what's installed. The end-to-end suite runs the app on every change.
+            echo "image=$(matches "^(Dockerfile|\.dockerignore|compose\.yml|install\.env\.example)\$|^apps/server/|^packages/db/|^backup/|$dependencies")"
+            # pnpm dev on a clean machine: the dev script, its Compose file and seed, the
+            # dashboard's dev proxy, and the database the setup migrates.
+            echo "dev=$(matches "^scripts/|^(compose\.dev\.yml|\.env\.example|apps/dashboard/vite\.config\.ts)\$|^packages/db/|$dependencies")"
+            echo "database=$(matches '^packages/db/')"
+            # Links between documents, which a moved or deleted file can break too.
+            moved=$(git diff --name-only --diff-filter=DR "$base" HEAD)
+            echo "docs=$( { grep -qE '\.md$' <<< "$changed" || [ -n "$moved" ]; } && echo true || echo false)"
+          } | tee -a "$GITHUB_OUTPUT"
+
+  check:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    env:
+      # The restored cache only grows otherwise: turbo evicts the oldest entries past this.
+      TURBO_CACHE_MAX_SIZE: 1GB
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Turborepo's own recipe for actions/cache (its guides/ci-vendors/github-actions):
+      # each package's build and tests run again only when its inputs changed.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .turbo/cache
+          key: turbo-check-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-check-${{ runner.os }}-
+
+      # Reads the pnpm version from package.json's packageManager field.
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          cache: true
+
+      # .nvmrc pins the exact version developers run, so CI and local runs agree.
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # The same gates as `pnpm run check`, one step each so a failure names its gate.
+      - name: Format
+        run: pnpm run format:check
+      - name: Build
+        run: pnpm run build
+      # ESLint's type-aware rules outgrow V8's default heap on this 8 GB runner, about
+      # 2 GiB (run 37843697687 ran out at ~2044 MB), and the whole tree in one process
+      # outgrew 4096 MiB too (run 38050456592). So `pnpm run lint` lints one workspace
+      # folder per process (scripts/lint.mjs): larger groups outgrew 4096 MiB one after
+      # another as the code grew.
+      - name: Lint
+        run: pnpm run lint
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+      - name: Translations in sync with the code
+        run: pnpm run i18n:check
+      - name: Module boundaries
+        run: pnpm run deps:check
+      - name: Every setting does something, or is a listed gap
+        run: pnpm run settings:check
+      - name: Types
+        run: pnpm run typecheck
+      # Two packages at a time: this runner has two cores, and turbo's default of ten
+      # starved the suites that only compute (a two-second property test of calendar slots
+      # passed 30 seconds in run 38058546672).
+      - name: Tests and coverage
+        run: pnpm run test --concurrency=2 --continue
+      # Against real Postgres 18 containers (Testcontainers), using the runner's Docker.
+      # Two at a time for the same reason, with a database server each; and every suite is
+      # run even after one fails, so one run names every failure. Turbo directly: the root
+      # script ends in `-- --maxWorkers=4` for a local machine, so flags added after it went
+      # to Vitest, which refused them.
+      - name: Integration tests and coverage
+        run: pnpm exec turbo run test:integration --concurrency=2 --continue
+
+      - name: Upload test reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-reports
+          path: |
+            packages/*/reports/
+            packages/*/coverage/
+
+  end-to-end:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    env:
+      TURBO_CACHE_MAX_SIZE: 1GB
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # As in check: a suite whose app and packages didn't change isn't run again.
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .turbo/cache
+          key: turbo-end-to-end-${{ runner.os }}-${{ github.sha }}
+          restore-keys: turbo-end-to-end-${{ runner.os }}-
+
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          cache: true
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Browser
+        run: pnpm --filter @repo/dashboard exec playwright install --with-deps chromium
+
+      # Builds the dashboard (which checks its size budgets) and the server, then runs both
+      # Playwright suites: the dashboard's, against its build with the API stood in for (axe
+      # checks included), and @repo/e2e's, against the built server and Postgres in Docker.
+      - name: End-to-end tests
+        run: pnpm run test:e2e
+
+      - name: Upload the Playwright reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: playwright-report
+          path: |
+            apps/dashboard/playwright-report/
+            apps/dashboard/reports/
+            apps/dashboard/test-results/
+            e2e/playwright-report/
+            e2e/reports/
+            e2e/test-results/
+
+  # The one image: built once, tested and scanned, then saved so that publish
+  # pushes exactly what was checked.
+  image:
+    needs: changes
+    if: needs.changes.outputs.image == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          cache: true
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - name: Build the image
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          load: true
+          tags: crm-server:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # The database's backups: pg_dump, the S3 client and one script. A cache
+      # scope of its own, since it is another Dockerfile.
+      - name: Build the backup image
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: backup
+          load: true
+          tags: crm-backup:ci
+          cache-from: type=gha,scope=backup
+          cache-to: type=gha,mode=max,scope=backup
+
+      # Both roles against Postgres, health and readiness, and a clean stop on SIGTERM
+      # with a request in flight; then the first start on a fresh Compose stack beside an
+      # empty external Postgres.
+      - name: Container tests
+        run: pnpm --filter @repo/server test:container
+        env:
+          SERVER_IMAGE: crm-server:ci
+
+      # Grype, compared with Trivy and OSV-Scanner on this image:
+      # it was the only one that found both the Alpine and the Node.js vulnerabilities.
+      - name: Scan the image
+        uses: anchore/scan-action@27805bf3b4e84b4a5c980df22ed233c00390a439 # v7.4.2
+        with:
+          image: crm-server:ci
+          grype-version: v0.120.1
+          severity-cutoff: high
+          fail-build: true
+          output-format: table
+          cache-db: true
+
+      # A backup to MinIO and a restore into a second Postgres, with every migration
+      # applied; then retention, failures, the schedule, the health check and encryption.
+      - name: Backup and restore tests
+        run: bash backup/test/run.sh
+        env:
+          BACKUP_IMAGE: crm-backup:ci
+
+      - name: Scan the backup image
+        uses: anchore/scan-action@27805bf3b4e84b4a5c980df22ed233c00390a439 # v7.4.2
+        with:
+          image: crm-backup:ci
+          grype-version: v0.120.1
+          severity-cutoff: high
+          fail-build: true
+          output-format: table
+          cache-db: true
+
+      - name: Save the images
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        run: docker save crm-server:ci crm-backup:ci --output crm-server.tar
+
+      - name: Hand the image to the publish job
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: crm-server-image
+          path: crm-server.tar
+          retention-days: 1
+
+  # Pushes the tested image to the GitHub container registry, from main only: the one job
+  # that may write packages.
+  publish:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: [check, end-to-end, image, database]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: crm-server-image
+
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Tagged with the commit, and main for the newest: the server as the repository's
+      # image, and the backups beside it with -backup.
+      - name: Push
+        run: |
+          docker load --input crm-server.tar
+          image="ghcr.io/${GITHUB_REPOSITORY,,}"
+          for pair in "crm-server:$image" "crm-backup:$image-backup"; do
+            local="${pair%%:*}"
+            remote="${pair#*:}"
+            docker tag "$local:ci" "$remote:$GITHUB_SHA"
+            docker tag "$local:ci" "$remote:main"
+            docker push "$remote:$GITHUB_SHA"
+            docker push "$remote:main"
+          done
+
+  database:
+    needs: changes
+    if: needs.changes.outputs.database == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # The script installs Graphile Worker's own schema with its CLI, as the production
+      # installer does, so it needs the workspace's packages.
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          cache: true
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # Applies every migration to a fresh Postgres 18 and runs the catalog,
+      # tenant-isolation and integrity suites.
+      - name: Database migrations and tests
+        run: bash packages/db/scripts/validate.sh
+
+  # The README's "Run it locally" on a clean machine: pnpm install, then pnpm dev.
+  dev-environment:
+    needs: changes
+    if: needs.changes.outputs.dev == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          cache: true
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # Twice: setting up again must leave everything as it is.
+      - name: Set up the database
+        run: pnpm dev:setup && pnpm dev:setup
+
+      # Through the dashboard's /api, as the README says: the seeded owner asks for a sign-in
+      # link, follows it from Mailpit's inbox (newest message first), then adds a tag.
+      - name: The owner signs in, and the app answers
+        run: |
+          pnpm dev > dev.log 2>&1 &
+          timeout 180 bash -c 'until curl -sf http://127.0.0.1:3000/ready && curl -sf -o /dev/null http://localhost:5173/; do sleep 1; done'
+          app=http://localhost:5173
+          curl -sf -X POST "$app/api/auth/sign-in/magic-link" -H 'content-type: application/json' \
+            -H "origin: $app" -d '{"email":"dana@harborlights.example","callbackURL":"/"}'
+          link=$(node --input-type=module -e "
+            const mailpit = 'http://localhost:8025/api/v1';
+            let link;
+            for (let tries = 0; tries < 30 && link === undefined; tries += 1) {
+              const { messages } = await (await fetch(mailpit + '/messages')).json();
+              if (messages.length > 0) {
+                const { Text } = await (await fetch(mailpit + '/message/' + messages[0].ID)).json();
+                link = /http:\/\/localhost:5173\/api\/auth\/magic-link\/verify\S+/.exec(Text)?.[0];
+              } else {
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+              }
+            }
+            if (link === undefined) throw new Error('No sign-in link came to Mailpit.');
+            console.log(link);
+          ")
+          curl -sf -c cookies.txt -o /dev/null "$link"
+          curl -sf -b cookies.txt -X POST "$app/api/v1/tags" -H 'content-type: application/json' \
+            -H "origin: $app" -d '{"name":"VIP"}'
+          curl -sf -b cookies.txt "$app/api/v1/tags" | grep -q '"name":"VIP"'
+
+      - name: The app's output
+        if: failure()
+        run: cat dev.log
+
+  docs:
+    needs: changes
+    if: needs.changes.outputs.docs == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Offline: only links between files in the repository, including #anchors.
+      - name: Links between documents
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          args: --offline --include-fragments --no-progress './**/*.md'
+          fail: true
+
+  # One status for the whole run: green only when every job that ran passed. A required
+  # check that's skipped counts as passed, and a failing changes job (the secrets scan)
+  # skips every gated job, so this is the check to require if branch protection is on.
+  ci:
+    if: always() && (github.event_name == 'push' || !github.event.pull_request.draft)
+    needs: [changes, check, end-to-end, image, database, dev-environment, docs, publish]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Every job that ran passed
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "$RESULTS"
+          for result in $RESULTS; do
+            case "$result" in
+              success | skipped) ;;
+              *) exit 1 ;;
+            esac
+          done

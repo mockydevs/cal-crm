@@ -1,0 +1,23 @@
+{
+  "$source": "Parameters of an inbound message webhook as documented at https://www.twilio.com/docs/messaging/guides/webhook-request. Twilio sends them as application/x-www-form-urlencoded; tests encode and sign them. Made up, not captured.",
+  "params": {
+    "AccountSid": "AC00000000000000000000000000000001",
+    "ApiVersion": "2010-04-01",
+    "Body": "STOP",
+    "From": "+15558675310",
+    "FromCity": "SAN FRANCISCO",
+    "FromCountry": "US",
+    "FromState": "CA",
+    "FromZip": "94103",
+    "MessageSid": "SM00000000000000000000000000000009",
+    "NumMedia": "0",
+    "NumSegments": "1",
+    "SmsMessageSid": "SM00000000000000000000000000000009",
+    "SmsSid": "SM00000000000000000000000000000009",
+    "To": "+15017122661",
+    "ToCity": "SAUSALITO",
+    "ToCountry": "US",
+    "ToState": "CA",
+    "ToZip": "94965"
+  }
+}

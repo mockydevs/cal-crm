@@ -1,0 +1,12 @@
+# Known vulnerabilities we accept for now, each with its reason and an expiry date, after
+# which the scan flags it again. Review each one before extending it.
+
+[[IgnoredVulns]]
+# braces: a stack overflow from deeply nested brace patterns, with no fixed version yet.
+# It reaches us only through micromatch in development tools (@lingui/cli,
+# eslint-plugin-lingui, kysely-codegen), which expand glob patterns from our own config
+# files and scripts. Nothing in production depends on it, and no attacker controls those
+# patterns.
+id = "GHSA-vfj7-8cjw-p6xm"
+ignoreUntil = 2027-01-07
+reason = "Development tools only (micromatch via Lingui and kysely-codegen); patterns come from our own config files and scripts."

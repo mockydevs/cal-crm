@@ -1,0 +1,505 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-18 04:02+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/scoring/settings-page.tsx
+msgid "\"{removingSaid}\" leaves the draft. It keeps scoring until you publish."
+msgstr "\"{removingSaid}\" leaves the draft. It keeps scoring until you publish."
+
+#: src/scoring/rule-dialog.tsx
+msgid "(deleted)"
+msgstr "(deleted)"
+
+#: src/scoring/words.ts
+msgid "{what} and contact Has tag - {has}"
+msgstr "{what} and contact Has tag - {has}"
+
+#: src/scoring/settings-page.tsx
+msgid "a deleted form"
+msgstr "a deleted form"
+
+#: src/scoring/settings-page.tsx
+msgid "a deleted tag"
+msgstr "a deleted tag"
+
+#: src/scoring/contact-score.tsx
+msgid "A scoring rule"
+msgstr "A scoring rule"
+
+#: src/scoring/settings-page.tsx
+msgid "A tag it names was deleted: it scores nobody."
+msgstr "A tag it names was deleted: it scores nobody."
+
+#: src/scoring/contact-score.tsx
+msgid "A workflow"
+msgstr "A workflow"
+
+#: src/scoring/rule-dialog.tsx
+#: src/scoring/settings-page.tsx
+msgid "Action"
+msgstr "Action"
+
+#: src/scoring/settings-page.tsx
+msgid "Actions"
+msgstr "Actions"
+
+#: src/scoring/settings-page.tsx
+msgid "Actions for {said}"
+msgstr "Actions for {said}"
+
+#: src/scoring/rule-dialog.tsx
+#: src/scoring/settings-page.tsx
+msgid "Add new rule"
+msgstr "Add new rule"
+
+#: src/scoring/words.ts
+msgid "Add points"
+msgstr "Add points"
+
+#: src/scoring/settings-page.tsx
+msgid "Add rules, then publish them to start scoring."
+msgstr "Add rules, then publish them to start scoring."
+
+#: src/scoring/rule-dialog.tsx
+msgid "Added"
+msgstr "Added"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Any channel"
+msgstr "Any channel"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Any contact"
+msgstr "Any contact"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Any form"
+msgstr "Any form"
+
+#: src/scoring/words.ts
+msgid "Appointment booked"
+msgstr "Appointment booked"
+
+#: src/scoring/words.ts
+msgid "Appointment status changed"
+msgstr "Appointment status changed"
+
+#: src/scoring/words.ts
+msgid "Booked"
+msgstr "Booked"
+
+#: src/scoring/words.ts
+msgid "Bounced"
+msgstr "Bounced"
+
+#: src/scoring/rule-dialog.tsx
+#: src/scoring/settings-page.tsx
+msgid "Calculation"
+msgstr "Calculation"
+
+#: src/scoring/contact-score.tsx
+#: src/scoring/rule-dialog.tsx
+#: src/scoring/settings-page.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/scoring/words.ts
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Channel"
+msgstr "Channel"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Choose a tag"
+msgstr "Choose a tag"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Choose the tag this rule scores."
+msgstr "Choose the tag this rule scores."
+
+#: src/scoring/rule-dialog.tsx
+msgid "Choose what the contact does, and how many points it adds or subtracts."
+msgstr "Choose what the contact does, and how many points it adds or subtracts."
+
+#: src/scoring/words.ts
+msgid "Complained (spam)"
+msgstr "Complained (spam)"
+
+#: src/scoring/words.ts
+msgid "Confirmed"
+msgstr "Confirmed"
+
+#: src/scoring/words.ts
+msgid "Contact changed"
+msgstr "Contact changed"
+
+#: src/scoring/contact-score.tsx
+msgid "Contact Engagement Score"
+msgstr "Contact Engagement Score"
+
+#: src/scoring/words.ts
+msgid "Contact replied"
+msgstr "Contact replied"
+
+#: src/scoring/words.ts
+msgid "Contact tag"
+msgstr "Contact tag"
+
+#: src/scoring/settings-page.tsx
+msgid "Delete"
+msgstr "Delete"
+
+#: src/scoring/settings-page.tsx
+msgid "Delete this rule?"
+msgstr "Delete this rule?"
+
+#: src/scoring/settings-page.tsx
+msgid "Description"
+msgstr "Description"
+
+#: src/scoring/settings-page.tsx
+msgid "Draft"
+msgstr "Draft"
+
+#: src/scoring/contact-score.tsx
+#: src/scoring/settings-page.tsx
+msgid "Edit"
+msgstr "Edit"
+
+#: src/scoring/settings-page.tsx
+msgid "Edit profile"
+msgstr "Edit profile"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Edit rule"
+msgstr "Edit rule"
+
+#: src/scoring/words.ts
+msgid "Email"
+msgstr "Email"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Email event"
+msgstr "Email event"
+
+#: src/scoring/words.ts
+msgid "Email events"
+msgstr "Email events"
+
+#: src/scoring/words.ts
+msgid "Email link clicked"
+msgstr "Email link clicked"
+
+#: src/scoring/words.ts
+msgid "Email opened"
+msgstr "Email opened"
+
+#: src/scoring/contact-score.tsx
+msgid "Engagement score"
+msgstr "Engagement score"
+
+#: src/scoring/contact-score.tsx
+msgid "Enter a whole number from -1,000,000 to 1,000,000."
+msgstr "Enter a whole number from -1,000,000 to 1,000,000."
+
+#: src/scoring/rule-dialog.tsx
+msgid "Enter whole points from 1 to 1,000."
+msgstr "Enter whole points from 1 to 1,000."
+
+#: src/scoring/settings-page.tsx
+msgid "Every rule here scores what contacts do."
+msgstr "Every rule here scores what contacts do."
+
+#: src/scoring/rule-dialog.tsx
+msgid "Form"
+msgstr "Form"
+
+#: src/scoring/words.ts
+msgid "Form submitted"
+msgstr "Form submitted"
+
+#: src/scoring/words.ts
+msgid "if a contact replies"
+msgstr "if a contact replies"
+
+#: src/scoring/words.ts
+msgid "if a contact replies - by {channel}"
+msgstr "if a contact replies - by {channel}"
+
+#: src/scoring/words.ts
+msgid "if a form is submitted"
+msgstr "if a form is submitted"
+
+#: src/scoring/words.ts
+msgid "if a form is submitted - {form}"
+msgstr "if a form is submitted - {form}"
+
+#: src/scoring/words.ts
+msgid "if a payment is received"
+msgstr "if a payment is received"
+
+#: src/scoring/words.ts
+msgid "if a tag is added - {tag}"
+msgstr "if a tag is added - {tag}"
+
+#: src/scoring/words.ts
+msgid "if a tag is removed - {tag}"
+msgstr "if a tag is removed - {tag}"
+
+#: src/scoring/words.ts
+msgid "if a trigger link is clicked"
+msgstr "if a trigger link is clicked"
+
+#: src/scoring/words.ts
+msgid "if an appointment is booked"
+msgstr "if an appointment is booked"
+
+#: src/scoring/words.ts
+msgid "if an appointment Status is - {status}"
+msgstr "if an appointment Status is - {status}"
+
+#: src/scoring/words.ts
+msgid "if an email is - {event}"
+msgstr "if an email is - {event}"
+
+#: src/scoring/words.ts
+msgid "if the contact is changed"
+msgstr "if the contact is changed"
+
+#: src/scoring/words.ts
+msgid "Invalid"
+msgstr "Invalid"
+
+#: src/scoring/settings-page.tsx
+msgid "It wasn't deleted. Check your connection and try again."
+msgstr "It wasn't deleted. Check your connection and try again."
+
+#: src/scoring/settings-page.tsx
+msgid "It wasn't published. Check your connection and try again."
+msgstr "It wasn't published. Check your connection and try again."
+
+#: src/scoring/settings-page.tsx
+msgid "It wasn't saved. Check your connection and try again."
+msgstr "It wasn't saved. Check your connection and try again."
+
+#: src/scoring/contact-score.tsx
+msgid "Latest changes"
+msgstr "Latest changes"
+
+#: src/scoring/contact-score.tsx
+msgid "Loading the score…"
+msgstr "Loading the score…"
+
+#: src/scoring/settings-page.tsx
+msgid "Loading the scoring rules…"
+msgstr "Loading the scoring rules…"
+
+#: src/scoring/settings-page.tsx
+msgid "Manage Scoring"
+msgstr "Manage Scoring"
+
+#: src/scoring/settings-page.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/scoring/settings-page.tsx
+msgid "No rules match."
+msgstr "No rules match."
+
+#: src/scoring/settings-page.tsx
+msgid "No rules yet. Add one to start scoring what contacts do."
+msgstr "No rules yet. Add one to start scoring what contacts do."
+
+#: src/scoring/contact-score.tsx
+msgid "No score yet"
+msgstr "No score yet"
+
+#: src/scoring/words.ts
+msgid "No show"
+msgstr "No show"
+
+#: src/scoring/settings-page.tsx
+msgid "Not available yet, as this CRM doesn't record them: {unavailable}. A contact's score never drops by itself; a workflow can subtract points instead."
+msgstr "Not available yet, as this CRM doesn't record them: {unavailable}. A contact's score never drops by itself; a workflow can subtract points instead."
+
+#: src/scoring/rule-dialog.tsx
+msgid "Only contacts with the tag"
+msgstr "Only contacts with the tag"
+
+#: src/scoring/words.ts
+msgid "Order form submission"
+msgstr "Order form submission"
+
+#: src/scoring/words.ts
+msgid "Order placed"
+msgstr "Order placed"
+
+#: src/scoring/words.ts
+msgid "Payment received"
+msgstr "Payment received"
+
+#: src/scoring/rule-dialog.tsx
+#: src/scoring/settings-page.tsx
+msgid "Points"
+msgstr "Points"
+
+#: src/scoring/settings-page.tsx
+msgid "Publish"
+msgstr "Publish"
+
+#: src/scoring/settings-page.tsx
+msgid "Published"
+msgstr "Published"
+
+#: src/scoring/settings-page.tsx
+msgid "Published. The rules score what contacts do from now on."
+msgstr "Published. The rules score what contacts do from now on."
+
+#: src/scoring/rule-dialog.tsx
+msgid "Removed"
+msgstr "Removed"
+
+#: src/scoring/settings-page.tsx
+msgid "Rule added to the draft: {said}. Publish to make it score."
+msgstr "Rule added to the draft: {said}. Publish to make it score."
+
+#: src/scoring/settings-page.tsx
+msgid "Rule saved in the draft: {said}. Publish to make it score."
+msgstr "Rule saved in the draft: {said}. Publish to make it score."
+
+#: src/scoring/settings-page.tsx
+msgid "Rules per page"
+msgstr "Rules per page"
+
+#: src/scoring/contact-score.tsx
+#: src/scoring/rule-dialog.tsx
+#: src/scoring/settings-page.tsx
+msgid "Save"
+msgstr "Save"
+
+#: src/scoring/settings-page.tsx
+msgid "Scoring profiles"
+msgstr "Scoring profiles"
+
+#: src/scoring/settings-page.tsx
+msgid "Scoring rules"
+msgstr "Scoring rules"
+
+#: src/scoring/settings-page.tsx
+msgid "Scoring rules table"
+msgstr "Scoring rules table"
+
+#: src/scoring/settings-page.tsx
+msgid "Search rules"
+msgstr "Search rules"
+
+#: src/scoring/contact-score.tsx
+msgid "Set by hand"
+msgstr "Set by hand"
+
+#: src/scoring/words.ts
+msgid "Showed"
+msgstr "Showed"
+
+#: src/scoring/words.ts
+msgid "SMS"
+msgstr "SMS"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Status"
+msgstr "Status"
+
+#: src/scoring/words.ts
+msgid "Subtract points"
+msgstr "Subtract points"
+
+#: src/scoring/words.ts
+msgid "Survey submitted"
+msgstr "Survey submitted"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Tag"
+msgstr "Tag"
+
+#: src/scoring/rule-dialog.tsx
+msgid "Tag is"
+msgstr "Tag is"
+
+#: src/scoring/rule-dialog.tsx
+msgid "That form was deleted. Choose another, or any form."
+msgstr "That form was deleted. Choose another, or any form."
+
+#: src/scoring/rule-dialog.tsx
+msgid "That tag was deleted. Choose another, or any contact."
+msgstr "That tag was deleted. Choose another, or any contact."
+
+#: src/scoring/rule-dialog.tsx
+msgid "That tag was deleted. Choose another."
+msgstr "That tag was deleted. Choose another."
+
+#: src/scoring/settings-page.tsx
+msgid "The draft has changes that score nothing until you publish them."
+msgstr "The draft has changes that score nothing until you publish them."
+
+#: src/scoring/contact-score.tsx
+msgid "The engagement score is now {value}."
+msgstr "The engagement score is now {value}."
+
+#: src/scoring/settings-page.tsx
+msgid "The form it names was deleted: it scores nobody."
+msgstr "The form it names was deleted: it scores nobody."
+
+#: src/scoring/settings-page.tsx
+msgid "The profile was saved."
+msgstr "The profile was saved."
+
+#: src/scoring/settings-page.tsx
+msgid "The rule was deleted from the draft. Publish to stop it scoring."
+msgstr "The rule was deleted from the draft. Publish to stop it scoring."
+
+#: src/scoring/rule-dialog.tsx
+msgid "The rule wasn't saved. Check your connection and try again."
+msgstr "The rule wasn't saved. Check your connection and try again."
+
+#: src/scoring/settings-page.tsx
+msgid "The rules changed since this page read them. They were read again: check them and publish once more."
+msgstr "The rules changed since this page read them. They were read again: check them and publish once more."
+
+#: src/scoring/contact-score.tsx
+msgid "The score couldn't be loaded."
+msgstr "The score couldn't be loaded."
+
+#: src/scoring/contact-score.tsx
+msgid "The score wasn't saved. Check your connection and try again."
+msgstr "The score wasn't saved. Check your connection and try again."
+
+#: src/scoring/settings-page.tsx
+msgid "The scoring rules couldn't be loaded."
+msgstr "The scoring rules couldn't be loaded."
+
+#: src/scoring/words.ts
+msgid "Trigger link clicked"
+msgstr "Trigger link clicked"
+
+#: src/scoring/words.ts
+msgid "Unsubscribed"
+msgstr "Unsubscribed"
+
+#: src/scoring/settings-page.tsx
+msgid "Use the score builder to add or subtract points in a profile and publish it to make it live."
+msgstr "Use the score builder to add or subtract points in a profile and publish it to make it live."
+
+#: src/scoring/words.ts
+msgid "Web chat"
+msgstr "Web chat"
+
+#: src/scoring/settings-page.tsx
+msgid "You can read the scoring rules. Changing them needs permission to configure fields."
+msgstr "You can read the scoring rules. Changing them needs permission to configure fields."

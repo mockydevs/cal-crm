@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "noEmit": true,
+    // The SDK runs wherever fetch does: browsers and Node.
+    "lib": ["es2024", "dom"]
+  },
+  "include": ["src"]
+}

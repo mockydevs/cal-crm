@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--
+      If the dashboard's own code doesn't arrive (a dropped connection, a release that
+      replaced the files mid-load), nothing of it runs, so nothing of it can say so. This
+      does: when the script below fails to load, with any file it needs, it puts a message
+      and a way to reload on the otherwise empty page. It is here in the page, before that
+      script, so it is listening before anything can fail. Its words are written out in
+      English because the translations arrive with the code that didn't.
+    -->
+    <script>
+      addEventListener(
+        'error',
+        function (event) {
+          var failed = event.target;
+          var root = document.getElementById('root');
+          if (!(failed instanceof HTMLScriptElement) || failed.type !== 'module') return;
+          if (root === null || root.childNodes.length > 0) return;
+          var heading = document.createElement('h1');
+          heading.textContent = "The dashboard couldn't load";
+          heading.style.cssText = 'margin:0 0 12px;font-size:24px;line-height:1.25';
+          var message = document.createElement('p');
+          message.textContent = 'Check your connection, then reload the page.';
+          message.style.margin = '0';
+          var reload = document.createElement('button');
+          reload.type = 'button';
+          reload.textContent = 'Reload page';
+          reload.style.cssText = 'margin-top:12px;padding:8px 16px;font:inherit;cursor:pointer';
+          reload.addEventListener('click', function () {
+            location.reload();
+          });
+          var notice = document.createElement('div');
+          notice.setAttribute('role', 'alert');
+          notice.append(message, reload);
+          var page = document.createElement('main');
+          page.style.cssText =
+            'max-width:32rem;margin:15vh auto 0;padding:24px;font:16px/1.5 system-ui,sans-serif';
+          page.append(heading, notice);
+          root.append(page);
+          reload.focus();
+        },
+        true,
+      );
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

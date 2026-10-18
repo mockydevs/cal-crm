@@ -1,0 +1,6 @@
+# For the first-start test (install.container.test.ts): publishes app's port on this
+# machine, which the install itself never does.
+services:
+  app:
+    ports:
+      - '127.0.0.1::3000'

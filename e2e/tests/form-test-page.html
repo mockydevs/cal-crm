@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Harbor Lights Events</title>
+  </head>
+  <body>
+    <!--
+      A business's own website, for the form end-to-end tests (checkpoint-1d.spec.ts). The
+      test server fills in the CRM's address and the form key, and serves this page with a
+      strict Content-Security-Policy: scripts and connections only to the CRM, no inline
+      script and no inline style. So the page has neither; what it tests instead is that
+      the form needs neither.
+    -->
+    <main>
+      <h1>Harbor Lights Events</h1>
+      <p>Tell us about your day and we will be in touch.</p>
+      <!-- The one line a business pastes. -->
+      <script async src="{{CRM}}/forms/embed.js" data-form-key="{{KEY}}"></script>
+      <p><a href="#venues">See our venues</a></p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,790 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-16 16:04+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/marketplace-app.tsx
+msgid "{name} asks to:"
+msgstr "{name} asks to:"
+
+#: src/marketplace-agency.tsx
+msgid "{name} is a draft again. Only your agency sees it."
+msgstr "{name} is a draft again. Only your agency sees it."
+
+#: src/marketplace-agency.tsx
+msgid "{name} is added as a draft. List it when businesses should see it."
+msgstr "{name} is added as a draft. List it when businesses should see it."
+
+#: src/marketplace-agency.tsx
+msgid "{name} is delisted. No new installs; businesses that have it keep it until they uninstall it."
+msgstr "{name} is delisted. No new installs; businesses that have it keep it until they uninstall it."
+
+#: src/marketplace-app.tsx
+msgid "{name} is disconnected at once and keeps no access to this business. You can install it again later."
+msgstr "{name} is disconnected at once and keeps no access to this business. You can install it again later."
+
+#: src/marketplace-app.tsx
+msgid "{name} is installed."
+msgstr "{name} is installed."
+
+#: src/marketplace-agency.tsx
+msgid "{name} is listed. Every business in your agency can install it."
+msgstr "{name} is listed. Every business in your agency can install it."
+
+#: src/marketplace-agency.tsx
+msgid "{name} is saved."
+msgstr "{name} is saved."
+
+#: src/marketplace-app.tsx
+msgid "{name} is uninstalled."
+msgstr "{name} is uninstalled."
+
+#: src/oauth-consent.tsx
+msgid "{name} wants to connect to {businessName}"
+msgstr "{name} wants to connect to {businessName}"
+
+#: src/marketplace-agency.tsx
+msgid "A business that installs the app gives it these, if the person installing it has them."
+msgstr "A business that installs the app gives it these, if the person installing it has them."
+
+#: src/marketplace-rules.ts
+msgid "A contact changes"
+msgstr "A contact changes"
+
+#: src/marketplace-rules.ts
+msgid "A contact is created"
+msgstr "A contact is created"
+
+#: src/marketplace-rules.ts
+msgid "A form is sent"
+msgstr "A form is sent"
+
+#: src/marketplace-rules.ts
+msgid "A message comes in"
+msgstr "A message comes in"
+
+#: src/marketplace-rules.ts
+msgid "A note is added"
+msgstr "A note is added"
+
+#: src/marketplace-rules.ts
+msgid "A payment is recorded"
+msgstr "A payment is recorded"
+
+#: src/marketplace-agency.tsx
+msgid "A square picture at an https:// address."
+msgstr "A square picture at an https:// address."
+
+#: src/marketplace-rules.ts
+msgid "A tag is added to a record"
+msgstr "A tag is added to a record"
+
+#: src/marketplace-rules.ts
+msgid "A tag is taken off a record"
+msgstr "A tag is taken off a record"
+
+#: src/marketplace-rules.ts
+msgid "A task is created"
+msgstr "A task is created"
+
+#: src/marketplace-rules.ts
+msgid "A task is done"
+msgstr "A task is done"
+
+#: src/marketplace-agency.tsx
+msgid "Actions"
+msgstr "Actions"
+
+#: src/marketplace-agency.tsx
+msgid "Add a redirect address with Edit first."
+msgstr "Add a redirect address with Edit first."
+
+#: src/marketplace-agency.tsx
+msgid "Add an app to offer it to your businesses."
+msgstr "Add an app to offer it to your businesses."
+
+#: src/marketplace-agency.tsx
+msgid "Add app"
+msgstr "Add app"
+
+#: src/marketplace.tsx
+msgid "All apps"
+msgstr "All apps"
+
+#: src/marketplace.tsx
+msgid "All categories"
+msgstr "All categories"
+
+#: src/oauth-consent.tsx
+msgid "Allow"
+msgstr "Allow"
+
+#: src/marketplace-app.tsx
+#: src/oauth-consent.tsx
+msgid "Allow & Install"
+msgstr "Allow & Install"
+
+#: src/marketplace-app.tsx
+msgid "Allowing it gives {name} these permissions in this business."
+msgstr "Allowing it gives {name} these permissions in this business."
+
+#: src/marketplace-rules.ts
+msgid "An appointment is booked"
+msgstr "An appointment is booked"
+
+#: src/marketplace-rules.ts
+msgid "An appointment is cancelled"
+msgstr "An appointment is cancelled"
+
+#: src/marketplace-rules.ts
+msgid "An appointment is moved"
+msgstr "An appointment is moved"
+
+#: src/marketplace-rules.ts
+msgid "An appointment’s status changes"
+msgstr "An appointment’s status changes"
+
+#: src/marketplace-rules.ts
+msgid "An invoice is paid"
+msgstr "An invoice is paid"
+
+#: src/marketplace-rules.ts
+msgid "An opportunity is created"
+msgstr "An opportunity is created"
+
+#: src/marketplace-rules.ts
+msgid "An opportunity is lost"
+msgstr "An opportunity is lost"
+
+#: src/marketplace-rules.ts
+msgid "An opportunity is won"
+msgstr "An opportunity is won"
+
+#: src/marketplace-rules.ts
+msgid "An opportunity moves to another stage"
+msgstr "An opportunity moves to another stage"
+
+#: src/marketplace-rules.ts
+msgid "Analytics"
+msgstr "Analytics"
+
+#: src/marketplace-app.tsx
+#: src/marketplace.tsx
+msgid "App Marketplace"
+msgstr "App Marketplace"
+
+#: src/marketplace-app.tsx
+msgid "App not found"
+msgstr "App not found"
+
+#: src/marketplace.tsx
+msgid "Apps"
+msgstr "Apps"
+
+#: src/marketplace.tsx
+msgid "Apps you install show here."
+msgstr "Apps you install show here."
+
+#: src/marketplace.tsx
+msgid "Apps your agency has made available to this business. Open one to see what it asks to do before you install it."
+msgstr "Apps your agency has made available to this business. Open one to see what it asks to do before you install it."
+
+#: src/marketplace-agency.tsx
+msgid "Authorization address"
+msgstr "Authorization address"
+
+#: src/marketplace-rules.ts
+msgid "Back to draft"
+msgstr "Back to draft"
+
+#: src/oauth-consent.tsx
+msgid "Back to the app"
+msgstr "Back to the app"
+
+#: src/marketplace-agency.tsx
+#: src/oauth-consent.tsx
+msgid "Business"
+msgstr "Business"
+
+#: src/marketplace-app.tsx
+#: src/oauth-consent.tsx
+msgid "By {developer}"
+msgstr "By {developer}"
+
+#: src/marketplace-rules.ts
+msgid "Calendars"
+msgstr "Calendars"
+
+#: src/marketplace-agency.tsx
+#: src/marketplace-app.tsx
+#: src/oauth-consent.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/marketplace-agency.tsx
+#: src/marketplace-app.tsx
+#: src/marketplace-parts.tsx
+msgid "Categories"
+msgstr "Categories"
+
+#: src/marketplace.tsx
+msgid "Category"
+msgstr "Category"
+
+#: src/oauth-consent.tsx
+msgid "Checking the app’s request…"
+msgstr "Checking the app’s request…"
+
+#: src/marketplace-agency.tsx
+msgid "Client ID"
+msgstr "Client ID"
+
+#: src/marketplace-agency.tsx
+msgid "Client secret"
+msgstr "Client secret"
+
+#: src/marketplace-rules.ts
+msgid "Communication"
+msgstr "Communication"
+
+#: src/marketplace-agency.tsx
+msgid "Connect {name}"
+msgstr "Connect {name}"
+
+#: src/oauth-consent.tsx
+msgid "Connect an app"
+msgstr "Connect an app"
+
+#: src/marketplace-agency.tsx
+msgid "Connection"
+msgstr "Connection"
+
+#: src/marketplace-agency.tsx
+msgid "Connection for {name}"
+msgstr "Connection for {name}"
+
+#: src/marketplace-agency.tsx
+msgid "Copied."
+msgstr "Copied."
+
+#: src/marketplace-agency.tsx
+msgid "Copy"
+msgstr "Copy"
+
+#: src/marketplace-agency.tsx
+msgid "Copy {label}"
+msgstr "Copy {label}"
+
+#: src/marketplace-agency.tsx
+msgid "Copy it now: you won’t see it again."
+msgstr "Copy it now: you won’t see it again."
+
+#: src/marketplace-agency.tsx
+msgid "Copying didn’t work: select it and copy it."
+msgstr "Copying didn’t work: select it and copy it."
+
+#: src/marketplace-rules.ts
+msgid "Delist"
+msgstr "Delist"
+
+#: src/marketplace-agency.tsx
+msgid "Delist {name}"
+msgstr "Delist {name}"
+
+#: src/marketplace-rules.ts
+msgid "Delisted"
+msgstr "Delisted"
+
+#: src/marketplace-rules.ts
+msgid "Delivered"
+msgstr "Delivered"
+
+#: src/marketplace-agency.tsx
+msgid "Description"
+msgstr "Description"
+
+#: src/marketplace-agency.tsx
+#: src/marketplace-app.tsx
+msgid "Developer"
+msgstr "Developer"
+
+#: src/marketplace-agency.tsx
+msgid "Done"
+msgstr "Done"
+
+#: src/marketplace-rules.ts
+msgid "Draft"
+msgstr "Draft"
+
+#: src/marketplace-agency.tsx
+msgid "Each needs the app to be able to read its part of the API."
+msgstr "Each needs the app to be able to read its part of the API."
+
+#: src/marketplace-agency.tsx
+msgid "Edit"
+msgstr "Edit"
+
+#: src/marketplace-agency.tsx
+msgid "Edit {name}"
+msgstr "Edit {name}"
+
+#: src/marketplace-agency.tsx
+msgid "Edit {savedName}"
+msgstr "Edit {savedName}"
+
+#: src/marketplace-agency.tsx
+msgid "Event"
+msgstr "Event"
+
+#: src/marketplace-agency.tsx
+msgid "Events it is told of"
+msgstr "Events it is told of"
+
+#: src/marketplace-rules.ts
+msgid "Failed"
+msgstr "Failed"
+
+#: src/marketplace-agency.tsx
+msgid "Generate client secret"
+msgstr "Generate client secret"
+
+#: src/marketplace-agency.tsx
+msgid "Generate webhook secret"
+msgstr "Generate webhook secret"
+
+#: src/marketplace-agency.tsx
+msgid "Icon URL"
+msgstr "Icon URL"
+
+#: src/marketplace-app.tsx
+msgid "Install {name}?"
+msgstr "Install {name}?"
+
+#: src/marketplace-app.tsx
+msgid "Install App"
+msgstr "Install App"
+
+#: src/marketplace-app.tsx
+#: src/marketplace-parts.tsx
+#: src/marketplace.tsx
+msgid "Installed"
+msgstr "Installed"
+
+#: src/marketplace-app.tsx
+msgid "Installed by {who} on {when}."
+msgstr "Installed by {who} on {when}."
+
+#: src/marketplace-app.tsx
+msgid "Installed on {when}."
+msgstr "Installed on {when}."
+
+#: src/marketplace-app.tsx
+msgid "Installing gives the app what it asks for in this business. The app connects through the link its developer gives you, and only reads and changes what is listed here. Uninstalling disconnects it at once."
+msgstr "Installing gives the app what it asks for in this business. The app connects through the link its developer gives you, and only reads and changes what is listed here. Uninstalling disconnects it at once."
+
+#: src/marketplace-agency.tsx
+msgid "Installs"
+msgstr "Installs"
+
+#: src/marketplace-app.tsx
+msgid "It asks for no permissions."
+msgstr "It asks for no permissions."
+
+#: src/oauth-consent.tsx
+msgid "It asks for permissions you don’t have here:"
+msgstr "It asks for permissions you don’t have here:"
+
+#: src/oauth-consent.tsx
+msgid "It asks to change nothing."
+msgstr "It asks to change nothing."
+
+#: src/oauth-consent.tsx
+msgid "It asks to:"
+msgstr "It asks to:"
+
+#: src/oauth-consent.tsx
+msgid "It couldn’t be checked. Check your connection and try again."
+msgstr "It couldn’t be checked. Check your connection and try again."
+
+#: src/marketplace-app.tsx
+msgid "It is told when:"
+msgstr "It is told when:"
+
+#: src/marketplace-app.tsx
+#: src/oauth-consent.tsx
+msgid "It may read:"
+msgstr "It may read:"
+
+#: src/marketplace-app.tsx
+#: src/oauth-consent.tsx
+msgid "It reads nothing."
+msgstr "It reads nothing."
+
+#: src/marketplace-app.tsx
+msgid "It was given no permissions."
+msgstr "It was given no permissions."
+
+#: src/marketplace-agency.tsx
+msgid "It wasn’t sent again. Check your connection and try again."
+msgstr "It wasn’t sent again. Check your connection and try again."
+
+#: src/marketplace-agency.tsx
+msgid "It will be sent again in a moment."
+msgstr "It will be sent again in a moment."
+
+#: src/marketplace-agency.tsx
+msgid "Last answer"
+msgstr "Last answer"
+
+#: src/marketplace-agency.tsx
+msgid "Latest deliveries"
+msgstr "Latest deliveries"
+
+#: src/marketplace-rules.ts
+msgid "List"
+msgstr "List"
+
+#: src/marketplace-agency.tsx
+msgid "List {name}"
+msgstr "List {name}"
+
+#: src/marketplace-rules.ts
+msgid "Listed"
+msgstr "Listed"
+
+#: src/marketplace-app.tsx
+msgid "Loading the app…"
+msgstr "Loading the app…"
+
+#: src/marketplace-agency.tsx
+#: src/marketplace.tsx
+msgid "Loading the apps…"
+msgstr "Loading the apps…"
+
+#: src/marketplace-agency.tsx
+msgid "Loading the deliveries…"
+msgstr "Loading the deliveries…"
+
+#: src/marketplace-rules.ts
+msgid "Marketing"
+msgstr "Marketing"
+
+#: src/marketplace-agency.tsx
+msgid "Marketplace apps"
+msgstr "Marketplace apps"
+
+#: src/marketplace-agency.tsx
+msgid "Move {name} back to draft"
+msgstr "Move {name} back to draft"
+
+#: src/marketplace-agency.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/marketplace-agency.tsx
+msgid "New client secret"
+msgstr "New client secret"
+
+#: src/marketplace-agency.tsx
+msgid "New webhook secret"
+msgstr "New webhook secret"
+
+#: src/marketplace.tsx
+msgid "No apps installed"
+msgstr "No apps installed"
+
+#: src/marketplace.tsx
+msgid "No apps match"
+msgstr "No apps match"
+
+#: src/marketplace-agency.tsx
+#: src/marketplace.tsx
+msgid "No apps yet"
+msgstr "No apps yet"
+
+#: src/marketplace-app.tsx
+msgid "No description."
+msgstr "No description."
+
+#: src/marketplace-agency.tsx
+msgid "No webhook address. Add one with Edit to tell the app of events."
+msgstr "No webhook address. Add one with Edit to tell the app of events."
+
+#: src/marketplace-agency.tsx
+msgid "No webhook secret yet. Nothing is sent until there is one."
+msgstr "No webhook secret yet. Nothing is sent until there is one."
+
+#: src/marketplace-app.tsx
+msgid "None"
+msgstr "None"
+
+#: src/marketplace-agency.tsx
+msgid "None yet. The app can’t connect until it has one."
+msgstr "None yet. The app can’t connect until it has one."
+
+#: src/marketplace-app.tsx
+msgid "Not in the marketplace"
+msgstr "Not in the marketplace"
+
+#: src/marketplace-agency.tsx
+msgid "Nothing sent yet."
+msgstr "Nothing sent yet."
+
+#: src/marketplace-agency.tsx
+msgid "One line on the app’s card."
+msgstr "One line on the app’s card."
+
+#: src/oauth-consent.tsx
+msgid "Only people who can manage apps and API keys connect apps here."
+msgstr "Only people who can manage apps and API keys connect apps here."
+
+#: src/marketplace-app.tsx
+msgid "Only people who can manage apps and API keys install and uninstall apps here."
+msgstr "Only people who can manage apps and API keys install and uninstall apps here."
+
+#: src/marketplace-rules.ts
+msgid "Other"
+msgstr "Other"
+
+#: src/marketplace-app.tsx
+msgid "Overview"
+msgstr "Overview"
+
+#: src/marketplace-rules.ts
+msgid "Payments"
+msgstr "Payments"
+
+#: src/marketplace-app.tsx
+msgid "Permissions"
+msgstr "Permissions"
+
+#: src/marketplace-app.tsx
+msgid "Permissions given:"
+msgstr "Permissions given:"
+
+#: src/marketplace-agency.tsx
+msgid "Permissions it asks for"
+msgstr "Permissions it asks for"
+
+#: src/marketplace-rules.ts
+msgid "Productivity"
+msgstr "Productivity"
+
+#: src/marketplace-agency.tsx
+msgid "Redirect addresses"
+msgstr "Redirect addresses"
+
+#: src/marketplace-agency.tsx
+msgid "Replace client secret"
+msgstr "Replace client secret"
+
+#: src/marketplace-agency.tsx
+msgid "Replace webhook secret"
+msgstr "Replace webhook secret"
+
+#: src/marketplace-agency.tsx
+msgid "Replacing it stops the old one at once. Businesses stay connected."
+msgstr "Replacing it stops the old one at once. Businesses stay connected."
+
+#: src/marketplace-rules.ts
+msgid "Reporting"
+msgstr "Reporting"
+
+#: src/marketplace-rules.ts
+msgid "Sales"
+msgstr "Sales"
+
+#: src/marketplace-agency.tsx
+msgid "Save changes"
+msgstr "Save changes"
+
+#: src/marketplace.tsx
+msgid "Search apps"
+msgstr "Search apps"
+
+#: src/marketplace-agency.tsx
+msgid "Send {event} to {business} again"
+msgstr "Send {event} to {business} again"
+
+#: src/marketplace-agency.tsx
+msgid "Send again"
+msgstr "Send again"
+
+#: src/marketplace-agency.tsx
+msgid "Send people here to connect"
+msgstr "Send people here to connect"
+
+#: src/marketplace-agency.tsx
+msgid "Sent to <0>{webhookUrl}</0>, signed with the webhook secret."
+msgstr "Sent to <0>{webhookUrl}</0>, signed with the webhook secret."
+
+#: src/marketplace-agency.tsx
+msgid "Starts with <0>{prefix}</0>, generated {generated}."
+msgstr "Starts with <0>{prefix}</0>, generated {generated}."
+
+#: src/marketplace-agency.tsx
+msgid "Status"
+msgstr "Status"
+
+#: src/marketplace-agency.tsx
+#: src/marketplace-app.tsx
+msgid "Support email"
+msgstr "Support email"
+
+#: src/marketplace-agency.tsx
+msgid "Tagline"
+msgstr "Tagline"
+
+#: src/marketplace-app.tsx
+msgid "The app couldn’t be loaded."
+msgstr "The app couldn’t be loaded."
+
+#: src/marketplace-rules.ts
+msgid "The app is installed"
+msgstr "The app is installed"
+
+#: src/marketplace-rules.ts
+msgid "The app is uninstalled"
+msgstr "The app is uninstalled"
+
+#: src/marketplace-agency.tsx
+msgid "The app wasn’t changed. Check your connection and try again."
+msgstr "The app wasn’t changed. Check your connection and try again."
+
+#: src/oauth-consent.tsx
+msgid "The app wasn’t connected. Check your connection and try again."
+msgstr "The app wasn’t connected. Check your connection and try again."
+
+#: src/marketplace-app.tsx
+msgid "The app wasn’t installed. Check your connection and try again."
+msgstr "The app wasn’t installed. Check your connection and try again."
+
+#: src/marketplace-agency.tsx
+msgid "The app wasn’t saved. Check your connection and try again."
+msgstr "The app wasn’t saved. Check your connection and try again."
+
+#: src/marketplace-app.tsx
+msgid "The app wasn’t uninstalled. Check your connection and try again."
+msgstr "The app wasn’t uninstalled. Check your connection and try again."
+
+#: src/marketplace-agency.tsx
+msgid "The app’s developer uses these to connect it to a business with OAuth. The person who connects it allows what it asks for, and the app gets an access token for that business."
+msgstr "The app’s developer uses these to connect it to a business with OAuth. The person who connects it allows what it asks for, and the app gets an access token for that business."
+
+#: src/oauth-consent.tsx
+msgid "The app’s request can’t be accepted: {description}"
+msgstr "The app’s request can’t be accepted: {description}"
+
+#: src/marketplace-agency.tsx
+#: src/marketplace.tsx
+msgid "The apps couldn’t be loaded."
+msgstr "The apps couldn’t be loaded."
+
+#: src/marketplace-agency.tsx
+msgid "The apps your businesses find in their App Marketplace. A new app is a draft that only your agency sees, until you list it."
+msgstr "The apps your businesses find in their App Marketplace. A new app is a draft that only your agency sees, until you list it."
+
+#: src/marketplace-agency.tsx
+msgid "The deliveries couldn’t be loaded."
+msgstr "The deliveries couldn’t be loaded."
+
+#: src/marketplace-agency.tsx
+msgid "The parts of the API the app may read in a business that installs it. It reads nothing else."
+msgstr "The parts of the API the app may read in a business that installs it. It reads nothing else."
+
+#: src/marketplace-agency.tsx
+msgid "The secret wasn’t generated. Check your connection and try again."
+msgstr "The secret wasn’t generated. Check your connection and try again."
+
+#: src/marketplace-agency.tsx
+msgid "The webhook secret was generated {generated}."
+msgstr "The webhook secret was generated {generated}."
+
+#: src/marketplace-app.tsx
+msgid "This app is no longer listed, so it can’t be installed."
+msgstr "This app is no longer listed, so it can’t be installed."
+
+#: src/marketplace-app.tsx
+msgid "This app isn’t listed for this business."
+msgstr "This app isn’t listed for this business."
+
+#: src/oauth-consent.tsx
+msgid "This connection link doesn’t work."
+msgstr "This connection link doesn’t work."
+
+#: src/marketplace.tsx
+msgid "Try other words or another category."
+msgstr "Try other words or another category."
+
+#: src/marketplace-app.tsx
+msgid "Uninstall"
+msgstr "Uninstall"
+
+#: src/marketplace-app.tsx
+msgid "Uninstall {name}?"
+msgstr "Uninstall {name}?"
+
+#: src/marketplace-app.tsx
+msgid "Uninstalling it later disconnects it at once."
+msgstr "Uninstalling it later disconnects it at once."
+
+#: src/marketplace-agency.tsx
+msgid "Up to 5."
+msgstr "Up to 5."
+
+#: src/marketplace-agency.tsx
+msgid "Updated"
+msgstr "Updated"
+
+#: src/marketplace-rules.ts
+msgid "Waiting"
+msgstr "Waiting"
+
+#: src/marketplace-agency.tsx
+msgid "Webhook address"
+msgstr "Webhook address"
+
+#: src/marketplace-agency.tsx
+msgid "Webhooks"
+msgstr "Webhooks"
+
+#: src/marketplace-agency.tsx
+#: src/marketplace-app.tsx
+msgid "Website"
+msgstr "Website"
+
+#: src/marketplace-agency.tsx
+msgid "What it may read"
+msgstr "What it may read"
+
+#: src/marketplace-agency.tsx
+msgid "When"
+msgstr "When"
+
+#: src/marketplace-agency.tsx
+msgid "Where the app is told of events, signed. It is told when it is installed and uninstalled, and of the events below."
+msgstr "Where the app is told of events, signed. It is told when it is installed and uninstalled, and of the events below."
+
+#: src/marketplace-agency.tsx
+msgid "Where the app receives a business’s consent, one address a line, up to 10. Use https://, or http://localhost while testing."
+msgstr "Where the app receives a business’s consent, one address a line, up to 10. Use https://, or http://localhost while testing."
+
+#: src/oauth-consent.tsx
+msgid "You can disconnect it at any time by uninstalling it."
+msgstr "You can disconnect it at any time by uninstalling it."
+
+#: src/marketplace-app.tsx
+msgid "You can’t install this app: it asks for permissions you don’t have. Someone who has them can install it."
+msgstr "You can’t install this app: it asks for permissions you don’t have. Someone who has them can install it."
+
+#: src/oauth-consent.tsx
+msgid "You don’t work in a business an app could be connected to."
+msgstr "You don’t work in a business an app could be connected to."
+
+#: src/marketplace.tsx
+msgid "Your agency hasn’t listed any apps."
+msgstr "Your agency hasn’t listed any apps."

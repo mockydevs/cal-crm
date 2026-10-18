@@ -1,0 +1,37 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        },
+        "next": "again"
+      },
+      "again": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        },
+        "next": "hello"
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/again",
+      "code": "loop_without_wait",
+      "message": "The steps again, hello loop without a wait.",
+      "suggestion": "Add a wait step inside the loop."
+    }
+  ]
+}

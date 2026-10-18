@@ -1,0 +1,36 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "mark",
+    "steps": {
+      "mark": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      }
+    },
+    "settings": {
+      "sendingWindow": {
+        "days": ["monday", "tuesday"],
+        "start": "09:00",
+        "end": "09:00"
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/settings/sendingWindow/end",
+      "code": "empty_sending_window",
+      "message": "The sending window opens and closes at 09:00, so it is never open.",
+      "suggestion": "Give it an end after its start, or an end before its start for a window that runs past midnight."
+    }
+  ]
+}

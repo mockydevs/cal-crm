@@ -1,0 +1,158 @@
+# The install: one Docker Compose resource, as Coolify runs it, or as plain
+# `docker compose --env-file install.env up -d` does behind any reverse proxy. Every
+# setting comes from the environment; install.env.example lists them.
+#
+# The database and the file storage are outside it: PostgreSQL 18 with the pgvector
+# extension (a database Coolify manages, or any server of your own), and S3-compatible
+# storage for uploaded files (Cloudflare R2, Amazon S3, MinIO and the like). Nothing the
+# install keeps lives on this server, so it can be replaced or redeployed at any time.
+#
+#   migrate   once per deploy: the migrations, then, on a new install, the agency and its
+#             built-in roles. With DATABASE_ADMIN_URL it first creates the roles and the
+#             database on the Postgres server. app and worker start once it has finished.
+#   app       the API and the dashboard. While nobody runs the agency yet, it prints a
+#             one-time setup link for the first admin.
+#   worker    background work.
+# backup optional (docs/BACKUPS.md): a dump of the database to S3-compatible
+#             storage once a day, a week kept. It runs only with COMPOSE_PROFILES=backup.
+#
+# No ports are published: the reverse proxy reaches app on port 3000.
+name: crm
+
+x-image: &image ${CRM_IMAGE:-ghcr.io/mockydevs/crm:main}
+
+services:
+  migrate:
+    image: *image
+    command: ['node', 'dist/install.js']
+    environment:
+      DATABASE_OWNER_URL: postgres://crm_owner:${CRM_OWNER_PASSWORD:?set crm_owner's password}@${DATABASE_HOST:?set the Postgres server's host name}:${DATABASE_PORT:-5432}/crm
+      # Only for the first start on an empty server: a superuser's connection string, such
+      # as postgres://postgres:<password>@db:5432/postgres. The bootstrap creates each role
+      # with the password of its connection string below. Remove it once installed.
+      DATABASE_ADMIN_URL: ${DATABASE_ADMIN_URL:-}
+      DATABASE_APP_URL: postgres://crm_app:${CRM_APP_PASSWORD:?set crm_app's password}@${DATABASE_HOST}:${DATABASE_PORT:-5432}/crm
+      DATABASE_AUTH_URL: postgres://crm_auth:${CRM_AUTH_PASSWORD:?set crm_auth's password}@${DATABASE_HOST}:${DATABASE_PORT:-5432}/crm
+      DATABASE_WORKER_URL: postgres://crm_worker:${CRM_WORKER_PASSWORD:?set crm_worker's password}@${DATABASE_HOST}:${DATABASE_PORT:-5432}/crm
+      AGENCY_NAME: ${AGENCY_NAME:?set your agency's name}
+    # It runs once and stops, so the image's health check doesn't apply.
+    healthcheck:
+      disable: true
+    restart: 'no'
+
+  app:
+    image: *image
+    environment:
+      ROLE: app
+      PUBLIC_URL: ${PUBLIC_URL:?set the address people use, such as https://crm.example.com}
+      VOICE_WORKER_ORIGIN: ${VOICE_WORKER_ORIGIN:-}
+      TRUST_PROXY: ${TRUST_PROXY:-}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      # Connections this process keeps to Postgres (docs/HOSTING.md, "Scaling notes").
+      DATABASE_POOL_SIZE: ${DATABASE_POOL_SIZE:-10}
+      DATABASE_APP_URL: postgres://crm_app:${CRM_APP_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT:-5432}/crm
+      DATABASE_AUTH_URL: postgres://crm_auth:${CRM_AUTH_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT:-5432}/crm
+      AUTH_SECRET: ${AUTH_SECRET:?set a secret of 32 characters or more}
+      SMTP_URL: ${SMTP_URL:?set the mail server, such as smtps://user:password@smtp.example.com}
+      MAIL_FROM: ${MAIL_FROM:?set who the install's mail is from}
+      # Optional connected mailbox for install mail; empty retains bootstrap SMTP.
+      SYSTEM_MAILBOX: ${SYSTEM_MAILBOX:-}
+      # Signs public forms, booking pages and document links. Without it none is served.
+      PUBLIC_INTAKE_SECRET: ${PUBLIC_INTAKE_SECRET:-}
+      SITES_SHARED_CACHE_SECONDS: ${SITES_SHARED_CACHE_SECONDS:-}
+      SITES_PAGE_CACHE_PAGES: ${SITES_PAGE_CACHE_PAGES:-}
+      # Uploaded files live in S3-compatible storage, never on this server.
+      FILES_STORAGE: s3
+      FILES_S3_ENDPOINT: ${FILES_S3_ENDPOINT:?set the S3-compatible endpoint for uploaded files}
+      FILES_S3_REGION: ${FILES_S3_REGION:-auto}
+      FILES_S3_BUCKET: ${FILES_S3_BUCKET:?set the bucket for uploaded files}
+      FILES_S3_ACCESS_KEY_ID: ${FILES_S3_ACCESS_KEY_ID:?set the access key for the files bucket}
+      FILES_S3_SECRET_ACCESS_KEY: ${FILES_S3_SECRET_ACCESS_KEY:?set the secret key for the files bucket}
+      FILES_S3_PATH_STYLE: ${FILES_S3_PATH_STYLE:-false}
+      # The largest upload taken, in bytes: 25 MiB. The proxy in front must allow as much.
+      FILES_MAX_BYTES: ${FILES_MAX_BYTES:-26214400}
+      # The most one business's files may add up to, in bytes; empty means no limit
+      FILES_BUSINESS_QUOTA_BYTES: ${FILES_BUSINESS_QUOTA_BYTES:-}
+      # One agency's campaign emails in 24 hours; empty means no limit
+      CAMPAIGN_AGENCY_DAILY_LIMIT: ${CAMPAIGN_AGENCY_DAILY_LIMIT:-}
+      FILES_LINK_SECRET: ${FILES_LINK_SECRET:?set a secret of 32 characters or more}
+      # The install's own model servers, as host:port, such as ollama:11434.
+      AI_LOCAL_SERVERS: ${AI_LOCAL_SERVERS:-}
+      # Google Calendar for team members: the install's OAuth client. Both or
+      # neither; empty hides Google. The worker needs the same two.
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      # The vault's public key: the app seals secrets, and can't open them.
+      SECRETS_PUBLIC_KEY: ${SECRETS_PUBLIC_KEY:?set the vault's public key, which docker run --rm <image> node dist/vault.js new-key 1 makes}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  worker:
+    image: *image
+    environment:
+      ROLE: worker
+      # Every role needs it: what the worker sends links to points there.
+      PUBLIC_URL: ${PUBLIC_URL:?set the address people use, such as https://crm.example.com}
+      DATABASE_APP_URL: postgres://crm_app:${CRM_APP_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT:-5432}/crm
+      DATABASE_WORKER_URL: postgres://crm_worker:${CRM_WORKER_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT:-5432}/crm
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      DATABASE_POOL_SIZE: ${DATABASE_POOL_SIZE:-10}
+      # The same stored files as the app: an import's job reads the uploaded file
+      # there and writes the file of rows it did not apply.
+      FILES_STORAGE: s3
+      FILES_S3_ENDPOINT: ${FILES_S3_ENDPOINT:?set the S3-compatible endpoint for uploaded files}
+      FILES_S3_REGION: ${FILES_S3_REGION:-auto}
+      FILES_S3_BUCKET: ${FILES_S3_BUCKET:?set the bucket for uploaded files}
+      FILES_S3_ACCESS_KEY_ID: ${FILES_S3_ACCESS_KEY_ID:?set the access key for the files bucket}
+      FILES_S3_SECRET_ACCESS_KEY: ${FILES_S3_SECRET_ACCESS_KEY:?set the secret key for the files bucket}
+      FILES_S3_PATH_STYLE: ${FILES_S3_PATH_STYLE:-false}
+      FILES_MAX_BYTES: ${FILES_MAX_BYTES:-26214400}
+      FILES_LINK_SECRET: ${FILES_LINK_SECRET:?set a secret of 32 characters or more}
+      # The only private or plain-http addresses an AI key may be sent to.
+      AI_LOCAL_SERVERS: ${AI_LOCAL_SERVERS:-}
+      # The same as the app's: the key of the reschedule-or-cancel link the worker writes into
+      # appointment reminders (migration 0107). The worker serves no public page with it.
+      PUBLIC_INTAKE_SECRET: ${PUBLIC_INTAKE_SECRET:-}
+      # Google Calendar: the worker reads and writes members' calendars with it.
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      # The vault's private keys: only the worker opens secrets.
+      SECRETS_KEYS: ${SECRETS_KEYS:?set the vault's keys, which docker run --rm <image> node dist/vault.js new-key 1 makes}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  # The database's backups, for a Postgres server that doesn't back itself up (a database
+  # Coolify manages has scheduled backups of its own). In a profile, so an install that has
+  # not asked for them starts nothing and pulls nothing: set COMPOSE_PROFILES=backup and the
+  # BACKUP_S3_ settings to turn them on. One on demand, a status and a restore need no profile:
+  #   docker compose --env-file install.env run --rm backup now
+  #   docker compose --env-file install.env run --rm backup status
+  backup:
+    image: ${CRM_BACKUP_IMAGE:-ghcr.io/mockydevs/crm-backup:main}
+    profiles: [backup]
+    environment:
+      # The owner's role, as migrate uses: it reads every row. crm_app and crm_worker are
+      # under row-level security, and pg_dump refuses to dump what it cannot read in full.
+      PGHOST: ${DATABASE_HOST:?set the Postgres server's host name}
+      PGPORT: ${DATABASE_PORT:-5432}
+      PGUSER: crm_owner
+      PGPASSWORD: ${CRM_OWNER_PASSWORD:?set crm_owner's password}
+      PGDATABASE: crm
+      # The folder the backups go in is named after this address's host, unless
+      # BACKUP_INSTALL_NAME names it.
+      PUBLIC_URL: ${PUBLIC_URL:-}
+      BACKUP_INSTALL_NAME: ${BACKUP_INSTALL_NAME:-}
+      BACKUP_S3_ENDPOINT: ${BACKUP_S3_ENDPOINT:-}
+      BACKUP_S3_REGION: ${BACKUP_S3_REGION:-auto}
+      BACKUP_S3_BUCKET: ${BACKUP_S3_BUCKET:-}
+      BACKUP_S3_ACCESS_KEY_ID: ${BACKUP_S3_ACCESS_KEY_ID:-}
+      BACKUP_S3_SECRET_ACCESS_KEY: ${BACKUP_S3_SECRET_ACCESS_KEY:-}
+      BACKUP_S3_PREFIX: ${BACKUP_S3_PREFIX:-database}
+      BACKUP_AT: ${BACKUP_AT:-02:15}
+      BACKUP_RETENTION_DAYS: ${BACKUP_RETENTION_DAYS:-7}
+      BACKUP_ENCRYPT_TO: ${BACKUP_ENCRYPT_TO:-}
+    restart: unless-stopped

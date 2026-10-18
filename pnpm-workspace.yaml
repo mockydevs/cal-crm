@@ -1,0 +1,152 @@
+packages:
+  - apps/*
+  - packages/*
+  - packages/adapters/*
+  - packages/modules/*
+  - e2e
+
+# One pinned version of each dependency for the whole repository. Packages refer to it
+# with "catalog:"; strict mode refuses anything outside the catalog.
+catalogMode: strict
+catalog:
+  '@modelcontextprotocol/sdk': 1.32.1
+  '@fastify/busboy': 3.2.2
+  '@dnd-kit/react': 0.5.0
+  '@dnd-kit/dom': 0.5.0
+  '@stryker-mutator/core': 10.0.0
+  '@aws-sdk/client-s3': 3.1146.0
+  '@axe-core/playwright': 4.13.0
+  '@base-ui/react': 1.8.0
+  '@better-auth/core': 1.7.7
+  '@better-auth/passkey': 1.7.7
+  '@commitlint/cli': 21.2.3
+  '@commitlint/config-conventional': 21.2.3
+  '@eslint-react/eslint-plugin': 5.24.6
+  '@eslint/js': 10.0.1
+  '@fastify/otel': 0.21.1
+  '@fastify/static': 10.1.5
+  '@fontsource-variable/lexend': 5.3.0
+  '@fontsource-variable/roboto': 5.3.0
+  '@hpke/core': 1.9.0
+  '@js-temporal/polyfill': 0.5.1
+  '@lingui/cli': 6.9.0
+  '@lingui/core': 6.9.0
+  '@lingui/format-po': 6.9.0
+  '@lingui/react': 6.9.0
+  '@lingui/vite-plugin': 6.9.0
+  '@opentelemetry/api': 1.9.1
+  '@opentelemetry/instrumentation-http': 0.222.0
+  '@opentelemetry/instrumentation-pg': 0.74.0
+  '@opentelemetry/instrumentation-pino': 0.68.0
+  '@opentelemetry/sdk-node': 0.222.0
+  '@playwright/test': 1.63.0
+  '@puckeditor/core': 0.23.0
+  '@simplewebauthn/browser': 13.3.0
+  '@smithy/types': 4.19.0
+  '@tailwindcss/vite': 4.3.3
+  '@tanstack/react-query': 5.104.1
+  '@tanstack/react-router': 1.170.41
+  '@tanstack/react-table': 9.2.6
+  '@tanstack/react-virtual': 3.14.13
+  '@tanstack/router-plugin': 1.168.42
+  '@testcontainers/postgresql': 12.2.0
+  '@tiptap/extension-bold': 3.31.4
+  '@tiptap/extension-code': 3.31.4
+  '@tiptap/extension-document': 3.31.4
+  '@tiptap/extension-hard-break': 3.31.4
+  '@tiptap/extension-italic': 3.31.4
+  '@tiptap/extension-paragraph': 3.31.4
+  '@tiptap/extension-text': 3.31.4
+  '@tiptap/extensions': 3.31.4
+  '@tiptap/pm': 3.31.4
+  '@tiptap/react': 3.31.4
+  '@testing-library/dom': 10.4.2
+  '@testing-library/react': 16.3.3
+  '@testing-library/user-event': 14.6.7
+  '@types/mailparser': 3.9.0
+  '@types/pdfmake': 0.3.3
+  # The Node line pinned in .nvmrc.
+  '@types/node': 24.19.1
+  '@types/pg': 8.23.1
+  '@types/react': 19.3.0
+  '@types/react-dom': 19.3.0
+  '@vitejs/plugin-react': 6.1.2
+  '@vitest/coverage-v8': 5.0.3
+  # ALTCHA's own challenge, solver and verifier library (MIT): bot protection.
+  altcha-lib: 2.6.0
+  axe-core: 4.13.0
+  better-auth: 1.7.7
+  class-variance-authority: 0.7.1
+  clsx: 2.1.1
+  dependency-cruiser: 18.5.0
+  eslint: 10.12.0
+  eslint-config-prettier: 10.1.8
+  # jsx-a11y itself supports ESLint only up to 9; this fork adds ESLint 10.
+  eslint-plugin-jsx-a11y-x: 0.2.0
+  eslint-plugin-lingui: 0.16.0
+  eslint-plugin-react-hooks: 7.1.1
+  fast-check: 4.10.2
+  fastify: 5.12.5
+  globals: 17.13.0
+  graphile-worker: 0.18.0
+  import-in-the-middle: 3.5.2
+  imapflow: 2.2.10
+  ipaddr.js: 2.5.0
+  jsdom: 30.1.2
+  kysely: 0.29.6
+  kysely-codegen: 0.20.0
+  lean-qr: 2.7.4
+  lefthook: 2.1.17
+  libphonenumber-js: 1.13.14
+  lucide-react: 1.52.0
+  mailauth: 7.1.1
+  mailparser: 3.9.36
+  nodemailer: 10.0.15
+  parse5: 8.0.1
+  pdfmake: 0.3.11
+  pg: 8.23.1
+  pino: 10.4.0
+  prettier: 3.9.9
+  react: 19.3.0
+  react-dom: 19.3.0
+  socket.io: 4.8.4
+  socket.io-client: 4.8.4
+  tailwind-merge: 3.7.0
+  tailwindcss: 4.3.3
+  testcontainers: 12.2.0
+  turbo: 2.11.7
+  # 6.0 until typescript-eslint supports 7 (its peer range is ">=4.8.4 <6.1.0").
+  typescript: 6.0.3
+  typescript-eslint: 8.71.1
+  unpdf: 1.8.1
+  vite: 8.3.3
+  vitest: 5.0.3
+  zod: 4.6.5
+  zod-openapi: 6.0.2
+  twilio: 6.1.2
+  '@twilio/voice-sdk': 2.18.5
+
+# One version of the Node.js types everywhere, matching the Node line we run. Packages
+# that accept any version would otherwise each pull in a different one.
+overrides:
+  '@types/node': 'catalog:'
+  # Stryker's typed-rest-client accepts this patched qs release (GHSA-x5fp-wj9c-mxmx).
+  'typed-rest-client>qs': 6.16.0
+
+# Dependencies may only run install scripts when listed here; anything else fails the
+# install (strictDepBuilds). lefthook's postinstall installs the git hooks.
+allowBuilds:
+  lefthook: true
+  # Testcontainers reaches Docker through dockerode, which pulls these in. ssh2 and
+  # cpu-features only try to compile optional native bindings (ssh2 falls back to
+  # JavaScript), and protobufjs's postinstall only prints a version warning.
+  cpu-features: false
+  protobufjs: false
+  ssh2: false
+
+# Nothing published less than a day ago is installed (most malicious releases are pulled
+# within hours). Set explicitly, so pnpm fails instead of quietly installing a newer
+# version or adding an exception, as its built-in default does.
+minimumReleaseAge: 1440
+patchedDependencies:
+  testcontainers@12.2.0: patches/testcontainers@12.2.0.patch

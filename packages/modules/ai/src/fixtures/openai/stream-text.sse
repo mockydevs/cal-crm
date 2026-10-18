@@ -1,0 +1,12 @@
+data: {"id":"chatcmpl-fixture-stream","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[{"index":0,"delta":{"role":"assistant","content":""},"logprobs":null,"finish_reason":null}],"usage":null}
+
+data: {"id":"chatcmpl-fixture-stream","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[{"index":0,"delta":{"content":"Hello"},"logprobs":null,"finish_reason":null}],"usage":null}
+
+data: {"id":"chatcmpl-fixture-stream","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[{"index":0,"delta":{"content":"!"},"logprobs":null,"finish_reason":null}],"usage":null}
+
+data: {"id":"chatcmpl-fixture-stream","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[{"index":0,"delta":{},"logprobs":null,"finish_reason":"stop"}],"usage":null}
+
+data: {"id":"chatcmpl-fixture-stream","object":"chat.completion.chunk","created":1760000000,"model":"fixture-model","choices":[],"usage":{"prompt_tokens":19,"completion_tokens":10,"total_tokens":29,"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

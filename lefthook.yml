@@ -1,0 +1,15 @@
+pre-commit:
+  piped: true
+  jobs:
+    - name: format
+      glob: '*.{ts,tsx,js,mjs,cjs,json,yml,yaml,css,html}'
+      run: pnpm exec prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+    - name: lint
+      glob: '*.{ts,tsx,js,mjs,cjs}'
+      run: pnpm exec eslint --max-warnings=0 --no-warn-ignored {staged_files}
+
+commit-msg:
+  jobs:
+    - name: conventional-commit
+      run: pnpm exec commitlint --edit {1}

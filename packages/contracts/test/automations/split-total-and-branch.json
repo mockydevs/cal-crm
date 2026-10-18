@@ -1,0 +1,53 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "split",
+        "config": {
+          "variants": [
+            {
+              "name": "a",
+              "percent": 50
+            },
+            {
+              "name": "b",
+              "percent": 40
+            }
+          ]
+        },
+        "next": {
+          "a": "done",
+          "c": "done"
+        }
+      },
+      "done": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello/next/c",
+      "code": "unknown_branch",
+      "message": "c is not one of this step's variants.",
+      "suggestion": "Did you mean a?"
+    },
+    {
+      "path": "/steps/hello/config/variants",
+      "code": "split_total",
+      "message": "The percentages add up to 90, not 100."
+    }
+  ]
+}

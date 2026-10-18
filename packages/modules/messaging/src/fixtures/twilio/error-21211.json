@@ -1,0 +1,7 @@
+{
+  "$source": "The error body documented at https://www.twilio.com/docs/usage/twilios-response#exceptions (the OpenAPI file defines no error schema). The message text here is made up.",
+  "code": 21211,
+  "message": "The 'To' number is not a valid phone number.",
+  "more_info": "https://www.twilio.com/docs/errors/21211",
+  "status": 400
+}

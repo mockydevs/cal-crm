@@ -1,0 +1,26 @@
+{
+  "$source": "Built by hand from the OpenAPI schema named in \"schema\" (twilio-oai, spec/json/twilio_api_v2010.json, commit 141f1201b55abcc16b3aa8089e71c4a927326975). Not captured from any account: every SID is made up and every number is one of Twilio's documentation examples.",
+  "schema": "api.v2010.account.message (the 201 answer of CreateMessage)",
+  "body": "Hello from the fixture",
+  "num_segments": "1",
+  "direction": "outbound-api",
+  "from": "+15017122661",
+  "to": "+15558675310",
+  "date_updated": "Thu, 24 Aug 2023 05:01:45 +0000",
+  "price": null,
+  "error_message": null,
+  "uri": "/2010-04-01/Accounts/AC00000000000000000000000000000001/Messages/SM00000000000000000000000000000001.json",
+  "account_sid": "AC00000000000000000000000000000001",
+  "num_media": "0",
+  "status": "queued",
+  "messaging_service_sid": null,
+  "sid": "SM00000000000000000000000000000001",
+  "date_sent": null,
+  "date_created": "Thu, 24 Aug 2023 05:01:45 +0000",
+  "error_code": null,
+  "price_unit": null,
+  "api_version": "2010-04-01",
+  "subresource_uris": {
+    "media": "/2010-04-01/Accounts/AC00000000000000000000000000000001/Messages/SM00000000000000000000000000000001/Media.json"
+  }
+}

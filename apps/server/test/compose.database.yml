@@ -1,0 +1,19 @@
+# For the first-start test (install.container.test.ts): the external database an install
+# is given, as a bare PostgreSQL 18 with pgvector beside the stack, with no roles and no crm
+# database. The install's migrate bootstraps it through DATABASE_ADMIN_URL.
+services:
+  postgres:
+    image: pgvector/pgvector:pg18@sha256:2358fcba361ed2233a5ed81b5fe4ca779ccb304120ce531a3bf51c0ed7e2bc11
+    environment:
+      POSTGRES_PASSWORD: ${TEST_POSTGRES_PASSWORD:?set the test server's superuser password}
+    healthcheck:
+      # Over TCP: during its first start the server answers only on its socket.
+      test: ['CMD', 'pg_isready', '-h', '127.0.0.1', '-U', 'postgres']
+      interval: 2s
+      timeout: 5s
+      retries: 60
+
+  migrate:
+    depends_on:
+      postgres:
+        condition: service_healthy

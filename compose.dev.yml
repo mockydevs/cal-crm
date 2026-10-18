@@ -1,0 +1,30 @@
+# Local development: Postgres 18 (with pgvector) and Mailpit, which catches outgoing email.
+# `pnpm dev` starts them, sets the database up and runs the app. Nothing listens beyond
+# this machine.
+name: crm-dev
+
+services:
+  db:
+    image: pgvector/pgvector:pg18@sha256:2358fcba361ed2233a5ed81b5fe4ca779ccb304120ce531a3bf51c0ed7e2bc11
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dev-only}
+    ports:
+      - '127.0.0.1:${DEV_DB_PORT:-54329}:5432'
+    volumes:
+      # Postgres 18's image keeps its data under /var/lib/postgresql/18/docker.
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      # Over TCP: the server answers on the socket briefly before it's ready.
+      test: ['CMD', 'pg_isready', '-h', '127.0.0.1', '-U', 'postgres']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  mailpit:
+    image: axllent/mailpit:v1.31.4@sha256:b68349e3a014b90c5610bfb26b2ae36f3892d7b8cf25ee140c6c71c98d2fcf48
+    ports:
+      - '127.0.0.1:1025:1025' # SMTP
+      - '127.0.0.1:8025:8025' # the web inbox: http://localhost:8025
+
+volumes:
+  db-data:

@@ -1,0 +1,42 @@
+{
+  "name": "@repo/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "bootstrap",
+    "dist",
+    "migrations"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint . --max-warnings=0 && node scripts/migration-lock.mjs",
+    "migrations:lock": "node scripts/migration-lock.mjs --add",
+    "test:integration": "vitest run --coverage --config vitest.integration.config.js",
+    "migrate": "node dist/bin.js",
+    "types": "vitest run --config vitest.integration.config.js src/database-types.int.test.ts --update"
+  },
+  "dependencies": {
+    "@repo/kernel": "workspace:*",
+    "graphile-worker": "catalog:",
+    "kysely": "catalog:",
+    "pg": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/testing": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/pg": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "kysely-codegen": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

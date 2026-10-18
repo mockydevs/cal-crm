@@ -1,0 +1,13 @@
+diff --git a/build/generic-container/generic-container.js b/build/generic-container/generic-container.js
+index 0156a923b3f4ac5d74078d4ced77edcdcfb24341..7604dc47705014a68b016f757ae7b9c79f241e98 100644
+--- a/build/generic-container/generic-container.js
++++ b/build/generic-container/generic-container.js
+@@ -304,7 +304,7 @@ class GenericContainer {
+             }
+             else {
+                 const containerPort = (0, port_1.getContainerPort)(exposedPort);
+-                portBindings[`${containerPort}/${protocol}`] = [{ HostPort: "0" }];
++                portBindings[`${containerPort}/${protocol}`] = [{ HostPort: "" }];
+             }
+         }
+         this.hostConfig.PortBindings = {

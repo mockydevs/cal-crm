@@ -1,0 +1,36 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "sms.send",
+        "config": {
+          "message": "Reel: {{values.sample_reel_ur}}"
+        },
+        "next": "done"
+      },
+      "done": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello/config/message",
+      "code": "unknown_merge_field",
+      "message": "values.sample_reel_ur is not a custom value.",
+      "suggestion": "Did you mean sample_reel_url?"
+    }
+  ]
+}

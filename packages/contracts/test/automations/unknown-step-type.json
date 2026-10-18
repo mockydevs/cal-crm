@@ -1,0 +1,29 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "sms.sendd",
+        "config": {
+          "message": "Hi"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello/type",
+      "code": "unknown_type",
+      "message": "sms.sendd is not a step type.",
+      "suggestion": "Did you mean sms.send?"
+    }
+  ]
+}

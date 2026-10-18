@@ -1,0 +1,58 @@
+# Dependencies and build output
+node_modules/
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+# TanStack Router's generator writes its scratch files here.
+.tanstack/
+
+# Tests and reports
+coverage/
+.stryker-tmp/
+reports/
+playwright-report/
+test-results/
+blob-report/
+
+# Environment and secrets: only the documented examples are committed
+.env
+.env.*
+!.env.example
+install.env
+
+# Local data, such as uploaded files in development
+.data/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Editors and assistants: each person's own settings
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.claude/settings.local.json
+
+# Standalone HTML exported from the design canvas: it bundles the canvas's own runtime,
+# which isn't ours to redistribute.
+CRM Frontend Design*.html
+
+# Development documents: plans, research, decision records and assistant instructions.
+# They are kept on the maintainers' machines, not published.
+/tasks/
+/design/
+/docs/decisions/
+/docs/ARCHITECTURE.md
+/docs/CODEBASE-GUIDE.md
+/docs/DATABASE.md
+/docs/EMAIL.md
+/docs/FRONTEND.md
+/docs/GHL-Feature-Map.md
+/docs/PERFORMANCE.md
+/docs/phone-system-study.md
+/AGENTS.md
+/CLAUDE.md
+/hosting-setup.md
+/m-db.txt.log

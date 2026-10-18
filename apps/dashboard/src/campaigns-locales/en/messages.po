@@ -1,0 +1,2158 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-14 05:16+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/campaigns/list-page.tsx
+msgid "“{askedName}” is deleted for good. Nothing was sent, so nothing else changes."
+msgstr "“{askedName}” is deleted for good. Nothing was sent, so nothing else changes."
+
+#: src/campaigns/rules.ts
+msgid "“{wrong}” is not an email address."
+msgstr "“{wrong}” is not an email address."
+
+#. placeholder {0}: check.count ?? 0
+#: src/campaigns/rules.ts
+msgid "{0, plural, one {# contact in the audience will not get it. The audience preview says why.} other {# contacts in the audience will not get it. The audience preview says why.}}"
+msgstr "{0, plural, one {# contact in the audience will not get it. The audience preview says why.} other {# contacts in the audience will not get it. The audience preview says why.}}"
+
+#. placeholder {0}: items.length
+#: src/campaigns/results.tsx
+msgid "{0, plural, one {# recipient shown} other {# recipients shown}}"
+msgstr "{0, plural, one {# recipient shown} other {# recipients shown}}"
+
+#. placeholder {0}: choices.options.length
+#: src/tag-picker.tsx
+msgid "{0, plural, one {# tag to add} other {# tags to add}}"
+msgstr "{0, plural, one {# tag to add} other {# tags to add}}"
+
+#. placeholder {0}: audience.tagIds.length
+#: src/campaigns/rules.ts
+msgid "{0, plural, one {Contacts with # tag} other {Contacts with # tags}}"
+msgstr "{0, plural, one {Contacts with # tag} other {Contacts with # tags}}"
+
+#. placeholder {0}: asking.campaigns.filter((each) => each.status === 'draft').length
+#: src/campaigns/list-page.tsx
+msgid "{0, plural, one {Delete # draft?} other {Delete # drafts?}}"
+msgstr "{0, plural, one {Delete # draft?} other {Delete # drafts?}}"
+
+#. placeholder {0}: estimate.batches
+#: src/campaigns/rules.ts
+msgid "{0, plural, one {One batch.} other {# batches; the last may start {last}.}}"
+msgstr "{0, plural, one {One batch.} other {# batches; the last may start {last}.}}"
+
+#: src/campaigns/editor-details.tsx
+msgid "{chosenName} (not switched on for campaigns)"
+msgstr "{chosenName} (not switched on for campaigns)"
+
+#: src/campaigns/rules.ts
+msgid "{conditions, plural, one {Contacts matching a filter with # condition} other {Contacts matching a filter with # conditions}}"
+msgstr "{conditions, plural, one {Contacts matching a filter with # condition} other {Contacts matching a filter with # conditions}}"
+
+#: src/email-library/table.tsx
+msgid "{count} selected on this page"
+msgstr "{count} selected on this page"
+
+#: src/campaigns/rules.ts
+msgid "{days, plural, one {About a day.} other {About # days.}}"
+msgstr "{days, plural, one {About a day.} other {About # days.}}"
+
+#: src/campaigns/list-page.tsx
+msgid "{deleted, plural, one {# draft deleted.} other {# drafts deleted.}}"
+msgstr "{deleted, plural, one {# draft deleted.} other {# drafts deleted.}}"
+
+#: src/campaigns/results.tsx
+msgid "{done} of {audienceCount} finished with ({percent}%): sent, skipped or failed."
+msgstr "{done} of {audienceCount} finished with ({percent}%): sent, skipped or failed."
+
+#: src/campaigns/rules.ts
+msgid "{every, plural, one {every day} other {every # days}}"
+msgstr "{every, plural, one {every day} other {every # days}}"
+
+#: src/campaigns/rules.ts
+msgid "{every, plural, one {every hour} other {every # hours}}"
+msgstr "{every, plural, one {every hour} other {every # hours}}"
+
+#: src/campaigns/rules.ts
+msgid "{every, plural, one {every minute} other {every # minutes}}"
+msgstr "{every, plural, one {every minute} other {every # minutes}}"
+
+#: src/email-library/footer.tsx
+msgid "{from} - {to} of {total}"
+msgstr "{from} - {to} of {total}"
+
+#: src/campaigns/editor-audience.tsx
+msgid "{held} will not"
+msgstr "{held} will not"
+
+#: src/tag-picker.tsx
+msgid "{limit} tags are chosen, which is the most. Remove one to add another."
+msgstr "{limit} tags are chosen, which is the most. Remove one to add another."
+
+#: src/campaigns/editor-audience.tsx
+msgid "{more, plural, one {and # more} other {and # more}}"
+msgstr "{more, plural, one {and # more} other {and # more}}"
+
+#: src/campaigns/list-page.tsx
+msgid "{moved, plural, one {# campaign moved.} other {# campaigns moved.}}"
+msgstr "{moved, plural, one {# campaign moved.} other {# campaigns moved.}}"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "{name} (copy)"
+msgstr "{name} (copy)"
+
+#: src/campaigns/editor.tsx
+msgid "{name} (my copy)"
+msgstr "{name} (my copy)"
+
+#: src/campaigns/list-page.tsx
+msgid "{notDrafts, plural, one {# campaign was kept: only a draft can be deleted.} other {# campaigns were kept: only a draft can be deleted.}}"
+msgstr "{notDrafts, plural, one {# campaign was kept: only a draft can be deleted.} other {# campaigns were kept: only a draft can be deleted.}}"
+
+#: src/campaigns/editor-audience.tsx
+msgid "{received} will receive it"
+msgstr "{received} will receive it"
+
+#: src/campaigns/list-page.tsx
+msgid "{sent} of {audience}"
+msgstr "{sent} of {audience}"
+
+#: src/search-picker.tsx
+msgid "{shownCount, plural, one {# choice} other {# choices}}"
+msgstr "{shownCount, plural, one {# choice} other {# choices}}"
+
+#: src/campaigns/rules.ts
+msgid "{size} emails {pace}"
+msgstr "{size} emails {pace}"
+
+#: src/campaigns/rules.ts
+msgid "{size} emails {pace}, between {from} and {to}"
+msgstr "{size} emails {pace}, between {from} and {to}"
+
+#: src/campaigns/editor-content.tsx
+msgid "A campaign email leaves as it is written here. One thing is added when it has none of its own: an unsubscribe line at its end."
+msgstr "A campaign email leaves as it is written here. One thing is added when it has none of its own: an unsubscribe line at its end."
+
+#: src/campaigns/list-page.tsx
+msgid "A campaign is one email sent to many contacts: now, at a set time, or in batches. It needs a mailbox switched on for campaigns that passes its setup checks (Settings → Email Services), and contacts who agreed to marketing email. Before anything is sent you see who will get it and who will not, and why."
+msgstr "A campaign is one email sent to many contacts: now, at a set time, or in batches. It needs a mailbox switched on for campaigns that passes its setup checks (Settings → Email Services), and contacts who agreed to marketing email. Before anything is sent you see who will get it and who will not, and why."
+
+#: src/campaigns/settings-limit.tsx
+msgid "A campaign pauses itself once {percent}% of its sent emails hard-bounced, counted after {after} were sent."
+msgstr "A campaign pauses itself once {percent}% of its sent emails hard-bounced, counted after {after} were sent."
+
+#: src/campaigns/rules.ts
+msgid "A campaign reaches at most {limit} contacts. Narrow the audience, or split it in two."
+msgstr "A campaign reaches at most {limit} contacts. Narrow the audience, or split it in two."
+
+#: src/campaigns/editor-audience.tsx
+msgid "A contact must have"
+msgstr "A contact must have"
+
+#: src/campaigns/editor-audience.tsx
+#: src/campaigns/results.tsx
+msgid "A contact with no name"
+msgstr "A contact with no name"
+
+#: src/campaigns/editor-audience.tsx
+msgid "A filter"
+msgstr "A filter"
+
+#: src/campaigns/editor-details.tsx
+msgid "A mailbox that is gone"
+msgstr "A mailbox that is gone"
+
+#: src/campaigns/editor-details.tsx
+msgid "A plain-text email has no preview text: mail apps show its first line."
+msgstr "A plain-text email has no preview text: mail apps show its first line."
+
+#: src/campaigns/editor-audience.tsx
+#: src/campaigns/rules.ts
+msgid "A smart list"
+msgstr "A smart list"
+
+#: src/campaigns/editor-audience.tsx
+msgid "A smart list is a saved view of Contacts. Who is on it is read when sending starts."
+msgstr "A smart list is a saved view of Contacts. Who is on it is read when sending starts."
+
+#: src/campaigns/editor-audience.tsx
+#: src/campaigns/rules.ts
+msgid "A smart list that is gone"
+msgstr "A smart list that is gone"
+
+#: src/campaigns/rules.ts
+msgid "a tag that is gone"
+msgstr "a tag that is gone"
+
+#: src/campaigns/rules.ts
+msgid "A test goes to at most {limit} addresses."
+msgstr "A test goes to at most {limit} addresses."
+
+#: src/campaigns/test-dialog.tsx
+msgid "A test's subject starts with [Test]. It is counted nowhere, nobody in the audience gets it, and its unsubscribe line is a placeholder. A business can send {hourly} tests an hour."
+msgstr "A test's subject starts with [Test]. It is counted nowhere, nobody in the audience gets it, and its unsubscribe line is a placeholder. A business can send {hourly} tests an hour."
+
+#: src/campaigns/rules.ts
+msgid "About {days} days: at most {perDay} a day from {from}."
+msgstr "About {days} days: at most {perDay} a day from {from}."
+
+#: src/campaigns/rules.ts
+msgid "About a day: {from} can release up to {perDay} campaign emails a day now."
+msgstr "About a day: {from} can release up to {perDay} campaign emails a day now."
+
+#: src/campaigns/list-page.tsx
+msgid "About campaigns"
+msgstr "About campaigns"
+
+#: src/campaigns/list-page.tsx
+msgid "Actions"
+msgstr "Actions"
+
+#: src/email-library/panel.tsx
+msgid "Actions for {chosenLabel}"
+msgstr "Actions for {chosenLabel}"
+
+#: src/email-library/panel.tsx
+msgid "Actions for {label}"
+msgstr "Actions for {label}"
+
+#: src/campaigns/list-page.tsx
+msgid "Actions for {name}"
+msgstr "Actions for {name}"
+
+#: src/search-picker.tsx
+msgid "Add “{own}”"
+msgstr "Add “{own}”"
+
+#: src/tag-picker.tsx
+msgid "Add a tag"
+msgstr "Add a tag"
+
+#: src/campaigns/editor-content.tsx
+msgid "Add my own unsubscribe line"
+msgstr "Add my own unsubscribe line"
+
+#: src/tag-picker.tsx
+msgid "Add tag"
+msgstr "Add tag"
+
+#: src/campaigns/rules.ts
+msgid "Add the plain-text part of the email, for mail apps that show no formatting."
+msgstr "Add the plain-text part of the email, for mail apps that show no formatting."
+
+#: src/tag-picker.tsx
+msgid "Added {name}."
+msgstr "Added {name}."
+
+#: src/campaigns/rules.ts
+msgid "All"
+msgstr "All"
+
+#: src/campaigns/campaign-page.tsx
+#: src/campaigns/editor.tsx
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "All campaigns"
+msgstr "All campaigns"
+
+#: src/campaigns/editor.tsx
+msgid "All changes saved"
+msgstr "All changes saved"
+
+#: src/campaigns/editor-audience.tsx
+msgid "All of these tags"
+msgstr "All of these tags"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Among those who will receive it:"
+msgstr "Among those who will receive it:"
+
+#: src/campaigns/rules.ts
+msgid "An earlier email to this address bounced. Correct the address on the contact."
+msgstr "An earlier email to this address bounced. Correct the address on the contact."
+
+#: src/campaigns/new-dialog.tsx
+msgid "An empty email to write from nothing."
+msgstr "An empty email to write from nothing."
+
+#: src/campaigns/rules.ts
+msgid "An unsubscribe link could not be made, and marketing email never leaves without one."
+msgstr "An unsubscribe link could not be made, and marketing email never leaves without one."
+
+#: src/campaigns/editor-audience.tsx
+msgid "Any of these tags"
+msgstr "Any of these tags"
+
+#: src/campaigns/results.tsx
+msgid "Ask an owner or admin to pause, resume or cancel it."
+msgstr "Ask an owner or admin to pause, resume or cancel it."
+
+#: src/campaigns/editor.tsx
+msgid "Ask an owner or admin to send."
+msgstr "Ask an owner or admin to send."
+
+#: src/campaigns/rules.ts
+msgid "At most {perDay} campaign emails can leave this mailbox in a day now, so this send will take about {days} days."
+msgstr "At most {perDay} campaign emails can leave this mailbox in a day now, so this send will take about {days} days."
+
+#: src/campaigns/editor.tsx
+#: src/campaigns/results.tsx
+msgid "Audience"
+msgstr "Audience"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Back"
+msgstr "Back"
+
+#: src/campaigns/results.tsx
+msgid "Batch"
+msgstr "Batch"
+
+#: src/campaigns/results.tsx
+msgid "Batches released"
+msgstr "Batches released"
+
+#: src/campaigns/list-page.tsx
+msgid "Before you send"
+msgstr "Before you send"
+
+#: src/campaigns/new-dialog.tsx
+msgid "Blank"
+msgstr "Blank"
+
+#: src/campaigns/list-page.tsx
+msgid "Blank, from a template, or a copy of another"
+msgstr "Blank, from a template, or a copy of another"
+
+#: src/campaigns/results.tsx
+msgid "Bounced"
+msgstr "Bounced"
+
+#: src/campaigns/rules.ts
+msgid "Bounced before"
+msgstr "Bounced before"
+
+#: src/email-library/table.tsx
+msgid "Bulk actions"
+msgstr "Bulk actions"
+
+#: src/campaigns/list-page.tsx
+msgid "Campaign"
+msgstr "Campaign"
+
+#: src/campaigns/settings-limit.tsx
+msgid "Campaign emails a day"
+msgstr "Campaign emails a day"
+
+#: src/campaigns/list-page.tsx
+msgid "Campaign folders"
+msgstr "Campaign folders"
+
+#: src/campaigns/settings-limit.tsx
+msgid "Campaign limit saved."
+msgstr "Campaign limit saved."
+
+#: src/campaigns/editor-details.tsx
+#: src/campaigns/new-dialog.tsx
+msgid "Campaign name"
+msgstr "Campaign name"
+
+#: src/campaigns/settings-limit.tsx
+msgid "Campaign sending limit"
+msgstr "Campaign sending limit"
+
+#: src/campaigns/new-dialog.tsx
+msgid "Campaign to copy"
+msgstr "Campaign to copy"
+
+#: src/email-library/header.tsx
+msgid "Campaigns"
+msgstr "Campaigns"
+
+#: src/campaigns/list-page.tsx
+msgid "Campaigns per page"
+msgstr "Campaigns per page"
+
+#: src/campaigns/folders.tsx
+#: src/campaigns/new-dialog.tsx
+#: src/campaigns/send-dialog.tsx
+#: src/campaigns/test-dialog.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Cancel campaign"
+msgstr "Cancel campaign"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Cancel this campaign?"
+msgstr "Cancel this campaign?"
+
+#: src/campaigns/results.tsx
+#: src/campaigns/rules.ts
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#: src/campaigns/list-page.tsx
+msgid "Cancelled “{name}”."
+msgstr "Cancelled “{name}”."
+
+#: src/campaigns/rules.ts
+msgid "Cancelled first"
+msgstr "Cancelled first"
+
+#: src/campaigns/list-page.tsx
+msgid "Check your connection and try again."
+msgstr "Check your connection and try again."
+
+#: src/campaigns/editor-checks.tsx
+msgid "Checked once your changes are saved."
+msgstr "Checked once your changes are saved."
+
+#: src/campaigns/editor-checks.tsx
+#: src/campaigns/editor.tsx
+msgid "Checking the campaign…"
+msgstr "Checking the campaign…"
+
+#: src/campaigns/editor-checks.tsx
+msgid "Checks before sending"
+msgstr "Checks before sending"
+
+#: src/campaigns/new-dialog.tsx
+msgid "Choose a campaign"
+msgstr "Choose a campaign"
+
+#: src/campaigns/rules.ts
+msgid "Choose a date and a time."
+msgstr "Choose a date and a time."
+
+#: src/campaigns/editor-details.tsx
+msgid "Choose a mailbox"
+msgstr "Choose a mailbox"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Choose a smart list"
+msgstr "Choose a smart list"
+
+#: src/campaigns/rules.ts
+msgid "Choose a time that is still ahead."
+msgstr "Choose a time that is still ahead."
+
+#: src/campaigns/rules.ts
+msgid "Choose a time within a year."
+msgstr "Choose a time within a year."
+
+#: src/campaigns/editor-audience.tsx
+msgid "Choose an audience to see who will get the email and who will not, and why."
+msgstr "Choose an audience to see who will get the email and who will not, and why."
+
+#: src/campaigns/draft.ts
+msgid "Choose at least one tag."
+msgstr "Choose at least one tag."
+
+#: src/campaigns/new-dialog.tsx
+msgid "Choose the campaign to copy."
+msgstr "Choose the campaign to copy."
+
+#: src/campaigns/rules.ts
+msgid "Choose the mailbox to send from."
+msgstr "Choose the mailbox to send from."
+
+#: src/campaigns/new-dialog.tsx
+msgid "Choose the template to start from."
+msgstr "Choose the template to start from."
+
+#: src/campaigns/rules.ts
+msgid "Choose where the test goes."
+msgstr "Choose where the test goes."
+
+#: src/campaigns/rules.ts
+msgid "Choose who to send to."
+msgstr "Choose who to send to."
+
+#: src/email-library/table.tsx
+msgid "Clear selection"
+msgstr "Clear selection"
+
+#: src/campaigns/controls.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Confirm"
+msgstr "Confirm"
+
+#: src/campaigns/email-parts.tsx
+#: src/campaigns/results.tsx
+msgid "Contact"
+msgstr "Contact"
+
+#: src/campaigns/email-parts.tsx
+msgid "Contact custom fields"
+msgstr "Contact custom fields"
+
+#: src/campaigns/rules.ts
+msgid "Contact removed"
+msgstr "Contact removed"
+
+#: src/campaigns/test-dialog.tsx
+msgid "Contact whose values fill the merge fields"
+msgstr "Contact whose values fill the merge fields"
+
+#: src/campaigns/rules.ts
+msgid "Contacts tagged {list}"
+msgstr "Contacts tagged {list}"
+
+#: src/campaigns/rules.ts
+msgid "Contacts with all of these tags: {list}"
+msgstr "Contacts with all of these tags: {list}"
+
+#: src/campaigns/rules.ts
+msgid "Contacts with any of these tags: {list}"
+msgstr "Contacts with any of these tags: {list}"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Contacts with the tags you choose."
+msgstr "Contacts with the tags you choose."
+
+#: src/campaigns/send-dialog.tsx
+msgid "Continue"
+msgstr "Continue"
+
+#: src/campaigns/new-dialog.tsx
+msgid "Copy of a campaign"
+msgstr "Copy of a campaign"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Count again"
+msgstr "Count again"
+
+#: src/campaigns/editor-audience.tsx
+#: src/campaigns/results.tsx
+msgid "Counted {counted}"
+msgstr "Counted {counted}"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Counted by the rules a send is decided by. Each email is decided again as it leaves, so someone who unsubscribes meanwhile gets nothing. Quiet hours and daily limits delay an email and refuse none."
+msgstr "Counted by the rules a send is decided by. Each email is decided again as it leaves, so someone who unsubscribes meanwhile gets nothing. Quiet hours and daily limits delay an email and refuse none."
+
+#: src/campaigns/editor-audience.tsx
+msgid "Counted once your changes are saved."
+msgstr "Counted once your changes are saved."
+
+#: src/campaigns/editor-audience.tsx
+msgid "Counting the audience…"
+msgstr "Counting the audience…"
+
+#: src/campaigns/new-dialog.tsx
+msgid "Create campaign"
+msgstr "Create campaign"
+
+#: src/tag-picker.tsx
+msgid "Create tag “{createName}”"
+msgstr "Create tag “{createName}”"
+
+#: src/tag-picker.tsx
+msgid "Creating “{createName}”…"
+msgstr "Creating “{createName}”…"
+
+#: src/campaigns/send-dialog.tsx
+msgid "days"
+msgstr "days"
+
+#: src/campaigns/list-page.tsx
+msgid "Delete"
+msgstr "Delete"
+
+#: src/campaigns/folders.tsx
+msgid "Delete {folderName}? Its campaigns and the folders inside it move to its parent. No campaign is deleted."
+msgstr "Delete {folderName}? Its campaigns and the folders inside it move to its parent. No campaign is deleted."
+
+#: src/campaigns/list-page.tsx
+msgid "Delete draft"
+msgstr "Delete draft"
+
+#: src/campaigns/list-page.tsx
+msgid "Delete drafts"
+msgstr "Delete drafts"
+
+#: src/campaigns/folders.tsx
+#: src/campaigns/list-page.tsx
+msgid "Delete folder"
+msgstr "Delete folder"
+
+#: src/campaigns/list-page.tsx
+msgid "Delete this draft?"
+msgstr "Delete this draft?"
+
+#: src/campaigns/list-page.tsx
+msgid "Deleted “{name}”."
+msgstr "Deleted “{name}”."
+
+#: src/tag-picker.tsx
+msgid "Deleted tag"
+msgstr "Deleted tag"
+
+#: src/campaigns/editor.tsx
+msgid "Details"
+msgstr "Details"
+
+#: src/campaigns/rules.ts
+msgid "Do not contact"
+msgstr "Do not contact"
+
+#: src/campaigns/test-dialog.tsx
+msgid "Done"
+msgstr "Done"
+
+#: src/campaigns/rules.ts
+msgid "Draft"
+msgstr "Draft"
+
+#: src/campaigns/rules.ts
+msgid "Drafts"
+msgstr "Drafts"
+
+#: src/campaigns/list-page.tsx
+msgid "Due {when}"
+msgstr "Due {when}"
+
+#: src/campaigns/list-page.tsx
+msgid "Duplicate"
+msgstr "Duplicate"
+
+#: src/campaigns/results.tsx
+msgid "Duplicate as a new draft"
+msgstr "Duplicate as a new draft"
+
+#: src/campaigns/rules.ts
+msgid "Duplicate it as a new draft and choose the audience again."
+msgstr "Duplicate it as a new draft and choose the audience again."
+
+#: src/campaigns/rules.ts
+msgid "Duplicate it as a new draft and look at the audience preview: it says why each contact gets nothing."
+msgstr "Duplicate it as a new draft and look at the audience preview: it says why each contact gets nothing."
+
+#: src/campaigns/rules.ts
+msgid "Duplicate it as a new draft and narrow the audience, or split it in two."
+msgstr "Duplicate it as a new draft and narrow the audience, or split it in two."
+
+#: src/campaigns/list-page.tsx
+msgid "Edit"
+msgstr "Edit"
+
+#: src/campaigns/editor-content.tsx
+msgid "Edit the email"
+msgstr "Edit the email"
+
+#: src/campaigns/editor.tsx
+#: src/campaigns/results.tsx
+msgid "Email"
+msgstr "Email"
+
+#: src/campaigns/campaign-page.tsx
+msgid "Email campaign"
+msgstr "Email campaign"
+
+#: src/campaigns/list-page.tsx
+msgid "Email campaigns"
+msgstr "Email campaigns"
+
+#: src/email-library/header.tsx
+msgid "Emails"
+msgstr "Emails"
+
+#: src/campaigns/results.tsx
+msgid "Emails finished with, of the audience"
+msgstr "Emails finished with, of the audience"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Emails in a batch"
+msgstr "Emails in a batch"
+
+#: src/campaigns/settings-limit.tsx
+msgid "Empty, each campaign mailbox's own daily cap is the limit."
+msgstr "Empty, each campaign mailbox's own daily cap is the limit."
+
+#: src/campaigns/editor-details.tsx
+msgid "Empty, recipients see the mailbox's own name."
+msgstr "Empty, recipients see the mailbox's own name."
+
+#: src/campaigns/editor-details.tsx
+msgid "Empty, replies go to the mailbox and show in Conversations. Replies to another address do not."
+msgstr "Empty, replies go to the mailbox and show in Conversations. Replies to another address do not."
+
+#: src/campaigns/list-page.tsx
+msgid "Ended {when}"
+msgstr "Ended {when}"
+
+#: src/campaigns/editor-content.tsx
+msgid "Every campaign email shows an unsubscribe link. This one has none of its own, so a standard unsubscribe line is added at its end when it is sent."
+msgstr "Every campaign email shows an unsubscribe link. This one has none of its own, so a standard unsubscribe line is added at its end when it is sent."
+
+#: src/campaigns/list-page.tsx
+msgid "Every campaign is in a folder."
+msgstr "Every campaign is in a folder."
+
+#: src/campaigns/rules.ts
+msgid "Every contact"
+msgstr "Every contact"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Every contact of the business."
+msgstr "Every contact of the business."
+
+#: src/campaigns/results.tsx
+msgid "Every reason"
+msgstr "Every reason"
+
+#: src/campaigns/results.tsx
+msgid "Every state"
+msgstr "Every state"
+
+#: src/tag-picker.tsx
+msgid "Every tag is already chosen."
+msgstr "Every tag is already chosen."
+
+#: src/tag-picker.tsx
+msgid "Every tag is already chosen. Type a name to make a new one."
+msgstr "Every tag is already chosen. Type a name to make a new one."
+
+#: src/campaigns/editor-audience.tsx
+msgid "Everyone"
+msgstr "Everyone"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Everyone in the audience can be sent it."
+msgstr "Everyone in the audience can be sent it."
+
+#: src/campaigns/new-dialog.tsx
+msgid "Everything but its schedule and results: the email, the mailbox and the audience."
+msgstr "Everything but its schedule and results: the email, the mailbox and the audience."
+
+#: src/campaigns/results.tsx
+#: src/campaigns/rules.ts
+msgid "Failed"
+msgstr "Failed"
+
+#: src/campaigns/test-dialog.tsx
+msgid "Fill the merge fields in for"
+msgstr "Fill the merge fields in for"
+
+#: src/campaigns/editor-details.tsx
+#: src/campaigns/folders.tsx
+#: src/campaigns/list-page.tsx
+msgid "Folder"
+msgstr "Folder"
+
+#: src/campaigns/folders.tsx
+msgid "Folder name"
+msgstr "Folder name"
+
+#: src/campaigns/results.tsx
+msgid "Format"
+msgstr "Format"
+
+#: src/campaigns/editor-content.tsx
+#: src/campaigns/results.tsx
+msgid "Formatted"
+msgstr "Formatted"
+
+#: src/campaigns/results.tsx
+#: src/campaigns/send-dialog.tsx
+msgid "From"
+msgstr "From"
+
+#: src/campaigns/new-dialog.tsx
+msgid "From a template"
+msgstr "From a template"
+
+#: src/campaigns/editor-details.tsx
+msgid "From mailbox"
+msgstr "From mailbox"
+
+#: src/campaigns/editor-details.tsx
+msgid "From name"
+msgstr "From name"
+
+#: src/campaigns/settings-limit.tsx
+msgid "Give a whole number from 1 to 100,000, or leave it empty."
+msgstr "Give a whole number from 1 to 100,000, or leave it empty."
+
+#: src/campaigns/rules.ts
+msgid "Give a whole number of emails, from 1 to {most}."
+msgstr "Give a whole number of emails, from 1 to {most}."
+
+#: src/campaigns/rules.ts
+msgid "Give a whole number, 1 or more."
+msgstr "Give a whole number, 1 or more."
+
+#: src/campaigns/rules.ts
+msgid "Give both ends of the window as times of day."
+msgstr "Give both ends of the window as times of day."
+
+#: src/campaigns/draft.ts
+msgid "Give one email address, such as hello@example.com."
+msgstr "Give one email address, such as hello@example.com."
+
+#: src/campaigns/draft.ts
+#: src/campaigns/new-dialog.tsx
+msgid "Give the campaign a name."
+msgstr "Give the campaign a name."
+
+#: src/campaigns/rules.ts
+msgid "Give the email a subject."
+msgstr "Give the email a subject."
+
+#: src/campaigns/folders.tsx
+msgid "Give the folder a name."
+msgstr "Give the folder a name."
+
+#: src/campaigns/controls.tsx
+msgid "Go back"
+msgstr "Go back"
+
+#: src/campaigns/editor-checks.tsx
+msgid "Go to Audience"
+msgstr "Go to Audience"
+
+#: src/campaigns/editor-checks.tsx
+msgid "Go to Details"
+msgstr "Go to Details"
+
+#: src/campaigns/editor-checks.tsx
+msgid "Go to Email"
+msgstr "Go to Email"
+
+#: src/email-library/table.tsx
+msgid "Grid view"
+msgstr "Grid view"
+
+#: src/campaigns/results.tsx
+msgid "Hard bounced"
+msgstr "Hard bounced"
+
+#: src/campaigns/send-dialog.tsx
+msgid "hours"
+msgstr "hours"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Hours of the business's day ({timeZone})."
+msgstr "Hours of the business's day ({timeZone})."
+
+#: src/campaigns/send-dialog.tsx
+msgid "How long it will take"
+msgstr "How long it will take"
+
+#: src/campaigns/results.tsx
+msgid "In batches: {batchWords}."
+msgstr "In batches: {batchWords}."
+
+#: src/campaigns/editor-details.tsx
+msgid "Insert a field into the preview text"
+msgstr "Insert a field into the preview text"
+
+#: src/campaigns/editor-details.tsx
+msgid "Insert a field into the subject"
+msgstr "Insert a field into the subject"
+
+#: src/campaigns/folders.tsx
+msgid "Inside"
+msgstr "Inside"
+
+#: src/campaigns/rules.ts
+msgid "It could not be sent."
+msgstr "It could not be sent."
+
+#: src/campaigns/rules.ts
+msgid "It has not started, so it becomes a draft again. Nobody is sent anything."
+msgstr "It has not started, so it becomes a draft again. Nobody is sent anything."
+
+#: src/campaigns/rules.ts
+msgid "It paused itself: its mailbox is gone, paused or no longer switched on for campaigns."
+msgstr "It paused itself: its mailbox is gone, paused or no longer switched on for campaigns."
+
+#: src/campaigns/rules.ts
+msgid "It paused itself: too many of its emails bounced."
+msgstr "It paused itself: too many of its emails bounced."
+
+#: src/campaigns/rules.ts
+msgid "It stops for good and cannot be resumed. Everyone who has not been sent it yet is skipped; emails that already left stay sent."
+msgstr "It stops for good and cannot be resumed. Everyone who has not been sent it yet is skipped; emails that already left stay sent."
+
+#: src/campaigns/new-dialog.tsx
+msgid "Its subject and text are copied. Changing the template later changes nothing here."
+msgstr "Its subject and text are copied. Changing the template later changes nothing here."
+
+#: src/campaigns/editor.tsx
+msgid "Keep mine as a copy"
+msgstr "Keep mine as a copy"
+
+#: src/campaigns/rules.ts
+msgid "Leave at least 5 minutes between batches."
+msgstr "Leave at least 5 minutes between batches."
+
+#: src/campaigns/rules.ts
+msgid "Leave at most 1,440 minutes between batches, or count in hours."
+msgstr "Leave at most 1,440 minutes between batches, or count in hours."
+
+#: src/campaigns/rules.ts
+msgid "Leave at most 30 days between batches."
+msgstr "Leave at most 30 days between batches."
+
+#: src/campaigns/rules.ts
+msgid "Leave at most 720 hours between batches."
+msgstr "Leave at most 720 hours between batches."
+
+#: src/campaigns/editor.tsx
+msgid "Leave without them"
+msgstr "Leave without them"
+
+#: src/campaigns/editor.tsx
+msgid "Leave without your last changes?"
+msgstr "Leave without your last changes?"
+
+#: src/email-library/table.tsx
+msgid "List view"
+msgstr "List view"
+
+#: src/campaigns/editor.tsx
+msgid "Load their version"
+msgstr "Load their version"
+
+#: src/campaigns/list-page.tsx
+msgid "Loading campaigns…"
+msgstr "Loading campaigns…"
+
+#: src/campaigns/editor-details.tsx
+msgid "Loading mailboxes…"
+msgstr "Loading mailboxes…"
+
+#: src/campaigns/results.tsx
+msgid "Loading recipients…"
+msgstr "Loading recipients…"
+
+#: src/tag-picker.tsx
+msgid "Loading tags…"
+msgstr "Loading tags…"
+
+#: src/campaigns/settings-limit.tsx
+msgid "Loading the campaign limit…"
+msgstr "Loading the campaign limit…"
+
+#: src/campaigns/campaign-page.tsx
+msgid "Loading the campaign…"
+msgstr "Loading the campaign…"
+
+#: src/campaigns/email-parts.tsx
+msgid "Loading the preview…"
+msgstr "Loading the preview…"
+
+#: src/campaigns/results.tsx
+#: src/search-picker.tsx
+msgid "Loading…"
+msgstr "Loading…"
+
+#: src/campaigns/rules.ts
+msgid "Look at the recipients that bounced and correct or remove those addresses. Then resume it, or cancel it."
+msgstr "Look at the recipients that bounced and correct or remove those addresses. Then resume it, or cancel it."
+
+#: src/campaigns/rules.ts
+msgid "Mailbox unavailable"
+msgstr "Mailbox unavailable"
+
+#: src/campaigns/new-dialog.tsx
+msgid "Making the draft…"
+msgstr "Making the draft…"
+
+#: src/campaigns/results.tsx
+msgid "Merge fields such as {exampleField} are shown as written: each recipient gets their own values. An email without its own unsubscribe link leaves with a standard unsubscribe line at its end."
+msgstr "Merge fields such as {exampleField} are shown as written: each recipient gets their own values. An email without its own unsubscribe link leaves with a standard unsubscribe line at its end."
+
+#: src/campaigns/send-dialog.tsx
+msgid "minutes"
+msgstr "minutes"
+
+#: src/campaigns/rules.ts
+msgid "Missing a merge value"
+msgstr "Missing a merge value"
+
+#: src/campaigns/rules.ts
+msgid "More contacts matched its audience than one campaign can reach."
+msgstr "More contacts matched its audience than one campaign can reach."
+
+#: src/campaigns/editor-audience.tsx
+msgid "More than {most} contacts match, which is the most one campaign reaches. The counts stop there. Narrow the audience, or split it in two."
+msgstr "More than {most} contacts match, which is the most one campaign reaches. The counts stop there. Narrow the audience, or split it in two."
+
+#: src/campaigns/folders.tsx
+msgid "Move"
+msgstr "Move"
+
+#: src/campaigns/folders.tsx
+msgid "Move {count} campaigns"
+msgstr "Move {count} campaigns"
+
+#: src/campaigns/folders.tsx
+#: src/campaigns/list-page.tsx
+msgid "Move to folder"
+msgstr "Move to folder"
+
+#: src/campaigns/folders.tsx
+msgid "Moving…"
+msgstr "Moving…"
+
+#: src/campaigns/editor-checks.tsx
+msgid "Must be fixed before sending"
+msgstr "Must be fixed before sending"
+
+#: src/campaigns/list-page.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/new-dialog.tsx
+msgid "New campaign"
+msgstr "New campaign"
+
+#: src/campaigns/folders.tsx
+#: src/campaigns/list-page.tsx
+msgid "New folder"
+msgstr "New folder"
+
+#: src/email-library/footer.tsx
+msgid "Next"
+msgstr "Next"
+
+#: src/email-library/footer.tsx
+msgid "Next page"
+msgstr "Next page"
+
+#: src/campaigns/rules.ts
+msgid "No audience chosen"
+msgstr "No audience chosen"
+
+#: src/campaigns/new-dialog.tsx
+msgid "No campaigns match."
+msgstr "No campaigns match."
+
+#: src/campaigns/list-page.tsx
+msgid "No campaigns yet, and your role can't write one."
+msgstr "No campaigns yet, and your role can't write one."
+
+#: src/campaigns/list-page.tsx
+msgid "No campaigns yet. Send one email to many contacts, now or later."
+msgstr "No campaigns yet. Send one email to many contacts, now or later."
+
+#: src/campaigns/rules.ts
+msgid "No consent to marketing email is recorded. Record it on the contact once they agree, or collect it with a form's consent box."
+msgstr "No consent to marketing email is recorded. Record it on the contact once they agree, or collect it with a form's consent box."
+
+#: src/campaigns/rules.ts
+msgid "No contact has a value for {fields}, so nobody would get this email. Remove or correct these merge fields."
+msgstr "No contact has a value for {fields}, so nobody would get this email. Remove or correct these merge fields."
+
+#: src/campaigns/test-dialog.tsx
+msgid "No contacts match."
+msgstr "No contacts match."
+
+#: src/campaigns/rules.ts
+msgid "No email address"
+msgstr "No email address"
+
+#: src/campaigns/list-page.tsx
+msgid "No folder"
+msgstr "No folder"
+
+#: src/campaigns/folders.tsx
+msgid "No folder (top level)"
+msgstr "No folder (top level)"
+
+#: src/campaigns/editor-details.tsx
+msgid "No mailbox is connected yet. A campaign is sent from one of the business's own mailboxes, which someone who manages mailboxes connects."
+msgstr "No mailbox is connected yet. A campaign is sent from one of the business's own mailboxes, which someone who manages mailboxes connects."
+
+#: src/campaigns/list-page.tsx
+msgid "No mailbox is switched on for campaigns yet. Connect one and switch it on in <0>Settings → Email Services</0>; drafts can be written meanwhile."
+msgstr "No mailbox is switched on for campaigns yet. Connect one and switch it on in <0>Settings → Email Services</0>; drafts can be written meanwhile."
+
+#: src/campaigns/editor-details.tsx
+msgid "No mailbox is switched on for campaigns. Someone who manages mailboxes ticks “Use for campaigns” for the mailbox campaigns should leave from."
+msgstr "No mailbox is switched on for campaigns. Someone who manages mailboxes ticks “Use for campaigns” for the mailbox campaigns should leave from."
+
+#: src/campaigns/rules.ts
+msgid "No marketing consent"
+msgstr "No marketing consent"
+
+#: src/campaigns/results.tsx
+msgid "No recipients match."
+msgstr "No recipients match."
+
+#: src/campaigns/results.tsx
+msgid "No recipients yet. They are written when sending starts, which can take a minute."
+msgstr "No recipients yet. They are written when sending starts, which can take a minute."
+
+#: src/campaigns/editor-audience.tsx
+msgid "No smart lists match."
+msgstr "No smart lists match."
+
+#: src/tag-picker.tsx
+msgid "No tags chosen."
+msgstr "No tags chosen."
+
+#: src/tag-picker.tsx
+msgid "No tags match."
+msgstr "No tags match."
+
+#: src/campaigns/rules.ts
+msgid "No time zone"
+msgstr "No time zone"
+
+#: src/campaigns/rules.ts
+msgid "No unsubscribe link"
+msgstr "No unsubscribe link"
+
+#: src/campaigns/rules.ts
+msgid "Nobody in its audience could be sent the email."
+msgstr "Nobody in its audience could be sent the email."
+
+#: src/campaigns/rules.ts
+msgid "Nobody in the audience can be sent it as things stand."
+msgstr "Nobody in the audience can be sent it as things stand."
+
+#: src/campaigns/rules.ts
+msgid "Nobody in this audience can be sent the email. The audience preview says why."
+msgstr "Nobody in this audience can be sent the email. The audience preview says why."
+
+#: src/campaigns/editor-audience.tsx
+msgid "Nobody matches this audience."
+msgstr "Nobody matches this audience."
+
+#: src/campaigns/test-dialog.tsx
+msgid "Nobody: fields stay as written"
+msgstr "Nobody: fields stay as written"
+
+#: src/campaigns/list-page.tsx
+msgid "Not deleted: {refused}"
+msgstr "Not deleted: {refused}"
+
+#: src/campaigns/editor-details.tsx
+#: src/campaigns/folders.tsx
+msgid "Not in a folder"
+msgstr "Not in a folder"
+
+#: src/campaigns/list-page.tsx
+msgid "Not moved: {kept}."
+msgstr "Not moved: {kept}."
+
+#: src/campaigns/results.tsx
+#: src/campaigns/rules.ts
+msgid "Not released yet"
+msgstr "Not released yet"
+
+#: src/campaigns/editor.tsx
+msgid "Not saved yet. Trying again…"
+msgstr "Not saved yet. Trying again…"
+
+#: src/campaigns/editor.tsx
+msgid "Not saved: put right what is marked"
+msgstr "Not saved: put right what is marked"
+
+#: src/campaigns/editor.tsx
+msgid "Not saved: someone else changed it"
+msgstr "Not saved: someone else changed it"
+
+#: src/campaigns/list-page.tsx
+msgid "Not scheduled"
+msgstr "Not scheduled"
+
+#: src/campaigns/list-page.tsx
+msgid "Not started"
+msgstr "Not started"
+
+#: src/campaigns/editor-checks.tsx
+msgid "Note"
+msgstr "Note"
+
+#: src/campaigns/test-dialog.tsx
+msgid "Nothing is sent to the contact: only their values are used."
+msgstr "Nothing is sent to the contact: only their values are used."
+
+#: src/campaigns/email-parts.tsx
+msgid "Nothing is written yet."
+msgstr "Nothing is written yet."
+
+#: src/campaigns/editor.tsx
+msgid "Nothing leaves until you confirm in the next step."
+msgstr "Nothing leaves until you confirm in the next step."
+
+#: src/email-library/header.tsx
+msgid "Nothing matches. Try another search or filter."
+msgstr "Nothing matches. Try another search or filter."
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Nothing more leaves until it is resumed, including emails already handed to the mailbox and not yet sent. Emails that have left stay sent."
+msgstr "Nothing more leaves until it is resumed, including emails already handed to the mailbox and not yet sent. Emails that have left stay sent."
+
+#: src/campaigns/editor-checks.tsx
+msgid "Nothing stands in the way of sending."
+msgstr "Nothing stands in the way of sending."
+
+#: src/campaigns/results.tsx
+msgid "Numbers"
+msgstr "Numbers"
+
+#: src/campaigns/results.tsx
+#: src/campaigns/send-dialog.tsx
+msgid "On the business's clock: {timeZone}."
+msgstr "On the business's clock: {timeZone}."
+
+#: src/campaigns/send-dialog.tsx
+msgid "One batch every"
+msgstr "One batch every"
+
+#: src/campaigns/rules.ts
+msgid "One of the mailbox's setup checks could not be confirmed."
+msgstr "One of the mailbox's setup checks could not be confirmed."
+
+#: src/campaigns/send-dialog.tsx
+msgid "Only between certain hours of the day"
+msgstr "Only between certain hours of the day"
+
+#: src/campaigns/editor-details.tsx
+msgid "Only mailboxes switched on for campaigns are listed. That switch, the daily limit and the setup checks are in"
+msgstr "Only mailboxes switched on for campaigns are listed. That switch, the daily limit and the setup checks are in"
+
+#: src/campaigns/editor-details.tsx
+msgid "Only your team sees it."
+msgstr "Only your team sees it."
+
+#: src/campaigns/new-dialog.tsx
+msgid "Only your team sees the name. Recipients see the subject."
+msgstr "Only your team sees the name. Recipients see the subject."
+
+#: src/campaigns/list-page.tsx
+msgid "Open"
+msgstr "Open"
+
+#: src/campaigns/list-page.tsx
+msgid "Open {name}"
+msgstr "Open {name}"
+
+#: src/campaigns/editor-checks.tsx
+msgid "Open Business Profile"
+msgstr "Open Business Profile"
+
+#: src/campaigns/editor-checks.tsx
+msgid "Open Email Services"
+msgstr "Open Email Services"
+
+#: src/campaigns/editor-details.tsx
+msgid "Open Settings → Email Services"
+msgstr "Open Settings → Email Services"
+
+#: src/campaigns/results.tsx
+msgid "Opens and clicks are not tracked yet. Bounces arrive as delivery reports, sometimes hours after an email left."
+msgstr "Opens and clicks are not tracked yet. Bounces arrive as delivery reports, sometimes hours after an email left."
+
+#: src/campaigns/test-dialog.tsx
+msgid "Other addresses"
+msgstr "Other addresses"
+
+#: src/tag-picker.tsx
+msgid "Other tags"
+msgstr "Other tags"
+
+#: src/email-library/footer.tsx
+msgid "Pages"
+msgstr "Pages"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Pause"
+msgstr "Pause"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Pause sending"
+msgstr "Pause sending"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Pause this campaign?"
+msgstr "Pause this campaign?"
+
+#: src/campaigns/results.tsx
+#: src/campaigns/rules.ts
+msgid "Paused"
+msgstr "Paused"
+
+#: src/campaigns/list-page.tsx
+msgid "Paused “{name}”."
+msgstr "Paused “{name}”."
+
+#: src/campaigns/rules.ts
+msgid "Paused by a person."
+msgstr "Paused by a person."
+
+#: src/campaigns/editor-content.tsx
+#: src/campaigns/results.tsx
+msgid "Plain text"
+msgstr "Plain text"
+
+#: src/campaigns/results.tsx
+msgid "Preview text"
+msgstr "Preview text"
+
+#: src/campaigns/editor-details.tsx
+msgid "Preview text (optional)"
+msgstr "Preview text (optional)"
+
+#: src/email-library/footer.tsx
+msgid "Previous"
+msgstr "Previous"
+
+#: src/email-library/footer.tsx
+msgid "Previous page"
+msgstr "Previous page"
+
+#: src/campaigns/editor.tsx
+msgid "Put right what is marked above first."
+msgstr "Put right what is marked above first."
+
+#: src/campaigns/send-dialog.tsx
+msgid "Put right what is marked above to see it."
+msgstr "Put right what is marked above to see it."
+
+#: src/campaigns/rules.ts
+msgid "Put the mailbox right in Settings → Email Services, then resume it."
+msgstr "Put the mailbox right in Settings → Email Services, then resume it."
+
+#: src/campaigns/rules.ts
+msgid "Queued"
+msgstr "Queued"
+
+#: src/campaigns/results.tsx
+msgid "Queued at the mailbox"
+msgstr "Queued at the mailbox"
+
+#: src/campaigns/rules.ts
+msgid "Quiet hours need the contact's time zone, and none is set. Set it on the contact."
+msgstr "Quiet hours need the contact's time zone, and none is set. Set it on the contact."
+
+#: src/campaigns/results.tsx
+msgid "Reason skipped"
+msgstr "Reason skipped"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Recipients"
+msgstr "Recipients"
+
+#: src/campaigns/rules.ts
+msgid "Refused by the sending rules"
+msgstr "Refused by the sending rules"
+
+#: src/tag-picker.tsx
+msgid "Remove {name}"
+msgstr "Remove {name}"
+
+#: src/tag-picker.tsx
+msgid "Removed {name}."
+msgstr "Removed {name}."
+
+#: src/campaigns/folders.tsx
+#: src/campaigns/list-page.tsx
+msgid "Rename or move folder"
+msgstr "Rename or move folder"
+
+#: src/campaigns/editor-content.tsx
+msgid "Replace what is written?"
+msgstr "Replace what is written?"
+
+#: src/campaigns/editor-content.tsx
+msgid "Replace with the template"
+msgstr "Replace with the template"
+
+#: src/campaigns/results.tsx
+msgid "Replies go to"
+msgstr "Replies go to"
+
+#: src/campaigns/editor-details.tsx
+msgid "Reply-To"
+msgstr "Reply-To"
+
+#: src/campaigns/rules.ts
+msgid "Reported spam"
+msgstr "Reported spam"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Resume"
+msgstr "Resume"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Resume sending"
+msgstr "Resume sending"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Resume this campaign?"
+msgstr "Resume this campaign?"
+
+#: src/campaigns/list-page.tsx
+msgid "Resumed “{name}”."
+msgstr "Resumed “{name}”."
+
+#: src/campaigns/editor.tsx
+msgid "Review and send"
+msgstr "Review and send"
+
+#: src/campaigns/folders.tsx
+msgid "Save folder"
+msgstr "Save folder"
+
+#: src/campaigns/settings-limit.tsx
+msgid "Save limit"
+msgstr "Save limit"
+
+#: src/campaigns/editor.tsx
+#: src/campaigns/folders.tsx
+#: src/campaigns/settings-limit.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Schedule “{name}” for {count} contacts from {from}, starting {start}?"
+msgstr "Schedule “{name}” for {count} contacts from {from}, starting {start}?"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Schedule campaign"
+msgstr "Schedule campaign"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Schedule for a date and time"
+msgstr "Schedule for a date and time"
+
+#: src/campaigns/rules.ts
+msgid "Scheduled"
+msgstr "Scheduled"
+
+#: src/campaigns/list-page.tsx
+msgid "Scheduled or sent"
+msgstr "Scheduled or sent"
+
+#: src/campaigns/results.tsx
+msgid "Scheduled to start {due}"
+msgstr "Scheduled to start {due}"
+
+#: src/campaigns/new-dialog.tsx
+msgid "Search campaign names"
+msgstr "Search campaign names"
+
+#: src/campaigns/list-page.tsx
+msgid "Search campaigns"
+msgstr "Search campaigns"
+
+#: src/campaigns/test-dialog.tsx
+msgid "Search contacts"
+msgstr "Search contacts"
+
+#: src/tag-picker.tsx
+msgid "Search or create a tag"
+msgstr "Search or create a tag"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Search smart lists"
+msgstr "Search smart lists"
+
+#: src/tag-picker.tsx
+msgid "Search tags"
+msgstr "Search tags"
+
+#: src/campaigns/list-page.tsx
+msgid "Select {name}"
+msgstr "Select {name}"
+
+#: src/campaigns/list-page.tsx
+msgid "Select all campaigns on this page"
+msgstr "Select all campaigns on this page"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Send “{name}” to {count} contacts from {from} now?"
+msgstr "Send “{name}” to {count} contacts from {from} now?"
+
+#: src/campaigns/editor.tsx
+#: src/campaigns/test-dialog.tsx
+msgid "Send a test"
+msgstr "Send a test"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Send in batches"
+msgstr "Send in batches"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Send now"
+msgstr "Send now"
+
+#: src/campaigns/editor.tsx
+#: src/campaigns/send-dialog.tsx
+msgid "Send or schedule"
+msgstr "Send or schedule"
+
+#: src/campaigns/test-dialog.tsx
+msgid "Send test"
+msgstr "Send test"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Send to"
+msgstr "Send to"
+
+#: src/campaigns/rules.ts
+msgid "Sending"
+msgstr "Sending"
+
+#: src/campaigns/rules.ts
+msgid "Sending at the mailbox's pace: a few emails a minute."
+msgstr "Sending at the mailbox's pace: a few emails a minute."
+
+#: src/campaigns/rules.ts
+msgid "Sending at the mailbox's pace: the next emails leave at {when}."
+msgstr "Sending at the mailbox's pace: the next emails leave at {when}."
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Sending goes on from where it stopped. Nobody is sent the campaign twice."
+msgstr "Sending goes on from where it stopped. Nobody is sent the campaign twice."
+
+#: src/campaigns/results.tsx
+msgid "Sending since {startedAt}"
+msgstr "Sending since {startedAt}"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Sending starts at once. You can pause or cancel it, but emails that have left stay sent, and the email can no longer be changed."
+msgstr "Sending starts at once. You can pause or cancel it, but emails that have left stay sent, and the email can no longer be changed."
+
+#: src/campaigns/test-dialog.tsx
+msgid "Sending the test…"
+msgstr "Sending the test…"
+
+#: src/campaigns/results.tsx
+#: src/campaigns/rules.ts
+msgid "Sent"
+msgstr "Sent"
+
+#: src/campaigns/list-page.tsx
+msgid "Sent {when}"
+msgstr "Sent {when}"
+
+#: src/campaigns/results.tsx
+msgid "Sent. Finished {finishedAt}"
+msgstr "Sent. Finished {finishedAt}"
+
+#: src/campaigns/test-dialog.tsx
+msgid "Separate addresses with commas. A test goes to at most {limit} addresses, yours included."
+msgstr "Separate addresses with commas. A test goes to at most {limit} addresses, yours included."
+
+#: src/campaigns/editor-details.tsx
+msgid "Settings → Email Services"
+msgstr "Settings → Email Services"
+
+#: src/campaigns/results.tsx
+msgid "Show more recipients"
+msgstr "Show more recipients"
+
+#: src/search-picker.tsx
+msgid "Showing {shownCount} of {all}. Type to narrow the list."
+msgstr "Showing {shownCount} of {all}. Type to narrow the list."
+
+#: src/tag-picker.tsx
+msgid "Showing {shownCount} of {matchingCount}. Type to narrow the list."
+msgstr "Showing {shownCount} of {matchingCount}. Type to narrow the list."
+
+#: src/campaigns/results.tsx
+#: src/campaigns/rules.ts
+msgid "Skipped"
+msgstr "Skipped"
+
+#: src/campaigns/results.tsx
+msgid "Skipped, by reason"
+msgstr "Skipped, by reason"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Smart list"
+msgstr "Smart list"
+
+#: src/campaigns/rules.ts
+msgid "Smart list: {name}"
+msgstr "Smart list: {name}"
+
+#: src/campaigns/editor.tsx
+msgid "Someone else changed this campaign while you were editing, so your changes were not saved over theirs. Load their version, or keep yours as a separate copy."
+msgstr "Someone else changed this campaign while you were editing, so your changes were not saved over theirs. Load their version, or keep yours as a separate copy."
+
+#: src/campaigns/new-dialog.tsx
+msgid "Start from"
+msgstr "Start from"
+
+#: src/campaigns/editor-content.tsx
+msgid "Start from a template"
+msgstr "Start from a template"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Start sending at"
+msgstr "Start sending at"
+
+#: src/campaigns/list-page.tsx
+msgid "Started {when}"
+msgstr "Started {when}"
+
+#: src/campaigns/results.tsx
+msgid "State"
+msgstr "State"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "Status"
+msgstr "Status"
+
+#: src/campaigns/editor-details.tsx
+#: src/campaigns/results.tsx
+msgid "Subject"
+msgstr "Subject"
+
+#: src/campaigns/rules.ts
+msgid "Suppressed"
+msgstr "Suppressed"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Tags"
+msgstr "Tags"
+
+#: src/tag-picker.tsx
+msgid "Tags to add"
+msgstr "Tags to add"
+
+#: src/campaigns/new-dialog.tsx
+msgid "Template"
+msgstr "Template"
+
+#: src/email-library/header.tsx
+msgid "Templates"
+msgstr "Templates"
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+#: src/campaigns/send-dialog.tsx
+msgid "That didn't happen. Check your connection and try again."
+msgstr "That didn't happen. Check your connection and try again."
+
+#: src/campaigns/rules.ts
+msgid "The {name} check could not be confirmed for this mailbox."
+msgstr "The {name} check could not be confirmed for this mailbox."
+
+#: src/campaigns/rules.ts
+msgid "The address is on this business's list of addresses not to email."
+msgstr "The address is on this business's list of addresses not to email."
+
+#: src/campaigns/editor-audience.tsx
+msgid "The audience couldn't be counted. Check your connection."
+msgstr "The audience couldn't be counted. Check your connection."
+
+#: src/campaigns/send-dialog.tsx
+msgid "The audience has not been counted yet."
+msgstr "The audience has not been counted yet."
+
+#: src/campaigns/rules.ts
+msgid "The audience names a smart list, tag or field that is gone or that you cannot open. Choose it again."
+msgstr "The audience names a smart list, tag or field that is gone or that you cannot open. Choose it again."
+
+#: src/campaigns/editor.tsx
+msgid "The campaign couldn't be saved. Close this to see why."
+msgstr "The campaign couldn't be saved. Close this to see why."
+
+#: src/campaigns/rules.ts
+msgid "The campaign was cancelled before this email left."
+msgstr "The campaign was cancelled before this email left."
+
+#: src/campaigns/list-page.tsx
+#: src/campaigns/results.tsx
+msgid "The campaign wasn't duplicated. Check your connection and try again."
+msgstr "The campaign wasn't duplicated. Check your connection and try again."
+
+#: src/campaigns/new-dialog.tsx
+msgid "The campaign wasn't made. Check your connection and try again."
+msgstr "The campaign wasn't made. Check your connection and try again."
+
+#: src/campaigns/folders.tsx
+msgid "The campaign wasn't moved. Check your connection and try again."
+msgstr "The campaign wasn't moved. Check your connection and try again."
+
+#: src/campaigns/editor.tsx
+msgid "The checks couldn't be read, so it can't be sent yet."
+msgstr "The checks couldn't be read, so it can't be sent yet."
+
+#: src/campaigns/editor-checks.tsx
+msgid "The checks couldn't be read. Check your connection."
+msgstr "The checks couldn't be read. Check your connection."
+
+#: src/campaigns/rules.ts
+#: src/campaigns/send-dialog.tsx
+msgid "the chosen mailbox"
+msgstr "the chosen mailbox"
+
+#: src/campaigns/rules.ts
+msgid "The contact has no email address. Add one on the contact."
+msgstr "The contact has no email address. Add one on the contact."
+
+#: src/campaigns/rules.ts
+msgid "The contact has no value for a field the email uses, so nothing was sent rather than an email with a gap. Fill the field in on the contact."
+msgstr "The contact has no value for a field the email uses, so nothing was sent rather than an email with a gap. Fill the field in on the contact."
+
+#: src/campaigns/rules.ts
+msgid "The contact is marked do not contact, for every channel or for email. Change it on the contact only if they asked to hear from you."
+msgstr "The contact is marked do not contact, for every channel or for email. Change it on the contact only if they asked to hear from you."
+
+#: src/campaigns/rules.ts
+msgid "The contact was deleted or merged after the audience was fixed."
+msgstr "The contact was deleted or merged after the audience was fixed."
+
+#: src/campaigns/editor-audience.tsx
+msgid "The contacts a saved smart list shows when sending starts."
+msgstr "The contacts a saved smart list shows when sending starts."
+
+#: src/campaigns/editor-content.tsx
+msgid "The email as it is written"
+msgstr "The email as it is written"
+
+#: src/campaigns/results.tsx
+msgid "The email as it was written"
+msgstr "The email as it was written"
+
+#: src/campaigns/rules.ts
+msgid "The email has no unsubscribe link of its own, so a standard unsubscribe line is added at its end."
+msgstr "The email has no unsubscribe link of its own, so a standard unsubscribe line is added at its end."
+
+#: src/campaigns/rules.ts
+msgid "The email uses a merge field no contact has a value for, so nobody would get it. Remove or correct it."
+msgstr "The email uses a merge field no contact has a value for, so nobody would get it. Remove or correct it."
+
+#: src/campaigns/rules.ts
+msgid "The email's HTML is {size} KB. Gmail cuts messages off at about 102 KB, hiding the unsubscribe link and postal address at the end. Make it smaller."
+msgstr "The email's HTML is {size} KB. Gmail cuts messages off at about 102 KB, hiding the unsubscribe link and postal address at the end. Make it smaller."
+
+#: src/campaigns/folders.tsx
+msgid "The folder wasn't saved. Check your connection and try again."
+msgstr "The folder wasn't saved. Check your connection and try again."
+
+#: src/campaigns/settings-limit.tsx
+msgid "The limit wasn't saved. Check your connection and try again."
+msgstr "The limit wasn't saved. Check your connection and try again."
+
+#: src/campaigns/editor-details.tsx
+msgid "The line mail apps show after the subject."
+msgstr "The line mail apps show after the subject."
+
+#: src/search-picker.tsx
+msgid "The list couldn't be loaded."
+msgstr "The list couldn't be loaded."
+
+#: src/campaigns/rules.ts
+msgid "The mailbox fails its {name} check. The fix is in Settings → Email Services."
+msgstr "The mailbox fails its {name} check. The fix is in Settings → Email Services."
+
+#: src/campaigns/rules.ts
+msgid "The mailbox fails one of its setup checks. The fix is in Settings → Email Services."
+msgstr "The mailbox fails one of its setup checks. The fix is in Settings → Email Services."
+
+#: src/campaigns/rules.ts
+msgid "The mailbox was paused, disconnected or switched off for campaigns when this email was due."
+msgstr "The mailbox was paused, disconnected or switched off for campaigns when this email was due."
+
+#: src/campaigns/results.tsx
+msgid "The mailbox, and so to Conversations"
+msgstr "The mailbox, and so to Conversations"
+
+#: src/campaigns/results.tsx
+msgid "The mailbox's own name"
+msgstr "The mailbox's own name"
+
+#: src/campaigns/editor-details.tsx
+msgid "The mailboxes could not be loaded."
+msgstr "The mailboxes could not be loaded."
+
+#: src/campaigns/settings-limit.tsx
+msgid "The most campaign emails this business releases in 24 hours, over all its campaigns. Replies and workflow emails always leave first and are never held back by it. A campaign larger than the limit spreads over several days, and says how many before it is sent."
+msgstr "The most campaign emails this business releases in 24 hours, over all its campaigns. Replies and workflow emails always leave first and are never held back by it. A campaign larger than the limit spreads over several days, and says how many before it is sent."
+
+#: src/campaigns/results.tsx
+msgid "The numbers couldn't be read."
+msgstr "The numbers couldn't be read."
+
+#: src/campaigns/results.tsx
+msgid "The recipients are listed once sending starts: the audience is counted again then."
+msgstr "The recipients are listed once sending starts: the audience is counted again then."
+
+#: src/campaigns/results.tsx
+msgid "The recipients couldn't be read."
+msgstr "The recipients couldn't be read."
+
+#: src/campaigns/editor.tsx
+msgid "The saved campaign couldn't be read. Check your connection."
+msgstr "The saved campaign couldn't be read. Check your connection."
+
+#: src/campaigns/rules.ts
+msgid "The sending rules refused this email as it was about to leave."
+msgstr "The sending rules refused this email as it was about to leave."
+
+#: src/campaigns/editor.tsx
+msgid "The server would not take the draft as it stands."
+msgstr "The server would not take the draft as it stands."
+
+#: src/campaigns/rules.ts
+msgid "The smart list, tag or field its audience names is gone."
+msgstr "The smart list, tag or field its audience names is gone."
+
+#: src/campaigns/rules.ts
+msgid "The subject has {length} characters. Mail apps cut long subjects short: {advice} or fewer is safer."
+msgstr "The subject has {length} characters. Mail apps cut long subjects short: {advice} or fewer is safer."
+
+#: src/tag-picker.tsx
+msgid "The tag wasn't made. Check your connection and try again."
+msgstr "The tag wasn't made. Check your connection and try again."
+
+#: src/tag-picker.tsx
+msgid "The tags couldn't be loaded."
+msgstr "The tags couldn't be loaded."
+
+#: src/tag-picker.tsx
+msgid "The tags couldn't be loaded. Reload the page to see the chosen tags."
+msgstr "The tags couldn't be loaded. Reload the page to see the chosen tags."
+
+#: src/campaigns/editor-content.tsx
+msgid "The template couldn't be read. Check your connection and try again."
+msgstr "The template couldn't be read. Check your connection and try again."
+
+#: src/campaigns/editor-content.tsx
+msgid "The template's subject and text take the place of this campaign's. The template itself is not changed."
+msgstr "The template's subject and text take the place of this campaign's. The template itself is not changed."
+
+#: src/campaigns/test-dialog.tsx
+msgid "The test is on its way to {list}. It should arrive within a minute or two."
+msgstr "The test is on its way to {list}. It should arrive within a minute or two."
+
+#: src/campaigns/test-dialog.tsx
+msgid "The test wasn't sent. Check your connection and try again."
+msgstr "The test wasn't sent. Check your connection and try again."
+
+#: src/campaigns/rules.ts
+msgid "The window must open and close at different times."
+msgstr "The window must open and close at different times."
+
+#: src/campaigns/new-dialog.tsx
+msgid "There are no campaigns to copy yet."
+msgstr "There are no campaigns to copy yet."
+
+#: src/campaigns/folders.tsx
+msgid "There are no folders yet. Make one with the folder button beside the list."
+msgstr "There are no folders yet. Make one with the folder button beside the list."
+
+#: src/campaigns/editor-audience.tsx
+msgid "There are no smart lists yet. Save one from the Contacts page."
+msgstr "There are no smart lists yet. Save one from the Contacts page."
+
+#: src/tag-picker.tsx
+msgid "There are no tags yet. Make them in Settings, under Custom Fields & Tags."
+msgstr "There are no tags yet. Make them in Settings, under Custom Fields & Tags."
+
+#: src/tag-picker.tsx
+msgid "There are no tags yet. Type a name to make the first one."
+msgstr "There are no tags yet. Type a name to make the first one."
+
+#: src/campaigns/list-page.tsx
+msgid "They are deleted for good. Nothing was sent, so nothing else changes. Ticked campaigns that are not drafts are kept."
+msgstr "They are deleted for good. Nothing was sent, so nothing else changes. Ticked campaigns that are not drafts are kept."
+
+#: src/campaigns/rules.ts
+msgid "They reported an earlier email as spam. They are not emailed again."
+msgstr "They reported an earlier email as spam. They are not emailed again."
+
+#: src/campaigns/rules.ts
+msgid "They unsubscribed from marketing email. Only they can sign up again."
+msgstr "They unsubscribed from marketing email. Only they can sign up again."
+
+#: src/campaigns/editor-audience.tsx
+msgid "This audience is a filter that was set through the API. It is kept as it is: this screen can't change its conditions yet. Choosing another audience replaces it."
+msgstr "This audience is a filter that was set through the API. It is kept as it is: this screen can't change its conditions yet. Choosing another audience replaces it."
+
+#: src/campaigns/editor-audience.tsx
+msgid "This audience names a smart list or a tag that is gone, or that you cannot open. Choose it again."
+msgstr "This audience names a smart list or a tag that is gone, or that you cannot open. Choose it again."
+
+#: src/campaigns/campaign-page.tsx
+msgid "This campaign is gone: it was deleted, or the address is wrong."
+msgstr "This campaign is gone: it was deleted, or the address is wrong."
+
+#: src/campaigns/email-parts.tsx
+msgid "This email"
+msgstr "This email"
+
+#: src/campaigns/editor-content.tsx
+msgid "This email places its own unsubscribe link, so no other is added. Each recipient gets their own link."
+msgstr "This email places its own unsubscribe link, so no other is added. Each recipient gets their own link."
+
+#: src/campaigns/list-page.tsx
+msgid "This folder is empty."
+msgstr "This folder is empty."
+
+#: src/campaigns/settings-limit.tsx
+msgid "This install also limits the whole agency to {agency} campaign emails in 24 hours, over all its businesses."
+msgstr "This install also limits the whole agency to {agency} campaign emails in 24 hours, over all its businesses."
+
+#: src/campaigns/rules.ts
+msgid "This install has no public HTTPS address, so it cannot make unsubscribe links, and marketing email never leaves without one. Whoever runs the server sets its public address."
+msgstr "This install has no public HTTPS address, so it cannot make unsubscribe links, and marketing email never leaves without one. Whoever runs the server sets its public address."
+
+#: src/campaigns/editor-audience.tsx
+msgid "This is the count before your last change. It is counted again once saved."
+msgstr "This is the count before your last change. It is counted again once saved."
+
+#: src/campaigns/rules.ts
+msgid "This mailbox is not switched on for campaigns. Tick “Use for campaigns” for it in Settings → Email Services."
+msgstr "This mailbox is not switched on for campaigns. Tick “Use for campaigns” for it in Settings → Email Services."
+
+#: src/campaigns/rules.ts
+msgid "This mailbox is paused or disconnected. Reconnect it in Settings → Email Services."
+msgstr "This mailbox is paused or disconnected. Reconnect it in Settings → Email Services."
+
+#: src/campaigns/rules.ts
+msgid "This mailbox's setup has not been checked yet. Check it in Settings → Email Services, then come back."
+msgstr "This mailbox's setup has not been checked yet. Check it in Settings → Email Services, then come back."
+
+#: src/tag-picker.tsx
+msgid "This tag is already chosen."
+msgstr "This tag is already chosen."
+
+#: src/campaigns/list-page.tsx
+msgid "To group campaigns"
+msgstr "To group campaigns"
+
+#: src/campaigns/test-dialog.tsx
+msgid "To me ({myAddress})"
+msgstr "To me ({myAddress})"
+
+#: src/campaigns/editor-content.tsx
+msgid "To place it yourself, edit the email and use “Insert an unsubscribe link” in the toolbar."
+msgstr "To place it yourself, edit the email and use “Insert an unsubscribe link” in the toolbar."
+
+#: src/campaigns/editor-audience.tsx
+#: src/campaigns/editor-checks.tsx
+#: src/campaigns/editor-details.tsx
+#: src/campaigns/settings-limit.tsx
+#: src/search-picker.tsx
+#: src/tag-picker.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Unit of time between batches"
+msgstr "Unit of time between batches"
+
+#: src/campaigns/rules.ts
+msgid "Unsubscribe"
+msgstr "Unsubscribe"
+
+#: src/campaigns/email-parts.tsx
+msgid "Unsubscribe link"
+msgstr "Unsubscribe link"
+
+#: src/campaigns/editor-content.tsx
+msgid "Unsubscribe: {unsubscribeToken}"
+msgstr "Unsubscribe: {unsubscribeToken}"
+
+#: src/campaigns/results.tsx
+#: src/campaigns/rules.ts
+msgid "Unsubscribed"
+msgstr "Unsubscribed"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Until"
+msgstr "Until"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Until it starts you can cancel it, and it becomes a draft again. The audience is counted again when it starts."
+msgstr "Until it starts you can cancel it, and it becomes a draft again. The audience is counted again when it starts."
+
+#: src/campaigns/editor.tsx
+msgid "Untitled campaign"
+msgstr "Untitled campaign"
+
+#: src/campaigns/list-page.tsx
+msgid "Updated"
+msgstr "Updated"
+
+#: src/campaigns/draft.ts
+msgid "Use at most 120 characters."
+msgstr "Use at most 120 characters."
+
+#: src/campaigns/draft.ts
+msgid "Use at most 150 characters."
+msgstr "Use at most 150 characters."
+
+#: src/campaigns/draft.ts
+msgid "Use at most 255 characters."
+msgstr "Use at most 255 characters."
+
+#: src/email-library/table.tsx
+msgid "View"
+msgstr "View"
+
+#: src/campaigns/rules.ts
+msgid "Waiting because the agency's daily campaign limit is reached."
+msgstr "Waiting because the agency's daily campaign limit is reached."
+
+#: src/campaigns/rules.ts
+msgid "Waiting because the business's daily campaign limit is reached."
+msgstr "Waiting because the business's daily campaign limit is reached."
+
+#: src/campaigns/rules.ts
+msgid "Waiting because the mailbox's daily limit is reached."
+msgstr "Waiting because the mailbox's daily limit is reached."
+
+#: src/campaigns/rules.ts
+msgid "Waiting because the mailbox's warm-up allowance for today is used."
+msgstr "Waiting because the mailbox's warm-up allowance for today is used."
+
+#: src/campaigns/rules.ts
+msgid "Waiting for the next batch."
+msgstr "Waiting for the next batch."
+
+#: src/campaigns/editor.tsx
+msgid "Waiting for your changes to save."
+msgstr "Waiting for your changes to save."
+
+#: src/campaigns/rules.ts
+msgid "Waiting until {when} because the agency's daily campaign limit is reached."
+msgstr "Waiting until {when} because the agency's daily campaign limit is reached."
+
+#: src/campaigns/rules.ts
+msgid "Waiting until {when} because the business's daily campaign limit is reached."
+msgstr "Waiting until {when} because the business's daily campaign limit is reached."
+
+#: src/campaigns/rules.ts
+msgid "Waiting until {when} because the mailbox's daily limit is reached."
+msgstr "Waiting until {when} because the mailbox's daily limit is reached."
+
+#: src/campaigns/rules.ts
+msgid "Waiting until {when} because the mailbox's warm-up allowance for today is used."
+msgstr "Waiting until {when} because the mailbox's warm-up allowance for today is used."
+
+#: src/campaigns/rules.ts
+msgid "Waiting until {when}, when the next batch is due."
+msgstr "Waiting until {when}, when the next batch is due."
+
+#: src/campaigns/rules.ts
+msgid "Waiting until {when}, when the sending window opens."
+msgstr "Waiting until {when}, when the sending window opens."
+
+#: src/campaigns/rules.ts
+msgid "Waiting: the sending window is closed."
+msgstr "Waiting: the sending window is closed."
+
+#: src/campaigns/settings-limit.tsx
+msgid "We couldn't load the campaign limit."
+msgstr "We couldn't load the campaign limit."
+
+#: src/campaigns/list-page.tsx
+msgid "We couldn't load the campaigns."
+msgstr "We couldn't load the campaigns."
+
+#: src/campaigns/campaign-page.tsx
+msgid "We couldn't load this campaign."
+msgstr "We couldn't load this campaign."
+
+#: src/campaigns/results.tsx
+msgid "What became of it"
+msgstr "What became of it"
+
+#: src/campaigns/results.tsx
+msgid "What was sent"
+msgstr "What was sent"
+
+#: src/campaigns/results.tsx
+msgid "What will be sent"
+msgstr "What will be sent"
+
+#: src/campaigns/send-dialog.tsx
+msgid "When"
+msgstr "When"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Who will get it"
+msgstr "Who will get it"
+
+#: src/campaigns/editor-audience.tsx
+msgid "Why some will not receive it"
+msgstr "Why some will not receive it"
+
+#: src/campaigns/send-dialog.tsx
+msgid "Without batches it leaves as fast as the mailbox allows; replies and workflow emails still go first."
+msgstr "Without batches it leaves as fast as the mailbox allows; replies and workflow emails still go first."
+
+#: src/campaigns/send-dialog.tsx
+msgid "Working…"
+msgstr "Working…"
+
+#: src/campaigns/editor-checks.tsx
+msgid "Worth knowing"
+msgstr "Worth knowing"
+
+#: src/campaigns/editor-content.tsx
+msgid "Write the email"
+msgstr "Write the email"
+
+#: src/campaigns/rules.ts
+msgid "Write the email."
+msgstr "Write the email."
+
+#: src/campaigns/rules.ts
+msgid "Your business profile has no postal address. US law (CAN-SPAM) requires every marketing email to show a valid physical postal address: a street address, or a PO box or private mailbox registered for mail. Add it in the Business Profile; it is added to the end of every campaign email."
+msgstr "Your business profile has no postal address. US law (CAN-SPAM) requires every marketing email to show a valid physical postal address: a street address, or a PO box or private mailbox registered for mail. Add it in the Business Profile; it is added to the end of every campaign email."
+
+#: src/campaigns/editor.tsx
+msgid "Your copy couldn't be saved. Check your connection and try again."
+msgstr "Your copy couldn't be saved. Check your connection and try again."
+
+#: src/campaigns/test-dialog.tsx
+msgid "Your last changes couldn't be saved, so no test was sent. Close this and look at what is marked."
+msgstr "Your last changes couldn't be saved, so no test was sent. Close this and look at what is marked."
+
+#: src/campaigns/editor.tsx
+msgid "Your last changes couldn't be saved. If you leave now they are lost."
+msgstr "Your last changes couldn't be saved. If you leave now they are lost."
+
+#: src/campaigns/settings-limit.tsx
+msgid "Your role can read this limit and not change it."
+msgstr "Your role can read this limit and not change it."
+
+#: src/campaigns/rules.ts
+msgid "Your role can send a test to yourself only."
+msgstr "Your role can send a test to yourself only."
+
+#: src/campaigns/test-dialog.tsx
+msgid "Your role can send a test to yourself only. Ask an owner or admin to send one to someone else."
+msgstr "Your role can send a test to yourself only. Ask an owner or admin to send one to someone else."
+
+#: src/campaigns/campaign-page.tsx
+#: src/campaigns/list-page.tsx
+msgid "Your role can't see email campaigns. Ask an owner or admin of this business."
+msgstr "Your role can't see email campaigns. Ask an owner or admin of this business."

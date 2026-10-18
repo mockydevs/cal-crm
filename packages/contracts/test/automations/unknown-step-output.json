@@ -1,0 +1,48 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "ai.ask",
+        "config": {
+          "prompt": "Budget?"
+        },
+        "next": "reply"
+      },
+      "reply": {
+        "type": "sms.send",
+        "config": {
+          "message": "You said {{steps.hello.anser}}"
+        },
+        "next": "done"
+      },
+      "done": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello",
+      "code": "no_ai_key",
+      "message": "Add an AI key before using AI steps."
+    },
+    {
+      "path": "/steps/reply/config/message",
+      "code": "unknown_merge_field",
+      "message": "steps.hello.anser is not an output of a step.",
+      "suggestion": "Did you mean answer?"
+    }
+  ]
+}

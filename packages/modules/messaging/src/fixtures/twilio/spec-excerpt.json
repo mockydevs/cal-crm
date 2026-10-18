@@ -1,0 +1,430 @@
+{
+  "source": {
+    "repository": "https://github.com/twilio/twilio-oai",
+    "file": "spec/json/twilio_api_v2010.json",
+    "commit": "141f1201b55abcc16b3aa8089e71c4a927326975",
+    "license": "MIT (repository LICENSE file); Apache 2.0 (info.license inside the file)",
+    "note": "A machine-made excerpt of the parts the SMS code relies on. Regenerate it from the file above; do not edit it by hand."
+  },
+  "servers": ["https://api.twilio.com"],
+  "security": {
+    "accountSid_authToken": {
+      "scheme": "basic",
+      "type": "http"
+    }
+  },
+  "operations": {
+    "FetchAccount": {
+      "method": "GET",
+      "path": "/2010-04-01/Accounts/{Sid}.json",
+      "sidPattern": "^AC[0-9a-fA-F]{32}$",
+      "success": ["200"]
+    },
+    "ListIncomingPhoneNumber": {
+      "method": "GET",
+      "path": "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json",
+      "query": ["Beta", "FriendlyName", "PhoneNumber", "Origin", "PageSize", "Page", "PageToken"],
+      "pageSize": {
+        "type": "integer",
+        "format": "int64",
+        "minimum": 1,
+        "maximum": 1000
+      },
+      "success": ["200"]
+    },
+    "CreateMessage": {
+      "method": "POST",
+      "path": "/2010-04-01/Accounts/{AccountSid}/Messages.json",
+      "contentTypes": ["application/x-www-form-urlencoded"],
+      "required": ["To"],
+      "parameters": [
+        "AddressRetention",
+        "ApplicationSid",
+        "Attempt",
+        "Body",
+        "ContentRetention",
+        "ContentSid",
+        "ContentVariables",
+        "FallbackFrom",
+        "ForceDelivery",
+        "From",
+        "MaxPrice",
+        "MediaUrl",
+        "MessageIntent",
+        "MessagingServiceSid",
+        "PersistentAction",
+        "ProvideFeedback",
+        "RiskCheck",
+        "ScheduleType",
+        "SendAsMms",
+        "SendAt",
+        "ShortenUrls",
+        "SmartEncoded",
+        "StatusCallback",
+        "To",
+        "TrafficType",
+        "ValidityPeriod"
+      ],
+      "headerParameters": [],
+      "success": ["201"]
+    }
+  },
+  "message_enum_status": [
+    "queued",
+    "sending",
+    "sent",
+    "failed",
+    "delivered",
+    "undelivered",
+    "receiving",
+    "received",
+    "accepted",
+    "scheduled",
+    "read",
+    "partially_delivered",
+    "canceled"
+  ],
+  "message_enum_direction": ["inbound", "outbound-api", "outbound-call", "outbound-reply"],
+  "account_enum_status": ["active", "suspended", "closed"],
+  "account_enum_type": ["Trial", "Full"],
+  "api.v2010.account": {
+    "auth_token": {
+      "type": "string",
+      "nullable": true
+    },
+    "date_created": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time-rfc-2822"
+    },
+    "date_updated": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time-rfc-2822"
+    },
+    "friendly_name": {
+      "type": "string",
+      "nullable": true
+    },
+    "owner_account_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$"
+    },
+    "sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$"
+    },
+    "status": {
+      "enumRef": "account_enum_status"
+    },
+    "subresource_uris": {
+      "type": "object",
+      "nullable": true,
+      "format": "uri-map"
+    },
+    "type": {
+      "enumRef": "account_enum_type"
+    },
+    "uri": {
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "api.v2010.account.message": {
+    "body": {
+      "type": "string",
+      "nullable": true
+    },
+    "num_segments": {
+      "type": "string",
+      "nullable": true
+    },
+    "direction": {
+      "enumRef": "message_enum_direction"
+    },
+    "from": {
+      "type": "string",
+      "nullable": true,
+      "format": "phone-number"
+    },
+    "to": {
+      "type": "string",
+      "nullable": true
+    },
+    "date_updated": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time-rfc-2822"
+    },
+    "price": {
+      "type": "string",
+      "nullable": true
+    },
+    "error_message": {
+      "type": "string",
+      "nullable": true
+    },
+    "uri": {
+      "type": "string",
+      "nullable": true
+    },
+    "account_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$"
+    },
+    "num_media": {
+      "type": "string",
+      "nullable": true
+    },
+    "status": {
+      "enumRef": "message_enum_status"
+    },
+    "messaging_service_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^MG[0-9a-fA-F]{32}$"
+    },
+    "sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^(SM|MM)[0-9a-fA-F]{32}$"
+    },
+    "date_sent": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time-rfc-2822"
+    },
+    "date_created": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time-rfc-2822"
+    },
+    "error_code": {
+      "type": "integer",
+      "nullable": true
+    },
+    "price_unit": {
+      "type": "string",
+      "nullable": true,
+      "format": "currency"
+    },
+    "api_version": {
+      "type": "string",
+      "nullable": true
+    },
+    "subresource_uris": {
+      "type": "object",
+      "nullable": true,
+      "format": "uri-map"
+    }
+  },
+  "api.v2010.account.incoming_phone_number": {
+    "account_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^AC[0-9a-fA-F]{32}$"
+    },
+    "address_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^AD[0-9a-fA-F]{32}$"
+    },
+    "address_requirements": {
+      "enumRef": "incoming_phone_number_enum_address_requirement"
+    },
+    "api_version": {
+      "type": "string",
+      "nullable": true
+    },
+    "beta": {
+      "type": "boolean",
+      "nullable": true
+    },
+    "capabilities": {
+      "type": "object",
+      "nullable": true,
+      "format": "phone-number-capabilities",
+      "properties": {
+        "mms": {
+          "type": "boolean"
+        },
+        "sms": {
+          "type": "boolean"
+        },
+        "voice": {
+          "type": "boolean"
+        },
+        "fax": {
+          "type": "boolean"
+        }
+      }
+    },
+    "date_created": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time-rfc-2822"
+    },
+    "date_updated": {
+      "type": "string",
+      "nullable": true,
+      "format": "date-time-rfc-2822"
+    },
+    "friendly_name": {
+      "type": "string",
+      "nullable": true
+    },
+    "identity_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^RI[0-9a-fA-F]{32}$"
+    },
+    "phone_number": {
+      "type": "string",
+      "nullable": true,
+      "format": "phone-number"
+    },
+    "origin": {
+      "type": "string",
+      "nullable": true
+    },
+    "sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^PN[0-9a-fA-F]{32}$"
+    },
+    "sms_application_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^AP[0-9a-fA-F]{32}$"
+    },
+    "sms_fallback_method": {
+      "type": "string",
+      "nullable": true,
+      "format": "http-method"
+    },
+    "sms_fallback_url": {
+      "type": "string",
+      "nullable": true,
+      "format": "uri"
+    },
+    "sms_method": {
+      "type": "string",
+      "nullable": true,
+      "format": "http-method"
+    },
+    "sms_url": {
+      "type": "string",
+      "nullable": true,
+      "format": "uri"
+    },
+    "status_callback": {
+      "type": "string",
+      "nullable": true,
+      "format": "uri"
+    },
+    "status_callback_method": {
+      "type": "string",
+      "nullable": true,
+      "format": "http-method"
+    },
+    "trunk_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^TK[0-9a-fA-F]{32}$"
+    },
+    "uri": {
+      "type": "string",
+      "nullable": true
+    },
+    "voice_receive_mode": {
+      "enumRef": "incoming_phone_number_enum_voice_receive_mode"
+    },
+    "voice_application_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^AP[0-9a-fA-F]{32}$"
+    },
+    "voice_caller_id_lookup": {
+      "type": "boolean",
+      "nullable": true
+    },
+    "voice_fallback_method": {
+      "type": "string",
+      "nullable": true,
+      "format": "http-method"
+    },
+    "voice_fallback_url": {
+      "type": "string",
+      "nullable": true,
+      "format": "uri"
+    },
+    "voice_method": {
+      "type": "string",
+      "nullable": true,
+      "format": "http-method"
+    },
+    "voice_url": {
+      "type": "string",
+      "nullable": true,
+      "format": "uri"
+    },
+    "emergency_status": {
+      "enumRef": "incoming_phone_number_enum_emergency_status"
+    },
+    "emergency_address_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^AD[0-9a-fA-F]{32}$"
+    },
+    "emergency_address_status": {
+      "enumRef": "incoming_phone_number_enum_emergency_address_status"
+    },
+    "bundle_sid": {
+      "type": "string",
+      "nullable": true,
+      "pattern": "^BU[0-9a-fA-F]{32}$"
+    },
+    "status": {
+      "type": "string",
+      "nullable": true
+    },
+    "type": {
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "ListIncomingPhoneNumberResponse": {
+    "end": {
+      "type": "integer"
+    },
+    "first_page_uri": {
+      "type": "string"
+    },
+    "next_page_uri": {
+      "type": "string",
+      "nullable": true
+    },
+    "page": {
+      "type": "integer"
+    },
+    "page_size": {
+      "type": "integer"
+    },
+    "previous_page_uri": {
+      "type": "string",
+      "nullable": true
+    },
+    "start": {
+      "type": "integer"
+    },
+    "uri": {
+      "type": "string"
+    },
+    "incoming_phone_numbers": {
+      "type": "array"
+    }
+  }
+}

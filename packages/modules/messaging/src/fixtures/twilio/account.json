@@ -1,0 +1,17 @@
+{
+  "$source": "Built by hand from the OpenAPI schema named in \"schema\" (twilio-oai, spec/json/twilio_api_v2010.json, commit 141f1201b55abcc16b3aa8089e71c4a927326975). Not captured from any account: every SID is made up and every number is one of Twilio's documentation examples.",
+  "schema": "api.v2010.account",
+  "auth_token": "fixture-auth-token-never-log-me",
+  "date_created": "Thu, 30 Jul 2015 20:00:00 +0000",
+  "date_updated": "Thu, 30 Jul 2015 20:00:00 +0000",
+  "friendly_name": "Fixture account",
+  "owner_account_sid": "AC00000000000000000000000000000001",
+  "sid": "AC00000000000000000000000000000001",
+  "status": "active",
+  "subresource_uris": {
+    "incoming_phone_numbers": "/2010-04-01/Accounts/AC00000000000000000000000000000001/IncomingPhoneNumbers.json",
+    "messages": "/2010-04-01/Accounts/AC00000000000000000000000000000001/Messages.json"
+  },
+  "type": "Full",
+  "uri": "/2010-04-01/Accounts/AC00000000000000000000000000000001.json"
+}

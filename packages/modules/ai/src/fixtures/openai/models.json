@@ -1,0 +1,7 @@
+{
+  "object": "list",
+  "data": [
+    { "id": "fixture-model", "object": "model", "created": 1760000000, "owned_by": "library" },
+    { "id": "fixture-small", "object": "model", "created": 1760000000, "owned_by": "library" }
+  ]
+}

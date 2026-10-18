@@ -1,0 +1,248 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-18 04:02+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "{more} more contacts share it and are not shown."
+msgstr "{more} more contacts share it and are not shown."
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "{title} was rejected. Those contacts won't be shown as duplicates again."
+msgstr "{title} was rejected. Those contacts won't be shown as duplicates again."
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "{total, plural, one {# contact} other {# contacts}}"
+msgstr "{total, plural, one {# contact} other {# contacts}}"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Added"
+msgstr "Added"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Compare more contacts"
+msgstr "Compare more contacts"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Compare the contacts field by field."
+msgstr "Compare the contacts field by field."
+
+#: src/contact-duplicates/preferences.tsx
+msgid "Contact Deduplication Preferences"
+msgstr "Contact Deduplication Preferences"
+
+#: src/contact-duplicates/preferences.tsx
+msgid "Contact deduplication preferences saved."
+msgstr "Contact deduplication preferences saved."
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Contacts that may be the same person. An email address or a phone number belongs to one contact, so these are near matches: addresses that reach one inbox, numbers that end alike, and similar names with something more in common."
+msgstr "Contacts that may be the same person. An email address or a phone number belongs to one contact, so these are near matches: addresses that reach one inbox, numbers that end alike, and similar names with something more in common."
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Duplicates by email"
+msgstr "Duplicates by email"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Duplicates by name"
+msgstr "Duplicates by name"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Duplicates by phone"
+msgstr "Duplicates by phone"
+
+#: src/contact-duplicates/manage-page.tsx
+#: src/contact-duplicates/preferences.tsx
+#: src/contact-duplicates/review-panel.tsx
+msgid "Email"
+msgstr "Email"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Find by"
+msgstr "Find by"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Looking for duplicates…"
+msgstr "Looking for duplicates…"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Looking…"
+msgstr "Looking…"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Manage Duplicates"
+msgstr "Manage Duplicates"
+
+#: src/contact-duplicates/preferences.tsx
+msgid "Match fields"
+msgstr "Match fields"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "No duplicates among the contacts compared so far."
+msgstr "No duplicates among the contacts compared so far."
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "No possible duplicates found."
+msgstr "No possible duplicates found."
+
+#: src/contact-duplicates/preferences.tsx
+#: src/contact-duplicates/review-panel.tsx
+msgid "None"
+msgstr "None"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Nothing is left to review."
+msgstr "Nothing is left to review."
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Only admins can manage duplicates."
+msgstr "Only admins can manage duplicates."
+
+#: src/contact-duplicates/preferences.tsx
+msgid "Only someone who may change the business profile can change these."
+msgstr "Only someone who may change the business profile can change these."
+
+#: src/contact-duplicates/manage-page.tsx
+#: src/contact-duplicates/preferences.tsx
+#: src/contact-duplicates/review-panel.tsx
+msgid "Phone"
+msgstr "Phone"
+
+#: src/contact-duplicates/possible-chip.tsx
+msgid "Possible duplicates ({count})"
+msgstr "Possible duplicates ({count})"
+
+#: src/contact-duplicates/preferences.tsx
+msgid "Primary field"
+msgstr "Primary field"
+
+#: src/contact-duplicates/manage-page.tsx
+#: src/contact-duplicates/review-panel.tsx
+msgid "Reject"
+msgstr "Reject"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Reject these duplicates?"
+msgstr "Reject these duplicates?"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Review"
+msgstr "Review"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Review duplicates"
+msgstr "Review duplicates"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Same company"
+msgstr "Same company"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Same email inbox"
+msgstr "Same email inbox"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Same email name"
+msgstr "Same email name"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Same last 10 digits"
+msgstr "Same last 10 digits"
+
+#: src/contact-duplicates/preferences.tsx
+msgid "Save preferences"
+msgstr "Save preferences"
+
+#: src/contact-duplicates/preferences.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/contact-duplicates/preferences.tsx
+msgid "Secondary field"
+msgstr "Secondary field"
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "Show more"
+msgstr "Show more"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Similar name"
+msgstr "Similar name"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Similar names, and at least one more thing in common."
+msgstr "Similar names, and at least one more thing in common."
+
+#: src/contact-duplicates/preferences.tsx
+msgid "Someone changed these preferences meanwhile. Reload the page to see theirs."
+msgstr "Someone changed these preferences meanwhile. Reload the page to see theirs."
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "The {count} contacts are not shown together as duplicates again, unless another contact joins them. This can't be undone."
+msgstr "The {count} contacts are not shown together as duplicates again, unless another contact joins them. This can't be undone."
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "The contacts of {title}, side by side"
+msgstr "The contacts of {title}, side by side"
+
+#: src/contact-duplicates/preferences.tsx
+msgid "The preferences weren't saved. Check your connection and try again."
+msgstr "The preferences weren't saved. Check your connection and try again."
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "The same email address with a different +tag. Some providers deliver both to one inbox, some don't."
+msgstr "The same email address with a different +tag. Some providers deliver both to one inbox, some don't."
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "These addresses reach one Gmail inbox: Gmail ignores dots, anything after a +, and googlemail.com."
+msgstr "These addresses reach one Gmail inbox: Gmail ignores dots, anything after a +, and googlemail.com."
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "These phone numbers end in the same 10 digits, but the names differ."
+msgstr "These phone numbers end in the same 10 digits, but the names differ."
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "These phone numbers end in the same 10 digits."
+msgstr "These phone numbers end in the same 10 digits."
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "They weren't rejected. Check your connection and try again."
+msgstr "They weren't rejected. Check your connection and try again."
+
+#: src/contact-duplicates/preferences.tsx
+msgid "Tried when the primary field is given and finds nobody. With none, the other field is used only when the primary one is not given."
+msgstr "Tried when the primary field is given and finds nobody. With none, the other field is used only when the primary one is not given."
+
+#: src/contact-duplicates/manage-page.tsx
+#: src/contact-duplicates/review-panel.tsx
+msgid "Unnamed contact"
+msgstr "Unnamed contact"
+
+#: src/contact-duplicates/preferences.tsx
+msgid "We couldn't load the preferences."
+msgstr "We couldn't load the preferences."
+
+#: src/contact-duplicates/manage-page.tsx
+msgid "We couldn't look for duplicates."
+msgstr "We couldn't look for duplicates."
+
+#: src/contact-duplicates/manage-page.tsx
+#: src/contact-duplicates/review-panel.tsx
+msgid "Weaker match"
+msgstr "Weaker match"
+
+#: src/contact-duplicates/preferences.tsx
+msgid "When a form, a booking or an import brings in details, the contact that already holds them is updated instead of a new one being made. These fields are looked at in this order, and the duplicate lookup of the API follows it too. An email address or a phone number always belongs to one contact."
+msgstr "When a form, a booking or an import brings in details, the contact that already holds them is updated instead of a new one being made. These fields are looked at in this order, and the duplicate lookup of the API follows it too. An email address or a phone number always belongs to one contact."

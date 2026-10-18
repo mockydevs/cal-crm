@@ -1,0 +1,36 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "email.send",
+        "config": {
+          "template": "Pricing guid"
+        },
+        "next": "done"
+      },
+      "done": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello/config/template",
+      "code": "unknown_reference",
+      "message": "There's no email template \"Pricing guid\".",
+      "suggestion": "Did you mean Pricing guide?"
+    }
+  ]
+}

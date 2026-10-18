@@ -1,0 +1,185 @@
+// What each setting does, and the test that proves it: the test changes the setting and sees
+// the CRM behave differently. A setting that is saved and shown but changes nothing is a gap,
+// listed with its reason, until code acts on it and a test proves that. `pnpm run
+// settings:check` holds every column of every settings table to this list.
+import type { Effects } from './audit.ts';
+
+const proof = (file: string, test: string) => ({ proof: { file, test } });
+
+const AI = 'packages/modules/ai/src/gateway.int.test.ts';
+const DOCUMENTS = 'packages/modules/commerce/src/documents.int.test.ts';
+const OWNERS = 'packages/modules/crm/src/pipelines/settings.int.test.ts';
+const OUTBOUND = 'packages/modules/messaging/src/outbound.int.test.ts';
+
+const INBOUND_ROUTING =
+  'Honoured by resolveInboundRoute (voice-routing.test.ts), which nothing calls yet: inbound calls are not routed yet.';
+const CALL_HANDLING =
+  'Nothing reads it yet: call connect, whisper and the outbound caller ID are not built yet.';
+const RECORDING =
+  'Nothing reads it yet: call recording, voicemail and transcripts are not built yet.';
+const MISSED_CALL = 'Nothing reads it yet: the missed-call text is not built yet.';
+
+export const effects: Effects = {
+  'ai.settings': {
+    enabled: proof(AI, 'calls nobody for a business that turned AI off'),
+    key_source: proof(AI, 'uses the agency’s key or the business’s own, as the business chose'),
+    monthly_limit: proof(
+      AI,
+      'pauses AI work once the month’s spend reaches it, without calling anyone',
+    ),
+    at_limit: proof(
+      AI,
+      'keeps going past the limit when the business chose that, and still tells the owner',
+    ),
+    mask_contact_details: proof(
+      AI,
+      'hides phone numbers and email addresses from the provider when the business asks',
+    ),
+    request_log_days: proof(
+      AI,
+      'keeps no log when the business keeps none, and keeps one for as long as it says',
+    ),
+    backup_provider: proof(
+      AI,
+      'takes over when the main model fails, and both calls are on record',
+    ),
+    backup_model: proof(AI, 'takes over when the main model fails, and both calls are on record'),
+    limit_reached_at: {
+      notASetting:
+        'When the month’s spend reached the limit: the gateway writes it, nobody chooses it.',
+    },
+  },
+  'commerce.settings': {
+    payment_terms_days: proof(
+      DOCUMENTS,
+      'issues a draft: its number, its dates, who it is from and for, and nothing sent',
+    ),
+    quote_validity_days: proof(
+      'packages/modules/commerce/src/rules.test.ts',
+      'are today and the quote validity after it for a quote that names none',
+    ),
+    default_notes: proof(
+      DOCUMENTS,
+      'starts a draft with its totals worked out, the contact as they are and the default wording',
+    ),
+    default_terms: proof(
+      DOCUMENTS,
+      'starts a draft with its totals worked out, the contact as they are and the default wording',
+    ),
+    payment_instructions: proof(
+      DOCUMENTS,
+      'issues a draft: its number, its dates, who it is from and for, and nothing sent',
+    ),
+    tax_number: proof(
+      DOCUMENTS,
+      'issues a draft: its number, its dates, who it is from and for, and nothing sent',
+    ),
+    default_tax_rate: proof(
+      'apps/dashboard/src/payments-rules.test.ts',
+      'takes a line from a product, with the default tax rate when it has none',
+    ),
+  },
+  'crm.settings': {
+    tag_creation: proof(
+      'packages/modules/crm/src/tags/configuration.int.test.ts',
+      'enforces the default admin creation policy for empty and populated businesses',
+    ),
+    suggest_similar_tags: proof(
+      'apps/dashboard/e2e/tag-management.spec.ts',
+      'groups, describes and edits tags and rules at ${String(width)}px',
+    ),
+    trash_retention_days: proof(
+      'packages/modules/crm/src/trash/trash.int.test.ts',
+      "purges only what has been in the trash past its business's retention days",
+    ),
+    deal_owner_follows_contact: proof(
+      OWNERS,
+      "make a deal's new owner a follower of its primary contact only while that rule is on",
+    ),
+    contact_owner_follows_deal: proof(
+      OWNERS,
+      "make a contact's new owner a follower of the open deals it is the primary contact of only while that rule is on",
+    ),
+    deal_owner_differs: {
+      gap: 'Saved and shown in the opportunity settings, but no code acts on it: a deal’s owner may differ from its contact’s whether it is on or off.',
+    },
+    duplicate_primary: proof(
+      'packages/modules/crm/src/contacts/duplicate-settings.int.test.ts',
+      'starts with the phone number when it is the primary field',
+    ),
+    duplicate_secondary: proof(
+      'packages/modules/crm/src/contacts/duplicate-settings.int.test.ts',
+      'tries the phone number after the email address when phone is the secondary field',
+    ),
+  },
+  'messaging.settings': {
+    email_verification_enabled: proof(
+      'packages/modules/messaging/src/email-verification-task.int.test.ts',
+      'turning verification off allows unchecked addresses without a provider call',
+    ),
+    email_reverify_after_90_days: proof(
+      'packages/modules/messaging/src/email-verification-task.int.test.ts',
+      'turning re-verification off keeps a result older than ninety days usable',
+    ),
+    email_verification_daily_limit: proof(
+      'packages/modules/messaging/src/email-verification-task.int.test.ts',
+      'over the daily limit runs free domain checks and schedules the next business day',
+    ),
+    quiet_hours_enabled: proof(
+      'packages/modules/messaging/src/quiet-hours-settings.int.test.ts',
+      'counts what quiet hours hold now, and lets them go at the next check once turned off',
+    ),
+    quiet_hours_start: proof(
+      OUTBOUND,
+      'uses the contact local time for an interval %s the current hour',
+    ),
+    quiet_hours_end: proof(
+      OUTBOUND,
+      'uses the contact local time for an interval %s the current hour',
+    ),
+    contact_daily_limit: proof(
+      OUTBOUND,
+      'counts reservations atomically so two distinct queued messages cannot exceed the contact cap',
+    ),
+    campaign_daily_limit: proof(
+      'packages/modules/messaging/src/campaigns.int.test.ts',
+      'says when the limits spread a send over days',
+    ),
+  },
+  'messaging.phone_system_settings': {
+    default_phone_number_id: proof(
+      'packages/modules/messaging/src/call-lifecycle.int.test.ts',
+      'stores a requested call from the default number, queues the worker once, and answers a retry with the same call',
+    ),
+    inbound_prefer_assigned_user: { gap: INBOUND_ROUTING },
+    inbound_allow_anonymous: { gap: INBOUND_ROUTING },
+    inbound_fallback_e164: { gap: INBOUND_ROUTING },
+    outbound_caller_id: { gap: CALL_HANDLING },
+    outbound_quiet_hours_warning: {
+      gap: 'Nothing reads it yet: placing a call does not warn about the contact’s quiet hours.',
+    },
+    outbound_connect_agent: { gap: RECORDING },
+    recording_retention_days: { gap: RECORDING },
+    transcription_enabled: { gap: RECORDING },
+    missed_call_text_enabled: { gap: MISSED_CALL },
+    missed_call_text: { gap: MISSED_CALL },
+  },
+  'messaging.phone_number_settings': {
+    phone_number_id: { notASetting: 'The number these settings belong to: part of the key.' },
+    owner_user_id: { gap: INBOUND_ROUTING },
+    primary_user_id: { gap: INBOUND_ROUTING },
+    ring_also_user_ids: { gap: INBOUND_ROUTING },
+    forward_to_e164: { gap: INBOUND_ROUTING },
+    use_business_fallback: { gap: INBOUND_ROUTING },
+    ring_timeout_seconds: { gap: INBOUND_ROUTING },
+    voicemail_backup: { gap: INBOUND_ROUTING },
+    forwarded_caller_id: { gap: INBOUND_ROUTING },
+    prefer_contact_owner: { gap: INBOUND_ROUTING },
+    call_connect_confirmation: { gap: CALL_HANDLING },
+    whisper_enabled: { gap: CALL_HANDLING },
+    whisper_message: { gap: CALL_HANDLING },
+    recording_enabled: { gap: RECORDING },
+    recording_announcement_enabled: { gap: RECORDING },
+    recording_announcement: { gap: RECORDING },
+  },
+};

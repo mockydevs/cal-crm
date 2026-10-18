@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spring offer for Acme &amp; Sons</title>
+<meta name="description" content="Everything you need, in one place.">
+<link rel="canonical" href="https://www.example.com/spring">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Spring offer for Acme &amp; Sons">
+<meta property="og:description" content="Everything you need, in one place.">
+<meta property="og:url" content="https://www.example.com/spring">
+<meta property="og:image" content="https://img.example/card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="author" content="Dana Brooks">
+<meta property="og:locale" content="en_GB">
+<link rel="icon" href="https://img.example/favicon.png">
+<style>*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.5;color:#1d2a24;background-color:#ffffff;overflow-wrap:break-word}
+h1,h2,h3,h4,h5,h6,p,ul,ol{margin:0 0 16px}
+h1,h2,h3,h4,h5,h6{line-height:1.2}
+img,video,iframe{max-width:100%}
+img{height:auto;display:block}
+.sc{display:grid;grid-template-columns:minmax(0,1fr);align-content:start;justify-content:center;padding:32px 16px}
+.sc-medium{grid-template-columns:minmax(0,960px)}
+.rw{display:flex;gap:24px}
+.rw+.rw{margin-top:24px}
+.cl{display:flex;flex-direction:column;min-width:0}
+.kt{display:flex}
+.k-v{flex-direction:column}
+.k-h{flex-direction:row;flex-wrap:wrap}
+.bt{display:inline-block;padding:12px 24px;border-radius:6px;background-color:#1d2a24;color:#ffffff;font-weight:600;text-align:center;text-decoration:none}
+.bt:focus-visible,a:focus-visible{outline:3px solid currentColor;outline-offset:2px}
+.bs{display:block;font-size:.8em;font-weight:400}
+.dv{border:0;width:100%;margin:16px 0}
+.ls-check,.ls-none{list-style:none;padding-left:0}
+.ls-check>li::before{content:"\2713\a0"}
+.vd{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0}
+.vf{width:100%;display:block}
+.pp{display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;padding:16px;background-color:rgba(0,0,0,.6);overflow:auto;outline:0}
+.pp:target,.pp.on{display:flex}
+.pb{position:relative;width:100%;padding:32px 24px;border-radius:8px;background-color:#ffffff}
+.pw-small{max-width:400px}
+.px{position:absolute;top:8px;right:12px;font-size:24px;line-height:1;text-decoration:none;color:inherit}
+@media (max-width:640px){.rw{flex-direction:column}.rw>.cl{flex:0 0 auto}}
+@media (max-width:640px){.sc{padding:24px 16px}}
+body{background-color:#f8fafc;background-image:url("https://img.example/bg.png");background-size:cover;background-position:top;background-repeat:no-repeat;font-family:"Roboto",system-ui,sans-serif;color:#1f2937}
+h1,h2,h3,h4,h5,h6{font-family:"Lexend",system-ui,sans-serif}
+a:not(.bt){color:#2563eb}
+.e1{padding-top:64px;padding-bottom:64px;background-color:#ffffff}
+.e2{flex:7 1 0%}
+.e3{margin-top:8px;margin-bottom:24px;padding-right:4px;padding-left:4px;color:#111827;font-family:"Lexend",system-ui,sans-serif;font-size:48px;font-weight:700;line-height:1.1;letter-spacing:-1px;text-align:center;text-transform:uppercase}
+.e4{color:#aa0000}
+.e6{color:#0000aa}
+.e7{background-color:#2563eb;color:#ffffff;border-radius:8px}
+.e8{flex:5 1 0%}
+.e9{border-width:1px;border-style:solid;border-color:#e5e7eb;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15);width:100%;max-width:480px;opacity:0.9;align-self:center}
+.e10{border-top:2px dashed #cccccc}
+.e11{flex:12 1 0%}
+.e12{gap:8px;background-image:url("/s/0123456789abcdef0123456789abcdef/media/pattern.png");background-position:center;background-repeat:no-repeat;min-height:10vh}
+.e13{background-color:#fffbeb}
+@media (max-width:1024px){.e3{font-size:36px}}
+@media (max-width:640px){.e1{padding-top:24px;padding-bottom:24px}.e3{font-size:28px;text-align:left}}
+@media (min-width:641px) and (max-width:1024px){.e1{display:none!important}}
+@media (max-width:640px){.e5{display:none!important}}
+.hero-title { text-shadow: 0 1px 0 #fff; }</style>
+<script defer src="/s/_js/countdown.0123456789abcdef.js"></script>
+<script defer src="/s/_js/popup.fedcba9876543210.js"></script>
+</head>
+<body>
+<main>
+<section id="top" class="sc sc-medium e1"><div class="rw"><div class="cl e2"><h1 class="hl e3 hero-title big">Hello <span class="e4"><em><strong>Acme &amp; Sons</strong></em></span><s><u><br>A second line</u></s></h1><h2 class="sh e5">Everything you need</h2><p class="pg">Read <a href="https://example.com/more" target="_blank" rel="noopener noreferrer">more</a>, see <a href="/s/0123456789abcdef0123456789abcdef/offers/next">the next step</a>, <a href="/s/0123456789abcdef0123456789abcdef/thanks">the thanks page</a>, <a href="#offer">the offer</a> or <a class="e6" href="#top">the top</a>.</p><ul class="ls ls-check" role="list"><li>One</li><li><strong>Two</strong></li></ul><a class="bt e7" href="/s/0123456789abcdef0123456789abcdef/offers/next">Get started<span class="bs">It takes a minute</span></a><p class="cd" data-cd="hide"><span role="timer">49d 21h 05m</span> left, ends <time datetime="2026-12-01T09:05:00.000Z">1 December 2026, 09:05 UTC</time></p></div><div class="cl e8"><a href="/s/0123456789abcdef0123456789abcdef/about"><img class="im e9" src="https://img.example/team.png" alt="The team at work" width="1600" height="900" fetchpriority="high" decoding="async"></a><iframe class="vd" src="https://www.youtube.com/embed/M7lc1UVf-VE?loop=1&amp;playlist=M7lc1UVf-VE" title="Video" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><hr class="dv e10"></div></div></section>
+<section id="more" class="sc sc-medium"><div class="rw"><div class="cl e11"><div class="fm"><script async src="/forms/embed.js" data-form-key="formkeyformkeyformkeyformkeyfor"></script><noscript>This form needs JavaScript to be shown.</noscript></div><a class="bt" href="https://crm.example/book/acme/main/intro">Book a time</a><div class="kt k-h e12"><p class="pg">In a box</p><div class="kt k-v"><span class="bt">Stay</span></div></div><video class="vf" src="https://media.example/clip.mp4" autoplay muted loop playsinline preload="metadata"></video><iframe class="vd" src="https://player.vimeo.com/video/76979871?autoplay=1&amp;muted=1&amp;loop=1&amp;controls=0" title="Video" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><ol class="ls"><li>First</li></ol><ul class="ls ls-none" role="list"><li>Unmarked</li></ul><img class="im" src="/s/0123456789abcdef0123456789abcdef/media/second.png" alt="" loading="lazy" decoding="async"></div></div></section>
+<section id="shared" class="sc sc-medium"><div class="rw"><div class="cl e11"><p class="pg">A footer every page shares.</p></div></div></section>
+</main>
+<div class="pp" id="offer" role="dialog" aria-modal="true" aria-label="Spring offer" tabindex="-1"><div class="pb pw-small e13"><div class="rw"><div class="cl e11"><h2 class="hl">Ten percent off</h2></div></div><a class="px" href="#_" aria-label="Close">&times;</a></div></div>
+</body>
+</html>

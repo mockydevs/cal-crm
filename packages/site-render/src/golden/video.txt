@@ -1,0 +1,15 @@
+<section id="top" class="sc sc-medium"><div class="rw"><div class="cl e1"><iframe class="vd" src="https://www.youtube.com/embed/M7lc1UVf-VE?loop=1&amp;playlist=M7lc1UVf-VE" title="Video" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div></div></section>
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.5;color:#1d2a24;background-color:#ffffff;overflow-wrap:break-word}
+img,video,iframe{max-width:100%}
+.sc{display:grid;grid-template-columns:minmax(0,1fr);align-content:start;justify-content:center;padding:32px 16px}
+.sc-medium{grid-template-columns:minmax(0,960px)}
+.rw{display:flex;gap:24px}
+.rw+.rw{margin-top:24px}
+.cl{display:flex;flex-direction:column;min-width:0}
+.vd{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0}
+@media (max-width:640px){.rw{flex-direction:column}.rw>.cl{flex:0 0 auto}}
+@media (max-width:640px){.sc{padding:24px 16px}}
+.e1{flex:12 1 0%}

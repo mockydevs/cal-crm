@@ -1,0 +1,1705 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-13 00:06+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/site-editor/fields.tsx
+msgid "\"{inactiveName}\" is not active, so it takes no bookings. Make it active under Calendars, or choose another: the page can't be published with it."
+msgstr "\"{inactiveName}\" is not active, so it takes no bookings. Make it active under Calendars, or choose another: the page can't be published with it."
+
+#: src/site-editor/panels.tsx
+msgid "{added} added after the selected {selectedName}."
+msgstr "{added} added after the selected {selectedName}."
+
+#: src/site-editor/panels.tsx
+msgid "{added} added inside the selected {selectedName}."
+msgstr "{added} added inside the selected {selectedName}."
+
+#: src/site-editor/panels.tsx
+msgid "{added} added to the page."
+msgstr "{added} added to the page."
+
+#: src/site-editor/editor.tsx
+msgid "{added} added where it was dropped."
+msgstr "{added} added where it was dropped."
+
+#: src/site-editor/panels.tsx
+msgid "{added} added."
+msgstr "{added} added."
+
+#: src/site-editor/fields.tsx
+msgid "{formName} (not published)"
+msgstr "{formName} (not published)"
+
+#: src/site-editor/fields.tsx
+msgid "{inactiveName} (not active)"
+msgstr "{inactiveName} (not active)"
+
+#: src/site-editor/field-parts.tsx
+msgid "{label}, {sideName}"
+msgstr "{label}, {sideName}"
+
+#: src/site-editor/field-parts.tsx
+msgid "{label}, amount"
+msgstr "{label}, amount"
+
+#: src/site-editor/fields.tsx
+msgid "{label}, part {part}"
+msgstr "{label}, part {part}"
+
+#: src/site-editor/field-parts.tsx
+msgid "{label}, unit"
+msgstr "{label}, unit"
+
+#: src/site-editor/picture-field.tsx
+msgid "{label}: choose from Media Storage"
+msgstr "{label}: choose from Media Storage"
+
+#: src/site-editor/field-parts.tsx
+msgid "{label}: pick a colour"
+msgstr "{label}: pick a colour"
+
+#: src/site-editor/fields.tsx
+msgid "{label}: use the wider screen's value on {deviceName}"
+msgstr "{label}: use the wider screen's value on {deviceName}"
+
+#: src/site-editor/panels.tsx
+msgid "{name} deleted. Undo brings it back."
+msgstr "{name} deleted. Undo brings it back."
+
+#: src/site-editor/panels.tsx
+msgid "{name} duplicated."
+msgstr "{name} duplicated."
+
+#: src/site-editor/panels.tsx
+msgid "{name} moved to {where}."
+msgstr "{name} moved to {where}."
+
+#: src/site-editor/panels.tsx
+msgid "{name} moved to place {to} of {siblings}."
+msgstr "{name} moved to place {to} of {siblings}."
+
+#: src/site-editor/panels.tsx
+msgid "{parentName} selected."
+msgstr "{parentName} selected."
+
+#: src/site-editor/fields.tsx
+msgid "{title}, part {part}"
+msgstr "{title}, part {part}"
+
+#: src/site-editor/editor.tsx
+msgid "{who} saved version {version} of this page on {when}, after you started editing. Your changes are still here and are not saved yet."
+msgstr "{who} saved version {version} of this page on {when}, after you started editing. Your changes are still here and are not saved yet."
+
+#: src/site-editor/image-fields.tsx
+msgid "{width} × {height} px"
+msgstr "{width} × {height} px"
+
+#: src/site-editor/fields.tsx
+msgid "400 (normal)"
+msgstr "400 (normal)"
+
+#: src/site-editor/fields.tsx
+msgid "700 (bold)"
+msgstr "700 (bold)"
+
+#: src/site-editor/fields.tsx
+msgid "A button needs a label."
+msgstr "A button needs a label."
+
+#: src/site-editor/panels.tsx
+msgid "A column or a container holds at most {children} elements."
+msgstr "A column or a container holds at most {children} elements."
+
+#: src/site-editor/versions.tsx
+msgid "a copy of version {from}"
+msgstr "a copy of version {from}"
+
+#: src/site-editor/canvas.tsx
+msgid "A line that says a little more"
+msgstr "A line that says a little more"
+
+#: src/site-editor/fields.tsx
+msgid "A link or a button that goes to this popup opens it in any case."
+msgstr "A link or a button that goes to this popup opens it in any case."
+
+#: src/site-editor/fields.tsx
+msgid "A list holds at most 100 points."
+msgstr "A list holds at most 100 points."
+
+#: src/site-editor/editor.tsx
+msgid "A newer version was saved"
+msgstr "A newer version was saved"
+
+#: src/site-editor/fields.tsx
+msgid "A page can be published only with a form that is itself published."
+msgstr "A page can be published only with a form that is itself published."
+
+#: src/site-editor/panels.tsx
+msgid "A page holds at most {popups} popups."
+msgstr "A page holds at most {popups} popups."
+
+#: src/site-editor/panels.tsx
+msgid "A page holds at most {sections} sections."
+msgstr "A page holds at most {sections} sections."
+
+#: src/site-editor/panels.tsx
+msgid "A page holds at most 2,000 sections, rows, columns and elements."
+msgstr "A page holds at most 2,000 sections, rows, columns and elements."
+
+#: src/site-editor/fields.tsx
+msgid "A page of this website"
+msgstr "A page of this website"
+
+#: src/site-editor/fields.tsx
+msgid "A popup needs a name."
+msgstr "A popup needs a name."
+
+#: src/site-editor/fields.tsx
+msgid "A popup of this page"
+msgstr "A popup of this page"
+
+#: src/site-editor/panels.tsx
+msgid "A row holds at most {columns} columns."
+msgstr "A row holds at most {columns} columns."
+
+#: src/site-editor/panels.tsx
+msgid "A row keeps at least one column. Delete the row instead."
+msgstr "A row keeps at least one column. Delete the row instead."
+
+#: src/site-editor/fields.tsx
+msgid "A saved section is kept once and shown on every page that uses it. It is changed where it is kept, not here."
+msgstr "A saved section is kept once and shown on every page that uses it. It is changed where it is kept, not here."
+
+#: src/site-editor/elements.tsx
+msgid "A saved section, shown here by reference."
+msgstr "A saved section, shown here by reference."
+
+#: src/site-editor/panels.tsx
+msgid "A section holds at most {rows} rows."
+msgstr "A section holds at most {rows} rows."
+
+#: src/site-editor/fields.tsx
+msgid "A section of this page"
+msgstr "A section of this page"
+
+#: src/site-editor/fields.tsx
+msgid "A step of this funnel"
+msgstr "A step of this funnel"
+
+#: src/site-editor/fields.tsx
+msgid "A stylesheet cannot contain \"<\"."
+msgstr "A stylesheet cannot contain \"<\"."
+
+#: src/site-editor/fields.tsx
+msgid "A video file"
+msgstr "A video file"
+
+#: src/site-editor/fields.tsx
+msgid "A web address"
+msgstr "A web address"
+
+#: src/site-editor/editor.tsx
+msgid "Add"
+msgstr "Add"
+
+#: src/site-editor/panels.tsx
+msgid "Add {name}"
+msgstr "Add {name}"
+
+#: src/site-editor/fields.tsx
+msgid "Add a part"
+msgstr "Add a part"
+
+#: src/site-editor/fields.tsx
+msgid "Add a point"
+msgstr "Add a point"
+
+#: src/site-editor/editor.tsx
+msgid "Add to the page, and its layers"
+msgstr "Add to the page, and its layers"
+
+#: src/site-editor/fields.tsx
+msgid "Address"
+msgstr "Address"
+
+#: src/site-editor/fields.tsx
+msgid "Advanced"
+msgstr "Advanced"
+
+#: src/site-editor/fields.tsx
+msgid "Alignment"
+msgstr "Alignment"
+
+#: src/site-editor/fields.tsx
+msgid "ALL CAPITALS"
+msgstr "ALL CAPITALS"
+
+#: src/site-editor/fields.tsx
+msgid "all lowercase"
+msgstr "all lowercase"
+
+#: src/site-editor/versions.tsx
+msgid "An app"
+msgstr "An app"
+
+#: src/site-editor/fields.tsx
+msgid "Applied to the published page after its own styles."
+msgstr "Applied to the published page after its own styles."
+
+#: src/site-editor/versions.tsx
+msgid "As a visitor would see it. Forms, calendar buttons and custom code are not drawn here. Nothing you do here changes the page."
+msgstr "As a visitor would see it. Forms, calendar buttons and custom code are not drawn here. Nothing you do here changes the page."
+
+#: src/site-editor/fields.tsx
+msgid "As written"
+msgstr "As written"
+
+#: src/site-editor/versions.tsx
+msgid "Automatic checkpoints"
+msgstr "Automatic checkpoints"
+
+#: src/site-editor/editor.tsx
+msgid "Back to the funnel"
+msgstr "Back to the funnel"
+
+#: src/site-editor/versions.tsx
+msgid "Back to the list of versions"
+msgstr "Back to the list of versions"
+
+#: src/site-editor/editor.tsx
+msgid "Back to the website"
+msgstr "Back to the website"
+
+#: src/site-editor/fields.tsx
+msgid "Background"
+msgstr "Background"
+
+#: src/site-editor/fields.tsx
+msgid "Background colour"
+msgstr "Background colour"
+
+#: src/site-editor/fields.tsx
+msgid "Background image address"
+msgstr "Background image address"
+
+#: src/site-editor/fields.tsx
+msgid "Background image size"
+msgstr "Background image size"
+
+#: src/site-editor/fields.tsx
+msgid "Background picture size"
+msgstr "Background picture size"
+
+#: src/site-editor/fields.tsx
+msgid "Bold"
+msgstr "Bold"
+
+#: src/site-editor/fields.tsx
+msgid "Border and shadow"
+msgstr "Border and shadow"
+
+#: src/site-editor/fields.tsx
+msgid "Border colour"
+msgstr "Border colour"
+
+#: src/site-editor/fields.tsx
+msgid "Border line"
+msgstr "Border line"
+
+#: src/site-editor/fields.tsx
+msgid "Border width (px)"
+msgstr "Border width (px)"
+
+#: src/site-editor/field-parts.tsx
+msgid "Bottom"
+msgstr "Bottom"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Bullet list"
+msgstr "Bullet list"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Button"
+msgstr "Button"
+
+#: src/site-editor/fields.tsx
+msgid "Button label"
+msgstr "Button label"
+
+#: src/site-editor/fields.tsx
+msgid "By itself, after a delay"
+msgstr "By itself, after a delay"
+
+#: src/site-editor/fields.tsx
+msgid "By itself, when the visitor is about to leave"
+msgstr "By itself, when the visitor is about to leave"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/fields.tsx
+#: src/site-editor/panels.tsx
+msgid "Calendar"
+msgstr "Calendar"
+
+#: src/site-editor/elements.tsx
+msgid "Calendar: {name} (not active)"
+msgstr "Calendar: {name} (not active)"
+
+#: src/site-editor/elements.tsx
+msgid "Calendar: none chosen yet"
+msgstr "Calendar: none chosen yet"
+
+#: src/site-editor/elements.tsx
+msgid "Calendar: the one chosen is no longer here"
+msgstr "Calendar: the one chosen is no longer here"
+
+#: src/site-editor/fields.tsx
+msgid "Capitals"
+msgstr "Capitals"
+
+#: src/site-editor/fields.tsx
+msgid "Centre"
+msgstr "Centre"
+
+#: src/site-editor/fields.tsx
+msgid "Choose a background picture"
+msgstr "Choose a background picture"
+
+#: src/site-editor/fields.tsx
+msgid "Choose a calendar: the page can't be published without one."
+msgstr "Choose a calendar: the page can't be published without one."
+
+#: src/site-editor/image-fields.tsx
+msgid "Choose a picture"
+msgstr "Choose a picture"
+
+#: src/site-editor/fields.tsx
+msgid "Choose a picture for social sharing"
+msgstr "Choose a picture for social sharing"
+
+#: src/site-editor/image-fields.tsx
+msgid "Choose a picture from Media Storage, or paste the web address of one, starting with https://."
+msgstr "Choose a picture from Media Storage, or paste the web address of one, starting with https://."
+
+#: src/site-editor/picture-field.tsx
+msgid "Choose from Media Storage"
+msgstr "Choose from Media Storage"
+
+#: src/site-editor/editor.tsx
+msgid "Choose whose to keep"
+msgstr "Choose whose to keep"
+
+#: src/site-editor/fields.tsx
+msgid "Class names for custom CSS"
+msgstr "Class names for custom CSS"
+
+#: src/site-editor/canvas.tsx
+msgid "Click here"
+msgstr "Click here"
+
+#: src/site-editor/versions.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/site-editor/fields.tsx
+msgid "Colour and link"
+msgstr "Colour and link"
+
+#: src/site-editor/fields.tsx
+msgid "Colour and link of part {part}"
+msgstr "Colour and link of part {part}"
+
+#: src/site-editor/fields.tsx
+msgid "Colour of part {part}"
+msgstr "Colour of part {part}"
+
+#: src/site-editor/fields.tsx
+msgid "Colours"
+msgstr "Colours"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Column"
+msgstr "Column"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Container"
+msgstr "Container"
+
+#: src/site-editor/panels.tsx
+msgid "Containers go at most three deep, so a container can't go there."
+msgstr "Containers go at most three deep, so a container can't go there."
+
+#: src/site-editor/fields.tsx
+msgid "Content width"
+msgstr "Content width"
+
+#: src/site-editor/elements.tsx
+msgid "Continue"
+msgstr "Continue"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Countdown"
+msgstr "Countdown"
+
+#: src/site-editor/elements.tsx
+msgid "Countdown: it is over, so the page shows nothing here"
+msgstr "Countdown: it is over, so the page shows nothing here"
+
+#: src/site-editor/elements.tsx
+msgid "Countdown: no end time yet"
+msgstr "Countdown: no end time yet"
+
+#: src/site-editor/fields.tsx
+msgid "Cover the area"
+msgstr "Cover the area"
+
+#: src/site-editor/fields.tsx
+msgid "Cover the page"
+msgstr "Cover the page"
+
+#: src/site-editor/fields.tsx
+msgid "CSS for this page"
+msgstr "CSS for this page"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Custom code"
+msgstr "Custom code"
+
+#: src/site-editor/elements.tsx
+msgid "Custom code runs on your connected domain."
+msgstr "Custom code runs on your connected domain."
+
+#: src/site-editor/fields.tsx
+msgid "Custom CSS"
+msgstr "Custom CSS"
+
+#: src/site-editor/fields.tsx
+msgid "Dashed"
+msgstr "Dashed"
+
+#: src/site-editor/image-fields.tsx
+msgid "Decoration only"
+msgstr "Decoration only"
+
+#: src/site-editor/fields.tsx
+msgid "Delay (seconds)"
+msgstr "Delay (seconds)"
+
+#: src/site-editor/canvas.tsx
+msgid "Delete"
+msgstr "Delete"
+
+#: src/site-editor/panels.tsx
+msgid "Delete {name}"
+msgstr "Delete {name}"
+
+#: src/site-editor/image-fields.tsx
+msgid "Describe the picture, or mark it below as decoration only."
+msgstr "Describe the picture, or mark it below as decoration only."
+
+#: src/site-editor/image-fields.tsx
+msgid "Description for screen readers"
+msgstr "Description for screen readers"
+
+#: src/site-editor/fields.tsx
+msgid "Description for search results"
+msgstr "Description for search results"
+
+#: src/site-editor/fields.tsx
+msgid "desktop"
+msgstr "desktop"
+
+#: src/site-editor/editor.tsx
+msgid "Desktop"
+msgstr "Desktop"
+
+#: src/site-editor/editor.tsx
+msgid "Device"
+msgstr "Device"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Divider"
+msgstr "Divider"
+
+#: src/site-editor/fields.tsx
+msgid "Dots"
+msgstr "Dots"
+
+#: src/site-editor/fields.tsx
+msgid "Dotted"
+msgstr "Dotted"
+
+#: src/site-editor/fields.tsx
+msgid "Drawn faint here so it can still be selected; visitors won't see it."
+msgstr "Drawn faint here so it can still be selected; visitors won't see it."
+
+#: src/site-editor/canvas.tsx
+msgid "Duplicate"
+msgstr "Duplicate"
+
+#: src/site-editor/panels.tsx
+msgid "Duplicate {name}"
+msgstr "Duplicate {name}"
+
+#: src/site-editor/versions.tsx
+msgid "Earlier working drafts, kept as they were when a newer version began."
+msgstr "Earlier working drafts, kept as they were when a newer version began."
+
+#: src/site-editor/editor.tsx
+msgid "Edit"
+msgstr "Edit"
+
+#: src/site-editor/editor.tsx
+msgid "Edit {stepName}"
+msgstr "Edit {stepName}"
+
+#: src/site-editor/canvas.tsx
+msgid "Element"
+msgstr "Element"
+
+#: src/site-editor/editor.tsx
+#: src/site-editor/panels.tsx
+msgid "Elements"
+msgstr "Elements"
+
+#: src/site-editor/fields.tsx
+msgid "End"
+msgstr "End"
+
+#: src/site-editor/fields.tsx
+msgid "Ends at (your time)"
+msgstr "Ends at (your time)"
+
+#: src/site-editor/fields.tsx
+msgid "First Letter Of Each Word"
+msgstr "First Letter Of Each Word"
+
+#: src/site-editor/canvas.tsx
+msgid "First point"
+msgstr "First point"
+
+#: src/site-editor/fields.tsx
+msgid "Fit inside"
+msgstr "Fit inside"
+
+#: src/site-editor/image-fields.tsx
+msgid "For a picture that adds nothing to what the page says."
+msgstr "For a picture that adds nothing to what the page says."
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/fields.tsx
+#: src/site-editor/panels.tsx
+msgid "Form"
+msgstr "Form"
+
+#: src/site-editor/elements.tsx
+msgid "Form: {name}"
+msgstr "Form: {name}"
+
+#: src/site-editor/elements.tsx
+msgid "Form: {name} (not published)"
+msgstr "Form: {name} (not published)"
+
+#: src/site-editor/elements.tsx
+msgid "Form: none chosen yet"
+msgstr "Form: none chosen yet"
+
+#: src/site-editor/elements.tsx
+msgid "Form: the one chosen is no longer here"
+msgstr "Form: the one chosen is no longer here"
+
+#: src/site-editor/fields.tsx
+msgid "From a wider screen"
+msgstr "From a wider screen"
+
+#: src/site-editor/fields.tsx
+msgid "Full width"
+msgstr "Full width"
+
+#: src/site-editor/editor.tsx
+msgid "Funnel step"
+msgstr "Funnel step"
+
+#: src/site-editor/fields.tsx
+msgid "Heading {level}"
+msgstr "Heading {level}"
+
+#: src/site-editor/fields.tsx
+msgid "Heading level"
+msgstr "Heading level"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Headline"
+msgstr "Headline"
+
+#: src/site-editor/fields.tsx
+msgid "Hide on {deviceName}"
+msgstr "Hide on {deviceName}"
+
+#: src/site-editor/panels.tsx
+msgid "Hide what is in {name} {words}"
+msgstr "Hide what is in {name} {words}"
+
+#: src/site-editor/fields.tsx
+msgid "HTML and JavaScript"
+msgstr "HTML and JavaScript"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Image"
+msgstr "Image"
+
+#: src/site-editor/image-fields.tsx
+msgid "Image address"
+msgstr "Image address"
+
+#: src/site-editor/elements.tsx
+msgid "Image: no picture chosen yet"
+msgstr "Image: no picture chosen yet"
+
+#: src/site-editor/fields.tsx
+msgid "It opens by itself every time a page with it is shown."
+msgstr "It opens by itself every time a page with it is shown."
+
+#: src/site-editor/fields.tsx
+msgid "It opens by itself once, then not again until the visitor closes the tab."
+msgstr "It opens by itself once, then not again until the visitor closes the tab."
+
+#: src/site-editor/versions.tsx
+msgid "It wasn't restored. Check your connection and try again."
+msgstr "It wasn't restored. Check your connection and try again."
+
+#: src/site-editor/fields.tsx
+msgid "Italic"
+msgstr "Italic"
+
+#: src/site-editor/fields.tsx
+msgid "Its own size"
+msgstr "Its own size"
+
+#: src/site-editor/fields.tsx
+msgid "Justified"
+msgstr "Justified"
+
+#: src/site-editor/editor.tsx
+msgid "Keep mine"
+msgstr "Keep mine"
+
+#: src/site-editor/editor.tsx
+msgid "Keep mine saves your changes as the newest version. Theirs stays in Versions, where it can be restored."
+msgstr "Keep mine saves your changes as the newest version. Theirs stays in Versions, where it can be restored."
+
+#: src/site-editor/versions.tsx
+msgid "Kept as version {number}, \"{chosen}\"."
+msgstr "Kept as version {number}, \"{chosen}\"."
+
+#: src/site-editor/versions.tsx
+msgid "Kept as version {number}."
+msgstr "Kept as version {number}."
+
+#: src/site-editor/versions.tsx
+msgid "Kept versions"
+msgstr "Kept versions"
+
+#: src/site-editor/fields.tsx
+msgid "Label"
+msgstr "Label"
+
+#: src/site-editor/fields.tsx
+msgid "Large"
+msgstr "Large"
+
+#: src/site-editor/fields.tsx
+msgid "Large (960 px)"
+msgstr "Large (960 px)"
+
+#: src/site-editor/editor.tsx
+#: src/site-editor/panels.tsx
+msgid "Layers"
+msgstr "Layers"
+
+#: src/site-editor/panels.tsx
+msgid "Layout"
+msgstr "Layout"
+
+#: src/site-editor/fields.tsx
+msgid "Least height"
+msgstr "Least height"
+
+#: src/site-editor/editor.tsx
+msgid "Leave"
+msgstr "Leave"
+
+#: src/site-editor/editor.tsx
+msgid "Leave with unsaved changes?"
+msgstr "Leave with unsaved changes?"
+
+#: src/site-editor/field-parts.tsx
+#: src/site-editor/fields.tsx
+msgid "Left"
+msgstr "Left"
+
+#: src/site-editor/fields.tsx
+msgid "Left empty, the button says \"{DEFAULT_CALENDAR_LABEL}\"."
+msgstr "Left empty, the button says \"{DEFAULT_CALENDAR_LABEL}\"."
+
+#: src/site-editor/fields.tsx
+msgid "Left empty, the name of the step is used."
+msgstr "Left empty, the name of the step is used."
+
+#: src/site-editor/editor.tsx
+msgid "Left panel"
+msgstr "Left panel"
+
+#: src/site-editor/fields.tsx
+msgid "Letter spacing (px)"
+msgstr "Letter spacing (px)"
+
+#: src/site-editor/fields.tsx
+msgid "Line"
+msgstr "Line"
+
+#: src/site-editor/fields.tsx
+msgid "Line colour"
+msgstr "Line colour"
+
+#: src/site-editor/fields.tsx
+msgid "Line height"
+msgstr "Line height"
+
+#: src/site-editor/fields.tsx
+msgid "Link colour"
+msgstr "Link colour"
+
+#: src/site-editor/versions.tsx
+msgid "Live"
+msgstr "Live"
+
+#: src/site-editor/editor.tsx
+msgid "Load theirs"
+msgstr "Load theirs"
+
+#: src/site-editor/editor.tsx
+msgid "Load theirs opens their version here. Your unsaved changes are dropped."
+msgstr "Load theirs opens their version here. Your unsaved changes are dropped."
+
+#: src/site-editor/editor.tsx
+msgid "Loading the editor…"
+msgstr "Loading the editor…"
+
+#: src/site-editor/editor.tsx
+#: src/site-editor/versions.tsx
+msgid "Loading…"
+msgstr "Loading…"
+
+#: src/site-editor/editor.tsx
+msgid "Look at theirs"
+msgstr "Look at theirs"
+
+#: src/site-editor/versions.tsx
+msgid "Look at version {number}"
+msgstr "Look at version {number}"
+
+#: src/site-editor/fields.tsx
+msgid "Margin (px)"
+msgstr "Margin (px)"
+
+#: src/site-editor/fields.tsx
+msgid "Marker"
+msgstr "Marker"
+
+#: src/site-editor/fields.tsx
+msgid "Medium"
+msgstr "Medium"
+
+#: src/site-editor/fields.tsx
+msgid "Medium (640 px)"
+msgstr "Medium (640 px)"
+
+#: src/site-editor/fields.tsx
+msgid "Medium (960 px)"
+msgstr "Medium (960 px)"
+
+#: src/site-editor/fields.tsx
+msgid "mobile"
+msgstr "mobile"
+
+#: src/site-editor/editor.tsx
+msgid "Mobile"
+msgstr "Mobile"
+
+#: src/site-editor/editor.tsx
+msgid "More for this page"
+msgstr "More for this page"
+
+#: src/site-editor/panels.tsx
+msgid "Move {name} down"
+msgstr "Move {name} down"
+
+#: src/site-editor/panels.tsx
+msgid "Move {name} left"
+msgstr "Move {name} left"
+
+#: src/site-editor/panels.tsx
+msgid "Move {name} right"
+msgstr "Move {name} right"
+
+#: src/site-editor/panels.tsx
+msgid "Move {name} to"
+msgstr "Move {name} to"
+
+#: src/site-editor/panels.tsx
+msgid "Move {name} up"
+msgstr "Move {name} up"
+
+#: src/site-editor/fields.tsx
+msgid "Move point {place} down"
+msgstr "Move point {place} down"
+
+#: src/site-editor/fields.tsx
+msgid "Move point {place} up"
+msgstr "Move point {place} up"
+
+#: src/site-editor/panels.tsx
+msgid "Move to"
+msgstr "Move to"
+
+#: src/site-editor/fields.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/site-editor/versions.tsx
+msgid "Name for this version (optional)"
+msgstr "Name for this version (optional)"
+
+#: src/site-editor/panels.tsx
+msgid "Needs a look"
+msgstr "Needs a look"
+
+#: src/site-editor/canvas.tsx
+msgid "New popup"
+msgstr "New popup"
+
+#: src/site-editor/versions.tsx
+msgid "Newest"
+msgstr "Newest"
+
+#: src/site-editor/fields.tsx
+msgid "No calendar chosen"
+msgstr "No calendar chosen"
+
+#: src/site-editor/fields.tsx
+msgid "No form chosen"
+msgstr "No form chosen"
+
+#: src/site-editor/fields.tsx
+msgid "None"
+msgstr "None"
+
+#: src/site-editor/editor.tsx
+msgid "Not saved"
+msgstr "Not saved"
+
+#: src/site-editor/editor.tsx
+msgid "Not saved yet"
+msgstr "Not saved yet"
+
+#: src/site-editor/editor.tsx
+msgid "Not saved: {problems} to put right first."
+msgstr "Not saved: {problems} to put right first."
+
+#: src/site-editor/editor.tsx
+msgid "Not saved: someone else saved a newer version."
+msgstr "Not saved: someone else saved a newer version."
+
+#: src/site-editor/editor.tsx
+msgid "Not saved: the save didn't arrive. Trying again by itself."
+msgstr "Not saved: the save didn't arrive. Trying again by itself."
+
+#: src/site-editor/fields.tsx
+msgid "Not set"
+msgstr "Not set"
+
+#: src/site-editor/image-fields.tsx
+msgid "Not stored yet. With it, the published page keeps the picture's place while it loads."
+msgstr "Not stored yet. With it, the published page keeps the picture's place while it loads."
+
+#: src/site-editor/image-fields.tsx
+msgid "Not stored: a size is read only from a full web address (https://), not from a path or a merge field."
+msgstr "Not stored: a size is read only from a full web address (https://), not from a path or a merge field."
+
+#: src/site-editor/fields.tsx
+msgid "Nothing"
+msgstr "Nothing"
+
+#: src/site-editor/panels.tsx
+msgid "Nothing is selected: what you add goes at the end of the page."
+msgstr "Nothing is selected: what you add goes at the end of the page."
+
+#: src/site-editor/fields.tsx
+msgid "Numbers"
+msgstr "Numbers"
+
+#: src/site-editor/fields.tsx
+msgid "Once in a visit"
+msgstr "Once in a visit"
+
+#: src/site-editor/fields.tsx
+msgid "One \"Heading 1\" a page, then 2, 3 in order, helps people who have the page read out."
+msgstr "One \"Heading 1\" a page, then 2, 3 in order, helps people who have the page read out."
+
+#: src/site-editor/fields.tsx
+msgid "One that is no longer here"
+msgstr "One that is no longer here"
+
+#: src/site-editor/fields.tsx
+msgid "One under the other"
+msgstr "One under the other"
+
+#: src/site-editor/fields.tsx
+msgid "Only from a link or a button"
+msgstr "Only from a link or a button"
+
+#: src/site-editor/fields.tsx
+msgid "Only shown here, in the editor, to tell sections apart."
+msgstr "Only shown here, in the editor, to tell sections apart."
+
+#: src/site-editor/fields.tsx
+msgid "Opacity (0 to 1)"
+msgstr "Opacity (0 to 1)"
+
+#: src/site-editor/fields.tsx
+msgid "Open in a new tab"
+msgstr "Open in a new tab"
+
+#: src/site-editor/editor.tsx
+msgid "Open live page"
+msgstr "Open live page"
+
+#: src/site-editor/fields.tsx
+msgid "Opens"
+msgstr "Opens"
+
+#: src/site-editor/editor.tsx
+msgid "Opens over the page from a link or a button. On this install it does not open by itself."
+msgstr "Opens over the page from a link or a button. On this install it does not open by itself."
+
+#: src/site-editor/panels.tsx
+msgid "Or drag one onto the page, to the place it should go."
+msgstr "Or drag one onto the page, to the place it should go."
+
+#: src/site-editor/fields.tsx
+msgid "Padding (px)"
+msgstr "Padding (px)"
+
+#: src/site-editor/editor.tsx
+#: src/site-editor/fields.tsx
+#: src/site-editor/panels.tsx
+msgid "Page"
+msgstr "Page"
+
+#: src/site-editor/fields.tsx
+msgid "Page background"
+msgstr "Page background"
+
+#: src/site-editor/fields.tsx
+msgid "Page background picture"
+msgstr "Page background picture"
+
+#: src/site-editor/editor.tsx
+msgid "Page editor"
+msgstr "Page editor"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Paragraph"
+msgstr "Paragraph"
+
+#: src/site-editor/fields.tsx
+msgid "Part {part} links to"
+msgstr "Part {part} links to"
+
+#: src/site-editor/editor.tsx
+msgid "Part of the editor"
+msgstr "Part of the editor"
+
+#: src/site-editor/fields.tsx
+msgid "Picture for social sharing"
+msgstr "Picture for social sharing"
+
+#: src/site-editor/image-fields.tsx
+msgid "Picture size"
+msgstr "Picture size"
+
+#: src/site-editor/fields.tsx
+msgid "Place across its column"
+msgstr "Place across its column"
+
+#: src/site-editor/fields.tsx
+msgid "Play again when it ends"
+msgstr "Play again when it ends"
+
+#: src/site-editor/fields.tsx
+msgid "Point {place}"
+msgstr "Point {place}"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/fields.tsx
+#: src/site-editor/panels.tsx
+msgid "Popup"
+msgstr "Popup"
+
+#: src/site-editor/elements.tsx
+msgid "Popup: {title}"
+msgstr "Popup: {title}"
+
+#: src/site-editor/elements.tsx
+#: src/site-editor/panels.tsx
+msgid "Popups"
+msgstr "Popups"
+
+#: src/site-editor/elements.tsx
+msgid "Popups. They are not part of the page's flow: each opens over the page from a link or a button."
+msgstr "Popups. They are not part of the page's flow: each opens over the page from a link or a button."
+
+#: src/site-editor/fields.tsx
+msgid "Pressing the button goes to"
+msgstr "Pressing the button goes to"
+
+#: src/site-editor/fields.tsx
+msgid "Pressing the image goes to"
+msgstr "Pressing the image goes to"
+
+#: src/site-editor/editor.tsx
+msgid "Preview"
+msgstr "Preview"
+
+#: src/site-editor/editor.tsx
+msgid "Publish"
+msgstr "Publish"
+
+#: src/site-editor/editor.tsx
+msgid "Put these right:"
+msgstr "Put these right:"
+
+#: src/site-editor/editor.tsx
+msgid "Reading the newer version…"
+msgstr "Reading the newer version…"
+
+#: src/site-editor/image-fields.tsx
+msgid "Reading the picture's size…"
+msgstr "Reading the picture's size…"
+
+#: src/site-editor/editor.tsx
+msgid "Redo"
+msgstr "Redo"
+
+#: src/site-editor/fields.tsx
+msgid "Remove part {part}"
+msgstr "Remove part {part}"
+
+#: src/site-editor/fields.tsx
+msgid "Remove point {place}"
+msgstr "Remove point {place}"
+
+#: src/site-editor/fields.tsx
+msgid "Remove this part"
+msgstr "Remove this part"
+
+#: src/site-editor/image-fields.tsx
+msgid "Reset to the picture's size"
+msgstr "Reset to the picture's size"
+
+#: src/site-editor/versions.tsx
+msgid "Restore"
+msgstr "Restore"
+
+#: src/site-editor/versions.tsx
+msgid "Restore as the draft"
+msgstr "Restore as the draft"
+
+#: src/site-editor/editor.tsx
+msgid "Restore them"
+msgstr "Restore them"
+
+#: src/site-editor/editor.tsx
+msgid "Restore unsaved changes?"
+msgstr "Restore unsaved changes?"
+
+#: src/site-editor/versions.tsx
+msgid "Restore version {askedNumber}"
+msgstr "Restore version {askedNumber}"
+
+#: src/site-editor/versions.tsx
+msgid "Restore version {number}"
+msgstr "Restore version {number}"
+
+#: src/site-editor/field-parts.tsx
+#: src/site-editor/fields.tsx
+msgid "Right"
+msgstr "Right"
+
+#: src/site-editor/fields.tsx
+msgid "Rounded corners (px)"
+msgstr "Rounded corners (px)"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Row"
+msgstr "Row"
+
+#: src/site-editor/elements.tsx
+msgid "Sample: on the page it counts down"
+msgstr "Sample: on the page it counts down"
+
+#: src/site-editor/elements.tsx
+msgid "Sample: on the page it is brought up to date when the page is loaded"
+msgstr "Sample: on the page it is brought up to date when the page is loaded"
+
+#: src/site-editor/versions.tsx
+msgid "Save a version"
+msgstr "Save a version"
+
+#: src/site-editor/editor.tsx
+msgid "Save now"
+msgstr "Save now"
+
+#: src/site-editor/editor.tsx
+msgid "Saved"
+msgstr "Saved"
+
+#: src/site-editor/versions.tsx
+msgid "Saved on purpose, published or restored. Nothing changes them afterwards."
+msgstr "Saved on purpose, published or restored. Nothing changes them afterwards."
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Saved section"
+msgstr "Saved section"
+
+#: src/site-editor/editor.tsx
+#: src/site-editor/versions.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/site-editor/image-fields.tsx
+msgid "Screen readers pass over it. It has no description."
+msgstr "Screen readers pass over it. It has no description."
+
+#: src/site-editor/fields.tsx
+msgid "Second line"
+msgstr "Second line"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/fields.tsx
+#: src/site-editor/panels.tsx
+msgid "Section"
+msgstr "Section"
+
+#: src/site-editor/fields.tsx
+msgid "Section {place}"
+msgstr "Section {place}"
+
+#: src/site-editor/panels.tsx
+msgid "Select a row, or something inside one, to add a column to it."
+msgstr "Select a row, or something inside one, to add a column to it."
+
+#: src/site-editor/fields.tsx
+msgid "Select something on the page to change it. These are the page's own settings."
+msgstr "Select something on the page to change it. These are the page's own settings."
+
+#: src/site-editor/canvas.tsx
+msgid "Select what holds it"
+msgstr "Select what holds it"
+
+#: src/site-editor/panels.tsx
+msgid "Select what holds this {name}"
+msgstr "Select what holds this {name}"
+
+#: src/site-editor/fields.tsx
+msgid "Shadow"
+msgstr "Shadow"
+
+#: src/site-editor/fields.tsx
+msgid "Show a line of text"
+msgstr "Show a line of text"
+
+#: src/site-editor/fields.tsx
+msgid "Show a link to go on"
+msgstr "Show a link to go on"
+
+#: src/site-editor/fields.tsx
+msgid "Show nothing"
+msgstr "Show nothing"
+
+#: src/site-editor/fields.tsx
+msgid "Show the player's controls"
+msgstr "Show the player's controls"
+
+#: src/site-editor/editor.tsx
+msgid "Show what"
+msgstr "Show what"
+
+#: src/site-editor/panels.tsx
+msgid "Show what is in {name} {words}"
+msgstr "Show what is in {name} {words}"
+
+#: src/site-editor/fields.tsx
+msgid "Shown when the page's link is shared, on networks that show a picture. It needs a full web address (https://)."
+msgstr "Shown when the page's link is shared, on networks that show a picture. It needs a full web address (https://)."
+
+#: src/site-editor/fields.tsx
+msgid "Side by side"
+msgstr "Side by side"
+
+#: src/site-editor/fields.tsx
+msgid "Size and place"
+msgstr "Size and place"
+
+#: src/site-editor/fields.tsx
+msgid "Small"
+msgstr "Small"
+
+#: src/site-editor/fields.tsx
+msgid "Small (400 px)"
+msgstr "Small (400 px)"
+
+#: src/site-editor/fields.tsx
+msgid "Small (640 px)"
+msgstr "Small (640 px)"
+
+#: src/site-editor/fields.tsx
+msgid "Solid"
+msgstr "Solid"
+
+#: src/site-editor/editor.tsx
+msgid "Some changes to this page aren't saved. They are kept in this browser and offered back the next time this page is openedId here."
+msgstr "Some changes to this page aren't saved. They are kept in this browser and offered back the next time this page is openedId here."
+
+#: src/site-editor/versions.tsx
+msgid "Someone"
+msgstr "Someone"
+
+#: src/site-editor/editor.tsx
+msgid "Someone else"
+msgstr "Someone else"
+
+#: src/site-editor/editor.tsx
+msgid "Someone else saved a newer version of this page. Choose whose to keep first."
+msgstr "Someone else saved a newer version of this page. Choose whose to keep first."
+
+#: src/site-editor/fields.tsx
+msgid "Space between (px)"
+msgstr "Space between (px)"
+
+#: src/site-editor/fields.tsx
+msgid "Spacing"
+msgstr "Spacing"
+
+#: src/site-editor/fields.tsx
+msgid "Start"
+msgstr "Start"
+
+#: src/site-editor/fields.tsx
+msgid "Start by itself"
+msgstr "Start by itself"
+
+#: src/site-editor/fields.tsx
+msgid "Start without sound"
+msgstr "Start without sound"
+
+#: src/site-editor/editor.tsx
+msgid "Stay and keep editing"
+msgstr "Stay and keep editing"
+
+#: src/site-editor/fields.tsx
+msgid "Step"
+msgstr "Step"
+
+#: src/site-editor/fields.tsx
+msgid "Stretched"
+msgstr "Stretched"
+
+#: src/site-editor/fields.tsx
+msgid "Strikethrough"
+msgstr "Strikethrough"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Sub-headline"
+msgstr "Sub-headline"
+
+#: src/site-editor/fields.tsx
+msgid "tablet"
+msgstr "tablet"
+
+#: src/site-editor/editor.tsx
+msgid "Tablet"
+msgstr "Tablet"
+
+#: src/site-editor/fields.tsx
+msgid "Text"
+msgstr "Text"
+
+#: src/site-editor/fields.tsx
+msgid "Text colour"
+msgstr "Text colour"
+
+#: src/site-editor/fields.tsx
+msgid "Text colour of this part"
+msgstr "Text colour of this part"
+
+#: src/site-editor/fields.tsx
+msgid "Text size (px)"
+msgstr "Text size (px)"
+
+#: src/site-editor/panels.tsx
+msgid "That can't go there."
+msgstr "That can't go there."
+
+#: src/site-editor/versions.tsx
+msgid "The assistant"
+msgstr "The assistant"
+
+#: src/site-editor/fields.tsx
+msgid "The calendar chosen here was deleted. Choose another: the page can't be published with it."
+msgstr "The calendar chosen here was deleted. Choose another: the page can't be published with it."
+
+#: src/site-editor/versions.tsx
+msgid "The editor saves your work by itself into one working draft. Keep a version to hold the page as it is now; the newest thirty versions are kept. Restoring one saves a copy of it as the newest version; the live page does not change until you publish."
+msgstr "The editor saves your work by itself into one working draft. Keep a version to hold the page as it is now; the newest thirty versions are kept. Restoring one saves a copy of it as the newest version; the live page does not change until you publish."
+
+#: src/site-editor/fields.tsx
+msgid "The look below is for {deviceName} screens. What you change here leaves the wider screens as they are."
+msgstr "The look below is for {deviceName} screens. What you change here leaves the wider screens as they are."
+
+#: src/site-editor/fields.tsx
+msgid "The look below is the desktop's: tablets and phones follow it unless changed."
+msgstr "The look below is the desktop's: tablets and phones follow it unless changed."
+
+#: src/site-editor/editor.tsx
+msgid "The newer version"
+msgstr "The newer version"
+
+#: src/site-editor/editor.tsx
+msgid "The newer version couldn't be read. Check your connection and try again."
+msgstr "The newer version couldn't be read. Check your connection and try again."
+
+#: src/site-editor/fields.tsx
+msgid "The next step of the funnel"
+msgstr "The next step of the funnel"
+
+#: src/site-editor/editor.tsx
+msgid "The page"
+msgstr "The page"
+
+#: src/site-editor/editor.tsx
+msgid "The page as it stands can't be saved. Your work is kept in this browser meanwhile."
+msgstr "The page as it stands can't be saved. Your work is kept in this browser meanwhile."
+
+#: src/site-editor/editor.tsx
+msgid "The page as saved"
+msgstr "The page as saved"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/elements.tsx
+msgid "The page being edited"
+msgstr "The page being edited"
+
+#: src/site-editor/image-fields.tsx
+msgid "The page can't be published until this image has a picture."
+msgstr "The page can't be published until this image has a picture."
+
+#: src/site-editor/editor.tsx
+msgid "The page can't be saved as it stands. Put right what the top bar lists, then try again."
+msgstr "The page can't be saved as it stands. Put right what the top bar lists, then try again."
+
+#: src/site-editor/versions.tsx
+msgid "The page changed meanwhile. Close this and try again."
+msgstr "The page changed meanwhile. Close this and try again."
+
+#: src/site-editor/editor.tsx
+msgid "The page couldn't be loaded. Check your connection and try again."
+msgstr "The page couldn't be loaded. Check your connection and try again."
+
+#: src/site-editor/panels.tsx
+msgid "The page is empty. Add a headline from Elements to start."
+msgstr "The page is empty. Add a headline from Elements to start."
+
+#: src/site-editor/fields.tsx
+msgid "The page shows a button that opens this calendar's own booking page. Only active calendars are listed."
+msgstr "The page shows a button that opens this calendar's own booking page. Only active calendars are listed."
+
+#: src/site-editor/image-fields.tsx
+msgid "The picture's size couldn't be read. Check that the address opens a picture."
+msgstr "The picture's size couldn't be read. Check that the address opens a picture."
+
+#: src/site-editor/versions.tsx
+msgid "The version couldn't be loaded. Go back and try again."
+msgstr "The version couldn't be loaded. Go back and try again."
+
+#: src/site-editor/versions.tsx
+msgid "The version wasn't kept. Check your connection and try again."
+msgstr "The version wasn't kept. Check your connection and try again."
+
+#: src/site-editor/versions.tsx
+msgid "The versions couldn't be loaded. Close this and try again."
+msgstr "The versions couldn't be loaded. Close this and try again."
+
+#: src/site-editor/fields.tsx
+msgid "Thickness (px)"
+msgstr "Thickness (px)"
+
+#: src/site-editor/panels.tsx
+msgid "This {name} is full: it holds {capacity}, the most it can. Nothing more can be added or dragged into it."
+msgstr "This {name} is full: it holds {capacity}, the most it can. Nothing more can be added or dragged into it."
+
+#: src/site-editor/editor.tsx
+msgid "This browser kept changes to this page from {keptAt} that were never saved. Restore them, or carry on from the saved page and let them go."
+msgstr "This browser kept changes to this page from {keptAt} that were never saved. Restore them, or carry on from the saved page and let them go."
+
+#: src/site-editor/fields.tsx
+msgid "This business has no active calendar yet. Make one under Calendars."
+msgstr "This business has no active calendar yet. Make one under Calendars."
+
+#: src/site-editor/fields.tsx
+msgid "This business has no forms yet. Make one under Sites, Forms."
+msgstr "This business has no forms yet. Make one under Sites, Forms."
+
+#: src/site-editor/fields.tsx
+msgid "This install's server was built without the page scripts, so on its pages this popup opens from a link or a button only."
+msgstr "This install's server was built without the page scripts, so on its pages this popup opens from a link or a button only."
+
+#: src/site-editor/versions.tsx
+msgid "This is a code page, which can't be shown here yet."
+msgstr "This is a code page, which can't be shown here yet."
+
+#: src/site-editor/editor.tsx
+msgid "This is a code page: its files are not edited here, and a code page can't be published yet."
+msgstr "This is a code page: its files are not edited here, and a code page can't be published yet."
+
+#: src/site-editor/fields.tsx
+msgid "This is the funnel's last step, so there is no next step to go to yet."
+msgstr "This is the funnel's last step, so there is no next step to go to yet."
+
+#: src/site-editor/editor.tsx
+msgid "This page is no longer here. It may have been deleted."
+msgstr "This page is no longer here. It may have been deleted."
+
+#: src/site-editor/image-fields.tsx
+msgid "This picture is a link, so it needs a description: it tells people who can't see it where the link goes. The page can't be published without one."
+msgstr "This picture is a link, so it needs a description: it tells people who can't see it where the link goes. The page can't be published without one."
+
+#: src/site-editor/fields.tsx
+msgid "This text links to"
+msgstr "This text links to"
+
+#: src/site-editor/fields.tsx
+msgid "Ticks"
+msgstr "Ticks"
+
+#: src/site-editor/fields.tsx
+msgid "Title in the browser tab and in search results"
+msgstr "Title in the browser tab and in search results"
+
+#: src/site-editor/field-parts.tsx
+msgid "Top"
+msgstr "Top"
+
+#: src/site-editor/editor.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/site-editor/fields.tsx
+msgid "Underline"
+msgstr "Underline"
+
+#: src/site-editor/editor.tsx
+msgid "Undo"
+msgstr "Undo"
+
+#: src/site-editor/editor.tsx
+msgid "Unpublish"
+msgstr "Unpublish"
+
+#: src/site-editor/field-parts.tsx
+msgid "Use a hex colour such as #1f2937, or transparent."
+msgstr "Use a hex colour such as #1f2937, or transparent."
+
+#: src/site-editor/field-parts.tsx
+msgid "Use a number from {min} to {max}."
+msgstr "Use a number from {min} to {max}."
+
+#: src/site-editor/field-parts.tsx
+msgid "Use a secure web address starting with https://, or a path on this site such as /picture.png."
+msgstr "Use a secure web address starting with https://, or a path on this site such as /picture.png."
+
+#: src/site-editor/field-parts.tsx
+msgid "Use a web address, a mailto: or tel: address, a path such as /thanks, or an anchor such as #top."
+msgstr "Use a web address, a mailto: or tel: address, a path such as /thanks, or an anchor such as #top."
+
+#: src/site-editor/fields.tsx
+msgid "Use the wider screen's"
+msgstr "Use the wider screen's"
+
+#: src/site-editor/fields.tsx
+msgid "Use up to ten class names separated by single spaces."
+msgstr "Use up to ten class names separated by single spaces."
+
+#: src/site-editor/versions.tsx
+msgid "Version {number}"
+msgstr "Version {number}"
+
+#: src/site-editor/versions.tsx
+msgid "Version {viewing} of the page"
+msgstr "Version {viewing} of the page"
+
+#: src/site-editor/versions.tsx
+msgid "Version {viewing}, to look at"
+msgstr "Version {viewing}, to look at"
+
+#: src/site-editor/editor.tsx
+#: src/site-editor/versions.tsx
+msgid "Versions"
+msgstr "Versions"
+
+#: src/site-editor/canvas.tsx
+#: src/site-editor/panels.tsx
+msgid "Video"
+msgstr "Video"
+
+#: src/site-editor/fields.tsx
+msgid "Video address"
+msgstr "Video address"
+
+#: src/site-editor/elements.tsx
+msgid "Video file: {address}"
+msgstr "Video file: {address}"
+
+#: src/site-editor/fields.tsx
+msgid "Video from"
+msgstr "Video from"
+
+#: src/site-editor/elements.tsx
+msgid "Video: no address yet"
+msgstr "Video: no address yet"
+
+#: src/site-editor/elements.tsx
+msgid "Video: this address can't be played"
+msgstr "Video: this address can't be played"
+
+#: src/site-editor/versions.tsx
+msgid "View"
+msgstr "View"
+
+#: src/site-editor/elements.tsx
+msgid "Vimeo video: {address}"
+msgstr "Vimeo video: {address}"
+
+#: src/site-editor/editor.tsx
+msgid "Website page"
+msgstr "Website page"
+
+#: src/site-editor/fields.tsx
+msgid "Weight"
+msgstr "Weight"
+
+#: src/site-editor/fields.tsx
+msgid "What is inside lies"
+msgstr "What is inside lies"
+
+#: src/site-editor/editor.tsx
+msgid "What is selected"
+msgstr "What is selected"
+
+#: src/site-editor/versions.tsx
+msgid "What the editor saves by itself as you work. It is rewritten in place."
+msgstr "What the editor saves by itself as you work. It is rewritten in place."
+
+#: src/site-editor/image-fields.tsx
+msgid "What the picture shows, for people who can't see it."
+msgstr "What the picture shows, for people who can't see it."
+
+#: src/site-editor/panels.tsx
+msgid "What you add goes after the selected {selectedName}."
+msgstr "What you add goes after the selected {selectedName}."
+
+#: src/site-editor/panels.tsx
+msgid "What you add goes into the selected {selectedName}."
+msgstr "What you add goes into the selected {selectedName}."
+
+#: src/site-editor/versions.tsx
+msgid "What you are editing is saved first, so nothing is lost. Then a copy of version {askedNumber} is saved as the newest version and opens here. The live page does not change."
+msgstr "What you are editing is saved first, so nothing is lost. Then a copy of version {askedNumber} is saved as the newest version and opens here. The live page does not change."
+
+#: src/site-editor/fields.tsx
+msgid "When it is over"
+msgstr "When it is over"
+
+#: src/site-editor/fields.tsx
+msgid "When the pointer leaves the top of the page. A phone has no pointer, so there it opens from a link or a button only."
+msgstr "When the pointer leaves the top of the page. A phone has no pointer, so there it opens from a link or a button only."
+
+#: src/site-editor/panels.tsx
+msgid "Where it is"
+msgstr "Where it is"
+
+#: src/site-editor/fields.tsx
+msgid "Wide (1280 px)"
+msgstr "Wide (1280 px)"
+
+#: src/site-editor/fields.tsx
+msgid "Widest"
+msgstr "Widest"
+
+#: src/site-editor/fields.tsx
+msgid "Width"
+msgstr "Width"
+
+#: src/site-editor/fields.tsx
+msgid "Width, in twelfths of the row"
+msgstr "Width, in twelfths of the row"
+
+#: src/site-editor/versions.tsx
+msgid "Working draft"
+msgstr "Working draft"
+
+#: src/site-editor/canvas.tsx
+msgid "Write something here."
+msgstr "Write something here."
+
+#: src/site-editor/editor.tsx
+msgid "You can look at this page. Changing it needs permission to manage sites."
+msgstr "You can look at this page. Changing it needs permission to manage sites."
+
+#: src/site-editor/editor.tsx
+msgid "You don't have permission to see this business's sites."
+msgstr "You don't have permission to see this business's sites."
+
+#: src/site-editor/editor.tsx
+msgid "Your changes couldn't be saved. Check your connection and try again."
+msgstr "Your changes couldn't be saved. Check your connection and try again."
+
+#: src/site-editor/canvas.tsx
+msgid "Your headline"
+msgstr "Your headline"
+
+#: src/site-editor/editor.tsx
+msgid "Your unsaved changes are back. They are saved in a moment."
+msgstr "Your unsaved changes are back. They are saved in a moment."
+
+#: src/site-editor/elements.tsx
+msgid "YouTube video: {address}"
+msgstr "YouTube video: {address}"

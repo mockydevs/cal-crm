@@ -1,0 +1,823 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-18 06:42+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/template-editor.tsx
+msgid "(you changed this too)"
+msgstr "(you changed this too)"
+
+#. placeholder {0}: used.length
+#: src/template-editor.tsx
+msgid "{0, plural, one {It uses # merge field. Change the sample value to see how it reads.} other {It uses # merge fields. Change the sample values to see how it reads.}}"
+msgstr "{0, plural, one {It uses # merge field. Change the sample value to see how it reads.} other {It uses # merge fields. Change the sample values to see how it reads.}}"
+
+#: src/templates/dialogs.tsx
+msgid "{count, plural, one {Archive # template} other {Archive # templates}}"
+msgstr "{count, plural, one {Archive # template} other {Archive # templates}}"
+
+#: src/templates/dialogs.tsx
+msgid "{count, plural, one {Delete # template} other {Delete # templates}}"
+msgstr "{count, plural, one {Delete # template} other {Delete # templates}}"
+
+#: src/templates/dialogs.tsx
+msgid "{count, plural, one {Move # template} other {Move # templates}}"
+msgstr "{count, plural, one {Move # template} other {Move # templates}}"
+
+#: src/templates/rows.tsx
+msgid "{count, plural, one {Used in # workflow} other {Used in # workflows}}"
+msgstr "{count, plural, one {Used in # workflow} other {Used in # workflows}}"
+
+#: src/email-library/table.tsx
+msgid "{count} selected on this page"
+msgstr "{count} selected on this page"
+
+#: src/templates/page.tsx
+msgid "{done, plural, one {# template archived.} other {# templates archived.}}"
+msgstr "{done, plural, one {# template archived.} other {# templates archived.}}"
+
+#: src/templates/page.tsx
+msgid "{done, plural, one {# template moved to the trash.} other {# templates moved to the trash.}}"
+msgstr "{done, plural, one {# template moved to the trash.} other {# templates moved to the trash.}}"
+
+#: src/templates/page.tsx
+msgid "{done, plural, one {# template moved.} other {# templates moved.}}"
+msgstr "{done, plural, one {# template moved.} other {# templates moved.}}"
+
+#: src/templates/page.tsx
+msgid "{done, plural, one {# template restored.} other {# templates restored.}}"
+msgstr "{done, plural, one {# template restored.} other {# templates restored.}}"
+
+#: src/email-library/footer.tsx
+msgid "{from} - {to} of {total}"
+msgstr "{from} - {to} of {total}"
+
+#: src/templates/rows.tsx
+msgid "{label}: {name}"
+msgstr "{label}: {name}"
+
+#: src/template-editor.tsx
+msgid "{name} (active)"
+msgstr "{name} (active)"
+
+#: src/template-editor.tsx
+msgid "{name} (paused)"
+msgstr "{name} (paused)"
+
+#: src/template-editor.tsx
+msgid "{name} (runs still in progress)"
+msgstr "{name} (runs still in progress)"
+
+#: src/templates/page.tsx
+msgid "{name} archived."
+msgstr "{name} archived."
+
+#: src/templates/dialogs.tsx
+msgid "{name} can't be archived while published workflows send it: {sending}. Take it out of their Send email step first; their emails would stop."
+msgstr "{name} can't be archived while published workflows send it: {sending}. Take it out of their Send email step first; their emails would stop."
+
+#: src/templates/dialogs.tsx
+msgid "{name} can't be archived while published workflows send it: {sending}. Take it out of their Send email step first; their emails would stop. Runs still in progress in {finishing} send it too."
+msgstr "{name} can't be archived while published workflows send it: {sending}. Take it out of their Send email step first; their emails would stop. Runs still in progress in {finishing} send it too."
+
+#: src/templates/dialogs.tsx
+msgid "{name} can't be archived while runs still in progress send it: {finishing}. Archive it once they finish."
+msgstr "{name} can't be archived while runs still in progress send it: {finishing}. Archive it once they finish."
+
+#: src/templates/dialogs.tsx
+msgid "{name} can't be deleted while published workflows send it: {sending}. Take it out of their Send email step first."
+msgstr "{name} can't be deleted while published workflows send it: {sending}. Take it out of their Send email step first."
+
+#: src/templates/dialogs.tsx
+msgid "{name} can't be deleted while published workflows send it: {sending}. Take it out of their Send email step first. Runs still in progress in {finishing} send it too."
+msgstr "{name} can't be deleted while published workflows send it: {sending}. Take it out of their Send email step first. Runs still in progress in {finishing} send it too."
+
+#: src/templates/dialogs.tsx
+msgid "{name} can't be deleted while runs still in progress send it: {finishing}. Delete it once they finish."
+msgstr "{name} can't be deleted while runs still in progress send it: {finishing}. Delete it once they finish."
+
+#: src/templates/page.tsx
+msgid "{name} created."
+msgstr "{name} created."
+
+#: src/templates/page.tsx
+msgid "{name} moved to the trash."
+msgstr "{name} moved to the trash."
+
+#: src/templates/page.tsx
+msgid "{name} restored."
+msgstr "{name} restored."
+
+#: src/templates/page.tsx
+msgid "{skippedCount, plural, one {# left as it was} other {# left as they were}}"
+msgstr "{skippedCount, plural, one {# left as it was} other {# left as they were}}"
+
+#: src/template-editor.tsx
+msgid "A send treats an archived template as gone, so it can't be archived while these automations send it."
+msgstr "A send treats an archived template as gone, so it can't be archived while these automations send it."
+
+#: src/templates/page.tsx
+msgid "About templates"
+msgstr "About templates"
+
+#: src/templates/rows.tsx
+msgid "Actions"
+msgstr "Actions"
+
+#: src/email-library/panel.tsx
+msgid "Actions for {chosenLabel}"
+msgstr "Actions for {chosenLabel}"
+
+#: src/email-library/panel.tsx
+msgid "Actions for {label}"
+msgstr "Actions for {label}"
+
+#: src/templates/grid.tsx
+#: src/templates/rows.tsx
+msgid "Actions for {name}"
+msgstr "Actions for {name}"
+
+#: src/template-editor.tsx
+msgid "Ada"
+msgstr "Ada"
+
+#: src/templates/page.tsx
+msgid "All templates"
+msgstr "All templates"
+
+#: src/templates/page.tsx
+msgid "All types"
+msgstr "All types"
+
+#: src/template-editor.tsx
+msgid "An archived template can't be edited or sent."
+msgstr "An archived template can't be edited or sent."
+
+#: src/template-editor.tsx
+msgid "Any automation that sends this template will fail at that step until you restore it or choose another template there."
+msgstr "Any automation that sends this template will fail at that step until you restore it or choose another template there."
+
+#: src/templates/page.tsx
+msgid "Any workflow use"
+msgstr "Any workflow use"
+
+#: src/template-editor.tsx
+#: src/templates/dialogs.tsx
+#: src/templates/page.tsx
+msgid "Archive"
+msgstr "Archive"
+
+#: src/templates/dialogs.tsx
+msgid "Archive {name}? It leaves the library and its name is free to use. A workflow that sends it stops at that step until it is restored."
+msgstr "Archive {name}? It leaves the library and its name is free to use. A workflow that sends it stops at that step until it is restored."
+
+#: src/templates/dialogs.tsx
+msgid "Archive {name}? No published workflow sends it. You can restore it from Archived."
+msgstr "Archive {name}? No published workflow sends it. You can restore it from Archived."
+
+#: src/template-editor.tsx
+#: src/templates/dialogs.tsx
+msgid "Archive template"
+msgstr "Archive template"
+
+#: src/template-editor.tsx
+msgid "Archive this template?"
+msgstr "Archive this template?"
+
+#: src/template-editor.tsx
+#: src/templates/page.tsx
+msgid "Archived"
+msgstr "Archived"
+
+#: src/template-editor.tsx
+msgid "Archiving…"
+msgstr "Archiving…"
+
+#: src/template-editor.tsx
+msgid "Automations show this name. It must differ from your other templates."
+msgstr "Automations show this name. It must differ from your other templates."
+
+#: src/template-editor.tsx
+#: src/templates/open.tsx
+msgid "Back to templates"
+msgstr "Back to templates"
+
+#: src/email-library/table.tsx
+msgid "Bulk actions"
+msgstr "Bulk actions"
+
+#: src/email-library/header.tsx
+msgid "Campaigns"
+msgstr "Campaigns"
+
+#: src/template-folder-editor.tsx
+#: src/templates/dialogs.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/templates/dialogs.tsx
+msgid "Checking which workflows send {name}…"
+msgstr "Checking which workflows send {name}…"
+
+#: src/email-library/table.tsx
+msgid "Clear selection"
+msgstr "Clear selection"
+
+#: src/template-editor.tsx
+msgid "Convert to formatted"
+msgstr "Convert to formatted"
+
+#: src/template-folder-editor.tsx
+msgid "Create folder"
+msgstr "Create folder"
+
+#: src/template-editor.tsx
+msgid "Create template"
+msgstr "Create template"
+
+#: src/templates/page.tsx
+msgid "Delete"
+msgstr "Delete"
+
+#: src/template-folder-editor.tsx
+msgid "Delete {folderName}? Its templates and child folders move to its parent. No templates are deleted."
+msgstr "Delete {folderName}? Its templates and child folders move to its parent. No templates are deleted."
+
+#: src/template-folder-editor.tsx
+#: src/templates/page.tsx
+msgid "Delete folder"
+msgstr "Delete folder"
+
+#: src/templates/dialogs.tsx
+msgid "Delete template"
+msgstr "Delete template"
+
+#: src/templates/page.tsx
+msgid "Deleted"
+msgstr "Deleted"
+
+#: src/templates/page.tsx
+msgid "Deleted templates wait here until you restore them."
+msgstr "Deleted templates wait here until you restore them."
+
+#: src/templates/page.tsx
+#: src/templates/rows.tsx
+msgid "Designed"
+msgstr "Designed"
+
+#: src/templates/page.tsx
+msgid "Designed email"
+msgstr "Designed email"
+
+#: src/templates/page.tsx
+msgid "Duplicate"
+msgstr "Duplicate"
+
+#: src/templates/page.tsx
+msgid "Edit"
+msgstr "Edit"
+
+#: src/templates/page.tsx
+msgid "Email templates"
+msgstr "Email templates"
+
+#: src/email-library/header.tsx
+msgid "Emails"
+msgstr "Emails"
+
+#: src/templates/page.tsx
+msgid "Every template is in a folder."
+msgstr "Every template is in a folder."
+
+#: src/templates/dialogs.tsx
+#: src/templates/page.tsx
+#: src/templates/rows.tsx
+msgid "Folder"
+msgstr "Folder"
+
+#: src/template-folder-editor.tsx
+msgid "Folder name"
+msgstr "Folder name"
+
+#: src/templates/dialogs.tsx
+msgid "Folders could not be loaded."
+msgstr "Folders could not be loaded."
+
+#: src/email-library/table.tsx
+msgid "Grid view"
+msgstr "Grid view"
+
+#: src/template-folder-editor.tsx
+msgid "Home"
+msgstr "Home"
+
+#: src/template-editor.tsx
+msgid "Insert {shown}"
+msgstr "Insert {shown}"
+
+#: src/template-editor.tsx
+msgid "Insert a merge field"
+msgstr "Insert a merge field"
+
+#: src/template-editor.tsx
+msgid "It goes into the message, where the cursor was."
+msgstr "It goes into the message, where the cursor was."
+
+#: src/template-editor.tsx
+msgid "It goes into the subject, where the cursor was."
+msgstr "It goes into the subject, where the cursor was."
+
+#: src/template-editor.tsx
+msgid "Its name becomes free for another template. You can restore it later."
+msgstr "Its name becomes free for another template. You can restore it later."
+
+#: src/template-editor.tsx
+msgid "Keep it"
+msgstr "Keep it"
+
+#: src/template-editor.tsx
+msgid "Keep my changes"
+msgstr "Keep my changes"
+
+#: src/templates/page.tsx
+msgid "Last updated"
+msgstr "Last updated"
+
+#: src/templates/page.tsx
+msgid "Layout, images and buttons, in the email editor"
+msgstr "Layout, images and buttons, in the email editor"
+
+#: src/template-editor.tsx
+msgid "Leave and drop my changes"
+msgstr "Leave and drop my changes"
+
+#: src/template-editor.tsx
+msgid "Leave without saving?"
+msgstr "Leave without saving?"
+
+#: src/email-library/table.tsx
+msgid "List view"
+msgstr "List view"
+
+#: src/templates/page.tsx
+msgid "Loading templates…"
+msgstr "Loading templates…"
+
+#: src/templates/open.tsx
+#: src/templates/page.tsx
+msgid "Loading the template…"
+msgstr "Loading the template…"
+
+#: src/templates/rows.tsx
+msgid "Loading…"
+msgstr "Loading…"
+
+#: src/template-editor.tsx
+msgid "Lovelace"
+msgstr "Lovelace"
+
+#: src/template-editor.tsx
+msgid "Message"
+msgstr "Message"
+
+#: src/template-editor.tsx
+msgid "Message as saved now"
+msgstr "Message as saved now"
+
+#: src/templates/page.tsx
+msgid "Most used"
+msgstr "Most used"
+
+#: src/templates/dialogs.tsx
+msgid "Move"
+msgstr "Move"
+
+#: src/templates/dialogs.tsx
+msgid "Move {name} to the trash? Nothing sends it from there, and you can restore it from Trash."
+msgstr "Move {name} to the trash? Nothing sends it from there, and you can restore it from Trash."
+
+#: src/templates/dialogs.tsx
+#: src/templates/page.tsx
+msgid "Move to folder"
+msgstr "Move to folder"
+
+#: src/templates/dialogs.tsx
+msgid "Move to trash"
+msgstr "Move to trash"
+
+#: src/templates/dialogs.tsx
+msgid "Moving keeps each template's content and its workflow links."
+msgstr "Moving keeps each template's content and its workflow links."
+
+#: src/templates/dialogs.tsx
+msgid "Moving…"
+msgstr "Moving…"
+
+#: src/template-editor.tsx
+#: src/templates/page.tsx
+#: src/templates/rows.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/template-editor.tsx
+msgid "Name as saved now"
+msgstr "Name as saved now"
+
+#: src/templates/page.tsx
+msgid "New folder"
+msgstr "New folder"
+
+#: src/template-editor.tsx
+#: src/templates/page.tsx
+msgid "New template"
+msgstr "New template"
+
+#: src/email-library/footer.tsx
+msgid "Next"
+msgstr "Next"
+
+#: src/email-library/footer.tsx
+msgid "Next page"
+msgstr "Next page"
+
+#: src/templates/page.tsx
+msgid "No archived templates."
+msgstr "No archived templates."
+
+#: src/templates/dialogs.tsx
+#: src/templates/page.tsx
+msgid "No folder"
+msgstr "No folder"
+
+#: src/template-editor.tsx
+msgid "No published automation sends this template."
+msgstr "No published automation sends this template."
+
+#: src/template-editor.tsx
+msgid "No sample value"
+msgstr "No sample value"
+
+#: src/templates/page.tsx
+msgid "No templates yet. Write an email once, and workflows and campaigns can send it."
+msgstr "No templates yet. Write an email once, and workflows and campaigns can send it."
+
+#: src/template-editor.tsx
+msgid "No value for {stopping}. A contact without one doesn't get this email: the send stops rather than leaving a gap."
+msgstr "No value for {stopping}. A contact without one doesn't get this email: the send stops rather than leaving a gap."
+
+#: src/templates/page.tsx
+msgid "Nobody has written a template yet, and your role can't add one."
+msgstr "Nobody has written a template yet, and your role can't add one."
+
+#: src/template-editor.tsx
+msgid "Not a contact field here: {unknownList}. A send stops at a field it can't fill in, so nobody would get this email."
+msgstr "Not a contact field here: {unknownList}. A send stops at a field it can't fill in, so nobody would get this email."
+
+#: src/templates/page.tsx
+#: src/templates/rows.tsx
+msgid "Not used"
+msgstr "Not used"
+
+#: src/email-library/header.tsx
+msgid "Nothing matches. Try another search or filter."
+msgstr "Nothing matches. Try another search or filter."
+
+#: src/templates/dialogs.tsx
+msgid "Nothing was changed. Try again."
+msgstr "Nothing was changed. Try again."
+
+#: src/templates/page.tsx
+msgid "Nothing was restored. Try again."
+msgstr "Nothing was restored. Try again."
+
+#: src/template-editor.tsx
+#: src/templates/dialogs.tsx
+msgid "OK"
+msgstr "OK"
+
+#: src/templates/page.tsx
+#: src/templates/rows.tsx
+msgid "Open"
+msgstr "Open"
+
+#: src/templates/rows.tsx
+msgid "Open {name}"
+msgstr "Open {name}"
+
+#: src/email-library/footer.tsx
+msgid "Pages"
+msgstr "Pages"
+
+#: src/template-folder-editor.tsx
+msgid "Parent folder"
+msgstr "Parent folder"
+
+#: src/templates/page.tsx
+#: src/templates/rows.tsx
+msgid "Plain text"
+msgstr "Plain text"
+
+#: src/template-editor.tsx
+msgid "Plain text. It's sent exactly as written, with merge fields filled in."
+msgstr "Plain text. It's sent exactly as written, with merge fields filled in."
+
+#: src/template-editor.tsx
+msgid "Preview"
+msgstr "Preview"
+
+#: src/templates/grid.tsx
+msgid "Preview of {name}"
+msgstr "Preview of {name}"
+
+#: src/email-library/footer.tsx
+msgid "Previous"
+msgstr "Previous"
+
+#: src/email-library/footer.tsx
+msgid "Previous page"
+msgstr "Previous page"
+
+#: src/templates/dialogs.tsx
+#: src/templates/page.tsx
+msgid "Rename"
+msgstr "Rename"
+
+#: src/template-folder-editor.tsx
+#: src/templates/page.tsx
+msgid "Rename or move folder"
+msgstr "Rename or move folder"
+
+#: src/templates/dialogs.tsx
+msgid "Rename template"
+msgstr "Rename template"
+
+#: src/templates/page.tsx
+msgid "Renamed to {name}."
+msgstr "Renamed to {name}."
+
+#: src/templates/page.tsx
+msgid "Restore"
+msgstr "Restore"
+
+#: src/template-editor.tsx
+msgid "Restore template"
+msgstr "Restore template"
+
+#: src/template-editor.tsx
+msgid "Restoring…"
+msgstr "Restoring…"
+
+#: src/template-folder-editor.tsx
+msgid "Save folder"
+msgstr "Save folder"
+
+#: src/template-editor.tsx
+msgid "Save or undo your changes before archiving."
+msgstr "Save or undo your changes before archiving."
+
+#: src/template-editor.tsx
+msgid "Save template"
+msgstr "Save template"
+
+#: src/template-editor.tsx
+#: src/template-folder-editor.tsx
+#: src/templates/dialogs.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/templates/page.tsx
+msgid "Search templates"
+msgstr "Search templates"
+
+#: src/templates/grid.tsx
+#: src/templates/rows.tsx
+msgid "Select {name}"
+msgstr "Select {name}"
+
+#: src/templates/rows.tsx
+msgid "Select all templates on this page"
+msgstr "Select all templates on this page"
+
+#: src/template-editor.tsx
+msgid "Someone else saved this template while you were editing. Nothing of yours was saved."
+msgstr "Someone else saved this template while you were editing. Nothing of yours was saved."
+
+#: src/templates/page.tsx
+msgid "Sort"
+msgstr "Sort"
+
+#: src/template-editor.tsx
+msgid "Stay here"
+msgstr "Stay here"
+
+#: src/template-editor.tsx
+msgid "Subject"
+msgstr "Subject"
+
+#: src/template-editor.tsx
+msgid "Subject as saved now"
+msgstr "Subject as saved now"
+
+#: src/template-editor.tsx
+msgid "Take it out of their Send email step first. Runs still in progress finish before it can go."
+msgstr "Take it out of their Send email step first. Runs still in progress finish before it can go."
+
+#: src/template-editor.tsx
+msgid "Template"
+msgstr "Template"
+
+#: src/template-editor.tsx
+msgid "Template archived."
+msgstr "Template archived."
+
+#: src/templates/page.tsx
+msgid "Template folders"
+msgstr "Template folders"
+
+#: src/templates/page.tsx
+msgid "Template moved."
+msgstr "Template moved."
+
+#: src/templates/dialogs.tsx
+msgid "Template name"
+msgstr "Template name"
+
+#: src/template-editor.tsx
+msgid "Template restored."
+msgstr "Template restored."
+
+#: src/template-editor.tsx
+msgid "Template saved."
+msgstr "Template saved."
+
+#: src/email-library/header.tsx
+msgid "Templates"
+msgstr "Templates"
+
+#: src/templates/page.tsx
+msgid "Templates per page"
+msgstr "Templates per page"
+
+#: src/templates/page.tsx
+msgid "Text only, like a personal email"
+msgstr "Text only, like a personal email"
+
+#: src/template-folder-editor.tsx
+msgid "The folder could not be saved. Try again."
+msgstr "The folder could not be saved. Try again."
+
+#: src/template-editor.tsx
+msgid "The name, subject and message are as you opened them."
+msgstr "The name, subject and message are as you opened them."
+
+#: src/template-editor.tsx
+msgid "The sample for {stopping} has a line break, which can't go in a subject. A send with one stops."
+msgstr "The sample for {stopping} has a line break, which can't go in a subject. A send with one stops."
+
+#: src/templates/dialogs.tsx
+msgid "The template could not be archived. Try again."
+msgstr "The template could not be archived. Try again."
+
+#: src/templates/dialogs.tsx
+msgid "The template could not be deleted. Try again."
+msgstr "The template could not be deleted. Try again."
+
+#: src/templates/page.tsx
+msgid "The template could not be duplicated. Try again."
+msgstr "The template could not be duplicated. Try again."
+
+#: src/templates/dialogs.tsx
+msgid "The template could not be renamed. Try again."
+msgstr "The template could not be renamed. Try again."
+
+#: src/templates/page.tsx
+msgid "The template could not be restored. Try again."
+msgstr "The template could not be restored. Try again."
+
+#: src/template-editor.tsx
+msgid "The template wasn't archived. Check your connection and try again."
+msgstr "The template wasn't archived. Check your connection and try again."
+
+#: src/template-editor.tsx
+msgid "The template wasn't restored. Check your connection and try again."
+msgstr "The template wasn't restored. Check your connection and try again."
+
+#: src/template-editor.tsx
+msgid "The template wasn't saved. Check your connection and try again."
+msgstr "The template wasn't saved. Check your connection and try again."
+
+#: src/templates/dialogs.tsx
+msgid "The templates could not be moved. Try again."
+msgstr "The templates could not be moved. Try again."
+
+#: src/templates/page.tsx
+msgid "The trash is empty."
+msgstr "The trash is empty."
+
+#: src/templates/rows.tsx
+msgid "The workflows could not be loaded."
+msgstr "The workflows could not be loaded."
+
+#: src/template-editor.tsx
+msgid "They archived it, so it can't be edited until it's restored."
+msgstr "They archived it, so it can't be edited until it's restored."
+
+#: src/templates/dialogs.tsx
+msgid "They leave the library and their names are free to use. A template a workflow sends stays where it is, and you'll see which."
+msgstr "They leave the library and their names are free to use. A template a workflow sends stays where it is, and you'll see which."
+
+#: src/templates/dialogs.tsx
+msgid "They move to the trash, where you can restore them. A template a published workflow sends stays where it is, and you'll see which."
+msgstr "They move to the trash, where you can restore them. A template a published workflow sends stays where it is, and you'll see which."
+
+#: src/templates/page.tsx
+msgid "This folder is empty."
+msgstr "This folder is empty."
+
+#: src/template-editor.tsx
+#: src/templates/dialogs.tsx
+msgid "This template is in use"
+msgstr "This template is in use"
+
+#: src/template-editor.tsx
+msgid "This template uses no merge fields: everyone gets the same text."
+msgstr "This template uses no merge fields: everyone gets the same text."
+
+#: src/templates/page.tsx
+msgid "To group templates"
+msgstr "To group templates"
+
+#: src/templates/page.tsx
+msgid "Trash"
+msgstr "Trash"
+
+#: src/templates/open.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/templates/page.tsx
+#: src/templates/rows.tsx
+msgid "Type"
+msgstr "Type"
+
+#: src/templates/page.tsx
+msgid "Undo"
+msgstr "Undo"
+
+#: src/templates/page.tsx
+msgid "Updated"
+msgstr "Updated"
+
+#: src/template-editor.tsx
+msgid "Use the saved version"
+msgstr "Use the saved version"
+
+#: src/templates/page.tsx
+msgid "Used in workflows"
+msgstr "Used in workflows"
+
+#: src/email-library/table.tsx
+msgid "View"
+msgstr "View"
+
+#: src/templates/page.tsx
+msgid "We couldn't load the templates."
+msgstr "We couldn't load the templates."
+
+#: src/templates/dialogs.tsx
+#: src/templates/open.tsx
+msgid "We couldn't load this template."
+msgstr "We couldn't load this template."
+
+#: src/templates/page.tsx
+#: src/templates/rows.tsx
+msgid "Workflows"
+msgstr "Workflows"
+
+#: src/templates/page.tsx
+msgid "Workflows and campaigns send these emails. Editing a template changes what every workflow that sends it sends from then on. Merge fields such as the contact's first name are filled in for each contact."
+msgstr "Workflows and campaigns send these emails. Editing a template changes what every workflow that sends it sends from then on. Merge fields such as the contact's first name are filled in for each contact."
+
+#: src/templates/rows.tsx
+msgid "Workflows using {name}"
+msgstr "Workflows using {name}"
+
+#: src/templates/page.tsx
+msgid "Write the first template"
+msgstr "Write the first template"
+
+#: src/template-editor.tsx
+msgid "You can read this template, but your role can't change it."
+msgstr "You can read this template, but your role can't change it."
+
+#: src/template-editor.tsx
+msgid "Your changes to this template haven't been saved."
+msgstr "Your changes to this template haven't been saved."
+
+#: src/template-editor.tsx
+msgid "Your own contact fields couldn't be loaded, so only the standard ones are listed."
+msgstr "Your own contact fields couldn't be loaded, so only the standard ones are listed."

@@ -1,0 +1,432 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-13 16:51+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "{archivedName} (archived)"
+msgstr "{archivedName} (archived)"
+
+#: src/contact-add-to-workflow.tsx
+msgid "{count, plural, one {# contact is selected.} other {# contacts are selected.}}"
+msgstr "{count, plural, one {# contact is selected.} other {# contacts are selected.}}"
+
+#: src/automation-source-fields.tsx
+msgid "{label}, the text"
+msgstr "{label}, the text"
+
+#: src/automation-source-fields.tsx
+msgid "{name} (your own)"
+msgstr "{name} (your own)"
+
+#: src/contact-add-to-workflow.tsx
+msgid "{selectedText} Each is added to the workflow. A contact already in it, or one it takes only once, is skipped."
+msgstr "{selectedText} Each is added to the workflow. A contact already in it, or one it takes only once, is skipped."
+
+#: src/search-picker.tsx
+msgid "{shownCount, plural, one {# choice} other {# choices}}"
+msgstr "{shownCount, plural, one {# choice} other {# choices}}"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "{written} (not found)"
+msgstr "{written} (not found)"
+
+#: src/automation-recipes.tsx
+msgid "← All recipes"
+msgstr "← All recipes"
+
+#: src/automation-recipes.tsx
+msgid "A lead that already has an owner keeps that owner."
+msgstr "A lead that already has an owner keeps that owner."
+
+#: src/automation-recipes.tsx
+msgid "A ready-made workflow, added as a new draft. You can change every step before you publish it; it never starts running by itself."
+msgstr "A ready-made workflow, added as a new draft. You can change every step before you publish it; it never starts running by itself."
+
+#: src/automation-recipe-rules.ts
+msgid "A reschedule moves both reminders; a cancellation or a no-show stops them."
+msgstr "A reschedule moves both reminders; a cancellation or a no-show stops them."
+
+#: src/automation-source-fields.tsx
+msgid "Add"
+msgstr "Add"
+
+#: src/search-picker.tsx
+msgid "Add “{own}”"
+msgstr "Add “{own}”"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Add filters"
+msgstr "Add filters"
+
+#: src/contact-add-to-workflow.tsx
+msgid "Add to Workflow"
+msgstr "Add to Workflow"
+
+#: src/automation-recipe-rules.ts
+msgid "Adds the tag of that source, such as “Source: Google Ads”: the same tag your forms add. Everything else gets no tag here."
+msgstr "Adds the tag of that source, such as “Source: Google Ads”: the same tag your forms add. Everything else gets no tag here."
+
+#: src/automation-recipes.tsx
+msgid "Also send a text an hour before"
+msgstr "Also send a text an hour before"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "An answer on the form"
+msgstr "An answer on the form"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Another field"
+msgstr "Another field"
+
+#: src/automation-source-fields.tsx
+msgid "Another lead source"
+msgstr "Another lead source"
+
+#: src/automation-submission.ts
+msgid "Answers to {form}"
+msgstr "Answers to {form}"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Any form"
+msgstr "Any form"
+
+#: src/automation-recipe-rules.ts
+msgid "Appointment reminders"
+msgstr "Appointment reminders"
+
+#: src/automation-recipes.tsx
+msgid "Calendars it reminds for"
+msgstr "Calendars it reminds for"
+
+#: src/automation-recipes.tsx
+#: src/contact-add-to-workflow.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/contact-add-to-workflow.tsx
+msgid "Choose a published workflow."
+msgstr "Choose a published workflow."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Choose lead sources"
+msgstr "Choose lead sources"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Choose session sources"
+msgstr "Choose session sources"
+
+#: src/contact-add-to-workflow.tsx
+msgid "Chosen workflow"
+msgstr "Chosen workflow"
+
+#: src/automation-recipes.tsx
+msgid "Connect a phone number in Settings → Phone System to send texts. You can add the text step later."
+msgstr "Connect a phone number in Settings → Phone System to send texts. You can add the text step later."
+
+#: src/automation-recipes.tsx
+msgid "Create the draft"
+msgstr "Create the draft"
+
+#: src/automation-trigger-filters-panel.tsx
+#: src/automation-trigger-filters.ts
+msgid "Draft"
+msgstr "Draft"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Edit in JSON"
+msgstr "Edit in JSON"
+
+#: src/automation-recipes.tsx
+msgid "Everyone on the team, in turn"
+msgstr "Everyone on the team, in turn"
+
+#: src/automation-recipe-rules.ts
+msgid "Fewer no-shows: reminds people of the appointment they booked, a day and an hour before."
+msgstr "Fewer no-shows: reminds people of the appointment they booked, a day and an hour before."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Filters"
+msgstr "Filters"
+
+#: src/automation-submission.ts
+msgid "Form answers"
+msgstr "Form answers"
+
+#: src/automation-source-fields.tsx
+msgid "From how they arrived (recommended)"
+msgstr "From how they arrived (recommended)"
+
+#: src/automation-recipe-rules.ts
+msgid "Gives the lead an owner, unless you leave that out."
+msgstr "Gives the lead an owner, unless you leave that out."
+
+#: src/automation-recipes.tsx
+msgid "It adds the tags your forms add for these sources ({tagNames}). One that isn't here yet is made first, in the “Lead source” tag group; no second copy is ever made."
+msgstr "It adds the tags your forms add for these sources ({tagNames}). One that isn't here yet is made first, in the “Lead source” tag group; no second copy is ever made."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Lead source"
+msgstr "Lead source"
+
+#: src/automation-recipes.tsx
+msgid "Leave them all unticked to remind for every calendar."
+msgstr "Leave them all unticked to remind for every calendar."
+
+#: src/automation-recipes.tsx
+#: src/search-picker.tsx
+msgid "Loading…"
+msgstr "Loading…"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "No filters applied: every event of this kind starts the workflow."
+msgstr "No filters applied: every event of this kind starts the workflow."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "No forms match."
+msgstr "No forms match."
+
+#: src/contact-add-to-workflow.tsx
+msgid "No published workflows match."
+msgstr "No published workflows match."
+
+#: src/automation-source-fields.tsx
+msgid "No source"
+msgstr "No source"
+
+#: src/automation-source-fields.tsx
+msgid "No source (remove it)"
+msgstr "No source (remove it)"
+
+#: src/automation-recipes.tsx
+msgid "Nobody yet (leave the owner step out)"
+msgstr "Nobody yet (leave the owner step out)"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Nothing is chosen yet, so this filter lets every lead through."
+msgstr "Nothing is chosen yet, so this filter lets every lead through."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Nothing matches."
+msgstr "Nothing matches."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Nothing to choose from."
+msgstr "Nothing to choose from."
+
+#: src/automation-recipe-rules.ts
+msgid "One form, several ads: tells the leads apart by how each arrived."
+msgstr "One form, several ads: tells the leads apart by how each arrived."
+
+#: src/automation-recipes.tsx
+msgid "Only to contacts with a phone number who agreed to texts about their bookings."
+msgstr "Only to contacts with a phone number who agreed to texts about their bookings."
+
+#: src/automation-recipe-rules.ts
+msgid "Opens an opportunity whose source is how the lead arrived."
+msgstr "Opens an opportunity whose source is how the lead arrived."
+
+#: src/automation-submission.ts
+msgid "Page the form was sent from"
+msgstr "Page the form was sent from"
+
+#: src/automation-recipes.tsx
+msgid "Pipeline for the new opportunities"
+msgstr "Pipeline for the new opportunities"
+
+#: src/automation-recipes.tsx
+msgid "Quiet hours hold reminders as they hold every message: one due during them goes out when they end."
+msgstr "Quiet hours hold reminders as they hold every message: one due during them goes out when they end."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Remove {shown}"
+msgstr "Remove {shown}"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Remove filter: {name}"
+msgstr "Remove filter: {name}"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Search forms"
+msgstr "Search forms"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Search or type a lead source"
+msgstr "Search or type a lead source"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Search session sources"
+msgstr "Search session sources"
+
+#: src/contact-add-to-workflow.tsx
+msgid "Search workflows"
+msgstr "Search workflows"
+
+#: src/contact-add-to-workflow.tsx
+msgid "Select a workflow"
+msgstr "Select a workflow"
+
+#: src/contact-add-to-workflow.tsx
+msgid "Select Workflow"
+msgstr "Select Workflow"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Session source"
+msgstr "Session source"
+
+#: src/search-picker.tsx
+msgid "Showing {shownCount} of {all}. Type to narrow the list."
+msgstr "Showing {shownCount} of {all}. Type to narrow the list."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Source filters"
+msgstr "Source filters"
+
+#: src/automation-recipes.tsx
+msgid "Stage they start in"
+msgstr "Stage they start in"
+
+#: src/automation-recipes.tsx
+msgid "Start from a recipe"
+msgstr "Start from a recipe"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Starts only for a lead that arrived through one of these channels. This filter never changes how a lead is recorded."
+msgstr "Starts only for a lead that arrived through one of these channels. This filter never changes how a lead is recorded."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "Starts only for a lead whose source is one of these. The source is worked out from how the lead arrived; this filter never changes it."
+msgstr "Starts only for a lead whose source is one of these. The source is worked out from how the lead arrived; this filter never changes it."
+
+#: src/automation-recipe-rules.ts
+msgid "Starts when an appointment is booked on the calendars you choose. The booking's own confirmation is not sent again."
+msgstr "Starts when an appointment is booked on the calendars you choose. The booking's own confirmation is not sent again."
+
+#: src/automation-recipe-rules.ts
+msgid "Starts when any form is submitted."
+msgstr "Starts when any form is submitted."
+
+#: src/automation-source-fields.tsx
+msgid "Such as a name you put in source="
+msgstr "Such as a name you put in source="
+
+#: src/automation-recipe-rules.ts
+msgid "Tag and route leads by source"
+msgstr "Tag and route leads by source"
+
+#: src/automation-recipe-rules.ts
+msgid "Takes a branch for each of {branchNames}, and one for everything else."
+msgstr "Takes a branch for each of {branchNames}, and one for everything else."
+
+#: src/automation-source-fields.tsx
+msgid "Text I write"
+msgstr "Text I write"
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "That is the most a trigger can list"
+msgstr "That is the most a trigger can list"
+
+#: src/automation-source-fields.tsx
+msgid "That is the most a trigger can list."
+msgstr "That is the most a trigger can list."
+
+#: src/contact-add-to-workflow.tsx
+msgid "The contacts weren't added. Check your connection and try again."
+msgstr "The contacts weren't added. Check your connection and try again."
+
+#: src/search-picker.tsx
+msgid "The list couldn't be loaded."
+msgstr "The list couldn't be loaded."
+
+#: src/automation-recipe-rules.ts
+msgid "The reminders are transactional: they go to people who agreed to booking notifications, without a marketing footer."
+msgstr "The reminders are transactional: they go to people who agreed to booking notifications, without a marketing footer."
+
+#: src/contact-add-to-workflow.tsx
+msgid "There are no published workflows yet. Publish one in Automation → Workflows."
+msgstr "There are no published workflows yet. Publish one in Automation → Workflows."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "These filters are edited in the JSON view."
+msgstr "These filters are edited in the JSON view."
+
+#: src/automation-recipes.tsx
+msgid "This business has no calendar yet: the workflow starts for any calendar."
+msgstr "This business has no calendar yet: the workflow starts for any calendar."
+
+#: src/automation-trigger-filters.ts
+msgid "This business has no form with this name or ID. Choose another form."
+msgstr "This business has no form with this name or ID. Choose another form."
+
+#: src/automation-trigger-filters-panel.tsx
+msgid "This business has no forms yet."
+msgstr "This business has no forms yet."
+
+#: src/automation-recipes.tsx
+msgid "This business has no mailbox connected, so the reminders can't be sent yet. The draft is made all the same: connect a mailbox in Settings → Email Services before you publish it."
+msgstr "This business has no mailbox connected, so the reminders can't be sent yet. The draft is made all the same: connect a mailbox in Settings → Email Services before you publish it."
+
+#: src/automation-trigger-filters.ts
+msgid "This form is a draft. Publish it to receive submissions."
+msgstr "This form is a draft. Publish it to receive submissions."
+
+#: src/automation-trigger-filters.ts
+msgid "This form is archived. Restore and publish it to receive submissions."
+msgstr "This form is archived. Restore and publish it to receive submissions."
+
+#: src/automation-recipes.tsx
+msgid "This recipe opens an opportunity, and this business has no pipeline with a stage yet. Add a pipeline in Opportunities first."
+msgstr "This recipe opens an opportunity, and this business has no pipeline with a stage yet. Add a pipeline in Opportunities first."
+
+#: src/automation-recipes.tsx
+#: src/search-picker.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/automation-recipe-rules.ts
+msgid "Waits until 1 hour before and emails again, with a text too if you choose."
+msgstr "Waits until 1 hour before and emails again, with a text too if you choose."
+
+#: src/automation-recipe-rules.ts
+msgid "Waits until 24 hours before the appointment and emails a reminder. A booking made less than a day ahead skips this one."
+msgstr "Waits until 24 hours before the appointment and emails a reminder. A booking made less than a day ahead skips this one."
+
+#: src/automation-recipes.tsx
+msgid "We couldn't create the workflow. Try again."
+msgstr "We couldn't create the workflow. Try again."
+
+#: src/automation-recipes.tsx
+msgid "We couldn't load what this business has to choose from."
+msgstr "We couldn't load what this business has to choose from."
+
+#: src/automation-recipes.tsx
+msgid "We couldn't reach the server. Check your connection and try again."
+msgstr "We couldn't reach the server. Check your connection and try again."
+
+#: src/automation-recipes.tsx
+msgid "Who new leads go to"
+msgstr "Who new leads go to"
+
+#: src/contact-add-to-workflow.tsx
+msgid "Workflow"
+msgstr "Workflow"
+
+#: src/contact-add-to-workflow.tsx
+msgid "Working…"
+msgstr "Working…"
+
+#: src/contact-add-to-workflow.tsx
+msgid "You don't have permission to add contacts to workflows."
+msgstr "You don't have permission to add contacts to workflows."
+
+#: src/automation-recipes.tsx
+msgid "You don't have permission to create workflows or to add tags. Ask someone who manages workflows and tags to start this recipe."
+msgstr "You don't have permission to create workflows or to add tags. Ask someone who manages workflows and tags to start this recipe."
+
+#: src/automation-recipes.tsx
+msgid "You don't have permission to create workflows. Ask someone who manages workflows to start this recipe."
+msgstr "You don't have permission to create workflows. Ask someone who manages workflows to start this recipe."

@@ -1,0 +1,23 @@
+{
+  "$source": "Built by hand from the OpenAPI schema named in \"schema\" (twilio-oai, spec/json/twilio_api_v2010.json, commit 141f1201b55abcc16b3aa8089e71c4a927326975, unchanged on main at 2026-10-15) and cross-checked with twilio@6.1.2. Not captured from any account: every SID is made up and every number is a 555 example.",
+  "schema": "ListOutgoingCallerIdResponse",
+  "end": 0,
+  "first_page_uri": "/2010-04-01/Accounts/AC00000000000000000000000000000001/OutgoingCallerIds.json?PageSize=1000&Page=0",
+  "next_page_uri": "/2010-04-01/Accounts/AC00000000000000000000000000000001/OutgoingCallerIds.json?PageSize=1000&Page=1&PageToken=PASynthetic",
+  "page": 0,
+  "page_size": 20,
+  "previous_page_uri": null,
+  "start": 0,
+  "uri": "/2010-04-01/Accounts/AC00000000000000000000000000000001/OutgoingCallerIds.json?PageSize=1000",
+  "outgoing_caller_ids": [
+    {
+      "account_sid": "AC00000000000000000000000000000001",
+      "date_created": "Thu, 15 Oct 2026 10:00:00 +0000",
+      "date_updated": "Thu, 15 Oct 2026 10:00:00 +0000",
+      "friendly_name": "Front desk",
+      "phone_number": "+12025550123",
+      "sid": "PN00000000000000000000000000000201",
+      "uri": "/2010-04-01/Accounts/AC00000000000000000000000000000001/OutgoingCallerIds/PN00000000000000000000000000000201.json"
+    }
+  ]
+}

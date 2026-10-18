@@ -1,0 +1,42 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        },
+        "next": "check_inn"
+      },
+      "check_in": {
+        "type": "tag.add",
+        "config": {
+          "tag": "VIP"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello/next",
+      "code": "unknown_step",
+      "message": "There's no step check_inn.",
+      "suggestion": "Did you mean check_in?"
+    },
+    {
+      "path": "/steps/check_in",
+      "code": "unreachable_step",
+      "message": "No path leads to check_in.",
+      "suggestion": "Point a step's next at check_in, or remove it."
+    }
+  ]
+}

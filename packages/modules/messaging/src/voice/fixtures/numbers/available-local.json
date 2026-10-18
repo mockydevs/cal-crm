@@ -1,0 +1,54 @@
+{
+  "$source": "Built by hand from the OpenAPI schema named in \"schema\" (twilio-oai, spec/json/twilio_api_v2010.json, commit 141f1201b55abcc16b3aa8089e71c4a927326975, unchanged on main at 2026-10-15) and cross-checked with twilio@6.1.2. Not captured from any account: every SID is made up and every number is a 555 example.",
+  "schema": "ListAvailablePhoneNumberLocalResponse",
+  "end": 0,
+  "first_page_uri": "/2010-04-01/Accounts/AC00000000000000000000000000000001/AvailablePhoneNumbers/US/Local.json?AreaCode=415&PageSize=20&Page=0",
+  "next_page_uri": null,
+  "page": 0,
+  "page_size": 20,
+  "previous_page_uri": null,
+  "start": 0,
+  "uri": "/2010-04-01/Accounts/AC00000000000000000000000000000001/AvailablePhoneNumbers/US/Local.json?AreaCode=415&PageSize=20",
+  "available_phone_numbers": [
+    {
+      "friendly_name": "(415) 555-0101",
+      "phone_number": "+14155550101",
+      "lata": "722",
+      "locality": "San Francisco",
+      "rate_center": "SNFC CNTRL",
+      "latitude": 37.7749,
+      "longitude": -122.4194,
+      "region": "CA",
+      "postal_code": "94103",
+      "iso_country": "US",
+      "address_requirements": "none",
+      "beta": false,
+      "capabilities": {
+        "voice": true,
+        "sms": true,
+        "mms": true,
+        "fax": false
+      }
+    },
+    {
+      "friendly_name": "(415) 555-0102",
+      "phone_number": "+14155550102",
+      "lata": null,
+      "locality": null,
+      "rate_center": null,
+      "latitude": null,
+      "longitude": null,
+      "region": null,
+      "postal_code": null,
+      "iso_country": "US",
+      "address_requirements": "local",
+      "beta": true,
+      "capabilities": {
+        "voice": true,
+        "sms": false,
+        "mms": false,
+        "fax": false
+      }
+    }
+  ]
+}

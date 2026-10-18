@@ -1,0 +1,39 @@
+{
+  "id": "chatcmpl-fixture-tools",
+  "object": "chat.completion",
+  "created": 1760000000,
+  "model": "fixture-model",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "tool_calls": [
+          {
+            "id": "call_fixture0001",
+            "type": "function",
+            "function": {
+              "name": "find_contacts",
+              "arguments": "{\"query\":\"wedding in June\",\"limit\":5}"
+            }
+          },
+          {
+            "id": "call_fixture0002",
+            "type": "function",
+            "function": { "name": "count_deals", "arguments": "{}" }
+          }
+        ]
+      },
+      "logprobs": null,
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 82,
+    "completion_tokens": 17,
+    "total_tokens": 99,
+    "prompt_tokens_details": { "cached_tokens": 64 }
+  }
+}

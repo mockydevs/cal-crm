@@ -1,0 +1,240 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-13 16:44+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/public-booking.tsx
+msgid "{length} minutes"
+msgstr "{length} minutes"
+
+#: src/public-booking.tsx
+msgid "A confirmation is on its way to your email, with a calendar invite."
+msgstr "A confirmation is on its way to your email, with a calendar invite."
+
+#: src/public-booking.tsx
+msgid "Appointment booked"
+msgstr "Appointment booked"
+
+#: src/public-booking.tsx
+msgid "Appointment cancelled"
+msgstr "Appointment cancelled"
+
+#: src/public-booking.tsx
+msgid "Appointment date"
+msgstr "Appointment date"
+
+#: src/public-booking.tsx
+msgid "Appointment details"
+msgstr "Appointment details"
+
+#: src/public-booking.tsx
+msgid "Appointment rescheduled"
+msgstr "Appointment rescheduled"
+
+#: src/public-booking.tsx
+msgid "Appointment times in {appointmentTimezone}"
+msgstr "Appointment times in {appointmentTimezone}"
+
+#: src/public-booking.tsx
+msgid "Appointment unavailable"
+msgstr "Appointment unavailable"
+
+#: src/public-booking.tsx
+msgid "Available times"
+msgstr "Available times"
+
+#: src/public-booking.tsx
+msgid "Available times could not be loaded."
+msgstr "Available times could not be loaded."
+
+#: src/public-booking.tsx
+msgid "Book an appointment"
+msgstr "Book an appointment"
+
+#: src/public-booking.tsx
+msgid "Book appointment"
+msgstr "Book appointment"
+
+#: src/public-booking.tsx
+msgid "Booking page unavailable"
+msgstr "Booking page unavailable"
+
+#: src/public-booking.tsx
+msgid "Booking page unavailable here"
+msgstr "Booking page unavailable here"
+
+#: src/public-booking.tsx
+msgid "Booking receipt"
+msgstr "Booking receipt"
+
+#: src/public-booking.tsx
+msgid "Booking…"
+msgstr "Booking…"
+
+#: src/public-booking.tsx
+msgid "Cancel appointment"
+msgstr "Cancel appointment"
+
+#: src/public-booking.tsx
+msgid "Cancel this appointment"
+msgstr "Cancel this appointment"
+
+#: src/public-booking.tsx
+msgid "Cancellation recorded."
+msgstr "Cancellation recorded."
+
+#: src/public-booking.tsx
+msgid "Cancellation releases your reserved time. Your cancellation can be recorded even when a confirmation cannot be delivered."
+msgstr "Cancellation releases your reserved time. Your cancellation can be recorded even when a confirmation cannot be delivered."
+
+#: src/public-booking.tsx
+msgid "Check complete."
+msgstr "Check complete."
+
+#: src/public-booking.tsx
+msgid "Check your contact details, appointment time and notification consent."
+msgstr "Check your contact details, appointment time and notification consent."
+
+#: src/public-booking.tsx
+msgid "Checking that you're a person…"
+msgstr "Checking that you're a person…"
+
+#: src/public-booking.tsx
+msgid "Choose a time"
+msgstr "Choose a time"
+
+#: src/public-booking.tsx
+msgid "Choose another time"
+msgstr "Choose another time"
+
+#: src/public-booking.tsx
+msgid "Email"
+msgstr "Email"
+
+#: src/public-booking.tsx
+msgid "Email delivery may be deferred."
+msgstr "Email delivery may be deferred."
+
+#: src/public-booking.tsx
+msgid "First name"
+msgstr "First name"
+
+#: src/public-booking.tsx
+msgid "Last name"
+msgstr "Last name"
+
+#: src/public-booking.tsx
+msgid "Leave this empty"
+msgstr "Leave this empty"
+
+#: src/public-booking.tsx
+msgid "Length"
+msgstr "Length"
+
+#: src/public-booking.tsx
+msgid "Loading appointment…"
+msgstr "Loading appointment…"
+
+#: src/public-booking.tsx
+msgid "Loading available times…"
+msgstr "Loading available times…"
+
+#: src/public-booking.tsx
+msgid "Loading booking page…"
+msgstr "Loading booking page…"
+
+#: src/public-booking.tsx
+msgid "Manage appointment"
+msgstr "Manage appointment"
+
+#: src/public-booking.tsx
+msgid "No confirmation email is sent for this booking. Keep the link below to change or cancel it."
+msgstr "No confirmation email is sent for this booking. Keep the link below to change or cancel it."
+
+#: src/public-booking.tsx
+msgid "No times available. Choose another date."
+msgstr "No times available. Choose another date."
+
+#: src/public-booking.tsx
+msgid "Open the booking page"
+msgstr "Open the booking page"
+
+#: src/public-booking.tsx
+msgid "Phone (optional)"
+msgstr "Phone (optional)"
+
+#: src/public-booking.tsx
+msgid "Reload appointment"
+msgstr "Reload appointment"
+
+#: src/public-booking.tsx
+msgid "Reload times"
+msgstr "Reload times"
+
+#: src/public-booking.tsx
+msgid "Reschedule appointment"
+msgstr "Reschedule appointment"
+
+#: src/public-booking.tsx
+msgid "Rescheduling times are unavailable."
+msgstr "Rescheduling times are unavailable."
+
+#: src/public-booking.tsx
+msgid "The booking could not be recorded. Try again."
+msgstr "The booking could not be recorded. Try again."
+
+#: src/public-booking.tsx
+msgid "This calendar is unavailable. Check the link or try again."
+msgstr "This calendar is unavailable. Check the link or try again."
+
+#: src/public-booking.tsx
+msgid "This change could not be recorded. Try again."
+msgstr "This change could not be recorded. Try again."
+
+#: src/public-booking.tsx
+msgid "This management link is invalid or expired. Check the original confirmation."
+msgstr "This management link is invalid or expired. Check the original confirmation."
+
+#: src/public-booking.tsx
+msgid "This page is busy. Trying again…"
+msgstr "This page is busy. Trying again…"
+
+#: src/public-booking.tsx
+msgid "This page is still busy, so your booking is not recorded yet. Your details are kept: book again in a moment."
+msgstr "This page is still busy, so your booking is not recorded yet. Your details are kept: book again in a moment."
+
+#: src/public-booking.tsx
+msgid "This page is still busy. Try again in a moment."
+msgstr "This page is still busy. Try again in a moment."
+
+#: src/public-booking.tsx
+msgid "This website isn't secure (https), so bookings can't be made on it."
+msgstr "This website isn't secure (https), so bookings can't be made on it."
+
+#: src/public-booking.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/public-booking.tsx
+msgid "Use the management link in your confirmation to make changes."
+msgstr "Use the management link in your confirmation to make changes."
+
+#: src/public-booking.tsx
+msgid "Used for the timing of appointment notifications."
+msgstr "Used for the timing of appointment notifications."
+
+#: src/public-booking.tsx
+msgid "We couldn't finish checking that you're a person. Book again to retry."
+msgstr "We couldn't finish checking that you're a person. Book again to retry."
+
+#: src/public-booking.tsx
+msgid "Your details"
+msgstr "Your details"
+
+#: src/public-booking.tsx
+msgid "Your time zone"
+msgstr "Your time zone"

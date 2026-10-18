@@ -1,0 +1,17 @@
+<section id="top" class="sc sc-medium"><div class="rw"><div class="cl e1"><a href="/s/0123456789abcdef0123456789abcdef/about"><img class="im e2" src="https://img.example/team.png" alt="The team at work" width="1600" height="900" fetchpriority="high" decoding="async"></a></div></div></section>
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.5;color:#1d2a24;background-color:#ffffff;overflow-wrap:break-word}
+img,video,iframe{max-width:100%}
+img{height:auto;display:block}
+.sc{display:grid;grid-template-columns:minmax(0,1fr);align-content:start;justify-content:center;padding:32px 16px}
+.sc-medium{grid-template-columns:minmax(0,960px)}
+.rw{display:flex;gap:24px}
+.rw+.rw{margin-top:24px}
+.cl{display:flex;flex-direction:column;min-width:0}
+.bt:focus-visible,a:focus-visible{outline:3px solid currentColor;outline-offset:2px}
+@media (max-width:640px){.rw{flex-direction:column}.rw>.cl{flex:0 0 auto}}
+@media (max-width:640px){.sc{padding:24px 16px}}
+.e1{flex:12 1 0%}
+.e2{border-width:1px;border-style:solid;border-color:#e5e7eb;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15);width:100%;max-width:480px;opacity:0.9;align-self:center}

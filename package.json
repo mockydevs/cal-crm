@@ -1,0 +1,46 @@
+{
+  "name": "crm",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": ">=24.11.0 <25"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:setup": "node scripts/dev.mjs --setup-only",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:dev": "tsc -p scripts/tsconfig.json && node --test scripts/dev/builtin-roles.test.mjs scripts/settings/audit.test.mjs",
+    "test:integration": "turbo run test:integration --concurrency=1 -- --maxWorkers=4",
+    "test:e2e": "turbo run test:e2e",
+    "lint": "node scripts/lint.mjs",
+    "i18n:check": "turbo run i18n:check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "deps:check": "depcruise apps packages e2e --config .dependency-cruiser.cjs",
+    "settings:check": "node scripts/settings/check.ts",
+    "db:validate": "bash packages/db/scripts/validate.sh",
+    "check": "pnpm run format:check && pnpm run build && pnpm run lint && pnpm run i18n:check && pnpm run deps:check && pnpm run settings:check && pnpm run typecheck && pnpm run test:dev && pnpm run test && pnpm run test:integration && pnpm run test:e2e"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
+    "@eslint-react/eslint-plugin": "catalog:",
+    "@eslint/js": "catalog:",
+    "dependency-cruiser": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "eslint-plugin-jsx-a11y-x": "catalog:",
+    "eslint-plugin-lingui": "catalog:",
+    "eslint-plugin-react-hooks": "catalog:",
+    "globals": "catalog:",
+    "lefthook": "catalog:",
+    "prettier": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:"
+  }
+}

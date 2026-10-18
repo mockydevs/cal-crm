@@ -1,0 +1,3 @@
+# The root .gitignore ignores every folder named "reports" (test reports). The run reports
+# kept here are evidence behind the registry of Tested models and must be committed.
+!reports/

@@ -1,0 +1,28 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "wait",
+        "config": {
+          "duration": "P400D"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello/config/duration",
+      "code": "wait_too_long",
+      "message": "A wait can last at most 365 days."
+    }
+  ]
+}

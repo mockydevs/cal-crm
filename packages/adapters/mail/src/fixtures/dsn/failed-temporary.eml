@@ -1,0 +1,52 @@
+Return-Path: <>
+Date: Thu, 08 Oct 2026 09:30:05 +0000
+From: Mail Delivery System <MAILER-DAEMON@mx.example.test>
+To: inbox@example.test
+Subject: Returned mail: Cannot send message for 5 days
+Message-ID: <20261008093005.4F2A1@mx.example.test>
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="B6"
+
+This is a MIME-encapsulated message.
+
+--B6
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+   ----- The following addresses had delivery problems -----
+<someone@example.com>  (unrecoverable error)
+
+   ----- Transcript of session follows -----
+<someone@example.com>... Deferred: Connection timed out
+            with mail.example.com.
+Message could not be delivered for 5 days
+Message will be deleted from queue
+
+--B6
+content-type: message/delivery-status
+
+Reporting-MTA: dns; mx.example.test
+
+Original-Recipient: rfc822;someone@example.com
+Final-Recipient: rfc822;someone@example.com
+Action: failed
+Status: 4.0.0
+Diagnostic-Code: smtp; 426 connection timed out
+Last-Attempt-Date: Thu, 08 Oct 2026 09:30:04 +0000
+
+--B6
+content-type: message/rfc822
+
+Date: Thu, 08 Oct 2026 09:30:00 +0000
+From: Example Shop <inbox@example.test>
+To: someone@example.com
+Subject: Your order
+Message-ID: <crm-outbound.0199c0de-0000-7000-8000-000000000001@crm.invalid>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Thank you for your order.
+
+--B6--

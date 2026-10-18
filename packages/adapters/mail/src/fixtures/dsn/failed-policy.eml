@@ -1,0 +1,49 @@
+Return-Path: <>
+Date: Thu, 08 Oct 2026 09:30:05 +0000
+From: Mail Delivery System <MAILER-DAEMON@mx.example.test>
+To: inbox@example.test
+Subject: Undeliverable: Your order
+Message-ID: <20261008093005.4F2A1@mx.example.test>
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="B4"
+
+This is a MIME-encapsulated message.
+
+--B4
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+Delivery has failed to these recipients or groups:
+
+someone@example.com
+Your message was rejected by the recipient's mail system because of its
+policy about the sender.
+
+--B4
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; mx.example.test
+
+Final-Recipient: rfc822;someone@example.com
+Action: failed
+Status: 5.7.1
+Remote-MTA: dns; mail.example.com
+Diagnostic-Code: smtp; 550 5.7.1 Message rejected: the sending domain is
+ blocked by policy
+
+--B4
+Content-Type: message/rfc822
+
+Date: Thu, 08 Oct 2026 09:30:00 +0000
+From: Example Shop <inbox@example.test>
+To: someone@example.com
+Subject: Your order
+Message-ID: <crm-outbound.0199c0de-0000-7000-8000-000000000001@crm.invalid>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Thank you for your order.
+
+--B4--

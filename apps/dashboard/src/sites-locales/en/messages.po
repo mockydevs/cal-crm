@@ -1,0 +1,1491 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-13 00:32+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#. placeholder {0}: each.siteCount
+#: src/sites.tsx
+msgid "{0, plural, one {# Funnel} other {# Funnels}}"
+msgstr "{0, plural, one {# Funnel} other {# Funnels}}"
+
+#. placeholder {0}: template.stepCount
+#: src/sites-create.tsx
+msgid "{0, plural, one {# page} other {# pages}}"
+msgstr "{0, plural, one {# page} other {# pages}}"
+
+#. placeholder {0}: site.stepCount
+#: src/sites.tsx
+msgid "{0, plural, one {# Page} other {# Pages}}"
+msgstr "{0, plural, one {# Page} other {# Pages}}"
+
+#. placeholder {0}: template.stepCount
+#: src/sites-create.tsx
+msgid "{0, plural, one {# step} other {# steps}}"
+msgstr "{0, plural, one {# step} other {# steps}}"
+
+#. placeholder {0}: site.stepCount
+#: src/sites.tsx
+msgid "{0, plural, one {# Step} other {# Steps}}"
+msgstr "{0, plural, one {# Step} other {# Steps}}"
+
+#. placeholder {0}: each.siteCount
+#: src/sites.tsx
+msgid "{0, plural, one {# Website} other {# Websites}}"
+msgstr "{0, plural, one {# Website} other {# Websites}}"
+
+#. placeholder {0}: listed.total
+#: src/sites-create.tsx
+msgid "{0, plural, one {Showing # template} other {Showing # templates}}"
+msgstr "{0, plural, one {Showing # template} other {Showing # templates}}"
+
+#. placeholder {0}: template.uses
+#: src/sites-create.tsx
+msgid "{0, plural, one {used # time} other {used # times}}"
+msgstr "{0, plural, one {used # time} other {used # times}}"
+
+#: src/site-tabs.tsx
+msgid "{added} was added."
+msgstr "{added} was added."
+
+#: src/site-page.tsx
+msgid "{askedName} will be deleted for good, with its pages, their versions and its statistics. This can't be undone."
+msgstr "{askedName} will be deleted for good, with its pages, their versions and its statistics. This can't be undone."
+
+#: src/site-tabs.tsx
+msgid "{firstDay} to {lastDay}"
+msgstr "{firstDay} to {lastDay}"
+
+#: src/site-tabs.tsx
+msgid "{header} was removed."
+msgstr "{header} was removed."
+
+#: src/site-tabs.tsx
+msgid "{hostname} (not verified yet)"
+msgstr "{hostname} (not verified yet)"
+
+#: src/sites-create.tsx
+msgid "{name} is in your favorites."
+msgstr "{name} is in your favorites."
+
+#: src/sites-create.tsx
+msgid "{name} is no longer in your favorites."
+msgstr "{name} is no longer in your favorites."
+
+#: src/site-page.tsx
+msgid "{name} was added."
+msgstr "{name} was added."
+
+#: src/site-page.tsx
+#: src/sites.tsx
+msgid "{name} was deleted."
+msgstr "{name} was deleted."
+
+#: src/sites.tsx
+msgid "{name} was moved."
+msgstr "{name} was moved."
+
+#: src/sites.tsx
+msgid "{openedName} will be deleted for good, with all its pages, settings and statistics. This can't be undone."
+msgstr "{openedName} will be deleted for good, with all its pages, settings and statistics. This can't be undone."
+
+#: src/sites.tsx
+msgid "{openedName} will be deleted for good, with all its steps, pages, settings and statistics. This can't be undone."
+msgstr "{openedName} will be deleted for good, with all its steps, pages, settings and statistics. This can't be undone."
+
+#: src/site-page.tsx
+msgid "{share}% of visitors"
+msgstr "{share}% of visitors"
+
+#: src/site-media-choice.tsx
+msgid "A page needs a picture anyone can open. \"{name}\" is private now: using it makes it public, at an address that stays the same until you make it private again."
+msgstr "A page needs a picture anyone can open. \"{name}\" is private now: using it makes it public, at an address that stays the same until you make it private again."
+
+#: src/site-media-choice.tsx
+msgid "A page takes pictures from secure addresses only (https://). This install is reached over plain http, so \"{name}\" has no such address. It works once the install has a secure address."
+msgstr "A page takes pictures from secure addresses only (https://). This install is reached over plain http, so \"{name}\" has no such address. It works once the install has a secure address."
+
+#: src/site-publish-dialogs.tsx
+msgid "A preview is served the way a published page is, so it waits too."
+msgstr "A preview is served the way a published page is, so it waits too."
+
+#: src/site-arrival-setting.tsx
+msgid "A visitor often lands on one page and sends the form, or books, on another. When this is on, the address of the first page they opened and the site they came from are kept in their own browser tab until the tab is closed, so the lead is still named after the ad. No cookie is set, and nothing is sent to us before they send a form or book."
+msgstr "A visitor often lands on one page and sends the form, or books, on another. When this is on, the address of the first page they opened and the site they came from are kept in their own browser tab until the tab is closed, so the lead is still named after the ad. No cookie is set, and nothing is sent to us before they send a form or book."
+
+#: src/site-arrival-setting.tsx
+msgid "A visitor whose browser sends the Global Privacy Control signal is left alone: nothing is kept, and their lead is named from the page they send it on."
+msgstr "A visitor whose browser sends the Global Privacy Control signal is left alone: nothing is kept, and their lead is named from the page they send it on."
+
+#: src/site-tabs.tsx
+#: src/sites.tsx
+msgid "Actions"
+msgstr "Actions"
+
+#: src/sites.tsx
+msgid "Actions for {name}"
+msgstr "Actions for {name}"
+
+#: src/sites.tsx
+msgid "Actions for the folder {name}"
+msgstr "Actions for the folder {name}"
+
+#: src/site-tabs.tsx
+msgid "Add"
+msgstr "Add"
+
+#: src/site-page.tsx
+msgid "Add new page"
+msgstr "Add new page"
+
+#: src/site-page.tsx
+msgid "Add new step"
+msgstr "Add new step"
+
+#: src/site-tabs.tsx
+msgid "Add security header"
+msgstr "Add security header"
+
+#: src/site-tabs.tsx
+msgid "Adds schema markup on publish to pages that have none."
+msgstr "Adds schema markup on publish to pages that have none."
+
+#: src/site-tabs.tsx
+msgid "All"
+msgstr "All"
+
+#: src/sites-create.tsx
+msgid "All templates"
+msgstr "All templates"
+
+#: src/site-tabs.tsx
+msgid "Auto-generate schema"
+msgstr "Auto-generate schema"
+
+#: src/site-page.tsx
+msgid "Back"
+msgstr "Back"
+
+#: src/site-tabs.tsx
+msgid "Body tracking code"
+msgstr "Body tracking code"
+
+#: src/sites-create.tsx
+msgid "Browse categories"
+msgstr "Browse categories"
+
+#: src/sites.tsx
+msgid "Build websites to showcase your products and build a trusted brand."
+msgstr "Build websites to showcase your products and build a trusted brand."
+
+#: src/site-tabs.tsx
+msgid "Can't find your domain? Connecting one is done in Settings, on a page that isn't available yet."
+msgstr "Can't find your domain? Connecting one is done in Settings, on a page that isn't available yet."
+
+#: src/site-page.tsx
+#: src/site-publish-dialogs.tsx
+#: src/site-tabs.tsx
+#: src/sites-create.tsx
+#: src/sites-dialogs.tsx
+#: src/sites.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/site-tabs.tsx
+msgid "Chat widget"
+msgstr "Chat widget"
+
+#: src/site-publish-dialogs.tsx
+msgid "Check again"
+msgstr "Check again"
+
+#: src/site-publish-dialogs.tsx
+msgid "Checking the page…"
+msgstr "Checking the page…"
+
+#: src/sites-create.tsx
+msgid "Choose"
+msgstr "Choose"
+
+#: src/sites-create.tsx
+msgid "Choose {name}"
+msgstr "Choose {name}"
+
+#: src/site-tabs.tsx
+msgid "Choose a favicon"
+msgstr "Choose a favicon"
+
+#: src/site-media-choice.tsx
+msgid "Choose another"
+msgstr "Choose another"
+
+#: src/site-tabs.tsx
+msgid "Choose from Media Storage"
+msgstr "Choose from Media Storage"
+
+#: src/sites-create.tsx
+msgid "Clear filters"
+msgstr "Clear filters"
+
+#: src/sites.tsx
+msgid "Clone"
+msgstr "Clone"
+
+#: src/site-page.tsx
+msgid "Clone Funnel Step"
+msgstr "Clone Funnel Step"
+
+#: src/site-page.tsx
+msgid "Clone page"
+msgstr "Clone page"
+
+#: src/site-publish-dialogs.tsx
+#: src/sites-create.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/sites-create.tsx
+msgid "Continue"
+msgstr "Continue"
+
+#: src/site-page.tsx
+#: src/site-tabs.tsx
+msgid "Control"
+msgstr "Control"
+
+#: src/site-page.tsx
+msgid "Control share (%)"
+msgstr "Control share (%)"
+
+#: src/site-page.tsx
+#: src/sites.tsx
+msgid "Copied as {name}."
+msgstr "Copied as {name}."
+
+#: src/site-publish.tsx
+#: src/site-tabs.tsx
+msgid "Copied."
+msgstr "Copied."
+
+#: src/site-publish.tsx
+msgid "Copy"
+msgstr "Copy"
+
+#: src/site-tabs.tsx
+msgid "Copy text"
+msgstr "Copy text"
+
+#: src/site-publish.tsx
+msgid "Copy the live address"
+msgstr "Copy the live address"
+
+#: src/sites-create.tsx
+#: src/sites.tsx
+msgid "Create"
+msgstr "Create"
+
+#: src/sites.tsx
+msgid "Create and manage funnels to generate leads, appointments and receive payments."
+msgstr "Create and manage funnels to generate leads, appointments and receive payments."
+
+#: src/sites.tsx
+msgid "Create folder"
+msgstr "Create folder"
+
+#: src/site-page.tsx
+msgid "Create funnel step"
+msgstr "Create funnel step"
+
+#: src/sites-create.tsx
+msgid "Create new funnel"
+msgstr "Create new funnel"
+
+#: src/sites-create.tsx
+msgid "Create new website"
+msgstr "Create new website"
+
+#: src/site-page.tsx
+msgid "Create page"
+msgstr "Create page"
+
+#: src/site-tabs.tsx
+msgid "Create share text"
+msgstr "Create share text"
+
+#: src/site-page.tsx
+msgid "Create variation"
+msgstr "Create variation"
+
+#: src/site-page.tsx
+#: src/sites-create.tsx
+msgid "Creating…"
+msgstr "Creating…"
+
+#: src/site-tabs.tsx
+msgid "Custom code is lazy loaded."
+msgstr "Custom code is lazy loaded."
+
+#: src/site-page.tsx
+msgid "Declare the control page the winner"
+msgstr "Declare the control page the winner"
+
+#: src/site-page.tsx
+msgid "Declare the variation the winner"
+msgstr "Declare the variation the winner"
+
+#: src/site-page.tsx
+msgid "Declare winner"
+msgstr "Declare winner"
+
+#: src/sites.tsx
+msgid "Delete"
+msgstr "Delete"
+
+#: src/sites.tsx
+msgid "Delete folder"
+msgstr "Delete folder"
+
+#: src/site-page.tsx
+#: src/site-tabs.tsx
+#: src/sites.tsx
+msgid "Delete for good"
+msgstr "Delete for good"
+
+#: src/site-tabs.tsx
+#: src/sites.tsx
+msgid "Delete funnel"
+msgstr "Delete funnel"
+
+#: src/site-page.tsx
+msgid "Delete Funnel Step"
+msgstr "Delete Funnel Step"
+
+#: src/site-page.tsx
+msgid "Delete page"
+msgstr "Delete page"
+
+#: src/site-tabs.tsx
+#: src/sites.tsx
+msgid "Delete website"
+msgstr "Delete website"
+
+#: src/sites-create.tsx
+msgid "Design from scratch using the funnel builder."
+msgstr "Design from scratch using the funnel builder."
+
+#: src/sites-create.tsx
+msgid "Design from scratch using the website builder."
+msgstr "Design from scratch using the website builder."
+
+#: src/site-publish-dialogs.tsx
+msgid "Desktop"
+msgstr "Desktop"
+
+#: src/site-tabs.tsx
+msgid "Domain"
+msgstr "Domain"
+
+#: src/site-publish-dialogs.tsx
+#: src/site-tabs.tsx
+msgid "Done"
+msgstr "Done"
+
+#: src/site-page.tsx
+msgid "Edit"
+msgstr "Edit"
+
+#: src/site-tabs.tsx
+msgid "Even for $0 purchases."
+msgstr "Even for $0 purchases."
+
+#: src/site-tabs.tsx
+msgid "Every count of {siteName} goes back to zero, for good. This can't be undone."
+msgstr "Every count of {siteName} goes back to zero, for good. This can't be undone."
+
+#: src/site-tabs.tsx
+msgid "Favicon URL"
+msgstr "Favicon URL"
+
+#: src/sites-create.tsx
+msgid "Favorite {name}"
+msgstr "Favorite {name}"
+
+#: src/sites-create.tsx
+msgid "Favorites"
+msgstr "Favorites"
+
+#: src/sites.tsx
+msgid "Folder"
+msgstr "Folder"
+
+#: src/sites.tsx
+msgid "Folder created."
+msgstr "Folder created."
+
+#: src/sites.tsx
+msgid "Folder name"
+msgstr "Folder name"
+
+#: src/sites.tsx
+msgid "Folder renamed."
+msgstr "Folder renamed."
+
+#: src/sites.tsx
+msgid "Folders"
+msgstr "Folders"
+
+#: src/site-tabs.tsx
+msgid "Fonts are served by this site instead of Google Fonts."
+msgstr "Fonts are served by this site instead of Google Fonts."
+
+#: src/site-tabs.tsx
+msgid "For example, X-Frame-Options."
+msgstr "For example, X-Frame-Options."
+
+#: src/sites-create.tsx
+msgid "From blank"
+msgstr "From blank"
+
+#: src/sites-create.tsx
+msgid "From templates"
+msgstr "From templates"
+
+#: src/site-page.tsx
+msgid "Funnel"
+msgstr "Funnel"
+
+#: src/site-tabs.tsx
+msgid "Funnel details"
+msgstr "Funnel details"
+
+#: src/sites-create.tsx
+#: src/sites.tsx
+msgid "Funnel name"
+msgstr "Funnel name"
+
+#: src/site-page.tsx
+msgid "Funnel sections"
+msgstr "Funnel sections"
+
+#: src/site-tabs.tsx
+msgid "Funnel settings"
+msgstr "Funnel settings"
+
+#: src/site-page.tsx
+#: src/sites.tsx
+msgid "Funnel steps"
+msgstr "Funnel steps"
+
+#: src/sites-create.tsx
+msgid "Funnel templates"
+msgstr "Funnel templates"
+
+#: src/sites.tsx
+msgid "Funnels"
+msgstr "Funnels"
+
+#: src/sites.tsx
+msgid "Funnels table"
+msgstr "Funnels table"
+
+#: src/site-tabs.tsx
+msgid "GDPR compliant fonts"
+msgstr "GDPR compliant fonts"
+
+#: src/site-publish-dialogs.tsx
+msgid "Getting the preview…"
+msgstr "Getting the preview…"
+
+#: src/site-tabs.tsx
+msgid "Head tracking code"
+msgstr "Head tracking code"
+
+#: src/site-tabs.tsx
+msgid "Header"
+msgstr "Header"
+
+#: src/sites.tsx
+msgid "Home"
+msgstr "Home"
+
+#: src/sites.tsx
+msgid "Home (no folder)"
+msgstr "Home (no folder)"
+
+#: src/sites-create.tsx
+msgid "How to start"
+msgstr "How to start"
+
+#: src/site-tabs.tsx
+msgid "Image Optimization"
+msgstr "Image Optimization"
+
+#: src/site-tabs.tsx
+msgid "Images are served from a CDN with caching."
+msgstr "Images are served from a CDN with caching."
+
+#: src/sites-create.tsx
+#: src/sites.tsx
+msgid "Import"
+msgstr "Import"
+
+#: src/sites-create.tsx
+msgid "Import a shared funnel or website"
+msgstr "Import a shared funnel or website"
+
+#: src/sites-create.tsx
+msgid "Importing…"
+msgstr "Importing…"
+
+#: src/site-page.tsx
+msgid "It couldn't be loaded."
+msgstr "It couldn't be loaded."
+
+#: src/site-tabs.tsx
+msgid "It couldn't be shared. Check your connection and try again."
+msgstr "It couldn't be shared. Check your connection and try again."
+
+#: src/sites-create.tsx
+msgid "It starts as a copy of the template {chosenName}."
+msgstr "It starts as a copy of the template {chosenName}."
+
+#: src/site-page.tsx
+msgid "It wasn't added. Check your connection and try again."
+msgstr "It wasn't added. Check your connection and try again."
+
+#: src/site-page.tsx
+msgid "It wasn't changed. Check your connection and try again."
+msgstr "It wasn't changed. Check your connection and try again."
+
+#: src/site-page.tsx
+#: src/sites.tsx
+msgid "It wasn't copied. Check your connection and try again."
+msgstr "It wasn't copied. Check your connection and try again."
+
+#: src/sites-create.tsx
+msgid "It wasn't created. Check your connection and try again."
+msgstr "It wasn't created. Check your connection and try again."
+
+#: src/site-page.tsx
+#: src/site-tabs.tsx
+#: src/sites.tsx
+msgid "It wasn't deleted. Check your connection and try again."
+msgstr "It wasn't deleted. Check your connection and try again."
+
+#: src/sites-create.tsx
+msgid "It wasn't imported. Check your connection and try again."
+msgstr "It wasn't imported. Check your connection and try again."
+
+#: src/sites.tsx
+msgid "It wasn't moved. Check your connection and try again."
+msgstr "It wasn't moved. Check your connection and try again."
+
+#: src/site-publish-dialogs.tsx
+msgid "It wasn't published. Check your connection and try again."
+msgstr "It wasn't published. Check your connection and try again."
+
+#: src/sites.tsx
+msgid "It wasn't renamed. Check your connection and try again."
+msgstr "It wasn't renamed. Check your connection and try again."
+
+#: src/site-page.tsx
+msgid "It wasn't saved. Check your connection and try again."
+msgstr "It wasn't saved. Check your connection and try again."
+
+#: src/site-publish-dialogs.tsx
+msgid "It wasn't unpublished. Check your connection and try again."
+msgstr "It wasn't unpublished. Check your connection and try again."
+
+#: src/sites-create.tsx
+msgid "Jump start with an awesome prebuilt funnel"
+msgstr "Jump start with an awesome prebuilt funnel"
+
+#: src/sites-create.tsx
+msgid "Jump start with an awesome prebuilt website"
+msgstr "Jump start with an awesome prebuilt website"
+
+#: src/site-arrival-setting.tsx
+msgid "Kept for every visitor, whatever privacy signal their browser sends."
+msgstr "Kept for every visitor, whatever privacy signal their browser sends."
+
+#: src/sites.tsx
+msgid "Last updated"
+msgstr "Last updated"
+
+#: src/sites-create.tsx
+msgid "Leave blank to keep the name it was shared under."
+msgstr "Leave blank to keep the name it was shared under."
+
+#: src/sites.tsx
+msgid "List"
+msgstr "List"
+
+#: src/site-publish.tsx
+msgid "Live at"
+msgstr "Live at"
+
+#: src/sites-create.tsx
+msgid "Loading templates…"
+msgstr "Loading templates…"
+
+#: src/site-page.tsx
+#: src/site-tabs.tsx
+#: src/sites.tsx
+msgid "Loading…"
+msgstr "Loading…"
+
+#: src/site-page.tsx
+#: src/site-tabs.tsx
+msgid "Lowercase letters, numbers and hyphens, with / between parts."
+msgstr "Lowercase letters, numbers and hyphens, with / between parts."
+
+#: src/site-media-choice.tsx
+msgid "Make \"{name}\" public?"
+msgstr "Make \"{name}\" public?"
+
+#: src/site-media-choice.tsx
+msgid "Make public and use it"
+msgstr "Make public and use it"
+
+#: src/site-tabs.tsx
+msgid "Makes a text that another business of this agency can import as a copy. It leaves out the domain, the chat widget, tracking codes and statistics."
+msgstr "Makes a text that another business of this agency can import as a copy. It leaves out the domain, the chat widget, tracking codes and statistics."
+
+#: src/site-publish-dialogs.tsx
+msgid "Makes the newest saved version what visitors see. Nothing is published until you press Publish."
+msgstr "Makes the newest saved version what visitors see. Nothing is published until you press Publish."
+
+#: src/site-publish-dialogs.tsx
+msgid "Mobile"
+msgstr "Mobile"
+
+#: src/sites-create.tsx
+msgid "Most popular"
+msgstr "Most popular"
+
+#: src/sites.tsx
+msgid "Move"
+msgstr "Move"
+
+#: src/site-page.tsx
+msgid "Move {name} down"
+msgstr "Move {name} down"
+
+#: src/site-page.tsx
+msgid "Move {name} up"
+msgstr "Move {name} up"
+
+#: src/sites.tsx
+msgid "Move to folder"
+msgstr "Move to folder"
+
+#: src/sites.tsx
+msgid "Moving…"
+msgstr "Moving…"
+
+#: src/sites-create.tsx
+msgid "My templates"
+msgstr "My templates"
+
+#: src/site-tabs.tsx
+#: src/sites-create.tsx
+#: src/sites.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/site-page.tsx
+msgid "Name for page"
+msgstr "Name for page"
+
+#: src/sites-create.tsx
+msgid "Name your funnel"
+msgstr "Name your funnel"
+
+#: src/sites-create.tsx
+msgid "Name your website"
+msgstr "Name your website"
+
+#: src/site-page.tsx
+msgid "Nested paths are supported: offers/spring."
+msgstr "Nested paths are supported: offers/spring."
+
+#: src/sites.tsx
+msgid "New funnel"
+msgstr "New funnel"
+
+#: src/site-page.tsx
+msgid "New page in website"
+msgstr "New page in website"
+
+#: src/site-page.tsx
+msgid "New step in funnel"
+msgstr "New step in funnel"
+
+#: src/sites.tsx
+msgid "New website"
+msgstr "New website"
+
+#: src/sites-create.tsx
+msgid "Next"
+msgstr "Next"
+
+#: src/site-arrival-setting.tsx
+msgid "No"
+msgstr "No"
+
+#: src/site-tabs.tsx
+msgid "No domain"
+msgstr "No domain"
+
+#: src/sites.tsx
+msgid "No funnels match."
+msgstr "No funnels match."
+
+#: src/site-tabs.tsx
+msgid "No security headers yet."
+msgstr "No security headers yet."
+
+#: src/sites-create.tsx
+msgid "No templates have been shared with this business yet."
+msgstr "No templates have been shared with this business yet."
+
+#: src/sites-create.tsx
+msgid "No templates match."
+msgstr "No templates match."
+
+#: src/sites.tsx
+msgid "No websites match."
+msgstr "No websites match."
+
+#: src/site-tabs.tsx
+msgid "None"
+msgstr "None"
+
+#: src/site-publish.tsx
+msgid "Not published"
+msgstr "Not published"
+
+#: src/site-arrival-setting.tsx
+msgid "Nothing is kept. A form on a later page, or a booking, is named from its own page, which often reads as Direct."
+msgstr "Nothing is kept. A form on a later page, or a booking, is named from its own page, which often reads as Direct."
+
+#: src/site-publish-dialogs.tsx
+msgid "Nothing stands in the way."
+msgstr "Nothing stands in the way."
+
+#: src/site-arrival-setting.tsx
+msgid "Only a site with a published form, or a calendar that can be booked, loads anything for this. This is not legal advice: whether your business must honour a browser's privacy signal, and what your privacy notice must say, are questions for your counsel."
+msgstr "Only a site with a published form, or a calendar that can be booked, loads anything for this. This is not legal advice: whether your business must honour a browser's privacy signal, and what your privacy notice must say, are questions for your counsel."
+
+#: src/site-publish-dialogs.tsx
+msgid "Open in a new tab"
+msgstr "Open in a new tab"
+
+#: src/site-publish.tsx
+msgid "Open live page"
+msgstr "Open live page"
+
+#: src/site-publish.tsx
+msgid "Open the live page in a new tab"
+msgstr "Open the live page in a new tab"
+
+#: src/site-tabs.tsx
+msgid "Opt-Ins"
+msgstr "Opt-Ins"
+
+#: src/site-tabs.tsx
+msgid "Optimize JavaScript"
+msgstr "Optimize JavaScript"
+
+#: src/site-page.tsx
+msgid "Overview"
+msgstr "Overview"
+
+#: src/site-page.tsx
+#: src/site-tabs.tsx
+msgid "Page"
+msgstr "Page"
+
+#: src/site-page.tsx
+msgid "Page name"
+msgstr "Page name"
+
+#: src/site-page.tsx
+msgid "Page path"
+msgstr "Page path"
+
+#: src/site-page.tsx
+msgid "Page sections"
+msgstr "Page sections"
+
+#: src/site-page.tsx
+msgid "Page updated."
+msgstr "Page updated."
+
+#: src/site-tabs.tsx
+msgid "Page Views"
+msgstr "Page Views"
+
+#: src/site-tabs.tsx
+msgid "Page views and opt-ins for each step"
+msgstr "Page views and opt-ins for each step"
+
+#: src/site-page.tsx
+msgid "Pages"
+msgstr "Pages"
+
+#: src/sites-create.tsx
+msgid "Paste the text that Share gave in another business of this agency. It arrives as a copy, unpublished."
+msgstr "Paste the text that Share gave in another business of this agency. It arrives as a copy, unpublished."
+
+#: src/site-page.tsx
+#: src/site-tabs.tsx
+msgid "Path"
+msgstr "Path"
+
+#: src/site-tabs.tsx
+msgid "Payment mode: Live"
+msgstr "Payment mode: Live"
+
+#: src/site-tabs.tsx
+msgid "Payments and checkout"
+msgstr "Payments and checkout"
+
+#: src/site-tabs.tsx
+msgid "Performance and compliance"
+msgstr "Performance and compliance"
+
+#: src/site-tabs.tsx
+msgid "Preparing…"
+msgstr "Preparing…"
+
+#: src/site-page.tsx
+#: src/site-publish-dialogs.tsx
+msgid "Preview"
+msgstr "Preview"
+
+#: src/site-publish-dialogs.tsx
+msgid "Preview of the page"
+msgstr "Preview of the page"
+
+#: src/site-publish-dialogs.tsx
+msgid "Preview width"
+msgstr "Preview width"
+
+#: src/sites-create.tsx
+msgid "Previous"
+msgstr "Previous"
+
+#: src/site-publish.tsx
+msgid "Public pages are switched off on this install, so the page has no address yet. To switch them on, whoever runs the server sets PUBLIC_INTAKE_SECRET in its settings (the .env file) and restarts it."
+msgstr "Public pages are switched off on this install, so the page has no address yet. To switch them on, whoever runs the server sets PUBLIC_INTAKE_SECRET in its settings (the .env file) and restarts it."
+
+#: src/site-publish.tsx
+msgid "Public pages are switched off on this install. {reason}"
+msgstr "Public pages are switched off on this install. {reason}"
+
+#: src/site-page.tsx
+#: src/site-publish-dialogs.tsx
+msgid "Publish"
+msgstr "Publish"
+
+#: src/site-page.tsx
+msgid "Publish changes"
+msgstr "Publish changes"
+
+#: src/site-publish-dialogs.tsx
+msgid "Publish page"
+msgstr "Publish page"
+
+#: src/site-publish.tsx
+msgid "Published"
+msgstr "Published"
+
+#: src/site-publish.tsx
+msgid "Published · changes not yet published"
+msgstr "Published · changes not yet published"
+
+#: src/site-page.tsx
+msgid "Published {when}"
+msgstr "Published {when}"
+
+#: src/site-page.tsx
+msgid "Publishing"
+msgstr "Publishing"
+
+#: src/site-publish-dialogs.tsx
+msgid "Publishing still works: it records this version as the one to show. Visitors reach it once public pages are on."
+msgstr "Publishing still works: it records this version as the one to show. Visitors reach it once public pages are on."
+
+#: src/site-publish-dialogs.tsx
+msgid "Publishing…"
+msgstr "Publishing…"
+
+#: src/site-publish-dialogs.tsx
+msgid "Put these right first. They stop the page being published:"
+msgstr "Put these right first. They stop the page being published:"
+
+#: src/site-tabs.tsx
+msgid "Rate"
+msgstr "Rate"
+
+#: src/sites.tsx
+msgid "Recent"
+msgstr "Recent"
+
+#: src/sites-create.tsx
+msgid "Recently added"
+msgstr "Recently added"
+
+#: src/site-publish-dialogs.tsx
+msgid "Refresh"
+msgstr "Refresh"
+
+#: src/site-arrival-setting.tsx
+msgid "Remember how visitors arrived"
+msgstr "Remember how visitors arrived"
+
+#: src/site-tabs.tsx
+msgid "Remove {header}"
+msgstr "Remove {header}"
+
+#: src/sites.tsx
+msgid "Rename"
+msgstr "Rename"
+
+#: src/sites.tsx
+msgid "Rename folder"
+msgstr "Rename folder"
+
+#: src/sites.tsx
+msgid "Rename funnel"
+msgstr "Rename funnel"
+
+#: src/sites.tsx
+msgid "Rename website"
+msgstr "Rename website"
+
+#: src/sites.tsx
+msgid "Renamed to {name}."
+msgstr "Renamed to {name}."
+
+#: src/site-tabs.tsx
+msgid "Require credit card"
+msgstr "Require credit card"
+
+#: src/site-tabs.tsx
+msgid "Reset"
+msgstr "Reset"
+
+#: src/site-tabs.tsx
+msgid "Reset for good"
+msgstr "Reset for good"
+
+#: src/site-tabs.tsx
+msgid "Reset statistics"
+msgstr "Reset statistics"
+
+#: src/site-tabs.tsx
+msgid "Response headers added to every page of this site."
+msgstr "Response headers added to every page of this site."
+
+#: src/sites.tsx
+msgid "Rows per page"
+msgstr "Rows per page"
+
+#: src/site-tabs.tsx
+#: src/sites.tsx
+msgid "Save"
+msgstr "Save"
+
+#: src/site-page.tsx
+#: src/site-tabs.tsx
+#: src/sites.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/sites.tsx
+msgid "Search funnels"
+msgstr "Search funnels"
+
+#: src/sites-create.tsx
+msgid "Search templates"
+msgstr "Search templates"
+
+#: src/sites.tsx
+msgid "Search websites"
+msgstr "Search websites"
+
+#: src/site-page.tsx
+msgid "Security"
+msgstr "Security"
+
+#: src/site-tabs.tsx
+msgid "Security Headers"
+msgstr "Security Headers"
+
+#: src/site-tabs.tsx
+msgid "SEO and AEO"
+msgstr "SEO and AEO"
+
+#: src/site-page.tsx
+msgid "Settings"
+msgstr "Settings"
+
+#: src/site-tabs.tsx
+msgid "Settings saved."
+msgstr "Settings saved."
+
+#: src/site-page.tsx
+msgid "Share"
+msgstr "Share"
+
+#: src/site-tabs.tsx
+msgid "Share funnel"
+msgstr "Share funnel"
+
+#: src/site-tabs.tsx
+msgid "Share text"
+msgstr "Share text"
+
+#: src/site-tabs.tsx
+msgid "Share website"
+msgstr "Share website"
+
+#: src/sites-create.tsx
+msgid "Shared text"
+msgstr "Shared text"
+
+#: src/sites-create.tsx
+msgid "Shared with me"
+msgstr "Shared with me"
+
+#: src/site-publish-dialogs.tsx
+msgid "Show it"
+msgstr "Show it"
+
+#: src/sites-create.tsx
+msgid "Sort templates"
+msgstr "Sort templates"
+
+#: src/sites.tsx
+msgid "Start by creating a funnel. All your funnels and folders will live here."
+msgstr "Start by creating a funnel. All your funnels and folders will live here."
+
+#: src/sites.tsx
+msgid "Start by creating a website. All your websites and folders will live here."
+msgstr "Start by creating a website. All your websites and folders will live here."
+
+#: src/site-page.tsx
+msgid "Start split test"
+msgstr "Start split test"
+
+#: src/site-page.tsx
+msgid "Start split test: Optimize your lead and sales generation with split tests."
+msgstr "Start split test: Optimize your lead and sales generation with split tests."
+
+#: src/site-page.tsx
+#: src/site-tabs.tsx
+msgid "Stats"
+msgstr "Stats"
+
+#: src/site-tabs.tsx
+msgid "Step"
+msgstr "Step"
+
+#: src/site-page.tsx
+msgid "Step name"
+msgstr "Step name"
+
+#: src/site-page.tsx
+msgid "Step path"
+msgstr "Step path"
+
+#: src/site-page.tsx
+msgid "Step sections"
+msgstr "Step sections"
+
+#: src/site-page.tsx
+msgid "Step updated."
+msgstr "Step updated."
+
+#: src/site-page.tsx
+msgid "Steps"
+msgstr "Steps"
+
+#: src/site-page.tsx
+msgid "Stop split test"
+msgstr "Stop split test"
+
+#: src/site-publish-dialogs.tsx
+msgid "Tablet"
+msgstr "Tablet"
+
+#: src/sites-create.tsx
+msgid "Tags"
+msgstr "Tags"
+
+#: src/sites-create.tsx
+msgid "Template lists"
+msgstr "Template lists"
+
+#: src/sites-create.tsx
+msgid "Template lists and filters"
+msgstr "Template lists and filters"
+
+#: src/sites-create.tsx
+msgid "Template pages"
+msgstr "Template pages"
+
+#: src/site-page.tsx
+msgid "The control page stays. The split test ends, and the variation is deleted for good with its versions and statistics."
+msgstr "The control page stays. The split test ends, and the variation is deleted for good with its versions and statistics."
+
+#: src/site-media-choice.tsx
+msgid "The file couldn't be made public. Check your connection and try again."
+msgstr "The file couldn't be made public. Check your connection and try again."
+
+#: src/sites.tsx
+msgid "The folder {name} was deleted."
+msgstr "The folder {name} was deleted."
+
+#: src/sites.tsx
+msgid "The folder {openedName} will be deleted. Its funnels are kept and move to Home."
+msgstr "The folder {openedName} will be deleted. Its funnels are kept and move to Home."
+
+#: src/sites.tsx
+msgid "The folder {openedName} will be deleted. Its websites are kept and move to Home."
+msgstr "The folder {openedName} will be deleted. Its websites are kept and move to Home."
+
+#: src/sites.tsx
+msgid "The folder wasn't deleted. Check your connection and try again."
+msgstr "The folder wasn't deleted. Check your connection and try again."
+
+#: src/sites.tsx
+msgid "The folder wasn't saved. Check your connection and try again."
+msgstr "The folder wasn't saved. Check your connection and try again."
+
+#: src/sites.tsx
+msgid "The funnels couldn't be loaded."
+msgstr "The funnels couldn't be loaded."
+
+#: src/site-tabs.tsx
+msgid "The headers weren't saved. Check your connection and try again."
+msgstr "The headers weren't saved. Check your connection and try again."
+
+#: src/site-publish-dialogs.tsx
+msgid "The newest saved version, as a visitor would see it. Only someone with this link can open it, for an hour."
+msgstr "The newest saved version, as a visitor would see it. Only someone with this link can open it, for an hour."
+
+#: src/site-page.tsx
+msgid "The order was saved."
+msgstr "The order was saved."
+
+#: src/site-publish-dialogs.tsx
+msgid "The page changed meanwhile. Try again."
+msgstr "The page changed meanwhile. Try again."
+
+#: src/site-publish-dialogs.tsx
+msgid "The page changed since this was opened. Look again, then publish."
+msgstr "The page changed since this was opened. Look again, then publish."
+
+#: src/site-publish-dialogs.tsx
+msgid "The page couldn't be checked. Check your connection and try again."
+msgstr "The page couldn't be checked. Check your connection and try again."
+
+#: src/site-publish-dialogs.tsx
+msgid "The page is live"
+msgstr "The page is live"
+
+#: src/site-publish-dialogs.tsx
+msgid "The page is published"
+msgstr "The page is published"
+
+#: src/site-publish-dialogs.tsx
+msgid "The page stops answering at its address at once: visitors get \"not found\". Its content and its versions stay, and it can be published again."
+msgstr "The page stops answering at its address at once: visitors get \"not found\". Its content and its versions stay, and it can be published again."
+
+#: src/site-publish-dialogs.tsx
+msgid "The preview couldn't be made. Check your connection and try again."
+msgstr "The preview couldn't be made. Check your connection and try again."
+
+#: src/site-publish-dialogs.tsx
+msgid "The server refused to publish it."
+msgstr "The server refused to publish it."
+
+#: src/site-publish-dialogs.tsx
+msgid "The server refused to publish it. Put these right first:"
+msgstr "The server refused to publish it. Put these right first:"
+
+#: src/site-tabs.tsx
+msgid "The settings weren't saved. Check your connection and try again."
+msgstr "The settings weren't saved. Check your connection and try again."
+
+#: src/site-page.tsx
+msgid "The split test is running: visitors are shared between the pages."
+msgstr "The split test is running: visitors are shared between the pages."
+
+#: src/site-page.tsx
+msgid "The split test is running."
+msgstr "The split test is running."
+
+#: src/site-page.tsx
+msgid "The split test is stopped: every visitor sees the control page."
+msgstr "The split test is stopped: every visitor sees the control page."
+
+#: src/site-page.tsx
+msgid "The split test is stopped."
+msgstr "The split test is stopped."
+
+#: src/site-tabs.tsx
+msgid "The statistics couldn't be loaded."
+msgstr "The statistics couldn't be loaded."
+
+#: src/site-tabs.tsx
+msgid "The statistics were reset."
+msgstr "The statistics were reset."
+
+#: src/sites-create.tsx
+msgid "The templates couldn't be loaded."
+msgstr "The templates couldn't be loaded."
+
+#: src/site-page.tsx
+msgid "The variation becomes the step's page. The split test ends, and the control page is deleted for good with its versions and statistics."
+msgstr "The variation becomes the step's page. The split test ends, and the control page is deleted for good with its versions and statistics."
+
+#: src/site-publish-dialogs.tsx
+msgid "The version you just published is the one visitors will see. They can't reach it yet."
+msgstr "The version you just published is the one visitors will see. They can't reach it yet."
+
+#: src/site-publish-dialogs.tsx
+msgid "The version you just published is this variation's. Visitors are served the control page."
+msgstr "The version you just published is this variation's. Visitors are served the control page."
+
+#: src/sites.tsx
+msgid "The websites couldn't be loaded."
+msgstr "The websites couldn't be loaded."
+
+#: src/site-tabs.tsx
+msgid "The widget chosen now"
+msgstr "The widget chosen now"
+
+#: src/site-page.tsx
+msgid "The winner is now the step's only page."
+msgstr "The winner is now the step's only page."
+
+#: src/sites-create.tsx
+msgid "There are no templates yet."
+msgstr "There are no templates yet."
+
+#: src/site-tabs.tsx
+msgid "These two are kept for selling from a page, which isn't available yet."
+msgstr "These two are kept for selling from a page, which isn't available yet."
+
+#: src/site-tabs.tsx
+msgid "They weren't reset. Check your connection and try again."
+msgstr "They weren't reset. Check your connection and try again."
+
+#: src/sites-create.tsx
+msgid "This business has saved no templates yet."
+msgstr "This business has saved no templates yet."
+
+#: src/site-media-choice.tsx
+msgid "This file can't be used on a page here"
+msgstr "This file can't be used on a page here"
+
+#: src/sites.tsx
+msgid "This folder is empty."
+msgstr "This folder is empty."
+
+#: src/sites.tsx
+msgid "This folder is no longer here."
+msgstr "This folder is no longer here."
+
+#: src/site-tabs.tsx
+msgid "This funnel has no steps to count yet."
+msgstr "This funnel has no steps to count yet."
+
+#: src/site-page.tsx
+msgid "This funnel has no steps yet."
+msgstr "This funnel has no steps yet."
+
+#: src/site-page.tsx
+msgid "This funnel is no longer here. It may have been deleted."
+msgstr "This funnel is no longer here. It may have been deleted."
+
+#: src/site-tabs.tsx
+msgid "This site already adds that header."
+msgstr "This site already adds that header."
+
+#: src/site-tabs.tsx
+msgid "This website has no pages to count yet."
+msgstr "This website has no pages to count yet."
+
+#: src/site-page.tsx
+msgid "This website has no pages yet."
+msgstr "This website has no pages yet."
+
+#: src/site-page.tsx
+msgid "This website is no longer here. It may have been deleted."
+msgstr "This website is no longer here. It may have been deleted."
+
+#: src/site-tabs.tsx
+msgid "This will permanently remove {siteName} with all its pages, settings and data. It is deleted for good and can't be undone."
+msgstr "This will permanently remove {siteName} with all its pages, settings and data. It is deleted for good and can't be undone."
+
+#: src/site-tabs.tsx
+msgid "Tracking and scripts"
+msgstr "Tracking and scripts"
+
+#: src/site-publish-dialogs.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/site-tabs.tsx
+msgid "Turn this on to accept live payments through your connected payment providers"
+msgstr "Turn this on to accept live payments through your connected payment providers"
+
+#: src/sites-create.tsx
+msgid "Types"
+msgstr "Types"
+
+#: src/site-tabs.tsx
+msgid "Uniques"
+msgstr "Uniques"
+
+#: src/site-page.tsx
+#: src/site-publish-dialogs.tsx
+msgid "Unpublish"
+msgstr "Unpublish"
+
+#: src/site-publish-dialogs.tsx
+msgid "Unpublish page"
+msgstr "Unpublish page"
+
+#: src/site-page.tsx
+msgid "Update page"
+msgstr "Update page"
+
+#: src/site-page.tsx
+msgid "Update step"
+msgstr "Update step"
+
+#: src/site-tabs.tsx
+msgid "Value"
+msgstr "Value"
+
+#: src/site-page.tsx
+#: src/site-tabs.tsx
+msgid "Variation"
+msgstr "Variation"
+
+#: src/site-page.tsx
+msgid "Variation created as a copy of the control page."
+msgstr "Variation created as a copy of the control page."
+
+#: src/site-page.tsx
+#: src/sites.tsx
+msgid "View"
+msgstr "View"
+
+#: src/site-publish.tsx
+msgid "Visitors can't reach pages on this install yet: public pages are switched off. {reason} You can still build, save and publish; a published page gets its address once they are on."
+msgstr "Visitors can't reach pages on this install yet: public pages are switched off. {reason} You can still build, save and publish; a published page gets its address once they are on."
+
+#: src/site-publish-dialogs.tsx
+msgid "Visitors now see the version you just published."
+msgstr "Visitors now see the version you just published."
+
+#: src/site-page.tsx
+msgid "Website"
+msgstr "Website"
+
+#: src/site-tabs.tsx
+msgid "Website details"
+msgstr "Website details"
+
+#: src/sites-create.tsx
+#: src/sites.tsx
+msgid "Website name"
+msgstr "Website name"
+
+#: src/site-page.tsx
+#: src/sites.tsx
+msgid "Website pages"
+msgstr "Website pages"
+
+#: src/site-page.tsx
+msgid "Website sections"
+msgstr "Website sections"
+
+#: src/site-tabs.tsx
+msgid "Website settings"
+msgstr "Website settings"
+
+#: src/sites-create.tsx
+msgid "Website templates"
+msgstr "Website templates"
+
+#: src/sites.tsx
+msgid "Websites"
+msgstr "Websites"
+
+#: src/sites.tsx
+msgid "Websites table"
+msgstr "Websites table"
+
+#: src/site-publish-dialogs.tsx
+msgid "Worth a look. These don't stop publishing:"
+msgstr "Worth a look. These don't stop publishing:"
+
+#: src/site-arrival-setting.tsx
+msgid "Yes, always"
+msgstr "Yes, always"
+
+#: src/site-arrival-setting.tsx
+msgid "Yes, unless their browser asks us not to (recommended)"
+msgstr "Yes, unless their browser asks us not to (recommended)"
+
+#: src/sites.tsx
+msgid "You can look at funnels. Creating and changing them needs permission to manage sites."
+msgstr "You can look at funnels. Creating and changing them needs permission to manage sites."
+
+#: src/site-tabs.tsx
+msgid "You can look at these settings. Changing them needs permission to manage sites."
+msgstr "You can look at these settings. Changing them needs permission to manage sites."
+
+#: src/site-page.tsx
+msgid "You can look at this. Changing it needs permission to manage sites."
+msgstr "You can look at this. Changing it needs permission to manage sites."
+
+#: src/site-publish-dialogs.tsx
+msgid "You can look at this. Publishing needs permission to publish sites."
+msgstr "You can look at this. Publishing needs permission to publish sites."
+
+#: src/sites.tsx
+msgid "You can look at websites. Creating and changing them needs permission to manage sites."
+msgstr "You can look at websites. Creating and changing them needs permission to manage sites."
+
+#: src/site-page.tsx
+#: src/sites.tsx
+msgid "You don't have permission to see this business's sites."
+msgstr "You don't have permission to see this business's sites."
+
+#: src/sites-create.tsx
+msgid "You have no favorite templates yet."
+msgstr "You have no favorite templates yet."
+
+#: src/site-media-choice.tsx
+msgid "You need permission to manage Media Storage to make a file public."
+msgstr "You need permission to manage Media Storage to make a file public."
+
+#: src/site-publish-dialogs.tsx
+msgid "You need permission to publish sites."
+msgstr "You need permission to publish sites."
+
+#: src/sites-create.tsx
+msgid "Your favorites weren't changed. Check your connection and try again."
+msgstr "Your favorites weren't changed. Check your connection and try again."

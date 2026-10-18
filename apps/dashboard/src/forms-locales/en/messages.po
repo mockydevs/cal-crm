@@ -1,0 +1,1184 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-13 16:37+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/forms-source.tsx
+msgid "“{name}” for everyone who sends this form."
+msgstr "“{name}” for everyone who sends this form."
+
+#: src/link-check-result.tsx
+msgid "(made by the first such lead)"
+msgstr "(made by the first such lead)"
+
+#: src/link-check-result.tsx
+msgid "(names the lead)"
+msgstr "(names the lead)"
+
+#: src/link-check-result.tsx
+msgid "(not used: a rule of yours names the lead)"
+msgstr "(not used: a rule of yours names the lead)"
+
+#: src/link-check-result.tsx
+msgid "(only if the contact has none yet)"
+msgstr "(only if the contact has none yet)"
+
+#: src/forms-editor.tsx
+msgid "(required)"
+msgstr "(required)"
+
+#. placeholder {0}: form.submissionCount
+#: src/forms.tsx
+msgid "{0, plural, one {# submission} other {# submissions}}"
+msgstr "{0, plural, one {# submission} other {# submissions}}"
+
+#. placeholder {0}: choices.options.length
+#: src/tag-picker.tsx
+msgid "{0, plural, one {# tag to add} other {# tags to add}}"
+msgstr "{0, plural, one {# tag to add} other {# tags to add}}"
+
+#: src/forms-extras.tsx
+msgid "{fromDay} to {toDay}. A view is each time the published form was shown; reloads count again."
+msgstr "{fromDay} to {toDay}. A view is each time the published form was shown; reloads count again."
+
+#: src/tag-picker.tsx
+msgid "{limit} tags are chosen, which is the most. Remove one to add another."
+msgstr "{limit} tags are chosen, which is the most. Remove one to add another."
+
+#: src/forms-extras.tsx
+msgid "{memberCount} chosen team members"
+msgstr "{memberCount} chosen team members"
+
+#: src/forms-source.tsx
+msgid "{paid}, {social}, {search} and so on, worked out for each person from the link they followed and the site they came from."
+msgstr "{paid}, {social}, {search} and so on, worked out for each person from the link they followed and the site they came from."
+
+#: src/link-check-result.tsx
+msgid "{position}."
+msgstr "{position}."
+
+#: src/forms-editor.tsx
+msgid "A box a visitor may tick to agree to marketing messages. It is never ticked for them. The exact words, the form, the time and the visitor's address are kept with their consent, as proof of what they agreed to."
+msgstr "A box a visitor may tick to agree to marketing messages. It is never ticked for them. The exact words, the form, the time and the visitor's address are kept with their consent, as proof of what they agreed to."
+
+#: src/forms-editor.tsx
+msgid "A contact field that no longer exists"
+msgstr "A contact field that no longer exists"
+
+#: src/forms-source.tsx
+msgid "A contact who already has a source keeps it; tags are always added."
+msgstr "A contact who already has a source keeps it; tags are always added."
+
+#: src/link-check-result.tsx
+msgid "a deleted tag (skipped)"
+msgstr "a deleted tag (skipped)"
+
+#: src/forms-editor.tsx
+msgid "A dropdown"
+msgstr "A dropdown"
+
+#: src/link-check-result.tsx
+msgid "a field that is gone"
+msgstr "a field that is gone"
+
+#: src/forms-source.tsx
+msgid "A name a link gives with source= gets its tag only when someone has already made that tag."
+msgstr "A name a link gives with source= gets its tag only when someone has already made that tag."
+
+#: src/forms-source.tsx
+msgid "A name I write"
+msgstr "A name I write"
+
+#: src/forms-extras.tsx
+msgid "A secure address, starting with https://."
+msgstr "A secure address, starting with https://."
+
+#: src/forms-editor.tsx
+msgid "Add a choice"
+msgstr "Add a choice"
+
+#: src/forms-editor.tsx
+msgid "Add a choice to question {number}"
+msgstr "Add a choice to question {number}"
+
+#: src/forms-editor.tsx
+msgid "Add a consent box"
+msgstr "Add a consent box"
+
+#: src/forms.tsx
+msgid "Add a form"
+msgstr "Add a form"
+
+#: src/forms-editor.tsx
+msgid "Add a question"
+msgstr "Add a question"
+
+#: src/tag-picker.tsx
+msgid "Add a tag"
+msgstr "Add a tag"
+
+#: src/tag-picker.tsx
+msgid "Add tag"
+msgstr "Add tag"
+
+#: src/forms.tsx
+msgid "Add the form"
+msgstr "Add the form"
+
+#: src/tag-picker.tsx
+msgid "Added {name}."
+msgstr "Added {name}."
+
+#: src/forms.tsx
+msgid "Adding…"
+msgstr "Adding…"
+
+#: src/forms-source.tsx
+msgid "Adds one tag for how each person arrived, such as “{example}”. A tag is made the first time it is needed."
+msgstr "Adds one tag for how each person arrived, such as “{example}”. A tag is made the first time it is needed."
+
+#: src/forms-extras.tsx
+msgid "After sending"
+msgstr "After sending"
+
+#: src/forms-source.tsx
+msgid "Also tag by source"
+msgstr "Also tag by source"
+
+#: src/forms-editor.tsx
+msgid "An answer always stays with the submission. It can also fill a part of the contact."
+msgstr "An answer always stays with the submission. It can also fill a part of the contact."
+
+#: src/forms.tsx
+msgid "Analytics"
+msgstr "Analytics"
+
+#: src/forms-editor.tsx
+msgid "Archive"
+msgstr "Archive"
+
+#: src/forms-editor.tsx
+msgid "Archived"
+msgstr "Archived"
+
+#: src/forms.tsx
+msgid "Archived forms"
+msgstr "Archived forms"
+
+#: src/forms-editor.tsx
+msgid "Archived."
+msgstr "Archived."
+
+#: src/forms-extras.tsx
+msgid "Average time"
+msgstr "Average time"
+
+#: src/forms.tsx
+msgid "Back to all forms"
+msgstr "Back to all forms"
+
+#: src/forms-editor.tsx
+msgid "Before this form can be published"
+msgstr "Before this form can be published"
+
+#: src/forms-editor.tsx
+msgid "Bot protection"
+msgstr "Bot protection"
+
+#: src/forms.tsx
+msgid "Build"
+msgstr "Build"
+
+#: src/link-check-result.tsx
+msgid "Built-in rule"
+msgstr "Built-in rule"
+
+#: src/forms-extras.tsx
+msgid "By day"
+msgstr "By day"
+
+#: src/forms.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/forms-link-check.tsx
+msgid "Check"
+msgstr "Check"
+
+#: src/forms-link-check.tsx
+msgid "Check a link"
+msgstr "Check a link"
+
+#: src/forms-editor.tsx
+msgid "Check the parts marked below."
+msgstr "Check the parts marked below."
+
+#: src/forms-editor.tsx
+msgid "Checkbox"
+msgstr "Checkbox"
+
+#: src/forms-editor.tsx
+msgid "Checkboxes"
+msgstr "Checkboxes"
+
+#: src/forms-link-check.tsx
+msgid "Checking…"
+msgstr "Checking…"
+
+#: src/forms-editor.tsx
+msgid "Choice {choiceNumber} of question {number}"
+msgstr "Choice {choiceNumber} of question {number}"
+
+#: src/forms-editor.tsx
+msgid "Choices"
+msgstr "Choices"
+
+#: src/link-check-result.tsx
+msgid "Click ids in the link"
+msgstr "Click ids in the link"
+
+#: src/forms-editor.tsx
+msgid "Code for your website"
+msgstr "Code for your website"
+
+#: src/forms-extras.tsx
+msgid "Completion rate"
+msgstr "Completion rate"
+
+#: src/forms-editor.tsx
+msgid "Consent boxes"
+msgstr "Consent boxes"
+
+#: src/forms-submissions.tsx
+msgid "Consent recorded"
+msgstr "Consent recorded"
+
+#: src/forms-editor.tsx
+msgid "Contact field: {fieldLabel}"
+msgstr "Contact field: {fieldLabel}"
+
+#: src/forms-editor.tsx
+msgid "Contact field: {fieldLabel} (archived)"
+msgstr "Contact field: {fieldLabel} (archived)"
+
+#: src/forms-editor.tsx
+msgid "Contact: date of birth"
+msgstr "Contact: date of birth"
+
+#: src/forms-editor.tsx
+msgid "Contact: email address"
+msgstr "Contact: email address"
+
+#: src/forms-editor.tsx
+msgid "Contact: first name"
+msgstr "Contact: first name"
+
+#: src/forms-editor.tsx
+msgid "Contact: last name"
+msgstr "Contact: last name"
+
+#: src/forms-editor.tsx
+msgid "Contact: phone number"
+msgstr "Contact: phone number"
+
+#: src/forms-editor.tsx
+#: src/forms-extras.tsx
+msgid "Copied."
+msgstr "Copied."
+
+#: src/forms-editor.tsx
+msgid "Copy the code"
+msgstr "Copy the code"
+
+#: src/forms-extras.tsx
+msgid "Copy the link"
+msgstr "Copy the link"
+
+#: src/forms-editor.tsx
+msgid "Couldn't copy. Select the code and copy it yourself."
+msgstr "Couldn't copy. Select the code and copy it yourself."
+
+#: src/forms-extras.tsx
+msgid "Couldn't copy. Select the link and copy it yourself."
+msgstr "Couldn't copy. Select the link and copy it yourself."
+
+#: src/tag-picker.tsx
+msgid "Create tag “{createName}”"
+msgstr "Create tag “{createName}”"
+
+#: src/tag-picker.tsx
+msgid "Creating “{createName}”…"
+msgstr "Creating “{createName}”…"
+
+#: src/forms-editor.tsx
+msgid "Date"
+msgstr "Date"
+
+#: src/forms-extras.tsx
+msgid "Day"
+msgstr "Day"
+
+#: src/link-check-result.tsx
+msgid "Decided by"
+msgstr "Decided by"
+
+#: src/tag-picker.tsx
+msgid "Deleted tag"
+msgstr "Deleted tag"
+
+#: src/forms-submissions.tsx
+msgid "Discard it"
+msgstr "Discard it"
+
+#: src/forms-submissions.tsx
+msgid "Discard this submission for good?"
+msgstr "Discard this submission for good?"
+
+#: src/forms-submissions.tsx
+msgid "Discard…"
+msgstr "Discard…"
+
+#: src/forms-submissions.tsx
+msgid "Discarding…"
+msgstr "Discarding…"
+
+#: src/forms-editor.tsx
+msgid "Draft"
+msgstr "Draft"
+
+#: src/forms-source.tsx
+msgid "Each lead gets one of these names, tried from the top: the first that fits is the lead source. It is kept with the contact's attribution whatever this form writes as the Source."
+msgstr "Each lead gets one of these names, tried from the top: the first that fits is the lead source. It is kept with the contact's attribution whatever this form writes as the Source."
+
+#: src/forms-editor.tsx
+msgid "Email address"
+msgstr "Email address"
+
+#: src/forms-editor.tsx
+msgid "Email me news and offers."
+msgstr "Email me news and offers."
+
+#: src/forms-submissions.tsx
+msgid "Every lead source"
+msgstr "Every lead source"
+
+#: src/tag-picker.tsx
+msgid "Every tag is already chosen."
+msgstr "Every tag is already chosen."
+
+#: src/tag-picker.tsx
+msgid "Every tag is already chosen. Type a name to make a new one."
+msgstr "Every tag is already chosen. Type a name to make a new one."
+
+#: src/forms-extras.tsx
+msgid "Everyone who manages forms"
+msgstr "Everyone who manages forms"
+
+#: src/forms-editor.tsx
+msgid "Fill question {number} from the page address: parameter name"
+msgstr "Fill question {number} from the page address: parameter name"
+
+#: src/link-check-result.tsx
+msgid "fills {field}: {value}"
+msgstr "fills {field}: {value}"
+
+#: src/forms-editor.tsx
+msgid "Form settings"
+msgstr "Form settings"
+
+#: src/forms.tsx
+msgid "Forms"
+msgstr "Forms"
+
+#: src/forms.tsx
+msgid "Forms in use"
+msgstr "Forms in use"
+
+#: src/forms-source.tsx
+msgid "From how they arrived (recommended)"
+msgstr "From how they arrived (recommended)"
+
+#: src/forms-extras.tsx
+msgid "Go to a web page"
+msgstr "Go to a web page"
+
+#: src/forms-editor.tsx
+msgid "Heading"
+msgstr "Heading"
+
+#: src/forms-editor.tsx
+msgid "Hidden field"
+msgstr "Hidden field"
+
+#: src/forms-editor.tsx
+msgid "Hidden field “{name}”: filled in from the page, never shown."
+msgstr "Hidden field “{name}”: filled in from the page, never shown."
+
+#: src/forms-editor.tsx
+msgid "Hint under question {number}"
+msgstr "Hint under question {number}"
+
+#: src/forms-editor.tsx
+msgid "How the choices of question {number} are shown"
+msgstr "How the choices of question {number} are shown"
+
+#: src/forms-editor.tsx
+msgid "How the text of question {number} looks"
+msgstr "How the text of question {number} looks"
+
+#: src/forms-editor.tsx
+msgid "Introduction"
+msgstr "Introduction"
+
+#: src/forms-submissions.tsx
+msgid "Keep it"
+msgstr "Keep it"
+
+#: src/forms-editor.tsx
+msgid "Kind of answer for question {number}"
+msgstr "Kind of answer for question {number}"
+
+#: src/forms.tsx
+msgid "last on {lastOn}"
+msgstr "last on {lastOn}"
+
+#: src/forms-submissions.tsx
+#: src/link-check-result.tsx
+msgid "Lead source"
+msgstr "Lead source"
+
+#: src/forms-source.tsx
+msgid "Leave it empty"
+msgstr "Leave it empty"
+
+#: src/forms-extras.tsx
+msgid "Link and preview"
+msgstr "Link and preview"
+
+#: src/forms-link-check.tsx
+msgid "Link they follow"
+msgstr "Link they follow"
+
+#: src/forms-editor.tsx
+msgid "Link to the terms for question {number}"
+msgstr "Link to the terms for question {number}"
+
+#: src/forms.tsx
+msgid "Loading forms…"
+msgstr "Loading forms…"
+
+#: src/forms-submissions.tsx
+msgid "Loading submissions…"
+msgstr "Loading submissions…"
+
+#: src/tag-picker.tsx
+msgid "Loading tags…"
+msgstr "Loading tags…"
+
+#: src/forms.tsx
+msgid "Loading the form…"
+msgstr "Loading the form…"
+
+#: src/forms-extras.tsx
+msgid "Loading the numbers…"
+msgstr "Loading the numbers…"
+
+#: src/forms-editor.tsx
+msgid "Long answer"
+msgstr "Long answer"
+
+#: src/forms-editor.tsx
+msgid "Marketing email"
+msgstr "Marketing email"
+
+#: src/forms-editor.tsx
+msgid "Marketing text messages"
+msgstr "Marketing text messages"
+
+#: src/forms-editor.tsx
+msgid "Message after sending"
+msgstr "Message after sending"
+
+#: src/forms-editor.tsx
+msgid "Move down"
+msgstr "Move down"
+
+#: src/forms-editor.tsx
+msgid "Move question {number} down"
+msgstr "Move question {number} down"
+
+#: src/forms-editor.tsx
+msgid "Move question {number} up"
+msgstr "Move question {number} up"
+
+#: src/forms-editor.tsx
+msgid "Move up"
+msgstr "Move up"
+
+#: src/forms-editor.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/forms.tsx
+msgid "Name of the new form"
+msgstr "Name of the new form"
+
+#: src/forms-submissions.tsx
+msgid "Named by the link (source=…)"
+msgstr "Named by the link (source=…)"
+
+#: src/link-check-result.tsx
+msgid "Names no Source"
+msgstr "Names no Source"
+
+#: src/forms-editor.tsx
+msgid "New choice"
+msgstr "New choice"
+
+#: src/forms-editor.tsx
+msgid "New question"
+msgstr "New question"
+
+#: src/forms-submissions.tsx
+msgid "No"
+msgstr "No"
+
+#: src/forms-submissions.tsx
+msgid "No answer"
+msgstr "No answer"
+
+#: src/forms.tsx
+msgid "No archived forms."
+msgstr "No archived forms."
+
+#: src/forms.tsx
+msgid "No form yet. Add one to start building it."
+msgstr "No form yet. Add one to start building it."
+
+#: src/forms-editor.tsx
+msgid "No questions yet."
+msgstr "No questions yet."
+
+#: src/forms-submissions.tsx
+msgid "No submission of this form arrived this way."
+msgstr "No submission of this form arrived this way."
+
+#: src/forms.tsx
+msgid "No submissions yet"
+msgstr "No submissions yet"
+
+#: src/tag-picker.tsx
+msgid "No tags chosen."
+msgstr "No tags chosen."
+
+#: src/tag-picker.tsx
+msgid "No tags match."
+msgstr "No tags match."
+
+#: src/forms-editor.tsx
+msgid "No value"
+msgstr "No value"
+
+#: src/forms-extras.tsx
+msgid "Nobody"
+msgstr "Nobody"
+
+#: src/forms-extras.tsx
+msgid "Nobody has seen or sent this form in these days."
+msgstr "Nobody has seen or sent this form in these days."
+
+#: src/forms-submissions.tsx
+msgid "Nobody has sent this form yet."
+msgstr "Nobody has sent this form yet."
+
+#: src/link-check-result.tsx
+msgid "None"
+msgstr "None"
+
+#: src/link-check-result.tsx
+msgid "None of your rules match this link."
+msgstr "None of your rules match this link."
+
+#: src/link-check-result.tsx
+msgid "None: this form writes no source."
+msgstr "None: this form writes no source."
+
+#: src/forms-submissions.tsx
+msgid "Not attached to a contact"
+msgstr "Not attached to a contact"
+
+#: src/forms-submissions.tsx
+msgid "Not ticked"
+msgstr "Not ticked"
+
+#: src/forms-editor.tsx
+msgid "Number"
+msgstr "Number"
+
+#: src/forms-editor.tsx
+msgid "Off"
+msgstr "Off"
+
+#: src/forms-editor.tsx
+msgid "One address a line, exactly as in the browser: https://www.example.com and https://example.com are two websites. The form answers on these and nowhere else."
+msgstr "One address a line, exactly as in the browser: https://www.example.com and https://example.com are two websites. The form answers on these and nowhere else."
+
+#: src/forms-editor.tsx
+msgid "One choice from a list"
+msgstr "One choice from a list"
+
+#: src/forms-editor.tsx
+msgid "Only kept with the submission"
+msgstr "Only kept with the submission"
+
+#: src/forms-editor.tsx
+msgid "Only your team sees it, to tell one form from another."
+msgstr "Only your team sees it, to tell one form from another."
+
+#: src/forms.tsx
+msgid "Open"
+msgstr "Open"
+
+#: src/forms.tsx
+msgid "Open {formName}"
+msgstr "Open {formName}"
+
+#: src/forms-submissions.tsx
+msgid "Open the contact"
+msgstr "Open the contact"
+
+#: src/forms-submissions.tsx
+msgid "Open the new contact"
+msgstr "Open the new contact"
+
+#: src/forms-extras.tsx
+msgid "Open the page"
+msgstr "Open the page"
+
+#: src/forms-extras.tsx
+msgid "Opening…"
+msgstr "Opening…"
+
+#: src/forms-editor.tsx
+msgid "Optional. A secure address, starting with https://."
+msgstr "Optional. A secure address, starting with https://."
+
+#: src/forms-editor.tsx
+msgid "Optional. Kept on your side: it is never sent to the visitor's browser."
+msgstr "Optional. Kept on your side: it is never sent to the visitor's browser."
+
+#: src/forms-editor.tsx
+msgid "Optional. One of the field's choices. The page's value is matched to a choice by its name or key."
+msgstr "Optional. One of the field's choices. The page's value is matched to a choice by its name or key."
+
+#: src/forms-editor.tsx
+msgid "Optional. With promo here, a page opened as …?promo=SPRING shows this question already filled with SPRING; the visitor can change it."
+msgstr "Optional. With promo here, a page opened as …?promo=SPRING shows this question already filled with SPRING; the visitor can change it."
+
+#: src/tag-picker.tsx
+msgid "Other tags"
+msgstr "Other tags"
+
+#: src/forms-editor.tsx
+msgid "Page address parameter for question {number}"
+msgstr "Page address parameter for question {number}"
+
+#: src/forms-editor.tsx
+msgid "Paragraph"
+msgstr "Paragraph"
+
+#: src/forms-editor.tsx
+msgid "Paste it where the form should appear, on a page of a website listed above. A website with a Content-Security-Policy must allow this install for script-src and connect-src."
+msgstr "Paste it where the form should appear, on a page of a website listed above. A website with a Content-Security-Policy must allow this install for script-src and connect-src."
+
+#: src/forms-link-check.tsx
+msgid "Paste the address an ad or a post sends people to, with everything after the question mark, and see what a lead arriving that way would get on this form. Nothing is stored."
+msgstr "Paste the address an ad or a post sends people to, with everything after the question mark, and see what a lead arriving that way would get on this form. Nothing is stored."
+
+#: src/forms-editor.tsx
+msgid "Phone number"
+msgstr "Phone number"
+
+#: src/forms-editor.tsx
+msgid "Placeholder in the box of question {number}"
+msgstr "Placeholder in the box of question {number}"
+
+#: src/forms-editor.tsx
+msgid "Preview"
+msgstr "Preview"
+
+#: src/forms-extras.tsx
+msgid "Preview the saved draft"
+msgstr "Preview the saved draft"
+
+#: src/forms-editor.tsx
+msgid "Proof of work (ALTCHA)"
+msgstr "Proof of work (ALTCHA)"
+
+#: src/forms-editor.tsx
+msgid "Proof of work asks the visitor's browser to solve a small puzzle by itself before the form is sent (ALTCHA, run on this server). Visitors see and do nothing extra."
+msgstr "Proof of work asks the visitor's browser to solve a small puzzle by itself before the form is sent (ALTCHA, run on this server). Visitors see and do nothing extra."
+
+#: src/forms-editor.tsx
+msgid "Publish"
+msgstr "Publish"
+
+#: src/forms-editor.tsx
+msgid "Publish changes"
+msgstr "Publish changes"
+
+#: src/forms-extras.tsx
+msgid "Publish the form to get a link to share. Until then you can preview the draft."
+msgstr "Publish the form to get a link to share. Until then you can preview the draft."
+
+#: src/forms-editor.tsx
+msgid "Published"
+msgstr "Published"
+
+#: src/forms-editor.tsx
+msgid "Published, with changes not yet published"
+msgstr "Published, with changes not yet published"
+
+#: src/forms-editor.tsx
+msgid "Published. Websites now show this version."
+msgstr "Published. Websites now show this version."
+
+#: src/forms.tsx
+msgid "Put a form on your website. What people send becomes a contact, or updates the contact they already are, with their consent kept as proof."
+msgstr "Put a form on your website. What people send becomes a contact, or updates the contact they already are, with their consent kept as proof."
+
+#: src/forms-editor.tsx
+msgid "Question {number}"
+msgstr "Question {number}"
+
+#: src/forms-editor.tsx
+msgid "Question {number} must be agreed to"
+msgstr "Question {number} must be agreed to"
+
+#: src/forms-editor.tsx
+msgid "Question {number} must be answered"
+msgstr "Question {number} must be answered"
+
+#: src/forms-editor.tsx
+msgid "Question {number}: {questionLabel}"
+msgstr "Question {number}: {questionLabel}"
+
+#: src/forms-editor.tsx
+msgid "Questions"
+msgstr "Questions"
+
+#: src/forms-editor.tsx
+msgid "Radio buttons"
+msgstr "Radio buttons"
+
+#: src/forms-editor.tsx
+msgid "Rating, 1 to 5"
+msgstr "Rating, 1 to 5"
+
+#: src/forms-editor.tsx
+msgid "Reload the saved form"
+msgstr "Reload the saved form"
+
+#: src/forms-editor.tsx
+msgid "Reloaded. Your unsaved changes were replaced."
+msgstr "Reloaded. Your unsaved changes were replaced."
+
+#: src/forms-editor.tsx
+msgid "Remove"
+msgstr "Remove"
+
+#: src/tag-picker.tsx
+msgid "Remove {name}"
+msgstr "Remove {name}"
+
+#: src/forms-editor.tsx
+msgid "Remove choice {choiceNumber} of question {number}"
+msgstr "Remove choice {choiceNumber} of question {number}"
+
+#: src/forms-editor.tsx
+msgid "Remove consent box {number}"
+msgstr "Remove consent box {number}"
+
+#: src/forms-editor.tsx
+msgid "Remove question {number}"
+msgstr "Remove question {number}"
+
+#: src/tag-picker.tsx
+msgid "Removed {name}."
+msgstr "Removed {name}."
+
+#: src/forms-extras.tsx
+msgid "Responses"
+msgstr "Responses"
+
+#: src/forms-editor.tsx
+msgid "Restore as a draft"
+msgstr "Restore as a draft"
+
+#: src/forms-editor.tsx
+msgid "Restored as a draft."
+msgstr "Restored as a draft."
+
+#: src/forms-source.tsx
+msgid "Rules of your own, for every form at once, are in Settings: <0>Lead source rules</0>"
+msgstr "Rules of your own, for every form at once, are in Settings: <0>Lead source rules</0>"
+
+#: src/forms-editor.tsx
+msgid "Save draft"
+msgstr "Save draft"
+
+#: src/forms-editor.tsx
+msgid "Save your changes before publishing."
+msgstr "Save your changes before publishing."
+
+#: src/forms-editor.tsx
+msgid "Saved."
+msgstr "Saved."
+
+#: src/forms-editor.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/tag-picker.tsx
+msgid "Search or create a tag"
+msgstr "Search or create a tag"
+
+#: src/tag-picker.tsx
+msgid "Search tags"
+msgstr "Search tags"
+
+#: src/link-check-result.tsx
+msgid "Session source"
+msgstr "Session source"
+
+#: src/forms-editor.tsx
+msgid "Several choices from a list"
+msgstr "Several choices from a list"
+
+#: src/forms-editor.tsx
+msgid "Short answer"
+msgstr "Short answer"
+
+#: src/forms.tsx
+msgid "Show archived forms"
+msgstr "Show archived forms"
+
+#: src/forms-submissions.tsx
+msgid "Show earlier submissions"
+msgstr "Show earlier submissions"
+
+#: src/forms.tsx
+msgid "Show forms in use"
+msgstr "Show forms in use"
+
+#: src/forms.tsx
+msgid "Show more forms"
+msgstr "Show more forms"
+
+#: src/forms-extras.tsx
+msgid "Show the message above"
+msgstr "Show the message above"
+
+#: src/tag-picker.tsx
+msgid "Showing {shownCount} of {matchingCount}. Type to narrow the list."
+msgstr "Showing {shownCount} of {matchingCount}. Type to narrow the list."
+
+#: src/forms-editor.tsx
+msgid "Shown above the questions. Leave it empty to show none."
+msgstr "Shown above the questions. Leave it empty to show none."
+
+#: src/forms-submissions.tsx
+msgid "Some answers could not be written to the contact's fields, because a field was archived or no longer takes that answer. They are kept here."
+msgstr "Some answers could not be written to the contact's fields, because a field was archived or no longer takes that answer. They are kept here."
+
+#: src/forms-source.tsx
+msgid "Source to write"
+msgstr "Source to write"
+
+#: src/forms-source.tsx
+#: src/link-check-result.tsx
+msgid "Source written on the contact"
+msgstr "Source written on the contact"
+
+#: src/link-check-result.tsx
+msgid "Source: {source} (not used: an earlier rule named it)"
+msgstr "Source: {source} (not used: an earlier rule named it)"
+
+#: src/link-check-result.tsx
+msgid "Source: <0>{source}</0> (used)"
+msgstr "Source: <0>{source}</0> (used)"
+
+#: src/forms-submissions.tsx
+msgid "Submissions"
+msgstr "Submissions"
+
+#: src/forms.tsx
+msgid "Submissions ({submissions})"
+msgstr "Submissions ({submissions})"
+
+#: src/forms-submissions.tsx
+msgid "Submissions, newest first"
+msgstr "Submissions, newest first"
+
+#: src/forms-source.tsx
+msgid "Such as Trade fair 2026"
+msgstr "Such as Trade fair 2026"
+
+#: src/link-check-result.tsx
+msgid "Tags added"
+msgstr "Tags added"
+
+#: src/forms-extras.tsx
+msgid "Tags added to the contact"
+msgstr "Tags added to the contact"
+
+#: src/tag-picker.tsx
+msgid "Tags to add"
+msgstr "Tags to add"
+
+#: src/link-check-result.tsx
+msgid "tags: {tags}"
+msgstr "tags: {tags}"
+
+#: src/forms-editor.tsx
+msgid "Terms to agree to"
+msgstr "Terms to agree to"
+
+#: src/forms-editor.tsx
+msgid "Text on the form"
+msgstr "Text on the form"
+
+#: src/forms-editor.tsx
+msgid "Text shown for question {number}"
+msgstr "Text shown for question {number}"
+
+#: src/forms-extras.tsx
+msgid "The contact's owner"
+msgstr "The contact's owner"
+
+#: src/forms-editor.tsx
+msgid "The form can't be sent without consent box {number} ticked"
+msgstr "The form can't be sent without consent box {number} ticked"
+
+#: src/forms-extras.tsx
+msgid "The form on a page of its own. Share this link anywhere: no website is needed."
+msgstr "The form on a page of its own. Share this link anywhere: no website is needed."
+
+#: src/forms-editor.tsx
+msgid "The form reads it from the address of the page it is on, such as ?utm_campaign=june. Visitors never see this question."
+msgstr "The form reads it from the address of the page it is on, such as ?utm_campaign=june. Visitors never see this question."
+
+#: src/forms.tsx
+msgid "The form wasn't added. Check your connection and try again."
+msgstr "The form wasn't added. Check your connection and try again."
+
+#: src/forms-editor.tsx
+msgid "The form wasn't changed. Check your connection and try again."
+msgstr "The form wasn't changed. Check your connection and try again."
+
+#: src/forms-editor.tsx
+msgid "The form wasn't saved. Check your connection and try again."
+msgstr "The form wasn't saved. Check your connection and try again."
+
+#: src/forms-source.tsx
+msgid "The form's name, for everyone who sends it."
+msgstr "The form's name, for everyone who sends it."
+
+#: src/forms-link-check.tsx
+msgid "The link couldn't be checked. Check your connection and try again."
+msgstr "The link couldn't be checked. Check your connection and try again."
+
+#: src/forms-source.tsx
+msgid "The name in the link"
+msgstr "The name in the link"
+
+#: src/forms-source.tsx
+msgid "The name of this form"
+msgstr "The name of this form"
+
+#: src/forms-source.tsx
+msgid "The names “how they arrived” can be"
+msgstr "The names “how they arrived” can be"
+
+#: src/forms-extras.tsx
+msgid "The numbers couldn't be loaded."
+msgstr "The numbers couldn't be loaded."
+
+#: src/forms-extras.tsx
+msgid "The preview couldn't be opened. Check your connection and try again."
+msgstr "The preview couldn't be opened. Check your connection and try again."
+
+#: src/forms-extras.tsx
+msgid "The preview opens in a new tab and works for 30 minutes. Nothing sent from a preview is kept."
+msgstr "The preview opens in a new tab and works for 30 minutes. Nothing sent from a preview is kept."
+
+#: src/forms-source.tsx
+msgid "The same name for everyone who sends this form, whatever link they followed."
+msgstr "The same name for everyone who sends this form, whatever link they followed."
+
+#: src/forms-link-check.tsx
+msgid "The site the link is on, when you know it."
+msgstr "The site the link is on, when you know it."
+
+#: src/forms-submissions.tsx
+msgid "The submission wasn't discarded. Check your connection and try again."
+msgstr "The submission wasn't discarded. Check your connection and try again."
+
+#: src/tag-picker.tsx
+msgid "The tag wasn't made. Check your connection and try again."
+msgstr "The tag wasn't made. Check your connection and try again."
+
+#: src/tag-picker.tsx
+msgid "The tags couldn't be loaded."
+msgstr "The tags couldn't be loaded."
+
+#: src/tag-picker.tsx
+msgid "The tags couldn't be loaded. Reload the page to see the chosen tags."
+msgstr "The tags couldn't be loaded. Reload the page to see the chosen tags."
+
+#: src/tag-picker.tsx
+msgid "There are no tags yet. Make them in Settings, under Custom Fields & Tags."
+msgstr "There are no tags yet. Make them in Settings, under Custom Fields & Tags."
+
+#: src/tag-picker.tsx
+msgid "There are no tags yet. Type a name to make the first one."
+msgstr "There are no tags yet. Type a name to make the first one."
+
+#: src/forms-editor.tsx
+msgid "These are the choices of the contact field this question fills. Change them in Settings, under Custom Fields & Tags."
+msgstr "These are the choices of the contact field this question fills. Change them in Settings, under Custom Fields & Tags."
+
+#: src/forms-submissions.tsx
+msgid "These details match more than one contact, or a contact in the trash, so no contact was changed. Read the answers and add them yourself, or discard the submission."
+msgstr "These details match more than one contact, or a contact in the trash, so no contact was changed. Read the answers and add them yourself, or discard the submission."
+
+#: src/forms-link-check.tsx
+msgid "This checks the form as last saved. Save the draft to check what you changed."
+msgstr "This checks the form as last saved. Save the draft to check what you changed."
+
+#: src/forms-source.tsx
+msgid "This form already adds {most} tags of its own, the most one submission adds, so this tag would be left out. Remove one to make room."
+msgstr "This form already adds {most} tags of its own, the most one submission adds, so this tag would be left out. Remove one to make room."
+
+#: src/forms-source.tsx
+msgid "This form writes no source on the contact."
+msgstr "This form writes no source on the contact."
+
+#: src/link-check-result.tsx
+msgid "This link carries nothing that tells us where the visitor came from, so it would be recorded as Direct. Add tracking to your ad links, such as utm_source and utm_medium, so each lead says where it came from."
+msgstr "This link carries nothing that tells us where the visitor came from, so it would be recorded as Direct. Add tracking to your ad links, such as utm_source and utm_medium, so each lead says where it came from."
+
+#: src/tag-picker.tsx
+msgid "This tag is already chosen."
+msgstr "This tag is already chosen."
+
+#: src/forms-submissions.tsx
+msgid "Ticked, but there was no address or contact to record it for"
+msgstr "Ticked, but there was no address or contact to record it for"
+
+#: src/forms-submissions.tsx
+msgid "Ticked, but this contact had withdrawn consent, so nothing changed"
+msgstr "Ticked, but this contact had withdrawn consent, so nothing changed"
+
+#: src/forms-extras.tsx
+#: src/forms-submissions.tsx
+#: src/forms.tsx
+#: src/tag-picker.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/forms-editor.tsx
+msgid "Unpublish"
+msgstr "Unpublish"
+
+#: src/forms-editor.tsx
+msgid "Unpublished. The form no longer accepts submissions."
+msgstr "Unpublished. The form no longer accepts submissions."
+
+#: src/forms-editor.tsx
+msgid "Value for question {number} when the page gives none"
+msgstr "Value for question {number} when the page gives none"
+
+#: src/forms-extras.tsx
+msgid "Views"
+msgstr "Views"
+
+#: src/forms.tsx
+msgid "We couldn't load forms."
+msgstr "We couldn't load forms."
+
+#: src/forms-submissions.tsx
+msgid "We couldn't load the submissions."
+msgstr "We couldn't load the submissions."
+
+#: src/forms.tsx
+msgid "We couldn't load this form."
+msgstr "We couldn't load this form."
+
+#: src/forms-extras.tsx
+msgid "Web page to go to"
+msgstr "Web page to go to"
+
+#: src/forms-editor.tsx
+msgid "Website address"
+msgstr "Website address"
+
+#: src/forms-editor.tsx
+msgid "Websites that may show this form"
+msgstr "Websites that may show this form"
+
+#: src/forms-editor.tsx
+msgid "What consent box {number} is for"
+msgstr "What consent box {number} is for"
+
+#: src/forms-extras.tsx
+msgid "When someone sends the form"
+msgstr "When someone sends the form"
+
+#: src/forms-editor.tsx
+msgid "Where the answer to question {number} is saved"
+msgstr "Where the answer to question {number} is saved"
+
+#: src/forms-link-check.tsx
+msgid "Where they came from (optional)"
+msgstr "Where they came from (optional)"
+
+#: src/forms-extras.tsx
+msgid "Who is told about a new submission"
+msgstr "Who is told about a new submission"
+
+#: src/forms-editor.tsx
+msgid "Wording of the box for question {number}"
+msgstr "Wording of the box for question {number}"
+
+#: src/forms-editor.tsx
+msgid "Words beside consent box {number}"
+msgstr "Words beside consent box {number}"
+
+#: src/forms-editor.tsx
+msgid "Words of the link for question {number}"
+msgstr "Words of the link for question {number}"
+
+#: src/forms-editor.tsx
+msgid "Words on the button"
+msgstr "Words on the button"
+
+#: src/link-check-result.tsx
+msgid "would fill {field}: {value} (skipped)"
+msgstr "would fill {field}: {value} (skipped)"
+
+#: src/forms-submissions.tsx
+msgid "Yes"
+msgstr "Yes"
+
+#: src/forms-editor.tsx
+msgid "You can read this form. Changing it needs permission to manage forms."
+msgstr "You can read this form. Changing it needs permission to manage forms."
+
+#: src/link-check-result.tsx
+msgid "Your rules that match"
+msgstr "Your rules that match"

@@ -1,0 +1,512 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-18 09:16+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/email-verification/settings.tsx
+msgid "{credits} credits left."
+msgstr "{credits} credits left."
+
+#: src/email-verification/address-status.tsx
+msgid "{label}: what this means for {shown}"
+msgstr "{label}: what this means for {shown}"
+
+#: src/email-verification/address-dialogs.tsx
+msgid "{shown} can't be unblocked here"
+msgstr "{shown} can't be unblocked here"
+
+#: src/email-verification/address-status.tsx
+msgid "{shown} is blocked. No email is sent to it."
+msgstr "{shown} is blocked. No email is sent to it."
+
+#: src/email-verification/address-status.tsx
+msgid "{shown} is excluded from email verification."
+msgstr "{shown} is excluded from email verification."
+
+#: src/email-verification/address-status.tsx
+msgid "{shown} is included in email verification again."
+msgstr "{shown} is included in email verification again."
+
+#: src/email-verification/address-status.tsx
+msgid "{shown} is unblocked."
+msgstr "{shown} is unblocked."
+
+#: src/email-verification/address-status.tsx
+msgid "A check found it can't receive email."
+msgstr "A check found it can't receive email."
+
+#: src/email-verification/settings.tsx
+msgid "A test key gives made-up results and uses no credits."
+msgstr "A test key gives made-up results and uses no credits."
+
+#: src/email-verification/address-dialogs.tsx
+msgid "An email to it bounced, so the mailbox may not exist. Sending to it again can hurt how your other email is delivered."
+msgstr "An email to it bounced, so the mailbox may not exist. Sending to it again can hurt how your other email is delivered."
+
+#: src/email-verification/address-status.tsx
+msgid "An email to it bounced: the mailbox doesn't take mail."
+msgstr "An email to it bounced: the mailbox doesn't take mail."
+
+#: src/email-verification/address-status.tsx
+msgid "An email to it bounced."
+msgstr "An email to it bounced."
+
+#: src/email-verification/settings.tsx
+msgid "An email waits for its address to be checked, once, before it is sent."
+msgstr "An email waits for its address to be checked, once, before it is sent."
+
+#: src/email-verification/settings.tsx
+msgid "An older result is checked again before the next email."
+msgstr "An older result is checked again before the next email."
+
+#: src/email-verification/address-dialogs.tsx
+msgid "Block"
+msgstr "Block"
+
+#: src/email-verification/address-dialogs.tsx
+msgid "Block {shown}?"
+msgstr "Block {shown}?"
+
+#: src/email-verification/address-status.tsx
+msgid "Block email"
+msgstr "Block email"
+
+#: src/email-verification/address-status.tsx
+msgid "Blocked"
+msgstr "Blocked"
+
+#: src/email-verification/address-dialogs.tsx
+#: src/email-verification/settings.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/email-verification/address-status.tsx
+msgid "Checked on {checked}."
+msgstr "Checked on {checked}."
+
+#: src/email-verification/address-status.tsx
+msgid "Checking {shown}. The result shows here once it's done."
+msgstr "Checking {shown}. The result shows here once it's done."
+
+#: src/email-verification/settings.tsx
+msgid "Checks each address before the first email is sent to it. Invalid addresses are not emailed. Risky ones are still emailed, with a warning on the contact."
+msgstr "Checks each address before the first email is sent to it. Invalid addresses are not emailed. Risky ones are still emailed, with a warning on the contact."
+
+#: src/email-verification/address-dialogs.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/email-verification/settings.tsx
+msgid "Connect"
+msgstr "Connect"
+
+#: src/email-verification/settings.tsx
+msgid "Connect Emailable"
+msgstr "Connect Emailable"
+
+#: src/email-verification/settings.tsx
+msgid "Connecting…"
+msgstr "Connecting…"
+
+#: src/email-verification/settings.tsx
+msgid "Daily verification limit"
+msgstr "Daily verification limit"
+
+#: src/email-verification/settings.tsx
+msgid "Disconnect"
+msgstr "Disconnect"
+
+#: src/email-verification/settings.tsx
+msgid "Disconnect Emailable?"
+msgstr "Disconnect Emailable?"
+
+#: src/email-verification/address-status.tsx
+msgid "Domain checked"
+msgstr "Domain checked"
+
+#: src/email-verification/address-status.tsx
+msgid "Domain checked on {checked}."
+msgstr "Domain checked on {checked}."
+
+#: src/email-verification/list-filter.tsx
+msgid "Email verification"
+msgstr "Email verification"
+
+#: src/email-verification/settings.tsx
+msgid "Email Verification"
+msgstr "Email Verification"
+
+#: src/email-verification/address-status.tsx
+msgid "Email verification for {shown}"
+msgstr "Email verification for {shown}"
+
+#: src/email-verification/list-filter.tsx
+msgid "Email verification is"
+msgstr "Email verification is"
+
+#: src/email-verification/settings.tsx
+msgid "Email verification saved."
+msgstr "Email verification saved."
+
+#: src/email-verification/settings.tsx
+msgid "Emailable API key"
+msgstr "Emailable API key"
+
+#: src/email-verification/settings.tsx
+msgid "Emailable connected"
+msgstr "Emailable connected"
+
+#: src/email-verification/settings.tsx
+msgid "Emailable is connected."
+msgstr "Emailable is connected."
+
+#: src/email-verification/settings.tsx
+msgid "Emailable is disconnected. Only domains are checked now."
+msgstr "Emailable is disconnected. Only domains are checked now."
+
+#: src/email-verification/settings.tsx
+msgid "Emailable needs attention"
+msgstr "Emailable needs attention"
+
+#: src/email-verification/settings.tsx
+msgid "Emailable stopped accepting the saved key. Only domains are checked until it is connected again with a working key."
+msgstr "Emailable stopped accepting the saved key. Only domains are checked until it is connected again with a working key."
+
+#: src/email-verification/settings.tsx
+msgid "Emailable wasn't connected. Check your connection and try again."
+msgstr "Emailable wasn't connected. Check your connection and try again."
+
+#: src/email-verification/settings.tsx
+msgid "Emailable wasn't disconnected. Check your connection and try again."
+msgstr "Emailable wasn't disconnected. Check your connection and try again."
+
+#: src/email-verification/address-status.tsx
+msgid "Emails are still sent to it, but they may not arrive."
+msgstr "Emails are still sent to it, but they may not arrive."
+
+#: src/email-verification/address-status.tsx
+msgid "Emails will not be sent to this address."
+msgstr "Emails will not be sent to this address."
+
+#: src/email-verification/settings.tsx
+msgid "Enter the API key from your Emailable account."
+msgstr "Enter the API key from your Emailable account."
+
+#: src/email-verification/address-status.tsx
+msgid "Exclude from email verification"
+msgstr "Exclude from email verification"
+
+#: src/email-verification/address-status.tsx
+#: src/email-verification/list-words.ts
+msgid "Excluded"
+msgstr "Excluded"
+
+#: src/email-verification/address-status.tsx
+msgid "Excluded from email verification: it isn't checked, and emails to it go out without a check."
+msgstr "Excluded from email verification: it isn't checked, and emails to it go out without a check."
+
+#: src/email-verification/settings.tsx
+msgid "Give a whole number from 0 to 100,000."
+msgstr "Give a whole number from 0 to 100,000."
+
+#: src/email-verification/address-status.tsx
+msgid "Good to know"
+msgstr "Good to know"
+
+#: src/email-verification/address-status.tsx
+msgid "Include in email verification"
+msgstr "Include in email verification"
+
+#: src/email-verification/address-status.tsx
+#: src/email-verification/list-words.ts
+msgid "Invalid"
+msgstr "Invalid"
+
+#: src/email-verification/list-filter.tsx
+msgid "Is any of"
+msgstr "Is any of"
+
+#: src/email-verification/list-filter.tsx
+msgid "Is empty (no email address)"
+msgstr "Is empty (no email address)"
+
+#: src/email-verification/list-filter.tsx
+msgid "Is none of"
+msgstr "Is none of"
+
+#: src/email-verification/list-filter.tsx
+msgid "Is not empty"
+msgstr "Is not empty"
+
+#: src/email-verification/address-status.tsx
+msgid "It hasn't been checked yet. With verification on, it is checked before the first email is sent."
+msgstr "It hasn't been checked yet. With verification on, it is checked before the first email is sent."
+
+#: src/email-verification/address-status.tsx
+msgid "It is a disposable address, made to be thrown away."
+msgstr "It is a disposable address, made to be thrown away."
+
+#: src/email-verification/address-status.tsx
+msgid "It is with a free email provider."
+msgstr "It is with a free email provider."
+
+#: src/email-verification/address-status.tsx
+msgid "It isn't written as an email address."
+msgstr "It isn't written as an email address."
+
+#: src/email-verification/address-status.tsx
+msgid "It reaches a role, such as info@ or sales@, more than one person."
+msgstr "It reaches a role, such as info@ or sales@, more than one person."
+
+#: src/email-verification/address-status.tsx
+msgid "It uses characters the check can't read."
+msgstr "It uses characters the check can't read."
+
+#: src/email-verification/address-status.tsx
+msgid "Its domain accepts mail for any address, so this mailbox can't be confirmed."
+msgstr "Its domain accepts mail for any address, so this mailbox can't be confirmed."
+
+#: src/email-verification/address-status.tsx
+msgid "Its domain couldn't be looked up at the time."
+msgstr "Its domain couldn't be looked up at the time."
+
+#: src/email-verification/address-status.tsx
+msgid "Its domain doesn't exist."
+msgstr "Its domain doesn't exist."
+
+#: src/email-verification/address-status.tsx
+msgid "Its domain has no mail server."
+msgstr "Its domain has no mail server."
+
+#: src/email-verification/address-status.tsx
+msgid "Its domain says it accepts no email."
+msgstr "Its domain says it accepts no email."
+
+#: src/email-verification/settings.tsx
+msgid "Loading email verification…"
+msgstr "Loading email verification…"
+
+#: src/email-verification/settings.tsx
+msgid "Mailbox checks need a verification provider. Domain checks still run."
+msgstr "Mailbox checks need a verification provider. Domain checks still run."
+
+#: src/email-verification/settings.tsx
+msgid "Mailboxes are no longer checked: only domains are. Results already found are kept."
+msgstr "Mailboxes are no longer checked: only domains are. Results already found are kept."
+
+#: src/email-verification/list-cell.tsx
+msgid "No email address"
+msgstr "No email address"
+
+#: src/email-verification/address-dialogs.tsx
+msgid "No email is sent to this address until someone unblocks it."
+msgstr "No email is sent to this address until someone unblocks it."
+
+#: src/email-verification/address-status.tsx
+msgid "No email is sent to this address."
+msgstr "No email is sent to this address."
+
+#: src/email-verification/address-status.tsx
+#: src/email-verification/list-words.ts
+msgid "Not verified"
+msgstr "Not verified"
+
+#: src/email-verification/address-status.tsx
+msgid "Re-verify"
+msgstr "Re-verify"
+
+#: src/email-verification/settings.tsx
+msgid "Re-verify results older than 90 days"
+msgstr "Re-verify results older than 90 days"
+
+#: src/email-verification/address-dialogs.tsx
+msgid "Reason (optional)"
+msgstr "Reason (optional)"
+
+#: src/email-verification/settings.tsx
+msgid "Replace key"
+msgstr "Replace key"
+
+#: src/email-verification/list-filter.tsx
+msgid "Results"
+msgstr "Results"
+
+#: src/email-verification/address-status.tsx
+#: src/email-verification/list-words.ts
+msgid "Risky"
+msgstr "Risky"
+
+#: src/email-verification/settings.tsx
+msgid "Save"
+msgstr "Save"
+
+#: src/email-verification/settings.tsx
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/email-verification/address-status.tsx
+msgid "Someone on your team blocked it."
+msgstr "Someone on your team blocked it."
+
+#: src/email-verification/settings.tsx
+msgid "Test connection"
+msgstr "Test connection"
+
+#: src/email-verification/settings.tsx
+msgid "Test mode"
+msgstr "Test mode"
+
+#: src/email-verification/settings.tsx
+msgid "Testing the connection. Its credits and status update here in a moment."
+msgstr "Testing the connection. Its credits and status update here in a moment."
+
+#: src/email-verification/settings.tsx
+msgid "Testing…"
+msgstr "Testing…"
+
+#: src/email-verification/address-status.tsx
+msgid "The change wasn't saved. Check your connection and try again."
+msgstr "The change wasn't saved. Check your connection and try again."
+
+#: src/email-verification/address-status.tsx
+msgid "The check couldn't tell. It is tried again later, and emails to it still go out."
+msgstr "The check couldn't tell. It is tried again later, and emails to it still go out."
+
+#: src/email-verification/address-status.tsx
+msgid "The check of {shown} is done."
+msgstr "The check of {shown} is done."
+
+#: src/email-verification/address-status.tsx
+msgid "The domain takes mail. Checking the mailbox itself needs a verification provider."
+msgstr "The domain takes mail. Checking the mailbox itself needs a verification provider."
+
+#: src/email-verification/settings.tsx
+msgid "The key is checked with Emailable before it is saved, and is never shown again."
+msgstr "The key is checked with Emailable before it is saved, and is never shown again."
+
+#: src/email-verification/address-status.tsx
+msgid "The latest check of {shown} is shown."
+msgstr "The latest check of {shown} is shown."
+
+#: src/email-verification/address-status.tsx
+msgid "The mail server didn't answer."
+msgstr "The mail server didn't answer."
+
+#: src/email-verification/address-status.tsx
+msgid "The mail server refused it."
+msgstr "The mail server refused it."
+
+#: src/email-verification/address-status.tsx
+msgid "The mailbox doesn't exist."
+msgstr "The mailbox doesn't exist."
+
+#: src/email-verification/address-status.tsx
+msgid "The mailbox is full."
+msgstr "The mailbox is full."
+
+#: src/email-verification/address-status.tsx
+msgid "The mailbox was checked and takes mail. Safe to send."
+msgstr "The mailbox was checked and takes mail. Safe to send."
+
+#: src/email-verification/settings.tsx
+msgid "The most mailbox checks the provider is asked for in a day. Checks past it wait for the next day."
+msgstr "The most mailbox checks the provider is asked for in a day. Checks past it wait for the next day."
+
+#: src/email-verification/address-status.tsx
+msgid "The provider expects email to it may not arrive."
+msgstr "The provider expects email to it may not arrive."
+
+#: src/email-verification/address-status.tsx
+msgid "The provider rates it as low quality."
+msgstr "The provider rates it as low quality."
+
+#: src/email-verification/address-status.tsx
+msgid "The result is old enough to be checked again before the next email."
+msgstr "The result is old enough to be checked again before the next email."
+
+#: src/email-verification/settings.tsx
+msgid "The settings weren't saved. Check your connection and try again."
+msgstr "The settings weren't saved. Check your connection and try again."
+
+#: src/email-verification/settings.tsx
+msgid "The test didn't start. Check your connection and try again."
+msgstr "The test didn't start. Check your connection and try again."
+
+#: src/email-verification/address-status.tsx
+msgid "The verification provider couldn't finish the check."
+msgstr "The verification provider couldn't finish the check."
+
+#: src/email-verification/address-status.tsx
+msgid "They marked an email from you as spam."
+msgstr "They marked an email from you as spam."
+
+#: src/email-verification/address-dialogs.tsx
+msgid "They marked an email from you as spam. Email them again only once they agree to it: record their consent on the contact."
+msgstr "They marked an email from you as spam. Email them again only once they agree to it: record their consent on the contact."
+
+#: src/email-verification/address-status.tsx
+msgid "They unsubscribed from your email."
+msgstr "They unsubscribed from your email."
+
+#: src/email-verification/address-dialogs.tsx
+msgid "They unsubscribed from your email. Email them again only once they agree to it: record their consent on the contact."
+msgstr "They unsubscribed from your email. Email them again only once they agree to it: record their consent on the contact."
+
+#: src/email-verification/settings.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/email-verification/address-dialogs.tsx
+msgid "Type unblock to confirm"
+msgstr "Type unblock to confirm"
+
+#: src/email-verification/address-dialogs.tsx
+#: src/email-verification/address-status.tsx
+msgid "Unblock"
+msgstr "Unblock"
+
+#: src/email-verification/address-dialogs.tsx
+msgid "Unblock {shown}?"
+msgstr "Unblock {shown}?"
+
+#: src/email-verification/address-status.tsx
+#: src/email-verification/list-words.ts
+msgid "Unknown"
+msgstr "Unknown"
+
+#: src/email-verification/settings.tsx
+msgid "Verification provider"
+msgstr "Verification provider"
+
+#: src/email-verification/settings.tsx
+msgid "Verification settings"
+msgstr "Verification settings"
+
+#: src/email-verification/address-status.tsx
+#: src/email-verification/list-words.ts
+msgid "Verified"
+msgstr "Verified"
+
+#: src/email-verification/address-status.tsx
+msgid "Verify email"
+msgstr "Verify email"
+
+#: src/email-verification/settings.tsx
+msgid "Verify email addresses before sending"
+msgstr "Verify email addresses before sending"
+
+#: src/email-verification/settings.tsx
+msgid "We couldn't load email verification."
+msgstr "We couldn't load email verification."
+
+#: src/email-verification/address-status.tsx
+msgid "Why"
+msgstr "Why"
+
+#: src/email-verification/address-status.tsx
+msgid "Why it can't be unblocked"
+msgstr "Why it can't be unblocked"

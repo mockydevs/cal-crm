@@ -1,0 +1,4717 @@
+{
+  "formatVersion": 1,
+  "triggers": [
+    {
+      "type": "form.submitted",
+      "label": "Form submitted",
+      "description": "A form is submitted: the form named, or any form when none is. It can start only for leads that arrived from the lead sources or session sources you list.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "form": {
+            "description": "Only this form, by id or name; left out, any form.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "sources": {
+            "description": "Only when the lead source of this submission or booking is one of these, such as [\"Google Ads\", \"Facebook Ads\"]; capitals do not matter. Left out, any.",
+            "minItems": 1,
+            "maxItems": 20,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          },
+          "sessionSources": {
+            "description": "Only when the session source of this submission or booking is one of these, such as [\"paid_search\"]. Left out, any.",
+            "minItems": 1,
+            "maxItems": 9,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "paid_search",
+                "paid_social",
+                "social_media",
+                "organic_search",
+                "referral",
+                "direct",
+                "others",
+                "crm_ui",
+                "third_party"
+              ]
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "submissionId",
+          "type": "id",
+          "description": "The submission."
+        }
+      ]
+    },
+    {
+      "type": "message.received",
+      "label": "Message received",
+      "description": "The contact sends a message.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "enum": [
+              "email",
+              "sms",
+              "whatsapp",
+              "webchat"
+            ]
+          },
+          "repliedTo": {
+            "description": "Only replies to these automations: the contact's most recent automated message on the same channel was sent by one of them.",
+            "minItems": 1,
+            "maxItems": 20,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200,
+              "description": "An id, or the exact name; the server resolves names to ids."
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "messageId",
+          "type": "id",
+          "description": "The message received."
+        }
+      ]
+    },
+    {
+      "type": "appointment.booked",
+      "label": "Appointment booked",
+      "description": "The contact books an appointment. It can start only for bookings that arrived from the lead sources or session sources you list.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "calendar": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          },
+          "sources": {
+            "description": "Only when the lead source of this submission or booking is one of these, such as [\"Google Ads\", \"Facebook Ads\"]; capitals do not matter. Left out, any.",
+            "minItems": 1,
+            "maxItems": 20,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          },
+          "sessionSources": {
+            "description": "Only when the session source of this submission or booking is one of these, such as [\"paid_search\"]. Left out, any.",
+            "minItems": 1,
+            "maxItems": 9,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "paid_search",
+                "paid_social",
+                "social_media",
+                "organic_search",
+                "referral",
+                "direct",
+                "others",
+                "crm_ui",
+                "third_party"
+              ]
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "appointmentId",
+          "type": "id",
+          "description": "The appointment it happened to."
+        }
+      ]
+    },
+    {
+      "type": "appointment.status_changed",
+      "label": "Appointment status changed",
+      "description": "An appointment's status changes, such as to cancelled or no-show.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "calendar": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "appointmentId",
+          "type": "id",
+          "description": "The appointment it happened to."
+        }
+      ]
+    },
+    {
+      "type": "deal.stage_changed",
+      "label": "Opportunity stage changed",
+      "description": "An opportunity moves to another stage.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "pipeline": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          },
+          "stage": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "dealId",
+          "type": "id",
+          "description": "The deal it happened to."
+        }
+      ]
+    },
+    {
+      "type": "deal.closed",
+      "label": "Opportunity closed",
+      "description": "An opportunity is closed as won or lost.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "pipeline": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "won",
+              "lost"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "dealId",
+          "type": "id",
+          "description": "The deal it happened to."
+        }
+      ]
+    },
+    {
+      "type": "contact.created",
+      "label": "Contact created",
+      "description": "A new contact is added.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "field.changed",
+      "label": "Field changed",
+      "description": "A field changes, optionally to a given value.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+            "description": "A field by its path, such as contact.services or deal.value."
+          },
+          "to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        "required": [
+          "field"
+        ],
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "contact.dnd_changed",
+      "label": "Contact DND",
+      "description": "A contact's do not disturb is turned on or off, however it was changed. Left out, a filter takes any.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "direction": {
+            "description": "outbound (left out) or inbound, which takes no channel.",
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ]
+          },
+          "flag": {
+            "type": "string",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          },
+          "channel": {
+            "description": "Outbound only: all, or one channel.",
+            "type": "string",
+            "enum": [
+              "all",
+              "email",
+              "sms",
+              "call",
+              "webchat"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "contact.score_changed",
+      "label": "Contact Engagement Score",
+      "description": "The engagement score matches a comparison.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "type": "string",
+            "enum": [
+              "equals",
+              "not_equals",
+              "gt",
+              "gte",
+              "lt",
+              "lte"
+            ]
+          },
+          "score": {
+            "type": "integer",
+            "minimum": -1000000,
+            "maximum": 1000000
+          }
+        },
+        "required": [
+          "operator",
+          "score"
+        ],
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "tag.added",
+      "label": "Tag added",
+      "description": "A tag is added to the contact.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "tag": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "tag.removed",
+      "label": "Tag removed",
+      "description": "A selected tag is removed from the contact.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "tag": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "task.created",
+      "label": "Task created",
+      "description": "A task is created for the contact.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "task.completed",
+      "label": "Task completed",
+      "description": "A task for the contact is completed.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "task.reminder",
+      "label": "Task reminder",
+      "description": "A task for the contact is due in, or was due, a number of days.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "before": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 365
+          },
+          "after": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 365
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "note.created",
+      "label": "Note added",
+      "description": "A note is added to the contact.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "note.updated",
+      "label": "Note changed",
+      "description": "A note on the contact is edited.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "trigger_link.clicked",
+      "label": "Trigger link clicked",
+      "description": "The contact opens a trigger link from a message sent to them.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "link": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "required": [
+          "link"
+        ],
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "linkId",
+          "type": "id",
+          "description": "The trigger link clicked."
+        }
+      ]
+    },
+    {
+      "type": "quote.sent",
+      "label": "Quote sent",
+      "description": "A quote is emailed to the contact.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "documentId",
+          "type": "id",
+          "description": "The quote."
+        }
+      ]
+    },
+    {
+      "type": "quote.accepted",
+      "label": "Quote accepted",
+      "description": "The contact, or someone on the team for them, accepts a quote.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "documentId",
+          "type": "id",
+          "description": "The quote."
+        }
+      ]
+    },
+    {
+      "type": "quote.declined",
+      "label": "Quote declined",
+      "description": "The contact, or someone on the team for them, declines a quote.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "documentId",
+          "type": "id",
+          "description": "The quote."
+        }
+      ]
+    },
+    {
+      "type": "invoice.issued",
+      "label": "Invoice issued",
+      "description": "An invoice for the contact is issued: it gets its number. Nothing is sent yet.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "documentId",
+          "type": "id",
+          "description": "The invoice."
+        }
+      ]
+    },
+    {
+      "type": "invoice.sent",
+      "label": "Invoice sent",
+      "description": "An invoice is emailed to the contact.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "documentId",
+          "type": "id",
+          "description": "The invoice."
+        }
+      ]
+    },
+    {
+      "type": "invoice.paid",
+      "label": "Invoice paid",
+      "description": "An invoice for the contact is paid in full.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "documentId",
+          "type": "id",
+          "description": "The invoice."
+        }
+      ]
+    },
+    {
+      "type": "payment.recorded",
+      "label": "Payment recorded",
+      "description": "A payment is recorded against an invoice for the contact, in part or in full.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "paymentId",
+          "type": "id",
+          "description": "The payment, which is its receipt."
+        }
+      ]
+    },
+    {
+      "type": "automation.run_ended",
+      "label": "Automation run ended",
+      "description": "A run of one of the automations named ends for the contact: stopped by one of its stop conditions, removed by another automation, completed or failed. A run cancelled because its automation was deleted does not count.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "automations": {
+            "minItems": 1,
+            "maxItems": 20,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200,
+              "description": "An id, or the exact name; the server resolves names to ids."
+            }
+          },
+          "how": {
+            "description": "How the run ended; left out, any of these.",
+            "minItems": 1,
+            "maxItems": 4,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "stopped",
+                "removed",
+                "completed",
+                "failed"
+              ]
+            }
+          },
+          "stoppedBy": {
+            "description": "Only a run one of its stop conditions ended, on one of these events, such as message.received.",
+            "minItems": 1,
+            "maxItems": 8,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "message.received",
+                "form.submitted",
+                "appointment.booked",
+                "appointment.status_changed",
+                "deal.stage_changed",
+                "deal.closed",
+                "field.changed",
+                "tag.added"
+              ]
+            }
+          }
+        },
+        "required": [
+          "automations"
+        ],
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "runId",
+          "type": "id",
+          "description": "The run that ended."
+        },
+        {
+          "key": "reason",
+          "type": "string",
+          "description": "Why it ended: a failure's code, stop:<event> or removed:<how>; absent when it completed."
+        },
+        {
+          "key": "step",
+          "type": "string",
+          "description": "The step a failed run failed at; absent otherwise."
+        }
+      ]
+    },
+    {
+      "type": "date.reached",
+      "label": "Date reached",
+      "description": "A date field comes round, such as a birthday, or a time before or after it. It comes round every year, or once only if you choose.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+            "description": "A field by its path, such as contact.services or deal.value."
+          },
+          "offset": {
+            "type": "string",
+            "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+            "description": "An ISO 8601 duration, such as P2D (2 days) or PT4H (4 hours)."
+          },
+          "direction": {
+            "default": "before",
+            "type": "string",
+            "enum": [
+              "before",
+              "after"
+            ]
+          },
+          "time": {
+            "type": "string",
+            "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+            "description": "A 24-hour time of day, such as 09:30."
+          },
+          "repeat": {
+            "default": "yearly",
+            "type": "string",
+            "enum": [
+              "yearly",
+              "never"
+            ]
+          }
+        },
+        "required": [
+          "field"
+        ],
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
+      "type": "webhook.received",
+      "label": "Webhook received",
+      "description": "An outside app calls this automation's webhook address.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputs": [
+        {
+          "key": "body",
+          "type": "string",
+          "description": "The JSON body received."
+        }
+      ]
+    },
+    {
+      "type": "schedule",
+      "label": "Schedule",
+      "description": "A repeating time, for every contact the automation is given.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "every": {
+                "type": "string",
+                "const": "day"
+              },
+              "at": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              }
+            },
+            "required": [
+              "every",
+              "at"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "every": {
+                "type": "string",
+                "const": "week"
+              },
+              "at": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              },
+              "weekday": {
+                "type": "string",
+                "enum": [
+                  "monday",
+                  "tuesday",
+                  "wednesday",
+                  "thursday",
+                  "friday",
+                  "saturday",
+                  "sunday"
+                ]
+              }
+            },
+            "required": [
+              "every",
+              "at",
+              "weekday"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "every": {
+                "type": "string",
+                "const": "month"
+              },
+              "at": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              },
+              "day": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 28
+              }
+            },
+            "required": [
+              "every",
+              "at",
+              "day"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "outputs": []
+    }
+  ],
+  "stopEvents": [
+    "message.received",
+    "form.submitted",
+    "appointment.booked",
+    "appointment.status_changed",
+    "deal.stage_changed",
+    "deal.closed",
+    "field.changed",
+    "tag.added"
+  ],
+  "steps": [
+    {
+      "type": "email.send",
+      "group": "messages",
+      "version": 1,
+      "label": "Send email",
+      "description": "Send an email from a template or content written in the step, as plain or formatted text. Consent, quiet hours and sending limits apply.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "mode": {
+                "type": "string",
+                "const": "copy"
+              },
+              "subject": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 998,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ],
+                "description": "Text with optional merge fields, such as {{contact.firstName}}."
+              },
+              "body": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000000,
+                "pattern": "\\S",
+                "description": "Text with optional merge fields, such as {{contact.firstName}}."
+              },
+              "html": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200000,
+                "pattern": "\\S",
+                "description": "The formatted part as HTML, sent beside the plain-text body. Cleaned by the same allowlist as a template when the email is sent."
+              },
+              "source": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^tmpl_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+                    "description": "A template id.",
+                    "examples": [
+                      "tmpl_01h455vb4pex5vsknk084sn02q"
+                    ]
+                  },
+                  "revision": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "id",
+                  "revision"
+                ],
+                "additionalProperties": false
+              },
+              "purpose": {
+                "description": "marketing (left out) or transactional: about the appointment the contact booked, such as a reminder. Only an appointment-triggered workflow may send one.",
+                "type": "string",
+                "enum": [
+                  "marketing",
+                  "transactional"
+                ]
+              },
+              "mailbox": {
+                "description": "The connected mailbox the email is from, by id or address. Left out, the business’s only working mailbox. An email is only ever from a connected mailbox.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "fromName": {
+                "description": "The name the email is from. Left out, the mailbox’s own name.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ]
+              },
+              "replyTo": {
+                "$ref": "#/$defs/WorkflowEmailAddress"
+              },
+              "cc": {
+                "minItems": 1,
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/WorkflowEmailAddress"
+                }
+              },
+              "bcc": {
+                "minItems": 1,
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/WorkflowEmailAddress"
+                }
+              },
+              "preheader": {
+                "description": "The preview line mail apps show after the subject. Formatted emails only. Left out on a step that sends a template, the template’s own.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ]
+              },
+              "attachments": {
+                "description": "Files of this business sent with the email, at most 5 and 15 MiB in all.",
+                "minItems": 1,
+                "maxItems": 5,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^file_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+                  "description": "A file id.",
+                  "examples": [
+                    "file_01h455vb4pex5vsknk084sn02q"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "mode",
+              "subject",
+              "body"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "mode": {
+                "type": "string",
+                "const": "sync"
+              },
+              "source": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^tmpl_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+                    "description": "A template id.",
+                    "examples": [
+                      "tmpl_01h455vb4pex5vsknk084sn02q"
+                    ]
+                  },
+                  "revision": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "id",
+                  "revision"
+                ],
+                "additionalProperties": false
+              },
+              "purpose": {
+                "description": "marketing (left out) or transactional: about the appointment the contact booked, such as a reminder. Only an appointment-triggered workflow may send one.",
+                "type": "string",
+                "enum": [
+                  "marketing",
+                  "transactional"
+                ]
+              },
+              "mailbox": {
+                "description": "The connected mailbox the email is from, by id or address. Left out, the business’s only working mailbox. An email is only ever from a connected mailbox.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "fromName": {
+                "description": "The name the email is from. Left out, the mailbox’s own name.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ]
+              },
+              "replyTo": {
+                "$ref": "#/$defs/WorkflowEmailAddress"
+              },
+              "cc": {
+                "minItems": 1,
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/WorkflowEmailAddress"
+                }
+              },
+              "bcc": {
+                "minItems": 1,
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/WorkflowEmailAddress"
+                }
+              },
+              "preheader": {
+                "description": "The preview line mail apps show after the subject. Formatted emails only. Left out on a step that sends a template, the template’s own.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ]
+              },
+              "attachments": {
+                "description": "Files of this business sent with the email, at most 5 and 15 MiB in all.",
+                "minItems": 1,
+                "maxItems": 5,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^file_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+                  "description": "A file id.",
+                  "examples": [
+                    "file_01h455vb4pex5vsknk084sn02q"
+                  ]
+                }
+              },
+              "subject": {
+                "description": "This step’s own subject. Left out, the template’s.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 998,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "mode",
+              "source"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "template": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "description": "An id, or the exact name; the server resolves names to ids."
+              },
+              "subject": {
+                "description": "This step’s own subject. Left out, the template’s.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 998,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ]
+              },
+              "purpose": {
+                "description": "marketing (left out) or transactional: about the appointment the contact booked, such as a reminder. Only an appointment-triggered workflow may send one.",
+                "type": "string",
+                "enum": [
+                  "marketing",
+                  "transactional"
+                ]
+              },
+              "mailbox": {
+                "description": "The connected mailbox the email is from, by id or address. Left out, the business’s only working mailbox. An email is only ever from a connected mailbox.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "fromName": {
+                "description": "The name the email is from. Left out, the mailbox’s own name.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ]
+              },
+              "replyTo": {
+                "$ref": "#/$defs/WorkflowEmailAddress"
+              },
+              "cc": {
+                "minItems": 1,
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/WorkflowEmailAddress"
+                }
+              },
+              "bcc": {
+                "minItems": 1,
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/WorkflowEmailAddress"
+                }
+              },
+              "preheader": {
+                "description": "The preview line mail apps show after the subject. Formatted emails only. Left out on a step that sends a template, the template’s own.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ]
+              },
+              "attachments": {
+                "description": "Files of this business sent with the email, at most 5 and 15 MiB in all.",
+                "minItems": 1,
+                "maxItems": 5,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^file_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+                  "description": "A file id.",
+                  "examples": [
+                    "file_01h455vb4pex5vsknk084sn02q"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "template"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "subject": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 998,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ],
+                "description": "Text with optional merge fields, such as {{contact.firstName}}."
+              },
+              "body": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000000,
+                "pattern": "\\S",
+                "description": "Text with optional merge fields, such as {{contact.firstName}}."
+              },
+              "html": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200000,
+                "pattern": "\\S",
+                "description": "The formatted part as HTML, sent beside the plain-text body. Cleaned by the same allowlist as a template when the email is sent."
+              },
+              "purpose": {
+                "description": "marketing (left out) or transactional: about the appointment the contact booked, such as a reminder. Only an appointment-triggered workflow may send one.",
+                "type": "string",
+                "enum": [
+                  "marketing",
+                  "transactional"
+                ]
+              },
+              "mailbox": {
+                "description": "The connected mailbox the email is from, by id or address. Left out, the business’s only working mailbox. An email is only ever from a connected mailbox.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "fromName": {
+                "description": "The name the email is from. Left out, the mailbox’s own name.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ]
+              },
+              "replyTo": {
+                "$ref": "#/$defs/WorkflowEmailAddress"
+              },
+              "cc": {
+                "minItems": 1,
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/WorkflowEmailAddress"
+                }
+              },
+              "bcc": {
+                "minItems": 1,
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/WorkflowEmailAddress"
+                }
+              },
+              "preheader": {
+                "description": "The preview line mail apps show after the subject. Formatted emails only. Left out on a step that sends a template, the template’s own.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150,
+                "allOf": [
+                  {
+                    "pattern": "^[^\\r\\n]*$"
+                  },
+                  {
+                    "pattern": "\\S"
+                  }
+                ]
+              },
+              "attachments": {
+                "description": "Files of this business sent with the email, at most 5 and 15 MiB in all.",
+                "minItems": 1,
+                "maxItems": 5,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^file_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+                  "description": "A file id.",
+                  "examples": [
+                    "file_01h455vb4pex5vsknk084sn02q"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "subject",
+              "body"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "$defs": {
+          "WorkflowEmailAddress": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 254,
+                "format": "email",
+                "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+              },
+              {
+                "type": "string",
+                "maxLength": 200,
+                "pattern": "^\\{\\{\\s*[a-z][a-z_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)+\\s*\\}\\}$"
+              }
+            ],
+            "description": "An email address, or one merge field that holds one."
+          }
+        }
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "messageId",
+          "type": "id",
+          "description": "The message sent."
+        }
+      ]
+    },
+    {
+      "type": "sms.send",
+      "group": "messages",
+      "version": 1,
+      "label": "Send text",
+      "description": "Send a text message. Consent, quiet hours and sending limits apply.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1600,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          },
+          "number": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          },
+          "purpose": {
+            "description": "marketing (left out) or transactional: about the appointment the contact booked, such as a reminder. Only an appointment-triggered workflow may send one.",
+            "type": "string",
+            "enum": [
+              "marketing",
+              "transactional"
+            ]
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "messageId",
+          "type": "id",
+          "description": "The message sent."
+        }
+      ]
+    },
+    {
+      "type": "whatsapp.send",
+      "group": "messages",
+      "version": 1,
+      "label": "Send WhatsApp message",
+      "description": "Send an approved WhatsApp template. Consent and sending limits apply.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "template": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "required": [
+          "template"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "messageId",
+          "type": "id",
+          "description": "The message sent."
+        }
+      ]
+    },
+    {
+      "type": "team.notify",
+      "group": "messages",
+      "version": 1,
+      "label": "Notify the team",
+      "description": "Notify the contact's owner, or everyone in the business, inside the app.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          },
+          "to": {
+            "default": "contact_owner",
+            "type": "string",
+            "enum": [
+              "contact_owner",
+              "everyone",
+              "owner_or_everyone"
+            ]
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "manual.call",
+      "group": "messages",
+      "version": 1,
+      "label": "Manual call",
+      "description": "Ask a person to call the contact. The run waits in the Manual Actions queue until the call is marked done or skipped.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "notes": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          },
+          "user": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "outcome",
+          "type": "string",
+          "description": "completed or skipped."
+        }
+      ]
+    },
+    {
+      "type": "manual.sms",
+      "group": "messages",
+      "version": 1,
+      "label": "Manual text",
+      "description": "Ask a person to send the contact a text by hand. The run waits in the Manual Actions queue until it is marked done or skipped.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1600,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          },
+          "user": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "outcome",
+          "type": "string",
+          "description": "completed or skipped."
+        }
+      ]
+    },
+    {
+      "type": "wait",
+      "group": "timing",
+      "version": 1,
+      "label": "Wait",
+      "description": "Wait for a length of time before the next step. With a resume window, the run goes on only inside it.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "duration": {
+            "type": "string",
+            "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+            "description": "An ISO 8601 duration, such as P2D (2 days) or PT4H (4 hours)."
+          },
+          "resumeWindow": {
+            "type": "object",
+            "properties": {
+              "days": {
+                "minItems": 1,
+                "maxItems": 7,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "monday",
+                    "tuesday",
+                    "wednesday",
+                    "thursday",
+                    "friday",
+                    "saturday",
+                    "sunday"
+                  ]
+                }
+              },
+              "start": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              },
+              "end": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              }
+            },
+            "required": [
+              "days",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false,
+            "description": "When the run may go on from this wait: weekdays and hours in the automation's time zone. Outside them it goes on when the window next opens."
+          }
+        },
+        "required": [
+          "duration"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "wait.until",
+      "group": "timing",
+      "version": 2,
+      "label": "Wait until",
+      "description": "Wait until a date field, or a time before or after it, such as 2 days before an event. When that time has already passed, the run goes on at once or ends there, whichever you choose.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                "description": "A field by its path, such as contact.services or deal.value."
+              },
+              "offset": {
+                "type": "string",
+                "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+                "description": "An ISO 8601 duration, such as P2D (2 days) or PT4H (4 hours)."
+              },
+              "direction": {
+                "default": "before",
+                "type": "string",
+                "enum": [
+                  "before",
+                  "after"
+                ]
+              },
+              "time": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              },
+              "ifPassed": {
+                "type": "string",
+                "enum": [
+                  "continue",
+                  "end"
+                ]
+              },
+              "ifEmpty": {
+                "type": "string",
+                "enum": [
+                  "wait",
+                  "continue",
+                  "end"
+                ]
+              },
+              "resumeWindow": {
+                "type": "object",
+                "properties": {
+                  "days": {
+                    "minItems": 1,
+                    "maxItems": 7,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "monday",
+                        "tuesday",
+                        "wednesday",
+                        "thursday",
+                        "friday",
+                        "saturday",
+                        "sunday"
+                      ]
+                    }
+                  },
+                  "start": {
+                    "type": "string",
+                    "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                    "description": "A 24-hour time of day, such as 09:30."
+                  },
+                  "end": {
+                    "type": "string",
+                    "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                    "description": "A 24-hour time of day, such as 09:30."
+                  }
+                },
+                "required": [
+                  "days",
+                  "start",
+                  "end"
+                ],
+                "additionalProperties": false,
+                "description": "When the run may go on from this wait: weekdays and hours in the automation's time zone. Outside them it goes on when the window next opens."
+              }
+            },
+            "required": [
+              "field"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "at": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+              },
+              "ifPassed": {
+                "type": "string",
+                "enum": [
+                  "continue",
+                  "end"
+                ]
+              },
+              "resumeWindow": {
+                "type": "object",
+                "properties": {
+                  "days": {
+                    "minItems": 1,
+                    "maxItems": 7,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "monday",
+                        "tuesday",
+                        "wednesday",
+                        "thursday",
+                        "friday",
+                        "saturday",
+                        "sunday"
+                      ]
+                    }
+                  },
+                  "start": {
+                    "type": "string",
+                    "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                    "description": "A 24-hour time of day, such as 09:30."
+                  },
+                  "end": {
+                    "type": "string",
+                    "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                    "description": "A 24-hour time of day, such as 09:30."
+                  }
+                },
+                "required": [
+                  "days",
+                  "start",
+                  "end"
+                ],
+                "additionalProperties": false,
+                "description": "When the run may go on from this wait: weekdays and hours in the automation's time zone. Outside them it goes on when the window next opens."
+              }
+            },
+            "required": [
+              "at"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "wait.event",
+      "group": "timing",
+      "version": 1,
+      "label": "Wait for an event",
+      "description": "Wait until something happens for the contact, such as a reply or a trigger link being opened, or until the timeout passes.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "enum": [
+              "message.received",
+              "form.submitted",
+              "appointment.booked",
+              "appointment.status_changed",
+              "deal.stage_changed",
+              "deal.closed",
+              "field.changed",
+              "tag.added",
+              "trigger_link.clicked"
+            ]
+          },
+          "from": {
+            "type": "string",
+            "const": "contact"
+          },
+          "channel": {
+            "description": "With message.received: only a message on this channel counts.",
+            "type": "string",
+            "enum": [
+              "email",
+              "sms",
+              "whatsapp",
+              "webchat"
+            ]
+          },
+          "link": {
+            "description": "With trigger_link.clicked: only this trigger link; left out, any of them.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "timeout": {
+            "type": "string",
+            "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+            "description": "An ISO 8601 duration, such as P2D (2 days) or PT4H (4 hours)."
+          },
+          "resumeWindow": {
+            "type": "object",
+            "properties": {
+              "days": {
+                "minItems": 1,
+                "maxItems": 7,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "monday",
+                    "tuesday",
+                    "wednesday",
+                    "thursday",
+                    "friday",
+                    "saturday",
+                    "sunday"
+                  ]
+                }
+              },
+              "start": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              },
+              "end": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              }
+            },
+            "required": [
+              "days",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false,
+            "description": "When the run may go on from this wait: weekdays and hours in the automation's time zone. Outside them it goes on when the window next opens."
+          }
+        },
+        "required": [
+          "event",
+          "timeout"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "fixed",
+        "names": [
+          "received",
+          "timed_out"
+        ]
+      },
+      "outputs": [
+        {
+          "key": "eventId",
+          "type": "id",
+          "description": "The event that arrived."
+        }
+      ]
+    },
+    {
+      "type": "wait.condition",
+      "group": "timing",
+      "version": 1,
+      "label": "Wait for a condition",
+      "description": "Wait until a condition on the contact holds, judged again each time the contact's fields or tags change, or until the timeout passes.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "if": {
+            "$ref": "#/$defs/AutomationCondition"
+          },
+          "timeout": {
+            "type": "string",
+            "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+            "description": "An ISO 8601 duration, such as P2D (2 days) or PT4H (4 hours)."
+          },
+          "resumeWindow": {
+            "type": "object",
+            "properties": {
+              "days": {
+                "minItems": 1,
+                "maxItems": 7,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "monday",
+                    "tuesday",
+                    "wednesday",
+                    "thursday",
+                    "friday",
+                    "saturday",
+                    "sunday"
+                  ]
+                }
+              },
+              "start": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              },
+              "end": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              }
+            },
+            "required": [
+              "days",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false,
+            "description": "When the run may go on from this wait: weekdays and hours in the automation's time zone. Outside them it goes on when the window next opens."
+          }
+        },
+        "required": [
+          "if",
+          "timeout"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "AutomationCondition": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                    "description": "A field by its path, such as contact.services or deal.value."
+                  },
+                  "operator": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "not_equals",
+                      "includes",
+                      "excludes",
+                      "starts_with",
+                      "greater_than",
+                      "less_than",
+                      "before",
+                      "after"
+                    ]
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 1000
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "field",
+                  "operator",
+                  "value"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                    "description": "A field by its path, such as contact.services or deal.value."
+                  },
+                  "operator": {
+                    "type": "string",
+                    "enum": [
+                      "is_set",
+                      "is_empty"
+                    ]
+                  }
+                },
+                "required": [
+                  "field",
+                  "operator"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                    "description": "A field by its path, such as contact.services or deal.value."
+                  },
+                  "operator": {
+                    "type": "string",
+                    "enum": [
+                      "within_last",
+                      "within_next"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+                    "description": "An ISO 8601 duration, such as P2D (2 days) or PT4H (4 hours)."
+                  }
+                },
+                "required": [
+                  "field",
+                  "operator",
+                  "value"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "all": {
+                    "minItems": 1,
+                    "maxItems": 20,
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/AutomationCondition"
+                    }
+                  }
+                },
+                "required": [
+                  "all"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "any": {
+                    "minItems": 1,
+                    "maxItems": 20,
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/AutomationCondition"
+                    }
+                  }
+                },
+                "required": [
+                  "any"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "not": {
+                    "$ref": "#/$defs/AutomationCondition"
+                  }
+                },
+                "required": [
+                  "not"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        }
+      },
+      "branches": {
+        "kind": "fixed",
+        "names": [
+          "met",
+          "timed_out"
+        ]
+      },
+      "outputs": []
+    },
+    {
+      "type": "wait.appointment",
+      "group": "timing",
+      "version": 2,
+      "label": "Wait for an appointment",
+      "description": "Wait until the contact's appointment starts, or a time before or after it: the appointment that started the run, otherwise the contact's next one. A time that has already passed takes a path of its own, and so does a contact with no appointment or one that is cancelled, marked no-show or invalid. A rescheduled appointment moves the wait.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "string",
+            "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+            "description": "An ISO 8601 duration, such as P2D (2 days) or PT4H (4 hours)."
+          },
+          "direction": {
+            "default": "before",
+            "type": "string",
+            "enum": [
+              "before",
+              "after"
+            ]
+          },
+          "resumeWindow": {
+            "type": "object",
+            "properties": {
+              "days": {
+                "minItems": 1,
+                "maxItems": 7,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "monday",
+                    "tuesday",
+                    "wednesday",
+                    "thursday",
+                    "friday",
+                    "saturday",
+                    "sunday"
+                  ]
+                }
+              },
+              "start": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              },
+              "end": {
+                "type": "string",
+                "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+                "description": "A 24-hour time of day, such as 09:30."
+              }
+            },
+            "required": [
+              "days",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false,
+            "description": "When the run may go on from this wait: weekdays and hours in the automation's time zone. Outside them it goes on when the window next opens."
+          }
+        },
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "fixed",
+        "names": [
+          "reached",
+          "passed",
+          "no_appointment"
+        ]
+      },
+      "outputs": [
+        {
+          "key": "appointmentId",
+          "type": "id",
+          "description": "The appointment waited for."
+        },
+        {
+          "key": "startsAt",
+          "type": "date",
+          "description": "When that appointment starts."
+        }
+      ]
+    },
+    {
+      "type": "condition",
+      "group": "logic",
+      "version": 2,
+      "label": "If / else",
+      "description": "Take the first branch whose condition holds, in the order written; when none holds, take the branch kept for that. With a single condition, the branches are yes and no.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "if": {
+                "$ref": "#/$defs/AutomationCondition"
+              }
+            },
+            "required": [
+              "if"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "branches": {
+                "minItems": 1,
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]{0,62}$",
+                      "description": "A stable id the author chooses, such as send_guide."
+                    },
+                    "label": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 80
+                    },
+                    "if": {
+                      "$ref": "#/$defs/AutomationCondition"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "if"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "branches"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "$defs": {
+          "AutomationCondition": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                    "description": "A field by its path, such as contact.services or deal.value."
+                  },
+                  "operator": {
+                    "type": "string",
+                    "enum": [
+                      "equals",
+                      "not_equals",
+                      "includes",
+                      "excludes",
+                      "starts_with",
+                      "greater_than",
+                      "less_than",
+                      "before",
+                      "after"
+                    ]
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 1000
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "field",
+                  "operator",
+                  "value"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                    "description": "A field by its path, such as contact.services or deal.value."
+                  },
+                  "operator": {
+                    "type": "string",
+                    "enum": [
+                      "is_set",
+                      "is_empty"
+                    ]
+                  }
+                },
+                "required": [
+                  "field",
+                  "operator"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                    "description": "A field by its path, such as contact.services or deal.value."
+                  },
+                  "operator": {
+                    "type": "string",
+                    "enum": [
+                      "within_last",
+                      "within_next"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+                    "description": "An ISO 8601 duration, such as P2D (2 days) or PT4H (4 hours)."
+                  }
+                },
+                "required": [
+                  "field",
+                  "operator",
+                  "value"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "all": {
+                    "minItems": 1,
+                    "maxItems": 20,
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/AutomationCondition"
+                    }
+                  }
+                },
+                "required": [
+                  "all"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "any": {
+                    "minItems": 1,
+                    "maxItems": 20,
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/AutomationCondition"
+                    }
+                  }
+                },
+                "required": [
+                  "any"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "not": {
+                    "$ref": "#/$defs/AutomationCondition"
+                  }
+                },
+                "required": [
+                  "not"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        }
+      },
+      "branches": {
+        "kind": "from_config",
+        "field": "branches",
+        "fallback": "none",
+        "legacy": [
+          "yes",
+          "no"
+        ]
+      },
+      "outputs": []
+    },
+    {
+      "type": "goto",
+      "group": "logic",
+      "version": 1,
+      "label": "Go to",
+      "description": "Jump to another step of this automation. It ends its path. A run visits one step 100 times at most.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "target": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,62}$",
+            "description": "A stable id the author chooses, such as send_guide."
+          }
+        },
+        "required": [
+          "target"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "split",
+      "group": "logic",
+      "version": 1,
+      "label": "A/B split",
+      "description": "Send each contact down one variant, by percentage.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "variants": {
+            "minItems": 2,
+            "maxItems": 5,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]{0,62}$",
+                  "description": "A stable id the author chooses, such as send_guide."
+                },
+                "percent": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 99
+                }
+              },
+              "required": [
+                "name",
+                "percent"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "variants"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "from_config",
+        "field": "variants"
+      },
+      "outputs": [
+        {
+          "key": "variant",
+          "type": "string",
+          "description": "The variant taken."
+        }
+      ]
+    },
+    {
+      "type": "contact.update",
+      "group": "records",
+      "version": 2,
+      "label": "Update contact",
+      "description": "Change one or more of the contact's fields. Each can take a value you type, a copy of another field, text with the contact's details filled in, the date the step runs, a date some days before or after another, or a sum. A field can be changed only when it is empty, if you choose. Either every field is changed or none is.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+              "description": "A field by its path, such as contact.services or deal.value."
+            },
+            "additionalProperties": {
+              "$ref": "#/$defs/AutomationFieldWrite"
+            },
+            "description": "The value for each field, by its path, such as { \"contact.custom.lead_source_raw\": \"{{contact.custom.utm_source}}\", \"contact.custom.first_enquiry\": { \"set\": { \"op\": \"now\" }, \"onlyIfEmpty\": true } }."
+          }
+        },
+        "required": [
+          "fields"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "AutomationFieldWrite": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 1000,
+                    "description": "Text, which may hold merge fields. One merge field alone, such as \"{{contact.custom.utm_source}}\", copies that field into this one, keeping its type; when the field copied from is empty, this one is left as it is. Text with merge fields mixed in is filled in as a message is, and must fit the field: a number field needs it to come out as a number, a date field as a date, a choice field as one of its choices."
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "null",
+                    "description": "Empties the field."
+                  },
+                  {
+                    "$ref": "#/$defs/AutomationComputedValue"
+                  }
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "set": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 1000,
+                        "description": "Text, which may hold merge fields. One merge field alone, such as \"{{contact.custom.utm_source}}\", copies that field into this one, keeping its type; when the field copied from is empty, this one is left as it is. Text with merge fields mixed in is filled in as a message is, and must fit the field: a number field needs it to come out as a number, a date field as a date, a choice field as one of its choices."
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "null",
+                        "description": "Empties the field."
+                      },
+                      {
+                        "$ref": "#/$defs/AutomationComputedValue"
+                      }
+                    ]
+                  },
+                  "onlyIfEmpty": {
+                    "description": "true: write only when the field has nothing in it; a field that has a value is left alone, and the step says so. Left out or false: the value is replaced.",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "set"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "AutomationComputedValue": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "const": "now"
+                  }
+                },
+                "required": [
+                  "op"
+                ],
+                "additionalProperties": false,
+                "description": "The moment the step runs. A date field takes today's date in the automation's time zone (settings.timezone); a date and time field takes the instant. Only for date and date-and-time fields."
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "const": "date_add"
+                  },
+                  "field": {
+                    "description": "The date field to count from, such as contact.custom.event_date. Not together with value.",
+                    "type": "string",
+                    "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$"
+                  },
+                  "value": {
+                    "description": "A fixed date to count from (2026-12-01, or a date and time with its offset), or \"now\". Not together with field. With neither, it counts from now.",
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "const": "now"
+                      },
+                      {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+                      }
+                    ]
+                  },
+                  "days": {
+                    "type": "integer",
+                    "minimum": -3660,
+                    "maximum": 3660,
+                    "description": "How many days to add; a negative number goes back."
+                  }
+                },
+                "required": [
+                  "op",
+                  "days"
+                ],
+                "additionalProperties": false,
+                "description": "A date moved by a number of days: from a date field, from a fixed date, or from now. { \"op\": \"date_add\", \"days\": 365 } is a year from today. Only for date and date-and-time fields. A field with no date in it fails the step."
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "type": "string",
+                    "const": "math"
+                  },
+                  "left": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                        "description": "A field by its path, such as contact.services or deal.value."
+                      }
+                    ],
+                    "description": "A number, or a number field by its path, such as contact.custom.budget, read when the step runs."
+                  },
+                  "operator": {
+                    "type": "string",
+                    "enum": [
+                      "+",
+                      "-",
+                      "*",
+                      "/"
+                    ]
+                  },
+                  "right": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string",
+                        "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                        "description": "A field by its path, such as contact.services or deal.value."
+                      }
+                    ],
+                    "description": "A number, or a number field by its path, such as contact.custom.budget, read when the step runs."
+                  }
+                },
+                "required": [
+                  "op",
+                  "left",
+                  "operator",
+                  "right"
+                ],
+                "additionalProperties": false,
+                "description": "Arithmetic on two numbers: left operator right, such as { \"op\": \"math\", \"left\": \"contact.custom.visits\", \"operator\": \"+\", \"right\": 1 }. Only for number fields. A field that holds no number, and a division by zero, fail the step."
+              }
+            ]
+          }
+        }
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "deal.create",
+      "group": "records",
+      "version": 2,
+      "label": "Create opportunity",
+      "description": "Create an opportunity for the contact in a pipeline stage. Its source is how the lead arrived (the lead source of the form submission or booking that started the run, else the contact's Source) unless you write one or choose none.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "pipeline": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          },
+          "stage": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "amountFrom": {
+            "description": "A number field of the contact, such as contact.custom.budget: the deal takes its value as the amount when the step runs. Not together with amount. A field with nothing in it gives a deal without an amount.",
+            "type": "string",
+            "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$"
+          },
+          "source": {
+            "description": "Where the deal came from. Left out, or { \"from\": \"arrival\" }: how the lead arrived. Text with optional merge fields: that text. null: no source.",
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "description": "Text with optional merge fields, such as {{contact.firstName}}."
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "from": {
+                        "type": "string",
+                        "const": "arrival"
+                      }
+                    },
+                    "required": [
+                      "from"
+                    ],
+                    "additionalProperties": false,
+                    "description": "From how they arrived: the lead source of the form submission or booking that started this run (trigger.attribution.source), else the contact's Source; a run with neither leaves the opportunity without one."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "pipeline",
+          "stage"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "dealId",
+          "type": "id",
+          "description": "The deal created."
+        }
+      ]
+    },
+    {
+      "type": "deal.move",
+      "group": "records",
+      "version": 1,
+      "label": "Move opportunity",
+      "description": "Move an opportunity to another stage. It acts on the opportunity found or created earlier in the run, or the opportunity the run is for; otherwise on the contact's one open opportunity, and it fails when the contact has none or several.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "stage": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          },
+          "pipeline": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "required": [
+          "stage"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "deal.close",
+      "group": "records",
+      "version": 1,
+      "label": "Close opportunity",
+      "description": "Close an opportunity as won, or as lost with a reason. It acts on the opportunity found or created earlier in the run, or the opportunity the run is for; otherwise on the contact's one open opportunity, and it fails when the contact has none or several.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "string",
+                "const": "won"
+              }
+            },
+            "required": [
+              "outcome"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "outcome": {
+                "type": "string",
+                "const": "lost"
+              },
+              "lostReason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "description": "An id, or the exact name; the server resolves names to ids."
+              }
+            },
+            "required": [
+              "outcome",
+              "lostReason"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "deal.find",
+      "group": "records",
+      "version": 1,
+      "label": "Find opportunity",
+      "description": "Find one of the contact's opportunities: the newest or the oldest of those that pass every filter you add. When one is found, the steps that follow move, close and update that opportunity, and conditions and messages can read its name, stage, pipeline, status, value and custom fields. When none is found the run takes the other path and keeps the opportunity it already had, if any.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "which": {
+            "default": "newest",
+            "description": "newest: the one created last (the default). oldest: the one created first.",
+            "type": "string",
+            "enum": [
+              "newest",
+              "oldest"
+            ]
+          },
+          "pipeline": {
+            "description": "Only deals in this pipeline, by id or name.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "stage": {
+            "description": "Only deals in this stage, by id or name.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "status": {
+            "description": "Only open, won or lost deals; any, or left out, takes every status.",
+            "type": "string",
+            "enum": [
+              "open",
+              "won",
+              "lost",
+              "any"
+            ]
+          },
+          "nameContains": {
+            "description": "Only deals whose name contains this text, whatever its capitals.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "value": {
+            "description": "Only deals whose value compares so with a number, such as { \"operator\": \"greater_than\", \"value\": 1000 }. A deal without a value passes none.",
+            "type": "object",
+            "properties": {
+              "operator": {
+                "type": "string",
+                "enum": [
+                  "equals",
+                  "greater_than",
+                  "less_than"
+                ]
+              },
+              "value": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "operator",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "customField": {
+            "description": "Only deals whose custom field holds this value, such as { \"field\": \"deal.custom.service\", \"equals\": \"video\" }.",
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                "description": "A field by its path, such as contact.services or deal.value."
+              },
+              "equals": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 1000
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "field",
+              "equals"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "fixed",
+        "names": [
+          "found",
+          "not_found"
+        ]
+      },
+      "outputs": [
+        {
+          "key": "dealId",
+          "type": "id",
+          "description": "The deal found; absent when none passed."
+        }
+      ]
+    },
+    {
+      "type": "deal.update",
+      "group": "records",
+      "version": 1,
+      "label": "Update opportunity",
+      "description": "Change an opportunity: its name, value, owner, expected close date, source or custom fields, or reopen one that was won or lost. Only what you choose is changed. It acts on the opportunity found or created earlier in the run, or the opportunity the run is for; otherwise on the contact's one open opportunity, and it fails when the contact has none or several.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          },
+          "amount": {
+            "description": "The deal's value as a fixed number; null removes it. Not together with amountFrom.",
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "amountFrom": {
+            "description": "A number field of the contact, such as contact.custom.budget: the deal takes its value as the step runs. Not together with amount. A field with nothing in it leaves the value as it is.",
+            "type": "string",
+            "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$"
+          },
+          "owner": {
+            "description": "The team member who becomes the deal's owner, by membership id or name; null removes the owner.",
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "description": "An id, or the exact name; the server resolves names to ids."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expectedCloseDate": {
+            "description": "When the deal is expected to close: a fixed date (2026-12-01), or { \"in\": \"P30D\" } for that long after the step runs, on the calendar of the automation’s time zone; null removes it.",
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "in": {
+                        "type": "string",
+                        "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+                        "description": "An ISO 8601 duration, such as P2D (2 days) or PT4H (4 hours)."
+                      }
+                    },
+                    "required": [
+                      "in"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source": {
+            "description": "Where the deal came from: text with optional merge fields, or { \"from\": \"arrival\" } for how the lead arrived (a run with nothing to say of that leaves the source as it is); null removes it.",
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "description": "Text with optional merge fields, such as {{contact.firstName}}."
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "from": {
+                        "type": "string",
+                        "const": "arrival"
+                      }
+                    },
+                    "required": [
+                      "from"
+                    ],
+                    "additionalProperties": false,
+                    "description": "From how they arrived: the lead source of the form submission or booking that started this run (trigger.attribution.source), else the contact's Source; a run with neither leaves the opportunity without one."
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "description": "open: reopen a deal that was won or lost. To close one, use deal.close.",
+            "type": "string",
+            "const": "open"
+          },
+          "fields": {
+            "description": "Custom fields of the deal to set, by path, such as { \"deal.custom.service\": \"video\" }; null empties one.",
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+              "description": "A field by its path, such as contact.services or deal.value."
+            },
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1000
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "dealId",
+          "type": "id",
+          "description": "The deal changed."
+        }
+      ]
+    },
+    {
+      "type": "task.create",
+      "group": "records",
+      "version": 1,
+      "label": "Create task",
+      "description": "Create a task for the contact's owner.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          },
+          "dueIn": {
+            "type": "string",
+            "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+            "description": "An ISO 8601 duration, such as P2D (2 days) or PT4H (4 hours)."
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "taskId",
+          "type": "id",
+          "description": "The task created."
+        }
+      ]
+    },
+    {
+      "type": "note.create",
+      "group": "records",
+      "version": 1,
+      "label": "Create note",
+      "description": "Write a note on the record the run is for.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100000,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "noteId",
+          "type": "id",
+          "description": "The note created."
+        }
+      ]
+    },
+    {
+      "type": "owner.remove",
+      "group": "records",
+      "version": 1,
+      "label": "Remove owner",
+      "description": "Take the owner off the contact. The record of who owned it is kept.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "dnd.set",
+      "group": "records",
+      "version": 2,
+      "label": "Set do not disturb",
+      "description": "Turn do not disturb on or off, with a reason: outbound, for every channel or one, or inbound, for what the contact sends in.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "direction": {
+            "description": "outbound (left out) or inbound, which takes no channel.",
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound"
+            ]
+          },
+          "channel": {
+            "description": "Outbound only: all, or one channel.",
+            "type": "string",
+            "enum": [
+              "all",
+              "email",
+              "sms",
+              "call",
+              "webchat"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "enable",
+              "disable"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 1000,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          }
+        },
+        "required": [
+          "action",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "followers.add",
+      "group": "records",
+      "version": 1,
+      "label": "Add contact followers",
+      "description": "Make team members followers of the contact.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "users": {
+            "minItems": 1,
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200,
+              "description": "An id, or the exact name; the server resolves names to ids."
+            },
+            "description": "1 to 10 team members, by membership id or name."
+          }
+        },
+        "required": [
+          "users"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "followers.remove",
+      "group": "records",
+      "version": 1,
+      "label": "Remove contact followers",
+      "description": "Take chosen team members, or every follower, off the contact.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "users": {
+                "minItems": 1,
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200,
+                  "description": "An id, or the exact name; the server resolves names to ids."
+                },
+                "description": "1 to 10 team members, by membership id or name."
+              }
+            },
+            "required": [
+              "users"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "all": {
+                "type": "boolean",
+                "const": true,
+                "description": "Every follower, former team members too."
+              }
+            },
+            "required": [
+              "all"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "score.modify",
+      "group": "records",
+      "version": 1,
+      "label": "Modify Contact Engagement Score",
+      "description": "Add or subtract engagement score points.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "calculation": {
+            "type": "string",
+            "enum": [
+              "add",
+              "subtract"
+            ]
+          },
+          "points": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        },
+        "required": [
+          "calculation",
+          "points"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "score",
+          "type": "number",
+          "description": "Score after change."
+        }
+      ]
+    },
+    {
+      "type": "email.verify",
+      "group": "records",
+      "version": 1,
+      "label": "Email verification",
+      "description": "Check the contact's primary email address with the business's email verification. A valid, risky or invalid result recent enough, and from the mailbox while a provider is connected, is used as it is, at no cost. Skipped when the contact has no email address or the address is excluded from verification.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "default": "primary",
+            "description": "Which address is checked: the contact's primary email address.",
+            "type": "string",
+            "const": "primary"
+          },
+          "maxAgeDays": {
+            "default": 90,
+            "description": "A current result at most this many days old is used as it is, with no new check, whatever Re-verify after 90 days says. Left out, 90.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 365
+          }
+        },
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "status",
+          "type": "string",
+          "description": "valid, risky, invalid, unknown, unchecked or excluded."
+        },
+        {
+          "key": "depth",
+          "type": "string",
+          "description": "mailbox when the provider checked the mailbox, domain when only the free checks ran; absent when nothing was checked."
+        }
+      ]
+    },
+    {
+      "type": "owner.assign",
+      "group": "records",
+      "version": 2,
+      "label": "Assign owner",
+      "description": "Make a team member the owner of the contact: one person, or several who take turns, each contact going to the member after the one the last contact went to. You can have a contact that already has an owner keep that owner.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "user": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "description": "The one team member every contact goes to, by membership id or name."
+              },
+              "onlyIfUnassigned": {
+                "type": "boolean",
+                "description": "true: a contact that already has an owner is left alone, and the step says so. Left out or false: the owner is replaced."
+              }
+            },
+            "required": [
+              "user"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "users": {
+                "minItems": 1,
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200,
+                  "description": "An id, or the exact name; the server resolves names to ids."
+                },
+                "description": "The team members who share the contacts in turn (round robin), by membership id or name, 1 to 20, each once. The turn is kept per step across runs and published versions; a member who has left the team is passed over."
+              },
+              "onlyIfUnassigned": {
+                "type": "boolean",
+                "description": "true: a contact that already has an owner is left alone, and the step says so. Left out or false: the owner is replaced."
+              }
+            },
+            "required": [
+              "users"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "membershipId",
+          "type": "id",
+          "description": "The team member made the owner; absent when the contact kept the owner it had."
+        }
+      ]
+    },
+    {
+      "type": "tag.add",
+      "group": "records",
+      "version": 1,
+      "label": "Add tag",
+      "description": "Add a tag to the contact.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "tag": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "tag.remove",
+      "group": "records",
+      "version": 1,
+      "label": "Remove tag",
+      "description": "Remove a tag from the contact.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "tag": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": []
+    },
+    {
+      "type": "ai.ask",
+      "group": "ai",
+      "version": 1,
+      "label": "Ask AI",
+      "description": "Ask the AI a question; its answer feeds later steps.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          }
+        },
+        "required": [
+          "prompt"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "answer",
+          "type": "string",
+          "description": "The AI's answer."
+        }
+      ]
+    },
+    {
+      "type": "ai.classify",
+      "group": "ai",
+      "version": 1,
+      "label": "Classify with AI",
+      "description": "Sort the contact's last reply into categories you name.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "categories": {
+            "minItems": 2,
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,62}$",
+              "description": "A stable id the author chooses, such as send_guide."
+            }
+          },
+          "instructions": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          }
+        },
+        "required": [
+          "categories"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "from_config",
+        "field": "categories"
+      },
+      "outputs": [
+        {
+          "key": "category",
+          "type": "string",
+          "description": "The category chosen."
+        }
+      ]
+    },
+    {
+      "type": "ai.draft_reply",
+      "group": "ai",
+      "version": 1,
+      "label": "Draft a reply with AI",
+      "description": "Draft a reply to the contact, sent or held for review by the contact's autonomy setting.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "instructions": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          }
+        },
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "draftId",
+          "type": "id",
+          "description": "The draft written."
+        }
+      ]
+    },
+    {
+      "type": "webhook.call",
+      "group": "connect",
+      "version": 2,
+      "label": "Call a webhook",
+      "description": "Send a signed request to an outside app, with a timeout and retries.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "maxLength": 2000,
+            "pattern": "^https:\\/\\/"
+          },
+          "method": {
+            "default": "POST",
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH"
+            ]
+          },
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10000,
+            "description": "Text with optional merge fields, such as {{contact.firstName}}."
+          },
+          "headers": {
+            "description": "Headers: { name, value } or { name, secret } with a stored webhook secret.",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "pattern": "^[!#$%&'*+\\-.^_`|~0-9A-Za-z]{1,100}$"
+                    },
+                    "value": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 1000,
+                      "pattern": "^[^\\r\\n\\u0000]*$"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "pattern": "^[!#$%&'*+\\-.^_`|~0-9A-Za-z]{1,100}$"
+                    },
+                    "secret": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]{0,62}$",
+                      "description": "A stable id the author chooses, such as send_guide."
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "secret"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "status",
+          "type": "number",
+          "description": "The response's HTTP status."
+        }
+      ]
+    },
+    {
+      "type": "automation.run",
+      "group": "connect",
+      "version": 1,
+      "label": "Start another automation",
+      "description": "Enrol the contact in another automation, by its own rules: once if it enrols a contact once, and never twice at the same time. This automation goes on at once.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "automation": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "An id, or the exact name; the server resolves names to ids."
+          }
+        },
+        "required": [
+          "automation"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "enrolmentId",
+          "type": "id",
+          "description": "The run it started; absent when nothing was started."
+        },
+        {
+          "key": "outcome",
+          "type": "string",
+          "description": "started, already_running, already_went_through, not_active or refused_loop."
+        }
+      ]
+    },
+    {
+      "type": "automation.remove",
+      "group": "connect",
+      "version": 1,
+      "label": "Remove from automations",
+      "description": "End the runs the contact is in: this automation, the ones listed, every other one, or all of them. You can name automations whose runs are left going.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "const": "current"
+              }
+            },
+            "required": [
+              "from"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "const": "automations"
+              },
+              "automations": {
+                "minItems": 1,
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200,
+                  "description": "An id, or the exact name; the server resolves names to ids."
+                }
+              }
+            },
+            "required": [
+              "from",
+              "automations"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "const": "all_others"
+              },
+              "except": {
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200,
+                  "description": "An id, or the exact name; the server resolves names to ids."
+                }
+              }
+            },
+            "required": [
+              "from"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "const": "all"
+              },
+              "except": {
+                "maxItems": 20,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200,
+                  "description": "An id, or the exact name; the server resolves names to ids."
+                }
+              }
+            },
+            "required": [
+              "from"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "removed",
+          "type": "number",
+          "description": "How many runs it ended."
+        }
+      ]
+    },
+    {
+      "type": "goal",
+      "group": "logic",
+      "version": 1,
+      "label": "Goal",
+      "description": "When one of these events happens for the contact, the run comes straight to this step from wherever it is, and goes on from here. A run that reaches the step first goes on anyway, waits here for the goal, or ends.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "events": {
+            "minItems": 1,
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "form.submitted"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "form": {
+                          "description": "Only this form, by id or name; left out, any form.",
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200
+                        },
+                        "sources": {
+                          "description": "Only when the lead source of this submission or booking is one of these, such as [\"Google Ads\", \"Facebook Ads\"]; capitals do not matter. Left out, any.",
+                          "minItems": 1,
+                          "maxItems": 20,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 200
+                          }
+                        },
+                        "sessionSources": {
+                          "description": "Only when the session source of this submission or booking is one of these, such as [\"paid_search\"]. Left out, any.",
+                          "minItems": 1,
+                          "maxItems": 9,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "paid_search",
+                              "paid_social",
+                              "social_media",
+                              "organic_search",
+                              "referral",
+                              "direct",
+                              "others",
+                              "crm_ui",
+                              "third_party"
+                            ]
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "trigger_link.clicked"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "link": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "description": "An id, or the exact name; the server resolves names to ids."
+                        }
+                      },
+                      "required": [
+                        "link"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "tag.added"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "tag": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "description": "An id, or the exact name; the server resolves names to ids."
+                        }
+                      },
+                      "required": [
+                        "tag"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "tag.removed"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "tag": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "description": "An id, or the exact name; the server resolves names to ids."
+                        }
+                      },
+                      "required": [
+                        "tag"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "appointment.booked"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "calendar": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "description": "An id, or the exact name; the server resolves names to ids."
+                        },
+                        "sources": {
+                          "description": "Only when the lead source of this submission or booking is one of these, such as [\"Google Ads\", \"Facebook Ads\"]; capitals do not matter. Left out, any.",
+                          "minItems": 1,
+                          "maxItems": 20,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 200
+                          }
+                        },
+                        "sessionSources": {
+                          "description": "Only when the session source of this submission or booking is one of these, such as [\"paid_search\"]. Left out, any.",
+                          "minItems": 1,
+                          "maxItems": 9,
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "paid_search",
+                              "paid_social",
+                              "social_media",
+                              "organic_search",
+                              "referral",
+                              "direct",
+                              "others",
+                              "crm_ui",
+                              "third_party"
+                            ]
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "appointment.status_changed"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "calendar": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "description": "An id, or the exact name; the server resolves names to ids."
+                        },
+                        "status": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 60
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "message.received"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "channel": {
+                          "type": "string",
+                          "enum": [
+                            "email",
+                            "sms",
+                            "whatsapp",
+                            "webchat"
+                          ]
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "deal.stage_changed"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "pipeline": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "description": "An id, or the exact name; the server resolves names to ids."
+                        },
+                        "stage": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "description": "An id, or the exact name; the server resolves names to ids."
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "deal.closed"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "pipeline": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 200,
+                          "description": "An id, or the exact name; the server resolves names to ids."
+                        },
+                        "outcome": {
+                          "type": "string",
+                          "enum": [
+                            "won",
+                            "lost"
+                          ]
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "const": "field.changed"
+                    },
+                    "config": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$",
+                          "description": "A field by its path, such as contact.services or deal.value."
+                        },
+                        "to": {
+                          "anyOf": [
+                            {
+                              "type": "string",
+                              "maxLength": 1000
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "boolean"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "field"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "config"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "otherwise": {
+            "default": "continue",
+            "type": "string",
+            "enum": [
+              "continue",
+              "wait",
+              "end"
+            ]
+          }
+        },
+        "required": [
+          "events"
+        ],
+        "additionalProperties": false
+      },
+      "branches": {
+        "kind": "none"
+      },
+      "outputs": [
+        {
+          "key": "eventId",
+          "type": "id",
+          "description": "The event that met the goal; absent when it was not met."
+        }
+      ]
+    }
+  ],
+  "stepGroups": [
+    "messages",
+    "timing",
+    "logic",
+    "records",
+    "ai",
+    "connect"
+  ],
+  "operators": [
+    {
+      "operator": "equals",
+      "value": "value"
+    },
+    {
+      "operator": "not_equals",
+      "value": "value"
+    },
+    {
+      "operator": "includes",
+      "value": "value"
+    },
+    {
+      "operator": "excludes",
+      "value": "value"
+    },
+    {
+      "operator": "starts_with",
+      "value": "value"
+    },
+    {
+      "operator": "greater_than",
+      "value": "value"
+    },
+    {
+      "operator": "less_than",
+      "value": "value"
+    },
+    {
+      "operator": "is_set",
+      "value": "none"
+    },
+    {
+      "operator": "is_empty",
+      "value": "none"
+    },
+    {
+      "operator": "before",
+      "value": "value"
+    },
+    {
+      "operator": "after",
+      "value": "value"
+    },
+    {
+      "operator": "within_last",
+      "value": "duration"
+    },
+    {
+      "operator": "within_next",
+      "value": "duration"
+    }
+  ],
+  "attribution": {
+    "prefixes": {
+      "first": "contact.attribution.first",
+      "latest": "contact.attribution.latest",
+      "trigger": "trigger.attribution"
+    },
+    "leaves": [
+      {
+        "key": "source",
+        "type": "text",
+        "options": [],
+        "label": "Lead source",
+        "description": "The lead source worked out for the touch, as people read it, such as Google Ads (lead-sources.ts lists the built-in names). Empty for a touch that was not a visit, such as a contact added by hand."
+      },
+      {
+        "key": "sourceKey",
+        "type": "text",
+        "options": [],
+        "label": "Lead source rule",
+        "description": "The rule that decided the lead source: a built-in rule by its key, such as google_ads, which stays the same if the name is ever reworded."
+      },
+      {
+        "key": "sessionSource",
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "paid_search",
+            "label": "Paid search"
+          },
+          {
+            "key": "paid_social",
+            "label": "Paid social"
+          },
+          {
+            "key": "social_media",
+            "label": "Social media"
+          },
+          {
+            "key": "organic_search",
+            "label": "Organic search"
+          },
+          {
+            "key": "referral",
+            "label": "Referral"
+          },
+          {
+            "key": "direct",
+            "label": "Direct traffic"
+          },
+          {
+            "key": "others",
+            "label": "Others"
+          },
+          {
+            "key": "crm_ui",
+            "label": "Added by hand"
+          },
+          {
+            "key": "third_party",
+            "label": "Third party"
+          }
+        ],
+        "label": "Session source",
+        "description": "The channel the visit came through, such as paid_search."
+      },
+      {
+        "key": "medium",
+        "type": "single_choice",
+        "options": [
+          {
+            "key": "form",
+            "label": "Form"
+          },
+          {
+            "key": "calendar",
+            "label": "Calendar"
+          },
+          {
+            "key": "chat",
+            "label": "Chat"
+          },
+          {
+            "key": "manual",
+            "label": "Added by hand"
+          },
+          {
+            "key": "api",
+            "label": "API"
+          },
+          {
+            "key": "import",
+            "label": "Import"
+          },
+          {
+            "key": "message",
+            "label": "Message"
+          },
+          {
+            "key": "automation",
+            "label": "Workflow"
+          },
+          {
+            "key": "assistant",
+            "label": "Assistant"
+          },
+          {
+            "key": "unknown",
+            "label": "Unknown"
+          }
+        ],
+        "label": "Medium",
+        "description": "The kind of interaction that recorded the touch, such as form."
+      },
+      {
+        "key": "utmSource",
+        "type": "text",
+        "options": [],
+        "label": "UTM source",
+        "description": "utm_source of the page the visitor arrived on."
+      },
+      {
+        "key": "utmMedium",
+        "type": "text",
+        "options": [],
+        "label": "UTM medium",
+        "description": "utm_medium of the page the visitor arrived on."
+      },
+      {
+        "key": "utmCampaign",
+        "type": "text",
+        "options": [],
+        "label": "UTM campaign",
+        "description": "utm_campaign of the page the visitor arrived on."
+      },
+      {
+        "key": "utmContent",
+        "type": "text",
+        "options": [],
+        "label": "UTM content",
+        "description": "utm_content of the page the visitor arrived on."
+      },
+      {
+        "key": "utmTerm",
+        "type": "text",
+        "options": [],
+        "label": "UTM term",
+        "description": "utm_term (or utm_keyword) of the page the visitor arrived on."
+      },
+      {
+        "key": "matchType",
+        "type": "text",
+        "options": [],
+        "label": "Match type",
+        "description": "The keyword match type an ad link carried."
+      },
+      {
+        "key": "campaignId",
+        "type": "text",
+        "options": [],
+        "label": "Campaign ID",
+        "description": "The campaign id an ad link carried."
+      },
+      {
+        "key": "adGroupId",
+        "type": "text",
+        "options": [],
+        "label": "Ad group ID",
+        "description": "The ad group (or ad set) id an ad link carried."
+      },
+      {
+        "key": "adId",
+        "type": "text",
+        "options": [],
+        "label": "Ad ID",
+        "description": "The ad id an ad link carried."
+      },
+      {
+        "key": "referrerDomain",
+        "type": "text",
+        "options": [],
+        "label": "Referrer domain",
+        "description": "The host of the site the visitor came from."
+      },
+      {
+        "key": "landingPage",
+        "type": "text",
+        "options": [],
+        "label": "Landing page",
+        "description": "The page the visitor arrived on, without its query."
+      },
+      {
+        "key": "page",
+        "type": "text",
+        "options": [],
+        "label": "Page",
+        "description": "The page the form was sent from or the booking was made on, without its query."
+      },
+      {
+        "key": "touchedAt",
+        "type": "datetime",
+        "options": [],
+        "label": "Date",
+        "description": "When the touch was recorded."
+      },
+      {
+        "key": "hasGoogleClickId",
+        "type": "boolean",
+        "options": [],
+        "label": "Has a Google click ID",
+        "description": "Whether the touch holds a Google Ads click id (gclid, gbraid or wbraid). The id itself is never given."
+      },
+      {
+        "key": "hasMetaClickId",
+        "type": "boolean",
+        "options": [],
+        "label": "Has a Meta click ID",
+        "description": "Whether the touch holds a Facebook or Instagram click id (fbclid, or a click-to-WhatsApp id). The id itself is never given."
+      },
+      {
+        "key": "hasMicrosoftClickId",
+        "type": "boolean",
+        "options": [],
+        "label": "Has a Microsoft click ID",
+        "description": "Whether the touch holds a Microsoft Advertising click id (msclkid). The id itself is never given."
+      },
+      {
+        "key": "hasTikTokClickId",
+        "type": "boolean",
+        "options": [],
+        "label": "Has a TikTok click ID",
+        "description": "Whether the touch holds a TikTok click id (ttclid). The id itself is never given."
+      },
+      {
+        "key": "hasLinkedInClickId",
+        "type": "boolean",
+        "options": [],
+        "label": "Has a LinkedIn click ID",
+        "description": "Whether the touch holds a LinkedIn click id (li_fat_id). The id itself is never given."
+      }
+    ],
+    "triggers": [
+      "form.submitted",
+      "appointment.booked"
+    ]
+  },
+  "submission": {
+    "page": "trigger.pageUrl",
+    "answers": "trigger.answers.",
+    "triggers": [
+      "form.submitted"
+    ]
+  },
+  "failures": {
+    "maxRetries": 5,
+    "maxRunRetries": 5,
+    "retryableSteps": [
+      "email.send",
+      "sms.send",
+      "contact.update",
+      "tag.add",
+      "tag.remove",
+      "owner.assign",
+      "owner.remove",
+      "deal.create",
+      "deal.move",
+      "deal.close",
+      "deal.update",
+      "task.create",
+      "note.create",
+      "dnd.set",
+      "followers.add",
+      "followers.remove"
+    ],
+    "retryableReasons": [
+      "conflict",
+      "mailbox_unavailable",
+      "number_unavailable"
+    ]
+  }
+}

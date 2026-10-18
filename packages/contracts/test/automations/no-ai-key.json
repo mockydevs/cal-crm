@@ -1,0 +1,28 @@
+{
+  "document": {
+    "name": "Golden",
+    "triggers": [
+      {
+        "id": "created",
+        "type": "contact.created",
+        "config": {}
+      }
+    ],
+    "start": "hello",
+    "steps": {
+      "hello": {
+        "type": "ai.ask",
+        "config": {
+          "prompt": "Summarize {{contact.firstName}}"
+        }
+      }
+    }
+  },
+  "errors": [
+    {
+      "path": "/steps/hello",
+      "code": "no_ai_key",
+      "message": "Add an AI key before using AI steps."
+    }
+  ]
+}
