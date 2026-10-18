@@ -263,11 +263,6 @@ msgstr "{0, plural, one {Star removed from # conversation.} other {Star removed 
 msgid "{0, plural, one {the last message here} other {the last # messages here}}"
 msgstr "{0, plural, one {the last message here} other {the last # messages here}}"
 
-#. placeholder {0}: changes.length
-#: src/api-keys-page.tsx
-msgid "{0} permissions"
-msgstr "{0} permissions"
-
 #: src/notifications-panel.tsx
 msgid "{actor} assigned you a conversation."
 msgstr "{actor} assigned you a conversation."
@@ -942,6 +937,10 @@ msgstr "{path} (not found)"
 #: src/saved-view-sharing-summary.tsx
 msgid "{people, plural, one {Shared with # person} other {Shared with # people}}"
 msgstr "{people, plural, one {Shared with # person} other {Shared with # people}}"
+
+#: src/api-keys-page.tsx
+msgid "{permissionCount} permissions"
+msgstr "{permissionCount} permissions"
 
 #: src/contact-deals.tsx
 msgid "{pipelineName}: {stageName}"
@@ -3998,10 +3997,9 @@ msgstr "Campaign ID"
 msgid "Campaigns"
 msgstr "Campaigns"
 
-#. placeholder {0}: (changes[0] ?? '').toLowerCase()
 #: src/api-keys-page.tsx
-msgid "Can {0}"
-msgstr "Can {0}"
+msgid "Can {permission}"
+msgstr "Can {permission}"
 
 #: src/api-keys-page.tsx
 msgid "Can change"
@@ -7081,10 +7079,9 @@ msgstr "Drag, or press the up or down arrow key, to reorder"
 msgid "Drop files to upload them to {openedName}"
 msgstr "Drop files to upload them to {openedName}"
 
-#. placeholder {0}: stage.name
 #: src/deal-board.tsx
-msgid "Drop in {0}"
-msgstr "Drop in {0}"
+msgid "Drop in {stageName}"
+msgstr "Drop in {stageName}"
 
 #: src/custom-field-words.ts
 msgid "Dropdown (multiple)"
@@ -14889,15 +14886,13 @@ msgstr "Reading the file…"
 msgid "Reading your calendars…"
 msgstr "Reading your calendars…"
 
-#. placeholder {0}: readGroups[0] ?? ''
 #: src/api-keys-page.tsx
-msgid "Reads {0}"
-msgstr "Reads {0}"
+msgid "Reads {area}"
+msgstr "Reads {area}"
 
-#. placeholder {0}: readGroups.length
 #: src/api-keys-page.tsx
-msgid "Reads {0} areas"
-msgstr "Reads {0} areas"
+msgid "Reads {areaCount} areas"
+msgstr "Reads {areaCount} areas"
 
 #: src/automation-json-view.tsx
 msgid "Reads as JSON · has errors"

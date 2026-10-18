@@ -587,20 +587,24 @@ function KeyRow({
     Date.parse(apiKey.expiresAt) <= now;
   const { readGroups } = apiKey;
   const changes = apiKey.scopes.map((scope) => permissionLabel(scope, i18n));
+  const area = readGroups?.[0] ?? '';
+  const areaCount = readGroups?.length ?? 0;
+  const permission = (changes[0] ?? '').toLowerCase();
+  const permissionCount = changes.length;
   const reads =
     readGroups === null || readGroups === undefined
       ? t`Reads everything`
-      : readGroups.length === 0
+      : areaCount === 0
         ? t`Reads nothing`
-        : readGroups.length === 1
-          ? t`Reads ${readGroups[0] ?? ''}`
-          : t`Reads ${readGroups.length} areas`;
+        : areaCount === 1
+          ? t`Reads ${area}`
+          : t`Reads ${areaCount} areas`;
   const changesText =
-    changes.length === 0
+    permissionCount === 0
       ? t`Changes nothing`
-      : changes.length === 1
-        ? t`Can ${(changes[0] ?? '').toLowerCase()}`
-        : t`${changes.length} permissions`;
+      : permissionCount === 1
+        ? t`Can ${permission}`
+        : t`${permissionCount} permissions`;
 
   const revoke = useMutation({
     mutationFn: () => client.request(revokeApiKey, { params: { id: apiKey.id } }),

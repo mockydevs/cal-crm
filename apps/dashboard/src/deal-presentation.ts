@@ -55,6 +55,7 @@ export function stageAccentOf(pipeline: Pick<Pipeline, 'stages'>, stageId: strin
 
 /** An accent mixed into nothing at `percent`, for a background text stays readable on. */
 export const accentTint = (accent: string, percent: number): string =>
+  // eslint-disable-next-line lingui/no-unlocalized-strings -- a CSS colour, not words
   `color-mix(in srgb, ${accent} ${String(percent)}%, transparent)`;
 
 /**

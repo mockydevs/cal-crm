@@ -179,6 +179,7 @@ function StageColumn({
   const home = carrying && deals.some((deal) => deal.id === source.id);
   const accepts = carrying && !disabled && !home;
   const highlighted = isDropTarget && !home;
+  const stageName = stage.name;
   const columnStyle: CSSProperties = {
     backgroundColor: accentTint(accent, highlighted ? 14 : 5),
     borderColor: highlighted ? accent : accepts ? accentTint(accent, 45) : 'transparent',
@@ -234,7 +235,7 @@ function StageColumn({
           style={{ borderColor: accent }}
         >
           <ArrowDownToLine className="size-4" style={{ color: accent }} />
-          <Trans>Drop in {stage.name}</Trans>
+          <Trans>Drop in {stageName}</Trans>
         </div>
       ) : null}
       {deals.map((deal) => (
