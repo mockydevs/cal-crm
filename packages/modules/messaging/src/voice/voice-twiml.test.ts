@@ -62,6 +62,19 @@ describe('voice TwiML against the installed official SDK', () => {
     ).toContain('url="https://crm.example.test/voice/next?call=test&amp;step=1" method="POST"');
   });
 
+  it("uses each destination's progressUrl override when set", () => {
+    const customProgress = 'https://crm.example.test/voice/progress/custom';
+    const xml = renderDial({
+      ...dial,
+      destinations: [
+        { kind: 'number', address: '+12025550101', progressUrl: customProgress },
+        { kind: 'client', address: 'agent_test_1' },
+      ],
+    });
+    expect(xml).toContain(`statusCallback="${customProgress}"`);
+    expect(xml).toContain(`statusCallback="${progress}"`);
+  });
+
   it('escapes text and attribute data rather than interpreting markup', () => {
     const result = renderDial({ ...dial, announcement: 'Hello <Hangup/> & "goodbye"' });
     expect(result).toContain('&lt;Hangup/&gt; &amp; &quot;goodbye&quot;');

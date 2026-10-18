@@ -136,6 +136,7 @@ export function createInboundCallCommand(
         .executeTakeFirst();
 
       if (existingRoute !== undefined) {
+        if (existingRoute.step_leg_id === null) return hangupReply;
         let rawSteps: unknown = existingRoute.steps;
         if (typeof existingRoute.steps === 'string') {
           try {
@@ -149,9 +150,57 @@ export function createInboundCallCommand(
         const currentStepDestinations = parsed.data[existingRoute.step];
         if ((currentStepDestinations?.length ?? 0) === 0 || currentStepDestinations === undefined)
           return hangupReply;
+
+        const firstLeg = await trx
+          .selectFrom('messaging.call_legs')
+          .select(['id', 'to_address', 'created_at'])
+          .where('id', '=', existingRoute.step_leg_id)
+          .where('call_id', '=', callId)
+          .where('business_id', '=', businessId)
+          .executeTakeFirst();
+        if (firstLeg === undefined) return hangupReply;
+
+        const stepLegs = await trx
+          .selectFrom('messaging.call_legs')
+          .select(['id', 'to_address'])
+          .where('call_id', '=', callId)
+          .where('business_id', '=', businessId)
+          .where('parent_leg_id', '=', rootLegId)
+          .where('created_at', '>=', firstLeg.created_at)
+          .orderBy('created_at', 'asc')
+          .execute();
+
+        const legsByAddress = new Map<string, string>();
+        for (const l of stepLegs) {
+          if (l.to_address !== null && !legsByAddress.has(l.to_address)) {
+            legsByAddress.set(l.to_address, l.id);
+          }
+        }
+
+        const dialDestinations: {
+          kind: 'client' | 'number';
+          address: string;
+          progressUrl: string;
+        }[] = [];
+        for (const dest of currentStepDestinations) {
+          const legId =
+            dest.address === firstLeg.to_address ? firstLeg.id : legsByAddress.get(dest.address);
+          if (legId === undefined) return hangupReply;
+          const legProgressUrl = voiceWebhookUrl(publicUrl, value.webhookToken, {
+            kind: 'progress',
+            stepId: legId,
+          });
+          if (legProgressUrl === null) return hangupReply;
+          dialDestinations.push({
+            kind: dest.kind,
+            address: dest.address,
+            progressUrl: legProgressUrl,
+          });
+        }
+
         const actionUrl = voiceWebhookUrl(publicUrl, value.webhookToken, {
           kind: 'dial-result',
-          stepId: rootLegId,
+          stepId: existingRoute.step_leg_id,
         });
         const progressUrl = voiceWebhookUrl(publicUrl, value.webhookToken, {
           kind: 'progress',
@@ -159,10 +208,7 @@ export function createInboundCallCommand(
         });
         if (actionUrl === null || progressUrl === null) return hangupReply;
         const body = renderDial({
-          destinations: currentStepDestinations.map((dest) => ({
-            kind: dest.kind,
-            address: dest.address,
-          })),
+          destinations: dialDestinations,
           actionUrl,
           progressUrl,
           timeoutSeconds: existingRoute.timeout_seconds,
@@ -266,6 +312,12 @@ export function createInboundCallCommand(
       }
 
       const ringingDestinations: InboundDestination[] = [];
+      const dialDestinations: {
+        kind: 'client' | 'number';
+        address: string;
+        progressUrl: string;
+      }[] = [];
+      let firstStepLegId: string | null = null;
       for (const dest of step0) {
         const legId = await addLeg(trx, {
           callId,
@@ -276,11 +328,22 @@ export function createInboundCallCommand(
           to: dest.address,
         });
         if (legId !== null) {
+          firstStepLegId ??= legId;
           ringingDestinations.push(dest);
+          const legProgressUrl = voiceWebhookUrl(publicUrl, value.webhookToken, {
+            kind: 'progress',
+            stepId: legId,
+          });
+          if (legProgressUrl === null) return hangupReply;
+          dialDestinations.push({
+            kind: dest.kind,
+            address: dest.address,
+            progressUrl: legProgressUrl,
+          });
         }
       }
 
-      if (ringingDestinations.length === 0) {
+      if (ringingDestinations.length === 0 || firstStepLegId === null) {
         return refuseCall(trx, command, callId, 'member_unavailable');
       }
 
@@ -292,6 +355,7 @@ export function createInboundCallCommand(
           // Step 0 as it rings: a retried request dials exactly these again.
           steps: JSON.stringify([ringingDestinations, ...route.steps.slice(1)]),
           step: 0,
+          step_leg_id: firstStepLegId,
           voicemail: route.voicemail,
           timeout_seconds: route.timeoutSeconds,
           caller_id: route.callerId,
@@ -300,7 +364,7 @@ export function createInboundCallCommand(
 
       const actionUrl = voiceWebhookUrl(publicUrl, value.webhookToken, {
         kind: 'dial-result',
-        stepId: rootLegId,
+        stepId: firstStepLegId,
       });
       const progressUrl = voiceWebhookUrl(publicUrl, value.webhookToken, {
         kind: 'progress',
@@ -309,10 +373,7 @@ export function createInboundCallCommand(
       if (actionUrl === null || progressUrl === null) return hangupReply;
 
       const body = renderDial({
-        destinations: ringingDestinations.map((dest) => ({
-          kind: dest.kind,
-          address: dest.address,
-        })),
+        destinations: dialDestinations,
         actionUrl,
         progressUrl,
         timeoutSeconds: route.timeoutSeconds,

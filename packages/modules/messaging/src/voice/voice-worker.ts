@@ -12,11 +12,11 @@ import {
 import { endCallReference } from '../call-requests.js';
 import { lockBusiness } from '../outbound.js';
 import { webhookDigest } from '../sms-webhook-url.js';
+import { createInboundAdvanceCommand } from './inbound-advance.js';
 import { createInboundCallCommand } from './inbound-call.js';
 import { authenticateVoiceCallback } from './voice-context.js';
 import { parseVoiceProgress } from './voice-progress.js';
 import { parseVoiceTerminal } from './voice-terminal.js';
-import { renderHangup } from './voice-twiml.js';
 import type { verifyVoiceRequest } from './voice-request.js';
 
 export interface VoiceCallbackReply {
@@ -107,14 +107,35 @@ export function createVoiceCallbackWorker(
   handle(request: Parameters<typeof verifyVoiceRequest>[0]): Promise<VoiceCallbackReply>;
 } {
   const inboundCall = createInboundCallCommand(publicUrl, readGrants, addLeg);
+  const inboundAdvance = createInboundAdvanceCommand(publicUrl, readGrants, addLeg);
   return {
     async handle(request) {
       const checked = await authenticateVoiceCallback(services.db, vault, publicUrl, request);
       if (checked.outcome === 'refused') return reply(checked.statusCode);
       const { target, params } = checked.verified;
-      // The browser and the other party have finished: the call ends with the dial.
-      if (target.kind === 'dial-result')
-        return { statusCode: 200, contentType: 'application/xml', body: renderHangup() };
+      if (target.kind === 'dial-result') {
+        if (target.stepId === undefined) return reply(400);
+        const firstParam = (v: string | readonly string[] | undefined): string | undefined =>
+          typeof v === 'string' ? v : v?.[0];
+        const dialBridged = firstParam(params['DialBridged']) === 'true';
+        const dialStatusResult = z
+          .enum(['completed', 'answered', 'busy', 'no-answer', 'failed', 'canceled'])
+          .safeParse(firstParam(params['DialCallStatus']));
+        const dialStatus = dialStatusResult.success ? dialStatusResult.data : null;
+        return runCommand(
+          services,
+          inboundAdvance,
+          {
+            connectionId: checked.connectionId,
+            digest: webhookDigest(target.token),
+            webhookToken: target.token,
+            stepLegId: target.stepId,
+            dialBridged,
+            dialStatus,
+          },
+          { context: checked.context, permissions: 'all' },
+        );
+      }
       if (target.kind === 'inbound') {
         const { call } = checked.verified;
         if (!call.from || !call.to || call.direction !== 'inbound') return reply(400);

@@ -36,11 +36,17 @@ const message = z
     }),
   );
 const destination = z.discriminatedUnion('kind', [
-  z.strictObject({ kind: z.literal('number'), address: e164, acceptUrl: httpsUrl.optional() }),
+  z.strictObject({
+    kind: z.literal('number'),
+    address: e164,
+    acceptUrl: httpsUrl.optional(),
+    progressUrl: httpsUrl.optional(),
+  }),
   z.strictObject({
     kind: z.literal('client'),
     address: z.string().regex(/^[A-Za-z0-9_]{1,121}$/),
     acceptUrl: httpsUrl.optional(),
+    progressUrl: httpsUrl.optional(),
   }),
 ]);
 const dialInstructions = z.strictObject({
@@ -105,7 +111,7 @@ export function renderDial(input: unknown): string {
   const targets = value.destinations
     .map((target) => {
       const attrs: Attribute[] = [
-        ['statusCallback', value.progressUrl],
+        ['statusCallback', target.progressUrl ?? value.progressUrl],
         ['statusCallbackMethod', 'POST'],
         ['statusCallbackEvent', 'initiated ringing answered completed'],
       ];

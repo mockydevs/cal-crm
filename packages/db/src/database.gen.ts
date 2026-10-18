@@ -2169,6 +2169,7 @@ export interface MessagingCallRoutes {
   created_at: Generated<Timestamp>;
   finished_at: Timestamp | null;
   step: Generated<number>;
+  step_leg_id: string | null;
   steps: Json;
   timeout_seconds: number;
   updated_at: Generated<Timestamp>;

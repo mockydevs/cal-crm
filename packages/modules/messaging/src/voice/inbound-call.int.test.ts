@@ -252,17 +252,27 @@ it("rings the number's team member in the browser, and stores the route at its f
   expect(routes[0]?.steps).toContain(expectedIdentity);
   expect(routes[0]?.caller_id).toBe(b.to);
 
-  const legs = await b.query<{ party: string; user_id: string | null; to_address: string }>(
-    'select party, user_id, to_address from messaging.call_legs where call_id = $1 order by created_at asc',
+  const legs = await b.query<{
+    id: string;
+    party: string;
+    user_id: string | null;
+    to_address: string;
+  }>(
+    'select id, party, user_id, to_address from messaging.call_legs where call_id = $1 order by created_at asc',
     [callId],
   );
   expect(legs).toHaveLength(2);
   expect(legs[0]).toMatchObject({ party: 'remote', user_id: null, to_address: b.to });
-  expect(legs[1]).toMatchObject({
+  const firstMemberLeg = legs[1];
+  if (firstMemberLeg === undefined) throw new Error('Expected member leg');
+  expect(firstMemberLeg).toMatchObject({
     party: 'member',
     user_id: b.user.id,
     to_address: expectedIdentity,
   });
+  expect(res.body).toContain(
+    `action="https://crm.example.test/webhooks/twilio/voice/${b.token}/dial-result?step=${firstMemberLeg.id}"`,
+  );
 });
 
 it("rings the contact's owner first when the number says so", async () => {
@@ -610,4 +620,57 @@ it('answers with a hang-up when stored route steps fail schema validation', asyn
   const retry = await b.worker.handle(b.request());
   expect(retry.statusCode).toBe(200);
   expect(retry.body).toBe(renderHangup());
+});
+
+it("books each ringing person's progress on their own leg, and the call connects when one answers", async () => {
+  const b = await world();
+  const res = await b.worker.handle(b.request());
+  expect(res.statusCode).toBe(200);
+
+  const legs = await b.query<{ id: string; party: string }>(
+    'select id, party from messaging.call_legs where business_id = $1 order by created_at asc',
+    [b.business.id],
+  );
+  expect(legs).toHaveLength(2);
+  const childLeg = legs[1];
+  if (childLeg === undefined) throw new Error('Expected child leg');
+
+  expect(res.body).toContain(
+    `statusCallback="https://crm.example.test/webhooks/twilio/voice/${b.token}/progress?step=${childLeg.id}"`,
+  );
+
+  const childCallSid = sid('CA');
+  const progressPath = `/webhooks/twilio/voice/${b.token}/progress?step=${childLeg.id}`;
+  const progressParams = {
+    AccountSid: b.accountSid,
+    CallSid: childCallSid,
+    ParentCallSid: b.callSid,
+    CallStatus: 'in-progress',
+    From: b.from,
+    To: b.to,
+    Direction: 'outbound-dial',
+    CallbackSource: 'call-progress-events',
+    SequenceNumber: '1',
+  };
+  const progressRequest = {
+    path: progressPath,
+    body: Buffer.from(new URLSearchParams(progressParams).toString()),
+    signature: expectedSignature(b.authToken, publicUrl + progressPath, progressParams),
+  };
+  const progressRes = await b.worker.handle(progressRequest);
+  expect(progressRes.statusCode).toBe(204);
+
+  const updatedLegs = await b.query<{ status: string; provider_call_sid: string | null }>(
+    'select status, provider_call_sid from messaging.call_legs where id = $1',
+    [childLeg.id],
+  );
+  expect(updatedLegs[0]?.status).toBe('in-progress');
+  expect(updatedLegs[0]?.provider_call_sid).toBe(childCallSid);
+
+  const calls = await b.query<{ state: string; needs_reconciliation: boolean }>(
+    'select state, needs_reconciliation from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls[0]?.state).toBe('connected');
+  expect(calls[0]?.needs_reconciliation).toBe(false);
 });
