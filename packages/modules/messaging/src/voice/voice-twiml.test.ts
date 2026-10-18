@@ -53,6 +53,96 @@ describe('voice TwiML against the installed official SDK', () => {
     expect(result.match(/<Dial /g)).toHaveLength(1);
   });
 
+  it('renders one parameter on a client destination, matching SDK XML', () => {
+    const expected = new twilio.twiml.VoiceResponse();
+    const node = expected.dial({
+      action,
+      method: 'POST',
+      timeout: 20,
+      answerOnBridge: true,
+      record: 'do-not-record',
+    });
+    const clientNode = node.client({
+      statusCallback: progress,
+      statusCallbackMethod: 'POST',
+      statusCallbackEvent: ['initiated', 'ringing', 'answered', 'completed'],
+    });
+    clientNode.identity('agent_test_1');
+    clientNode.parameter({ name: 'callId', value: 'call_123' });
+    expect(
+      renderDial({
+        ...dial,
+        destinations: [
+          { kind: 'client', address: 'agent_test_1', parameters: { callId: 'call_123' } },
+        ],
+      }),
+    ).toBe(expected.toString());
+  });
+
+  it('renders two parameters on a client destination, matching SDK XML', () => {
+    const expected = new twilio.twiml.VoiceResponse();
+    const node = expected.dial({
+      action,
+      method: 'POST',
+      timeout: 20,
+      answerOnBridge: true,
+      record: 'do-not-record',
+    });
+    const clientNode = node.client({
+      statusCallback: progress,
+      statusCallbackMethod: 'POST',
+      statusCallbackEvent: ['initiated', 'ringing', 'answered', 'completed'],
+    });
+    clientNode.identity('agent_test_1');
+    clientNode.parameter({ name: 'callId', value: 'call_123' });
+    clientNode.parameter({ name: 'channel', value: 'voice' });
+    expect(
+      renderDial({
+        ...dial,
+        destinations: [
+          {
+            kind: 'client',
+            address: 'agent_test_1',
+            parameters: { callId: 'call_123', channel: 'voice' },
+          },
+        ],
+      }),
+    ).toBe(expected.toString());
+  });
+
+  it('escapes XML special characters in a parameter value', () => {
+    const xml = renderDial({
+      ...dial,
+      destinations: [
+        {
+          kind: 'client',
+          address: 'agent_test_1',
+          parameters: { note: 'A & B < C > "D" \'E\'' },
+        },
+      ],
+    });
+    expect(xml).toContain(
+      '<Parameter name="note" value="A &amp; B &lt; C &gt; &quot;D&quot; &apos;E&apos;"/>',
+    );
+  });
+
+  it.each([
+    { 'call id': 'valid_value' },
+    { '1call': 'valid_value' },
+    { callId: 'bad\u0000val' },
+    { callId: 'bad\nval' },
+    { callId: 'bad\rval' },
+    { callId: 'bad\tval' },
+    { p1: '1', p2: '2', p3: '3', p4: '4', p5: '5' },
+  ])('refuses invalid client parameters: %j', (parameters) => {
+    expect(() =>
+      renderDial({
+        ...dial,
+        destinations: [{ kind: 'client', address: 'agent_test_1', parameters }],
+      }),
+    ).toThrow();
+  });
+
   it('puts optional call-connect instructions on the dialed leg only', () => {
     expect(
       renderDial({
@@ -149,6 +239,77 @@ describe('voice TwiML against the installed official SDK', () => {
         requireConfirmation: false,
       }),
     ).not.toContain('<Gather');
+  });
+
+  it('renders a Client destination with one custom parameter', () => {
+    const xml = renderDial({
+      ...dial,
+      destinations: [
+        {
+          kind: 'client',
+          address: 'agent_test_1',
+          parameters: { callId: 'call_01h455vb4pex5vsknk084sn02q' },
+        },
+      ],
+    });
+    expect(xml).toContain(
+      '<Client statusCallback="https://crm.example.test/voice/progress" statusCallbackMethod="POST" statusCallbackEvent="initiated ringing answered completed"><Identity>agent_test_1</Identity><Parameter name="callId" value="call_01h455vb4pex5vsknk084sn02q"/></Client>',
+    );
+  });
+
+  it('renders a Client destination with two custom parameters', () => {
+    const xml = renderDial({
+      ...dial,
+      destinations: [
+        {
+          kind: 'client',
+          address: 'agent_test_1',
+          parameters: {
+            callId: 'call_01h455vb4pex5vsknk084sn02q',
+            queue: 'support',
+          },
+        },
+      ],
+    });
+    expect(xml).toContain('<Identity>agent_test_1</Identity>');
+    expect(xml).toContain('<Parameter name="callId" value="call_01h455vb4pex5vsknk084sn02q"/>');
+    expect(xml).toContain('<Parameter name="queue" value="support"/>');
+  });
+
+  it.each([
+    { 'call id': '123' },
+    { '1call': '123' },
+    { '': '123' },
+    { callId: 'bad\u0000val' },
+    { callId: 'bad\nval' },
+    { callId: 'bad\rval' },
+    { callId: 'bad\tval' },
+    { callId: '' },
+    { callId: 'x'.repeat(129) },
+    { p1: '1', p2: '2', p3: '3', p4: '4', p5: '5' },
+  ])('refuses invalid parameter %j', (parameters) => {
+    expect(() =>
+      renderDial({
+        ...dial,
+        destinations: [{ kind: 'client', address: 'agent_test_1', parameters }],
+      }),
+    ).toThrow();
+  });
+
+  it('escapes XML special characters in a parameter value', () => {
+    const xml = renderDial({
+      ...dial,
+      destinations: [
+        {
+          kind: 'client',
+          address: 'agent_test_1',
+          parameters: { note: 'A & B < C > D "quote" \'single\'' },
+        },
+      ],
+    });
+    expect(xml).toContain(
+      '<Parameter name="note" value="A &amp; B &lt; C &gt; D &quot;quote&quot; &apos;single&apos;"/>',
+    );
   });
 
   it('hangs up with the same output as the SDK', () => {

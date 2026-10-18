@@ -228,7 +228,7 @@ it("rings the number's team member in the browser, and stores the route at its f
 
   const expectedIdentity = voiceIdentity(b.business.id, b.user.id);
   expect(res.body).toContain(`<Client statusCallback=`);
-  expect(res.body).toContain(`>${expectedIdentity}</Client>`);
+  expect(res.body).toContain(`<Identity>${expectedIdentity}</Identity>`);
   expect(res.body).toContain(
     `action="https://crm.example.test/webhooks/twilio/voice/${b.token}/dial-result?step=`,
   );
@@ -242,6 +242,7 @@ it("rings the number's team member in the browser, and stores the route at its f
   expect(firstCall?.state).toBe('ringing');
   if (firstCall === undefined) throw new Error('Expected call');
   const callId = firstCall.id;
+  expect(res.body).toContain(`<Parameter name="callId" value="${toPublicId('call', callId)}"/>`);
 
   const routes = await b.query<{ step: number; steps: string; caller_id: string }>(
     'select step, steps::text, caller_id from messaging.call_routes where business_id = $1 and call_id = $2',
@@ -337,6 +338,7 @@ it('rings the outside number when no team member is set', async () => {
   expect(res.statusCode).toBe(200);
   expect(res.body).toContain(`<Number statusCallback=`);
   expect(res.body).toContain(`>${forwardE164}</Number>`);
+  expect(res.body).not.toContain('<Parameter');
 
   const legs = await b.query<{ party: string; user_id: string | null; to_address: string }>(
     'select party, user_id, to_address from messaging.call_legs where party = $1',

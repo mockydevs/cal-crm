@@ -7,6 +7,7 @@ import { userEvent } from '@testing-library/user-event';
 import { StrictMode, useEffect, type ReactNode } from 'react';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { ApiError } from '@repo/sdk';
 import { SoftphoneProvider, useSoftphone } from './softphone';
 import type {
   BrowserVoice,
@@ -29,6 +30,32 @@ vi.mock('./api', () => ({
     },
   }),
 }));
+vi.mock('./workspace', () => ({
+  useBusiness: () => ({ id: 'biz_test', name: 'Harbor Lights Events', slug: 'harbor' }),
+}));
+vi.mock('@tanstack/react-router', () => ({
+  Link: ({
+    to,
+    params,
+    children,
+    className,
+  }: {
+    to: string;
+    params: Record<string, string>;
+    children: ReactNode;
+    className?: string;
+  }) => (
+    <a
+      className={className}
+      href={Object.entries(params).reduce(
+        (path, [key, value]) => path.replace(`$${key}`, value),
+        to,
+      )}
+    >
+      {children}
+    </a>
+  ),
+}));
 
 beforeAll(async () => {
   i18n.loadAndActivate({ locale: 'en', messages: {} });
@@ -48,6 +75,7 @@ afterEach(() => {
 
 const callView = (patch: Partial<VoiceCallView> = {}): VoiceCallView => ({
   sid: 'CA11111111111111111111111111111111',
+  callId: null,
   from: '+14155550111',
   phase: 'open',
   muted: false,
@@ -373,6 +401,7 @@ describe('Softphone', () => {
       standIn.setState({
         call: {
           sid: 'CA99999999999999999999999999999999',
+          callId: null,
           from: '+14155550199',
           phase: 'incoming',
           muted: false,
@@ -386,6 +415,7 @@ describe('Softphone', () => {
     standIn.setState({
       call: {
         sid: providerCallId,
+        callId: null,
         from: '+14155550199',
         phase: 'incoming',
         muted: false,
@@ -400,6 +430,7 @@ describe('Softphone', () => {
     standIn.setState({
       call: {
         sid: providerCallId,
+        callId: null,
         from: '+14155550199',
         phase: 'open',
         muted: false,
@@ -412,6 +443,7 @@ describe('Softphone', () => {
     const standIn = makeStandInVoice({
       call: {
         sid: 'CA11111111111111111111111111111111',
+        callId: null,
         from: '+14155550111',
         phase: 'incoming',
         muted: false,
@@ -441,6 +473,7 @@ describe('Softphone', () => {
     standIn.setState({
       call: {
         sid: 'CA11111111111111111111111111111111',
+        callId: null,
         from: '+14155550111',
         phase: 'open',
         muted: false,
@@ -710,5 +743,127 @@ describe('Softphone', () => {
     expect(made.every((each) => each.recorded.start === 0 || each.recorded.dispose === 1)).toBe(
       true,
     );
+  });
+
+  it('incoming call with a known contact shows the name, number and Open contact link, and can be answered or declined', async () => {
+    const callId = 'call_01h455vb4pex5vsknk084sn02q';
+    const contactId = 'con_01h455vb4pex5vsknk084sn02q';
+    const standIn = makeStandInVoice({
+      call: {
+        sid: 'CA11111111111111111111111111111111',
+        callId,
+        from: '+14155550111',
+        phase: 'incoming',
+        muted: false,
+      },
+    });
+
+    server.answer = (operation) => {
+      if (operation === 'getMyPermissions') return { permissions: ['calls.place'] };
+      if (operation === 'getCallingAvailability') return { available: true, unavailable: null };
+      if (operation === 'getCall') {
+        return {
+          id: callId,
+          contactId,
+          legs: [],
+        };
+      }
+      if (operation === 'getContact') {
+        return {
+          id: contactId,
+          name: 'Maya Thompson',
+        };
+      }
+      throw new Error(`Unexpected ${operation}`);
+    };
+
+    const user = userEvent.setup();
+    renderSoftphone(<p>page</p>, () => standIn.controller);
+
+    expect(await screen.findByText('Maya Thompson')).toBeDefined();
+    expect(screen.getByText('+14155550111')).toBeDefined();
+    const link = screen.getByRole('link', { name: 'Open contact' });
+    expect(link.getAttribute('href')).toBe('/b/harbor/contacts/con_01h455vb4pex5vsknk084sn02q');
+
+    const answerBtn = screen.getByRole('button', { name: 'Answer' });
+    const declineBtn = screen.getByRole('button', { name: 'Decline' });
+    await user.click(answerBtn);
+    expect(standIn.recorded.accept).toBe(1);
+    await user.click(declineBtn);
+    expect(standIn.recorded.reject).toBe(1);
+  });
+
+  it('an unknown caller shows the number only without a contact link', async () => {
+    const standIn = makeStandInVoice({
+      call: {
+        sid: 'CA11111111111111111111111111111111',
+        callId: null,
+        from: '+14155550111',
+        phase: 'incoming',
+        muted: false,
+      },
+    });
+
+    server.answer = (operation) => {
+      if (operation === 'getMyPermissions') return { permissions: ['calls.place'] };
+      if (operation === 'getCallingAvailability') return { available: true, unavailable: null };
+      throw new Error(`Unexpected ${operation}`);
+    };
+
+    const user = userEvent.setup();
+    renderSoftphone(<p>page</p>, () => standIn.controller);
+
+    expect(await screen.findByText('+14155550111')).toBeDefined();
+    expect(screen.queryByRole('link', { name: 'Open contact' })).toBeNull();
+
+    const answerBtn = screen.getByRole('button', { name: 'Answer' });
+    await user.click(answerBtn);
+    expect(standIn.recorded.accept).toBe(1);
+  });
+
+  it('a failed lookup (e.g. 403 on contact or failed call lookup) shows the number only', async () => {
+    const callId = 'call_01h455vb4pex5vsknk084sn02q';
+    const contactId = 'con_01h455vb4pex5vsknk084sn02q';
+    const standIn = makeStandInVoice({
+      call: {
+        sid: 'CA11111111111111111111111111111111',
+        callId,
+        from: '+14155550111',
+        phase: 'incoming',
+        muted: false,
+      },
+    });
+
+    server.answer = (operation) => {
+      if (operation === 'getMyPermissions') return { permissions: ['calls.place'] };
+      if (operation === 'getCallingAvailability') return { available: true, unavailable: null };
+      if (operation === 'getCall') {
+        return {
+          id: callId,
+          contactId,
+          legs: [],
+        };
+      }
+      if (operation === 'getContact') {
+        throw new ApiError({
+          type: 'about:blank',
+          title: 'Forbidden',
+          status: 403,
+          detail: 'Forbidden',
+        });
+      }
+      throw new Error(`Unexpected ${operation}`);
+    };
+
+    const user = userEvent.setup();
+    renderSoftphone(<p>page</p>, () => standIn.controller);
+
+    expect(await screen.findByText('+14155550111')).toBeDefined();
+    expect(screen.queryByRole('link', { name: 'Open contact' })).toBeNull();
+    expect(screen.queryByText('Maya Thompson')).toBeNull();
+
+    const declineBtn = screen.getByRole('button', { name: 'Decline' });
+    await user.click(declineBtn);
+    expect(standIn.recorded.reject).toBe(1);
   });
 });

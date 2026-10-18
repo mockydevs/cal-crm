@@ -7,6 +7,7 @@
 // request, go straight to the Device and never into state, storage or logs. Outbound
 // calls are placed by the server and bridged here as incoming calls, so there is no
 // connect(): nothing here can dial a number or repeat a paid action.
+import { publicId } from '@repo/contracts';
 import type { Call, Device } from '@twilio/voice-sdk';
 
 /** A short-lived access token the server issued for this person and business. */
@@ -28,7 +29,14 @@ interface Listening {
 /** The parts of the SDK's Call and Device this controller uses. */
 export type SdkCall = Pick<
   Call,
-  'accept' | 'reject' | 'ignore' | 'disconnect' | 'mute' | 'sendDigits' | 'parameters'
+  | 'accept'
+  | 'reject'
+  | 'ignore'
+  | 'disconnect'
+  | 'mute'
+  | 'sendDigits'
+  | 'parameters'
+  | 'customParameters'
 > &
   Listening;
 export type SdkDevice = Pick<Device, 'register' | 'updateToken' | 'destroy'> & Listening;
@@ -56,6 +64,7 @@ export interface VoiceProblem {
 export interface VoiceCallView {
   /** The provider's Call SID, when it is well formed. */
   readonly sid: string | null;
+  readonly callId?: string | null;
   /** Who is calling, as the SDK reports it (a number or client:name). */
   readonly from: string | null;
   readonly phase: 'incoming' | 'connecting' | 'open' | 'reconnecting';
@@ -129,6 +138,8 @@ const fromOf = (value: string | undefined): string | null =>
     ? value
     : null;
 
+const callIdSchema = publicId('call');
+
 export function createBrowserVoice(options: BrowserVoiceOptions): BrowserVoice {
   const loadSdk = options.loadSdk;
   const now = options.now ?? Date.now;
@@ -186,6 +197,10 @@ export function createBrowserVoice(options: BrowserVoiceOptions): BrowserVoice {
     }
     call = incoming;
     const sid = incoming.parameters['CallSid'];
+    // installed @twilio/voice-sdk@2.18.5 es5/twilio/call.d.ts: Call.customParameters: Map<string, string>
+    const rawCallId = incoming.customParameters.get('callId');
+    const callId =
+      typeof rawCallId === 'string' && callIdSchema.safeParse(rawCallId).success ? rawCallId : null;
     const listeners: (readonly [string, Listener])[] = [
       [
         'accept',
@@ -226,6 +241,7 @@ export function createBrowserVoice(options: BrowserVoiceOptions): BrowserVoice {
     set({
       call: {
         sid: sid !== undefined && CALL_SID.test(sid) ? sid : null,
+        callId,
         from: fromOf(incoming.parameters['From']),
         phase: 'incoming',
         muted: false,

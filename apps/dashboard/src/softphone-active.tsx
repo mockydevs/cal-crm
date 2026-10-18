@@ -4,10 +4,12 @@
 // A placed call rings this browser first; that call is answered without a click, because
 // the person asked for it. Any other incoming call waits for Answer or Decline.
 import { Trans, useLingui } from '@lingui/react/macro';
-import { getCall, requestCall, type Call, type CallDetail } from '@repo/contracts';
+import { getCall, getContact, requestCall, type Call, type CallDetail } from '@repo/contracts';
 import { ApiError, type Client } from '@repo/sdk';
 import { Badge } from '@repo/ui/components/badge';
 import { Button } from '@repo/ui/components/button';
+import { useQuery } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
 import { Device } from '@twilio/voice-sdk';
 import {
   useCallback,
@@ -32,6 +34,7 @@ import {
   type VoiceProblemKind,
 } from './voice-browser';
 import { grantRequester, type GrantClient } from './voice-grant';
+import { useBusiness } from './workspace';
 
 /** Between reads of a placed call until its first leg has the provider's id. */
 const POLL_MS = 500;
@@ -139,15 +142,23 @@ export function ActiveSoftphone({
   );
   const running = useSyncExternalStore(slot.subscribe, slot.get, slot.get);
   return running === null ? null : (
-    <RunningSoftphone key={running.key} client={client} voice={running.voice} onValue={onValue} />
+    <RunningSoftphone
+      key={running.key}
+      businessId={businessId}
+      client={client}
+      voice={running.voice}
+      onValue={onValue}
+    />
   );
 }
 
 function RunningSoftphone({
+  businessId,
   client,
   voice,
   onValue,
 }: {
+  readonly businessId: string;
   readonly client: Client;
   readonly voice: BrowserVoice;
   readonly onValue: (value: SoftphoneValue | null) => void;
@@ -249,7 +260,14 @@ function RunningSoftphone({
     <>
       <PhaseAnnouncement call={call} />
       {call !== null ? (
-        <CallBar call={call} voice={voice} openedAt={openedAt} problem={state.problem} />
+        <CallBar
+          businessId={businessId}
+          client={client}
+          call={call}
+          voice={voice}
+          openedAt={openedAt}
+          problem={state.problem}
+        />
       ) : state.problem !== null ? (
         <ProblemBar kind={state.problem.kind} voice={voice} />
       ) : null}
@@ -372,27 +390,80 @@ function CallDuration({ since }: { readonly since: number }): ReactElement {
 const DIGITS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'] as const;
 
 function CallBar({
+  businessId,
+  client,
   call,
   voice,
   openedAt,
   problem,
 }: {
+  readonly businessId: string;
+  readonly client: Client;
   readonly call: VoiceCallView;
   readonly voice: BrowserVoice;
   readonly openedAt: number | null;
   readonly problem: BrowserVoiceState['problem'];
 }): ReactElement {
   const { t } = useLingui();
+  const business = useBusiness();
   const phases = usePhaseWords();
   const problems = useProblemWords();
   const [keypad, setKeypad] = useState(false);
   const barRef = useFocusReturn();
   const caller = call.from ?? t`Unknown caller`;
   const open = call.phase === 'open';
+
+  const callId = call.callId ?? null;
+  const callQuery = useQuery({
+    queryKey: ['b', businessId, 'call', callId],
+    queryFn: () => {
+      if (!callId) {
+        throw new Error('callId required');
+      }
+      return client.request(getCall, { params: { id: callId } });
+    },
+    enabled: callId !== null,
+    retry: (failures, error) =>
+      !(error instanceof ApiError && error.status >= 400 && error.status < 500) && failures < 3,
+  });
+
+  const contactId = callQuery.data?.contactId ?? null;
+  const contactQuery = useQuery({
+    queryKey: ['b', businessId, 'contacts', contactId],
+    queryFn: () => {
+      if (!contactId) {
+        throw new Error('contactId required');
+      }
+      return client.request(getContact, { params: { id: contactId } });
+    },
+    enabled: contactId !== null,
+    retry: (failures, error) =>
+      !(error instanceof ApiError && error.status >= 400 && error.status < 500) && failures < 3,
+  });
+
+  const contactName =
+    contactQuery.data?.name ??
+    ([contactQuery.data?.firstName, contactQuery.data?.lastName].filter(Boolean).join(' ') || null);
+  const hasContact = contactId !== null && contactName !== null && !contactQuery.isError;
+
   return (
     <aside ref={barRef} aria-label={t`Phone call`} className={barClassName}>
       <div className="flex items-center justify-between gap-2">
-        <span className="truncate font-semibold">{caller}</span>
+        {hasContact ? (
+          <div className="flex min-w-0 flex-col">
+            <span className="truncate font-semibold">{contactName}</span>
+            <span className="truncate text-xs text-muted-foreground">{caller}</span>
+            <Link
+              to="/b/$slug/contacts/$contactId"
+              params={{ slug: business.slug, contactId }}
+              className="text-xs text-link hover:underline"
+            >
+              <Trans>Open contact</Trans>
+            </Link>
+          </div>
+        ) : (
+          <span className="truncate font-semibold">{caller}</span>
+        )}
         <Badge variant={open ? 'assistant' : 'neutral'}>{phases[call.phase]}</Badge>
       </div>
       {openedAt !== null && (open || call.phase === 'reconnecting') ? (

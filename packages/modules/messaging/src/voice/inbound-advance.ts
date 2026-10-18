@@ -4,7 +4,7 @@
 // https://www.twilio.com/docs/voice/twiml/dial
 // https://www.twilio.com/docs/voice/twiml/changelog
 import { defineCommand, type Command } from '@repo/commands';
-import { ForbiddenError, parsePublicId } from '@repo/kernel';
+import { ForbiddenError, parsePublicId, toPublicId } from '@repo/kernel';
 import { sql } from 'kysely';
 import * as z from 'zod';
 import { addCallLeg, type ReadCallGrants } from '../call-ledger.js';
@@ -158,6 +158,7 @@ export function createInboundAdvanceCommand(
           kind: 'client' | 'number';
           address: string;
           progressUrl: string;
+          parameters?: Record<string, string>;
         }[] = [];
         for (const dest of currentStepDestinations) {
           const legId =
@@ -172,6 +173,9 @@ export function createInboundAdvanceCommand(
             kind: dest.kind,
             address: dest.address,
             progressUrl: legProgressUrl,
+            ...(dest.kind === 'client'
+              ? { parameters: { callId: toPublicId('call', call.id) } }
+              : {}),
           });
         }
 
@@ -272,6 +276,7 @@ export function createInboundAdvanceCommand(
           kind: 'client' | 'number';
           address: string;
           progressUrl: string;
+          parameters?: Record<string, string>;
         }[] = [];
         let firstNewLegId: string | null = null;
         for (const item of validDestinations) {
@@ -294,6 +299,9 @@ export function createInboundAdvanceCommand(
               kind: item.dest.kind,
               address: item.dest.address,
               progressUrl: legProgressUrl,
+              ...(item.dest.kind === 'client'
+                ? { parameters: { callId: toPublicId('call', call.id) } }
+                : {}),
             });
           }
         }

@@ -2,6 +2,7 @@ import { randomBytes, randomUUID } from 'node:crypto';
 import { allowEveryone, type Services } from '@repo/commands';
 import type { Permission } from '@repo/contracts';
 import { connectDatabase, withTenant, type Database } from '@repo/db';
+import { toPublicId } from '@repo/kernel';
 import { createVault, newSecretsKey, parseSecretsKeys, type Vault } from '@repo/module-vault';
 import { testDatabase, type TestDatabase } from '@repo/testing';
 import { afterAll, beforeAll, expect, inject, it } from 'vitest';
@@ -313,6 +314,15 @@ it('rings the next step when nobody answered the first', async () => {
   expect(res.body).toContain(b.id3);
   expect(res.body).not.toContain(b.id1);
 
+  const calls = await b.query<{ id: string }>(
+    'select id from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  const call = calls[0];
+  if (call === undefined) throw new Error('Expected call');
+  expect(res.body).toContain(`<Identity>${b.id3}</Identity>`);
+  expect(res.body).toContain(`<Parameter name="callId" value="${toPublicId('call', call.id)}"/>`);
+
   const route1 = await b.queryFirst<{
     step: number;
     step_leg_id: string;
@@ -521,6 +531,7 @@ it('skips a step left empty and rings the one after it', async () => {
   expect(res.statusCode).toBe(200);
   expect(res.body).toContain(`<Number statusCallback=`);
   expect(res.body).toContain(`>${forwardE164}</Number>`);
+  expect(res.body).not.toContain('<Parameter');
 
   const route1 = await b.queryFirst<{ step: number; step_leg_id: string }>(
     'select step, step_leg_id from messaging.call_routes where business_id = $1',

@@ -35,6 +35,12 @@ const message = z
       );
     }),
   );
+const parameterName = z.string().regex(/^[A-Za-z][A-Za-z0-9_]{0,31}$/);
+const parameterValue = z
+  .string()
+  .min(1)
+  .max(128)
+  .refine((value) => !/\p{Cc}/u.test(value));
 const destination = z.discriminatedUnion('kind', [
   z.strictObject({
     kind: z.literal('number'),
@@ -47,6 +53,11 @@ const destination = z.discriminatedUnion('kind', [
     address: z.string().regex(/^[A-Za-z0-9_]{1,121}$/),
     acceptUrl: httpsUrl.optional(),
     progressUrl: httpsUrl.optional(),
+    // installed twilio@6.1.2 lib/twiml/VoiceResponse.d.ts, class Client: identity(), parameter(); https://www.twilio.com/docs/voice/twiml/client#custom-parameters
+    parameters: z
+      .record(parameterName, parameterValue)
+      .refine((record) => Object.keys(record).length <= 4)
+      .optional(),
   }),
 ]);
 const dialInstructions = z.strictObject({
@@ -116,6 +127,22 @@ export function renderDial(input: unknown): string {
         ['statusCallbackEvent', 'initiated ringing answered completed'],
       ];
       if (target.acceptUrl !== undefined) attrs.push(['url', target.acceptUrl], ['method', 'POST']);
+      if (
+        target.kind === 'client' &&
+        target.parameters !== undefined &&
+        Object.keys(target.parameters).length > 0
+      ) {
+        const params = Object.entries(target.parameters)
+          .map(
+            ([name, paramValue]) =>
+              `<Parameter ${attributes([
+                ['name', name],
+                ['value', paramValue],
+              ])}/>`,
+          )
+          .join('');
+        return `<Client ${attributes(attrs)}><Identity>${escape(target.address)}</Identity>${params}</Client>`;
+      }
       const tag = target.kind === 'number' ? 'Number' : 'Client';
       return `<${tag} ${attributes(attrs)}>${escape(target.address)}</${tag}>`;
     })

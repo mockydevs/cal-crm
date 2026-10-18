@@ -64,6 +64,10 @@ msgid "No microphone is available."
 msgstr "No microphone is available."
 
 #: src/softphone-active.tsx
+msgid "Open contact"
+msgstr "Open contact"
+
+#: src/softphone-active.tsx
 msgid "Phone call"
 msgstr "Phone call"
 

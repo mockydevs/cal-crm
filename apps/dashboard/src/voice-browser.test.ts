@@ -25,8 +25,16 @@ class FakeCall extends EventEmitter {
   readonly disconnect = vi.fn();
   readonly mute = vi.fn();
   readonly sendDigits = vi.fn();
-  constructor(readonly parameters: Record<string, string>) {
+  readonly customParameters: Map<string, string>;
+  constructor(
+    readonly parameters: Record<string, string>,
+    customParameters?: Map<string, string> | Record<string, string>,
+  ) {
     super();
+    this.customParameters =
+      customParameters instanceof Map
+        ? customParameters
+        : new Map(Object.entries(customParameters ?? {}));
   }
 }
 
@@ -354,6 +362,7 @@ describe('an incoming call', () => {
     const { voice, call } = await ringing();
     expect(voice.getState().call).toEqual({
       sid,
+      callId: null,
       from: '+12025550101',
       phase: 'incoming',
       muted: false,
@@ -437,10 +446,39 @@ describe('an incoming call', () => {
     device.emit('incoming', new FakeCall({ CallSid: 'nope', From: 'x'.repeat(300) }));
     expect(voice.getState().call).toEqual({
       sid: null,
+      callId: null,
       from: null,
       phase: 'incoming',
       muted: false,
     });
+  });
+
+  it('reads the callId custom parameter when it is a valid call public id', async () => {
+    const validCallId = 'call_01h455vb4pex5vsknk084sn02q';
+    const { voice, device } = await registered();
+    const call = new FakeCall(
+      { CallSid: sid, From: '+12025550101' },
+      new Map([['callId', validCallId]]),
+    );
+    device.emit('incoming', call);
+    expect(voice.getState().call?.callId).toBe(validCallId);
+  });
+
+  it('rejects a malformed callId and treats it as null', async () => {
+    const { voice, device } = await registered();
+    const call = new FakeCall(
+      { CallSid: sid, From: '+12025550101' },
+      new Map([['callId', 'not_a_valid_call_id']]),
+    );
+    device.emit('incoming', call);
+    expect(voice.getState().call?.callId).toBeNull();
+  });
+
+  it('sets callId to null when customParameters has no callId or is empty', async () => {
+    const { voice, device } = await registered();
+    const call = new FakeCall({ CallSid: sid, From: '+12025550101' });
+    device.emit('incoming', call);
+    expect(voice.getState().call?.callId).toBeNull();
   });
 
   it('has no controls without a call', async () => {

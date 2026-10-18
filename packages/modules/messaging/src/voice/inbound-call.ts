@@ -181,6 +181,7 @@ export function createInboundCallCommand(
           kind: 'client' | 'number';
           address: string;
           progressUrl: string;
+          parameters?: Record<string, string>;
         }[] = [];
         for (const dest of currentStepDestinations) {
           const legId =
@@ -195,6 +196,9 @@ export function createInboundCallCommand(
             kind: dest.kind,
             address: dest.address,
             progressUrl: legProgressUrl,
+            ...(dest.kind === 'client'
+              ? { parameters: { callId: toPublicId('call', callId) } }
+              : {}),
           });
         }
 
@@ -316,6 +320,7 @@ export function createInboundCallCommand(
         kind: 'client' | 'number';
         address: string;
         progressUrl: string;
+        parameters?: Record<string, string>;
       }[] = [];
       let firstStepLegId: string | null = null;
       for (const dest of step0) {
@@ -339,6 +344,9 @@ export function createInboundCallCommand(
             kind: dest.kind,
             address: dest.address,
             progressUrl: legProgressUrl,
+            ...(dest.kind === 'client'
+              ? { parameters: { callId: toPublicId('call', callId) } }
+              : {}),
           });
         }
       }
