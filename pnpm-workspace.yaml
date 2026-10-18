@@ -10,7 +10,7 @@ packages:
 catalogMode: strict
 catalog:
   '@modelcontextprotocol/sdk': 1.32.1
-  '@fastify/busboy': 3.2.2
+  '@fastify/busboy': 3.2.3
   '@dnd-kit/react': 0.5.0
   '@dnd-kit/dom': 0.5.0
   '@stryker-mutator/core': 10.0.0
