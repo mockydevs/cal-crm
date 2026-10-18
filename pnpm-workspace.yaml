@@ -96,7 +96,7 @@ catalog:
   kysely: 0.29.6
   kysely-codegen: 0.20.0
   lean-qr: 2.7.4
-  lefthook: 2.1.17
+  lefthook: 2.2.2
   libphonenumber-js: 1.13.14
   lucide-react: 1.52.0
   mailauth: 7.1.1
