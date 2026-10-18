@@ -49,7 +49,7 @@ catalog:
   '@tanstack/react-table': 9.2.6
   '@tanstack/react-virtual': 3.14.13
   '@tanstack/router-plugin': 1.168.42
-  '@testcontainers/postgresql': 12.2.0
+  '@testcontainers/postgresql': 12.2.1
   '@tiptap/extension-bold': 3.31.4
   '@tiptap/extension-code': 3.31.4
   '@tiptap/extension-document': 3.31.4
