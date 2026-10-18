@@ -18,6 +18,8 @@ import {
   business,
   businessProfile,
   association,
+  customRecord,
+  relation,
   blockedSlot,
   calendarConfiguration,
   calendarGroup,
@@ -59,6 +61,7 @@ import { createAiSettingsRoutes } from '@repo/module-ai';
 import { createAuthentication, readUserNames, type Authentication } from '@repo/module-auth';
 import { marketplaceRoutes } from '@repo/module-tenancy';
 import { createGoogleCalendarRoutes } from '@repo/module-calendar';
+import { createIntegrationRoutes } from '@repo/module-integrations';
 import { createImportRoutes } from '@repo/module-crm';
 import {
   createFiles,
@@ -92,6 +95,7 @@ import {
   googleConnectionsOf,
   googleRouteOptions,
 } from '../test/google-fixtures.js';
+import { integrationConnection, integrationRouteOptions } from '../test/integration-fixtures.js';
 import { addReport, reportingInputs } from '../test/reporting-fixtures.js';
 import { addSiteRecords, SITE_ROUTE_OPTIONS, siteInputs } from '../test/sites-fixtures.js';
 import { apiRoutes } from './api-routes.js';
@@ -206,6 +210,8 @@ const everyRoute = () => [
   ...createImportRoutes({ files, apiUrl: `${PUBLIC_URL}${API_PREFIX}` }),
   // Settings → Calendars → Connections, as an install with Google set up has it.
   ...createGoogleCalendarRoutes(googleRouteOptions(sealer)),
+  // Settings → Integrations, with the stand-in provider an install's code would register.
+  ...createIntegrationRoutes(integrationRouteOptions(sealer)),
   // The consent page's read and decision, offered with a public address.
   ...marketplaceRoutes({ people: readUserNames, issuer: PUBLIC_URL }).filter(({ endpoint }) =>
     ['readOAuthAuthorization', 'grantOAuthAuthorization'].includes(endpoint.operationId),
@@ -1200,10 +1206,28 @@ describe('the API isolation suite', () => {
       },
     });
     expect(createdAssociation.statusCode, createdAssociation.body).toBe(201);
+    // A record of B's object, related to B's contact under that association.
+    const createdPet = await call('POST', '/objects/pet/records', {
+      payload: { fields: { pet_name: 'Business B only' } },
+    });
+    expect(createdPet.statusCode, createdPet.body).toBe(201);
+    const pet = customRecord.parse(createdPet.json());
+    const createdRelation = await call('POST', '/associations/relations', {
+      payload: {
+        associationId: association.parse(createdAssociation.json()).id,
+        firstRecordId: pet.id,
+        secondRecordId: contactId,
+      },
+    });
+    expect(createdRelation.statusCode, createdRelation.body).toBe(201);
     const ids = {
       ...teamRecords,
       ...inbox,
+      // A connected account of B's in Settings → Integrations.
+      integration_connection: (await integrationConnection(database, b.id)).id,
       link_type: association.parse(createdAssociation.json()).id,
+      custom: pet.id,
+      record_link: relation.parse(createdRelation.json()).id,
       proposal: toPublicId('proposal', proposed.id),
       // The contact's memory: a fact, the revision B's member would rewrite it from, and
       // (not an id a path takes) the proposal about the contact that still waits.
@@ -1466,6 +1490,20 @@ describe('the API isolation suite', () => {
         },
       },
       updateAssociation: { payload: { label: 'Keeper', reverseLabel: 'Pet' } },
+      // B's connected account, at the revision it was made with.
+      updateIntegrationConnection: { payload: { primary: true, revision: 1 } },
+      // B's records of that object, and a relation of B's record with B's contact.
+      createCustomRecord: { payload: { fields: { pet_name: 'Reached from A' } } },
+      listCustomRecords: { query: '?q=Business' },
+      updateCustomRecord: { payload: { owner: null, revision: 'a'.repeat(64) } },
+      createRelation: {
+        payload: {
+          associationId: records['link_type'],
+          firstRecordId: records['custom'],
+          secondRecordId: records['contact'],
+        },
+      },
+      getRecordAssociations: { query: `?associationId=${records['link_type'] ?? ''}&side=to` },
       // Settings → Custom Fields and Custom Values. Each is what B's own member could send
       // about B's folder, field or value and have accepted: A's 404, 409 and 422 are then
       // the boundary, and A's request names B's records without ever reaching them.
@@ -1940,6 +1978,9 @@ describe('the API isolation suite', () => {
    * boundary is that B's secret by the same name is untouched.
    */
   const storesUnderName: ReadonlySet<string> = new Set(['putAutomationWebhookSecret']);
+  // Named by the provider alone, which every business of the install has: A reads or
+  // starts its own, and nothing of B's is named.
+  const namedByProvider: ReadonlySet<string> = new Set(['getIntegration', 'connectIntegration']);
 
   /** A web chat widget as its settings page saves one. */
   const webchatInput = {
@@ -1965,6 +2006,8 @@ describe('the API isolation suite', () => {
     name: WEBHOOK_SECRET_OF_B,
     // B's custom object: A's business has none by that key.
     key: 'pet',
+    // The stand-in provider of Settings → Integrations.
+    provider: 'standin',
   };
 
   function pathFor(endpoint: Endpoint, records: Record<string, string>): string {
@@ -2034,6 +2077,8 @@ describe('the API isolation suite', () => {
         expect(namingA.statusCode, namingA.body).toBe(200);
         const ofA = await call('GET', '/automations/webhook-secrets', { business: a.id });
         expect(ofA.json()).toMatchObject({ items: [{ name: WEBHOOK_SECRET_OF_B }] });
+      } else if (namedByProvider.has(endpoint.operationId)) {
+        expect(namingA.statusCode, namingA.body).toBeLessThan(300);
       } else if (endpoint.params !== undefined && endpoint.path.startsWith('/agency/')) {
         // The agency's own work (its apps): refused in every business, A's too,
         // before any record is looked up.

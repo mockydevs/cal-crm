@@ -313,6 +313,7 @@ describe('what extraction adds to proposals', () => {
       'calendar_update',
       'calendar_availability',
       'automation_publish',
+      'deal_update',
     ]);
     expect(undoRefusals).toContain('already_known');
     expect(

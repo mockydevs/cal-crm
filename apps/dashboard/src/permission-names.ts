@@ -35,6 +35,7 @@ export const permissionNames: Readonly<Record<string, MessageDescriptor>> = {
   'email.verification.manage': msg`Manage email verification settings and hard-bounce unblocking`,
   'fields.manage': msg`Manage field definitions and AI fill policies`,
   'objects.manage': msg`Create, edit and delete custom objects and their associations`,
+  'records.manage': msg`Add, change and trash custom object records, and relate records`,
   'audit.read': msg`Read audit logs`,
   'payments.read': msg`View payment data`,
   'payments.manage': msg`Manage products, invoices and payments`,

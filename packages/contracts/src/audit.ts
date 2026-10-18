@@ -125,7 +125,7 @@ export const auditModules = {
   imports: ['import', 'imports'],
   team: ['team', 'api_key'],
   assistant: ['ai', 'proposal'],
-  settings: ['business', 'view', 'file'],
+  settings: ['business', 'view', 'file', 'integration'],
   trash: ['record', 'trash'],
 } as const satisfies Record<string, readonly string[]>;
 export type AuditModule = keyof typeof auditModules;

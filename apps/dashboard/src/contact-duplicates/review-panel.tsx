@@ -1,8 +1,9 @@
 // The review of possible duplicates (GoHighLevel's "Review" in Manage Duplicates): each
-// group's contacts side by side, field by field, and Reject, which says they are not the
-// same person and cannot be undone. There is no merge here.
+// group's contacts side by side, field by field; Merge, which opens Merge Contacts with
+// them; and Reject, which says they are not the same person and cannot be undone.
 import { Trans, useLingui } from '@lingui/react/macro';
 import {
+  MAX_CONTACTS_IN_MERGE,
   rejectDuplicateGroup,
   type DuplicateContact,
   type DuplicateGroup,
@@ -15,9 +16,10 @@ import { Dialog } from '@repo/ui/components/dialog';
 import { useMutation } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { X } from 'lucide-react';
-import { useId, useRef, useState, type ReactElement, type RefObject } from 'react';
+import { Suspense, useId, useRef, useState, type ReactElement, type RefObject } from 'react';
 
 import { apiIn } from '../api';
+import { ContactMergeDialog } from '../contact-merge/loader';
 import { returnTo } from '../list-table';
 import { ConfirmDialog } from '../settings-list';
 import { useBusiness } from '../workspace';
@@ -88,10 +90,13 @@ function GroupReview({
   group,
   canReject,
   onReject,
+  onMerge,
 }: {
   readonly group: DuplicateGroup;
   readonly canReject: boolean;
   readonly onReject: (group: DuplicateGroup, opener: HTMLElement) => void;
+  /** Opens Merge Contacts with the group's contacts; absent for whoever may not merge. */
+  readonly onMerge: ((group: DuplicateGroup, opener: HTMLElement) => void) | undefined;
 }): ReactElement {
   const { t } = useLingui();
   const business = useBusiness();
@@ -109,6 +114,9 @@ function GroupReview({
   ];
   const more = group.total - group.contacts.length;
   const title = groupTitle(group);
+  const tooManyId = useId();
+  // GoHighLevel merges up to ten contacts at a time.
+  const mergeable = group.total <= MAX_CONTACTS_IN_MERGE;
   return (
     <section aria-labelledby={headingId} className="flex min-w-0 flex-col gap-3">
       <div className="flex min-w-0 flex-wrap items-center gap-2">
@@ -168,16 +176,38 @@ function GroupReview({
           <Trans>{more} more contacts share it and are not shown.</Trans>
         </p>
       ) : null}
-      {canReject ? (
-        <Button
-          variant="secondary"
-          className="self-start"
-          onClick={(event) => {
-            onReject(group, event.currentTarget);
-          }}
-        >
-          <Trans>Reject</Trans>
-        </Button>
+      {canReject || onMerge !== undefined ? (
+        <div className="flex flex-wrap items-center gap-2">
+          {onMerge === undefined ? null : (
+            <Button
+              disabled={!mergeable}
+              aria-describedby={mergeable ? undefined : tooManyId}
+              onClick={(event) => {
+                onMerge(group, event.currentTarget);
+              }}
+            >
+              <Trans>Merge</Trans>
+            </Button>
+          )}
+          {canReject ? (
+            <Button
+              variant="secondary"
+              onClick={(event) => {
+                onReject(group, event.currentTarget);
+              }}
+            >
+              <Trans>Reject</Trans>
+            </Button>
+          ) : null}
+          {onMerge === undefined || mergeable ? null : (
+            <p id={tooManyId} className="text-sm text-muted-foreground">
+              <Trans>
+                Merge at most {MAX_CONTACTS_IN_MERGE} contacts at a time: tick the ones to merge in
+                the contact list.
+              </Trans>
+            </p>
+          )}
+        </div>
       ) : null}
     </section>
   );
@@ -258,6 +288,7 @@ export function ReviewPanel({
   open,
   groups,
   canReject,
+  canMerge,
   returnFocus,
   onClose,
   onRejected,
@@ -265,12 +296,16 @@ export function ReviewPanel({
   readonly open: boolean;
   readonly groups: readonly DuplicateGroup[];
   readonly canReject: boolean;
+  /** Whether Merge is offered: Manage Duplicates' permission, as Reject's. */
+  readonly canMerge: boolean;
   readonly returnFocus: RefObject<HTMLElement | null>;
   readonly onClose: () => void;
   readonly onRejected: (group: DuplicateGroup) => void;
 }): ReactElement {
   const { t } = useLingui();
   const { ask, dialog } = useReject(onRejected);
+  const mergeOpenerRef = useRef<HTMLElement | null>(null);
+  const [merging, setMerging] = useState<DuplicateGroup>();
   return (
     <Dialog.Root
       open={open}
@@ -313,11 +348,30 @@ export function ReviewPanel({
                 group={group}
                 canReject={canReject}
                 onReject={ask}
+                onMerge={
+                  canMerge
+                    ? (chosen, opener) => {
+                        mergeOpenerRef.current = opener;
+                        setMerging(chosen);
+                      }
+                    : undefined
+                }
               />
             ))}
           </div>
           {/* Inside the panel, so the question opens over it rather than behind its inert page. */}
           {dialog}
+          <Suspense fallback={null}>
+            {merging === undefined ? null : (
+              <ContactMergeDialog
+                contactIds={merging.contacts.map((each) => each.id)}
+                returnFocus={mergeOpenerRef}
+                onClose={() => {
+                  setMerging(undefined);
+                }}
+              />
+            )}
+          </Suspense>
         </Dialog.Popup>
       </Dialog.Portal>
     </Dialog.Root>

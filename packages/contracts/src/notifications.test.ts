@@ -42,7 +42,7 @@ const assigned = {
 };
 
 describe('the kinds of notification', () => {
-  it('are these fourteen, in the order the preferences list them', () => {
+  it('are these fifteen, in the order the preferences list them', () => {
     expect(notificationKinds).toEqual([
       'conversation.assigned',
       'message.received',
@@ -58,6 +58,7 @@ describe('the kinds of notification', () => {
       'ai.limit_reached',
       'automation.notice',
       'calendar.google_disconnected',
+      'integration.needs_attention',
     ]);
     expect(new Set(notificationKinds).size).toBe(notificationKinds.length);
   });

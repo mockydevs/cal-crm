@@ -99,6 +99,7 @@ function PreferencesForm({ saved }: { readonly saved: NotificationPreferences })
     'ai.limit_reached': t`The monthly AI spending limit is reached`,
     'automation.notice': t`A workflow notifies the team`,
     'calendar.google_disconnected': t`My Google Calendar is disconnected`,
+    'integration.needs_attention': t`An integration needs attention`,
   };
   const units: Record<ReminderUnit, string> = {
     minutes: t`Minutes`,

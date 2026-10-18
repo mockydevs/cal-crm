@@ -1873,3 +1873,267 @@ begin
   raise notice 'ok: the daily purge finds expired custom records';
 end $$;
 reset role;
+
+-- External Tracking (0131): a tracking id names one active business and nothing else; ids
+-- keep their shape and stay unique; a contact erased leaves its page views anonymous and
+-- takes its external submissions and visitor link with it; the daily purge keeps raw events
+-- thirty days and a page's days thirteen months; a touch can be an external submission's.
+set role crm_owner;
+do $$
+declare
+  b1 constant uuid := 'bbbbbbb1-0000-7000-8000-000000000000';
+  b2 constant uuid := 'bbbbbbb2-0000-7000-8000-000000000000';
+  v_contact uuid := uuidv7();
+  v_contact_type uuid;
+  v_visitor uuid := uuidv7();
+  v_found uuid;
+  v_removed integer;
+begin
+  select business_id into v_found
+    from private.resolve_tracking('tk_' || repeat('b1', 16));
+  if v_found is distinct from b1 then
+    raise exception 'expected the tracking id to name business 1, found %', v_found;
+  end if;
+  if exists (select from private.resolve_tracking('tk_' || repeat('zz', 16))) then
+    raise exception 'an unknown tracking id should name no business';
+  end if;
+  if exists (select from private.resolve_tracking('not a tracking id')) then
+    raise exception 'a malformed tracking id should name no business';
+  end if;
+  begin
+    insert into forms.tracking_settings (business_id, tracking_id) values (b2, 'tk_SHORT');
+    raise exception 'expected a malformed tracking id to be refused';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into forms.tracking_settings (business_id, tracking_id)
+      values (b2, 'tk_' || repeat('b1', 16));
+    raise exception 'expected a second business to be unable to take the same tracking id';
+  exception when unique_violation then null;
+  end;
+  begin
+    insert into forms.tracking_settings (business_id, tracking_id, visitor_ids)
+      values (b2, 'tk_' || repeat('b2', 16), 'sometimes');
+    raise exception 'expected an unknown visitor identification setting to be refused';
+  exception when check_violation then null;
+  end;
+
+  update tenancy.businesses set status = 'suspended' where id = b1;
+  if exists (select from private.resolve_tracking('tk_' || repeat('b1', 16))) then
+    raise exception 'a business that is not active should take no tracking';
+  end if;
+  update tenancy.businesses set status = 'active' where id = b1;
+
+  -- A contact of its own, with a page view, a visitor link and an external submission.
+  select id into v_contact_type from crm.object_types where business_id = b1 and kind = 'contact';
+  insert into crm.records (business_id, id, kind, object_type_id) values (b1, v_contact, 'contact', v_contact_type);
+  insert into crm.contacts (business_id, id, first_name, created_by_kind)
+    values (b1, v_contact, 'Robin', 'system');
+  insert into forms.tracking_events (business_id, kind, page_host, page_path, visitor_id, contact_id, received_at)
+    values (b1, 'page_view', 'www.harborlights.example', '/old', v_visitor, v_contact, now() - interval '31 days'),
+           (b1, 'page_view', 'www.harborlights.example', '/new', v_visitor, v_contact, now());
+  insert into forms.tracking_visitors (business_id, visitor_id, contact_id) values (b1, v_visitor, v_contact);
+  insert into forms.external_submissions (business_id, contact_id, form_name, page_host, page_path, fields,
+                                          client_submission_id, view_mark)
+    values (b1, v_contact, 'Quote', 'www.harborlights.example', '/quote', '[]', uuidv7(), repeat('q', 43));
+  insert into forms.tracking_page_days (business_id, page_host, page_path, day, page_views, last_seen_at)
+    values (b1, 'www.harborlights.example', '/old', current_date - 400, 3, now() - interval '400 days');
+  begin
+    insert into forms.tracking_events (business_id, kind, page_host, page_path)
+      values (b1, 'click', 'www.harborlights.example', '/');
+    raise exception 'expected an unknown event kind to be refused';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into forms.external_submissions (business_id, form_name, page_host, page_path, fields,
+                                            client_submission_id, view_mark)
+      values (b1, 'Quote', 'www.harborlights.example', '/quote', '{}', uuidv7(), repeat('q', 43));
+    raise exception 'expected submitted fields that are not a list to be refused';
+  exception when check_violation then null;
+  end;
+
+  insert into crm.contact_attributions
+    (business_id, contact_id, medium, session_source, subject_kind, subject_id, is_first, is_latest)
+    values (b1, v_contact, 'form', 'direct', 'external_submission', uuidv7(), true, true);
+
+  v_removed := private.expire_tracking_data(1000);
+  if v_removed < 2 then
+    raise exception 'expected the purge to remove the old event and the old day, removed %', v_removed;
+  end if;
+  if exists (select from forms.tracking_events where business_id = b1 and page_path = '/old') then
+    raise exception 'a raw event past thirty days should be purged';
+  end if;
+  if not exists (select from forms.tracking_events where business_id = b1 and page_path = '/new') then
+    raise exception 'a recent raw event should stay';
+  end if;
+  if exists (select from forms.tracking_page_days where business_id = b1 and page_path = '/old') then
+    raise exception 'a page''s day past thirteen months should be purged';
+  end if;
+
+  delete from crm.records where business_id = b1 and id = v_contact;
+  if exists (select from forms.tracking_visitors where business_id = b1 and visitor_id = v_visitor)
+     or exists (select from forms.external_submissions where business_id = b1 and form_name = 'Quote') then
+    raise exception 'an erased contact should take its visitor link and external submissions';
+  end if;
+  if not exists (select from forms.tracking_events
+                 where business_id = b1 and page_path = '/new' and contact_id is null) then
+    raise exception 'an erased contact should leave its page views, anonymous';
+  end if;
+  delete from forms.tracking_events where business_id = b1 and page_path = '/new';
+  raise notice 'ok: tracking ids, retention and erasure of external tracking hold';
+end $$;
+reset role;
+
+-- Integrations (0132): a webhook capability names one live connection of an active business
+-- and its provider, and is stored unverified with its check queued; oversized requests and
+-- unknown capabilities store nothing. A connection's states keep their reasons; one live row
+-- per account and one primary per provider; Google Calendar's key is not a provider here.
+-- The attempt finder answers only a live digest; the sweep lists what is due and the
+-- schedule clears what has expired.
+set role crm_owner;
+do $$
+declare
+  b1 constant uuid := 'bbbbbbb1-0000-7000-8000-000000000000';
+  v_outcome text;
+  v_webhook uuid;
+  v_connection uuid;
+  v_secret uuid;
+  v_found uuid;
+begin
+  select c.id, c.secret_id into v_connection, v_secret
+    from integrations.connections c where c.business_id = b1 and c.account_ref = 'T0001';
+
+  select outcome into v_outcome
+    from private.accept_integration_webhook('standin', repeat('cd', 32), '{}', '\x7b7d');
+  if v_outcome <> 'unknown' then
+    raise exception 'an unknown capability should store nothing, said %', v_outcome;
+  end if;
+  select outcome into v_outcome
+    from private.accept_integration_webhook('slack', repeat('ab', 32), '{}', '\x7b7d');
+  if v_outcome <> 'unknown' then
+    raise exception 'a capability given to another provider should store nothing, said %', v_outcome;
+  end if;
+  select outcome into v_outcome
+    from private.accept_integration_webhook('standin', repeat('ab', 32), '{}',
+      convert_to(repeat('x', 262145), 'UTF8'));
+  if v_outcome <> 'refused' then
+    raise exception 'a body over 256 KiB should be refused, said %', v_outcome;
+  end if;
+  select outcome, webhook_id into v_outcome, v_webhook
+    from private.accept_integration_webhook('standin', repeat('ab', 32),
+      '{"x-standin-signature": "00"}', '\x7b7d');
+  if v_outcome <> 'accepted' or not exists (
+    select from intake.webhooks
+    where id = v_webhook and business_id = b1 and integration_connection_id = v_connection
+      and signature_valid is null and processed_at is null and provider = 'standin'
+  ) then
+    raise exception 'an admitted webhook should be stored unverified for its connection';
+  end if;
+  if not exists (select from graphile_worker.jobs
+                 where key = 'integration-webhook:' || v_webhook::text
+                   and task_identifier = 'integrations.verify_webhook') then
+    raise exception 'an admitted webhook should queue its verification';
+  end if;
+  perform graphile_worker.remove_job('integration-webhook:' || v_webhook::text);
+
+  update tenancy.businesses set status = 'suspended' where id = b1;
+  select outcome into v_outcome
+    from private.accept_integration_webhook('standin', repeat('ab', 32), '{}', '\x7b7d');
+  if v_outcome <> 'unknown' then
+    raise exception 'a business that is not active should take no webhook, said %', v_outcome;
+  end if;
+  update tenancy.businesses set status = 'active' where id = b1;
+
+  select business_id into v_found
+    from private.find_integration_connect_attempt(sha256(convert_to('integrations:' || b1::text, 'UTF8')));
+  if v_found is distinct from b1 then
+    raise exception 'a live attempt should name its business';
+  end if;
+  update integrations.connect_attempts set expires_at = now() - interval '2 hours'
+    where business_id = b1;
+  if exists (select from private.find_integration_connect_attempt(
+               sha256(convert_to('integrations:' || b1::text, 'UTF8')))) then
+    raise exception 'an expired attempt should name nothing';
+  end if;
+
+  begin
+    insert into integrations.connections (business_id, provider, secret_id)
+      values (b1, 'google', v_secret);
+    raise exception 'expected Google Calendar''s key to be refused as a provider';
+  exception when check_violation then null;
+  end;
+  begin
+    update integrations.connections set status = 'needs_attention' where id = v_connection;
+    raise exception 'expected needs_attention without a reason to be refused';
+  exception when check_violation then null;
+  end;
+  begin
+    update integrations.connections set status = 'disconnected' where id = v_connection;
+    raise exception 'expected a disconnection without its reason and time to be refused';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into integrations.connections (business_id, provider, account_ref, account_label,
+                                          status, secret_id)
+      values (b1, 'standin', 'T0001', 'Again', 'connected', v_secret);
+    raise exception 'expected a second live row for the same account to be refused';
+  exception when unique_violation then null;
+  end;
+  begin
+    insert into integrations.connections (business_id, provider, account_ref, account_label,
+                                          status, secret_id, is_primary)
+      values (b1, 'standin', 'T0002', 'Other', 'connected', v_secret, true);
+    raise exception 'expected a second primary account to be refused';
+  exception when unique_violation then null;
+  end;
+  begin
+    insert into integrations.connections (business_id, provider, status, secret_id)
+      values (b1, 'standin', 'connected', v_secret);
+    raise exception 'expected a connected row without its account to be refused';
+  exception when check_violation then null;
+  end;
+
+  update integrations.connections set next_check_at = now() - interval '1 minute'
+    where id = v_connection;
+  if not exists (select from private.due_integration_checks(10) where connection_id = v_connection) then
+    raise exception 'a connected account past its check time should be due';
+  end if;
+  update integrations.connections
+    set status = 'needs_attention', error_code = 'reauthorize', error_detail = 'Sign in again.'
+    where id = v_connection;
+  if exists (select from private.due_integration_checks(10) where connection_id = v_connection) then
+    raise exception 'an account waiting to be signed into again should not be checked';
+  end if;
+
+  insert into integrations.activity (business_id, connection_id, kind, at)
+    values (b1, v_connection, 'check_ok', now() - interval '31 days');
+  insert into integrations.activity (business_id, connection_id, kind)
+    select b1, v_connection, 'check_ok' from generate_series(1, 201);
+  update intake.webhooks set processed_at = now(), signature_valid = false,
+                             received_at = now() - interval '2 days'
+    where id = v_webhook;
+  perform private.maintain_integrations(10000);
+  if exists (select from integrations.activity where connection_id = v_connection
+                                                 and at < now() - interval '30 days')
+     or (select count(*) from integrations.activity where connection_id = v_connection) > 200 then
+    raise exception 'activity past thirty days or beyond two hundred rows should be cleared';
+  end if;
+  if exists (select from intake.webhooks where id = v_webhook)
+     or exists (select from integrations.connect_attempts where business_id = b1) then
+    raise exception 'a badly signed webhook after a day and an old attempt should be cleared';
+  end if;
+  if not exists (select from integrations.connections where id = v_connection) then
+    raise exception 'a live connection should stay';
+  end if;
+  update integrations.connections
+    set status = 'disconnected', disconnected_reason = 'user', error_code = null,
+        error_detail = null, is_primary = false, secret_id = null,
+        disconnected_at = now() - interval '31 days'
+    where id = v_connection;
+  perform private.maintain_integrations(10000);
+  if exists (select from integrations.connections where id = v_connection) then
+    raise exception 'a connection disconnected a month ago, its credentials gone, should be cleared';
+  end if;
+  raise notice 'ok: integration webhooks, attempts, states, checks and retention hold';
+end $$;
+reset role;

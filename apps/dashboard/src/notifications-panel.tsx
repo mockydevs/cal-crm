@@ -56,6 +56,8 @@ function useSentence(): (notification: Notification) => string {
         return notification.body ?? t`The workflow ${title} sent a notice.`;
       case 'calendar.google_disconnected':
         return t`Google Calendar was disconnected. Bookings no longer check it: connect it again.`;
+      case 'integration.needs_attention':
+        return t`An integration needs you: ${title}`;
     }
   };
 }

@@ -54,7 +54,8 @@ test('finds two contacts one Gmail inbox reaches, reviews and rejects them, and 
   await expect(
     panel.getByRole('cell', { name: `janedoe${suffix}+news@googlemail.com` }),
   ).toBeVisible();
-  await expect(page.getByRole('button', { name: /merge/iu })).toHaveCount(0);
+  // Merge opens Merge Contacts (contact-merge.spec.ts); this test rejects them instead.
+  await expect(panel.getByRole('button', { name: 'Merge', exact: true })).toBeVisible();
   await panel.getByRole('button', { name: 'Reject', exact: true }).click();
   const confirm = page.getByRole('dialog', { name: 'Reject these duplicates?' });
   await confirm.getByRole('button', { name: 'Reject', exact: true }).click();

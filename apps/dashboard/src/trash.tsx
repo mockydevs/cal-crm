@@ -23,6 +23,7 @@ import {
   type InfiniteData,
   type UseInfiniteQueryResult,
 } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
 import { Trash2 } from 'lucide-react';
 import { useCallback, useState, type ReactElement } from 'react';
 
@@ -165,6 +166,21 @@ export function TrashPage(): ReactElement {
                     {kindName(item)} · <Trans>Trashed {trashedOn}</Trans> ·{' '}
                     <Trans>Deleted for good on {purgedOn}</Trans>
                   </p>
+                  {/* A merge can't be undone, so a merged contact is never restored. */}
+                  {item.mergedInto === null ? null : (
+                    <p className="text-sm">
+                      <Trans>
+                        Merged into{' '}
+                        <Link
+                          to="/b/$slug/contacts/$contactId"
+                          params={{ slug: business.slug, contactId: item.mergedInto }}
+                          className="text-link underline"
+                        >
+                          the contact kept
+                        </Link>
+                      </Trans>
+                    </p>
+                  )}
                 </div>
                 {confirming === item.id ? (
                   <div
@@ -198,17 +214,19 @@ export function TrashPage(): ReactElement {
                   </div>
                 ) : (
                   <div className="flex flex-wrap gap-2">
-                    <Button
-                      variant="secondary"
-                      size="small"
-                      aria-label={t`Restore ${name}`}
-                      disabled={busy === item.id}
-                      onClick={() => {
-                        void act(item, 'restore');
-                      }}
-                    >
-                      <Trans>Restore</Trans>
-                    </Button>
+                    {item.mergedInto === null ? (
+                      <Button
+                        variant="secondary"
+                        size="small"
+                        aria-label={t`Restore ${name}`}
+                        disabled={busy === item.id}
+                        onClick={() => {
+                          void act(item, 'restore');
+                        }}
+                      >
+                        <Trans>Restore</Trans>
+                      </Button>
+                    ) : null}
                     {first?.canPurge === true ? (
                       <Button
                         variant="quiet"

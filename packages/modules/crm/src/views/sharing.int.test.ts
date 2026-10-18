@@ -183,10 +183,10 @@ it('lets a viewer open and use the list, never change, share or delete it', asyn
     ForbiddenError,
   );
   for (const refused of [
-    rename(viewer, shared, 'Renamed'),
-    call('deleteView', viewer, { revision: shared.revision }, { id: shared.id }),
+    () => rename(viewer, shared, 'Renamed'),
+    () => call('deleteView', viewer, { revision: shared.revision }, { id: shared.id }),
   ])
-    await expect(refused).rejects.toBeInstanceOf(ForbiddenError);
+    await expect(refused()).rejects.toBeInstanceOf(ForbiddenError);
   expect((await views(c.owner.as()))[0]).toMatchObject({
     name: 'Garden venues',
     revision: shared.revision,

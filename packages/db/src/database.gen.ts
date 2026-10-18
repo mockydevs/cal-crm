@@ -1875,6 +1875,20 @@ export interface FormsDailyStats {
   views: Generated<number>;
 }
 
+export interface FormsExternalSubmissions {
+  business_id: string;
+  client_submission_id: string;
+  contact_id: string | null;
+  fields: Json;
+  form_name: string;
+  id: Generated<string>;
+  lead_source: string | null;
+  page_host: string;
+  page_path: string;
+  submitted_at: Generated<Timestamp>;
+  view_mark: string;
+}
+
 export interface FormsForms {
   allowed_origins: Generated<string[]>;
   business_id: string;
@@ -1911,6 +1925,54 @@ export interface FormsSubmissions {
   submitted_at: Generated<Timestamp>;
   user_agent: string | null;
   utm: Generated<Json>;
+}
+
+export interface FormsTrackingEvents {
+  business_id: string;
+  campaign: Generated<Json>;
+  contact_id: string | null;
+  device_type: string | null;
+  form_name: string | null;
+  id: Generated<string>;
+  kind: string;
+  page_host: string;
+  page_path: string;
+  page_title: string | null;
+  received_at: Generated<Timestamp>;
+  referrer_domain: string | null;
+  session_id: string | null;
+  submission_id: string | null;
+  visitor_id: string | null;
+}
+
+export interface FormsTrackingPageDays {
+  business_id: string;
+  day: Timestamp;
+  form_submissions: Generated<number>;
+  last_seen_at: Generated<Timestamp>;
+  page_host: string;
+  page_path: string;
+  page_views: Generated<number>;
+}
+
+export interface FormsTrackingSettings {
+  allowed_domains: Generated<string[]>;
+  business_id: string;
+  created_at: Generated<Timestamp>;
+  form_capture: Generated<boolean>;
+  page_views: Generated<boolean>;
+  revision: Generated<number>;
+  tracking_id: string;
+  updated_at: Generated<Timestamp>;
+  visitor_ids: Generated<string>;
+}
+
+export interface FormsTrackingVisitors {
+  business_id: string;
+  contact_id: string;
+  first_seen_at: Generated<Timestamp>;
+  last_seen_at: Generated<Timestamp>;
+  visitor_id: string;
 }
 
 export interface ImportsIdMap {
@@ -2005,11 +2067,68 @@ export interface IntakeWebhooks {
   error: string | null;
   headers: Json;
   id: Generated<string>;
+  integration_connection_id: string | null;
   processed_at: Timestamp | null;
   provider: string;
   provider_connection_id: string | null;
   received_at: Generated<Timestamp>;
   signature_valid: boolean | null;
+}
+
+export interface IntegrationsActivity {
+  at: Generated<Timestamp>;
+  business_id: string;
+  connection_id: string;
+  detail: string | null;
+  error_code: string | null;
+  id: Generated<string>;
+  kind: string;
+}
+
+export interface IntegrationsConnectAttempts {
+  business_id: string;
+  created_at: Generated<Timestamp>;
+  expires_at: Generated<Timestamp>;
+  id: Generated<string>;
+  provider: string;
+  state_digest: Buffer;
+  user_id: string;
+}
+
+export interface IntegrationsConnections {
+  account_label: string | null;
+  account_ref: string | null;
+  business_id: string;
+  connected_at: Generated<Timestamp>;
+  connected_by: string | null;
+  created_at: Generated<Timestamp>;
+  disconnected_at: Timestamp | null;
+  disconnected_reason: string | null;
+  error_code: string | null;
+  error_detail: string | null;
+  id: Generated<string>;
+  is_primary: Generated<boolean>;
+  last_error_at: Timestamp | null;
+  last_ok_at: Timestamp | null;
+  next_check_at: Generated<Timestamp>;
+  provider: string;
+  revision: Generated<number>;
+  scopes_granted: Generated<string[]>;
+  secret_id: string | null;
+  settings: Generated<Json>;
+  status: Generated<string>;
+  updated_at: Generated<Timestamp>;
+  webhook_digest: string | null;
+}
+
+export interface IntegrationsExternalIds {
+  business_id: string;
+  connection_id: string;
+  entity_id: string;
+  entity_kind: string;
+  external_id: string;
+  external_version: string | null;
+  synced_at: Generated<Timestamp>;
 }
 
 export interface MessagingCallLegs {
@@ -3270,14 +3389,23 @@ export interface DB {
   "files.files": FilesFiles;
   "files.folders": FilesFolders;
   "forms.daily_stats": FormsDailyStats;
+  "forms.external_submissions": FormsExternalSubmissions;
   "forms.forms": FormsForms;
   "forms.submissions": FormsSubmissions;
+  "forms.tracking_events": FormsTrackingEvents;
+  "forms.tracking_page_days": FormsTrackingPageDays;
+  "forms.tracking_settings": FormsTrackingSettings;
+  "forms.tracking_visitors": FormsTrackingVisitors;
   "imports.id_map": ImportsIdMap;
   "imports.job_rows": ImportsJobRows;
   "imports.jobs": ImportsJobs;
   "intake.public_rate_limit_clients": IntakePublicRateLimitClients;
   "intake.public_rate_limit_totals": IntakePublicRateLimitTotals;
   "intake.webhooks": IntakeWebhooks;
+  "integrations.activity": IntegrationsActivity;
+  "integrations.connect_attempts": IntegrationsConnectAttempts;
+  "integrations.connections": IntegrationsConnections;
+  "integrations.external_ids": IntegrationsExternalIds;
   "messaging.call_legs": MessagingCallLegs;
   "messaging.call_progress": MessagingCallProgress;
   "messaging.calls": MessagingCalls;

@@ -20,9 +20,11 @@ import {
   createAssistantThread,
   createForm,
   createContact,
+  createDeal,
   dismissProposal,
   getAssistantContext,
   getAssistantThread,
+  getDeal,
   getForm,
   getPipelines,
   getContactJourney,
@@ -33,6 +35,7 @@ import {
   listForms,
   permissionsOf,
   postAssistantTurn,
+  savePipelines,
   undoProposal,
   updateForm,
   type AssistantMessage,
@@ -42,6 +45,7 @@ import {
   type Form,
   type PipelineConfiguration,
   type AutomationDraftSaved,
+  type Deal,
 } from '@repo/contracts';
 import { connectDatabase, type Database } from '@repo/db';
 import { ConflictError, NotFoundError, parsePublicId, type TenantContext } from '@repo/kernel';
@@ -1191,6 +1195,101 @@ describe('assistant harness reliability', () => {
     });
     await call(applyProposal, dana.as(), { params: { id: card.proposal.id }, body: {} });
     expect((await call(getPipelines, dana.as())).items).toMatchObject(pipelines);
+    expect(faults).toEqual([]);
+  });
+
+  it('moves a deal to another stage only when the person applies the card, and can undo it', async () => {
+    const { dana } = await setUp();
+    const stage = (name: string) => ({ name, description: '', archived: false, probability: 50 });
+    await call(savePipelines, dana.as(), {
+      body: {
+        revision: (await call(getPipelines, dana.as())).revision,
+        items: [
+          {
+            name: 'Sales',
+            description: '',
+            archived: false,
+            colorStyle: 'dot',
+            stages: [stage('New lead'), stage('Negotiating')],
+          },
+        ],
+      },
+    });
+    const [sales] = (await call(getPipelines, dana.as())).items;
+    const [first, negotiating] = sales?.stages ?? [];
+    if (sales === undefined || first === undefined || negotiating === undefined)
+      throw new Error('Missing stages.');
+    const made = await call(createDeal, dana.as(), {
+      body: {
+        name: 'New Lead - Kanyapong Demo',
+        pipelineId: sales.id,
+        stageId: first.id,
+        amount: '1200',
+        currency: 'KES',
+      },
+    });
+    const started = await say(dana, 'Move the Kanyapong Demo deal to Negotiating', {
+      route: '/opportunities',
+    });
+    await runTurns([
+      () => ({ calls: [{ name: 'crm_getDeal', input: { params: { id: made.id } } }] }),
+      (told) => {
+        const now = told('getDeal') as unknown as Deal;
+        return {
+          calls: [
+            {
+              name: 'crm_updateDeal',
+              input: {
+                params: { id: made.id },
+                body: {
+                  name: now.name,
+                  pipelineId: now.pipelineId,
+                  stageId: negotiating.id,
+                  amount: now.amount,
+                  currency: now.currency,
+                  expectedCloseDate: now.expectedCloseDate,
+                  status: now.status,
+                  outcomeReason: now.outcomeReason,
+                  revision: now.revision,
+                },
+              },
+            },
+          ],
+        };
+      },
+      () => ({ text: 'The move is waiting for you to apply it.' }),
+    ]);
+    // Nothing moved: a card waits.
+    const read = () => call(getDeal, dana.as(), { params: { id: made.id } });
+    expect((await read()).stageName).toBe('New lead');
+    const card = (await messagesOf(dana, started)).find((message) => message.kind === 'proposal');
+    if (card?.kind !== 'proposal' || card.proposal === null)
+      throw new Error('No deal confirmation.');
+    expect(card).toMatchObject({
+      text: 'Move the deal “New Lead - Kanyapong Demo” to Negotiating',
+      proposal: {
+        kind: 'deal_update',
+        status: 'pending',
+        change: {
+          kind: 'crm_change',
+          operationId: 'updateDeal',
+          details: {
+            fromStage: 'New lead',
+            stage: 'Negotiating',
+            changes: { stageId: { from: first.id, to: negotiating.id } },
+          },
+        },
+      },
+    });
+    const applied = await call(applyProposal, dana.as(), {
+      params: { id: card.proposal.id },
+      body: {},
+    });
+    expect(applied).toMatchObject({ status: 'applied', undo: { available: true } });
+    expect(await read()).toMatchObject({ stageName: 'Negotiating', amount: made.amount });
+    const undone = await call(undoProposal, dana.as(), { params: { id: card.proposal.id } });
+    expect(undone.status).toBe('undone');
+    expect(await read()).toMatchObject({ stageName: 'New lead', amount: made.amount });
     expect(faults).toEqual([]);
   });
 

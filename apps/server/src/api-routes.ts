@@ -5,6 +5,7 @@
 // readers of the business's profile, a contact and an opportunity.
 import type { ApiRoute } from '@repo/commands';
 import {
+  aiContactMerge,
   aiRoutes,
   createAssistantChatRoutes,
   createAssistantRoutes,
@@ -12,6 +13,7 @@ import {
   createMemoryRoutes,
 } from '@repo/module-ai';
 import {
+  automationContactMerge,
   bulkWorkflows,
   createBulkMessages,
   contactValues,
@@ -25,6 +27,7 @@ import {
 } from '@repo/module-automation';
 import { readTeamPeople, readUserNames, type Authentication } from '@repo/module-auth';
 import {
+  calendarContactMerge,
   createAppointmentRoutes,
   createBlockedSlotRoutes,
   createCalendarEventRoutes,
@@ -64,9 +67,9 @@ import {
   teamRoutes,
   userRoutes,
 } from '@repo/module-tenancy';
-import { createCommerceRoutes } from '@repo/module-commerce';
+import { commerceContactMerge, createCommerceRoutes } from '@repo/module-commerce';
 import { checkBusinessLogo, checkUserAvatar } from '@repo/module-files';
-import { readFormNames } from '@repo/module-forms';
+import { externalTrackingRoutes, formsContactMerge, readFormNames } from '@repo/module-forms';
 import { createNotificationRoutes } from '@repo/module-notifications';
 import { createReportingRoutes } from '@repo/module-reporting';
 import type { SealingVault } from '@repo/module-vault';
@@ -91,6 +94,7 @@ import {
   readCalendarSenderChoices,
   readEligibleCalendarSenders,
   smsDeliveryAvailable,
+  messagingContactMerge,
   triggerLinkRoutes,
 } from '@repo/module-messaging';
 import { assistantPage, proposables } from './assistant.js';
@@ -228,12 +232,25 @@ export const apiRoutes = (
     ),
     // Settings → Manage Scoring: profile and rule commands, and a contact's score.
     ...scoringRoutes,
+    // Settings → External Tracking: the tracking id, its settings and Troubleshoot.
+    ...externalTrackingRoutes,
     // Duplicate contacts: the deduplication preferences, the lookup, Manage Duplicates and
     // a contact's possible duplicates.
     ...contactDuplicateRoutes,
     // Merging contacts. Each module that keeps rows of a contact hands in its part of a
-    // merge here, in the order they run.
-    ...contactMergeRoutes({ participants: [] }),
+    // merge here, in the order they run and take their locks. Automation first: a workflow
+    // step holds its run's row and may then queue a message, which holds the business; so
+    // the runs are taken before messaging takes the business, and both before any contact.
+    ...contactMergeRoutes({
+      participants: [
+        automationContactMerge,
+        messagingContactMerge,
+        formsContactMerge,
+        calendarContactMerge,
+        commerceContactMerge,
+        aiContactMerge,
+      ],
+    }),
     // Deleting a field for good names the templates and automations that use it, which only
     // the automation module can read.
     ...createFieldDeletionRoutes({ uses: readFieldUses }),

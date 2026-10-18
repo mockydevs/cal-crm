@@ -1,5 +1,7 @@
 import { defineCommand, requireBusiness } from '@repo/commands';
 import {
+  DUPLICATE_RECORD_VALUE,
+  MAX_CUSTOM_RECORD_NAME,
   setRecordField,
   setRecordFieldInput,
   confirmRecordField,
@@ -7,7 +9,7 @@ import {
   type RecordField,
   type FieldDefinition,
 } from '@repo/contracts';
-import type { DatabaseTransaction } from '@repo/db';
+import { explainUniqueViolation, type DatabaseTransaction } from '@repo/db';
 import {
   ConflictError,
   ForbiddenError,
@@ -41,16 +43,58 @@ function semanticValue(definition: FieldDefinition, value: FieldValue): unknown 
     return Object.entries(value).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
   return value;
 }
-function valueColumns(definition: FieldDefinition, value: FieldValue) {
-  const columns: {
-    value_text: string | null;
-    value_number: string | null;
-    value_date: string | null;
-    value_datetime: Date | null;
-    value_bool: boolean | null;
-    value_options: string[] | null;
-    value_json: string | null;
-  } = {
+/**
+ * A custom object's primary field names each record, in a column of 200 characters: its
+ * value is required, and as long as a name may be, a number's digits too.
+ */
+export function checkPrimaryValue(
+  definition: FieldDefinition,
+  value: FieldValue,
+  path: string,
+): void {
+  if (definition.primary === true) primaryName(definition, value, path);
+}
+
+/** A primary field's value as the record's name, or why it can't be one. */
+export function primaryName(definition: FieldDefinition, value: FieldValue, path: string): string {
+  if (typeof value !== 'string' || value.trim() === '')
+    throw new ValidationError([
+      {
+        path,
+        code: 'required',
+        message: `Enter the ${definition.label}: it names the record.`,
+      },
+    ]);
+  if (value.length > MAX_CUSTOM_RECORD_NAME)
+    throw new ValidationError([
+      {
+        path,
+        code: 'too_long',
+        message: `Use at most ${String(MAX_CUSTOM_RECORD_NAME)} characters: the ${definition.label} names the record.`,
+      },
+    ]);
+  return value;
+}
+
+/** A unique field's value that another record of its object has: GoHighLevel's words. */
+export const duplicateValue = (path: string): ((error: unknown) => never) =>
+  explainUniqueViolation({
+    field_unique_values_pkey: () =>
+      new ValidationError([{ path, code: 'duplicate_value', message: DUPLICATE_RECORD_VALUE }]),
+  });
+
+/** The columns a field value is kept in: its type's, and null in the rest. */
+interface ValueColumns {
+  value_text: string | null;
+  value_number: string | null;
+  value_date: string | null;
+  value_datetime: Date | null;
+  value_bool: boolean | null;
+  value_options: string[] | null;
+  value_json: string | null;
+}
+function valueColumns(definition: FieldDefinition, value: FieldValue): ValueColumns {
+  const columns: ValueColumns = {
     value_text: null,
     value_number: null,
     value_date: null,
@@ -110,6 +154,7 @@ export async function requireValueDefinition(
     )
     .selectAll('f')
     .select(['o.key as object_key', 'o.kind as object_kind'])
+    .select('o.primary_field_id as object_primary_field_id')
     .where('f.object_type_id', '=', objectTypeId)
     .where('f.id', '=', parsePublicId('field', fieldId) ?? '')
     .where('f.merged_into_field_id', 'is', null);
@@ -170,6 +215,7 @@ export const setRecordFieldCommand = defineCommand({
         },
       ]);
     const value = await validateFieldValue(trx, definition, input.value, current.value, businessId);
+    checkPrimaryValue(definition, value, '/value');
     if (
       JSON.stringify(semanticValue(definition, value)) ===
       JSON.stringify(semanticValue(definition, current.value))
@@ -234,7 +280,8 @@ export const setRecordFieldCommand = defineCommand({
       .onConflict((conflict) =>
         conflict.columns(['business_id', 'record_id', 'field_id']).doUpdateSet(values),
       )
-      .execute();
+      .execute()
+      .catch(duplicateValue('/value'));
     return presentValue(
       definition,
       await trx

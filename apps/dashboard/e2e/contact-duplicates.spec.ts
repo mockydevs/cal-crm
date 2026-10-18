@@ -1,7 +1,7 @@
 // Duplicate contacts against the built dashboard, with the API stood in for: Contacts → ⋯
 // → Manage Duplicates (find by email, phone or name; review; reject), a contact's "Possible
-// duplicates", and Business Profile → Contact Deduplication Preferences. There is no Merge
-// button anywhere yet. The real server is exercised by @repo/e2e.
+// duplicates", and Business Profile → Contact Deduplication Preferences. Merge in the review
+// opens Merge Contacts (contact-merge.spec.ts). The real server is exercised by @repo/e2e.
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 import {
@@ -76,7 +76,7 @@ for (const width of [1440, 360]) {
     await expect(panel.getByRole('table')).toBeVisible();
     await expect(panel.getByRole('columnheader')).toHaveText(['Jane Doe', 'Jane Doe']);
     await expect(panel.getByRole('cell', { name: 'janedoe+news@gmail.com' })).toBeVisible();
-    await expect(page.getByRole('button', { name: /merge/iu })).toHaveCount(0);
+    await expect(panel.getByRole('button', { name: 'Merge' })).toBeVisible();
     await expectNoAccessibilityViolations(page);
     await page.keyboard.press('Escape');
     await expect(panel).toBeHidden();
@@ -191,6 +191,7 @@ test("shows a contact's possible duplicates and opens the same review", async ({
   await expect(panel.getByRole('heading', { name: 'janedoe@gmail.com' })).toBeVisible();
   // Reject is Manage Duplicates' (contacts.merge), which this role does not have.
   await expect(panel.getByRole('button', { name: 'Reject' })).toHaveCount(0);
+  await expect(panel.getByRole('button', { name: 'Merge' })).toHaveCount(0);
   await expectNoAccessibilityViolations(page);
   await page.keyboard.press('Escape');
   await expect(chip).toBeFocused();

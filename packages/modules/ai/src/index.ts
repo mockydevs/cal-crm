@@ -1,4 +1,5 @@
 import { requireBusiness, type ApiRoute, type Route } from '@repo/commands';
+export { aiContactMerge } from './contact-merge.js';
 export { createContactJourneyRoute } from './assistant-journey.js';
 import { getContactMemory, parseInput, type ContactMemory } from '@repo/contracts';
 import { withTenant } from '@repo/db';
@@ -31,6 +32,7 @@ export {
   type AssistantTurnOptions,
 } from './assistant-turn.js';
 export { createTestAiConnectionTask } from './connection-tests.js';
+export { readAiModelsIntegration } from './integration-reading.js';
 export type { PeopleNames, SecretSealer } from './connections.js';
 export {
   AI_JOBS,

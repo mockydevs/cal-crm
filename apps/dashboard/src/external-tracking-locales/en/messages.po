@@ -1,0 +1,320 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-18 21:31+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "A Content-Security-Policy on your website must allow this CRM in script-src and connect-src."
+msgstr "A Content-Security-Policy on your website must allow this CRM in script-src and connect-src."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "A form appears here only when it is a real <form> with named, visible fields, and becomes a contact only with an email or phone field."
+msgstr "A form appears here only when it is a real <form> with named, visible fields, and becomes a contact only with an email or phone field."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "A form with an email or phone field creates or updates the contact."
+msgstr "A form with an email or phone field creates or updates the contact."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "A new tracking ID couldn't be made."
+msgstr "A new tracking ID couldn't be made."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "A new tracking ID stops the old script at once: paste the new one on every website."
+msgstr "A new tracking ID stops the old script at once: paste the new one on every website."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "A new tracking ID was made. Copy the new script from Installation."
+msgstr "A new tracking ID was made. Copy the new script from Installation."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "A random ID kept in the visitor's browser links their page views to the contact their form creates."
+msgstr "A random ID kept in the visitor's browser links their page views to the contact their form creates."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Add data-debug=\"true\" to the tag and open the browser's console: the script says what it sent."
+msgstr "Add data-debug=\"true\" to the tag and open the browser's console: the script says what it sent."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Allowed websites"
+msgstr "Allowed websites"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Always"
+msgstr "Always"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Browsers that send Global Privacy Control are not recognised."
+msgstr "Browsers that send Global Privacy Control are not recognised."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Capture form submissions"
+msgstr "Capture form submissions"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Check the tag is on the page and still has its data-tracking-id. Google Tag Manager can strip data attributes: paste the tag into the page itself."
+msgstr "Check the tag is on the page and still has its data-tracking-id. Google Tag Manager can strip data attributes: paste the tag into the page itself."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Contact"
+msgstr "Contact"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Copy and paste this tracking code into every page of your site, just before the closing </body> tag"
+msgstr "Copy and paste this tracking code into every page of your site, just before the closing </body> tag"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Copy Script"
+msgstr "Copy Script"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Each page a visitor opens, kept 30 days, and counted per page for 13 months."
+msgstr "Each page a visitor opens, kept 30 days, and counted per page for 13 months."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Event"
+msgstr "Event"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Events Tracked"
+msgstr "Events Tracked"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Every returning visitor is recognised."
+msgstr "Every returning visitor is recognised."
+
+#: src/external-tracking/shared.tsx
+msgid "External Tracking"
+msgstr "External Tracking"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "External Tracking Script Installation"
+msgstr "External Tracking Script Installation"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Fields must be visible on the page. Hidden fields are not captured."
+msgstr "Fields must be visible on the page. Hidden fields are not captured."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Form"
+msgstr "Form"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Form capture is turned off in Settings."
+msgstr "Form capture is turned off in Settings."
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Form Fills / Optins"
+msgstr "Form Fills / Optins"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Form submission"
+msgstr "Form submission"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Form submissions"
+msgstr "Form submissions"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Forms inside an iframe are not captured. Passwords and card numbers never are."
+msgstr "Forms inside an iframe are not captured. Passwords and card numbers never are."
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Give every field a name attribute, such as email, phone or first_name."
+msgstr "Give every field a name attribute, such as email, phone or first_name."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "If nothing arrives"
+msgstr "If nothing arrives"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "If your website sets a Content-Security-Policy, allow {origin} in its script-src and connect-src. Add data-debug=\"true\" to the tag to see what the script does in the browser's console."
+msgstr "If your website sets a Content-Security-Policy, allow {origin} in its script-src and connect-src. Add data-debug=\"true\" to the tag to see what the script does in the browser's console."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "In the browser's network tab, the script's requests should answer 200. A 403 means the website is not in Settings → Allowed websites, or the tracking ID was regenerated."
+msgstr "In the browser's network tab, the script's requests should answer 200. A 403 means the website is not in Settings → Allowed websites, or the tracking ID was regenerated."
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Include an email or phone field: that is how the contact is created or found."
+msgstr "Include an email or phone field: that is how the contact is created or found."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Last event received {lastSeen}."
+msgstr "Last event received {lastSeen}."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Last seen"
+msgstr "Last seen"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Never"
+msgstr "Never"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "No event has been received. Install the script, then open a page of your website."
+msgstr "No event has been received. Install the script, then open a page of your website."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Not detected yet"
+msgstr "Not detected yet"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "One website a line, such as example.com; its subdomains are included. Leave it empty to accept any website the script is on."
+msgstr "One website a line, such as example.com; its subdomains are included. Leave it empty to accept any website the script is on."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Only people who manage sites can change these settings."
+msgstr "Only people who manage sites can change these settings."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Page"
+msgstr "Page"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Page view"
+msgstr "Page view"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Page Views"
+msgstr "Page Views"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Page views are turned off in Settings."
+msgstr "Page views are turned off in Settings."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Page views stay anonymous; forms still create or find contacts."
+msgstr "Page views stay anonymous; forms still create or find contacts."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Pages"
+msgstr "Pages"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Receiving events"
+msgstr "Receiving events"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Recent events"
+msgstr "Recent events"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Recognise returning visitors"
+msgstr "Recognise returning visitors"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Refresh"
+msgstr "Refresh"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Regenerate"
+msgstr "Regenerate"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Regenerate tracking ID"
+msgstr "Regenerate tracking ID"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Regenerate tracking ID?"
+msgstr "Regenerate tracking ID?"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Save"
+msgstr "Save"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Script copied."
+msgstr "Script copied."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Script status"
+msgstr "Script status"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Settings saved."
+msgstr "Settings saved."
+
+#: src/external-tracking/installation-tab.tsx
+msgid "The script couldn't be copied. Select it and copy it yourself."
+msgstr "The script couldn't be copied. Select it and copy it yourself."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "The script on your websites stops working at once, until you paste the new one."
+msgstr "The script on your websites stops working at once, until you paste the new one."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "The settings couldn't be saved."
+msgstr "The settings couldn't be saved."
+
+#: src/external-tracking/installation-tab.tsx
+msgid "The tracking script couldn't be loaded."
+msgstr "The tracking script couldn't be loaded."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "The tracking settings couldn't be loaded."
+msgstr "The tracking settings couldn't be loaded."
+
+#: src/external-tracking/settings-tab.tsx
+msgid "These are not websites: {listed}"
+msgstr "These are not websites: {listed}"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Time"
+msgstr "Time"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Track page views"
+msgstr "Track page views"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Tracking ID"
+msgstr "Tracking ID"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Tracking script"
+msgstr "Tracking script"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Tracks when a user views any page where the script is installed."
+msgstr "Tracks when a user views any page where the script is installed."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Unknown visitor"
+msgstr "Unknown visitor"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "Unless their browser asks not to be tracked (recommended)"
+msgstr "Unless their browser asks not to be tracked (recommended)"
+
+#: src/external-tracking/installation-tab.tsx
+msgid "Use a real <form> element."
+msgstr "Use a real <form> element."
+
+#: src/external-tracking/shared.tsx
+msgid "Use our tracking script on your external sites to bring all your analytics - all in one place, with no extra tools needed."
+msgstr "Use our tracking script on your external sites to bring all your analytics - all in one place, with no extra tools needed."
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "View contact"
+msgstr "View contact"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "Views (30 days)"
+msgstr "Views (30 days)"
+
+#: src/external-tracking/settings-tab.tsx
+msgid "What the script records"
+msgstr "What the script records"
+
+#: src/external-tracking/troubleshoot-tab.tsx
+msgid "What the script reported couldn't be loaded."
+msgstr "What the script reported couldn't be loaded."
+
+#: src/external-tracking/installation-tab.tsx
+msgid "When a user fills a form on any page where the script is installed. Forms should follow these requirements:"
+msgstr "When a user fills a form on any page where the script is installed. Forms should follow these requirements:"

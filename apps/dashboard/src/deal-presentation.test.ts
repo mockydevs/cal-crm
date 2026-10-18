@@ -1,6 +1,14 @@
 import type { Deal, Pipeline } from '@repo/contracts';
 import { describe, expect, it } from 'vitest';
-import { amountOf, probabilityOf, stageMarkOf, stageTotals } from './deal-presentation';
+import {
+  accentTint,
+  amountOf,
+  probabilityOf,
+  STAGE_PALETTE,
+  stageAccentOf,
+  stageMarkOf,
+  stageTotals,
+} from './deal-presentation';
 
 const stages: Pipeline['stages'] = [
   {
@@ -21,6 +29,15 @@ const stages: Pipeline['stages'] = [
   },
 ];
 const [green, plain] = stages.map((stage) => stage.id) as [string, string];
+
+describe('stageAccentOf', () => {
+  it('uses the stage’s own colour, else the palette by the stage’s place', () => {
+    expect(stageAccentOf({ stages }, green)).toBe('#12b76a');
+    expect(stageAccentOf({ stages }, plain)).toBe(STAGE_PALETTE[1]);
+    expect(stageAccentOf({ stages }, 'stage_unknown')).toBe(STAGE_PALETTE[0]);
+    expect(accentTint('#12b76a', 8)).toBe('color-mix(in srgb, #12b76a 8%, transparent)');
+  });
+});
 
 describe('stageMarkOf', () => {
   it('draws nothing unless the pipeline draws colours and the stage has one', () => {

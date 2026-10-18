@@ -10,15 +10,16 @@ import { address, verifyDay } from './servers.js';
 import { askForSignInLink, emailTo } from './signing-in.js';
 
 /**
- * Signs the install's owner in by the link of a new email. Each Verify day file signs the
- * same person in, in either order, so the link is the one sent after those already there.
+ * Signs a fixture owner in with a fresh link, after any mail already sent to that owner.
  */
-export async function signInToChecks(page: Page): Promise<void> {
+export async function signInToChecks(
+  page: Page,
+  email: string = verifyDay.owner.email,
+): Promise<void> {
   await page.goto(`${address('verifyDay')}/sign-in`);
-  const sent = (await mailbox({ apiUrl: address('mail') }).messagesTo(verifyDay.owner.email))
-    .length;
-  await askForSignInLink(page, verifyDay.owner.email);
-  await page.goto((await emailTo(verifyDay.owner.email, sent + 1)).link);
+  const sent = (await mailbox({ apiUrl: address('mail') }).messagesTo(email)).length;
+  await askForSignInLink(page, email);
+  await page.goto((await emailTo(email, sent + 1)).link);
 }
 
 /** Reads or writes the "Verify day" install's database as crm_owner. */
@@ -36,8 +37,8 @@ export async function checksQuery<Row extends pg.QueryResultRow>(
 }
 
 /** The dashboard's address for a page of the business, such as checks('/contacts'). */
-export function checks(path = ''): string {
-  return `${address('verifyDay')}/b/${verifyDay.business.slug}${path}`;
+export function checks(path = '', businessSlug: string = verifyDay.business.slug): string {
+  return `${address('verifyDay')}/b/${businessSlug}${path}`;
 }
 
 /**

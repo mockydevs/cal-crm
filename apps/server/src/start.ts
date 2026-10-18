@@ -13,6 +13,7 @@ import {
   createDraftReplyTask,
   createExtractContactTask,
   createTestAiConnectionTask,
+  readAiModelsIntegration,
 } from '@repo/module-ai';
 import { createAuthentication, readUserNames, type Authentication } from '@repo/module-auth';
 import {
@@ -22,10 +23,19 @@ import {
   createGoogleWorker,
   createPublicBookingHandlers,
   freshenGoogleBusy,
+  readGoogleCalendarIntegration,
   type AppointmentOptions,
   type GoogleSettings,
 } from '@repo/module-calendar';
-import { deliver } from '@repo/module-notifications';
+import { deliver, membersHolding } from '@repo/module-notifications';
+import {
+  acceptIntegrationWebhook,
+  completeIntegrationConnect,
+  createIntegrationRoutes,
+  createIntegrationWorker,
+  type IntegrationOptions,
+  type IntegrationProvider,
+} from '@repo/module-integrations';
 import {
   assignOwnerFromBooking,
   createImportRoutes,
@@ -39,6 +49,7 @@ import {
 import {
   lockActiveBusiness,
   readApiKeyNames,
+  readAppsIntegration,
   readCalendarMemberMemberships,
   readPersonGrants,
   resolveCalendarMember,
@@ -56,6 +67,7 @@ import {
   createBookingShownProof,
   createFormRoutes,
   createPublicFormHandlers,
+  createPublicTrackingHandlers,
   ownOrigin,
   readFormKeys,
 } from '@repo/module-forms';
@@ -88,6 +100,9 @@ import {
   queueCalendarConfirmation,
   smsDeliveryAvailable,
   createVoiceCallbackWorker,
+  readEmailableIntegration,
+  readMailboxIntegration,
+  readTwilioIntegration,
 } from '@repo/module-messaging';
 import { createSealingVault, createVault, type SealingVault, type Vault } from '@repo/module-vault';
 import { localStorage, s3Storage, type Storage } from '@repo/storage';
@@ -117,6 +132,7 @@ import { createHostResolver } from './sites-dns.js';
 import { loadWidgetScript } from './webchat-widget/transport.js';
 import { loadEmbedScript } from './forms-embed/transport.js';
 import { loadBookingEmbedScript } from './booking-embed.js';
+import { loadTrackingScript } from './external-tracking.js';
 import { createInstallAiGateway } from './worker/ai.js';
 import { startWorker } from './worker/worker.js';
 import { createMessagingDeliveryTasks, createVoiceTasks } from './worker/messaging-tasks.js';
@@ -180,6 +196,11 @@ export interface OutsideWorld {
    * constant list); a stand-in answers them in tests by being this fetch.
    */
   readonly googleFetch?: typeof fetch;
+  /**
+   * Providers Settings → Integrations can connect besides the install's own: a test's local
+   * stand-in. An install has none; no setting adds one.
+   */
+  readonly integrationProviders?: readonly IntegrationProvider[];
 }
 
 export async function start(
@@ -321,6 +342,58 @@ export async function start(
             });
           },
         });
+  // Settings → Integrations. The providers this install's code can connect (none ships yet;
+  // a test passes its stand-in), the connections that live on pages of their own read by
+  // their modules, and where providers send the browser back and their updates.
+  const integrationProviders = outside.integrationProviders ?? [];
+  const integrationOptions: IntegrationOptions = {
+    providers: integrationProviders,
+    vault: vault?.sealing,
+    redirectUri: (key) => `${config.publicUrl}${API_PREFIX}/integrations/${key}/callback`,
+    elsewhere: [
+      {
+        key: 'google_calendar',
+        available: google !== undefined && vault !== undefined,
+        read: readGoogleCalendarIntegration,
+      },
+      { key: 'mailboxes', available: vault !== undefined, read: readMailboxIntegration },
+      { key: 'emailable', available: vault !== undefined, read: readEmailableIntegration },
+      { key: 'twilio', available: vault !== undefined, read: readTwilioIntegration },
+      { key: 'ai_models', available: vault !== undefined, read: readAiModelsIntegration },
+      { key: 'apps_and_api_keys', available: true, read: readAppsIntegration },
+    ],
+    webhooks:
+      config.publicIntake === undefined
+        ? undefined
+        : { publicUrl: config.publicUrl, secret: config.publicIntake.secret },
+    people: readUserNames,
+  };
+  // The worker's part: reading and checking accounts, refreshing tokens, revoking, and
+  // verifying what providers sent. Only a role that opens secrets has it.
+  const integrationWorker =
+    vault?.opening === undefined
+      ? undefined
+      : createIntegrationWorker({
+          providers: integrationProviders,
+          vault: vault.opening,
+          fetch,
+          redirectUri: integrationOptions.redirectUri,
+          random: Math.random,
+          // Who connected it and whoever manages the business's integrations are told; the
+          // notification opens Settings → Integrations.
+          notifyAttention: async (trx, context, notice) => {
+            const managers = await membersHolding(trx, context, ['integrations.manage']);
+            await deliver(trx, context, {
+              kind: 'integration.needs_attention',
+              recipients: [notice.connectedBy, ...managers],
+              sourceKey: `integration.needs_attention:${notice.connectionId}:${String(Date.now())}`,
+              collapseKey: `integration.needs_attention:${notice.connectionId}`,
+              cause: { kind: 'system', id: null },
+              subject: { kind: 'integrations' },
+              title: notice.provider,
+            });
+          },
+        });
   const mailboxConnector = (timeoutMs?: number) =>
     createMailboxConnector({
       ...outside.mailbox,
@@ -365,6 +438,7 @@ export async function start(
               ? [
                   ...resolvedTasks,
                   ...(googleWorker?.tasks ?? []),
+                  ...(integrationWorker?.tasks ?? []),
                   createVerifyMailboxTask(vault.opening, mailboxConnector()),
                   createSendInstallMailTask(vault.opening, mailboxConnector()),
                   createCheckMailboxTask(vault.opening, mailboxConnector(), outside.resolveDns),
@@ -514,6 +588,8 @@ export async function start(
     // Settings → Calendars → Connections. The read always answers, so the dashboard knows
     // whether Google can be connected here at all.
     ...createGoogleCalendarRoutes({ google, vault: vault?.sealing, members: googleMembers }),
+    // Settings → Integrations: every connection of the business, and those made there.
+    ...createIntegrationRoutes(integrationOptions),
     // A link that previews a draft is keyed like the proof of when a form was shown. An
     // install without that secret serves no public form, and refuses a preview.
     ...createFormRoutes(config.publicUrl, { previewSecret: config.publicIntake?.secret }),
@@ -672,6 +748,20 @@ export async function start(
           script: embedScript,
           ownOrigin: formsOwnOrigin,
         };
+  // External Tracking: the script for a business's other websites and the address it reports
+  // to. As forms: without the built script the API still answers and the script is a 404;
+  // without the limiter's secret neither is mounted. The same secret keys the view tokens.
+  const trackingScript = publicIntake === undefined ? undefined : loadTrackingScript();
+  if (publicIntake !== undefined && trackingScript === undefined)
+    logger.warn('The tracking script is not built: /tracking/external-tracking.js answers 404.');
+  const publicTracking =
+    publicIntakeLimit === undefined || publicIntake === undefined
+      ? undefined
+      : {
+          handlers: createPublicTrackingHandlers({ db, secret: publicIntake.secret }),
+          rateLimit: publicIntakeLimit,
+          script: trackingScript,
+        };
   // A quote's or an invoice's public page: /d/<token>. Mounted, like every public surface,
   // only with the limiter; its secret is also what the addresses are made with.
   const publicDocuments =
@@ -722,6 +812,7 @@ export async function start(
     ...(publicBooking === undefined ? {} : { publicBooking }),
     ...(publicWebchat === undefined ? {} : { publicWebchat }),
     ...(publicForms === undefined ? {} : { publicForms }),
+    ...(publicTracking === undefined ? {} : { publicTracking }),
     ...(publicDocuments === undefined ? {} : { publicDocuments }),
     ...(oauth === undefined ? {} : { oauth }),
     ...(publicSites === undefined ? {} : { publicSites }),
@@ -746,6 +837,30 @@ export async function start(
                 person,
                 correlationId,
               ),
+          },
+        }
+      : {}),
+    // A provider's redirect back after consent, and its updates for a connection.
+    ...(serveApi && vault !== undefined
+      ? {
+          integrationCallback: {
+            complete: (key, callback, person, correlationId) =>
+              completeIntegrationConnect(
+                integrationOptions,
+                services,
+                fetch,
+                key,
+                callback,
+                person,
+                correlationId,
+              ),
+          },
+        }
+      : {}),
+    ...(serveApi
+      ? {
+          integrationWebhooks: {
+            accept: (request) => acceptIntegrationWebhook(db, integrationProviders, request),
           },
         }
       : {}),

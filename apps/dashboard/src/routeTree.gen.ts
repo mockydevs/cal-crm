@@ -79,9 +79,11 @@ import { Route as AppBSlugSettingsCustomValuesRouteImport } from './routes/_app.
 import { Route as AppBSlugSettingsDealStagesRouteImport } from './routes/_app.b.$slug.settings.deal-stages'
 import { Route as AppBSlugSettingsDomainsRouteImport } from './routes/_app.b.$slug.settings.domains'
 import { Route as AppBSlugSettingsEmailRouteImport } from './routes/_app.b.$slug.settings.email'
+import { Route as AppBSlugSettingsExternalTrackingRouteImport } from './routes/_app.b.$slug.settings.external-tracking'
 import { Route as AppBSlugSettingsFieldsAndTagsRouteImport } from './routes/_app.b.$slug.settings.fields-and-tags'
 import { Route as AppBSlugSettingsFormsRouteImport } from './routes/_app.b.$slug.settings.forms'
 import { Route as AppBSlugSettingsImportRouteImport } from './routes/_app.b.$slug.settings.import'
+import { Route as AppBSlugSettingsIntegrationsRouteImport } from './routes/_app.b.$slug.settings.integrations'
 import { Route as AppBSlugSettingsLeadSourcesRouteImport } from './routes/_app.b.$slug.settings.lead-sources'
 import { Route as AppBSlugSettingsNotificationsRouteImport } from './routes/_app.b.$slug.settings.notifications'
 import { Route as AppBSlugSettingsScoringRouteImport } from './routes/_app.b.$slug.settings.scoring'
@@ -102,6 +104,8 @@ import { Route as AppBSlugSettingsCalendarsCalendarIdRouteImport } from './route
 import { Route as AppBSlugSettingsCalendarsAvailabilityRouteImport } from './routes/_app.b.$slug.settings.calendars_.availability'
 import { Route as AppBSlugSettingsCalendarsConnectionsRouteImport } from './routes/_app.b.$slug.settings.calendars_.connections'
 import { Route as AppBSlugSettingsCalendarsNewRouteImport } from './routes/_app.b.$slug.settings.calendars_.new'
+import { Route as AppBSlugSettingsExternalTrackingSettingsRouteImport } from './routes/_app.b.$slug.settings.external-tracking_.settings'
+import { Route as AppBSlugSettingsExternalTrackingTroubleshootRouteImport } from './routes/_app.b.$slug.settings.external-tracking_.troubleshoot'
 import { Route as AppBSlugSettingsLeadSourcesCheckRouteImport } from './routes/_app.b.$slug.settings.lead-sources_.check'
 import { Route as AppBSlugSettingsLeadSourcesTrackingLinksRouteImport } from './routes/_app.b.$slug.settings.lead-sources_.tracking-links'
 import { Route as AppBSlugSettingsTeamUserIdRouteImport } from './routes/_app.b.$slug.settings.team_.$userId'
@@ -485,6 +489,12 @@ const AppBSlugSettingsEmailRoute = AppBSlugSettingsEmailRouteImport.update({
   path: '/email',
   getParentRoute: () => AppBSlugSettingsRoute,
 } as any)
+const AppBSlugSettingsExternalTrackingRoute =
+  AppBSlugSettingsExternalTrackingRouteImport.update({
+    id: '/external-tracking',
+    path: '/external-tracking',
+    getParentRoute: () => AppBSlugSettingsRoute,
+  } as any)
 const AppBSlugSettingsFieldsAndTagsRoute =
   AppBSlugSettingsFieldsAndTagsRouteImport.update({
     id: '/fields-and-tags',
@@ -501,6 +511,12 @@ const AppBSlugSettingsImportRoute = AppBSlugSettingsImportRouteImport.update({
   path: '/import',
   getParentRoute: () => AppBSlugSettingsRoute,
 } as any)
+const AppBSlugSettingsIntegrationsRoute =
+  AppBSlugSettingsIntegrationsRouteImport.update({
+    id: '/integrations',
+    path: '/integrations',
+    getParentRoute: () => AppBSlugSettingsRoute,
+  } as any)
 const AppBSlugSettingsLeadSourcesRoute =
   AppBSlugSettingsLeadSourcesRouteImport.update({
     id: '/lead-sources',
@@ -614,6 +630,18 @@ const AppBSlugSettingsCalendarsNewRoute =
     path: '/calendars/new',
     getParentRoute: () => AppBSlugSettingsRoute,
   } as any)
+const AppBSlugSettingsExternalTrackingSettingsRoute =
+  AppBSlugSettingsExternalTrackingSettingsRouteImport.update({
+    id: '/external-tracking_/settings',
+    path: '/external-tracking/settings',
+    getParentRoute: () => AppBSlugSettingsRoute,
+  } as any)
+const AppBSlugSettingsExternalTrackingTroubleshootRoute =
+  AppBSlugSettingsExternalTrackingTroubleshootRouteImport.update({
+    id: '/external-tracking_/troubleshoot',
+    path: '/external-tracking/troubleshoot',
+    getParentRoute: () => AppBSlugSettingsRoute,
+  } as any)
 const AppBSlugSettingsLeadSourcesCheckRoute =
   AppBSlugSettingsLeadSourcesCheckRouteImport.update({
     id: '/lead-sources_/check',
@@ -721,9 +749,11 @@ export interface FileRoutesByFullPath {
   '/b/$slug/settings/deal-stages': typeof AppBSlugSettingsDealStagesRoute
   '/b/$slug/settings/domains': typeof AppBSlugSettingsDomainsRoute
   '/b/$slug/settings/email': typeof AppBSlugSettingsEmailRoute
+  '/b/$slug/settings/external-tracking': typeof AppBSlugSettingsExternalTrackingRoute
   '/b/$slug/settings/fields-and-tags': typeof AppBSlugSettingsFieldsAndTagsRoute
   '/b/$slug/settings/forms': typeof AppBSlugSettingsFormsRoute
   '/b/$slug/settings/import': typeof AppBSlugSettingsImportRoute
+  '/b/$slug/settings/integrations': typeof AppBSlugSettingsIntegrationsRoute
   '/b/$slug/settings/lead-sources': typeof AppBSlugSettingsLeadSourcesRoute
   '/b/$slug/settings/notifications': typeof AppBSlugSettingsNotificationsRoute
   '/b/$slug/settings/scoring': typeof AppBSlugSettingsScoringRoute
@@ -746,6 +776,8 @@ export interface FileRoutesByFullPath {
   '/b/$slug/settings/calendars/availability': typeof AppBSlugSettingsCalendarsAvailabilityRoute
   '/b/$slug/settings/calendars/connections': typeof AppBSlugSettingsCalendarsConnectionsRoute
   '/b/$slug/settings/calendars/new': typeof AppBSlugSettingsCalendarsNewRoute
+  '/b/$slug/settings/external-tracking/settings': typeof AppBSlugSettingsExternalTrackingSettingsRoute
+  '/b/$slug/settings/external-tracking/troubleshoot': typeof AppBSlugSettingsExternalTrackingTroubleshootRoute
   '/b/$slug/settings/lead-sources/check': typeof AppBSlugSettingsLeadSourcesCheckRoute
   '/b/$slug/settings/lead-sources/tracking-links': typeof AppBSlugSettingsLeadSourcesTrackingLinksRoute
   '/b/$slug/settings/team/$userId': typeof AppBSlugSettingsTeamUserIdRoute
@@ -819,9 +851,11 @@ export interface FileRoutesByTo {
   '/b/$slug/settings/deal-stages': typeof AppBSlugSettingsDealStagesRoute
   '/b/$slug/settings/domains': typeof AppBSlugSettingsDomainsRoute
   '/b/$slug/settings/email': typeof AppBSlugSettingsEmailRoute
+  '/b/$slug/settings/external-tracking': typeof AppBSlugSettingsExternalTrackingRoute
   '/b/$slug/settings/fields-and-tags': typeof AppBSlugSettingsFieldsAndTagsRoute
   '/b/$slug/settings/forms': typeof AppBSlugSettingsFormsRoute
   '/b/$slug/settings/import': typeof AppBSlugSettingsImportRoute
+  '/b/$slug/settings/integrations': typeof AppBSlugSettingsIntegrationsRoute
   '/b/$slug/settings/lead-sources': typeof AppBSlugSettingsLeadSourcesRoute
   '/b/$slug/settings/notifications': typeof AppBSlugSettingsNotificationsRoute
   '/b/$slug/settings/scoring': typeof AppBSlugSettingsScoringRoute
@@ -844,6 +878,8 @@ export interface FileRoutesByTo {
   '/b/$slug/settings/calendars/availability': typeof AppBSlugSettingsCalendarsAvailabilityRoute
   '/b/$slug/settings/calendars/connections': typeof AppBSlugSettingsCalendarsConnectionsRoute
   '/b/$slug/settings/calendars/new': typeof AppBSlugSettingsCalendarsNewRoute
+  '/b/$slug/settings/external-tracking/settings': typeof AppBSlugSettingsExternalTrackingSettingsRoute
+  '/b/$slug/settings/external-tracking/troubleshoot': typeof AppBSlugSettingsExternalTrackingTroubleshootRoute
   '/b/$slug/settings/lead-sources/check': typeof AppBSlugSettingsLeadSourcesCheckRoute
   '/b/$slug/settings/lead-sources/tracking-links': typeof AppBSlugSettingsLeadSourcesTrackingLinksRoute
   '/b/$slug/settings/team/$userId': typeof AppBSlugSettingsTeamUserIdRoute
@@ -922,9 +958,11 @@ export interface FileRoutesById {
   '/_app/b/$slug/settings/deal-stages': typeof AppBSlugSettingsDealStagesRoute
   '/_app/b/$slug/settings/domains': typeof AppBSlugSettingsDomainsRoute
   '/_app/b/$slug/settings/email': typeof AppBSlugSettingsEmailRoute
+  '/_app/b/$slug/settings/external-tracking': typeof AppBSlugSettingsExternalTrackingRoute
   '/_app/b/$slug/settings/fields-and-tags': typeof AppBSlugSettingsFieldsAndTagsRoute
   '/_app/b/$slug/settings/forms': typeof AppBSlugSettingsFormsRoute
   '/_app/b/$slug/settings/import': typeof AppBSlugSettingsImportRoute
+  '/_app/b/$slug/settings/integrations': typeof AppBSlugSettingsIntegrationsRoute
   '/_app/b/$slug/settings/lead-sources': typeof AppBSlugSettingsLeadSourcesRoute
   '/_app/b/$slug/settings/notifications': typeof AppBSlugSettingsNotificationsRoute
   '/_app/b/$slug/settings/scoring': typeof AppBSlugSettingsScoringRoute
@@ -947,6 +985,8 @@ export interface FileRoutesById {
   '/_app/b/$slug/settings/calendars_/availability': typeof AppBSlugSettingsCalendarsAvailabilityRoute
   '/_app/b/$slug/settings/calendars_/connections': typeof AppBSlugSettingsCalendarsConnectionsRoute
   '/_app/b/$slug/settings/calendars_/new': typeof AppBSlugSettingsCalendarsNewRoute
+  '/_app/b/$slug/settings/external-tracking_/settings': typeof AppBSlugSettingsExternalTrackingSettingsRoute
+  '/_app/b/$slug/settings/external-tracking_/troubleshoot': typeof AppBSlugSettingsExternalTrackingTroubleshootRoute
   '/_app/b/$slug/settings/lead-sources_/check': typeof AppBSlugSettingsLeadSourcesCheckRoute
   '/_app/b/$slug/settings/lead-sources_/tracking-links': typeof AppBSlugSettingsLeadSourcesTrackingLinksRoute
   '/_app/b/$slug/settings/team_/$userId': typeof AppBSlugSettingsTeamUserIdRoute
@@ -1025,9 +1065,11 @@ export interface FileRouteTypes {
     | '/b/$slug/settings/deal-stages'
     | '/b/$slug/settings/domains'
     | '/b/$slug/settings/email'
+    | '/b/$slug/settings/external-tracking'
     | '/b/$slug/settings/fields-and-tags'
     | '/b/$slug/settings/forms'
     | '/b/$slug/settings/import'
+    | '/b/$slug/settings/integrations'
     | '/b/$slug/settings/lead-sources'
     | '/b/$slug/settings/notifications'
     | '/b/$slug/settings/scoring'
@@ -1050,6 +1092,8 @@ export interface FileRouteTypes {
     | '/b/$slug/settings/calendars/availability'
     | '/b/$slug/settings/calendars/connections'
     | '/b/$slug/settings/calendars/new'
+    | '/b/$slug/settings/external-tracking/settings'
+    | '/b/$slug/settings/external-tracking/troubleshoot'
     | '/b/$slug/settings/lead-sources/check'
     | '/b/$slug/settings/lead-sources/tracking-links'
     | '/b/$slug/settings/team/$userId'
@@ -1123,9 +1167,11 @@ export interface FileRouteTypes {
     | '/b/$slug/settings/deal-stages'
     | '/b/$slug/settings/domains'
     | '/b/$slug/settings/email'
+    | '/b/$slug/settings/external-tracking'
     | '/b/$slug/settings/fields-and-tags'
     | '/b/$slug/settings/forms'
     | '/b/$slug/settings/import'
+    | '/b/$slug/settings/integrations'
     | '/b/$slug/settings/lead-sources'
     | '/b/$slug/settings/notifications'
     | '/b/$slug/settings/scoring'
@@ -1148,6 +1194,8 @@ export interface FileRouteTypes {
     | '/b/$slug/settings/calendars/availability'
     | '/b/$slug/settings/calendars/connections'
     | '/b/$slug/settings/calendars/new'
+    | '/b/$slug/settings/external-tracking/settings'
+    | '/b/$slug/settings/external-tracking/troubleshoot'
     | '/b/$slug/settings/lead-sources/check'
     | '/b/$slug/settings/lead-sources/tracking-links'
     | '/b/$slug/settings/team/$userId'
@@ -1225,9 +1273,11 @@ export interface FileRouteTypes {
     | '/_app/b/$slug/settings/deal-stages'
     | '/_app/b/$slug/settings/domains'
     | '/_app/b/$slug/settings/email'
+    | '/_app/b/$slug/settings/external-tracking'
     | '/_app/b/$slug/settings/fields-and-tags'
     | '/_app/b/$slug/settings/forms'
     | '/_app/b/$slug/settings/import'
+    | '/_app/b/$slug/settings/integrations'
     | '/_app/b/$slug/settings/lead-sources'
     | '/_app/b/$slug/settings/notifications'
     | '/_app/b/$slug/settings/scoring'
@@ -1250,6 +1300,8 @@ export interface FileRouteTypes {
     | '/_app/b/$slug/settings/calendars_/availability'
     | '/_app/b/$slug/settings/calendars_/connections'
     | '/_app/b/$slug/settings/calendars_/new'
+    | '/_app/b/$slug/settings/external-tracking_/settings'
+    | '/_app/b/$slug/settings/external-tracking_/troubleshoot'
     | '/_app/b/$slug/settings/lead-sources_/check'
     | '/_app/b/$slug/settings/lead-sources_/tracking-links'
     | '/_app/b/$slug/settings/team_/$userId'
@@ -1768,6 +1820,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppBSlugSettingsEmailRouteImport
       parentRoute: typeof AppBSlugSettingsRoute
     }
+    '/_app/b/$slug/settings/external-tracking': {
+      id: '/_app/b/$slug/settings/external-tracking'
+      path: '/external-tracking'
+      fullPath: '/b/$slug/settings/external-tracking'
+      preLoaderRoute: typeof AppBSlugSettingsExternalTrackingRouteImport
+      parentRoute: typeof AppBSlugSettingsRoute
+    }
     '/_app/b/$slug/settings/fields-and-tags': {
       id: '/_app/b/$slug/settings/fields-and-tags'
       path: '/fields-and-tags'
@@ -1787,6 +1846,13 @@ declare module '@tanstack/react-router' {
       path: '/import'
       fullPath: '/b/$slug/settings/import'
       preLoaderRoute: typeof AppBSlugSettingsImportRouteImport
+      parentRoute: typeof AppBSlugSettingsRoute
+    }
+    '/_app/b/$slug/settings/integrations': {
+      id: '/_app/b/$slug/settings/integrations'
+      path: '/integrations'
+      fullPath: '/b/$slug/settings/integrations'
+      preLoaderRoute: typeof AppBSlugSettingsIntegrationsRouteImport
       parentRoute: typeof AppBSlugSettingsRoute
     }
     '/_app/b/$slug/settings/lead-sources': {
@@ -1929,6 +1995,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppBSlugSettingsCalendarsNewRouteImport
       parentRoute: typeof AppBSlugSettingsRoute
     }
+    '/_app/b/$slug/settings/external-tracking_/settings': {
+      id: '/_app/b/$slug/settings/external-tracking_/settings'
+      path: '/external-tracking/settings'
+      fullPath: '/b/$slug/settings/external-tracking/settings'
+      preLoaderRoute: typeof AppBSlugSettingsExternalTrackingSettingsRouteImport
+      parentRoute: typeof AppBSlugSettingsRoute
+    }
+    '/_app/b/$slug/settings/external-tracking_/troubleshoot': {
+      id: '/_app/b/$slug/settings/external-tracking_/troubleshoot'
+      path: '/external-tracking/troubleshoot'
+      fullPath: '/b/$slug/settings/external-tracking/troubleshoot'
+      preLoaderRoute: typeof AppBSlugSettingsExternalTrackingTroubleshootRouteImport
+      parentRoute: typeof AppBSlugSettingsRoute
+    }
     '/_app/b/$slug/settings/lead-sources_/check': {
       id: '/_app/b/$slug/settings/lead-sources_/check'
       path: '/lead-sources/check'
@@ -2038,9 +2118,11 @@ interface AppBSlugSettingsRouteChildren {
   AppBSlugSettingsDealStagesRoute: typeof AppBSlugSettingsDealStagesRoute
   AppBSlugSettingsDomainsRoute: typeof AppBSlugSettingsDomainsRoute
   AppBSlugSettingsEmailRoute: typeof AppBSlugSettingsEmailRoute
+  AppBSlugSettingsExternalTrackingRoute: typeof AppBSlugSettingsExternalTrackingRoute
   AppBSlugSettingsFieldsAndTagsRoute: typeof AppBSlugSettingsFieldsAndTagsRoute
   AppBSlugSettingsFormsRoute: typeof AppBSlugSettingsFormsRoute
   AppBSlugSettingsImportRoute: typeof AppBSlugSettingsImportRoute
+  AppBSlugSettingsIntegrationsRoute: typeof AppBSlugSettingsIntegrationsRoute
   AppBSlugSettingsLeadSourcesRoute: typeof AppBSlugSettingsLeadSourcesRoute
   AppBSlugSettingsNotificationsRoute: typeof AppBSlugSettingsNotificationsRoute
   AppBSlugSettingsScoringRoute: typeof AppBSlugSettingsScoringRoute
@@ -2055,6 +2137,8 @@ interface AppBSlugSettingsRouteChildren {
   AppBSlugSettingsCalendarsAvailabilityRoute: typeof AppBSlugSettingsCalendarsAvailabilityRoute
   AppBSlugSettingsCalendarsConnectionsRoute: typeof AppBSlugSettingsCalendarsConnectionsRoute
   AppBSlugSettingsCalendarsNewRoute: typeof AppBSlugSettingsCalendarsNewRoute
+  AppBSlugSettingsExternalTrackingSettingsRoute: typeof AppBSlugSettingsExternalTrackingSettingsRoute
+  AppBSlugSettingsExternalTrackingTroubleshootRoute: typeof AppBSlugSettingsExternalTrackingTroubleshootRoute
   AppBSlugSettingsLeadSourcesCheckRoute: typeof AppBSlugSettingsLeadSourcesCheckRoute
   AppBSlugSettingsLeadSourcesTrackingLinksRoute: typeof AppBSlugSettingsLeadSourcesTrackingLinksRoute
   AppBSlugSettingsTeamUserIdRoute: typeof AppBSlugSettingsTeamUserIdRoute
@@ -2072,9 +2156,11 @@ const AppBSlugSettingsRouteChildren: AppBSlugSettingsRouteChildren = {
   AppBSlugSettingsDealStagesRoute: AppBSlugSettingsDealStagesRoute,
   AppBSlugSettingsDomainsRoute: AppBSlugSettingsDomainsRoute,
   AppBSlugSettingsEmailRoute: AppBSlugSettingsEmailRoute,
+  AppBSlugSettingsExternalTrackingRoute: AppBSlugSettingsExternalTrackingRoute,
   AppBSlugSettingsFieldsAndTagsRoute: AppBSlugSettingsFieldsAndTagsRoute,
   AppBSlugSettingsFormsRoute: AppBSlugSettingsFormsRoute,
   AppBSlugSettingsImportRoute: AppBSlugSettingsImportRoute,
+  AppBSlugSettingsIntegrationsRoute: AppBSlugSettingsIntegrationsRoute,
   AppBSlugSettingsLeadSourcesRoute: AppBSlugSettingsLeadSourcesRoute,
   AppBSlugSettingsNotificationsRoute: AppBSlugSettingsNotificationsRoute,
   AppBSlugSettingsScoringRoute: AppBSlugSettingsScoringRoute,
@@ -2092,6 +2178,10 @@ const AppBSlugSettingsRouteChildren: AppBSlugSettingsRouteChildren = {
   AppBSlugSettingsCalendarsConnectionsRoute:
     AppBSlugSettingsCalendarsConnectionsRoute,
   AppBSlugSettingsCalendarsNewRoute: AppBSlugSettingsCalendarsNewRoute,
+  AppBSlugSettingsExternalTrackingSettingsRoute:
+    AppBSlugSettingsExternalTrackingSettingsRoute,
+  AppBSlugSettingsExternalTrackingTroubleshootRoute:
+    AppBSlugSettingsExternalTrackingTroubleshootRoute,
   AppBSlugSettingsLeadSourcesCheckRoute: AppBSlugSettingsLeadSourcesCheckRoute,
   AppBSlugSettingsLeadSourcesTrackingLinksRoute:
     AppBSlugSettingsLeadSourcesTrackingLinksRoute,

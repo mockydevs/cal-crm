@@ -66,10 +66,14 @@ export type ModulePlace =
   | '/b/$slug/settings/import'
   | '/b/$slug/settings/scoring'
   | '/b/$slug/settings/domains'
+  | '/b/$slug/settings/integrations'
   | '/b/$slug/settings/tags'
   | '/b/$slug/settings/lead-sources'
   | '/b/$slug/settings/lead-sources/tracking-links'
   | '/b/$slug/settings/lead-sources/check'
+  | '/b/$slug/settings/external-tracking'
+  | '/b/$slug/settings/external-tracking/troubleshoot'
+  | '/b/$slug/settings/external-tracking/settings'
   | '/b/$slug/settings/apps'
   | '/b/$slug/settings/audit-logs'
   | '/b/$slug/settings/notifications'
@@ -296,6 +300,7 @@ export const settingsGroups: readonly SettingsGroup[] = [
       { to: '/b/$slug/settings/import', label: msg`Import Data` },
       { to: '/b/$slug/settings/scoring', label: msg`Manage Scoring` },
       { to: '/b/$slug/settings/domains', label: msg`Domains & URL Redirects` },
+      { to: '/b/$slug/settings/integrations', label: msg`Integrations` },
       { to: '/b/$slug/settings/tags', label: msg`Tags` },
       {
         // Ours: GoHighLevel has no such page. How a lead's source is named, in one place.
@@ -310,6 +315,25 @@ export const settingsGroups: readonly SettingsGroup[] = [
             here: true,
           },
           { to: '/b/$slug/settings/lead-sources/check', label: msg`Check a link`, here: true },
+        ],
+      },
+      {
+        // GoHighLevel's Settings → External Tracking, with its three tabs.
+        to: '/b/$slug/settings/external-tracking',
+        label: msg`External Tracking`,
+        titled: true,
+        tabs: [
+          { to: '/b/$slug/settings/external-tracking', label: msg`Installation`, here: true },
+          {
+            to: '/b/$slug/settings/external-tracking/troubleshoot',
+            label: msg`Troubleshoot`,
+            here: true,
+          },
+          {
+            to: '/b/$slug/settings/external-tracking/settings',
+            label: msg`Settings`,
+            here: true,
+          },
         ],
       },
       { to: '/b/$slug/settings/apps', label: msg`Apps and API keys` },

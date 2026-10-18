@@ -23,7 +23,7 @@ import {
   type TenantContext,
 } from '@repo/kernel';
 import { sql, type ExpressionBuilder, type Selectable } from 'kysely';
-import type * as z from 'zod';
+import * as z from 'zod';
 
 import { kindOf } from './rules.js';
 
@@ -67,6 +67,7 @@ const TARGET_KINDS = ['conversation', 'task', 'form', 'appointment', 'automation
 function targetOf(row: Row): NotificationTarget {
   if (row.subject_kind === 'ai_settings') return { kind: 'ai_settings' };
   if (row.subject_kind === 'calendar_connections') return { kind: 'calendar_connections' };
+  if (row.subject_kind === 'integrations') return { kind: 'integrations' };
   const kind = TARGET_KINDS.find((each) => each === row.subject_kind);
   if (kind === undefined || row.subject_id === null)
     throw new TypeError(`Unknown notification subject: ${row.subject_kind}`);
@@ -96,23 +97,27 @@ async function recordsOf(
     .leftJoin('crm.deals as deal', (join) =>
       join.onRef('deal.business_id', '=', 'record.business_id').onRef('deal.id', '=', 'record.id'),
     )
+    .leftJoin('crm.custom_records as custom', (join) =>
+      join
+        .onRef('custom.business_id', '=', 'record.business_id')
+        .onRef('custom.id', '=', 'record.id'),
+    )
     .select(['record.id', 'record.kind'])
     // A contact's name only: one with no name shows none, never an address or a number.
     .select(
       sql<string | null>`case record.kind when 'contact' then contact.display_name
-        when 'company' then company.name when 'deal' then deal.name end`.as('name'),
+        when 'company' then company.name when 'deal' then deal.name
+        when 'custom' then custom.title end`.as('name'),
     )
     .select(
-      sql<boolean>`coalesce(contact.deleted_at, company.deleted_at, deal.deleted_at) is not null`.as(
-        'trashed',
-      ),
+      sql<boolean>`coalesce(contact.deleted_at, company.deleted_at, deal.deleted_at,
+        custom.deleted_at) is not null`.as('trashed'),
     )
     .where('record.id', 'in', ids)
     .execute();
   for (const row of found) {
-    const kind = recordKinds.find((each) => each === row.kind);
-    // A custom object's record has no page of its own yet: the notification names none.
-    if (kind === undefined) continue;
+    // Every kind of record the registry holds is one the API names: parsed, not assumed.
+    const kind = z.enum(recordKinds).parse(row.kind);
     records.set(row.id, { id: toPublicId(kind, row.id), name: row.name, trashed: row.trashed });
   }
   return records;

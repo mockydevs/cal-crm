@@ -10,6 +10,7 @@ import {
 import { decodeTypeId, isUuidV7 } from '@repo/kernel';
 
 import { scoreMismatch } from './score-trigger.js';
+import { trackingMismatch } from './tracking-trigger.js';
 
 interface TriggerEvents {
   /** The event types the trigger starts on. */
@@ -167,6 +168,12 @@ export const TRIGGER_EVENTS: Readonly<Record<AutomationTriggerType, TriggerEvent
   'note.updated': { events: ['note.updated'], filters: {} },
   // Messaging emits it when a contact opens the address a message carried for the link.
   'trigger_link.clicked': { events: ['trigger_link.clicked'], filters: { link: 'linkId' } },
+  // A known contact's page view or external form (forms/src/tracking); which, and where, are
+  // judged in eventPassesTrigger.
+  'external_tracking.event': {
+    events: ['external_tracking.page_viewed', 'external_tracking.form_submitted'],
+    filters: {},
+  },
   // Commerce emits each under the trigger's own name, with the document's contact among the
   // records it happened to.
   'quote.sent': { events: ['quote.sent'], filters: {} },
@@ -218,6 +225,8 @@ export function eventPassesTrigger(
     return dndMismatch(trigger.config, eventType, payload) === undefined;
   if (trigger.type === 'contact.score_changed')
     return scoreMismatch(trigger.config, payload) === undefined;
+  if (trigger.type === 'external_tracking.event')
+    return trackingMismatch(trigger.config, eventType, payload) === undefined;
   if (trigger.type === 'deal.closed' && trigger.config.outcome !== undefined)
     return eventType === `deal.${trigger.config.outcome}` && filtersPass(trigger, mapping, payload);
   return (
@@ -434,6 +443,8 @@ export function triggerMismatch(
   if (trigger.type === 'contact.dnd_changed')
     return dndMismatch(trigger.config, eventType, payload);
   if (trigger.type === 'contact.score_changed') return scoreMismatch(trigger.config, payload);
+  if (trigger.type === 'external_tracking.event')
+    return trackingMismatch(trigger.config, eventType, payload);
   if (
     trigger.type === 'deal.closed' &&
     trigger.config.outcome !== undefined &&

@@ -32,6 +32,7 @@ export default function PossibleDuplicates({
     staleTime: 60_000,
   });
   const count = found.data?.count ?? 0;
+  const mayManage = grants.data?.permissions.includes('contacts.merge') === true;
   // While the review is open it stays, even once its last group is rejected.
   if (found.data === undefined || (count === 0 && !open)) return null;
   return (
@@ -51,7 +52,8 @@ export default function PossibleDuplicates({
       <ReviewPanel
         open={open}
         groups={found.data.groups}
-        canReject={grants.data?.permissions.includes('contacts.merge') === true}
+        canReject={mayManage}
+        canMerge={mayManage}
         returnFocus={openerRef}
         onClose={() => {
           setOpen(false);

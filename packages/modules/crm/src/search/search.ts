@@ -1,7 +1,8 @@
-// The command bar's search: a few contacts, companies and deals outside the trash, to go
-// to. Contacts are found as the contact list finds them; companies and deals through
-// private.search_companies and private.search_deals, which read their indexes in the
-// request's business, since row-level security keeps crm_app from using them.
+// The command bar's search: a few contacts, companies, deals and records of each custom
+// object outside the trash, to go to. Contacts are found as the contact list finds them;
+// companies, deals and custom records through private.search_companies, search_deals and
+// search_custom_records, which read their indexes in the request's business, since
+// row-level security keeps crm_app from using them.
 import { requireBusiness, type Invocation } from '@repo/commands';
 import {
   listContactsQuery,
@@ -104,7 +105,62 @@ async function deals(
   }));
 }
 
-/** The records a search finds: contacts, then companies, then deals. */
+/**
+ * Records of a custom object whose name has words starting with the search (`words`), or
+ * whose name or a searchable field has it in any part (`part`, a LIKE pattern): by name, at
+ * most CANDIDATES of them. The caller names an object that is not being deleted.
+ */
+export async function findCustomRecordIds(
+  trx: DatabaseTransaction,
+  objectTypeId: string,
+  words: string | null,
+  part: string | null,
+): Promise<{ id: string; title: string }[]> {
+  const { rows } = await sql<{ id: string; title: string }>`
+    select c.id, c.title from crm.custom_records c
+    where c.object_type_id = ${objectTypeId} and c.deleted_at is null
+      and c.id = any(array(select id from private.search_custom_records(
+        ${objectTypeId}::uuid, ${words}::text, ${part}::text, ${CANDIDATES}::integer) as found (id)))
+    order by lower(c.title), c.id
+    limit ${CANDIDATES}`.execute(trx);
+  return rows;
+}
+
+/** Each custom object's records the search finds, a few of each, objects oldest first. */
+async function customRecords(
+  trx: DatabaseTransaction,
+  search: string,
+  words: string | null,
+  part: string | null,
+): Promise<FoundRecord[]> {
+  const objects = await trx
+    .selectFrom('crm.object_types')
+    .select(['id', 'key', 'singular_label'])
+    .where('kind', '=', 'custom')
+    .where('archived_at', 'is', null)
+    .orderBy('created_at')
+    .orderBy('id')
+    .execute();
+  const found: FoundRecord[] = [];
+  for (const object of objects) {
+    const rows = await findCustomRecordIds(trx, object.id, words, part);
+    found.push(
+      ...ranked(
+        rows.map((row) => ({
+          id: toPublicId('custom', row.id),
+          kind: 'custom',
+          name: row.title,
+          object: { key: object.key, label: object.singular_label },
+          detail: null,
+        })),
+        search,
+      ),
+    );
+  }
+  return found;
+}
+
+/** The records a search finds: contacts, then companies, then deals, then custom records. */
 export async function searchRecords(
   trx: DatabaseTransaction,
   invocation: Invocation,
@@ -123,6 +179,7 @@ export async function searchRecords(
       ...found,
       ...ranked(await companies(trx, businessId, words, part), search),
       ...ranked(await deals(trx, businessId, words, part), search),
+      ...(await customRecords(trx, search, words, part)),
     ],
   };
 }

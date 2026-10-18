@@ -26,7 +26,7 @@ export type Subject =
       readonly kind: 'conversation' | 'task' | 'form' | 'appointment' | 'automation';
       readonly id: string;
     }
-  | { readonly kind: 'ai_settings' | 'calendar_connections' };
+  | { readonly kind: 'ai_settings' | 'calendar_connections' | 'integrations' };
 
 export interface Notice {
   readonly kind: NotificationKind;

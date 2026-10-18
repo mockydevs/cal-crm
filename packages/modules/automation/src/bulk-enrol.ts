@@ -11,6 +11,10 @@ import type { BulkWorkflows } from '@repo/module-crm';
 import { enrol, lockRecordRuns } from './enrolment.js';
 
 export const bulkWorkflows: BulkWorkflows = {
+  async hold(trx, contactIds) {
+    for (const contactId of contactIds) await lockRecordRuns(trx, contactId);
+  },
+
   async resolve(trx, _invocation, workflowId) {
     const id = parsePublicId('automation', workflowId);
     const row =

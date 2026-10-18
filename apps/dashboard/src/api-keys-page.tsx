@@ -10,12 +10,13 @@ import {
   type CreateApiKeyInput,
 } from '@repo/contracts';
 import { ApiError, type Client } from '@repo/sdk';
+import { Badge } from '@repo/ui/components/badge';
 import { Button } from '@repo/ui/components/button';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@repo/ui/components/field';
 import { Form } from '@repo/ui/components/form';
 import { Input } from '@repo/ui/components/input';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Plus } from 'lucide-react';
+import { ChevronRight, Plus } from 'lucide-react';
 import { useEffect, useId, useRef, useState, type ReactElement } from 'react';
 
 import { apiKeyInputOf } from './api-keys-input';
@@ -91,19 +92,10 @@ function KeysPage({ client, workspace }: KeysPageProps): ReactElement {
       }
     >
       <p className="max-w-prose text-md text-muted-foreground">
-        <Trans>
-          Connect an app with your CRM URL and API key. Choose which data it may read and what it
-          may change. No agency, business or location ID is needed to set up the connection.
-        </Trans>
-      </p>
-      <p className="max-w-prose text-sm text-muted-foreground">
         {workspace.scope === 'agency' ? (
-          <Trans>
-            Agency keys work at the agency. Apps can discover available businesses and select a
-            business slug for each call.
-          </Trans>
+          <Trans>Keys that let apps use the CRM across all of the agency’s businesses.</Trans>
         ) : (
-          <Trans>Business keys work only in this business.</Trans>
+          <Trans>Keys that let apps use this business’s CRM data.</Trans>
         )}
       </p>
       {keys.data !== undefined && keys.data.readGroups === undefined ? (
@@ -593,7 +585,22 @@ function KeyRow({
     apiKey.expiresAt !== null &&
     apiKey.expiresAt !== undefined &&
     Date.parse(apiKey.expiresAt) <= now;
-  const selectedReads = apiKey.readGroups?.join(', ');
+  const { readGroups } = apiKey;
+  const changes = apiKey.scopes.map((scope) => permissionLabel(scope, i18n));
+  const reads =
+    readGroups === null || readGroups === undefined
+      ? t`Reads everything`
+      : readGroups.length === 0
+        ? t`Reads nothing`
+        : readGroups.length === 1
+          ? t`Reads ${readGroups[0] ?? ''}`
+          : t`Reads ${readGroups.length} areas`;
+  const changesText =
+    changes.length === 0
+      ? t`Changes nothing`
+      : changes.length === 1
+        ? t`Can ${(changes[0] ?? '').toLowerCase()}`
+        : t`${changes.length} permissions`;
 
   const revoke = useMutation({
     mutationFn: () => client.request(revokeApiKey, { params: { id: apiKey.id } }),
@@ -607,40 +614,79 @@ function KeyRow({
   });
 
   return (
-    <li className="flex flex-wrap items-start justify-between gap-x-5 gap-y-3 rounded-card border border-border bg-card p-[18px]">
-      <div className="flex min-w-0 flex-col gap-1">
-        <p className="font-semibold">{name}</p>
-        <p className="font-mono text-sm break-all">{apiKey.prefix}…</p>
-        <p className="text-sm">
-          {(apiKey.scope ?? workspace.scope) === 'agency' ? t`Agency scope` : t`Business scope`}
+    <li className="flex flex-wrap items-start justify-between gap-x-5 gap-y-2 rounded-card border border-border bg-card px-[18px] py-3.5">
+      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="font-semibold">{name}</p>
+          <Badge className="px-2 py-0.5 text-xs">
+            {(apiKey.scope ?? workspace.scope) === 'agency' ? t`Agency` : t`Business`}
+          </Badge>
+          {apiKey.readOnly === true ? (
+            <Badge className="px-2 py-0.5 text-xs">
+              <Trans>Read-only</Trans>
+            </Badge>
+          ) : null}
+          {expires === undefined ? null : (
+            <Badge variant={expired ? 'attention' : 'neutral'} className="px-2 py-0.5 text-xs">
+              {expired ? t`Expired ${expires}` : t`Expires ${expires}`}
+            </Badge>
+          )}
+        </div>
+        <p className="flex flex-wrap gap-x-2 text-sm text-muted-foreground">
+          <span className="font-mono break-all text-foreground">{apiKey.prefix}…</span>
+          <span aria-hidden>·</span>
+          <span>
+            {createdBy === null ? t`Made on ${made}` : t`Made by ${createdBy} on ${made}`}
+            {' · '}
+            {lastUsed === undefined ? t`Never used` : t`Last used ${lastUsed}`}
+          </span>
         </p>
-        {apiKey.readOnly === true ? (
-          <p className="text-sm">
-            <Trans>Read-only</Trans>
-          </p>
-        ) : null}
-        <p className="text-sm">
-          {apiKey.readGroups === null || apiKey.readGroups === undefined
-            ? t`Legacy unrestricted reads`
-            : apiKey.readGroups.length === 0
-              ? t`No read groups selected`
-              : t`Selected reads: ${selectedReads}`}
-        </p>
-        <p className="text-sm text-muted-foreground">
-          {expires === undefined
-            ? t`No expiry`
-            : expired
-              ? t`Expired on ${expires}`
-              : t`Expires on ${expires}`}
-        </p>
-        <p className="text-sm">
-          {apiKey.scopes.map((scope) => permissionLabel(scope, i18n)).join(', ')}
-        </p>
-        <p className="text-sm text-muted-foreground">
-          {createdBy === null ? t`Made on ${made}` : t`Made by ${createdBy} on ${made}`}
-          {' · '}
-          {lastUsed === undefined ? t`Never used` : t`Last used ${lastUsed}`}
-        </p>
+        <details className="group min-w-0 text-sm">
+          <summary className="flex w-fit cursor-pointer list-none items-center gap-1 text-muted-foreground hover:text-foreground [&::-webkit-details-marker]:hidden">
+            <ChevronRight
+              aria-hidden
+              className="size-4 transition-transform group-open:rotate-90"
+              strokeWidth={2}
+            />
+            {reads} · {changesText}
+          </summary>
+          <dl className="mt-2 grid gap-3 rounded-control bg-muted/40 p-3">
+            <div className="flex flex-col gap-1.5">
+              <dt className="text-xs font-medium text-muted-foreground uppercase">
+                <Trans>Can read</Trans>
+              </dt>
+              <dd className="flex flex-wrap gap-1.5">
+                {readGroups === null || readGroups === undefined ? (
+                  <Trans>Everything (an older key without read limits)</Trans>
+                ) : readGroups.length === 0 ? (
+                  <Trans>Nothing</Trans>
+                ) : (
+                  readGroups.map((group) => (
+                    <Badge key={group} className="px-2 py-0.5 text-xs">
+                      {group}
+                    </Badge>
+                  ))
+                )}
+              </dd>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <dt className="text-xs font-medium text-muted-foreground uppercase">
+                <Trans>Can change</Trans>
+              </dt>
+              <dd className="flex flex-wrap gap-1.5">
+                {changes.length === 0 ? (
+                  <Trans>Nothing</Trans>
+                ) : (
+                  changes.map((change) => (
+                    <Badge key={change} className="px-2 py-0.5 text-xs">
+                      {change}
+                    </Badge>
+                  ))
+                )}
+              </dd>
+            </div>
+          </dl>
+        </details>
       </div>
       {!canManage ? null : confirming ? (
         <div className="flex flex-wrap items-center gap-2.5">

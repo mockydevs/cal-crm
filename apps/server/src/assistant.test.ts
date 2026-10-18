@@ -161,6 +161,21 @@ describe('what the in-app assistant is composed with', () => {
     }
   });
 
+  it('says a deal edit is a move when the stage changes, and a save otherwise', () => {
+    const confirmation = assistantConfirmations['updateDeal'];
+    expect(confirmation?.kind).toBe('deal_update');
+    expect(
+      confirmation?.input({ params: { id: 'native-deal-id' }, body: { stageId: 'stage' } }),
+    ).toEqual({ id: 'native-deal-id', stageId: 'stage' });
+    expect(
+      confirmation?.summary({ name: 'Kanyapong Demo', moved: true, stageName: 'Negotiating' }),
+    ).toBe('Move the deal “Kanyapong Demo” to Negotiating');
+    expect(confirmation?.summary({ name: 'Kanyapong Demo', moved: false })).toBe(
+      'Save the deal “Kanyapong Demo”',
+    );
+    expect(confirmation?.summary({ name: 4, moved: true })).toBe('Save the deal “Deal”');
+  });
+
   it('offers grounded questions for each supported CRM page', () => {
     const cases = [
       ['/pipelines', ['pipelines.review', 'pipelines.build']],

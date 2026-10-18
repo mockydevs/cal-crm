@@ -9,6 +9,7 @@ export { builtInRoles, ensureAgency, type BuiltInRole } from './agency/install.j
 export { readApiKeyNames, type PeopleNames } from './api-keys/api-keys.js';
 export { apiKeyRoutes, type ApiKeyOptions } from './api-keys/routes.js';
 export { marketplaceRoutes, type MarketplaceOptions } from './marketplace/routes.js';
+export { readAppsIntegration } from './integration-reading.js';
 export {
   APP_WEBHOOK_SECRET_PURPOSE,
   createMarketplaceTasks,

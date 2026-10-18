@@ -128,7 +128,7 @@ export interface TouchInput {
   readonly decision?: LeadDecision | undefined;
   /** What recorded it, by its own id. */
   readonly subject: {
-    readonly kind: 'form_submission' | 'appointment' | 'webchat_session';
+    readonly kind: 'form_submission' | 'appointment' | 'webchat_session' | 'external_submission';
     readonly id: string;
   };
 }

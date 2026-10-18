@@ -10,6 +10,7 @@ const AI = 'packages/modules/ai/src/gateway.int.test.ts';
 const DOCUMENTS = 'packages/modules/commerce/src/documents.int.test.ts';
 const OWNERS = 'packages/modules/crm/src/pipelines/settings.int.test.ts';
 const OUTBOUND = 'packages/modules/messaging/src/outbound.int.test.ts';
+const TRACKING = 'packages/modules/forms/src/tracking/tracking.int.test.ts';
 
 const INBOUND_ROUTING =
   'Honoured by resolveInboundRoute (voice-routing.test.ts), which nothing calls yet: inbound calls are not routed yet.';
@@ -110,6 +111,26 @@ export const effects: Effects = {
     duplicate_secondary: proof(
       'packages/modules/crm/src/contacts/duplicate-settings.int.test.ts',
       'tries the phone number after the email address when phone is the secondary field',
+    ),
+  },
+  // Settings → External Tracking.
+  'forms.tracking_settings': {
+    tracking_id: proof(
+      TRACKING,
+      'gives a new tracking id on request, and the old one stops at once',
+    ),
+    page_views: proof(
+      TRACKING,
+      'is not kept when page views are off, and still proves the page was shown',
+    ),
+    form_capture: proof(TRACKING, 'is not taken when form capture is off'),
+    allowed_domains: proof(
+      TRACKING,
+      'answers any secure website until the business lists some, then those and their subdomains',
+    ),
+    visitor_ids: proof(
+      TRACKING,
+      'keeps no visitor id for a browser that asks not to be tracked, unless told to',
     ),
   },
   'messaging.settings': {

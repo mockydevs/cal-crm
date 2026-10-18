@@ -12,6 +12,7 @@ export {
   type GoogleTransport,
 } from './google-api.js';
 export { freshenGoogleBusy, readGoogleBusy } from './google-busy.js';
+export { readGoogleCalendarIntegration } from './integration-reading.js';
 export {
   completeGoogleConnect,
   createGoogleCalendarRoutes,

@@ -1,7 +1,8 @@
-// Searching for a record to go to: the command bar's contacts, companies and deals, a few
-// of each kind.
+// Searching for a record to go to: the command bar's contacts, companies, deals and records
+// of custom objects, a few of each kind (of each custom object).
 import * as z from 'zod';
 
+import { recordObject } from './custom-records.js';
 import { defineEndpoint } from './endpoints.js';
 import { recordId, recordKinds } from './ids.js';
 
@@ -17,7 +18,7 @@ export const searchRecordsQuery = z
       .max(200, { error: 'Use at most 200 characters.' })
       .meta({
         description:
-          'Finds contacts by name, email address or phone number digits, and companies and deals by name. Companies also by domain.',
+          "Finds contacts by name, email address or phone number digits, and companies and deals by name. Companies also by domain; a custom object's records by name or a searchable field.",
         examples: ['lee'],
       }),
   })
@@ -29,8 +30,9 @@ export const foundRecord = z
     kind: z.enum(recordKinds),
     name: z.string().nullable().meta({
       description:
-        "A contact's name or else its primary email address or phone; a company's or deal's name.",
+        "A contact's name or else its primary email address or phone; a company's or deal's name; a custom record's primary field.",
     }),
+    object: recordObject.optional().meta({ description: "A custom record's object." }),
     detail: z.string().nullable().meta({
       description:
         "What tells it apart: a named contact's primary email address or phone, a company's domain, a deal's pipeline and stage.",
@@ -43,7 +45,7 @@ export type FoundRecord = z.infer<typeof foundRecord>;
 export const searchResults = z
   .looseObject({
     items: z.array(foundRecord).meta({
-      description: `Contacts, then companies, then deals, at most ${String(SEARCH_LIMIT)} of each: names starting with the search first, then by name.`,
+      description: `Contacts, then companies, then deals, then each custom object's records, at most ${String(SEARCH_LIMIT)} of each: names starting with the search first, then by name.`,
     }),
   })
   .meta({ id: 'SearchResults' });
@@ -54,7 +56,7 @@ export const searchRecords = defineEndpoint({
   operationId: 'searchRecords',
   method: 'get',
   path: '/search',
-  summary: 'Search contacts, companies and deals',
+  summary: 'Search contacts, companies, deals and custom records',
   group: 'Search',
   query: searchRecordsQuery,
   response: {

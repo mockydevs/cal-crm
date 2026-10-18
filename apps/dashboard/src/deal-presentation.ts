@@ -28,6 +28,36 @@ export function stageMarkOf(
 }
 
 /**
+ * The board's colours, in stage order, for a stage that has none of its own: strong enough
+ * to read as a stripe, mixed thin for the column behind the cards.
+ */
+export const STAGE_PALETTE = [
+  '#2563eb',
+  '#7c3aed',
+  '#d97706',
+  '#0891b2',
+  '#db2777',
+  '#ea580c',
+  '#16a34a',
+  '#4f46e5',
+] as const;
+
+/**
+ * The colour the board draws a stage in, whatever the pipeline's own colour style: the
+ * stage's colour where it has one, else the palette's, by the stage's place.
+ */
+export function stageAccentOf(pipeline: Pick<Pipeline, 'stages'>, stageId: string): string {
+  const index = pipeline.stages.findIndex((stage) => stage.id === stageId);
+  const own = pipeline.stages[index]?.color;
+  if (own !== undefined && own !== null) return own;
+  return STAGE_PALETTE[Math.max(index, 0) % STAGE_PALETTE.length] ?? STAGE_PALETTE[0];
+}
+
+/** An accent mixed into nothing at `percent`, for a background text stays readable on. */
+export const accentTint = (accent: string, percent: number): string =>
+  `color-mix(in srgb, ${accent} ${String(percent)}%, transparent)`;
+
+/**
  * The chance of winning an opportunity shows, in percent: its own where the pipeline says
  * opportunities carry theirs, else its stage's. Undefined when none is set.
  */

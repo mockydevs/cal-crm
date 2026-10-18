@@ -454,8 +454,10 @@ test.describe('at 1440 px', () => {
       'Import Data',
       'Manage Scoring',
       'Domains & URL Redirects',
+      'Integrations',
       'Tags',
       'Lead Sources',
+      'External Tracking',
       'Apps and API keys',
       'Audit Logs',
     ]);

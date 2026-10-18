@@ -31,7 +31,8 @@ import { contactBulkEndpoints } from './contact-bulk.js';
 import { contactDuplicateEndpoints } from './contact-duplicates.js';
 import { contactMergeEndpoints } from './contact-merge.js';
 import { objectEndpoints } from './objects.js';
-import { associationEndpoints } from './associations.js';
+import { associationEndpoints, relationEndpoints } from './associations.js';
+import { customRecordEndpoints } from './custom-records.js';
 import { listAudit, listRecordAudit } from './audit.js';
 import {
   getContactConsent,
@@ -177,6 +178,8 @@ export const endpoints: readonly Endpoint[] = [
   ...leadSourceEndpoints,
   ...leadSourceRuleEndpoints,
   ...scoringEndpoints,
+  ...externalTrackingEndpoints,
+  ...integrationEndpoints,
   trashDeal,
   restoreDeal,
   getFields,
@@ -219,6 +222,8 @@ export const endpoints: readonly Endpoint[] = [
   ...contactMergeEndpoints,
   ...objectEndpoints,
   ...associationEndpoints,
+  ...customRecordEndpoints,
+  ...relationEndpoints,
   listTimeZones,
   getMessagingSettings,
   updateMessagingSettings,
@@ -353,6 +358,8 @@ import { contactAttributionEndpoints } from './reporting-attribution.js';
 import { leadSourceEndpoints } from './lead-sources.js';
 import { leadSourceRuleEndpoints } from './lead-source-rules.js';
 import { scoringEndpoints } from './scoring.js';
+import { externalTrackingEndpoints } from './external-tracking.js';
+import { integrationEndpoints } from './integrations.js';
 import {
   connectSms,
   getSmsConnectionAttempt,

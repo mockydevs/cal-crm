@@ -481,6 +481,60 @@
       "outputs": []
     },
     {
+      "type": "external_tracking.event",
+      "label": "External Tracking Event",
+      "description": "A known contact views a page, or sends a form, on a website with the External Tracking script.",
+      "config": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "event": {
+            "description": "Only page views or only forms; left out, either.",
+            "type": "string",
+            "enum": [
+              "page_view",
+              "form_submission"
+            ]
+          },
+          "domain": {
+            "description": "Only this website or its subdomains, such as example.com.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 253
+          },
+          "pagePath": {
+            "description": "Only pages whose path contains this, such as /pricing.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "formName": {
+            "description": "Only the external form with this name.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "utmSource": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "utmMedium": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "utmCampaign": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputs": []
+    },
+    {
       "type": "trigger_link.clicked",
       "label": "Trigger link clicked",
       "description": "The contact opens a trigger link from a message sent to them.",

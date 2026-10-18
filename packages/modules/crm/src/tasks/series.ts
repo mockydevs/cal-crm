@@ -553,11 +553,13 @@ async function makeTask(
   }
   if (series.record_id !== null) {
     const { rows } = await sql<{ trashed: boolean }>`
-      select coalesce(c.deleted_at, co.deleted_at, d.deleted_at) is not null as trashed
+      select coalesce(c.deleted_at, co.deleted_at, d.deleted_at, cr.deleted_at) is not null
+        as trashed
       from crm.records r
       left join crm.contacts c on c.id = r.id
       left join crm.companies co on co.id = r.id
       left join crm.deals d on d.id = r.id
+      left join crm.custom_records cr on cr.id = r.id
       where r.id = ${series.record_id}
     `.execute(trx);
     if (rows[0]?.trashed !== false) return false;

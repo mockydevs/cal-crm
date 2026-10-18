@@ -83,6 +83,8 @@ export const proposalKinds = [
   'calendar_update',
   'calendar_availability',
   'automation_publish',
+  /** Editing a deal: its stage, value or outcome. */
+  'deal_update',
 ] as const;
 export type ProposalKind = (typeof proposalKinds)[number];
 

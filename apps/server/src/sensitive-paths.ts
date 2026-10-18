@@ -51,5 +51,11 @@ export function redactedRequestUrl(url: string): string {
   // query: neither is logged, and the answer is never stored.
   if (url.split('?', 1)[0]?.startsWith('/api/v1/integrations/google/callback') === true)
     return '/api/v1/integrations/google/callback?[redacted]';
+  // The same for every other provider's redirect back, and a connection's update address,
+  // whose last part is the capability that admits what is sent to it.
+  if (/^\/api\/v1\/integrations\/[^/]+\/callback(?:\/|$)/.test(url.split('?', 1)[0] ?? ''))
+    return '/api/v1/integrations/[provider]/callback?[redacted]';
+  if (prefixes.some((prefix) => prefix.startsWith('/webhooks/integrations')))
+    return '/webhooks/integrations/[redacted]';
   return url;
 }

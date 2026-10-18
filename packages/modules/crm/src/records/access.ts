@@ -6,6 +6,7 @@ const recordTables = {
   contact: 'crm.contacts',
   company: 'crm.companies',
   deal: 'crm.deals',
+  custom: 'crm.custom_records',
 } as const satisfies Record<RecordKind, string>;
 
 /** A visible registry record and its owning entity. Optional locks coordinate writes with trash. */
@@ -25,6 +26,17 @@ export async function requireRecord(
   if (lock) registry = registry.forNoKeyUpdate();
   const registered = await registry.executeTakeFirst();
   if (registered === undefined) throw new NotFoundError('Record', id);
+  // A custom object being deleted takes its records with it: none of them is there to read
+  // or change any more.
+  if (record.kind === 'custom') {
+    const object = await trx
+      .selectFrom('crm.object_types')
+      .select('id')
+      .where('id', '=', registered.object_type_id)
+      .where('archived_at', 'is', null)
+      .executeTakeFirst();
+    if (object === undefined) throw new NotFoundError('Record', id);
+  }
   let entity = trx
     .selectFrom(recordTables[record.kind])
     .select('deleted_at')

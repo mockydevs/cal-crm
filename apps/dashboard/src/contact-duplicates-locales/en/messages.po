@@ -85,6 +85,14 @@ msgstr "Manage Duplicates"
 msgid "Match fields"
 msgstr "Match fields"
 
+#: src/contact-duplicates/review-panel.tsx
+msgid "Merge"
+msgstr "Merge"
+
+#: src/contact-duplicates/review-panel.tsx
+msgid "Merge at most {MAX_CONTACTS_IN_MERGE} contacts at a time: tick the ones to merge in the contact list."
+msgstr "Merge at most {MAX_CONTACTS_IN_MERGE} contacts at a time: tick the ones to merge in the contact list."
+
 #: src/contact-duplicates/manage-page.tsx
 msgid "Name"
 msgstr "Name"

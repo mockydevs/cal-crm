@@ -17,6 +17,9 @@
 //   own address, a constant, with the global fetch, so requests for that address go to the
 //   local stand-in (apps/server/test/fake-emailable.ts) and every other request as before.
 //   DNS for an address check is the same one record as for mailbox checks.
+// - Settings → Integrations, on the "Verify day" install (E2E_INTEGRATION_URL): the stand-in
+//   OAuth provider (packages/modules/integrations/test/fake-provider.ts) is a provider this
+//   server may connect. An install has none such; no setting adds one.
 import { apiRoutes } from '../apps/server/dist/api-routes.js';
 import { loadConfig } from '../apps/server/dist/config.js';
 import { start } from '../apps/server/dist/start.js';
@@ -33,6 +36,7 @@ const mailAddress = need('E2E_MAIL_ADDRESS');
 const mailCertificate = need('E2E_MAIL_CA');
 const claude = process.env['E2E_CLAUDE_URL'];
 const emailable = process.env['E2E_EMAILABLE_URL'];
+const integration = process.env['E2E_INTEGRATION_URL'];
 
 if (emailable !== undefined && emailable !== '') {
   const realFetch = globalThis.fetch;
@@ -62,6 +66,36 @@ const running = await start(loadConfig(process.env), apiRoutes, workerTasks, {
     return fetch(new URL(asked.pathname + asked.search, twilio), init);
   },
   ...(claude === undefined || claude === '' ? {} : { aiBaseUrls: { anthropic: claude } }),
+  // The stand-in's client and endpoints, as test/fake-provider.ts's standInProvider has them.
+  ...(integration === undefined || integration === ''
+    ? {}
+    : {
+        integrationProviders: [
+          {
+            key: 'standin',
+            name: 'Stand-in',
+            description: 'A local provider that proves the model without a third party.',
+            category: 'productivity',
+            multipleAccounts: true,
+            operatorGuide: null,
+            auth: 'oauth2',
+            endpoints: {
+              authorizeUrl: `${integration}/authorize`,
+              tokenUrl: `${integration}/token`,
+              revokeUrl: `${integration}/revoke`,
+              clientAuth: 'basic',
+            },
+            client: {
+              clientId: 'standin-client-fixture',
+              clientSecret: 'standin-secret-fixture-not-real',
+            },
+            scopes: ['account:read', 'messages:write'],
+            pkce: true,
+            identity: { url: `${integration}/me`, id: 'account.id', label: 'account.name' },
+            webhook: { header: 'x-standin-signature', encoding: 'hex', prefix: 'sha256=' },
+          },
+        ],
+      }),
   resolveDns: (_name, type) =>
     type === 'MX'
       ? Promise.resolve([{ exchange: 'mail.localhost.test', priority: 10 }])

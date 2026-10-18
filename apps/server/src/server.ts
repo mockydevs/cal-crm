@@ -32,7 +32,7 @@ import {
   type SignedIn,
 } from '@repo/module-auth';
 import type { WebchatAdmission } from '@repo/module-messaging';
-import type { FormAdmission } from '@repo/module-forms';
+import type { FormAdmission, TrackingAdmission } from '@repo/module-forms';
 import type { Files } from '@repo/module-files';
 import Fastify, {
   type FastifyBaseLogger,
@@ -50,8 +50,15 @@ import { BOOKING_PAGE_FRAMING, isBookingPagePath } from './booking-embed.js';
 import { registerSmsWebhooks, type SmsWebhookTransport } from './sms-webhooks.js';
 import { registerVoiceWebhooks, type VoiceWebhookTransport } from './voice-webhooks.js';
 import { registerGoogleCallback, type GoogleCallbackTransport } from './google-callback.js';
+import {
+  registerIntegrationCallback,
+  registerIntegrationWebhooks,
+  type IntegrationCallbackTransport,
+  type IntegrationWebhookTransport,
+} from './integrations-http.js';
 import { registerPublicWebchat, type PublicWebchatTransport } from './webchat-widget/transport.js';
 import { registerPublicForms, type PublicFormTransport } from './forms-embed/transport.js';
+import { registerPublicTracking, type PublicTrackingTransport } from './external-tracking.js';
 import { registerPublicDocuments, type PublicDocumentTransport } from './commerce-public.js';
 import { registerOAuth, type OAuthTransport } from './oauth.js';
 import { registerPublicSites, type PublicSiteTransport } from './public-sites.js';
@@ -89,6 +96,13 @@ export interface ServerOptions {
    */
   readonly googleCallback?: GoogleCallbackTransport;
   /**
+   * Where a provider sends the browser back after consent, for Settings → Integrations: GET
+   * /api/v1/integrations/{key}/callback. Mounted only with sign-in and a sealing vault.
+   */
+  readonly integrationCallback?: IntegrationCallbackTransport;
+  /** A provider's updates for a connection: stored unverified for the worker to check. */
+  readonly integrationWebhooks?: IntegrationWebhookTransport;
+  /**
    * Web chat's public API and the widget script, mounted only with the messaging
    * module's handlers and the shared limiter. The admission is the module's own value.
    */
@@ -98,6 +112,11 @@ export interface ServerOptions {
    * module's handlers and the shared limiter. The admission is the module's own value.
    */
   readonly publicForms?: PublicFormTransport<FormAdmission>;
+  /**
+   * External Tracking: the script a business pastes into its other websites and the address
+   * it reports to, mounted only with the forms module's handlers and the shared limiter.
+   */
+  readonly publicTracking?: PublicTrackingTransport<TrackingAdmission>;
   /**
    * A quote's or an invoice's public page: /d/<token>, mounted only with the
    * commerce module's handlers and the shared limiter.
@@ -397,11 +416,28 @@ export async function buildServer(options: ServerOptions): Promise<Server> {
       publicUrl: config.publicUrl,
     });
   }
+  if (
+    options.serveApi &&
+    options.integrationCallback !== undefined &&
+    options.authentication !== undefined
+  ) {
+    registerIntegrationCallback(app, {
+      authentication: options.authentication,
+      transport: options.integrationCallback,
+      publicUrl: config.publicUrl,
+    });
+  }
+  if (options.serveApi && options.integrationWebhooks !== undefined) {
+    await registerIntegrationWebhooks(app, options.integrationWebhooks);
+  }
   if (options.serveApi && options.publicWebchat !== undefined) {
     await registerPublicWebchat(app, options.publicWebchat);
   }
   if (options.serveApi && options.publicForms !== undefined) {
     await registerPublicForms(app, options.publicForms);
+  }
+  if (options.serveApi && options.publicTracking !== undefined) {
+    await registerPublicTracking(app, options.publicTracking);
   }
   if (options.serveApi && options.publicDocuments !== undefined) {
     await registerPublicDocuments(app, options.publicDocuments);

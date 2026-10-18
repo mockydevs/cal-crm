@@ -6,9 +6,15 @@ import { requireRecord } from '../records/access.js';
 import { asField } from './fields.js';
 import { validateFieldValue } from './value-validation.js';
 
+/**
+ * The object a list is of: a standard one by its kind, of which a business has one, or a
+ * custom one by its id, since every custom object's kind is custom.
+ */
+export type ListedObject = Exclude<RecordKind, 'custom'> | { readonly objectTypeId: string };
+
 async function definitionFor(
   trx: DatabaseTransaction,
-  kind: RecordKind,
+  object: ListedObject,
   id: string,
   path: string,
 ): Promise<FieldDefinition> {
@@ -20,7 +26,9 @@ async function definitionFor(
     .selectAll('f')
     .select(['o.key as object_key', 'o.kind as object_kind'])
     .where('f.id', '=', parsePublicId('field', id) ?? '')
-    .where('o.kind', '=', kind)
+    .where((eb) =>
+      typeof object === 'string' ? eb('o.kind', '=', object) : eb('o.id', '=', object.objectTypeId),
+    )
     .where('f.merged_into_field_id', 'is', null)
     .executeTakeFirst();
   if (definition === undefined)
@@ -69,14 +77,14 @@ export interface FieldListPlan {
 export async function planFieldList(
   trx: DatabaseTransaction,
   businessId: string,
-  kind: RecordKind,
+  object: ListedObject,
   alias: string,
   input: FieldListOptions & { after?: string | undefined },
 ): Promise<FieldListPlan> {
   const recordId = sql.ref(`${alias}.id`);
   let filter: RawBuilder<SqlBool> | undefined;
   if (input.fieldId !== undefined) {
-    const definition = await definitionFor(trx, kind, input.fieldId, '/fieldId');
+    const definition = await definitionFor(trx, object, input.fieldId, '/fieldId');
     const fieldId = parsePublicId('field', definition.id);
     const exists = sql<SqlBool>`exists (select 1 from crm.field_values fv where fv.business_id = ${businessId} and fv.record_id = ${recordId} and fv.field_id = ${fieldId})`;
     if (input.fieldOperator === 'is_set') filter = exists;
@@ -161,7 +169,7 @@ export async function planFieldList(
   let order: RawBuilder<unknown> | undefined;
   let after: RawBuilder<SqlBool> | undefined;
   if (input.sortField !== undefined) {
-    const definition = await definitionFor(trx, kind, input.sortField, '/sortField');
+    const definition = await definitionFor(trx, object, input.sortField, '/sortField');
     if (unmatched(definition))
       throw new ValidationError([
         {
@@ -176,7 +184,11 @@ export async function planFieldList(
       input.fieldOrder === 'desc' ? sql`${sorted} desc nulls last` : sql`${sorted} asc nulls last`;
     if (input.after !== undefined) {
       const anchor = await requireRecord(trx, input.after);
-      if (anchor.kind !== kind)
+      if (
+        typeof object === 'string'
+          ? anchor.kind !== object
+          : anchor.kind !== 'custom' || anchor.objectTypeId !== object.objectTypeId
+      )
         throw new ValidationError([
           {
             path: '/after',

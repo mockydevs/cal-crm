@@ -17,7 +17,8 @@ export type NotificationPlace =
   | { readonly to: '/b/$slug/calendar'; readonly search: { readonly appointment: string } }
   | { readonly to: '/b/$slug/settings/forms' }
   | { readonly to: '/b/$slug/settings/ai-models' }
-  | { readonly to: '/b/$slug/settings/calendars/connections' };
+  | { readonly to: '/b/$slug/settings/calendars/connections' }
+  | { readonly to: '/b/$slug/settings/integrations' };
 
 /**
  * The page that shows what a notification is about. A conversation, a workflow and an
@@ -40,6 +41,8 @@ export function notificationPlace(target: NotificationTarget): NotificationPlace
       return { to: '/b/$slug/settings/ai-models' };
     case 'calendar_connections':
       return { to: '/b/$slug/settings/calendars/connections' };
+    case 'integrations':
+      return { to: '/b/$slug/settings/integrations' };
   }
 }
 

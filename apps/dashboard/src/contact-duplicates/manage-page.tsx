@@ -212,6 +212,7 @@ export function ManageDuplicatesPage(): ReactElement {
         open={reviewing !== undefined}
         groups={reviewing === undefined ? [] : [reviewing]}
         canReject
+        canMerge
         returnFocus={reviewOpenerRef}
         onClose={() => {
           setReviewing(undefined);

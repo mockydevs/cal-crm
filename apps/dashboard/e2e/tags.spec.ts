@@ -130,7 +130,7 @@ test.describe('at 1440 px', () => {
     await fakeApi(page, []);
     await page.goto(inHarbor('/settings/tags'));
 
-    await expect(page.getByText('No tags yet.')).toBeVisible();
+    await expect(page.getByText('No tags yet', { exact: true })).toBeVisible();
     await expect(tagsTable(page)).toHaveCount(0);
   });
 

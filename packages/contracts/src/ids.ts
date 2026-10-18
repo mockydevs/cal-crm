@@ -26,11 +26,12 @@ export function publicId(kind: PublicIdKind): z.ZodString {
     });
 }
 
-/** The kinds of record (crm.records) the API shows ids for. */
+/** The kinds of record (crm.records) the API shows ids for: custom is a custom object's. */
 export const recordKinds = [
   'contact',
   'company',
   'deal',
+  'custom',
 ] as const satisfies readonly PublicIdKind[];
 
 export type RecordKind = (typeof recordKinds)[number];
@@ -57,6 +58,6 @@ export const recordId = z
   )
   .refine((value) => parseRecordId(value) !== undefined, { error: recordIdError })
   .meta({
-    description: 'A record id: a contact, company or deal.',
+    description: "A record id: a contact, company or deal, or a custom object's record.",
     examples: [toPublicId('contact', EXAMPLE_UUID)],
   });

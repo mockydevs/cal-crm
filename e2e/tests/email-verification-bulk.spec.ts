@@ -10,10 +10,12 @@ import { randomUUID } from 'node:crypto';
 import { expect, test } from '@playwright/test';
 import { contact, contactList, me } from '@repo/contracts';
 
-import { address, asClient, verifyDay } from '../servers.js';
-import { checks, checksQuery as query, signInToChecks } from '../verify-day.js';
+import { address, asClient, bulkVerifyDay as verifyDay } from '../servers.js';
+import { checks as checksAddress, checksQuery as query, signInToChecks } from '../verify-day.js';
 
 test.use(asClient('203.0.113.201'));
+
+const checks = (path = '') => checksAddress(path, verifyDay.business.slug);
 
 /** What the install keeps of one address: the result and how many checks were made. */
 const checked = (shown: string) =>
@@ -35,16 +37,15 @@ test('Verify day: Verify emails checks the ticked contacts, keeps a current resu
   const gone = `nobody-bulk-${suffix}@example.test`;
   const kept = `kept-bulk-${suffix}@example.test`;
 
-  await signInToChecks(page);
+  await signInToChecks(page, verifyDay.owner.email);
   const api = `${address('verifyDay')}/api/v1`;
   const profile = me.parse(await (await page.request.get(`${api}/me`)).json());
   const business = profile.businesses.find((item) => item.slug === verifyDay.business.slug);
   if (business === undefined) throw new Error('The Verify day install has no business.');
   const headers = { 'Business-Id': business.id, Origin: address('verifyDay') };
 
-  // Emailable connected, as Settings → Email Services connects it (email-verification.spec.ts
-  // drives that page); connecting again with the same key keeps it connected. It is
-  // disconnected again at the end, as that file expects to find it before it connects.
+  // The Settings flow connects another business concurrently. Keep this business's
+  // provider lifecycle independent, including cleanup after a failed assertion.
   const connected = await page.request.put(`${api}/email-verification/provider`, {
     headers,
     data: { apiKey: verifyDay.emailableKey },

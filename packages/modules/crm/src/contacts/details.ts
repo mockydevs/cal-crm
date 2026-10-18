@@ -53,6 +53,12 @@ export interface BulkWorkflows {
     invocation: Invocation,
     workflowId: string,
   ) => Promise<{ readonly id: string } | 'not_found' | 'not_published'>;
+  /**
+   * Holds the runs of these contacts still (ids sorted), as a start of a run and a merge
+   * hold them: before a batch holds the contacts themselves, so a merge, which takes the
+   * runs before the contacts, never waits for a batch that waits for it.
+   */
+  readonly hold?: (trx: DatabaseTransaction, contactIds: readonly string[]) => Promise<void>;
   /** Enrols one contact, by stored ids, by the rules every enrolment keeps. */
   readonly enrol: (
     trx: DatabaseTransaction,

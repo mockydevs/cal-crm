@@ -7,7 +7,7 @@ import { actorKinds } from '@repo/kernel';
 import * as z from 'zod';
 
 import { defineEndpoint } from './endpoints.js';
-import { publicId } from './ids.js';
+import { publicId, recordId, recordKinds } from './ids.js';
 import { objectKey } from './objects.js';
 import { timestamp } from './timestamps.js';
 
@@ -158,3 +158,149 @@ export const associationEndpoints = [
   updateAssociation,
   deleteAssociation,
 ] as const;
+
+// Relations: the links between two records under an association, GoHighLevel's relations,
+// and a record's Associations panel, which shows them one association side at a time.
+
+/** How many records each side of an association shows on a record, a page at a time. */
+export const RELATION_PAGE_SIZE = 20;
+
+export const relation = z
+  .looseObject({
+    id: publicId('record_link'),
+    associationId: publicId('link_type'),
+    fromRecordId: recordId.meta({ description: "The record of the association's from object." }),
+    toRecordId: recordId.meta({ description: "The record of the association's to object." }),
+    isPrimary: z.boolean(),
+    createdAt: timestamp,
+  })
+  .meta({ id: 'Relation' });
+export type Relation = z.infer<typeof relation>;
+
+export const createRelationInput = z
+  .strictObject({
+    associationId: publicId('link_type'),
+    firstRecordId: recordId,
+    secondRecordId: recordId,
+    primary: z.boolean().optional().meta({
+      description:
+        "Whether the to record is the from record's primary one, where the association has a primary. Left out, a relation that exists keeps its state, and a new one isn't primary.",
+    }),
+  })
+  .refine((input) => input.firstRecordId !== input.secondRecordId, {
+    path: ['secondRecordId'],
+    error: 'Choose another record: a record is not related to itself.',
+  })
+  .meta({
+    id: 'CreateRelationInput',
+    description:
+      "Two records, in either order, of the association's two objects. Repeating it changes nothing.",
+  });
+export type CreateRelationInput = z.input<typeof createRelationInput>;
+
+export const relationIdInput = z.strictObject({ relationId: publicId('record_link') });
+
+/** Which side of an association a record is on: from, to, or either (one object, one label). */
+export const associationSides = ['from', 'to', 'both'] as const;
+export type AssociationSide = (typeof associationSides)[number];
+
+export const recordAssociationsQuery = z
+  .strictObject({
+    associationId: publicId('link_type')
+      .optional()
+      .meta({ description: 'Only this association, on the side named.' }),
+    side: z.enum(associationSides).optional(),
+    after: publicId('record_link')
+      .optional()
+      .meta({ description: "Start after this relation: the side's next." }),
+  })
+  .superRefine((query, context) => {
+    if (
+      query.associationId === undefined &&
+      (query.side !== undefined || query.after !== undefined)
+    )
+      context.addIssue({
+        code: 'custom',
+        path: ['associationId'],
+        message: 'Choose the association to read.',
+      });
+    else if (query.associationId !== undefined && query.side === undefined)
+      context.addIssue({ code: 'custom', path: ['side'], message: 'Choose the side to read.' });
+  })
+  .meta({ id: 'RecordAssociationsQuery' });
+
+export const associatedRecord = z
+  .looseObject({
+    relationId: publicId('record_link'),
+    id: recordId,
+    kind: z.enum(recordKinds),
+    name: z.string().nullable(),
+    inTrash: z.boolean(),
+    isPrimary: z.boolean(),
+    linkedAt: timestamp,
+  })
+  .meta({ id: 'AssociatedRecord' });
+
+export const associationGroup = z
+  .looseObject({
+    associationId: publicId('link_type'),
+    side: z.enum(associationSides).meta({
+      description: 'Which side of the association this record is on.',
+    }),
+    label: z.string().meta({ description: 'What each record listed is to this one.' }),
+    objectKey: objectKey.meta({ description: 'The object of the records listed.' }),
+    objectLabel: z.string().meta({ description: "That object's plural name." }),
+    system: z.boolean(),
+    allowsPrimary: z.boolean(),
+    limit: z.int().nullable().meta({
+      description: 'How many records this one may have here. Null for no limit.',
+    }),
+    records: z.array(associatedRecord),
+    total: z.int().min(0),
+    next: publicId('record_link')
+      .nullable()
+      .meta({ description: 'Pass it as after, with this association and side, for more.' }),
+    canManage: z.boolean(),
+  })
+  .meta({ id: 'AssociationGroup' });
+export type AssociationGroup = z.infer<typeof associationGroup>;
+
+export const recordAssociations = z
+  .looseObject({ items: z.array(associationGroup) })
+  .meta({ id: 'RecordAssociations' });
+export type RecordAssociations = z.infer<typeof recordAssociations>;
+
+export const getRecordAssociations = defineEndpoint({
+  operationId: 'getRecordAssociations',
+  method: 'get',
+  path: '/records/{id}/associations',
+  group: 'Records',
+  summary: "Read a record's associated records, by association",
+  params: z.strictObject({ id: recordId }),
+  query: recordAssociationsQuery,
+  response: {
+    status: 200,
+    description: `Each association of the record's object, with up to ${String(RELATION_PAGE_SIZE)} records of each side.`,
+    schema: recordAssociations,
+  },
+});
+export const createRelation = defineEndpoint({
+  operationId: 'createRelation',
+  method: 'post',
+  path: '/associations/relations',
+  group: 'Records',
+  summary: 'Relate two records under an association',
+  body: createRelationInput,
+  response: { status: 201, description: 'The relation, made or as it was.', schema: relation },
+});
+export const deleteRelation = defineEndpoint({
+  operationId: 'deleteRelation',
+  method: 'delete',
+  path: '/associations/relations/{relationId}',
+  group: 'Records',
+  summary: 'Remove a relation; both records stay',
+  params: relationIdInput,
+  response: { status: 204, description: 'Removed.' },
+});
+
+export const relationEndpoints = [getRecordAssociations, createRelation, deleteRelation] as const;

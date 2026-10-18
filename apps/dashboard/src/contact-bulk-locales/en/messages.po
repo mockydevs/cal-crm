@@ -492,6 +492,10 @@ msgstr "Mailbox checks need a verification provider. Domain checks still run."
 msgid "Mark as won"
 msgstr "Mark as won"
 
+#: src/contact-bulk-bar.tsx
+msgid "Merge"
+msgstr "Merge"
+
 #: src/contact-bulk/email.tsx
 #: src/contact-bulk/sms.tsx
 msgid "Message"

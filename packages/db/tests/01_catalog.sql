@@ -9,7 +9,8 @@ create temporary table checked_schemas (name text primary key);
 insert into checked_schemas values
   ('app'), ('util'), ('private'), ('tenancy'), ('auth'), ('vault'), ('files'), ('events'),
   ('crm'), ('messaging'), ('calendar'), ('forms'), ('automation'), ('ai'), ('audit'),
-  ('intake'), ('imports'), ('reporting'), ('notifications'), ('sites'), ('commerce');
+  ('intake'), ('imports'), ('reporting'), ('notifications'), ('sites'), ('commerce'),
+  ('integrations');
 
 -- Tables with no row-level security, each with a reason where it's created:
 --   intake.webhooks          the business isn't known yet when a webhook arrives (0011)
@@ -459,4 +460,63 @@ begin
     raise exception 'crm_app should update only record_id and field_id of crm.record_files';
   end if;
   raise notice 'ok: a merge can move record files and nothing else of them';
+end $$;
+
+-- A merge moves the other modules' rows of a contact to the contact it keeps (0129): crm_app
+-- may change which contact or record these rows are of, and nothing else of them.
+do $$
+declare
+  v_table text;
+  v_column text;
+begin
+  foreach v_table in array array['forms.submissions', 'messaging.trigger_link_tokens',
+    'messaging.trigger_link_clicks', 'automation.trigger_firings',
+    'automation.trigger_evaluations']
+  loop
+    v_column := case when v_table like 'automation.%' then 'record_id' else 'contact_id' end;
+    if has_table_privilege('crm_app', v_table, 'update')
+       or not has_column_privilege('crm_app', v_table, v_column, 'update') then
+      raise exception 'crm_app should update only %.% (a merge moves it)', v_table, v_column;
+    end if;
+  end loop;
+  if has_column_privilege('crm_app', 'forms.submissions', 'data', 'update')
+     or has_column_privilege('crm_app', 'messaging.trigger_link_tokens', 'digest', 'update')
+     or has_column_privilege('crm_app', 'automation.trigger_firings', 'occurrence', 'update') then
+    raise exception 'a merge grant reaches past the contact column';
+  end if;
+  raise notice 'ok: a merge can move form submissions, trigger links and trigger bookkeeping';
+end $$;
+
+-- External Tracking (0131): the application writes events and links but never rewrites what
+-- an event recorded, and may delete nothing of it; only the daily purge removes old rows.
+do $$
+begin
+  if has_table_privilege('crm_app', 'forms.tracking_events', 'delete')
+     or has_column_privilege('crm_app', 'forms.tracking_events', 'page_path', 'update')
+     or not has_column_privilege('crm_app', 'forms.tracking_events', 'contact_id', 'update')
+     or has_table_privilege('crm_app', 'forms.external_submissions', 'delete')
+     or has_column_privilege('crm_app', 'forms.external_submissions', 'fields', 'update')
+     or not has_function_privilege('crm_app', 'private.resolve_tracking(text)', 'execute')
+     or not has_function_privilege('crm_app', 'private.expire_tracking_data(integer)', 'execute') then
+    raise exception 'external tracking grants are not as designed';
+  end if;
+  raise notice 'ok: external tracking events are written once and purged only by the sweep';
+end $$;
+
+-- Integrations (0132): activity is appended to and never rewritten; only the schedule's
+-- function clears it. Connecting needs the attempt finder and the webhook admission; the
+-- worker's sweep needs the due list.
+do $$
+begin
+  if has_table_privilege('crm_app', 'integrations.activity', 'update')
+     or has_table_privilege('crm_app', 'integrations.activity', 'delete')
+     or not has_table_privilege('crm_app', 'integrations.activity', 'insert')
+     or not has_function_privilege('crm_app', 'private.find_integration_connect_attempt(bytea)', 'execute')
+     or not has_function_privilege('crm_app', 'private.accept_integration_webhook(text, text, jsonb, bytea)', 'execute')
+     or not has_function_privilege('crm_app', 'private.due_integration_checks(integer)', 'execute')
+     or not has_function_privilege('crm_app', 'private.maintain_integrations(integer)', 'execute')
+     or has_function_privilege('crm_worker', 'private.accept_integration_webhook(text, text, jsonb, bytea)', 'execute') then
+    raise exception 'integration grants are not as designed';
+  end if;
+  raise notice 'ok: integration activity is append-only and its functions are crm_app''s alone';
 end $$;

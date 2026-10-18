@@ -59,6 +59,7 @@ import {
   notificationPreferences,
   unreadNotificationCount,
   scoreProfile,
+  externalTracking,
   scoreRule,
   duplicateSettings,
   contactMergePreview,
@@ -79,6 +80,7 @@ import { createAuthentication, readUserNames, type Authentication } from '@repo/
 import { marketplaceRoutes } from '@repo/module-tenancy';
 import { createGoogleCalendarRoutes } from '@repo/module-calendar';
 import { createImportRoutes } from '@repo/module-crm';
+import { createIntegrationRoutes } from '@repo/module-integrations';
 import { createFiles, createMedia, fileRoutes, mediaRoutes, type Files } from '@repo/module-files';
 import { createFormRoutes } from '@repo/module-forms';
 import { createSiteRoutes } from '@repo/module-sites';
@@ -110,6 +112,11 @@ import {
   campaignExamples,
 } from '../test/campaign-fixtures.js';
 import { googleRouteOptions } from '../test/google-fixtures.js';
+import {
+  INTEGRATION_COMMANDS,
+  integrationConnection,
+  integrationRouteOptions,
+} from '../test/integration-fixtures.js';
 import { REPORTING_COMMANDS, reportingExamples } from '../test/reporting-fixtures.js';
 import { SITE_COMMANDS, SITE_ROUTE_OPTIONS, siteExamples } from '../test/sites-fixtures.js';
 import { apiRoutes } from './api-routes.js';
@@ -220,6 +227,8 @@ beforeAll(async () => {
     ...createAiSettingsRoutes({ vault: sealer, localServers: [], people: readUserNames }),
     // Settings → Calendars → Connections, as an install with Google set up has it.
     ...createGoogleCalendarRoutes(googleRouteOptions(sealer)),
+    // Settings → Integrations, with the stand-in provider an install's code would register.
+    ...createIntegrationRoutes(integrationRouteOptions(sealer)),
   ];
   server = await buildServer({
     config: {
@@ -277,6 +286,9 @@ const agencyWork = [
   ...MARKETPLACE_PUBLISH_COMMANDS,
 ];
 const teamWork = [
+  // Connecting, changing and disconnecting integrations moves the business's credentials
+  // (integrations.manage): owners' and admins'.
+  ...INTEGRATION_COMMANDS,
   'email_verification.settings',
   'email_verification.connect',
   'email_verification.disconnect',
@@ -284,6 +296,9 @@ const teamWork = [
   // Funnels, websites, their templates and share bundles, domains and redirects:
   // sites.manage, sites.publish, sites.share and domains.manage are owners' and admins'.
   ...SITE_COMMANDS,
+  // Settings → External Tracking: the analytics of the business's websites (sites.manage).
+  'external_tracking.update',
+  'external_tracking.regenerate',
   // The catalogue, quotes, invoices, payments and their settings: payments.manage is
   // owners' and admins'. Members see them (payments.read) and change none.
   ...COMMERCE_COMMANDS,
@@ -550,6 +565,13 @@ const builtInRoles: readonly BuiltInRole[] = [
       'deal.set_contacts',
       // Many deals at once, from the list's selection.
       'deal.bulk',
+      // Records of custom objects, and relations between records (records.manage).
+      'record.create',
+      'record.update',
+      'record.trash',
+      'record.restore',
+      'relation.create',
+      'relation.delete',
       'file.create',
       // A contact's documents: uploading one and deleting it (files.upload).
       'record.file.attach',
@@ -607,6 +629,38 @@ interface Example {
 // Every command an API route runs, by name. A route whose command has no example here fails
 // the first test, so each new command joins the matrix.
 const examples: Readonly<Record<string, Example>> = {
+  // Settings → Integrations: connecting only makes the stand-in's consent address; the
+  // others change a connected account made for each run.
+  'integration.connect': {
+    run: (call) => call('POST', '/integrations/standin/connect', { inBusiness: true, payload: {} }),
+  },
+  'integration.update': {
+    run: async (call) => {
+      const { id, revision } = await integrationConnection(database, matrixBusiness);
+      return call('PATCH', `/integrations/standin/connections/${id}`, {
+        inBusiness: true,
+        payload: { primary: true, revision },
+      });
+    },
+  },
+  'integration.test': {
+    run: async (call) => {
+      const { id } = await integrationConnection(database, matrixBusiness);
+      return call('POST', `/integrations/standin/connections/${id}/test`, {
+        inBusiness: true,
+        payload: undefined,
+      });
+    },
+  },
+  'integration.disconnect': {
+    run: async (call) => {
+      const { id } = await integrationConnection(database, matrixBusiness);
+      return call('DELETE', `/integrations/standin/connections/${id}`, {
+        inBusiness: true,
+        payload: undefined,
+      });
+    },
+  },
   'email_verification.settings': {
     run: (call) =>
       call('PUT', '/email-verification/settings', {
@@ -2265,6 +2319,78 @@ const examples: Readonly<Record<string, Example>> = {
       });
     },
   },
+  // Records of the business's Pet object, each made for its try, and relations between two.
+  'record.create': {
+    run: (call, run) =>
+      call('POST', '/objects/matrix_pet/records', {
+        inBusiness: true,
+        payload: { fields: { pet_name: `Matrix ${String(run)}` } },
+      }),
+  },
+  'record.update': {
+    run: async (call, run) => {
+      const id = await matrixPet(`Owned ${String(run)}`);
+      const read = await call('GET', `/objects/matrix_pet/records/${id}`, {
+        inBusiness: true,
+        payload: undefined,
+      });
+      return call('PATCH', `/objects/matrix_pet/records/${id}`, {
+        inBusiness: true,
+        payload: { owner: null, revision: read.json<{ ownerRevision: string }>().ownerRevision },
+      });
+    },
+  },
+  'record.trash': {
+    run: async (call, run) =>
+      call('DELETE', `/objects/matrix_pet/records/${await matrixPet(`Old ${String(run)}`)}`, {
+        inBusiness: true,
+        payload: undefined,
+      }),
+  },
+  'record.restore': {
+    run: async (call, run) =>
+      call(
+        'POST',
+        `/objects/matrix_pet/records/${await matrixPet(`Back ${String(run)}`, true)}/restore`,
+        { inBusiness: true, payload: {} },
+      ),
+  },
+  'relation.create': {
+    run: async (call, run) =>
+      call('POST', '/associations/relations', {
+        inBusiness: true,
+        payload: {
+          associationId: matrixPetFriend,
+          firstRecordId: await matrixPet(`Ann ${String(run)}`),
+          secondRecordId: await matrixPet(`Bea ${String(run)}`),
+        },
+      }),
+  },
+  'relation.delete': {
+    run: async (call, run) => {
+      const [first, second] = [
+        await matrixPet(`Cy ${String(run)}`),
+        await matrixPet(`Di ${String(run)}`),
+      ];
+      const made = await database.as('crm_owner', (sql) =>
+        sql.one<{ id: string }>(
+          `insert into crm.record_links (business_id, link_type_id, from_record_id, to_record_id,
+                                         source_kind)
+           values ($1, $2, $3, $4, 'system') returning id`,
+          [
+            matrixBusiness,
+            parsePublicId('link_type', matrixPetFriend),
+            parsePublicId('custom', first),
+            parsePublicId('custom', second),
+          ],
+        ),
+      );
+      return call('DELETE', `/associations/relations/${toPublicId('record_link', made.id)}`, {
+        inBusiness: true,
+        payload: undefined,
+      });
+    },
+  },
   'contact.link_company': {
     run: (call) =>
       call('PUT', `/contacts/${matrixContact}/companies/${matrixCompany}`, {
@@ -3192,6 +3318,39 @@ const examples: Readonly<Record<string, Example>> = {
         inBusiness: true,
       }),
   },
+  // Each reads the revision first: every role changes the same business's settings.
+  'external_tracking.update': {
+    run: async (call) => {
+      const read = await call('GET', '/external-tracking', {
+        inBusiness: true,
+        payload: undefined,
+      });
+      const { revision } = externalTracking.parse(read.json());
+      return call('PUT', '/external-tracking', {
+        inBusiness: true,
+        payload: {
+          pageViews: true,
+          formCapture: true,
+          allowedDomains: [],
+          visitorIds: 'unless_opted_out',
+          revision,
+        },
+      });
+    },
+  },
+  'external_tracking.regenerate': {
+    run: async (call) => {
+      const read = await call('GET', '/external-tracking', {
+        inBusiness: true,
+        payload: undefined,
+      });
+      const { revision } = externalTracking.parse(read.json());
+      return call('POST', '/external-tracking/regenerate', {
+        inBusiness: true,
+        payload: { revision },
+      });
+    },
+  },
   'crm.score_rule.create': {
     run: (call) =>
       call('POST', '/scoring/rules', {
@@ -3423,6 +3582,28 @@ let matrixAiConnection = '';
 /** The person signed in last, and their business: a saved view is a person's own. */
 let matrixPerson = '';
 let matrixBusiness = '';
+/** The business's Pet object, and an association of Pet with itself. */
+let matrixPetObject = '';
+let matrixPetFriend = '';
+
+/** A record of the business's Pet, written as the records command writes one. */
+async function matrixPet(name: string, trashed = false): Promise<string> {
+  const made = await database.as('crm_owner', async (sql) => {
+    const record = await sql.one<{ id: string }>(
+      `insert into crm.records (business_id, kind, object_type_id)
+       values ($1, 'custom', $2) returning id`,
+      [matrixBusiness, matrixPetObject],
+    );
+    await sql.query(
+      `insert into crm.custom_records (business_id, id, object_type_id, title, deleted_at,
+                                       created_by_kind)
+       values ($1, $2, $3, $4, case when $5 then now() end, 'system')`,
+      [matrixBusiness, record.id, matrixPetObject, name, trashed],
+    );
+    return record;
+  });
+  return toPublicId('custom', made.id);
+}
 
 /**
  * A new contact view of the person signed in last, with the visibility given, as they read
@@ -3980,6 +4161,31 @@ async function signedInWith(role: BuiltInRole): Promise<Call> {
       `insert into crm.field_values(business_id,record_id,field_id,value_type,value_text,source_kind) values($1,$2,$3,'text','Suggested','ai_agent')`,
       [business.id, parsePublicId('contact', matrixContact), ai.id],
     );
+  });
+  // A custom object, Pet, and an association of Pet with itself.
+  await database.withTenant(business.context, async (sql) => {
+    const pet = await sql.one<{ id: string; primary_field_id: string }>(
+      `insert into crm.object_types (business_id, id, kind, key, singular_label, plural_label,
+                                     primary_field_id)
+       values ($1, uuidv7(), 'custom', 'matrix_pet', 'Pet', 'Pets', uuidv7())
+       returning id, primary_field_id`,
+      [business.id],
+    );
+    await sql.query(
+      `insert into crm.field_definitions (business_id, id, object_type_id, key, label, description,
+                                          value_type, folder_id, created_by_kind)
+       select $1, $2, $3, 'pet_name', 'Pet name', 'Its name.', 'text', f.id, 'system'
+       from crm.field_folders f where f.object_type_id = $3 limit 1`,
+      [business.id, pet.primary_field_id, pet.id],
+    );
+    const friend = await sql.one<{ id: string }>(
+      `insert into crm.link_types (business_id, key, from_object_type_id, to_object_type_id,
+                                   label, reverse_label, from_limit, to_limit)
+       values ($1, 'matrix_pet_friend', $2, $2, 'Friend', 'Friend', 1000, 1000) returning id`,
+      [business.id, pet.id],
+    );
+    matrixPetObject = pet.id;
+    matrixPetFriend = toPublicId('link_type', friend.id);
   });
   const email = `role-${String(++people)}@harborlights.example`;
   const { id: userId } = await authentication.createUser({

@@ -109,7 +109,7 @@ test('creates an agency read-only key without a business selector or unrequested
   await page.getByRole('button', { name: 'I’ve copied it' }).click();
   const listed = page.getByRole('listitem').filter({ hasText: 'Agency reader' });
   await expect(listed).toContainText('Read-only');
-  await expect(listed).toContainText('Agency scope');
+  await expect(listed).toContainText('Agency');
   await expect(listed).toContainText('Contacts');
 });
 

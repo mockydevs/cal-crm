@@ -93,6 +93,7 @@ export const triggerCategories: readonly Category[] = [
       'form.submitted',
       'message.received',
       'trigger_link.clicked',
+      'external_tracking.event',
       'webhook.received',
       'schedule',
       'automation.run_ended',

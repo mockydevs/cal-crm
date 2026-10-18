@@ -420,6 +420,20 @@ describe('the trash list', () => {
     ]);
     expect(list.canPurge).toBe(true);
     expect((await trash({ ...invocation, permissions: new Set() })).canPurge).toBe(false);
+    expect(list.items.map((item) => item.mergedInto)).toEqual([null, null, null]);
+  });
+
+  it('marks a contact merged into another with the contact it went to', async () => {
+    const invocation = await inBusiness();
+    const kept = await newContact(invocation, 'Kept');
+    const merged = await newContact(invocation, 'Merged');
+    await database.as('crm_owner', (sql) =>
+      sql.query(`update crm.contacts set merged_into_id = $1, deleted_at = now() where id = $2`, [
+        parsePublicId('contact', kept),
+        parsePublicId('contact', merged),
+      ]),
+    );
+    expect((await trash(invocation)).items).toMatchObject([{ id: merged, mergedInto: kept }]);
   });
 
   it('pages across kinds without gaps or repeats, and refuses a foreign place to start', async () => {
@@ -577,5 +591,77 @@ describe('the daily purge', () => {
       ]),
     );
     expect(purged).toEqual([]);
+  });
+});
+
+describe("a custom object's records in the trash", () => {
+  /** A Pet object and a record of it in the trash, trashed this many days ago. */
+  async function trashedPet(invocation: Invocation, name: string, days: number) {
+    return database.as('crm_owner', async (sql) => {
+      const business = businessOf(invocation);
+      const object = await sql.query<{ id: string }>(
+        `select id from crm.object_types where business_id = $1 and key = 'pet'`,
+        [business],
+      );
+      let objectId = object[0]?.id;
+      if (objectId === undefined) {
+        const made = await sql.one<{ id: string; primary_field_id: string }>(
+          `insert into crm.object_types (business_id, id, kind, key, singular_label, plural_label,
+                                         primary_field_id)
+           values ($1, uuidv7(), 'custom', 'pet', 'Pet', 'Pets', uuidv7())
+           returning id, primary_field_id`,
+          [business],
+        );
+        await sql.query(
+          `insert into crm.field_definitions (business_id, id, object_type_id, key, label,
+                                              description, value_type, folder_id, created_by_kind)
+           select $1, $2, $3, 'pet_name', 'Pet name', 'Its name.', 'text', f.id, 'system'
+           from crm.field_folders f where f.object_type_id = $3 limit 1`,
+          [business, made.primary_field_id, made.id],
+        );
+        objectId = made.id;
+      }
+      const record = await sql.one<{ id: string }>(
+        `with record as (
+           insert into crm.records (business_id, kind, object_type_id)
+           values ($1, 'custom', $2) returning id)
+         insert into crm.custom_records (business_id, id, object_type_id, title, deleted_at,
+                                         created_by_kind)
+         select $1, id, $2, $3, now() - make_interval(days => $4), 'user' from record
+         returning id`,
+        [business, objectId, name, days],
+      );
+      return { objectId, id: toPublicId('custom', record.id) };
+    });
+  }
+
+  it('lists them with their object, and purges them past the retention days', async () => {
+    const invocation = await inBusiness();
+    const old = await trashedPet(invocation, 'Old Buddy', 40);
+    const recent = await trashedPet(invocation, 'Rex', 1);
+    expect((await trash(invocation)).items).toMatchObject([
+      { id: recent.id, kind: 'custom', name: 'Rex', object: { key: 'pet', label: 'Pet' } },
+      { id: old.id, kind: 'custom', name: 'Old Buddy', object: { key: 'pet', label: 'Pet' } },
+    ]);
+    expect(await runCommand(services, purgeExpiredCommand, {}, invocation)).toEqual({ purged: 1 });
+    expect((await trash(invocation, { kind: 'custom' })).items.map((item) => item.id)).toEqual([
+      recent.id,
+    ]);
+    const [event] = await database.as('crm_owner', (sql) =>
+      sql.query<{ payload: Record<string, unknown> }>(
+        `select payload from events.events where business_id = $1 and type = 'trash.purged'`,
+        [businessOf(invocation)],
+      ),
+    );
+    expect(event?.payload).toMatchObject({ customRecords: 1, contacts: 0 });
+  });
+
+  it('leaves out the records of an object being deleted, which go with it', async () => {
+    const invocation = await inBusiness();
+    const pet = await trashedPet(invocation, 'Buddy', 1);
+    await database.as('crm_owner', (sql) =>
+      sql.query('update crm.object_types set archived_at = now() where id = $1', [pet.objectId]),
+    );
+    expect((await trash(invocation)).items).toEqual([]);
   });
 });

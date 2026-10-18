@@ -73,6 +73,10 @@ it('shows each kind’s switch and the reminder time read back in its largest un
   expect(
     screen.getByRole('checkbox', { name: 'A contact writes in any other conversation' }),
   ).toHaveProperty('checked', false);
+  expect(screen.getByRole('checkbox', { name: 'An integration needs attention' })).toHaveProperty(
+    'checked',
+    true,
+  );
   expect(screen.getByRole('textbox', { name: 'Remind me' })).toHaveProperty('value', '2');
   expect(screen.getByRole('combobox', { name: 'Unit' }).textContent).toContain('Hours');
 });

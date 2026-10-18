@@ -1527,6 +1527,8 @@ describe('the one way to a provider', () => {
       'CONNECTION_TEST_JOB',
       'DEFAULT_JOB_MODELS',
       'PROVIDER_ERROR_CODES',
+      // Its part in a contact merge: moves the assistant's memory of a contact, no provider.
+      'aiContactMerge',
       'aiRoutes',
       'checkBaseUrl',
       'createAiGateway',
@@ -1556,6 +1558,8 @@ describe('the one way to a provider', () => {
       'microsToDollars',
       'parseLocalServers',
       'priceKey',
+      // What Settings → Integrations shows of the AI keys: counts and a name, no key.
+      'readAiModelsIntegration',
       'storeProposal',
       'textOf',
       'toolCallsOf',

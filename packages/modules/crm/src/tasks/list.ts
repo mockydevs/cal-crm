@@ -82,7 +82,9 @@ async function conditionsOf(
       exists (select 1 from crm.companies c where c.business_id = crm.tasks.business_id
         and c.id = crm.tasks.record_id and c.deleted_at is null) or
       exists (select 1 from crm.deals d where d.business_id = crm.tasks.business_id
-        and d.id = crm.tasks.record_id and d.deleted_at is null))`
+        and d.id = crm.tasks.record_id and d.deleted_at is null) or
+      exists (select 1 from crm.custom_records r where r.business_id = crm.tasks.business_id
+        and r.id = crm.tasks.record_id and r.deleted_at is null))`
       : sql`record_id = ${recordId}`,
   );
   return kept;

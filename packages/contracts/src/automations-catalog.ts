@@ -1101,6 +1101,31 @@ export const automationTriggerTypes = {
     config: z.strictObject({}),
     outputs: [],
   },
+  // Settings → External Tracking: a page viewed or a form sent on another website of the
+  // business, by a visitor a form has identified as the contact.
+  'external_tracking.event': {
+    label: 'External Tracking Event',
+    description:
+      'A known contact views a page, or sends a form, on a website with the External Tracking script.',
+    config: z.strictObject({
+      event: z.enum(['page_view', 'form_submission']).optional().meta({
+        description: 'Only page views or only forms; left out, either.',
+      }),
+      domain: z.string().trim().min(1).max(253).optional().meta({
+        description: 'Only this website or its subdomains, such as example.com.',
+      }),
+      pagePath: z.string().trim().min(1).max(500).optional().meta({
+        description: 'Only pages whose path contains this, such as /pricing.',
+      }),
+      formName: z.string().trim().min(1).max(200).optional().meta({
+        description: 'Only the external form with this name.',
+      }),
+      utmSource: z.string().trim().min(1).max(200).optional(),
+      utmMedium: z.string().trim().min(1).max(200).optional(),
+      utmCampaign: z.string().trim().min(1).max(200).optional(),
+    }),
+    outputs: [],
+  },
   'trigger_link.clicked': {
     label: 'Trigger link clicked',
     description: 'The contact opens a trigger link from a message sent to them.',

@@ -918,6 +918,26 @@ export const triggerFields: Readonly<Record<AutomationTriggerType, readonly Fiel
   'invoice.paid': [],
   'payment.recorded': [],
   'trigger_link.clicked': [reference('link', msg`Trigger link`, 'triggerLinks', required)],
+  // GoHighLevel's filters: the event, the domain, the page path, the external form's name and
+  // the campaign labels. Each left empty matches any.
+  'external_tracking.event': [
+    choice(
+      'event',
+      msg`Event`,
+      [
+        { value: 'page_view', label: msg`Page view` },
+        { value: 'form_submission', label: msg`Form submission` },
+      ],
+      optional,
+      { unset: msg`Any event` },
+    ),
+    text('domain', msg`Domain`, optional, { placeholder: 'example.com' }),
+    text('pagePath', msg`Page path contains`, optional, { placeholder: '/pricing' }),
+    text('formName', msg`External form name`, optional),
+    text('utmSource', msg`UTM source`, optional),
+    text('utmMedium', msg`UTM medium`, optional),
+    text('utmCampaign', msg`UTM campaign`, optional),
+  ],
   'automation.run_ended': [
     {
       key: 'automations',

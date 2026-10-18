@@ -18,12 +18,15 @@ export const API_KEY_PREFIX_LENGTH = 21;
  * too: a provider's key, and the limit on what it may spend, are not for a program to
  * change. The audit log says what people did, and is for people to read. A conversation
  * with the in-app assistant is one person's: a program uses the assistant's tools through
- * the API itself, with the key's own permissions.
+ * the API itself, with the key's own permissions. Connecting an integration hands the
+ * business's accounts elsewhere to this install, so only a person may do it, as only a
+ * person may make keys.
  */
 const peopleOnly: readonly Permission[] = [
   'ai.manage',
   'assistant.use',
   'audit.read',
+  'integrations.manage',
   'views.save',
   'views.share',
 ];
@@ -61,11 +64,13 @@ export const apiKeyReadGroups = [
   'Deals',
   'Email',
   'Email campaigns',
+  'External tracking',
   'Fields',
   'Files',
   'Forms',
   'Imports',
   'Inbox',
+  'Integrations',
   'Lead sources',
   'Manual actions',
   'Media storage',
@@ -81,6 +86,9 @@ export const apiKeyReadGroups = [
   'Pipelines',
   'Products',
   'Quotes and invoices',
+  // Records of custom objects and the relations between records (GoHighLevel's
+  // objects/record and associations/relation scopes).
+  'Records',
   'Reports',
   'SMS',
   'Scoring',

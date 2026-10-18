@@ -2,9 +2,10 @@
 // after the business's retention days.
 import * as z from 'zod';
 
+import { recordObject } from './custom-records.js';
 import { deal, dealIdInput } from './deals.js';
 import { defineEndpoint } from './endpoints.js';
-import { recordId, recordKinds } from './ids.js';
+import { publicId, recordId, recordKinds } from './ids.js';
 import { timestamp } from './timestamps.js';
 
 /** How many records a page of the trash holds. */
@@ -27,8 +28,13 @@ export const trashedRecord = z
       description:
         "A contact's name or else its primary email address or phone; a company's or deal's name.",
     }),
+    object: recordObject.optional().meta({ description: "A custom record's object." }),
     trashedAt: timestamp,
     purgeAt: timestamp.meta({ description: 'When it will be purged, unless restored first.' }),
+    mergedInto: publicId('contact').nullable().meta({
+      description:
+        'For a contact merged into another, the contact it was merged into. A merge cannot be undone, so it cannot be restored. Null otherwise.',
+    }),
   })
   .meta({ id: 'TrashedRecord' });
 

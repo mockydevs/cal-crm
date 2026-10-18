@@ -8,6 +8,7 @@ import { plural } from '@lingui/core/macro';
 import { Trans, useLingui } from '@lingui/react/macro';
 import {
   CONTACT_BULK_INLINE_LIMIT,
+  MAX_CONTACTS_IN_MERGE,
   getMyPermissions,
   type ContactBulkAction,
   type ContactBulkSelection,
@@ -29,6 +30,7 @@ import {
   HandCoins,
   Mail,
   MailCheck,
+  Merge,
   MessageSquareText,
   Tag,
   Tags,
@@ -40,6 +42,7 @@ import { lazy, Suspense, useRef, useState, type ReactElement, type ReactNode } f
 
 import { apiIn } from './api';
 import { selectionOf, type ListSelection } from './contact-bulk-dialog-rules';
+import { ContactMergeDialog } from './contact-merge/loader';
 
 // Each dialog by itself, fetched when its button is first pressed. "Add to Workflow" brings
 // the workflow words it shares with the builder (lingui.config.ts).
@@ -72,7 +75,8 @@ type Chosen =
   | 'send_email'
   | 'set_dnd'
   | 'add_opportunity'
-  | 'verify_emails';
+  | 'verify_emails'
+  | 'merge';
 
 /** What each action needs of the reader's role besides changing contacts. */
 const NEEDS: Readonly<Partial<Record<Chosen, Permission>>> = {
@@ -83,6 +87,7 @@ const NEEDS: Readonly<Partial<Record<Chosen, Permission>>> = {
   send_sms: 'campaigns.send',
   send_email: 'campaigns.send',
   add_opportunity: 'deals.manage',
+  merge: 'contacts.merge',
 };
 
 export interface ContactBulkBarProps {
@@ -224,6 +229,10 @@ export default function ContactBulkBar({
         return <OpportunityDialog {...shared} />;
       case 'verify_emails':
         return <VerifyDialog {...shared} />;
+      case 'merge':
+        return (
+          <ContactMergeDialog contactIds={[...ticked]} returnFocus={focusRef} onClose={close} />
+        );
     }
   };
 
@@ -279,6 +288,22 @@ export default function ContactBulkBar({
             <FileDown aria-hidden className={iconClassName} strokeWidth={1.8} />,
             <Trans>Export</Trans>,
           )}
+          {/* GoHighLevel's Merge Contacts: two to ten contacts ticked by hand. */}
+          {may('merge') ? (
+            <Button
+              variant="secondary"
+              size="small"
+              disabled={
+                everyone !== undefined || ticked.size < 2 || ticked.size > MAX_CONTACTS_IN_MERGE
+              }
+              onClick={(event) => {
+                open('merge', event.currentTarget);
+              }}
+            >
+              <Merge aria-hidden className={iconClassName} strokeWidth={1.8} />
+              <Trans>Merge</Trans>
+            </Button>
+          ) : null}
           {button(
             'trash',
             <Trash2 aria-hidden className={iconClassName} strokeWidth={1.8} />,

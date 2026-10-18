@@ -21,6 +21,7 @@ const OWNED = {
   contact: 'crm.contacts',
   company: 'crm.companies',
   deal: 'crm.deals',
+  custom: 'crm.custom_records',
 } as const satisfies Record<RecordKind, string>;
 
 const refuse = (path: string, code: string, message: string): ValidationError =>

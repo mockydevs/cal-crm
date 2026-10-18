@@ -36,6 +36,7 @@ describe('apiKeyScopes', () => {
       'payments.read',
       'phone.manage',
       'pipelines.manage',
+      'records.manage',
       'reports.manage',
       'reports.view',
       'sites.manage',

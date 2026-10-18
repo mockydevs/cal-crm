@@ -1,7 +1,9 @@
 import {
   DragDropProvider,
+  DragOverlay,
   KeyboardSensor,
   PointerSensor,
+  useDragOperation,
   useDraggable,
   useDroppable,
 } from '@dnd-kit/react';
@@ -11,6 +13,7 @@ import type { Deal, DealStageSummary, Pipeline } from '@repo/contracts';
 import { Avatar } from '@repo/ui/components/avatar';
 import { getRouteApi, Link } from '@tanstack/react-router';
 import {
+  ArrowDownToLine,
   ClipboardCheck,
   GripVertical,
   MessageSquare,
@@ -18,10 +21,17 @@ import {
   UserRound,
   type LucideIcon,
 } from 'lucide-react';
-import type { ReactElement, ReactNode } from 'react';
+import type { CSSProperties, ReactElement, ReactNode } from 'react';
 import { tintOf } from './avatar-tint';
 import { contactNameOf, DealTags, StageName, useOwnerName } from './deal-extras';
-import { amountOf, stageMarkOf, stageTotals, type StageMark } from './deal-presentation';
+import {
+  accentTint,
+  amountOf,
+  stageAccentOf,
+  stageMarkOf,
+  stageTotals,
+  type StageMark,
+} from './deal-presentation';
 import { DealStatus } from './deal-status';
 import { initialsOf, useBusiness } from './workspace';
 
@@ -115,6 +125,7 @@ export default function DealBoard({
               <StageColumn
                 key={stage.id}
                 stage={stage}
+                accent={stageAccentOf(pipeline, stage.id)}
                 mark={stageMarkOf(pipeline, stage.id)}
                 disabled={!canManage || pipeline.archived || stage.archived}
                 saving={pending}
@@ -124,11 +135,22 @@ export default function DealBoard({
             ))}
         </div>
       </div>
+      {/* What follows the pointer while a card is carried: a lifted copy, for the eye only.
+          The card itself stays in its column as a placeholder, and keeps the focus. */}
+      <DragOverlay>
+        {(source) => {
+          const deal = deals.find((item) => item.id === source.id);
+          return deal === undefined ? null : (
+            <DealPreview deal={deal} accent={stageAccentOf(pipeline, deal.stageId)} />
+          );
+        }}
+      </DragOverlay>
     </DragDropProvider>
   );
 }
 function StageColumn({
   stage,
+  accent,
   mark,
   deals,
   counted,
@@ -136,6 +158,8 @@ function StageColumn({
   saving,
 }: {
   readonly stage: Pipeline['stages'][number];
+  /** The colour the board draws the stage in: its own, or the palette's. */
+  readonly accent: string;
   /** The stage's colour as the pipeline draws it: a dot before the name, or the header tinted. */
   readonly mark: StageMark;
   readonly deals: Deal[];
@@ -147,55 +171,125 @@ function StageColumn({
 }): ReactElement {
   const { t } = useLingui();
   const { ref, isDropTarget } = useDroppable({ id: stage.id, disabled: disabled || saving });
+  const { source } = useDragOperation();
   const count = counted?.count ?? deals.length;
   const totals = counted === undefined ? stageTotals(deals) : counted.totals.map(amountOf);
+  // While a card is carried, every stage it could go to says so; the one under it, loudly.
+  const carrying = source !== null && source !== undefined;
+  const home = carrying && deals.some((deal) => deal.id === source.id);
+  const accepts = carrying && !disabled && !home;
+  const highlighted = isDropTarget && !home;
+  const columnStyle: CSSProperties = {
+    backgroundColor: accentTint(accent, highlighted ? 14 : 5),
+    borderColor: highlighted ? accent : accepts ? accentTint(accent, 45) : 'transparent',
+  };
   return (
     <section
       ref={ref}
       aria-label={stage.name}
-      className={`flex min-h-60 w-[308px] shrink-0 flex-col gap-2.5 rounded-lg border p-1 ${isDropTarget ? 'border-primary bg-accent' : 'border-transparent'}`}
+      data-drop-target={highlighted ? 'true' : undefined}
+      className={`flex min-h-60 w-[308px] shrink-0 flex-col gap-2.5 rounded-xl border-2 p-1 transition-colors ${accepts ? 'border-dashed' : ''}`}
+      style={columnStyle}
     >
-      <div className="rounded-lg border border-border bg-card shadow-xs">
+      <div
+        className="rounded-lg border border-t-4 border-border bg-card shadow-xs"
+        style={{ borderTopColor: accent }}
+      >
         <div
           data-stage-color={mark.tint === undefined ? undefined : 'tint'}
-          className="flex flex-col gap-1 rounded-[inherit] px-3 py-2.5"
+          className="flex flex-col gap-1.5 rounded-b-[inherit] px-3 py-2.5"
           style={mark.tint === undefined ? undefined : { backgroundColor: mark.tint }}
         >
-          <h2 className="text-md font-semibold wrap-break-word">
-            <StageName mark={mark.dot === undefined ? {} : mark}>
-              {stage.name}
-              {stage.archived ? t` (archived)` : ''}
-            </StageName>
-          </h2>
+          <div className="flex items-start justify-between gap-2">
+            <h2 className="min-w-0 text-md font-semibold wrap-break-word">
+              <StageName mark={mark.dot === undefined ? {} : mark}>
+                {stage.name}
+                {stage.archived ? t` (archived)` : ''}
+              </StageName>
+            </h2>
+            <span
+              aria-hidden
+              className="shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold text-foreground"
+              style={{ backgroundColor: accentTint(accent, 16) }}
+            >
+              {count}
+            </span>
+          </div>
           <p className="flex flex-wrap gap-x-2 text-xs text-body">
             <span>
               <Plural value={count} one="# opportunity" other="# opportunities" />
             </span>
             {totals.map((total) => (
-              <span key={total} className="font-medium text-foreground">
+              <span key={total} className="font-semibold text-foreground">
                 {total}
               </span>
             ))}
           </p>
         </div>
       </div>
+      {highlighted ? (
+        <div
+          aria-hidden
+          className="flex h-16 items-center justify-center gap-2 rounded-lg border-2 border-dashed bg-card/70 text-sm font-medium text-foreground"
+          style={{ borderColor: accent }}
+        >
+          <ArrowDownToLine className="size-4" style={{ color: accent }} />
+          <Trans>Drop in {stage.name}</Trans>
+        </div>
+      ) : null}
       {deals.map((deal) => (
         <DealCard
           key={deal.id}
           deal={deal}
+          accent={accent}
           disabled={disabled || !deal.canManage}
           saving={saving}
         />
       ))}
+      {deals.length === 0 && !highlighted ? (
+        <p className="flex h-20 items-center justify-center rounded-lg border-2 border-dashed border-border text-sm text-muted-foreground">
+          <Trans>No opportunities</Trans>
+        </p>
+      ) : null}
     </section>
   );
 }
+
+/** The card as it follows the pointer: its name, contact and value, lifted off the board. */
+function DealPreview({
+  deal,
+  accent,
+}: {
+  readonly deal: Deal;
+  readonly accent: string;
+}): ReactElement {
+  const contactName = contactNameOf(deal);
+  return (
+    <div
+      aria-hidden
+      className="flex w-[296px] rotate-2 cursor-grabbing flex-col gap-1.5 rounded-lg border border-l-4 border-border bg-card p-3"
+      style={{
+        borderLeftColor: accent,
+        boxShadow: `0 0 0 2px ${accentTint(accent, 40)}, 0 20px 25px -5px rgb(0 0 0 / 0.15)`,
+      }}
+    >
+      <p className="text-md leading-snug font-medium wrap-anywhere">{deal.name}</p>
+      {contactName === undefined ? null : (
+        <p className="text-sm text-body wrap-anywhere">{contactName}</p>
+      )}
+      <p className="text-sm font-semibold">{amountOf(deal)}</p>
+    </div>
+  );
+}
+
 function DealCard({
   deal,
+  accent,
   disabled,
   saving,
 }: {
   readonly deal: Deal;
+  readonly accent: string;
   readonly disabled: boolean;
   readonly saving: boolean;
 }): ReactElement {
@@ -236,7 +330,9 @@ function DealCard({
   return (
     <article
       ref={ref}
-      className={`flex flex-col gap-2.5 rounded-lg border p-3 shadow-xs transition-shadow hover:shadow-sm ${won ? 'border-success-line bg-success-subtle' : 'border-border bg-card'} ${isDragging ? 'opacity-50' : ''}`}
+      data-dragging={isDragging ? 'true' : undefined}
+      className={`group flex flex-col gap-2.5 rounded-lg border border-l-4 p-3 shadow-xs transition-[box-shadow,transform,opacity] hover:-translate-y-px hover:shadow-md ${won ? 'border-success-line bg-success-subtle' : 'border-border bg-card'} ${isDragging ? 'border-dashed opacity-40 shadow-none hover:translate-y-0' : ''}`}
+      style={{ borderLeftColor: won ? undefined : accent }}
     >
       <div className="flex items-start gap-2">
         <h3 className="min-w-0 flex-1 text-md leading-snug font-medium wrap-anywhere">
@@ -281,7 +377,8 @@ function DealCard({
             // who ask for reduced motion, who get no animation.
             disabled={disabled}
             aria-label={t`Move ${name}`}
-            className="-my-1.5 -mr-1.5 flex size-11 shrink-0 touch-none items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-40 aria-disabled:opacity-40 lg:size-8"
+            title={t`Drag to another stage`}
+            className="-my-1.5 -mr-1.5 flex size-11 shrink-0 cursor-grab touch-none items-center justify-center rounded-full text-muted-foreground group-hover:bg-muted group-hover:text-foreground hover:bg-muted hover:text-foreground active:cursor-grabbing disabled:cursor-default disabled:opacity-40 aria-disabled:cursor-default aria-disabled:opacity-40 lg:size-8"
           >
             <GripVertical size={16} aria-hidden />
           </button>

@@ -9,6 +9,7 @@ export default defineConfig({
       'webchat-widget/**/*.domtest.ts',
       'forms-embed/**/*.domtest.ts',
       'booking-embed/**/*.domtest.ts',
+      'tracking-script/**/*.domtest.ts',
     ],
     exclude: ['src/**/*.int.test.ts', 'src/**/*.container.test.ts'],
     reporters: ['default', 'junit'],
@@ -22,6 +23,7 @@ export default defineConfig({
         'forms-embed/entry.ts',
         'forms-embed/view.ts',
         'booking-embed/sizer.ts',
+        'tracking-script/tracker.ts',
       ],
       // main.ts and instrumentation.ts only run as a process: process.int.test.ts runs the
       // built files. The worker needs Postgres: the integration run measures it.

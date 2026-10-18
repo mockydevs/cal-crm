@@ -462,6 +462,10 @@ export const triggerExamples: Readonly<Record<string, AutomationExample>> = {
   'invoice.sent': { config: {}, summary: 'An invoice is sent' },
   'invoice.paid': { config: {}, summary: 'An invoice is paid in full' },
   'payment.recorded': { config: {}, summary: 'A payment is recorded' },
+  'external_tracking.event': {
+    config: { event: 'form_submission' },
+    summary: 'A contact sends a form on your website',
+  },
   'trigger_link.clicked': {
     config: { link: 'tlnk_book' },
     summary: 'A contact clicks the trigger link Booking page',

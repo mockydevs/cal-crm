@@ -1,0 +1,292 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-18 19:14+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/contact-merge/dialog.tsx
+msgid "· Added {on}"
+msgstr "· Added {on}"
+
+#: src/contact-merge/dialog.tsx
+msgid "Activity entries"
+msgstr "Activity entries"
+
+#: src/contact-merge/dialog.tsx
+msgid "Appointments"
+msgstr "Appointments"
+
+#: src/contact-merge/dialog.tsx
+msgid "Assistant permissions for the contact"
+msgstr "Assistant permissions for the contact"
+
+#: src/contact-merge/dialog.tsx
+msgid "Associations"
+msgstr "Associations"
+
+#: src/contact-merge/dialog.tsx
+msgid "Attribution touches"
+msgstr "Attribution touches"
+
+#: src/contact-merge/dialog.tsx
+msgid "Calls"
+msgstr "Calls"
+
+#: src/contact-merge/dialog.tsx
+msgid "Campaign test emails"
+msgstr "Campaign test emails"
+
+#: src/contact-merge/dialog.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/contact-merge/dialog.tsx
+msgid "Chat sessions"
+msgstr "Chat sessions"
+
+#: src/contact-merge/dialog.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/contact-merge/dialog.tsx
+msgid "Consent records"
+msgstr "Consent records"
+
+#: src/contact-merge/dialog.tsx
+msgid "Contact source"
+msgstr "Contact source"
+
+#: src/contact-merge/dialog.tsx
+msgid "Contact summaries"
+msgstr "Contact summaries"
+
+#: src/contact-merge/dialog.tsx
+msgid "Contact type"
+msgstr "Contact type"
+
+#: src/contact-merge/dialog.tsx
+msgid "Conversations"
+msgstr "Conversations"
+
+#: src/contact-merge/dialog.tsx
+msgid "Conversations the assistant read"
+msgstr "Conversations the assistant read"
+
+#: src/contact-merge/dialog.tsx
+msgid "Counting what moves…"
+msgstr "Counting what moves…"
+
+#: src/contact-merge/dialog.tsx
+msgid "Custom field values"
+msgstr "Custom field values"
+
+#: src/contact-merge/dialog.tsx
+msgid "Customer"
+msgstr "Customer"
+
+#: src/contact-merge/dialog.tsx
+msgid "Date of birth"
+msgstr "Date of birth"
+
+#: src/contact-merge/dialog.tsx
+msgid "Date trigger records"
+msgstr "Date trigger records"
+
+#: src/contact-merge/dialog.tsx
+msgid "Each field's value, contact by contact"
+msgstr "Each field's value, contact by contact"
+
+#: src/contact-merge/dialog.tsx
+msgid "Email addresses and phone numbers"
+msgstr "Email addresses and phone numbers"
+
+#: src/contact-merge/dialog.tsx
+msgid "Email campaign recipients"
+msgstr "Email campaign recipients"
+
+#: src/contact-merge/dialog.tsx
+msgid "Facts the assistant learned"
+msgstr "Facts the assistant learned"
+
+#: src/contact-merge/dialog.tsx
+msgid "Files"
+msgstr "Files"
+
+#: src/contact-merge/dialog.tsx
+msgid "First name"
+msgstr "First name"
+
+#: src/contact-merge/dialog.tsx
+msgid "Followers"
+msgstr "Followers"
+
+#: src/contact-merge/dialog.tsx
+msgid "Form submissions"
+msgstr "Form submissions"
+
+#: src/contact-merge/dialog.tsx
+msgid "Former team member"
+msgstr "Former team member"
+
+#: src/contact-merge/dialog.tsx
+msgid "I understand this cannot be undone"
+msgstr "I understand this cannot be undone"
+
+#: src/contact-merge/dialog.tsx
+msgid "Invoices and documents"
+msgstr "Invoices and documents"
+
+#: src/contact-merge/dialog.tsx
+msgid "Last name"
+msgstr "Last name"
+
+#: src/contact-merge/dialog.tsx
+msgid "Lead"
+msgstr "Lead"
+
+#: src/contact-merge/dialog.tsx
+msgid "Loading the contacts…"
+msgstr "Loading the contacts…"
+
+#: src/contact-merge/dialog.tsx
+msgid "Manual workflow actions"
+msgstr "Manual workflow actions"
+
+#: src/contact-merge/dialog.tsx
+msgid "Master"
+msgstr "Master"
+
+#: src/contact-merge/dialog.tsx
+msgid "Master contact"
+msgstr "Master contact"
+
+#: src/contact-merge/dialog.tsx
+msgid "Merge"
+msgstr "Merge"
+
+#: src/contact-merge/dialog.tsx
+msgid "Merge Contacts"
+msgstr "Merge Contacts"
+
+#: src/contact-merge/dialog.tsx
+msgid "Merging…"
+msgstr "Merging…"
+
+#: src/contact-merge/dialog.tsx
+msgid "Messages"
+msgstr "Messages"
+
+#: src/contact-merge/dialog.tsx
+msgid "Not set"
+msgstr "Not set"
+
+#: src/contact-merge/dialog.tsx
+msgid "Notes"
+msgstr "Notes"
+
+#: src/contact-merge/dialog.tsx
+msgid "Nothing else moves: the others have no notes, tasks or history."
+msgstr "Nothing else moves: the others have no notes, tasks or history."
+
+#: src/contact-merge/dialog.tsx
+msgid "One of these contacts changed while you had this open. The latest is shown: check your choices and merge again."
+msgstr "One of these contacts changed while you had this open. The latest is shown: check your choices and merge again."
+
+#: src/contact-merge/dialog.tsx
+msgid "Only admins can merge contacts."
+msgstr "Only admins can merge contacts."
+
+#: src/contact-merge/dialog.tsx
+msgid "Owner"
+msgstr "Owner"
+
+#: src/contact-merge/dialog.tsx
+msgid "Pick the master contact and, where the contacts differ, the values it keeps."
+msgstr "Pick the master contact and, where the contacts differ, the values it keeps."
+
+#: src/contact-merge/dialog.tsx
+msgid "Primary email"
+msgstr "Primary email"
+
+#: src/contact-merge/dialog.tsx
+msgid "Primary phone"
+msgstr "Primary phone"
+
+#: src/contact-merge/dialog.tsx
+msgid "Recurring tasks"
+msgstr "Recurring tasks"
+
+#: src/contact-merge/dialog.tsx
+msgid "Score changes"
+msgstr "Score changes"
+
+#: src/contact-merge/dialog.tsx
+msgid "Tags"
+msgstr "Tags"
+
+#: src/contact-merge/dialog.tsx
+msgid "Tasks"
+msgstr "Tasks"
+
+#: src/contact-merge/dialog.tsx
+msgid "The contact kept. The others' notes, tasks, conversations and the rest move to it, and they go to the trash."
+msgstr "The contact kept. The others' notes, tasks, conversations and the rest move to it, and they go to the trash."
+
+#: src/contact-merge/dialog.tsx
+msgid "The contacts weren't merged. Check your connection and try again."
+msgstr "The contacts weren't merged. Check your connection and try again."
+
+#: src/contact-merge/dialog.tsx
+msgid "These contacts have {rowsWords} rows of history between them, more than the {maxWords} one merge moves. Merge fewer contacts at a time."
+msgstr "These contacts have {rowsWords} rows of history between them, more than the {maxWords} one merge moves. Merge fewer contacts at a time."
+
+#: src/contact-merge/dialog.tsx
+msgid "Time zone"
+msgstr "Time zone"
+
+#: src/contact-merge/dialog.tsx
+msgid "Trigger link clicks"
+msgstr "Trigger link clicks"
+
+#: src/contact-merge/dialog.tsx
+msgid "Trigger links sent"
+msgstr "Trigger links sent"
+
+#: src/contact-merge/dialog.tsx
+msgid "Try again"
+msgstr "Try again"
+
+#: src/contact-merge/dialog.tsx
+msgid "Unnamed contact"
+msgstr "Unnamed contact"
+
+#: src/contact-merge/dialog.tsx
+msgid "Unsubscribe links"
+msgstr "Unsubscribe links"
+
+#: src/contact-merge/dialog.tsx
+msgid "We couldn't load the contacts."
+msgstr "We couldn't load the contacts."
+
+#: src/contact-merge/dialog.tsx
+msgid "We couldn't read what would move."
+msgstr "We couldn't read what would move."
+
+#: src/contact-merge/dialog.tsx
+msgid "What moves to {masterName}"
+msgstr "What moves to {masterName}"
+
+#: src/contact-merge/dialog.tsx
+msgid "Workflow runs"
+msgstr "Workflow runs"
+
+#: src/contact-merge/dialog.tsx
+msgid "Workflow trigger checks"
+msgstr "Workflow trigger checks"
+
+#: src/contact-merge/dialog.tsx
+msgid "Workflow waits"
+msgstr "Workflow waits"

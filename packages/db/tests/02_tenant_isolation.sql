@@ -463,6 +463,20 @@ begin
   -- The form's numbers for one day: shown twelve times, two submissions timed.
   insert into forms.daily_stats (business_id, form_id, day, views, timed_submissions, fill_seconds)
     values (b, form, date '2026-10-10', 12, 2, 95);
+  -- 0131: External Tracking, its events, a page's day, a visitor known to be the contact and
+  -- an external form's submission.
+  insert into forms.tracking_settings (business_id, tracking_id)
+    values (b, 'tk_' || repeat('b1', 16));
+  insert into forms.tracking_events (business_id, kind, page_host, page_path, visitor_id, contact_id)
+    values (b, 'page_view', 'www.harborlights.example', '/pricing', uuidv7(), contact_1);
+  insert into forms.tracking_page_days (business_id, page_host, page_path, day, page_views, last_seen_at)
+    values (b, 'www.harborlights.example', '/pricing', current_date, 1, now());
+  insert into forms.tracking_visitors (business_id, visitor_id, contact_id)
+    values (b, uuidv7(), contact_1);
+  insert into forms.external_submissions (business_id, contact_id, form_name, page_host, page_path, fields,
+                                          client_submission_id, view_mark)
+    values (b, contact_1, 'Contact us', 'www.harborlights.example', '/contact',
+            '[{"name": "email", "label": "Email", "value": "jordan@example.com"}]', uuidv7(), repeat('m', 43));
   -- Where the contact came from (0086): one touch, its first and its latest; and a saved report.
   insert into crm.contact_attributions
     (business_id, contact_id, medium, session_source, utm_source, subject_kind, subject_id, is_first, is_latest)
@@ -704,6 +718,31 @@ begin
   -- Its public address (0080): the digest of a token, never the token.
   insert into commerce.document_links (business_id, document_id, digest, created_by_kind, created_by_id)
     values (b, invoice_1, repeat('c0', 32), 'user', u);
+end $$;
+
+-- Integrations (0132): a connected account with its sealed credentials, an OAuth attempt,
+-- a record's id at the provider and the account's activity.
+do $$
+declare
+  b constant uuid := current_setting('test.b1');
+  u constant uuid := current_setting('test.u2');
+  secret_1 uuid;
+  connection_1 uuid;
+  contact_1 uuid;
+begin
+  select id into contact_1 from crm.contacts where business_id = b order by id limit 1;
+  -- One of the business's own secrets: the count of what each business sees stays as it is.
+  select id into secret_1 from vault.secrets where business_id = b order by id limit 1;
+  insert into integrations.connections (business_id, provider, account_ref, account_label, status,
+                                        secret_id, is_primary, connected_by, webhook_digest)
+    values (b, 'standin', 'T0001', 'Harbor Lights', 'connected', secret_1, true, u, repeat('ab', 32))
+    returning id into connection_1;
+  insert into integrations.connect_attempts (business_id, provider, user_id, state_digest)
+    values (b, 'standin', u, sha256(convert_to('integrations:' || b::text, 'UTF8')));
+  insert into integrations.external_ids (business_id, connection_id, entity_kind, entity_id, external_id)
+    values (b, connection_1, 'contact', contact_1, 'C-1');
+  insert into integrations.activity (business_id, connection_id, kind)
+    values (b, connection_1, 'connected');
 end $$;
 
 -- 3. Business 2 (same agency) and business 3 (another agency): just enough to compare --------

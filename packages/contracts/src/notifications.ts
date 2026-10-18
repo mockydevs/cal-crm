@@ -42,6 +42,8 @@ export const notificationKinds = [
   'automation.notice',
   // Your Google Calendar stopped answering: expired or revoked.
   'calendar.google_disconnected',
+  // An integration of the business stopped working and needs someone who manages them.
+  'integration.needs_attention',
 ] as const;
 
 export type NotificationKind = (typeof notificationKinds)[number];
@@ -64,11 +66,12 @@ export const notificationTarget = z
     z.looseObject({ kind: z.literal('automation'), id: publicId('automation') }),
     z.looseObject({ kind: z.literal('ai_settings') }),
     z.looseObject({ kind: z.literal('calendar_connections') }),
+    z.looseObject({ kind: z.literal('integrations') }),
   ])
   .meta({
     id: 'NotificationTarget',
     description:
-      "What the notification is about, for the dashboard to open: a kind and that kind's id, never an address. `ai_settings` is the business's own AI settings and `calendar_connections` your own calendar connections; neither has an id.",
+      "What the notification is about, for the dashboard to open: a kind and that kind's id, never an address. `ai_settings` is the business's own AI settings, `calendar_connections` your own calendar connections and `integrations` the business's integrations; none has an id.",
   });
 
 export type NotificationTarget = z.infer<typeof notificationTarget>;

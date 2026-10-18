@@ -33,6 +33,7 @@ import {
   PURGE_TRASH,
   SCHEDULE_CAMPAIGNS,
   SCHEDULE_GOOGLE,
+  SCHEDULE_INTEGRATIONS,
   startWorker,
   type Worker,
 } from './worker.js';
@@ -348,6 +349,67 @@ describe('the worker', () => {
         ? true
         : undefined,
     );
+  });
+
+  it('queues a due integration check in its business, and clears an attempt past its time', async () => {
+    const agency = await database.fixtures.agency();
+    const business = await database.fixtures.business(agency.id);
+    const member = await database.fixtures.user();
+    const [connection] = await database.withTenant(business.context, (client) =>
+      client.query<{ id: string }>(
+        `with secret as (
+           insert into vault.secrets (agency_id, business_id, purpose, key_version, enc, ciphertext)
+           values ($1, $2, 'integrations.standin.credentials', 1, decode(repeat('01',32),'hex'),
+                   decode(repeat('ab',32),'hex')) returning id
+         )
+         insert into integrations.connections
+           (business_id, provider, account_ref, account_label, status, secret_id, next_check_at)
+         select $2, 'standin', 'acct-1', 'Workspace', 'connected', secret.id,
+                now() - interval '1 minute'
+         from secret returning id`,
+        [agency.id, business.id],
+      ),
+    );
+    if (connection === undefined) throw new Error('No integration fixture.');
+    await database.withTenant(business.context, (client) =>
+      client.query(
+        `insert into integrations.connect_attempts (business_id, provider, user_id, state_digest, expires_at)
+         values ($1, 'standin', $2, sha256('worker-schedule'::bytea), now() - interval '2 hours')`,
+        [business.id, member.id],
+      ),
+    );
+    const checked: unknown[] = [];
+    const check = defineTask({
+      name: 'integrations.check',
+      data: z.strictObject({ connectionId: z.uuid() }),
+      run(data) {
+        checked.push(data);
+        return Promise.resolve();
+      },
+    });
+    workers.push(
+      await startWorker({
+        connectionString: database.url('crm_worker'),
+        services,
+        tasks: [check],
+        logger: pino({ level: 'silent' }),
+        shutdownTimeoutMs: 1000,
+      }),
+    );
+    await database.as('crm_owner', (client) =>
+      client.query('select graphile_worker.add_job($1)', [SCHEDULE_INTEGRATIONS]),
+    );
+    await eventually(() => (checked.length > 0 ? true : undefined));
+    expect(checked).toEqual([{ connectionId: connection.id }]);
+    await eventually(async () =>
+      (await queued(SCHEDULE_INTEGRATIONS)).length === 0 ? true : undefined,
+    );
+    const left = await database.as('crm_owner', (client) =>
+      client.query('select 1 from integrations.connect_attempts where business_id = $1', [
+        business.id,
+      ]),
+    );
+    expect(left).toEqual([]);
   });
 
   it('runs a committed job once, in the business that added it, as the system', async () => {

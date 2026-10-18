@@ -28,12 +28,15 @@ import { startFakeClaude } from '../apps/server/test/fake-claude.js';
 import { startFakeEmailable } from '../apps/server/test/fake-emailable.js';
 import { startFakeTwilio } from '../apps/server/test/fake-twilio.js';
 import { startFakeOpenAi } from '../packages/modules/ai/test/fake-openai.js';
+import { startFakeProvider } from '../packages/modules/integrations/test/fake-provider.js';
 import { startHttpsFront } from './https-front.js';
 import {
   automationDay,
   bookingDay,
+  bulkVerifyDay,
   draftDay,
   inboxDay,
+  integrationsDay,
   modelDay,
   ours,
   owner,
@@ -482,6 +485,17 @@ export default async function globalSetup(): Promise<Stop> {
     const checksAgency = await checks.fixtures.agency({ name: 'Bluebird Digital' });
     const birchwood = await checks.fixtures.business(checksAgency.id, verifyDay.business);
     await seedOwner(checks, checksAgency.id, birchwood.id, verifyDay.owner);
+    const bulkAgency = await checks.fixtures.agency({ name: 'Bulk Verification Digital' });
+    const bulkBusiness = await checks.fixtures.business(bulkAgency.id, bulkVerifyDay.business);
+    await seedOwner(checks, bulkAgency.id, bulkBusiness.id, bulkVerifyDay.owner);
+    // Settings → Integrations on the same install: a business of its own, and the stand-in
+    // provider its server is told about, with the account the consent page signs in as.
+    const provider = await startFakeProvider();
+    stops.push(() => provider.close());
+    provider.addAccount(integrationsDay.account);
+    const cedarAgency = await checks.fixtures.agency({ name: 'Cedar Hollow Digital' });
+    const cedar = await checks.fixtures.business(cedarAgency.id, integrationsDay.business);
+    await seedOwner(checks, cedarAgency.id, cedar.id, integrationsDay.owner);
     const checksApp = await startServer(
       'verify-day',
       {
@@ -494,6 +508,7 @@ export default async function globalSetup(): Promise<Stop> {
         DASHBOARD_DIR: dashboardDirectory,
         TRUST_PROXY: 'loopback',
         E2E_EMAILABLE_URL: emailable.origin,
+        E2E_INTEGRATION_URL: provider.origin,
         E2E_TWILIO_URL: twilio.origin,
         E2E_MAIL_ADDRESS: greenMail.server.address,
         E2E_MAIL_CA: greenMail.server.ca,
@@ -503,6 +518,7 @@ export default async function globalSetup(): Promise<Stop> {
     stops.push(checksApp.stop);
 
     process.env[variables.verifyDay] = checksApp.url;
+    process.env[variables.integrationProvider] = provider.origin;
     process.env[variables.verifyDayDatabase] = checks.url('crm_owner');
     process.env[variables.draftDay] = draftApp.url;
     process.env[variables.draftDayDatabase] = drafts.url('crm_owner');

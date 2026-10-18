@@ -37,7 +37,7 @@ import {
   type InfiniteData,
 } from '@tanstack/react-query';
 import { getRouteApi, Link, useRouter, useRouterState } from '@tanstack/react-router';
-import { EllipsisVertical, Plus, SquareKanban } from 'lucide-react';
+import { EllipsisVertical, GripVertical, Plus, SquareKanban } from 'lucide-react';
 import {
   lazy,
   Suspense,
@@ -50,7 +50,8 @@ import {
 import { apiIn } from './api';
 import DealBoard from './deal-board-loader';
 import { selectionAmong, toggled } from './deal-bulk-rules';
-import { DealDialog, type OpenDeal } from './deal-dialog';
+import type { OpenDeal } from './deal-dialog';
+import { DealDialog } from './deal-dialog-loader';
 import { contactNameOf, DealTags, StageName, useOwnerName } from './deal-extras';
 import {
   dealColumnsOfView,
@@ -812,10 +813,11 @@ function DealsWorkspace({ businessId }: { readonly businessId: string }): ReactE
           {view === 'board' ? (
             <>
               {canManage ? (
-                <p className="text-sm text-body">
+                <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <GripVertical aria-hidden className="size-3.5 shrink-0" />
                   <Trans>
-                    Drag the grip to change stage. With the grip focused, press Space, Left or
-                    Right, then Space. Escape cancels.
+                    Drag a card by its grip to change stage. By keyboard: focus the grip, press
+                    Space, Left or Right, then Space.
                   </Trans>
                 </p>
               ) : null}

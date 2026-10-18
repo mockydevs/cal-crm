@@ -727,6 +727,24 @@ test('a failed board download offers the list without changing opportunities', a
   await expect(page.getByRole('table')).toContainText('Maya’s wedding');
   expect(sent).toHaveLength(0);
 });
+
+test('an opportunity link opens its dialog as the page first loads', async ({ page }) => {
+  const sent = await setup(page, { path: `/deals?deal=${original.id}` });
+  await expect(editing(page).getByLabel('Opportunity name')).toHaveValue('Maya’s wedding');
+  await page.keyboard.press('Escape');
+  await expect(editing(page)).toBeHidden();
+  await expect(opener(page)).toBeVisible();
+  expect(sent).toHaveLength(0);
+});
+
+test('a failed dialog download keeps the board usable', async ({ page }) => {
+  await page.route(/\/assets\/deal-dialog-[A-Za-z0-9_-]{8}\.js$/, (route) => route.abort('failed'));
+  const sent = await setup(page, { path: `/deals?deal=${original.id}` });
+  await expect(opener(page)).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Opportunities', exact: true })).toBeVisible();
+  await expect(editing(page)).toBeHidden();
+  expect(sent).toHaveLength(0);
+});
 test('adds a new opportunity to the pipeline the list shows, at the stage chosen', async ({
   page,
 }) => {

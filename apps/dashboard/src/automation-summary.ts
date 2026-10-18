@@ -805,6 +805,7 @@ const triggerLabels: Readonly<Record<AutomationTriggerType, () => string>> = {
   'invoice.paid': () => t`Invoice paid`,
   'payment.recorded': () => t`Payment recorded`,
   'trigger_link.clicked': () => t`Trigger link clicked`,
+  'external_tracking.event': () => t`External Tracking Event`,
   'automation.run_ended': () => t`Automation run ended`,
   'date.reached': () => t`Date reached`,
   'webhook.received': () => t`Webhook received`,
@@ -937,6 +938,14 @@ const triggerSummaries: Readonly<Record<AutomationTriggerType, Summarize>> = {
   'invoice.sent': () => t`An invoice is sent`,
   'invoice.paid': () => t`An invoice is paid in full`,
   'payment.recorded': () => t`A payment is recorded`,
+  'external_tracking.event': (config) => {
+    const form = config['formName'];
+    if (typeof form === 'string' && form !== '')
+      return t`A contact sends the external form ${form}`;
+    if (config['event'] === 'form_submission') return t`A contact sends a form on your website`;
+    if (config['event'] === 'page_view') return t`A contact views a page on your website`;
+    return t`A contact views a page or sends a form on your website`;
+  },
   'trigger_link.clicked': (config, setup) => {
     const link = nameIn(setup.triggerLinks ?? [], config['link']);
     return link === undefined ? undefined : t`A contact clicks the trigger link ${link}`;

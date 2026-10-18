@@ -107,6 +107,8 @@ export const assistantTools: readonly AssistantTool[] = [
   { operationId: 'getRecordFields', group: 'contacts', effect: 'read' },
   { operationId: 'getDeals', group: 'contacts', effect: 'read' },
   { operationId: 'getDeal', group: 'contacts', effect: 'read' },
+  // A deal's stage, value or outcome is live: workflows start on it. A person confirms.
+  { operationId: 'updateDeal', group: 'contacts', effect: 'confirm' },
   { operationId: 'listRecordActivity', group: 'contacts', effect: 'read' },
   { operationId: 'explainEvent', group: 'contacts', effect: 'read' },
   { operationId: 'getReportCatalog', group: 'reports', effect: 'read' },

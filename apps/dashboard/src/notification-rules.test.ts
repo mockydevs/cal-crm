@@ -43,6 +43,9 @@ describe('the page a notification opens', () => {
     expect(notificationPlace({ kind: 'ai_settings' })).toEqual({
       to: '/b/$slug/settings/ai-models',
     });
+    expect(notificationPlace({ kind: 'integrations' })).toEqual({
+      to: '/b/$slug/settings/integrations',
+    });
   });
 });
 

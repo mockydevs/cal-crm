@@ -774,6 +774,10 @@ async function applyBatch(
     kind === 'verify_emails' && items.length > 0
       ? await options.emailChecks?.start(trx, command)
       : undefined;
+  // Adding to a workflow holds each contact's runs, which come before the contact: all of
+  // the batch's are held first, in id order, as a merge holds them.
+  if (kind === 'add_to_workflow')
+    await options.workflows?.hold?.(trx, [...new Set(items.map((item) => item.contact_id))].sort());
   // The batch's contacts, held in id order before the first is changed, as a merge and an
   // import hold theirs; each is still changed, and reported, in its place in the action.
   await lockContactsInOrder(

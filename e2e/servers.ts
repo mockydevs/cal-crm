@@ -45,6 +45,8 @@ export const variables = {
   verifyDay: 'E2E_VERIFY_DAY_URL',
   /** That install's database, as crm_owner. */
   verifyDayDatabase: 'E2E_VERIFY_DAY_DATABASE_URL',
+  /** The stand-in OAuth provider Settings → Integrations connects on "Verify day". */
+  integrationProvider: 'E2E_INTEGRATION_PROVIDER_URL',
   /** The local stand-in for Twilio's REST API (apps/server/test/fake-twilio.ts). */
   twilio: 'E2E_TWILIO_URL',
   /** The mail server a mailbox is connected to on "Inbox day", as JSON (InboxDayMailServer). */
@@ -112,6 +114,24 @@ export const verifyDay = {
   business: { name: 'Birchwood Rooms', slug: 'birchwood-rooms' },
   owner: { name: 'Omar Haddad', email: 'omar@birchwood.example' },
   emailableKey: 'test_fake_verify_day',
+} as const;
+
+// Provider settings are business state: bulk checks must not connect or disconnect
+// the business whose Settings flow is being tested concurrently.
+export const bulkVerifyDay = {
+  ...verifyDay,
+  business: { name: 'Birchwood Bulk', slug: 'birchwood-bulk' },
+  owner: { name: 'Riley Morgan', email: 'riley@birchwood-bulk.example' },
+} as const;
+
+/**
+ * Settings → Integrations, on the "Verify day" install (whose server is told where the
+ * stand-in provider is): a business and owner of their own, and the stand-in's account.
+ */
+export const integrationsDay = {
+  business: { name: 'Cedar Hollow Studio', slug: 'cedar-hollow-studio' },
+  owner: { name: 'Mara Quinn', email: 'mara@cedarhollow.example' },
+  account: { id: 'CEDAR-1', name: 'Cedar Hollow Workspace' },
 } as const;
 
 export function address(name: keyof typeof variables): string {

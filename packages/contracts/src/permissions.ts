@@ -33,6 +33,7 @@ export const permissions = [
   'fields.values',
   'files.upload',
   'forms.manage',
+  'integrations.manage',
   'mailboxes.manage',
   'media.manage',
   'notes.manage',
@@ -41,6 +42,7 @@ export const permissions = [
   'payments.read',
   'phone.manage',
   'pipelines.manage',
+  'records.manage',
   'reports.manage',
   'reports.view',
   'sites.manage',
@@ -145,6 +147,11 @@ export const permissionCatalog: Readonly<Record<Permission, PermissionInfo>> = {
     description:
       'Create, edit and delete custom objects and the associations between objects. GoHighLevel gives this to admins only; everyone else reads them.',
   },
+  'records.manage': {
+    scope: 'business',
+    description:
+      'Create, change, trash and restore records of custom objects, and relate records under any association.',
+  },
   'tasks.manage': {
     scope: 'business',
     description: 'Create, edit, complete and delete tasks.',
@@ -168,6 +175,11 @@ export const permissionCatalog: Readonly<Record<Permission, PermissionInfo>> = {
   'agency.security': {
     scope: 'agency',
     description: "Change the agency's sign-in rules, such as requiring two-factor sign-in.",
+  },
+  'integrations.manage': {
+    scope: 'business',
+    description:
+      "Connect, change and disconnect the business's integrations in Settings → Integrations. An API key or an app can't have it.",
   },
   'apps.manage': {
     scope: 'both',
@@ -332,6 +344,8 @@ const dailyWork: readonly Permission[] = [
   'media.manage',
   'notes.manage',
   'fields.values',
+  // Records of custom objects are daily work, as companies are; their objects are not.
+  'records.manage',
   // Seeing what a customer was quoted and has paid is daily work; writing it is not.
   'payments.read',
   // Reading the business's numbers is daily work; making and changing reports is not.

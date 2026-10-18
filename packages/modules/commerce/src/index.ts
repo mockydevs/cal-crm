@@ -64,6 +64,7 @@ export {
   type PublicDocumentHandlers,
   type PublicDocumentRequest,
 } from './public.js';
+export { commerceContactMerge } from './contact-merge.js';
 export { DOCUMENT_PAGE_POLICY } from './print-html.js';
 // The commands and the reads themselves, for whoever runs them outside these routes: the
 // assistant's tools, an automation's steps. Each command goes through runCommand like any

@@ -9,7 +9,12 @@ import { userEvent } from '@testing-library/user-event';
 import type { ReactElement, ReactNode } from 'react';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { companyNames, gmailTwins, phoneTails } from '../../e2e/contact-duplicates-fixtures';
+import {
+  companyNames,
+  duplicateContactOf,
+  gmailTwins,
+  phoneTails,
+} from '../../e2e/contact-duplicates-fixtures';
 import { ManageDuplicatesPage } from './manage-page';
 import PossibleDuplicates from './possible-chip';
 import DuplicatePreferences from './preferences';
@@ -26,6 +31,14 @@ vi.mock('../api', () => ({
       return Promise.resolve().then(() => server.answer(endpoint.operationId, input));
     },
   }),
+}));
+// The merge dialog by itself is tested in contact-merge/dialog.test.tsx: here, what opens it.
+vi.mock('../contact-merge/loader', () => ({
+  ContactMergeDialog: ({ contactIds }: { contactIds: readonly string[] }) => (
+    <div role="dialog" aria-label="Merge Contacts">
+      {contactIds.join(',')}
+    </div>
+  ),
 }));
 vi.mock('../workspace', () => ({
   useBusiness: () => ({
@@ -111,7 +124,7 @@ describe('Manage Duplicates', () => {
       { query: { by: 'phone' } },
       { query: { by: 'name' } },
     ]);
-    // There is no merge here: only review and reject.
+    // Merge is in the review, not on the cards.
     expect(screen.queryByRole('button', { name: /merge/iu })).toBeNull();
   });
 
@@ -138,7 +151,6 @@ describe('Manage Duplicates', () => {
     expect(within(table).getByRole('rowheader', { name: 'Email' })).toBeTruthy();
     expect(within(table).getByText('janedoe+news@gmail.com')).toBeTruthy();
     expect(within(table).getByText('None')).toBeTruthy();
-    expect(within(panel).queryByRole('button', { name: /merge/iu })).toBeNull();
 
     await user.click(within(panel).getByRole('button', { name: 'Reject' }));
     const confirm = await screen.findByRole('dialog', { name: 'Reject these duplicates?' });
@@ -161,6 +173,41 @@ describe('Manage Duplicates', () => {
       "janedoe@gmail.com was rejected. Those contacts won't be shown as duplicates again.",
     );
     expect(screen.getByText('No possible duplicates found.')).toBeTruthy();
+  });
+
+  it("merges a group's contacts from the review", async () => {
+    server.answer = (operation) =>
+      operation === 'listDuplicateGroups' ? { items: [gmailTwins()], next: null } : undefined;
+    const user = show(<ManageDuplicatesPage />);
+    await user.click(await screen.findByRole('button', { name: 'Review' }));
+    const panel = await screen.findByRole('dialog', { name: 'Review duplicates' });
+    await user.click(within(panel).getByRole('button', { name: 'Merge' }));
+    expect((await screen.findByRole('dialog', { name: 'Merge Contacts' })).textContent).toBe(
+      gmailTwins()
+        .contacts.map((each) => each.id)
+        .join(','),
+    );
+  });
+
+  it('keeps Merge from a group of more than ten contacts', async () => {
+    const twelve = Array.from({ length: 12 }, (_, index) =>
+      duplicateContactOf(index + 10, 'Jane Doe'),
+    );
+    server.answer = (operation) =>
+      operation === 'listDuplicateGroups'
+        ? { items: [{ ...gmailTwins(), total: 12, contacts: twelve }], next: null }
+        : undefined;
+    const user = show(<ManageDuplicatesPage />);
+    await user.click(await screen.findByRole('button', { name: 'Review' }));
+    const panel = await screen.findByRole('dialog', { name: 'Review duplicates' });
+    expect(within(panel).getByRole('button', { name: 'Merge' }).hasAttribute('disabled')).toBe(
+      true,
+    );
+    expect(
+      within(panel).getByText(
+        'Merge at most 10 contacts at a time: tick the ones to merge in the contact list.',
+      ),
+    ).toBeTruthy();
   });
 
   it('rejects the whole of a group larger than it lists, and says how many', async () => {
@@ -197,6 +244,23 @@ describe("a contact's possible duplicates", () => {
     const panel = await screen.findByRole('dialog', { name: 'Review duplicates' });
     expect(within(panel).getByText('janedoe@gmail.com')).toBeTruthy();
     expect(within(panel).queryByRole('button', { name: 'Reject' })).toBeNull();
+    expect(within(panel).queryByRole('button', { name: 'Merge' })).toBeNull();
+  });
+
+  it('offers Merge and Reject to whoever may manage duplicates', async () => {
+    const group = gmailTwins();
+    server.answer = (operation) =>
+      operation === 'listPossibleDuplicates'
+        ? { groups: [group], count: 1 }
+        : operation === 'getMyPermissions'
+          ? { business: null, permissions: ['contacts.manage', 'contacts.merge'] }
+          : undefined;
+    const user = show(<PossibleDuplicates contactId={group.contacts[0]?.id ?? ''} />);
+    await user.click(await screen.findByRole('button', { name: 'Possible duplicates (1)' }));
+    const panel = await screen.findByRole('dialog', { name: 'Review duplicates' });
+    expect(await within(panel).findByRole('button', { name: 'Reject' })).toBeTruthy();
+    await user.click(within(panel).getByRole('button', { name: 'Merge' }));
+    expect(await screen.findByRole('dialog', { name: 'Merge Contacts' })).toBeTruthy();
   });
 
   it('shows nothing when there are none', async () => {

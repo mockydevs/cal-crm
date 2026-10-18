@@ -8,6 +8,7 @@ import {
   automationContactExplanation,
   automationTriggerEvaluation,
   parseRecordId,
+  recordKinds,
   TRIGGER_EVALUATION_DAYS,
   type AutomationContactExplanation,
   type AutomationTriggerEvaluation,
@@ -163,7 +164,7 @@ export async function readTriggerEvaluations(
   const items = rows.slice(0, page.limit).map((row): AutomationTriggerEvaluation => {
     const reason = row.reason as AutomationTriggerEvaluationReason;
     const detail = z.record(z.string(), z.unknown()).catch({}).parse(row.detail);
-    const kind = z.enum(['contact', 'company', 'deal']).safeParse(row.record_kind);
+    const kind = z.enum(recordKinds).safeParse(row.record_kind);
     return automationTriggerEvaluation.parse({
       id: row.id,
       evaluatedAt: row.evaluated_at.toISOString(),
@@ -209,7 +210,7 @@ export async function explainContact(
       ? undefined
       : (
           await sql<{ name: string | null }>`
-            select coalesce(contact.display_name, company.name, deal.name) as name
+            select coalesce(contact.display_name, company.name, deal.name, custom.title) as name
             from crm.records record
             left join crm.contacts contact
               on contact.business_id = record.business_id and contact.id = record.id
@@ -217,6 +218,8 @@ export async function explainContact(
               on company.business_id = record.business_id and company.id = record.id
             left join crm.deals deal
               on deal.business_id = record.business_id and deal.id = record.id
+            left join crm.custom_records custom
+              on custom.business_id = record.business_id and custom.id = record.id
             where record.id = ${parsed.id} and record.kind = ${parsed.kind}
           `.execute(trx)
         ).rows[0];

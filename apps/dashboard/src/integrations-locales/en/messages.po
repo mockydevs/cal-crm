@@ -1,0 +1,438 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-10-18 22:17+0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#. placeholder {0}: entry.connected
+#. placeholder {0}: entry.connections.length
+#: src/integrations/card.tsx
+msgid "{0, plural, one {# account connected} other {# accounts connected}}"
+msgstr "{0, plural, one {# account connected} other {# accounts connected}}"
+
+#. placeholder {0}: entry.attention
+#: src/integrations/card.tsx
+msgid "{0, plural, one {# connection needs attention} other {# connections need attention}}"
+msgstr "{0, plural, one {# connection needs attention} other {# connections need attention}}"
+
+#: src/integrations/manage-panel.tsx
+msgid "{label} is the primary account now."
+msgstr "{label} is the primary account now."
+
+#: src/integrations/manage-panel.tsx
+msgid "{name} account"
+msgstr "{name} account"
+
+#: src/integrations/words.ts
+msgid "{name} couldn't be connected. Try again."
+msgstr "{name} couldn't be connected. Try again."
+
+#: src/integrations/settings-page.tsx
+#: src/integrations/words.ts
+msgid "{name} is connected. Checking the account…"
+msgstr "{name} is connected. Checking the account…"
+
+#: src/integrations/settings-page.tsx
+msgid "{name} was disconnected."
+msgstr "{name} was disconnected."
+
+#: src/integrations/words.ts
+msgid "{name} wasn't connected: allow everything it asks for, then try again."
+msgstr "{name} wasn't connected: allow everything it asks for, then try again."
+
+#: src/integrations/words.ts
+msgid "Access removed"
+msgstr "Access removed"
+
+#: src/integrations/words.ts
+msgid "Account confirmed"
+msgstr "Account confirmed"
+
+#: src/integrations/card.tsx
+msgid "Account connected"
+msgstr "Account connected"
+
+#: src/integrations/manage-panel.tsx
+msgid "Accounts"
+msgstr "Accounts"
+
+#: src/integrations/card.tsx
+msgid "Actions for {name}"
+msgstr "Actions for {name}"
+
+#: src/integrations/card.tsx
+#: src/integrations/manage-panel.tsx
+msgid "Activity"
+msgstr "Activity"
+
+#: src/integrations/manage-panel.tsx
+msgid "Add account"
+msgstr "Add account"
+
+#: src/integrations/words.ts
+msgid "AI"
+msgstr "AI"
+
+#: src/integrations/words.ts
+msgid "AI Models"
+msgstr "AI Models"
+
+#: src/integrations/settings-page.tsx
+msgid "All"
+msgstr "All"
+
+#: src/integrations/card.tsx
+msgid "An account needs attention."
+msgstr "An account needs attention."
+
+#: src/integrations/words.ts
+msgid "Apps and API keys"
+msgstr "Apps and API keys"
+
+#: src/integrations/words.ts
+msgid "Calendar & email"
+msgstr "Calendar & email"
+
+#: src/integrations/words.ts
+msgid "Calendars"
+msgstr "Calendars"
+
+#: src/integrations/key-dialog.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/integrations/settings-page.tsx
+msgid "Categories"
+msgstr "Categories"
+
+#: src/integrations/words.ts
+msgid "Check email addresses with Emailable before anything is sent to them."
+msgstr "Check email addresses with Emailable before anything is sent to them."
+
+#: src/integrations/words.ts
+msgid "Check failed"
+msgstr "Check failed"
+
+#: src/integrations/manage-panel.tsx
+msgid "Check now"
+msgstr "Check now"
+
+#: src/integrations/words.ts
+msgid "Checked: working"
+msgstr "Checked: working"
+
+#: src/integrations/words.ts
+msgid "Checking the account"
+msgstr "Checking the account"
+
+#: src/integrations/manage-panel.tsx
+msgid "Checking the account now. The answer shows in the activity."
+msgstr "Checking the account now. The answer shows in the activity."
+
+#: src/integrations/card.tsx
+msgid "Checking the account…"
+msgstr "Checking the account…"
+
+#: src/integrations/manage-panel.tsx
+msgid "Close"
+msgstr "Close"
+
+#: src/integrations/card.tsx
+#: src/integrations/key-dialog.tsx
+msgid "Connect"
+msgstr "Connect"
+
+#: src/integrations/card.tsx
+#: src/integrations/key-dialog.tsx
+msgid "Connect {name}"
+msgstr "Connect {name}"
+
+#: src/integrations/words.ts
+msgid "Connect any mailbox to send from it and read its replies into Conversations."
+msgstr "Connect any mailbox to send from it and read its replies into Conversations."
+
+#: src/integrations/settings-page.tsx
+msgid "Connect the tools your business already uses."
+msgstr "Connect the tools your business already uses."
+
+#: src/integrations/settings-page.tsx
+#: src/integrations/words.ts
+msgid "Connected"
+msgstr "Connected"
+
+#: src/integrations/manage-panel.tsx
+msgid "Connected {when}"
+msgstr "Connected {when}"
+
+#: src/integrations/card.tsx
+#: src/integrations/manage-panel.tsx
+msgid "Connected by {who} · {when}"
+msgstr "Connected by {who} · {when}"
+
+#: src/integrations/words.ts
+msgid "Connecting {name} was cancelled."
+msgstr "Connecting {name} was cancelled."
+
+#: src/integrations/manage-panel.tsx
+msgid "Copied"
+msgstr "Copied"
+
+#: src/integrations/manage-panel.tsx
+msgid "Copy"
+msgstr "Copy"
+
+#: src/integrations/manage-panel.tsx
+msgid "Copy update address"
+msgstr "Copy update address"
+
+#: src/integrations/words.ts
+msgid "Developers"
+msgstr "Developers"
+
+#: src/integrations/card.tsx
+#: src/integrations/manage-panel.tsx
+#: src/integrations/settings-page.tsx
+msgid "Disconnect"
+msgstr "Disconnect"
+
+#: src/integrations/manage-panel.tsx
+msgid "Disconnect {removingLabel}?"
+msgstr "Disconnect {removingLabel}?"
+
+#: src/integrations/settings-page.tsx
+msgid "Disconnect {removingName}?"
+msgstr "Disconnect {removingName}?"
+
+#: src/integrations/words.ts
+msgid "Disconnected"
+msgstr "Disconnected"
+
+#: src/integrations/manage-panel.tsx
+msgid "Disconnected."
+msgstr "Disconnected."
+
+#: src/integrations/card.tsx
+msgid "Documentation"
+msgstr "Documentation"
+
+#: src/integrations/words.ts
+msgid "E-commerce"
+msgstr "E-commerce"
+
+#: src/integrations/words.ts
+msgid "Email Services"
+msgstr "Email Services"
+
+#: src/integrations/words.ts
+msgid "Email Verification"
+msgstr "Email Verification"
+
+#: src/integrations/settings-page.tsx
+msgid "Find more in App Marketplace"
+msgstr "Find more in App Marketplace"
+
+#: src/integrations/words.ts
+msgid "Forms"
+msgstr "Forms"
+
+#: src/integrations/words.ts
+msgid "Google Calendar"
+msgstr "Google Calendar"
+
+#: src/integrations/settings-page.tsx
+msgid "Integrations"
+msgstr "Integrations"
+
+#: src/integrations/settings-page.tsx
+msgid "It couldn't be connected. Check your connection and try again."
+msgstr "It couldn't be connected. Check your connection and try again."
+
+#: src/integrations/manage-panel.tsx
+msgid "It wasn't changed. Check your connection and try again."
+msgstr "It wasn't changed. Check your connection and try again."
+
+#: src/integrations/manage-panel.tsx
+msgid "It wasn't checked. Check your connection and try again."
+msgstr "It wasn't checked. Check your connection and try again."
+
+#: src/integrations/key-dialog.tsx
+msgid "It wasn't connected. Check your connection and try again."
+msgstr "It wasn't connected. Check your connection and try again."
+
+#: src/integrations/manage-panel.tsx
+#: src/integrations/settings-page.tsx
+msgid "It wasn't disconnected. Check your connection and try again."
+msgstr "It wasn't disconnected. Check your connection and try again."
+
+#: src/integrations/manage-panel.tsx
+#: src/integrations/settings-page.tsx
+msgid "Its steps stop and it no longer sends anything here. What it already brought in stays."
+msgstr "Its steps stop and it no longer sends anything here. What it already brought in stays."
+
+#: src/integrations/key-dialog.tsx
+msgid "Key"
+msgstr "Key"
+
+#: src/integrations/words.ts
+msgid "Keys for your own code, Zapier, Make or n8n, and the marketplace apps you installed."
+msgstr "Keys for your own code, Zapier, Make or n8n, and the marketplace apps you installed."
+
+#: src/integrations/manage-panel.tsx
+msgid "Last checked {checkedAt}"
+msgstr "Last checked {checkedAt}"
+
+#: src/integrations/words.ts
+msgid "Lead intake"
+msgstr "Lead intake"
+
+#: src/integrations/manage-panel.tsx
+msgid "Loading the accounts…"
+msgstr "Loading the accounts…"
+
+#: src/integrations/settings-page.tsx
+msgid "Loading the integrations…"
+msgstr "Loading the integrations…"
+
+#: src/integrations/manage-panel.tsx
+msgid "Make primary"
+msgstr "Make primary"
+
+#: src/integrations/card.tsx
+msgid "Manage"
+msgstr "Manage"
+
+#: src/integrations/card.tsx
+#: src/integrations/manage-panel.tsx
+msgid "Manage {name}"
+msgstr "Manage {name}"
+
+#: src/integrations/words.ts
+msgid "Needs attention"
+msgstr "Needs attention"
+
+#: src/integrations/manage-panel.tsx
+msgid "No account is connected."
+msgstr "No account is connected."
+
+#: src/integrations/settings-page.tsx
+msgid "No integrations match."
+msgstr "No integrations match."
+
+#: src/integrations/manage-panel.tsx
+msgid "Not checked yet"
+msgstr "Not checked yet"
+
+#: src/integrations/manage-panel.tsx
+msgid "Nothing has happened yet."
+msgstr "Nothing has happened yet."
+
+#: src/integrations/manage-panel.tsx
+msgid "Older"
+msgstr "Older"
+
+#: src/integrations/card.tsx
+msgid "Open {pageName}"
+msgstr "Open {pageName}"
+
+#: src/integrations/card.tsx
+msgid "Operator setup guide <0>(opens in a new tab)</0>"
+msgstr "Operator setup guide <0>(opens in a new tab)</0>"
+
+#: src/integrations/words.ts
+msgid "Options changed"
+msgstr "Options changed"
+
+#: src/integrations/key-dialog.tsx
+msgid "Paste the key from your {name} account. It is kept sealed and never shown again."
+msgstr "Paste the key from your {name} account. It is kept sealed and never shown again."
+
+#: src/integrations/words.ts
+msgid "Payments & accounting"
+msgstr "Payments & accounting"
+
+#: src/integrations/words.ts
+msgid "Phone & messaging"
+msgstr "Phone & messaging"
+
+#: src/integrations/words.ts
+msgid "Phone System"
+msgstr "Phone System"
+
+#: src/integrations/manage-panel.tsx
+msgid "Primary"
+msgstr "Primary"
+
+#: src/integrations/words.ts
+msgid "Productivity"
+msgstr "Productivity"
+
+#: src/integrations/words.ts
+msgid "Received an update"
+msgstr "Received an update"
+
+#: src/integrations/card.tsx
+msgid "Reconnect"
+msgstr "Reconnect"
+
+#: src/integrations/card.tsx
+msgid "Reconnect {name}"
+msgstr "Reconnect {name}"
+
+#: src/integrations/settings-page.tsx
+msgid "Search integrations"
+msgstr "Search integrations"
+
+#: src/integrations/words.ts
+msgid "Text messages and calls through your own Twilio account."
+msgstr "Text messages and calls through your own Twilio account."
+
+#: src/integrations/words.ts
+msgid "That sign-in took too long or was already used. Try again."
+msgstr "That sign-in took too long or was already used. Try again."
+
+#: src/integrations/manage-panel.tsx
+msgid "The accounts couldn't be loaded."
+msgstr "The accounts couldn't be loaded."
+
+#: src/integrations/settings-page.tsx
+msgid "The integrations couldn't be loaded."
+msgstr "The integrations couldn't be loaded."
+
+#: src/integrations/manage-panel.tsx
+msgid "The older activity couldn't be loaded. Try again."
+msgstr "The older activity couldn't be loaded. Try again."
+
+#: src/integrations/manage-panel.tsx
+msgid "This connection changed since you opened it."
+msgstr "This connection changed since you opened it."
+
+#: src/integrations/words.ts
+msgid "Two-way sync for each team member: bookings go into their calendar, and busy time keeps slots free."
+msgstr "Two-way sync for each team member: bookings go into their calendar, and busy time keeps slots free."
+
+#: src/integrations/manage-panel.tsx
+msgid "Update address"
+msgstr "Update address"
+
+#: src/integrations/manage-panel.tsx
+msgid "Update address copied."
+msgstr "Update address copied."
+
+#: src/integrations/words.ts
+msgid "Working"
+msgstr "Working"
+
+#: src/integrations/settings-page.tsx
+msgid "You need permission to manage integrations."
+msgstr "You need permission to manage integrations."
+
+#: src/integrations/card.tsx
+msgid "Your administrator hasn't set this up."
+msgstr "Your administrator hasn't set this up."
+
+#: src/integrations/words.ts
+msgid "Your own keys for Anthropic, OpenAI or a model server of your own."
+msgstr "Your own keys for Anthropic, OpenAI or a model server of your own."

@@ -47,6 +47,7 @@ const businessKeys = [
   'fields.values',
   'files.upload',
   'forms.manage',
+  'integrations.manage',
   'mailboxes.manage',
   'media.manage',
   'notes.manage',
@@ -55,6 +56,7 @@ const businessKeys = [
   'payments.read',
   'phone.manage',
   'pipelines.manage',
+  'records.manage',
   'reports.manage',
   'reports.view',
   'sites.manage',
@@ -300,6 +302,7 @@ describe('permissionsOf', () => {
       'media.manage',
       'notes.manage',
       'payments.read',
+      'records.manage',
       'reports.view',
       'tags.manage',
       'tasks.manage',
@@ -330,6 +333,7 @@ describe('permissionsOf', () => {
       'media.manage',
       'notes.manage',
       'payments.read',
+      'records.manage',
       'reports.view',
       'tags.manage',
       'tasks.manage',
@@ -389,4 +393,15 @@ describe('permissionsOf', () => {
     expect(sorted(permissionsOf(custom, 'agency'))).toEqual([]);
     expect(sorted(permissionsOf(custom, 'business'))).toEqual(businessKeys);
   });
+});
+
+// Records of custom objects are daily work, as companies are; their objects are not.
+it('gives working with custom records to owners, admins and members, never viewers', () => {
+  for (const scope of ['agency', 'business'] as const)
+    for (const key of ['owner', 'admin', 'member'])
+      expect(permissionsOf(builtIn(scope, key), 'business').has('records.manage')).toBe(true);
+  expect(permissionsOf(builtIn('business', 'viewer'), 'business').has('records.manage')).toBe(
+    false,
+  );
+  expect(permissionCatalog['records.manage'].scope).toBe('business');
 });

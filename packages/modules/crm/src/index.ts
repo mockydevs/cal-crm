@@ -1,5 +1,6 @@
 import type { AnyTask, ApiRoute } from '@repo/commands';
 export { createPipelineProposables } from './pipelines/proposals.js';
+export { createDealProposables } from './deals/proposals.js';
 export { readPipelines } from './pipelines/pipelines.js';
 
 import { createContactRoutes } from './contacts/routes.js';
@@ -23,6 +24,8 @@ import { noteRoutes } from './notes/routes.js';
 import { searchRoutes } from './search/routes.js';
 import { viewRoutes } from './views/routes.js';
 import { associationRoutes } from './associations/routes.js';
+import { relationRoutes } from './associations/relation-routes.js';
+import { createCustomRecordRoutes } from './custom-records/routes.js';
 import { purgeObjectTask } from './objects/objects.js';
 import { scoreEventTask } from './scoring/scores.js';
 import { fillMatchKeysTask } from './contacts/duplicates.js';
@@ -208,6 +211,9 @@ export function createCrmRoutes(
     // A list is shared with team members by name, who are whoever a task could be given to.
     ...viewRoutes(actorNames, people),
     ...associationRoutes,
+    // Records of custom objects, whose owners are named as a deal's are, and relations.
+    ...createCustomRecordRoutes(people),
+    ...relationRoutes,
   ];
 }
 export const crmRoutes: readonly ApiRoute[] = createCrmRoutes();
@@ -254,6 +260,13 @@ export type {
   ContactMergeParticipant,
   MergeCounts,
 } from './contacts/merge.js';
+export {
+  contactRowsParticipant,
+  countContactRows,
+  moveContactRows,
+  type ContactColumn,
+  type ContactColumns,
+} from './contacts/merge-rows.js';
 export {
   fillMatchKeysTask,
   findDuplicateContact,

@@ -1,6 +1,7 @@
 export { createConnectMailboxCommand, readMailboxConnectionAttempt } from './attempts.js';
 export { createVerifyMailboxTask } from './verify.js';
 export { createUnsubscribeLink, unsubscribeFromLink } from './unsubscribe.js';
+export { messagingContactMerge } from './contact-merge.js';
 export {
   mailboxDailyAllowance,
   evaluateMailboxAdmission,
@@ -266,3 +267,8 @@ export {
 } from './call-ledger.js';
 // A contact's message attachments, for the contact's Documents panel (Sent, Received).
 export { contactAttachments } from './contact-attachments.js';
+export {
+  readEmailableIntegration,
+  readMailboxIntegration,
+  readTwilioIntegration,
+} from './integration-readings.js';

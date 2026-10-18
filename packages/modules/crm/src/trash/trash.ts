@@ -1,5 +1,5 @@
-// The trash: contacts, companies and deals moved there stay, with everything attached,
-// until they're restored or purged. A purge deletes the registry row (crm.records), and the
+// The trash: contacts, companies, deals and custom records moved there stay, with
+// everything attached, until they're restored or purged. A purge deletes the registry row (crm.records), and the
 // database's cascades remove the record and everything attached to it. The worker purges
 // what's been there longer than the business's retention days.
 import { randomUUID } from 'node:crypto';
@@ -36,6 +36,7 @@ const tables = {
   contact: sql.table('crm.contacts'),
   company: sql.table('crm.companies'),
   deal: sql.table('crm.deals'),
+  custom: sql.table('crm.custom_records'),
 } as const satisfies Record<RecordKind, RawBuilder<unknown>>;
 
 /** What the trash calls a record: a contact without a name by its primary identity. */
@@ -46,7 +47,21 @@ const names = {
     order by i.kind limit 1))`,
   company: sql`t.name`,
   deal: sql`t.name`,
+  custom: sql`t.title`,
 } as const satisfies Record<RecordKind, RawBuilder<unknown>>;
+
+/**
+ * A custom record's object, as the list names it: its key and singular name. A record of an
+ * object being deleted is left out, since it goes with its object.
+ */
+const objectOf = (kind: RecordKind) =>
+  kind === 'custom'
+    ? {
+        join: sql`join crm.object_types o on o.business_id = t.business_id
+          and o.id = t.object_type_id and o.archived_at is null`,
+        columns: sql`o.key as object_key, o.singular_label as object_label`,
+      }
+    : { join: sql``, columns: sql`null::text as object_key, null::text as object_label` };
 
 async function retentionDays(trx: DatabaseTransaction, businessId: string): Promise<number> {
   const settings = await trx
@@ -92,7 +107,7 @@ export async function readTrash(
 ): Promise<TrashList> {
   const businessId = requireBusiness(invocation.context);
   const days = await retentionDays(trx, businessId);
-  const kinds = query.kind === undefined ? (['contact', 'company', 'deal'] as const) : [query.kind];
+  const kinds = query.kind === undefined ? recordKinds : [query.kind];
   let after: RawBuilder<unknown> = sql``;
   if (query.after !== undefined) {
     const anchor = parseRecordId(query.after);
@@ -117,8 +132,10 @@ export async function readTrash(
   }
   const limit = TRASH_PAGE_SIZE + 1;
   const branches = kinds.map(
-    (kind) => sql`(select ${kind}::text as kind, t.id, ${names[kind]} as name, t.deleted_at
-      from ${tables[kind]} t
+    (kind) => sql`(select ${kind}::text as kind, t.id, ${names[kind]} as name, t.deleted_at,
+        ${kind === 'contact' ? sql`t.merged_into_id` : sql`null::uuid`} as merged_into_id,
+        ${objectOf(kind).columns}
+      from ${tables[kind]} t ${objectOf(kind).join}
       where t.business_id = ${businessId} and t.deleted_at is not null ${after}
       order by t.deleted_at desc, t.id desc limit ${limit})`,
   );
@@ -127,6 +144,9 @@ export async function readTrash(
     id: string;
     name: string | null;
     deleted_at: Date;
+    merged_into_id: string | null;
+    object_key: string | null;
+    object_label: string | null;
   }>`
     select * from (${sql.join(branches, sql` union all `)}) trash
     order by deleted_at desc, id desc limit ${limit}`.execute(trx);
@@ -137,8 +157,12 @@ export async function readTrash(
       id: toPublicId(row.kind, row.id),
       kind: row.kind,
       name: row.name,
+      ...(row.object_key === null || row.object_label === null
+        ? {}
+        : { object: { key: row.object_key, label: row.object_label } }),
       trashedAt: row.deleted_at.toISOString(),
       purgeAt: new Date(row.deleted_at.getTime() + days * DAY).toISOString(),
+      mergedInto: row.merged_into_id === null ? null : toPublicId('contact', row.merged_into_id),
     })),
     next:
       rows.length > TRASH_PAGE_SIZE && last !== undefined ? toPublicId(last.kind, last.id) : null,
@@ -189,6 +213,9 @@ export const purgeExpiredCommand = defineCommand({
       (select id from crm.companies where business_id = ${businessId} and deleted_at < ${cutoff})
       union all
       (select id from crm.deals where business_id = ${businessId} and deleted_at < ${cutoff})
+      union all
+      (select id from crm.custom_records
+       where business_id = ${businessId} and deleted_at < ${cutoff})
       limit ${PURGE_BATCH}`.execute(trx);
     // Locked as a purge of one is, but never waiting: a record someone is working on is
     // skipped, for the next run. Each record's own row is read again, so one restored
@@ -220,6 +247,7 @@ export const purgeExpiredCommand = defineCommand({
         contacts: count('contact'),
         companies: count('company'),
         deals: count('deal'),
+        customRecords: count('custom'),
       },
     });
     return { purged: rows.length };

@@ -34,7 +34,7 @@ export interface TaskOptions {
 export type TaskRow = Selectable<DB['crm.tasks']> & { version: string };
 export const version = sql<string>`extract(epoch from updated_at)::text`.as('version');
 /**
- * Contacts, companies and deals by id, as far as the reader sees them: the kind, the name
+ * Contacts, companies, deals and custom records by id, as far as the reader sees them: the kind, the name
  * now (null for one that has none) and whether it is in the trash.
  */
 export function recordNames(
@@ -59,18 +59,23 @@ export function recordNames(
     .leftJoin('crm.deals as d', (join) =>
       join.onRef('d.business_id', '=', 'r.business_id').onRef('d.id', '=', 'r.id'),
     )
+    .leftJoin('crm.custom_records as custom', (join) =>
+      join.onRef('custom.business_id', '=', 'r.business_id').onRef('custom.id', '=', 'r.id'),
+    )
     .select(['r.id', 'r.kind'])
     .select(
       sql<string | null>`case r.kind when 'contact' then coalesce(c.display_name, (
         select i.value_normalized from crm.contact_identities i
         where i.business_id = c.business_id and i.contact_id = c.id and i.is_primary
         order by i.kind limit 1))
-        when 'company' then company.name when 'deal' then d.name end`.as('name'),
+        when 'company' then company.name when 'deal' then d.name
+        when 'custom' then custom.title end`.as('name'),
     )
     .select(
       sql<boolean>`case r.kind when 'contact' then c.deleted_at is not null
         when 'company' then company.deleted_at is not null
-        when 'deal' then d.deleted_at is not null else true end`.as('trashed'),
+        when 'deal' then d.deleted_at is not null
+        when 'custom' then custom.deleted_at is not null else true end`.as('trashed'),
     )
     .where('r.id', 'in', [...ids])
     .execute();

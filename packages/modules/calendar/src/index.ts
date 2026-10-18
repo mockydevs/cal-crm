@@ -1,5 +1,6 @@
 import { requireBusiness, requirePermission, runCommand, type ApiRoute } from '@repo/commands';
 export { createCalendarProposables } from './proposals.js';
+export { calendarContactMerge } from './contact-merge.js';
 export { readCalendar } from './calendars.js';
 import {
   createCalendar,

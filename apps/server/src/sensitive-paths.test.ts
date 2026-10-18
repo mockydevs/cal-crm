@@ -69,3 +69,17 @@ it('keeps the code and state Google sends back out of what is logged', () => {
   );
   expect(redactedRequestUrl('/api/v1/integrations/google')).toBe('/api/v1/integrations/google');
 });
+
+it("keeps a provider's code and state, and an update address's capability, out of what is logged", () => {
+  expect(
+    redactedRequestUrl('/api/v1/integrations/standin/callback?state=abc&code=secret-code'),
+  ).toBe('/api/v1/integrations/[provider]/callback?[redacted]');
+  expect(redactedRequestUrl('/webhooks/integrations/standin/' + 'a'.repeat(43))).toBe(
+    '/webhooks/integrations/[redacted]',
+  );
+  // The integrations API itself carries nothing secret in its address.
+  expect(redactedRequestUrl('/api/v1/integrations/standin/connect')).toBe(
+    '/api/v1/integrations/standin/connect',
+  );
+  expect(redactedRequestUrl('/api/v1/integrations')).toBe('/api/v1/integrations');
+});

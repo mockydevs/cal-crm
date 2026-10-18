@@ -18,6 +18,10 @@ const PURE = [
   'src/submit-gate.ts',
   // Who a submission comes from: an IPv4 address or an IPv6 /64.
   'src/visitor-source.ts',
+  // External Tracking: a form's fields read, the website a request comes from, the view token.
+  'src/tracking/fields.ts',
+  'src/tracking/origin.ts',
+  'src/tracking/view-token.ts',
 ];
 
 export default defineConfig({

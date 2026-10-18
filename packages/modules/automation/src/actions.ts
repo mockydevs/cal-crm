@@ -114,6 +114,7 @@ const RECORD_KINDS: Readonly<Record<string, RecordKind>> = {
   contact: 'contact',
   company: 'company',
   deal: 'deal',
+  custom: 'custom',
 };
 
 const publicIdOf = (kind: 'tag', id: string) => (isUuidV7(id) ? toPublicId(kind, id) : id);

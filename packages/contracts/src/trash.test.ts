@@ -21,10 +21,28 @@ describe('the trash', () => {
       name: 'Maya Thompson',
       trashedAt: '2026-10-08T12:00:00.000Z',
       purgeAt: '2026-11-07T12:00:00.000Z',
+      mergedInto: null,
     };
     expect(trashedRecord.parse(item)).toEqual(item);
     expect(
       trashList.parse({ items: [item], next: null, retentionDays: 30, canPurge: true }),
     ).toMatchObject({ retentionDays: 30, canPurge: true });
+  });
+
+  it('marks a contact merged into another with the one it went to', () => {
+    const merged = {
+      id,
+      kind: 'contact',
+      name: null,
+      trashedAt: '2026-10-08T12:00:00.000Z',
+      purgeAt: '2026-11-07T12:00:00.000Z',
+      mergedInto: 'con_01h455vb4pex5vsknk084sn02r',
+    };
+    expect(trashedRecord.parse(merged)).toEqual(merged);
+    expect(
+      trashedRecord.safeParse({ ...merged, mergedInto: 'com_01h455vb4pex5vsknk084sn02r' }).success,
+    ).toBe(false);
+    const { mergedInto: _left, ...unmarked } = merged;
+    expect(trashedRecord.safeParse(unmarked).success).toBe(false);
   });
 });

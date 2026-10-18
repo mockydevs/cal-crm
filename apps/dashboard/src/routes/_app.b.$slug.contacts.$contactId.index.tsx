@@ -5,8 +5,10 @@ import { Button } from '@repo/ui/components/button';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createFileRoute, getRouteApi, Link, useLocation } from '@tanstack/react-router';
 import { Pencil, Trash2 } from 'lucide-react';
-import { useRef, useState, type ReactElement } from 'react';
+import { useEffect, useRef, useState, type ReactElement } from 'react';
 import { apiIn } from '../api';
+import { mergedIntoOf, noteMerge } from '../contact-merge/notice';
+import { ContactMergeNotice } from '../contact-merge-notice';
 import { contactSearch, contactSearchString } from '../contact-search';
 import { ContactActionButton, ContactWorkspace } from '../contact-workspace';
 import { ContactLoading, contactKey, contactTitle, useContact } from '../contacts';
@@ -30,10 +32,22 @@ function ContactPage(): ReactElement {
   const business = useBusiness();
   const { contactId } = route.useParams();
   const current = useContact(business.id, contactId);
+  // A contact merged into another answers 404 naming the one kept: its page opens instead.
+  const kept = mergedIntoOf(current.error);
+  const navigate = route.useNavigate();
+  useEffect(() => {
+    if (kept === undefined) return;
+    noteMerge(kept, { kind: 'followed' });
+    void navigate({
+      to: '/b/$slug/contacts/$contactId',
+      params: { slug: business.slug, contactId: kept },
+      replace: true,
+    });
+  }, [kept, navigate, business.slug]);
   if (current.data === undefined)
     return (
       <Page title={t`Contact`}>
-        <ContactLoading query={current} />
+        {kept === undefined ? <ContactLoading query={current} /> : null}
       </Page>
     );
   return <LoadedContact key={`${business.id}:${contactId}`} contactId={contactId} />;
@@ -116,6 +130,7 @@ function LoadedContact({ contactId }: { readonly contactId: string }): ReactElem
       <p role="status" className="text-sm empty:sr-only">
         {move.isPending ? t`Saving…` : notice}
       </p>
+      <ContactMergeNotice contactId={contactId} />
       <ContactWorkspace
         contact={contact}
         search={search}

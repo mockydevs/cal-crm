@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && node webchat-widget/tools/build.ts && node forms-embed/tools/build.ts && node booking-embed/tools/build.ts",
+    "build": "tsc -p tsconfig.build.json && node webchat-widget/tools/build.ts && node forms-embed/tools/build.ts && node booking-embed/tools/build.ts && node tracking-script/tools/build.ts",
     "typecheck": "tsc -p tsconfig.json",
     "lint": "eslint . --max-warnings=0",
     "test": "vitest run --coverage",
@@ -19,7 +19,7 @@
     "load:intake": "vitest run --config vitest.bench.config.js bench/intake.load.ts",
     "load:neighbours": "vitest run --config vitest.bench.config.js bench/neighbours.load.ts",
     "browser:arrival": "vitest run --config vitest.bench.config.js bench/arrival.browser.ts",
-    "dev": "tsc -p tsconfig.build.json && node webchat-widget/tools/build.ts && node forms-embed/tools/build.ts && node booking-embed/tools/build.ts && node --env-file-if-exists=../../.env --import ./dist/instrumentation.js dist/main.js"
+    "dev": "tsc -p tsconfig.build.json && node webchat-widget/tools/build.ts && node forms-embed/tools/build.ts && node booking-embed/tools/build.ts && node tracking-script/tools/build.ts && node --env-file-if-exists=../../.env --import ./dist/instrumentation.js dist/main.js"
   },
   "dependencies": {
     "@fontsource-variable/lexend": "catalog:",
@@ -44,6 +44,7 @@
     "@repo/module-crm": "workspace:*",
     "@repo/module-files": "workspace:*",
     "@repo/module-forms": "workspace:*",
+    "@repo/module-integrations": "workspace:*",
     "@repo/module-messaging": "workspace:*",
     "@repo/module-notifications": "workspace:*",
     "@repo/module-reporting": "workspace:*",

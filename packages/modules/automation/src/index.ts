@@ -1,5 +1,6 @@
 import type { AnyTask } from '@repo/commands';
 export { createAutomationProposables } from './proposals.js';
+export { automationContactMerge } from './contact-merge.js';
 
 import type { ActionOptions } from './actions.js';
 import { matchEventTask } from './match-task.js';

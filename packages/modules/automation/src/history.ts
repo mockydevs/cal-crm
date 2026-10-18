@@ -10,6 +10,7 @@ import {
   automationStepRunEntry,
   diffJson,
   parseRecordId,
+  recordKinds,
   type AutomationRun,
   type AutomationRunList,
   type AutomationStepType,
@@ -108,8 +109,8 @@ export async function diffVersions(
   };
 }
 
-// A run with its automation and its record as they are named now. Only the three kinds of
-// record the CRM names can be enrolled, so the inner join on kind loses nothing.
+// A run with its automation and its record as they are named now. Only the kinds of record
+// the CRM names can be enrolled, so the inner join on kind loses nothing.
 const runs = (trx: DatabaseTransaction) =>
   trx
     .selectFrom('automation.enrolments as enrolment')
@@ -141,6 +142,11 @@ const runs = (trx: DatabaseTransaction) =>
     .leftJoin('crm.deals as deal', (join) =>
       join.onRef('deal.business_id', '=', 'record.business_id').onRef('deal.id', '=', 'record.id'),
     )
+    .leftJoin('crm.custom_records as custom', (join) =>
+      join
+        .onRef('custom.business_id', '=', 'record.business_id')
+        .onRef('custom.id', '=', 'record.id'),
+    )
     .select([
       'enrolment.id',
       'enrolment.automation_id',
@@ -166,12 +172,14 @@ const runs = (trx: DatabaseTransaction) =>
         where identity.business_id = contact.business_id and identity.contact_id = contact.id
           and identity.is_primary
         order by identity.kind limit 1))
-        when 'company' then company.name when 'deal' then deal.name end`.as('record_name'),
+        when 'company' then company.name when 'deal' then deal.name
+        when 'custom' then custom.title end`.as('record_name'),
     )
     .select(
       sql<boolean>`case record.kind when 'contact' then contact.deleted_at is not null
         when 'company' then company.deleted_at is not null
-        when 'deal' then deal.deleted_at is not null else true end`.as('record_trashed'),
+        when 'deal' then deal.deleted_at is not null
+        when 'custom' then custom.deleted_at is not null else true end`.as('record_trashed'),
     );
 
 type RunRow = Awaited<ReturnType<ReturnType<typeof runs>['executeTakeFirstOrThrow']>>;
@@ -312,10 +320,7 @@ async function presentRuns(
   const waitingAt = new Map(waiting.map((row) => [row.enrolment_id, row.step_key]));
   // Parsed, not assumed: stored statuses and kinds are checked against the contract.
   return rows.map((row) => {
-    const recordId = toPublicId(
-      z.enum(['contact', 'company', 'deal']).parse(row.record_kind),
-      row.record_id,
-    );
+    const recordId = toPublicId(z.enum(recordKinds).parse(row.record_kind), row.record_id);
     const version = names.get(row.version_id);
     const live = row.status === 'running' || row.status === 'waiting';
     const at = waitingAt.get(row.id) ?? row.current_step;

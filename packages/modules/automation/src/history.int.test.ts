@@ -429,3 +429,48 @@ it("finds no runs for another business's record, or for something that is not a 
     nextCursor: null,
   });
 });
+
+it("names a custom object's record in its runs, as any record is named", async () => {
+  const { context, id, automationId, versionId } = await published();
+  const record = await database.withTenant(context, async (sql) => {
+    const object = await sql.one<{ id: string }>(
+      `insert into crm.object_types (business_id, id, kind, key, singular_label, plural_label,
+                                     primary_field_id)
+       values (app.business_id(), uuidv7(), 'custom', 'pet', 'Pet', 'Pets', uuidv7())
+       returning id`,
+    );
+    await sql.query(
+      `insert into crm.field_definitions (business_id, id, object_type_id, key, label, description,
+                                          value_type, folder_id, created_by_kind)
+       select app.business_id(), o.primary_field_id, o.id, 'pet_name', 'Pet name', 'Its name.',
+              'text', f.id, 'system'
+       from crm.object_types o join crm.field_folders f on f.object_type_id = o.id
+       where o.id = $1 limit 1`,
+      [object.id],
+    );
+    const made = await sql.one<{ id: string }>(
+      `insert into crm.records (business_id, kind, object_type_id)
+       values (app.business_id(), 'custom', $1) returning id`,
+      [object.id],
+    );
+    await sql.query(
+      `insert into crm.custom_records (business_id, id, object_type_id, title, created_by_kind)
+       values (app.business_id(), $1, $2, 'Buddy', 'system')`,
+      [made.id, object.id],
+    );
+    await sql.query(
+      `insert into automation.enrolments (business_id, automation_id, version_id, record_id,
+                                          correlation_id, reentry_key)
+       values (app.business_id(), $1, $2, $3, $4, $5)`,
+      [automationId, versionId, made.id, randomUUID(), randomUUID()],
+    );
+    return toPublicId('custom', made.id);
+  });
+  const runs = await withTenant(db, context, (trx) => readRecordRuns(trx, record, {}));
+  expect(runs.items.map((run) => run.record)).toEqual([
+    { id: record, name: 'Buddy', trashed: false },
+  ]);
+  expect((await withTenant(db, context, (trx) => readRuns(trx, id, {}))).items[0]?.recordId).toBe(
+    record,
+  );
+});

@@ -13,6 +13,8 @@ interface Item {
   name: string | null;
   trashedAt: string;
   purgeAt: string;
+  /** For a contact merged into another, the contact it went into. */
+  mergedInto: string | null;
 }
 
 // Ids the server made: the contract checks each wraps a UUIDv7.
@@ -22,6 +24,7 @@ const maya: Item = {
   name: 'Maya Thompson',
   trashedAt: '2026-10-08T12:00:00.000Z',
   purgeAt: '2026-11-07T12:00:00.000Z',
+  mergedInto: null,
 };
 const lee: Item = {
   id: 'com_01m4bd9fteedat3be9bqgx2047',
@@ -29,6 +32,7 @@ const lee: Item = {
   name: 'Lee Family',
   trashedAt: '2026-10-07T12:00:00.000Z',
   purgeAt: '2026-11-06T12:00:00.000Z',
+  mergedInto: null,
 };
 const wedding: Item = {
   id: 'deal_01m4bdmgqwfgatd5ch0pqddfxm',
@@ -36,6 +40,7 @@ const wedding: Item = {
   name: 'Lee wedding',
   trashedAt: '2026-10-06T12:00:00.000Z',
   purgeAt: '2026-11-05T12:00:00.000Z',
+  mergedInto: null,
 };
 
 const at = '2026-10-08T12:00:00.000Z';

@@ -154,10 +154,23 @@ const SCORING = ['src/scoring'];
 // them (src/contact-duplicates/words.ts).
 const CONTACT_DUPLICATES = ['src/contact-duplicates'];
 
+// Merging contacts: the Merge Contacts dialog, opened from the contact list's bulk bar,
+// Manage Duplicates and a contact's possible duplicates, fetched with it
+// (src/contact-merge/words.ts).
+const CONTACT_MERGE = ['src/contact-merge'];
+
 // Email verification: an email row's status and menu on the contact page, and Settings →
 // Email Services → Email Verification, fetched with each of them
 // (src/email-verification/words.ts).
 const EMAIL_VERIFICATION = ['src/email-verification'];
+
+// Settings → External Tracking: its three tabs (Installation, Troubleshoot, Settings), fetched
+// with them (src/external-tracking/words.ts).
+const EXTERNAL_TRACKING = ['src/external-tracking'];
+
+// Settings → Integrations: its cards, the Manage panel and the key's dialog, fetched with the
+// page (src/integrations/words-loader.ts).
+const INTEGRATIONS = ['src/integrations'];
 
 export default defineConfig({
   sourceLocale: 'en',
@@ -185,7 +198,10 @@ export default defineConfig({
         ...AI_SETTINGS,
         ...SCORING,
         ...CONTACT_DUPLICATES,
+        ...CONTACT_MERGE,
         ...EMAIL_VERIFICATION,
+        ...EXTERNAL_TRACKING,
+        ...INTEGRATIONS,
         'src/templates/**',
         'src/email-library/**',
         ...TEMPLATES,
@@ -215,11 +231,20 @@ export default defineConfig({
       path: '<rootDir>/src/contact-duplicates-locales/{locale}/messages',
       include: CONTACT_DUPLICATES,
     },
+    { path: '<rootDir>/src/contact-merge-locales/{locale}/messages', include: CONTACT_MERGE },
     {
       path: '<rootDir>/src/email-verification-locales/{locale}/messages',
       include: EMAIL_VERIFICATION,
     },
     { path: '<rootDir>/src/templates-locales/{locale}/messages', include: TEMPLATES },
+    {
+      path: '<rootDir>/src/external-tracking-locales/{locale}/messages',
+      include: EXTERNAL_TRACKING,
+    },
+    {
+      path: '<rootDir>/src/integrations-locales/{locale}/messages',
+      include: INTEGRATIONS,
+    },
     {
       path: '<rootDir>/src/site-editor/locales/{locale}/messages',
       include: ['src/site-editor'],

@@ -789,6 +789,9 @@ importers:
       '@repo/module-forms':
         specifier: workspace:*
         version: link:../../packages/modules/forms
+      '@repo/module-integrations':
+        specifier: workspace:*
+        version: link:../../packages/modules/integrations
       '@repo/module-messaging':
         specifier: workspace:*
         version: link:../../packages/modules/messaging
@@ -1552,6 +1555,49 @@ importers:
       altcha-lib:
         specifier: 'catalog:'
         version: 2.6.0(cors@2.8.6)(express@5.3.0(supports-color@7.2.0))(fastify@5.12.5)(hono@4.13.13)
+      kysely:
+        specifier: 'catalog:'
+        version: 0.29.6
+      zod:
+        specifier: 'catalog:'
+        version: 4.6.5
+    devDependencies:
+      '@repo/testing':
+        specifier: workspace:*
+        version: link:../../testing
+      '@types/node':
+        specifier: 24.19.1
+        version: 24.19.1
+      '@vitest/coverage-v8':
+        specifier: 'catalog:'
+        version: 5.0.3(vitest@5.0.3)
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      vite:
+        specifier: 'catalog:'
+        version: 8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1)
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@24.19.1)(@vitest/coverage-v8@5.0.3)(happy-dom@20.14.6)(jsdom@30.1.2(@noble/hashes@2.4.0))(vite@8.3.3(@types/node@24.19.1)(jiti@2.7.0)(yaml@2.9.1))
+
+  packages/modules/integrations:
+    dependencies:
+      '@repo/commands':
+        specifier: workspace:*
+        version: link:../../commands
+      '@repo/contracts':
+        specifier: workspace:*
+        version: link:../../contracts
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../db
+      '@repo/kernel':
+        specifier: workspace:*
+        version: link:../../kernel
+      '@repo/module-vault':
+        specifier: workspace:*
+        version: link:../vault
       kysely:
         specifier: 'catalog:'
         version: 0.29.6

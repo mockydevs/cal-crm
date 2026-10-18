@@ -67,6 +67,7 @@ describe('recordId', () => {
     ['contact', 'con_01h455vb4pex5vsknk084sn02q'],
     ['company', 'com_01h455vb4pex5vsknk084sn02q'],
     ['deal', 'deal_01h455vb4pex5vsknk084sn02q'],
+    ['custom', 'rec_01h455vb4pex5vsknk084sn02q'],
   ])("accepts a %s's id, and says which kind it names", (kind, value) => {
     expect(recordId.parse(value)).toBe(value);
     expect(parseRecordId(value)).toEqual({ kind, id: uuid });
@@ -84,7 +85,7 @@ describe('recordId', () => {
   it('shows its format in JSON Schema', () => {
     expect(z.toJSONSchema(recordId)).toMatchObject({
       type: 'string',
-      pattern: '^(con|com|deal)_[0-7][0-9a-hjkmnp-tv-z]{25}$',
+      pattern: '^(con|com|deal|rec)_[0-7][0-9a-hjkmnp-tv-z]{25}$',
     });
   });
 });

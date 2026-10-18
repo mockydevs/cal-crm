@@ -22,6 +22,7 @@ export default defineConfig({
         'src/simulate-deals.ts',
         'src/trigger-evaluation-words.ts',
         'src/compared-fields.ts',
+        'src/tracking-trigger.ts',
         'src/index.ts',
       ],
       thresholds: { lines: 90, functions: 90, branches: 90, statements: 90 },

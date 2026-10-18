@@ -33,6 +33,7 @@ import {
   type CalendarOptions,
 } from '@repo/module-calendar';
 import {
+  createDealProposables,
   createFieldProposables,
   createPipelineProposables,
   findTimeZone,
@@ -85,6 +86,7 @@ export function proposables(
     ...createFieldProposables(),
     ...createMemoryProposables(findConversation),
     ...createPipelineProposables(),
+    ...createDealProposables(),
     ...createCalendarProposables(assistantCalendarOptions),
     ...createAutomationProposables({
       setup: (trx, context) =>
@@ -342,6 +344,16 @@ export const assistantConfirmations: Readonly<Record<string, AssistantConfirmati
     input: ({ params, body }) => ({ ...body, id: params['id'] }),
     summary: (change) =>
       `Publish workflow “${typeof change['name'] === 'string' ? change['name'] : 'Workflow'}”`,
+  },
+  updateDeal: {
+    kind: 'deal_update',
+    input: ({ params, body }) => ({ ...body, id: params['id'] }),
+    summary: (change) => {
+      const name = typeof change['name'] === 'string' ? change['name'] : 'Deal';
+      return change['moved'] === true && typeof change['stageName'] === 'string'
+        ? `Move the deal “${name}” to ${change['stageName']}`
+        : `Save the deal “${name}”`;
+    },
   },
   publishForm: {
     kind: 'form_publish',

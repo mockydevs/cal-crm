@@ -273,6 +273,7 @@ it('makes a contact from a submission: its details, its custom fields, its conse
       heard: 'A friend',
     },
     {
+      clientSubmissionId: '00000000-0000-4000-8000-000000000712',
       consents: { news: true, texts: true },
       pageUrl: `${WEBSITE}/weddings/enquire?utm_source=newsletter&utm_campaign=spring&email=leak@example.test#form`,
       visitor: { ipAddress: '198.51.100.24', userAgent: 'Browser/2.0' },
@@ -409,8 +410,14 @@ it('makes a contact from a submission: its details, its custom fields, its conse
     ),
   );
   expect(kept.length).toBeGreaterThan(5);
-  for (const row of kept)
-    expect(row.text).not.toMatch(/maya|thompson|712|198\.51\.100|Outdoor|friend|250000/i);
+  for (const row of kept) {
+    // Opaque identifiers can contain an answer's digits; keep every non-ID value checked.
+    const withoutIds = row.text.replace(
+      /"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"/gi,
+      '""',
+    );
+    expect(withoutIds).not.toMatch(/maya|thompson|712|198\.51\.100|Outdoor|friend|250000/i);
+  }
   const [audited] = await database.as('crm_owner', (sql) =>
     sql.query<{ input: unknown; actor_kind: string; ip: string | null; outcome: string }>(
       "select input, actor_kind, ip::text as ip, outcome from audit.commands where command = 'forms.submit' and business_id = $1",

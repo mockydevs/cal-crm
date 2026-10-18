@@ -146,6 +146,11 @@ msgstr "{0, plural, =0 {Not linked to a funnel or website.} one {Linked to # fun
 msgid "{0, plural, one {{1} won of # opportunity} other {{2} won of # opportunities}}"
 msgstr "{0, plural, one {{1} won of # opportunity} other {{2} won of # opportunities}}"
 
+#. placeholder {0}: notice.count
+#: src/contact-merge-notice.tsx
+msgid "{0, plural, one {# contact was merged into this one.} other {# contacts were merged into this one.}}"
+msgstr "{0, plural, one {# contact was merged into this one.} other {# contacts were merged into this one.}}"
+
 #. placeholder {0}: counted.count
 #: src/routes/_app.b.$slug.contacts.index.tsx
 msgid "{0, plural, one {# Contact} other {# Contacts}}"
@@ -257,6 +262,11 @@ msgstr "{0, plural, one {Star removed from # conversation.} other {Star removed 
 #: src/inbox-assistant.tsx
 msgid "{0, plural, one {the last message here} other {the last # messages here}}"
 msgstr "{0, plural, one {the last message here} other {the last # messages here}}"
+
+#. placeholder {0}: changes.length
+#: src/api-keys-page.tsx
+msgid "{0} permissions"
+msgstr "{0} permissions"
 
 #: src/notifications-panel.tsx
 msgid "{actor} assigned you a conversation."
@@ -422,6 +432,10 @@ msgstr "{count, plural, one {Assign in turn to # person} other {Assign in turn t
 #: src/media/library.tsx
 msgid "{count} files · {held}"
 msgstr "{count} files · {held}"
+
+#: src/tags.tsx
+msgid "{count} tags"
+msgstr "{count} tags"
 
 #: src/automation-contact-fields.tsx
 msgid "{countedFrom} (not found)"
@@ -1085,6 +1099,10 @@ msgstr "{total} appointments taking place in these dates, as they stand now."
 msgid "{total} appointments, times in {zone}"
 msgstr "{total} appointments, times in {zone}"
 
+#: src/tags.tsx
+msgid "{undescribed} tags have no description, so the assistant can’t tell what they mean."
+msgstr "{undescribed} tags have no description, so the assistant can’t tell what they mean."
+
 #: src/inbox-filters.tsx
 msgid "{unread, plural, one {# unread conversation} other {# unread conversations}}"
 msgstr "{unread, plural, one {# unread conversation} other {# unread conversations}}"
@@ -1191,6 +1209,14 @@ msgstr "1 file · {held}"
 msgid "1 selected"
 msgstr "1 selected"
 
+#: src/tags.tsx
+msgid "1 tag"
+msgstr "1 tag"
+
+#: src/tags.tsx
+msgid "1 tag has no description, so the assistant can’t tell what it means."
+msgstr "1 tag has no description, so the assistant can’t tell what it means."
+
 #: src/routes/reset-password.tsx
 #: src/routes/setup.tsx
 msgid "8 characters or more. A few unrelated words make a strong one."
@@ -1254,6 +1280,10 @@ msgid "A contact is created"
 msgstr "A contact is created"
 
 #: src/automation-summary.ts
+msgid "A contact sends a form on your website"
+msgstr "A contact sends a form on your website"
+
+#: src/automation-summary.ts
 msgid "A contact sends a message"
 msgstr "A contact sends a message"
 
@@ -1273,6 +1303,10 @@ msgstr "A contact sends a WhatsApp message"
 msgid "A contact sends an email"
 msgstr "A contact sends an email"
 
+#: src/automation-summary.ts
+msgid "A contact sends the external form {form}"
+msgstr "A contact sends the external form {form}"
+
 #: src/automation-record-fields.tsx
 msgid "A contact that already has an owner gets the new one."
 msgstr "A contact that already has an owner gets the new one."
@@ -1280,6 +1314,14 @@ msgstr "A contact that already has an owner gets the new one."
 #: src/automation-record-fields.tsx
 msgid "A contact that already has an owner keeps them."
 msgstr "A contact that already has an owner keeps them."
+
+#: src/automation-summary.ts
+msgid "A contact views a page on your website"
+msgstr "A contact views a page on your website"
+
+#: src/automation-summary.ts
+msgid "A contact views a page or sends a form on your website"
+msgstr "A contact views a page or sends a form on your website"
 
 #: src/automation-fields.ts
 msgid "A contact who gets here before the goal is met"
@@ -1750,6 +1792,7 @@ msgstr "Action to go to"
 #: src/pipelines.tsx
 #: src/reporting/reports-list.tsx
 #: src/snippets.tsx
+#: src/tags.tsx
 #: src/tasks.tsx
 #: src/trigger-links.tsx
 #: src/users.tsx
@@ -2200,6 +2243,10 @@ msgid "Add, change and trash contacts"
 msgstr "Add, change and trash contacts"
 
 #: src/permission-names.ts
+msgid "Add, change and trash custom object records, and relate records"
+msgstr "Add, change and trash custom object records, and relate records"
+
+#: src/permission-names.ts
 msgid "Add, edit and delete notes"
 msgstr "Add, edit and delete notes"
 
@@ -2307,17 +2354,13 @@ msgstr "After no. of days"
 msgid "After:"
 msgstr "After:"
 
+#: src/api-keys-page.tsx
+msgid "Agency"
+msgstr "Agency"
+
 #: src/users.tsx
 msgid "Agency - {role}"
 msgstr "Agency - {role}"
-
-#: src/api-keys-page.tsx
-msgid "Agency keys work at the agency. Apps can discover available businesses and select a business slug for each call."
-msgstr "Agency keys work at the agency. Apps can discover available businesses and select a business slug for each call."
-
-#: src/api-keys-page.tsx
-msgid "Agency scope"
-msgstr "Agency scope"
 
 #: src/users.tsx
 msgid "Agency users"
@@ -2604,6 +2647,10 @@ msgstr "An https:// address."
 msgid "An import"
 msgstr "An import"
 
+#: src/notifications-panel.tsx
+msgid "An integration needs you: {title}"
+msgstr "An integration needs you: {title}"
+
 #: src/inbox-rules.ts
 msgid "An internal note can't be sent to the contact."
 msgstr "An internal note can't be sent to the contact."
@@ -2701,6 +2748,10 @@ msgstr "Any calendar"
 #: src/automation-fields.ts
 msgid "Any channel"
 msgstr "Any channel"
+
+#: src/automation-fields.ts
+msgid "Any event"
+msgstr "Any event"
 
 #: src/field-list-controls.tsx
 msgid "Any field"
@@ -3678,6 +3729,7 @@ msgstr "Bulk actions on opportunities, newest first"
 msgid "Bulk actions table"
 msgstr "Bulk actions table"
 
+#: src/api-keys-page.tsx
 #: src/shell/business-switcher.tsx
 msgid "Business"
 msgstr "Business"
@@ -3685,10 +3737,6 @@ msgstr "Business"
 #: src/business-profile.tsx
 msgid "Business details"
 msgstr "Business details"
-
-#: src/api-keys-page.tsx
-msgid "Business keys work only in this business."
-msgstr "Business keys work only in this business."
 
 #: src/business-profile.tsx
 msgid "Business logo"
@@ -3708,10 +3756,6 @@ msgstr "Business Profile"
 #: src/business-profile.tsx
 msgid "Business profile saved."
 msgstr "Business profile saved."
-
-#: src/api-keys-page.tsx
-msgid "Business scope"
-msgstr "Business scope"
 
 #: src/shell/modules.ts
 msgid "Business Services"
@@ -3954,9 +3998,22 @@ msgstr "Campaign ID"
 msgid "Campaigns"
 msgstr "Campaigns"
 
+#. placeholder {0}: (changes[0] ?? '').toLowerCase()
+#: src/api-keys-page.tsx
+msgid "Can {0}"
+msgstr "Can {0}"
+
+#: src/api-keys-page.tsx
+msgid "Can change"
+msgstr "Can change"
+
 #: src/saved-view-sharing.tsx
 msgid "Can edit"
 msgstr "Can edit"
+
+#: src/api-keys-page.tsx
+msgid "Can read"
+msgstr "Can read"
 
 #: src/saved-view-sharing.tsx
 msgid "Can view"
@@ -4175,6 +4232,10 @@ msgstr "Changed"
 #: src/audit-logs.tsx
 msgid "Changes made"
 msgstr "Changes made"
+
+#: src/api-keys-page.tsx
+msgid "Changes nothing"
+msgstr "Changes nothing"
 
 #: src/calendar-settings-editor.tsx
 msgid "Changes saved."
@@ -5154,10 +5215,6 @@ msgstr "Connect again"
 #: src/permission-names.ts
 msgid "Connect AI providers and set AI models, limits and privacy"
 msgstr "Connect AI providers and set AI models, limits and privacy"
-
-#: src/api-keys-page.tsx
-msgid "Connect an app with your CRM URL and API key. Choose which data it may read and what it may change. No agency, business or location ID is needed to set up the connection."
-msgstr "Connect an app with your CRM URL and API key. Choose which data it may read and what it may change. No agency, business or location ID is needed to set up the connection."
 
 #: src/permission-names.ts
 msgid "Connect and manage email mailboxes"
@@ -6586,6 +6643,10 @@ msgstr "Delivery not confirmed"
 msgid "Descending"
 msgstr "Descending"
 
+#: src/tags.tsx
+msgid "Described"
+msgstr "Described"
+
 #: src/automation-changes.ts
 #: src/calendar-new-dialog.tsx
 #: src/calendar-settings-basic.tsx
@@ -6824,6 +6885,7 @@ msgstr "Does not equal"
 msgid "Does not include"
 msgstr "Does not include"
 
+#: src/automation-fields.ts
 #: src/company-panel.tsx
 #: src/domain-redirects.tsx
 #: src/domains.tsx
@@ -6987,6 +7049,10 @@ msgstr "Draft saved. It has problems to fix before it can be published."
 msgid "Draft set aside. Nothing was sent."
 msgstr "Draft set aside. Nothing was sent."
 
+#: src/deals.tsx
+msgid "Drag a card by its grip to change stage. By keyboard: focus the grip, press Space, Left or Right, then Space."
+msgstr "Drag a card by its grip to change stage. By keyboard: focus the grip, press Space, Left or Right, then Space."
+
 #: src/pipeline-dialog.tsx
 msgid "Drag a stage by its handle, or focus the handle and press the up or down arrow key, to change the order. Archive a stage when you stop using it: its opportunities and history stay intact."
 msgstr "Drag a stage by its handle, or focus the handle and press the up or down arrow key, to change the order. Archive a stage when you stop using it: its opportunities and history stay intact."
@@ -6995,9 +7061,9 @@ msgstr "Drag a stage by its handle, or focus the handle and press the up or down
 msgid "Drag an action onto the canvas, or choose one and then where it goes with a + on the canvas."
 msgstr "Drag an action onto the canvas, or choose one and then where it goes with a + on the canvas."
 
-#: src/deals.tsx
-msgid "Drag the grip to change stage. With the grip focused, press Space, Left or Right, then Space. Escape cancels."
-msgstr "Drag the grip to change stage. With the grip focused, press Space, Left or Right, then Space. Escape cancels."
+#: src/deal-board.tsx
+msgid "Drag to another stage"
+msgstr "Drag to another stage"
 
 #: src/reporting/report-builder.tsx
 msgid "Drag to move"
@@ -7014,6 +7080,11 @@ msgstr "Drag, or press the up or down arrow key, to reorder"
 #: src/media/library.tsx
 msgid "Drop files to upload them to {openedName}"
 msgstr "Drop files to upload them to {openedName}"
+
+#. placeholder {0}: stage.name
+#: src/deal-board.tsx
+msgid "Drop in {0}"
+msgstr "Drop in {0}"
 
 #: src/custom-field-words.ts
 msgid "Dropdown (multiple)"
@@ -7159,6 +7230,10 @@ msgstr "Each time a workflow does not start is kept for {days} days."
 msgid "Earlier causes are unavailable. This is the part of the history you can read."
 msgstr "Earlier causes are unavailable. This is the part of the history you can read."
 
+#: src/activity.tsx
+msgid "Earlier page visits linked"
+msgstr "Earlier page visits linked"
+
 #: src/automation-canvas.tsx
 #: src/automation-steps-view.tsx
 #: src/calendar-event-panel.tsx
@@ -7170,7 +7245,6 @@ msgstr "Earlier causes are unavailable. This is the part of the history you can 
 #: src/routes/_app.b.$slug.contacts.$contactId.index.tsx
 #: src/routes/_app.b.$slug.contacts.companies.$companyId.index.tsx
 #: src/snippets.tsx
-#: src/tags.tsx
 #: src/trigger-links.tsx
 #: src/user-availability.tsx
 #: src/users.tsx
@@ -7715,6 +7789,7 @@ msgstr "Error:"
 msgid "Errors"
 msgstr "Errors"
 
+#: src/automation-fields.ts
 #: src/calendar-settings-words.ts
 msgid "Event"
 msgstr "Event"
@@ -7850,6 +7925,10 @@ msgstr "Everyone on this calendar"
 msgid "Everything"
 msgstr "Everything"
 
+#: src/api-keys-page.tsx
+msgid "Everything (an older key without read limits)"
+msgstr "Everything (an older key without read limits)"
+
 #: src/import-flow.tsx
 msgid "Examples"
 msgstr "Examples"
@@ -7922,12 +8001,12 @@ msgid "Expired"
 msgstr "Expired"
 
 #: src/api-keys-page.tsx
-msgid "Expired on {expires}"
-msgstr "Expired on {expires}"
+msgid "Expired {expires}"
+msgstr "Expired {expires}"
 
 #: src/api-keys-page.tsx
-msgid "Expires on {expires}"
-msgstr "Expires on {expires}"
+msgid "Expires {expires}"
+msgstr "Expires {expires}"
 
 #: src/api-keys-page.tsx
 msgid "Expiry (optional)"
@@ -7952,6 +8031,22 @@ msgstr "Exported “{name}”. The file is in your downloads."
 #: src/user-form.tsx
 msgid "Extension"
 msgstr "Extension"
+
+#: src/automation-fields.ts
+msgid "External form name"
+msgstr "External form name"
+
+#: src/activity.tsx
+msgid "External form submitted"
+msgstr "External form submitted"
+
+#: src/shell/modules.ts
+msgid "External Tracking"
+msgstr "External Tracking"
+
+#: src/automation-summary.ts
+msgid "External Tracking Event"
+msgstr "External Tracking Event"
 
 #: src/import-flow.tsx
 msgid "Fail"
@@ -8434,6 +8529,10 @@ msgstr "Forgot your password?"
 msgid "Form"
 msgstr "Form"
 
+#: src/automation-fields.ts
+msgid "Form submission"
+msgstr "Form submission"
+
 #: src/activity.tsx
 #: src/automation-summary.ts
 msgid "Form submitted"
@@ -8791,6 +8890,7 @@ msgstr "Grid view"
 #: src/calendars.tsx
 #: src/reporting/widget-editor.tsx
 #: src/tag-editors.tsx
+#: src/tags.tsx
 msgid "Group"
 msgstr "Group"
 
@@ -8815,6 +8915,7 @@ msgid "Group renamed to {name}."
 msgstr "Group renamed to {name}."
 
 #: src/calendar-groups-rail.tsx
+#: src/tags.tsx
 msgid "Groups"
 msgstr "Groups"
 
@@ -9228,9 +9329,18 @@ msgstr "Insert a snippet. You can also type / at the start of a word."
 msgid "Insert with the fields unfilled"
 msgstr "Insert with the fields unfilled"
 
+#: src/shell/modules.ts
+msgid "Installation"
+msgstr "Installation"
+
 #: src/automation-fields.ts
 msgid "Instructions for the AI"
 msgstr "Instructions for the AI"
+
+#: src/command-bar.tsx
+#: src/shell/modules.ts
+msgid "Integrations"
+msgstr "Integrations"
 
 #: src/automation-catalogue.ts
 #: src/contact-files.tsx
@@ -9946,6 +10056,14 @@ msgstr "Key: <0>{token}</0>. Renaming the link keeps this key."
 msgid "Key: <0>{token}</0>. Renaming the value keeps this key."
 msgstr "Key: <0>{token}</0>. Renaming the value keeps this key."
 
+#: src/api-keys-page.tsx
+msgid "Keys that let apps use the CRM across all of the agency’s businesses."
+msgstr "Keys that let apps use the CRM across all of the agency’s businesses."
+
+#: src/api-keys-page.tsx
+msgid "Keys that let apps use this business’s CRM data."
+msgstr "Keys that let apps use this business’s CRM data."
+
 #: src/consent-panel.tsx
 msgid "Keyword"
 msgstr "Keyword"
@@ -9970,6 +10088,10 @@ msgstr "Label for {shown}"
 #: src/contact-add-panel.tsx
 msgid "Label for phone {number}"
 msgstr "Label for phone {number}"
+
+#: src/tags.tsx
+msgid "Labels for grouping and filtering contacts, deals and more."
+msgstr "Labels for grouping and filtering contacts, deals and more."
 
 #: src/automation-canvas.tsx
 msgid "Laid out automatically again."
@@ -10188,10 +10310,6 @@ msgstr "Left empty, it takes the calendar's name."
 #: src/reporting/reports-dialogs.tsx
 msgid "Left empty, the report takes the name shown."
 msgstr "Left empty, the report takes the name shown."
-
-#: src/api-keys-page.tsx
-msgid "Legacy unrestricted reads"
-msgstr "Legacy unrestricted reads"
 
 #: src/automation-fields.ts
 #: src/automation-record-fields.tsx
@@ -11231,6 +11349,10 @@ msgstr "Meeting location {number} of {name}"
 msgid "Meeting locations of {name}"
 msgstr "Meeting locations of {name}"
 
+#: src/trash.tsx
+msgid "Merged into <0>the contact kept</0>"
+msgstr "Merged into <0>the contact kept</0>"
+
 #: src/automation-attribution-words.ts
 #: src/automation-fields.ts
 #: src/contact-list.tsx
@@ -12204,10 +12326,6 @@ msgstr "No enrollment matches that."
 msgid "No event this workflow listens for is on record for this contact. Each time a workflow does not start is kept for {days} days."
 msgstr "No event this workflow listens for is on record for this contact. Each time a workflow does not start is kept for {days} days."
 
-#: src/api-keys-page.tsx
-msgid "No expiry"
-msgstr "No expiry"
-
 #: src/automation-contact-fields.tsx
 msgid "No field is set yet. Add the first one."
 msgstr "No field is set yet. Add the first one."
@@ -12380,6 +12498,10 @@ msgstr "No notes yet."
 msgid "No notifications yet."
 msgstr "No notifications yet."
 
+#: src/deal-board.tsx
+msgid "No opportunities"
+msgstr "No opportunities"
+
 #: src/deals.tsx
 msgid "No opportunities match these filters."
 msgstr "No opportunities match these filters."
@@ -12462,10 +12584,6 @@ msgstr "No quotes match."
 msgid "No quotes yet. Start one for a contact and issue it when it is ready."
 msgstr "No quotes yet. Start one for a contact and issue it when it is ready."
 
-#: src/api-keys-page.tsx
-msgid "No read groups selected"
-msgstr "No read groups selected"
-
 #: src/dashboard-activity-widgets.tsx
 msgid "No reason recorded"
 msgstr "No reason recorded"
@@ -12547,6 +12665,7 @@ msgid "No step has run yet."
 msgstr "No step has run yet."
 
 #: src/record-tags.tsx
+#: src/tags.tsx
 msgid "No tags match."
 msgstr "No tags match."
 
@@ -12555,8 +12674,8 @@ msgid "No tags on this record yet."
 msgstr "No tags on this record yet."
 
 #: src/tags.tsx
-msgid "No tags yet. Tags you create are listed here, for everyone on the team."
-msgstr "No tags yet. Tags you create are listed here, for everyone on the team."
+msgid "No tags yet"
+msgstr "No tags yet"
 
 #: src/tasks.tsx
 msgid "No tasks due today."
@@ -12917,6 +13036,7 @@ msgstr "Notes saved."
 msgid "nothing"
 msgstr "nothing"
 
+#: src/api-keys-page.tsx
 #: src/reporting/widget-editor.tsx
 msgid "Nothing"
 msgstr "Nothing"
@@ -13872,6 +13992,18 @@ msgstr "Page not found"
 msgid "Page of the form or booking"
 msgstr "Page of the form or booking"
 
+#: src/automation-fields.ts
+msgid "Page path contains"
+msgstr "Page path contains"
+
+#: src/automation-fields.ts
+msgid "Page view"
+msgstr "Page view"
+
+#: src/activity.tsx
+msgid "Page visited"
+msgstr "Page visited"
+
 #: src/audit-logs.tsx
 #: src/calendars.tsx
 #: src/contact-list.tsx
@@ -14757,9 +14889,27 @@ msgstr "Reading the file…"
 msgid "Reading your calendars…"
 msgstr "Reading your calendars…"
 
+#. placeholder {0}: readGroups[0] ?? ''
+#: src/api-keys-page.tsx
+msgid "Reads {0}"
+msgstr "Reads {0}"
+
+#. placeholder {0}: readGroups.length
+#: src/api-keys-page.tsx
+msgid "Reads {0} areas"
+msgstr "Reads {0} areas"
+
 #: src/automation-json-view.tsx
 msgid "Reads as JSON · has errors"
 msgstr "Reads as JSON · has errors"
+
+#: src/api-keys-page.tsx
+msgid "Reads everything"
+msgstr "Reads everything"
+
+#: src/api-keys-page.tsx
+msgid "Reads nothing"
+msgstr "Reads nothing"
 
 #: src/automation-fields.ts
 #: src/contact-add-panel.tsx
@@ -16096,6 +16246,10 @@ msgstr "Search reports"
 msgid "Search snippets"
 msgstr "Search snippets"
 
+#: src/tags.tsx
+msgid "Search tags"
+msgstr "Search tags"
+
 #: src/automation-record-fields.tsx
 #: src/saved-view-sharing.tsx
 msgid "Search team members"
@@ -16248,10 +16402,6 @@ msgstr "Selected conversations"
 #: src/media/library.tsx
 msgid "Selected files"
 msgstr "Selected files"
-
-#: src/api-keys-page.tsx
-msgid "Selected reads: {selectedReads}"
-msgstr "Selected reads: {selectedReads}"
 
 #: src/snippets.tsx
 msgid "Selected snippets"
@@ -16613,6 +16763,10 @@ msgstr "Show {label} in the funnel chart"
 msgid "Show {label} in the stage distribution chart"
 msgstr "Show {label} in the stage distribution chart"
 
+#: src/tags.tsx
+msgid "Show all"
+msgstr "Show all"
+
 #: src/reporting/contact-attribution.tsx
 msgid "Show all fields"
 msgstr "Show all fields"
@@ -16656,6 +16810,10 @@ msgstr "Show older versions"
 #: src/calendar-view.tsx
 msgid "Show the week of {date}"
 msgstr "Show the week of {date}"
+
+#: src/tags.tsx
+msgid "Show them"
+msgstr "Show them"
 
 #: src/pipeline-dialog.tsx
 msgid "Show this pipeline in reports"
@@ -17655,10 +17813,6 @@ msgstr "Tag updated"
 msgid "Tags"
 msgstr "Tags"
 
-#: src/tags.tsx
-msgid "Tags are quick labels for grouping and filtering. Each one has a description, so the assistant knows what it means."
-msgstr "Tags are quick labels for grouping and filtering. Each one has a description, so the assistant knows what it means."
-
 #: src/record-tags.tsx
 msgid "Tags to add"
 msgstr "Tags to add"
@@ -17666,6 +17820,10 @@ msgstr "Tags to add"
 #: src/import-flow.tsx
 msgid "Tags to add to every imported contact (optional)"
 msgstr "Tags to add to every imported contact (optional)"
+
+#: src/tags.tsx
+msgid "Tags you create are listed here, for everyone on the team."
+msgstr "Tags you create are listed here, for everyone on the team."
 
 #: src/automation-summary.ts
 msgid "Take the first branch that holds: {each}"
@@ -18491,6 +18649,10 @@ msgstr "The contact went through to its last action."
 #: src/automation-run-words.ts
 msgid "the contact withdrew their consent"
 msgstr "the contact withdrew their consent"
+
+#: src/contact-merge-notice.tsx
+msgid "The contact you opened was merged into this one."
+msgstr "The contact you opened was merged into this one."
 
 #: src/automation-changes.ts
 msgid "The contact's"
@@ -20739,6 +20901,10 @@ msgstr "Trigger Links"
 msgid "Trigger: {name}"
 msgstr "Trigger: {name}"
 
+#: src/shell/modules.ts
+msgid "Troubleshoot"
+msgstr "Troubleshoot"
+
 #: src/inbox-list.tsx
 msgid "Try a different status, person or channel."
 msgstr "Try a different status, person or channel."
@@ -21459,6 +21625,7 @@ msgid "UTC offset: {selectedOffset}"
 msgstr "UTC offset: {selectedOffset}"
 
 #: src/automation-attribution-words.ts
+#: src/automation-fields.ts
 #: src/reporting/attribution-report.tsx
 #: src/reporting/contact-attribution.tsx
 msgid "UTM campaign"
@@ -21471,12 +21638,14 @@ msgid "UTM content"
 msgstr "UTM content"
 
 #: src/automation-attribution-words.ts
+#: src/automation-fields.ts
 #: src/reporting/attribution-report.tsx
 #: src/reporting/contact-attribution.tsx
 msgid "UTM medium"
 msgstr "UTM medium"
 
 #: src/automation-attribution-words.ts
+#: src/automation-fields.ts
 #: src/reporting/attribution-report.tsx
 #: src/reporting/contact-attribution.tsx
 msgid "UTM source"

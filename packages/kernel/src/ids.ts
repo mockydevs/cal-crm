@@ -52,6 +52,7 @@ export const publicIdPrefixes = {
   form: 'form',
   form_submission: 'fsub',
   import: 'imp',
+  integration_connection: 'int',
   tag: 'tag',
   tag_group: 'tgrp',
   invitation: 'inv',

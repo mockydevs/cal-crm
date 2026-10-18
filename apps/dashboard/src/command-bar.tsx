@@ -10,6 +10,7 @@ import { CommandDialog, type CommandGroup } from '@repo/ui/components/command';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { useMatch, useNavigate } from '@tanstack/react-router';
 import {
+  Boxes,
   Building2,
   CornerDownLeft,
   FileText,
@@ -49,6 +50,7 @@ type BusinessPage =
   | '/b/$slug/settings/custom-fields'
   | '/b/$slug/settings/custom-values'
   | '/b/$slug/settings/import'
+  | '/b/$slug/settings/integrations'
   | '/b/$slug/settings/tags'
   | '/b/$slug/settings/lead-sources'
   | '/b/$slug/settings/lead-sources/tracking-links'
@@ -80,6 +82,7 @@ const businessPages: readonly { readonly to: BusinessPage; readonly label: Messa
   { to: '/b/$slug/settings/custom-fields', label: msg`Custom Fields` },
   { to: '/b/$slug/settings/custom-values', label: msg`Custom Values` },
   { to: '/b/$slug/settings/import', label: msg`Import Data` },
+  { to: '/b/$slug/settings/integrations', label: msg`Integrations` },
   { to: '/b/$slug/settings/tags', label: msg`Tags` },
   { to: '/b/$slug/settings/lead-sources', label: msg`Lead Sources` },
   { to: '/b/$slug/settings/lead-sources/tracking-links', label: msg`Tracking links` },
@@ -117,6 +120,8 @@ const recordIcons: Readonly<Record<FoundRecord['kind'], LucideIcon>> = {
   contact: User,
   company: Building2,
   deal: SquareKanban,
+  // A custom object's record; its own page and icon come with the record screens.
+  custom: Boxes,
 };
 
 /** What's typed, once typing pauses, so the API isn't asked for every key. */

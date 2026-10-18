@@ -87,6 +87,10 @@ msgstr "An appointment of mine is cancelled"
 msgid "An appointment of mine is moved"
 msgstr "An appointment of mine is moved"
 
+#: src/notification-settings.tsx
+msgid "An integration needs attention"
+msgstr "An integration needs attention"
+
 #: src/task-recurrence-fields.tsx
 msgid "Apply changes to"
 msgstr "Apply changes to"

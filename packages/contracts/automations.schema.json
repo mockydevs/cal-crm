@@ -812,6 +812,76 @@
             },
             "type": {
               "type": "string",
+              "const": "external_tracking.event"
+            },
+            "config": {
+              "type": "object",
+              "properties": {
+                "event": {
+                  "description": "Only page views or only forms; left out, either.",
+                  "type": "string",
+                  "enum": [
+                    "page_view",
+                    "form_submission"
+                  ]
+                },
+                "domain": {
+                  "description": "Only this website or its subdomains, such as example.com.",
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 253
+                },
+                "pagePath": {
+                  "description": "Only pages whose path contains this, such as /pricing.",
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                },
+                "formName": {
+                  "description": "Only the external form with this name.",
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "utmSource": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "utmMedium": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "utmCampaign": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                }
+              },
+              "additionalProperties": false
+            },
+            "if": {
+              "$ref": "#/$defs/AutomationCondition"
+            }
+          },
+          "required": [
+            "id",
+            "type",
+            "config"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,62}$",
+              "description": "A stable id the author chooses, such as send_guide."
+            },
+            "type": {
+              "type": "string",
               "const": "trigger_link.clicked"
             },
             "config": {

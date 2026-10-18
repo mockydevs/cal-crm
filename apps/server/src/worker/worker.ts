@@ -16,6 +16,7 @@ import {
 } from '@repo/module-automation';
 import { scheduleGoogleRefreshes } from '@repo/module-calendar';
 import { purgeExpiredTrash, recoverStalledImports } from '@repo/module-crm';
+import { expireExternalTracking } from '@repo/module-forms';
 import {
   expireMailboxAttempts,
   expireInstallMessages,
@@ -27,6 +28,7 @@ import {
   scheduleMailboxChecks,
   scheduleMailboxSyncs,
 } from '@repo/module-messaging';
+import { maintainIntegrations, scheduleIntegrationChecks } from '@repo/module-integrations';
 import { expireNotifications } from '@repo/module-notifications';
 import type { SealingVault } from '@repo/module-vault';
 import {
@@ -88,6 +90,8 @@ export const RECOVER_IMPORTS = 'imports.recover';
 export const MAINTAIN_NOTIFICATIONS = 'notifications.maintain';
 /** Queues the Google Calendar readings that are due, and clears what is spent. */
 export const SCHEDULE_GOOGLE = 'calendar.google.schedule';
+/** Queues the integration checks that are due, and clears what has expired. */
+export const SCHEDULE_INTEGRATIONS = 'integrations.schedule';
 
 // What private.enqueue_job wraps each job's data in (0013_jobs.sql). The event behind the
 // job came with 0020; a job queued before it has none.
@@ -189,6 +193,7 @@ export async function startWorker(options: WorkerOptions): Promise<Worker> {
   const hasImports = options.tasks.some((task) => task.name === 'imports.run');
   const hasCampaigns = options.tasks.some((task) => task.name === 'campaigns.run');
   const hasGoogle = options.tasks.some((task) => task.name === 'calendar.google.refresh_busy');
+  const hasIntegrations = options.tasks.some((task) => task.name === 'integrations.check');
   const runner = await run({
     pgPool: pool,
     events,
@@ -258,6 +263,9 @@ export async function startWorker(options: WorkerOptions): Promise<Worker> {
         // Why a workflow did not start is kept thirty days, and then goes.
         const evaluations = await expireTriggerEvaluations(services);
         if (evaluations > 0) logger.info({ evaluations }, 'removed expired trigger evaluations');
+        // External Tracking: raw events after thirty days, a page's days after thirteen months.
+        const tracking = await expireExternalTracking(services);
+        if (tracking > 0) logger.info({ tracking }, 'removed expired external tracking data');
       },
       [MAINTAIN_SMS]: async () => {
         if (mailboxVault !== undefined) {
@@ -309,6 +317,18 @@ export async function startWorker(options: WorkerOptions): Promise<Worker> {
               // Each connected member's Google busy time, about every five minutes.
               const queued = await scheduleGoogleRefreshes(services);
               if (queued > 0) logger.debug({ queued }, 'queued Google Calendar readings');
+            },
+          }
+        : {}),
+      ...(hasIntegrations
+        ? {
+            [SCHEDULE_INTEGRATIONS]: async () => {
+              // Each connected account about daily, and the attempts, activity and webhooks
+              // past their time.
+              const queued = await scheduleIntegrationChecks(services);
+              if (queued > 0) logger.debug({ queued }, 'queued integration checks');
+              const cleared = await maintainIntegrations(services);
+              if (cleared > 0) logger.info({ cleared }, 'cleared expired integration data');
             },
           }
         : {}),
@@ -407,6 +427,17 @@ export async function startWorker(options: WorkerOptions): Promise<Worker> {
               task: SCHEDULE_GOOGLE,
               match: '* * * * *',
               options: { backfillPeriod: 60_000, queueName: SCHEDULE_GOOGLE },
+            },
+          ]
+        : []),
+      // Every five minutes; each account is due about daily. A fixed queue keeps one sweep
+      // from overlapping the next.
+      ...(hasIntegrations
+        ? [
+            {
+              task: SCHEDULE_INTEGRATIONS,
+              match: '*/5 * * * *',
+              options: { backfillPeriod: 300_000, queueName: SCHEDULE_INTEGRATIONS },
             },
           ]
         : []),

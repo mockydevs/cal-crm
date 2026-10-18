@@ -15,6 +15,14 @@ vi.mock('./api', () => ({
     request: () => Promise.resolve({ business: null, permissions: granted.permissions }),
   }),
 }));
+// The merge dialog by itself is tested in contact-merge/dialog.test.tsx: here, what opens it.
+vi.mock('./contact-merge/loader', () => ({
+  ContactMergeDialog: ({ contactIds }: { contactIds: readonly string[] }) => (
+    <div role="dialog" aria-label="Merge Contacts">
+      {contactIds.join(',')}
+    </div>
+  ),
+}));
 vi.mock('@tanstack/react-router', async (original) => ({
   ...(await original<typeof import('@tanstack/react-router')>()),
   Link: ({ children }: { children: ReactNode }) => <a href="/">{children}</a>,
@@ -25,7 +33,7 @@ beforeAll(() => {
 });
 afterEach(cleanup);
 
-function show(): void {
+function show(ticked: readonly string[] = ['con_1', 'con_2']): void {
   render(
     <QueryClientProvider
       client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}
@@ -34,10 +42,10 @@ function show(): void {
         <ContactBulkBar
           businessId="biz_test"
           slug="harbor"
-          ticked={new Set(['con_1', 'con_2'])}
+          ticked={new Set(ticked)}
           everyone={undefined}
-          loaded={2}
-          counted={{ count: 2, exact: true }}
+          loaded={ticked.length}
+          counted={{ count: ticked.length, exact: true }}
           list={{ q: '', createdFrom: undefined }}
           columns={['name']}
           fields={[]}
@@ -76,4 +84,35 @@ it('offers Verify emails under More, and opens its dialog', async () => {
   await user.click(await screen.findByRole('button', { name: 'More' }));
   await user.click(await screen.findByRole('menuitem', { name: 'Verify emails' }));
   expect(await screen.findByRole('dialog', { name: 'Verify emails' })).toBeDefined();
+});
+
+it('offers Merge for two to ten contacts to whoever may merge, and opens the dialog with them', async () => {
+  granted.permissions = ['contacts.manage', 'contacts.merge'];
+  show(['con_1', 'con_2', 'con_3']);
+  const user = userEvent.setup();
+  const merge = await screen.findByRole('button', { name: 'Merge' });
+  await user.click(merge);
+  expect((await screen.findByRole('dialog', { name: 'Merge Contacts' })).textContent).toBe(
+    'con_1,con_2,con_3',
+  );
+});
+
+it('keeps Merge from fewer than two or more than ten contacts', async () => {
+  granted.permissions = ['contacts.manage', 'contacts.merge'];
+  show(['con_1']);
+  expect((await screen.findByRole('button', { name: 'Merge' })).hasAttribute('disabled')).toBe(
+    true,
+  );
+  cleanup();
+  show(Array.from({ length: 11 }, (_, index) => `con_${String(index)}`));
+  expect((await screen.findByRole('button', { name: 'Merge' })).hasAttribute('disabled')).toBe(
+    true,
+  );
+});
+
+it('does not offer Merge to a role that may not merge contacts', async () => {
+  granted.permissions = ['contacts.manage'];
+  show();
+  expect(await screen.findByRole('button', { name: 'Delete' })).toBeDefined();
+  expect(screen.queryByRole('button', { name: 'Merge' })).toBeNull();
 });

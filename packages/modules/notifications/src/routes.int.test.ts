@@ -235,8 +235,8 @@ describe('the list', () => {
     });
     const { items } = await list(at.owner.invocation);
     expect(items.map((item) => item.record)).toEqual([
-      // A record of a kind the dashboard has no page for is not named.
-      null,
+      // A custom object's record, by its name.
+      { id: toPublicId('custom', custom.id), name: 'The Old Mill', trashed: false },
       // No name is no name: never the address or the number.
       { id: toPublicId('contact', unnamed.id), name: null, trashed: false },
       { id: toPublicId('contact', contactId), name: 'Jo Leigh', trashed: true },
@@ -244,7 +244,7 @@ describe('the list', () => {
     expect(JSON.stringify(items)).not.toContain('who@example.com');
   });
 
-  it('names a company and a deal by their own names', async () => {
+  it("names a company, a deal and a custom object's record by their own names", async () => {
     const at = await place(s);
     const ids = await s.database.withTenant(at.system, async (sql) => {
       const typeOf = async (kind: string) =>
@@ -282,13 +282,58 @@ describe('the list', () => {
          values ($1, $2, 'Lee wedding', $3, $4, 'USD', 'system')`,
         [at.businessId, deal, pipeline.id, stage.id],
       );
-      return { company, deal };
+      // A custom object's record, named by its primary field, and in the trash.
+      const pet = await sql.one<{ id: string }>(
+        `insert into crm.object_types (business_id, id, kind, key, singular_label, plural_label,
+                                       primary_field_id)
+         values ($1, uuidv7(), 'custom', 'pet', 'Pet', 'Pets', uuidv7()) returning id`,
+        [at.businessId],
+      );
+      await sql.query(
+        `insert into crm.field_definitions (business_id, id, object_type_id, key, label,
+                                            description, value_type, folder_id, created_by_kind)
+         select $1, o.primary_field_id, o.id, 'pet_name', 'Pet name', 'Its name.', 'text', f.id,
+                'system'
+         from crm.object_types o join crm.field_folders f on f.object_type_id = o.id
+         where o.id = $2 limit 1`,
+        [at.businessId, pet.id],
+      );
+      const custom = (
+        await sql.one<{ id: string }>(
+          `insert into crm.records (business_id, kind, object_type_id) values ($1, 'custom', $2)
+           returning id`,
+          [at.businessId, pet.id],
+        )
+      ).id;
+      await sql.query(
+        `insert into crm.custom_records (business_id, id, object_type_id, title, deleted_at,
+                                         created_by_kind)
+         values ($1, $2, $3, 'Buddy', now(), 'system')`,
+        [at.businessId, custom, pet.id],
+      );
+      return { company, deal, custom };
     });
     await tell(at, notice([at.owner.id], { recordId: ids.company }));
     await tell(at, notice([at.owner.id], { recordId: ids.deal }));
+    await tell(at, notice([at.owner.id], { recordId: ids.custom }));
     expect((await list(at.owner.invocation)).items.map((item) => item.record)).toEqual([
+      { id: toPublicId('custom', ids.custom), name: 'Buddy', trashed: true },
       { id: toPublicId('deal', ids.deal), name: 'Lee wedding', trashed: false },
       { id: toPublicId('company', ids.company), name: 'Lee Family', trashed: false },
+    ]);
+  });
+
+  it('opens your own calendar connections for a calendar that was disconnected', async () => {
+    const at = await place(s);
+    await tell(
+      at,
+      notice([at.owner.id], {
+        kind: 'calendar.google_disconnected',
+        subject: { kind: 'calendar_connections' },
+      }),
+    );
+    expect((await list(at.owner.invocation)).items).toMatchObject([
+      { kind: 'calendar.google_disconnected', target: { kind: 'calendar_connections' } },
     ]);
   });
 

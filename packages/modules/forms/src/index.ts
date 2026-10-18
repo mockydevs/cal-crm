@@ -29,6 +29,17 @@ import { readLeadSourcePreview } from './lead-source-preview.js';
 import { createFormProposables } from './proposals.js';
 import { discardSubmissionCommand, readSubmissions } from './submissions.js';
 
+export { formsContactMerge } from './contact-merge.js';
+export {
+  createPublicTrackingHandlers,
+  TRACKING_FORM_LIMITS,
+  type PublicTrackingHandlers,
+  type PublicTrackingOptions,
+  type TrackingAdmission,
+  type TrackingRefusal,
+  type TrackingRequest,
+} from './tracking/public.js';
+export { expireExternalTracking, externalTrackingRoutes } from './tracking/settings.js';
 export { FORM_SCRIPT_PATH, hostedFormUrl, readFormKeys, readFormNames } from './forms.js';
 export {
   createPublicFormHandlers,

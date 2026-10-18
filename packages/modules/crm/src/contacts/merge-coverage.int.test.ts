@@ -61,13 +61,13 @@ const history = [
 ];
 
 /**
- * Each module's participant, by what it moves. Pending: the participant is still to be
- * written, and its tables are listed here so this test names every one of them.
+ * Each module's participant (its src/contact-merge.ts, wired in the server's api-routes.ts),
+ * by the columns it moves or combines. Pending: a participant still to be written. None may
+ * stay pending: a merge would leave that module's rows on the contact merged away.
  */
 const participants: Record<string, { readonly moves: string[]; readonly pending: string[] }> = {
   messaging: {
-    moves: [],
-    pending: [
+    moves: [
       'messaging.conversations.contact_id',
       'messaging.consents.contact_id',
       'messaging.webchat_sessions.contact_id',
@@ -79,29 +79,44 @@ const participants: Record<string, { readonly moves: string[]; readonly pending:
       'messaging.unsubscribe_links.contact_id',
       'messaging.calls.contact_id',
     ],
+    pending: [],
   },
   automation: {
-    moves: [],
-    pending: [
+    // Also automation.enrolments.reentry_key, the record's id under a name the query below
+    // doesn't look for and with no foreign key: the participant moves it with record_id.
+    moves: [
       'automation.enrolments.record_id',
       'automation.event_waits.record_id',
       'automation.trigger_firings.record_id',
       'automation.trigger_evaluations.record_id',
       'automation.manual_actions.contact_id',
     ],
+    pending: [],
   },
-  forms: { moves: [], pending: ['forms.submissions.contact_id'] },
-  calendar: { moves: [], pending: ['calendar.appointments.contact_id'] },
-  commerce: { moves: [], pending: ['commerce.documents.contact_id'] },
+  forms: {
+    moves: [
+      'forms.submissions.contact_id',
+      // External Tracking's: forms sent on other websites, page views and visitor ids.
+      'forms.external_submissions.contact_id',
+      'forms.tracking_events.contact_id',
+      'forms.tracking_visitors.contact_id',
+    ],
+    pending: [],
+  },
+  calendar: { moves: ['calendar.appointments.contact_id'], pending: [] },
+  commerce: { moves: ['commerce.documents.contact_id'], pending: [] },
   ai: {
-    moves: [],
-    pending: [
+    // ai.proposals: a pending proposal about the merged contact, or naming it in its input
+    // (jsonb, out of the catalog's sight), expires; a decided one stays, as what a proposal
+    // is about never changes.
+    moves: [
       'ai.contact_facts.contact_id',
       'ai.contact_summaries.contact_id',
       'ai.extractions.contact_id',
       'ai.autonomy_rules.contact_id',
       'ai.proposals.record_id',
     ],
+    pending: [],
   },
 };
 
@@ -144,4 +159,12 @@ it('accounts for every column that points at a contact, and names no column that
   ];
   expect(new Set(accounted).size).toBe(accounted.length);
   expect((await pointingAtContacts()).sort()).toEqual([...accounted].sort());
+});
+
+it('leaves no module with a participant still to be written', () => {
+  expect(
+    Object.entries(participants)
+      .filter(([, each]) => each.pending.length > 0)
+      .map(([name]) => name),
+  ).toEqual([]);
 });

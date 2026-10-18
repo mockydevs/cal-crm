@@ -472,6 +472,8 @@ export const purgeObjectCommand = defineCommand({
       .executeTakeFirst();
     // Purged already, or never deleted: nothing to do.
     if (object?.kind !== 'custom' || object.archived_at === null) return { done: true };
+    // Any batch of them, as the object's index finds them: no order is needed to empty it,
+    // and none is paid for by sorting what is left each time.
     const purged = await trx
       .deleteFrom('crm.records')
       .where('id', 'in', (eb) =>
@@ -479,7 +481,6 @@ export const purgeObjectCommand = defineCommand({
           .selectFrom('crm.records')
           .select('id')
           .where('object_type_id', '=', object.id)
-          .orderBy('id')
           .limit(input.batch),
       )
       .returning('id')

@@ -399,7 +399,7 @@ it('uses native validation when no read group or permission is selected', async 
   expect(creates()).toHaveLength(0);
 });
 
-it('shows per-key scope, read-only, selected and legacy read labels with expiry state', async () => {
+it('shows per-key scope, read-only, what it reads and expiry state', async () => {
   items = [
     {
       ...key,
@@ -420,14 +420,15 @@ it('shows per-key scope, read-only, selected and legacy read labels with expiry 
   ];
   open();
   await screen.findByText('Selected');
-  expect(screen.getByText('Agency scope')).toBeDefined();
+  expect(screen.getByText('Agency')).toBeDefined();
   expect(screen.getByText('Read-only')).toBeDefined();
-  expect(screen.getByText('Selected reads: Contacts')).toBeDefined();
-  expect(screen.getByText('Legacy unrestricted reads')).toBeDefined();
-  expect(screen.getByText('No read groups selected')).toBeDefined();
-  expect(screen.getByText(/^Expired on/)).toBeDefined();
-  expect(screen.getByText(/^Expires on/)).toBeDefined();
-  expect(screen.getAllByText('Business scope')).toHaveLength(2);
+  expect(screen.getByText(/^Reads Contacts ·/)).toBeDefined();
+  expect(screen.getByText(/^Reads everything ·/)).toBeDefined();
+  expect(screen.getByText('Everything (an older key without read limits)')).toBeDefined();
+  expect(screen.getByText(/^Reads nothing ·/)).toBeDefined();
+  expect(screen.getByText(/^Expired /)).toBeDefined();
+  expect(screen.getByText(/^Expires /)).toBeDefined();
+  expect(screen.getAllByText('Business')).toHaveLength(2);
 });
 
 it('copies once then removes the credential from the UI without caching or persistence', async () => {
@@ -574,6 +575,6 @@ it('revokes an agency key without selecting a business and refreshes the list', 
 it('updates an expiry label when the key expires while the page is open', async () => {
   items = [{ ...key, expiresAt: new Date(Date.now() + 1500).toISOString() }];
   open();
-  await screen.findByText(/^Expires on/);
-  await screen.findByText(/^Expired on/);
+  await screen.findByText(/^Expires /);
+  await screen.findByText(/^Expired /);
 });
