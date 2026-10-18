@@ -86,7 +86,7 @@ catalog:
   eslint-plugin-lingui: 0.16.0
   eslint-plugin-react-hooks: 7.1.1
   fast-check: 4.10.2
-  fastify: 5.12.5
+  fastify: 5.12.7
   globals: 17.13.0
   graphile-worker: 0.18.0
   import-in-the-middle: 3.5.2

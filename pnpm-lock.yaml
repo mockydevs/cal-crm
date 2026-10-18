@@ -387,8 +387,8 @@ catalogs:
       specifier: 4.10.2
       version: 4.10.2
     fastify:
-      specifier: 5.12.5
-      version: 5.12.5
+      specifier: 5.12.7
+      version: 5.12.7
     globals:
       specifier: 17.13.0
       version: 17.13.0
@@ -637,7 +637,7 @@ importers:
         version: 2.18.5
       altcha-lib:
         specifier: 'catalog:'
-        version: 2.6.0(cors@2.8.6)(express@5.3.0(supports-color@7.2.0))(fastify@5.12.5)(hono@4.13.13)
+        version: 2.6.0(cors@2.8.6)(express@5.3.0(supports-color@7.2.0))(fastify@5.12.7)(hono@4.13.13)
       lean-qr:
         specifier: 'catalog:'
         version: 2.7.4
@@ -815,10 +815,10 @@ importers:
         version: link:../../packages/adapters/storage
       altcha-lib:
         specifier: 'catalog:'
-        version: 2.6.0(cors@2.8.6)(express@5.3.0(supports-color@7.2.0))(fastify@5.12.5)(hono@4.13.13)
+        version: 2.6.0(cors@2.8.6)(express@5.3.0(supports-color@7.2.0))(fastify@5.12.7)(hono@4.13.13)
       fastify:
         specifier: 'catalog:'
-        version: 5.12.5
+        version: 5.12.7
       graphile-worker:
         specifier: 'catalog:'
         version: 0.18.0(supports-color@7.2.0)(typescript@6.0.3)
@@ -1554,7 +1554,7 @@ importers:
         version: link:../tenancy
       altcha-lib:
         specifier: 'catalog:'
-        version: 2.6.0(cors@2.8.6)(express@5.3.0(supports-color@7.2.0))(fastify@5.12.5)(hono@4.13.13)
+        version: 2.6.0(cors@2.8.6)(express@5.3.0(supports-color@7.2.0))(fastify@5.12.7)(hono@4.13.13)
       kysely:
         specifier: 'catalog:'
         version: 0.29.6
@@ -5683,8 +5683,8 @@ packages:
   fastify-plugin@6.0.0:
     resolution: {integrity: sha512-fZOty7z3O7vOliF6d8bHE3wiEh1KcNnKEQensSgTk9C1DvN6nRLS++XVd86v33Hw/8u9Un8A1zDrQ8ujcQDHEg==}
 
-  fastify@5.12.5:
-    resolution: {integrity: sha512-OB2k1dlxs5/NAABqeKV2FUHkSD2BbENsCak8yULVcymn3fHIPDVa9TI3SDnJSWYSllZmSYuZXy2gTnsT+Sut1A==}
+  fastify@5.12.7:
+    resolution: {integrity: sha512-v4pEPsTRPuqlDIYiQFB+BHjVN4SdHX9u0ABk0ZDUKbbdY1vsNryUd1j4Z+jQEZajvYIVk047Kimva9/AJ79GYw==}
 
   fastq@1.20.3:
     resolution: {integrity: sha512-XKv5nnLs6nLF71NgiKJLIZFLkPyIEuOselLG7ujZnGrRfQK8HpvY+WqKhAJUAdLomwVHErVS4LfxFlPq0/FTAw==}
@@ -11019,11 +11019,11 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  altcha-lib@2.6.0(cors@2.8.6)(express@5.3.0(supports-color@7.2.0))(fastify@5.12.5)(hono@4.13.13):
+  altcha-lib@2.6.0(cors@2.8.6)(express@5.3.0(supports-color@7.2.0))(fastify@5.12.7)(hono@4.13.13):
     optionalDependencies:
       cors: 2.8.6
       express: 5.3.0(supports-color@7.2.0)
-      fastify: 5.12.5
+      fastify: 5.12.7
       hono: 4.13.13
 
   angular-html-parser@10.11.0: {}
@@ -12060,7 +12060,7 @@ snapshots:
 
   fastify-plugin@6.0.0: {}
 
-  fastify@5.12.5:
+  fastify@5.12.7:
     dependencies:
       '@fastify/ajv-compiler': 4.0.6
       '@fastify/error': 4.2.0
