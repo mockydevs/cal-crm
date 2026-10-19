@@ -53,6 +53,23 @@ import { createSendCommands } from './sending.js';
 import { createProductCommands, readProduct, readProducts } from './products.js';
 import { createSettingsCommand, readSettings } from './settings.js';
 import { createInvoiceReminderCommands, readInvoiceReminders } from './reminders.js';
+export { createStripeRoutes } from './stripe-routes.js';
+export {
+  createRemoveStripeEndpointsTask,
+  createSetUpStripeTask,
+  readStripeConnection,
+  removeStripeEndpointsReference,
+  setUpStripeReference,
+  STRIPE_WEBHOOK_SECRET_PURPOSE,
+  stripeWebhookDigest,
+  type StripeSealing,
+  type StripeVault,
+} from './stripe-connect.js';
+export {
+  createStripeTransport,
+  STRIPE_API_VERSION,
+  type StripeTransport,
+} from './stripe-transport.js';
 import { requireRead, type CommerceOptions } from './shared.js';
 
 export type {

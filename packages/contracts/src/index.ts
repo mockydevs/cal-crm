@@ -778,6 +778,7 @@ export * from './commerce-money.js';
 export * from './commerce-rules.js';
 export * from './commerce.js';
 export * from './invoice-reminders.js';
+export * from './stripe.js';
 export * from './sites.js';
 export * from './sites-document.js';
 export * from './sites-steps.js';

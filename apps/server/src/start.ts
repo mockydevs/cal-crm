@@ -17,6 +17,11 @@ import {
 } from '@repo/module-ai';
 import { createAuthentication, readUserNames, type Authentication } from '@repo/module-auth';
 import {
+  createRemoveStripeEndpointsTask,
+  createSetUpStripeTask,
+  createStripeTransport,
+} from '@repo/module-commerce';
+import {
   completeGoogleConnect,
   createGoogleCalendarRoutes,
   createGoogleTransport,
@@ -536,6 +541,9 @@ export async function start(
                           fetcher: outside.twilioFetch,
                         }),
                       ]),
+                  // Card payments: the webhook endpoint on each business's own Stripe account.
+                  createSetUpStripeTask(vault.opening, createStripeTransport(), config.publicUrl),
+                  createRemoveStripeEndpointsTask(vault.opening, createStripeTransport()),
                 ]
               : resolvedTasks,
           ...(vault === undefined ? {} : { mailboxVault: vault.sealing, vault: vault.opening }),

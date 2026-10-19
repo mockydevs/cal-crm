@@ -772,6 +772,24 @@ begin
     values (b, connection_1, 'connected');
 end $$;
 
+-- Stripe (0141): the business's own account with its sealed key and webhook secrets, and an
+-- earlier endpoint waiting to be removed.
+do $$
+declare
+  b constant uuid := current_setting('test.b1');
+  secret_1 uuid;
+begin
+  -- One of the business's own secrets: the count of what each business sees stays as it is.
+  select id into secret_1 from vault.secrets where business_id = b order by id limit 1;
+  insert into commerce.stripe_connections (business_id, status, livemode, key_secret_id,
+                                           webhook_token_secret_id, webhook_digest,
+                                           webhook_endpoint_id, webhook_secret_id, connected_at)
+    values (b, 'connected', false, secret_1, secret_1, repeat('5e', 32), 'we_0000000000000001',
+            secret_1, now());
+  insert into commerce.stripe_endpoint_removals (business_id, key_secret_id, webhook_endpoint_id)
+    values (b, secret_1, 'we_0000000000000002');
+end $$;
+
 -- 3. Business 2 (same agency) and business 3 (another agency): just enough to compare --------
 
 set app.business_id = :'b2';

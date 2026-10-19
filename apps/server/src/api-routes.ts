@@ -67,7 +67,11 @@ import {
   teamRoutes,
   userRoutes,
 } from '@repo/module-tenancy';
-import { commerceContactMerge, createCommerceRoutes } from '@repo/module-commerce';
+import {
+  commerceContactMerge,
+  createCommerceRoutes,
+  createStripeRoutes,
+} from '@repo/module-commerce';
 import { checkBusinessLogo, checkUserAvatar } from '@repo/module-files';
 import { externalTrackingRoutes, formsContactMerge, readFormNames } from '@repo/module-forms';
 import { createNotificationRoutes } from '@repo/module-notifications';
@@ -402,6 +406,10 @@ export const apiRoutes = (
     // Products, quotes, invoices, payments and their settings, their PDFs, public addresses
     // and emails. What the module is handed is in commerce-options.ts.
     ...createCommerceRoutes(commerceOptions(commerce)),
+    // The business's own Stripe account for card payments: the API seals its key, never opens it.
+    ...(sealingVault === undefined
+      ? []
+      : createStripeRoutes(commerceOptions(commerce), sealingVault)),
     // Reporting: the catalogue, the query engine, saved reports and the fixed reports. A
     // team member in a report is whoever a task could be assigned to.
     ...createReportingRoutes({

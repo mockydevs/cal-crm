@@ -1031,15 +1031,6 @@ export interface CommerceDocuments {
   voided_at: Timestamp | null;
 }
 
-export interface CommerceInvoiceReminderSends {
-  business_id: string;
-  document_id: string;
-  message_id: string | null;
-  reminder_id: string;
-  sent_at: Generated<Timestamp>;
-  step: number;
-}
-
 export interface CommerceInvoiceReminders {
   anchor: string;
   body: string;
@@ -1055,6 +1046,15 @@ export interface CommerceInvoiceReminders {
   name: string;
   subject: string;
   updated_at: Generated<Timestamp>;
+}
+
+export interface CommerceInvoiceReminderSends {
+  business_id: string;
+  document_id: string;
+  message_id: string | null;
+  reminder_id: string;
+  sent_at: Generated<Timestamp>;
+  step: number;
 }
 
 export interface CommercePayments {
@@ -1125,6 +1125,29 @@ export interface CommerceSettings {
   revision: Generated<number>;
   tax_number: string | null;
   updated_at: Generated<Timestamp>;
+}
+
+export interface CommerceStripeConnections {
+  business_id: string;
+  connected_at: Timestamp | null;
+  created_at: Generated<Timestamp>;
+  failure: string | null;
+  key_secret_id: string;
+  livemode: boolean;
+  status: Generated<string>;
+  updated_at: Generated<Timestamp>;
+  webhook_digest: string;
+  webhook_endpoint_id: string | null;
+  webhook_secret_id: string | null;
+  webhook_token_secret_id: string;
+}
+
+export interface CommerceStripeEndpointRemovals {
+  business_id: string;
+  created_at: Generated<Timestamp>;
+  id: Generated<string>;
+  key_secret_id: string;
+  webhook_endpoint_id: string;
 }
 
 export interface CrmBulkActions {
@@ -3401,6 +3424,8 @@ export interface DB {
   "commerce.products": CommerceProducts;
   "commerce.sequences": CommerceSequences;
   "commerce.settings": CommerceSettings;
+  "commerce.stripe_connections": CommerceStripeConnections;
+  "commerce.stripe_endpoint_removals": CommerceStripeEndpointRemovals;
   "crm.bulk_actions": CrmBulkActions;
   "crm.companies": CrmCompanies;
   "crm.contact_attributions": CrmContactAttributions;

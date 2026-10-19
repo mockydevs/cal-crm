@@ -47005,6 +47005,339 @@
           }
         }
       }
+    },
+    "/payments/stripe": {
+      "get": {
+        "operationId": "getStripeConnection",
+        "summary": "Read whether the business's own Stripe account is connected for card payments",
+        "tags": [
+          "Payment settings"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Business-Id",
+            "schema": {
+              "description": "Optional legacy account selector. An API key already identifies its account. Do not combine with Business-Slug. Cookie users retain their workplace rules.",
+              "type": "string",
+              "pattern": "^biz_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+              "examples": [
+                "biz_01h455vb4pex5vsknk084sn02q"
+              ]
+            },
+            "description": "Optional legacy account selector. An API key already identifies its account. Do not combine with Business-Slug. Cookie users retain their workplace rules."
+          },
+          {
+            "in": "header",
+            "name": "Business-Slug",
+            "schema": {
+              "description": "API keys only: optional per-request business slug from account discovery. The key must permit that active account. Omit both selectors to use the key account; no location ID is needed to connect.",
+              "type": "string",
+              "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+            },
+            "description": "API keys only: optional per-request business slug from account discovery. The key must permit that active account. Omit both selectors to use the key account; no location ID is needed to connect."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The connection.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "not_connected",
+                        "connecting",
+                        "connected",
+                        "failed"
+                      ]
+                    },
+                    "livemode": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "connectedAt": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/Timestamp"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "failure": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "enum": [
+                            "key_rejected",
+                            "missing_permission",
+                            "no_public_address",
+                            "provider_error"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "livemode",
+                    "connectedAt",
+                    "failure"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An error, as problem details (RFC 9457).",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "connectStripe",
+        "summary": "Connect the business’s own Stripe account with a restricted key, replacing any other",
+        "tags": [
+          "Payment settings"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Business-Id",
+            "schema": {
+              "description": "Optional legacy account selector. An API key already identifies its account. Do not combine with Business-Slug. Cookie users retain their workplace rules.",
+              "type": "string",
+              "pattern": "^biz_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+              "examples": [
+                "biz_01h455vb4pex5vsknk084sn02q"
+              ]
+            },
+            "description": "Optional legacy account selector. An API key already identifies its account. Do not combine with Business-Slug. Cookie users retain their workplace rules."
+          },
+          {
+            "in": "header",
+            "name": "Business-Slug",
+            "schema": {
+              "description": "API keys only: optional per-request business slug from account discovery. The key must permit that active account. Omit both selectors to use the key account; no location ID is needed to connect.",
+              "type": "string",
+              "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+            },
+            "description": "API keys only: optional per-request business slug from account discovery. The key must permit that active account. Omit both selectors to use the key account; no location ID is needed to connect."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The connection, connecting while the webhook endpoint is made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "not_connected",
+                        "connecting",
+                        "connected",
+                        "failed"
+                      ]
+                    },
+                    "livemode": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "connectedAt": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/Timestamp"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "failure": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "enum": [
+                            "key_rejected",
+                            "missing_permission",
+                            "no_public_address",
+                            "provider_error"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "livemode",
+                    "connectedAt",
+                    "failure"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An error, as problem details (RFC 9457).",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "disconnectStripe",
+        "summary": "Disconnect the Stripe account; its webhook endpoint is then deleted at Stripe",
+        "tags": [
+          "Payment settings"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Business-Id",
+            "schema": {
+              "description": "Optional legacy account selector. An API key already identifies its account. Do not combine with Business-Slug. Cookie users retain their workplace rules.",
+              "type": "string",
+              "pattern": "^biz_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+              "examples": [
+                "biz_01h455vb4pex5vsknk084sn02q"
+              ]
+            },
+            "description": "Optional legacy account selector. An API key already identifies its account. Do not combine with Business-Slug. Cookie users retain their workplace rules."
+          },
+          {
+            "in": "header",
+            "name": "Business-Slug",
+            "schema": {
+              "description": "API keys only: optional per-request business slug from account discovery. The key must permit that active account. Omit both selectors to use the key account; no location ID is needed to connect.",
+              "type": "string",
+              "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+            },
+            "description": "API keys only: optional per-request business slug from account discovery. The key must permit that active account. Omit both selectors to use the key account; no location ID is needed to connect."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The connection: not connected.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "not_connected",
+                        "connecting",
+                        "connected",
+                        "failed"
+                      ]
+                    },
+                    "livemode": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "connectedAt": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/Timestamp"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "failure": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "enum": [
+                            "key_rejected",
+                            "missing_permission",
+                            "no_public_address",
+                            "provider_error"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "livemode",
+                    "connectedAt",
+                    "failure"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An error, as problem details (RFC 9457).",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {

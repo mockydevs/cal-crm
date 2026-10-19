@@ -306,6 +306,9 @@ const teamWork = [
   'invoice_reminder.create',
   'invoice_reminder.update',
   'invoice_reminder.delete',
+  // The business's own Stripe account for card payments (payments.manage).
+  'commerce.connect_stripe',
+  'commerce.disconnect_stripe',
   // Saved reports: reports.manage is owners' and admins'. Members read reports
   // (reports.view) and change none.
   ...REPORTING_COMMANDS,
@@ -748,6 +751,26 @@ const examples: Readonly<Record<string, Example>> = {
           body: 'Hello {{ contact.name }}',
         },
       }),
+  },
+  'commerce.connect_stripe': {
+    run: (call) =>
+      call('PUT', '/payments/stripe', {
+        inBusiness: true,
+        payload: { key: `rk_test_${'a'.repeat(24)}` },
+      }),
+  },
+  'commerce.disconnect_stripe': {
+    // A connection still being set up can't be changed: this one failed, so it can go.
+    run: async (call) => {
+      await database.as('crm_owner', (sql) =>
+        sql.query(
+          `update commerce.stripe_connections set status = 'failed', failure = 'provider_error'
+           where business_id = $1`,
+          [matrixBusiness],
+        ),
+      );
+      return call('DELETE', '/payments/stripe', { inBusiness: true, payload: undefined });
+    },
   },
   'invoice_reminder.update': {
     run: async (call) => {
