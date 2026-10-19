@@ -78,6 +78,7 @@ export const publicIdPrefixes = {
   phone_number: 'phn',
   call: 'call',
   call_leg: 'cleg',
+  call_recording: 'crec',
   voice_grant: 'vgr',
   webchat_widget: 'wcw',
   snippet: 'snip',

@@ -10,6 +10,7 @@ import {
   getCall,
   getMyPermissions,
   hangUpCall,
+  listCallRecordings,
   listCalls,
   type Call,
   type CallDetail,
@@ -586,6 +587,7 @@ function CallPanel({
         words={words}
         memberName={memberName}
       />
+      <Recordings callId={listed.id} businessId={business.id} />
       <ConfirmDialog
         open={confirming}
         title={notPlaced ? <Trans>Cancel this call?</Trans> : <Trans>Hang up this call?</Trans>}
@@ -693,6 +695,90 @@ function Legs({
           </table>
         </div>
       )}
+    </section>
+  );
+}
+
+function Recordings({
+  callId,
+  businessId,
+}: {
+  readonly callId: string;
+  readonly businessId: string;
+}): ReactElement | null {
+  const { t } = useLingui();
+  const api = apiIn(businessId);
+  const retriedRef = useRef<Set<string>>(new Set());
+
+  const query = useQuery({
+    queryKey: ['b', businessId, 'call', callId, 'recordings'],
+    queryFn: () => api.request(listCallRecordings, { params: { id: callId } }),
+    refetchInterval: (q) =>
+      q.state.data?.data.some((item) => item.unavailable === 'not_ready') ? 60_000 : false,
+  });
+
+  if (query.isError || query.data === undefined) {
+    return null;
+  }
+
+  const items = query.data.data.filter((item) => item.status !== 'absent');
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <section aria-label={t`Recordings`} className="flex min-w-0 flex-col gap-2">
+      <h3 className="text-sm font-medium">
+        <Trans>Recordings</Trans>
+      </h3>
+      <div className="flex flex-col gap-3">
+        {items.map((item) => {
+          const kindText = item.kind === 'voicemail' ? t`Voicemail` : t`Call recording`;
+          const duration =
+            item.durationSeconds !== null ? durationText(item.durationSeconds) : null;
+          const accessibleName = duration !== null ? `${kindText}, ${duration}` : kindText;
+
+          return (
+            <div key={item.id} className="flex flex-col gap-1.5 rounded border p-3">
+              <div className="flex items-center justify-between text-sm">
+                <span className="font-medium">{kindText}</span>
+                {duration !== null ? (
+                  <span className="text-muted-foreground">{duration}</span>
+                ) : null}
+              </div>
+              {item.unavailable === 'not_ready' ? (
+                <p className="text-sm text-muted-foreground">
+                  <Trans>Getting the recording…</Trans>
+                </p>
+              ) : item.unavailable === 'not_found' ? (
+                <p className="text-sm text-muted-foreground">
+                  <Trans>The recording is no longer available.</Trans>
+                </p>
+              ) : item.unavailable === 'too_large' ? (
+                <p className="text-sm text-muted-foreground">
+                  <Trans>The recording was too large to keep.</Trans>
+                </p>
+              ) : item.audio !== null ? (
+                <audio
+                  controls
+                  preload="none"
+                  src={item.audio.url}
+                  aria-label={accessibleName}
+                  className="w-full"
+                  onError={() => {
+                    if (!retriedRef.current.has(item.id)) {
+                      retriedRef.current.add(item.id);
+                      void query.refetch();
+                    }
+                  }}
+                >
+                  <track kind="captions" />
+                </audio>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 }

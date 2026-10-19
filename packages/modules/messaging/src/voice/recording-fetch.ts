@@ -8,6 +8,7 @@ import {
   type Command,
   type CommandContext,
   type Invocation,
+  type Services,
   type Task,
   type TaskReference,
 } from '@repo/commands';
@@ -34,6 +35,12 @@ export interface RecordingFiles {
       readonly quota: true;
     },
   ): Promise<{ readonly id: string }>;
+  link(
+    services: Services,
+    invocation: Invocation,
+    fileId: string,
+    lifetime: { readonly seconds: number; readonly purpose: 'call_recording' },
+  ): Promise<{ readonly path: string; readonly expiresAt: string }>;
 }
 
 export const fetchCallRecordingReference = {

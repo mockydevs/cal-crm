@@ -1,5 +1,10 @@
 // The API over HTTP, against a migrated Postgres: the request hook's tenant context, the
 // command layer and the error mapping together, and signing in.
+import { randomUUID } from 'node:crypto';
+import { mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
 import { allowEveryone } from '@repo/commands';
 import {
   appointmentDetail,
@@ -18,9 +23,11 @@ import {
   savedView,
   viewList,
 } from '@repo/contracts';
-import { connectDatabase, type Database } from '@repo/db';
-import { parsePublicId, toPublicId } from '@repo/kernel';
+import { connectDatabase, withTenant, type Database } from '@repo/db';
+import { parsePublicId, toPublicId, type TenantContext } from '@repo/kernel';
 import { createAuthentication, type Authentication } from '@repo/module-auth';
+import { createFiles, fileRoutes, type Files } from '@repo/module-files';
+import { localStorage } from '@repo/storage';
 import { testDatabase, type Sql, type TestDatabase } from '@repo/testing';
 import { pino } from 'pino';
 import { afterAll, afterEach, beforeAll, describe, expect, inject, it } from 'vitest';
@@ -51,7 +58,11 @@ afterAll(async () => {
 });
 
 /** The API, signed in as this context (the stub from before sign-in existed). */
-async function apiFor(signedIn: DevTenantContext | undefined): Promise<Server> {
+async function apiFor(
+  signedIn: DevTenantContext | undefined,
+  options: { readonly files?: Files | undefined; readonly publicUrl?: string | undefined } = {},
+): Promise<Server> {
+  const publicUrl = options.publicUrl ?? 'https://crm.example.test';
   const config: Config = {
     nodeEnv: 'test',
     role: 'app',
@@ -64,7 +75,7 @@ async function apiFor(signedIn: DevTenantContext | undefined): Promise<Server> {
     shutdownTimeoutMs: 1000,
     dashboardDir: undefined,
     devTenantContext: signedIn,
-    publicUrl: 'https://crm.example.test',
+    publicUrl,
     authentication: undefined,
     trustProxy: [],
     mail: undefined,
@@ -75,9 +86,16 @@ async function apiFor(signedIn: DevTenantContext | undefined): Promise<Server> {
     config,
     logger: pino({ level: 'silent' }),
     serveApi: true,
-    routes: apiRoutes(),
+    routes:
+      options.files === undefined
+        ? apiRoutes()
+        : [
+            ...apiRoutes(undefined, undefined, false, publicUrl, { files: options.files }),
+            ...fileRoutes(options.files, { apiUrl: `${publicUrl}${API_PREFIX}` }),
+          ],
     services: { db, authorize: allowEveryone },
     readinessChecks: {},
+    files: options.files,
   });
   servers.push(server);
   return server;
@@ -1124,5 +1142,144 @@ describe('signed in with a session (P1.01)', () => {
     // Past the sign-in check: tags belong to a business, so the command asks for one.
     expect(response.statusCode).toBe(422);
     expect(response.json()).toMatchObject({ errors: [{ code: 'business_required' }] });
+  });
+});
+
+describe('GET /calls/{id}/recordings', () => {
+  it('returns a completed recording with audio.url through the composed routes', async () => {
+    const signedIn = await signedInToBusiness();
+    const storageDir = await mkdtemp(join(tmpdir(), 'crm-api-call-recordings-'));
+    const files = createFiles({
+      storage: localStorage({ directory: join(storageDir, 'storage') }),
+      uploadDirectory: join(storageDir, 'uploads'),
+      maxBytes: 10 * 1024 * 1024,
+      linkSecret: 'a-files-link-secret-of-32-characters-or-more',
+    });
+    try {
+      const publicUrl = 'https://crm.example.test';
+      const { app } = await apiFor(signedIn, { files, publicUrl });
+
+      const secretId =
+        (
+          await asOwner<{ id: string }>(
+            `insert into vault.secrets (agency_id, business_id, purpose, key_version, ciphertext, enc)
+           values ($1, $2, 'messaging.sms_credentials', 1, $3, $4) returning id`,
+            [signedIn.agencyId, signedIn.businessId, Buffer.alloc(32), Buffer.alloc(32)],
+          )
+        )[0]?.id ?? '';
+
+      const connectionId =
+        (
+          await asOwner<{ id: string }>(
+            `insert into messaging.provider_connections (agency_id, business_id, provider, label, account_ref, secret_id, webhook_digest)
+           values ($1, $2, 'twilio', 'Test', $3, $4, repeat('a', 64)) returning id`,
+            [
+              signedIn.agencyId,
+              signedIn.businessId,
+              `AC${randomUUID().replaceAll('-', '')}`,
+              secretId,
+            ],
+          )
+        )[0]?.id ?? '';
+
+      const channelId =
+        (
+          await asOwner<{ id: string }>(
+            `insert into messaging.channel_accounts (business_id, channel, name)
+           values ($1, 'sms', 'Main') returning id`,
+            [signedIn.businessId],
+          )
+        )[0]?.id ?? '';
+
+      await asOwner(
+        `insert into messaging.phone_numbers (business_id, id, e164, provider_connection_id, provider_number_ref, capabilities)
+         values ($1, $2, '+15005550006', $3, 'PNtest', array['voice'])`,
+        [signedIn.businessId, channelId, connectionId],
+      );
+
+      const callRow = (
+        await asOwner<{ id: string }>(
+          `insert into messaging.calls (business_id, direction, phone_number_id, provider_connection_id,
+             local_e164, remote_e164, requested_by_kind, idempotency_key, request_hash)
+           values ($1, 'inbound', $2, $3, '+15005550006', '+15005550199', 'system', $4, repeat('c', 64))
+           returning id`,
+          [signedIn.businessId, channelId, connectionId, `call-${randomUUID()}`],
+        )
+      )[0];
+      if (callRow === undefined) throw new Error('Failed to insert call');
+
+      const mp3Bytes = new Uint8Array([0xff, 0xfb, 0x90, 0x64, 0x01, 0x02, 0x03, 0x04]);
+      const tenantContext: TenantContext = {
+        agencyId: signedIn.agencyId,
+        ...(signedIn.businessId !== undefined ? { businessId: signedIn.businessId } : {}),
+        actorKind: 'system',
+        actorId: signedIn.userId,
+        correlationId: randomUUID(),
+      };
+      const stored = await withTenant(db, tenantContext, (trx) =>
+        files.store(
+          trx,
+          {
+            context: tenantContext,
+            permissions: 'all',
+            emit: () => Promise.resolve('evt_id'),
+            enqueue: () => undefined,
+          },
+          {
+            filename: 'recording.mp3',
+            contentType: 'audio/mpeg',
+            content: mp3Bytes,
+            purpose: 'call_recording',
+            quota: true,
+          },
+        ),
+      );
+
+      await asOwner(
+        `insert into messaging.call_recordings (business_id, call_id, provider_connection_id,
+           provider_recording_sid, kind, status, duration_seconds, file_id)
+         values ($1, $2, $3, $4, 'call', 'completed', 45, $5)`,
+        [
+          signedIn.businessId,
+          callRow.id,
+          connectionId,
+          `RE${randomUUID().replaceAll('-', '')}`,
+          parsePublicId('file', stored.id),
+        ],
+      );
+
+      const callPublicId = toPublicId('call', callRow.id);
+      const response = await app.inject({
+        method: 'GET',
+        url: `${API_PREFIX}/calls/${callPublicId}/recordings`,
+      });
+
+      expect(response.statusCode).toBe(200);
+      const body = response.json<{
+        data: {
+          id: string;
+          kind: string;
+          status: string;
+          durationSeconds: number;
+          audio: { url: string; expiresAt: string } | null;
+          unavailable: string | null;
+        }[];
+      }>();
+      expect(body.data).toHaveLength(1);
+      expect(body.data[0]?.status).toBe('completed');
+      expect(body.data[0]?.unavailable).toBeNull();
+      expect(body.data[0]?.audio).not.toBeNull();
+      expect(body.data[0]?.audio?.url).toContain(`${publicUrl}${API_PREFIX}/files/`);
+
+      const linkPath = body.data[0]?.audio?.url.replace(publicUrl, '') ?? '';
+      const contentResponse = await app.inject({
+        method: 'GET',
+        url: linkPath,
+      });
+      expect(contentResponse.statusCode).toBe(200);
+      expect(Buffer.compare(contentResponse.rawPayload, Buffer.from(mp3Bytes))).toBe(0);
+    } finally {
+      await rm(storageDir, { recursive: true, force: true });
+    }
   });
 });

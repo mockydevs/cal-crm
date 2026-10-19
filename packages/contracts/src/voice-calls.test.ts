@@ -8,8 +8,11 @@ import { builtInPermissions, permissionCatalog } from './permissions.js';
 import {
   call,
   callDetail,
+  callRecording,
+  callRecordings,
   callRequestRefusalCodes,
   getCallingAvailability,
+  listCallRecordings,
   listCalls,
   requestCallInput,
   voiceCallEndpoints,
@@ -113,4 +116,57 @@ it('describes calling availability as whether calls can be made now', () => {
   expect(getCallingAvailability.path).toBe('/calls/availability');
   expect(getCallingAvailability.group).toBe('Calls');
   expect(voiceCallEndpoints).toContain(getCallingAvailability);
+});
+
+it('describes a call’s recordings and voicemails within bounds, at most 20 items', () => {
+  const item = {
+    id: toPublicId('call_recording', UUID),
+    kind: 'call' as const,
+    status: 'completed' as const,
+    durationSeconds: 120,
+    createdAt: '2026-10-15T12:00:00.000Z',
+    audio: {
+      url: 'https://crm.example.com/api/v1/files/file_01890a5d-ac96-774b-bcce-b302099a8057/content',
+      expiresAt: '2026-10-15T12:10:00.000Z',
+    },
+    unavailable: null,
+  };
+  expect(callRecording.parse(item)).toEqual(item);
+
+  // Valid unavailable states
+  for (const reason of ['not_found', 'too_large', 'not_ready'] as const) {
+    const unavail = { ...item, audio: null, unavailable: reason };
+    expect(callRecording.parse(unavail)).toEqual(unavail);
+  }
+
+  // Voicemail kind and in-progress status
+  const vm = { ...item, kind: 'voicemail' as const, status: 'in-progress' as const, audio: null };
+  expect(callRecording.parse(vm)).toEqual(vm);
+
+  // Bounds and invalid checks
+  expect(callRecording.safeParse({ ...item, id: toPublicId('call', UUID) }).success).toBe(false);
+  expect(callRecording.safeParse({ ...item, kind: 'other' }).success).toBe(false);
+  expect(callRecording.safeParse({ ...item, status: 'failed' }).success).toBe(false);
+  expect(callRecording.safeParse({ ...item, durationSeconds: -1 }).success).toBe(false);
+  expect(callRecording.safeParse({ ...item, durationSeconds: 1.5 }).success).toBe(false);
+  expect(callRecording.safeParse({ ...item, unavailable: 'deleted' }).success).toBe(false);
+  expect(
+    callRecording.safeParse({ ...item, audio: { url: 'not-a-url', expiresAt: 'invalid' } }).success,
+  ).toBe(false);
+
+  // Response array bounds (max 20)
+  expect(callRecordings.parse({ data: [item] })).toEqual({ data: [item] });
+  const twenty = Array.from({ length: 20 }, () => item);
+  expect(callRecordings.parse({ data: twenty })).toEqual({ data: twenty });
+  const twentyOne = Array.from({ length: 21 }, () => item);
+  expect(callRecordings.safeParse({ data: twentyOne }).success).toBe(false);
+
+  // Endpoint structure
+  expect(listCallRecordings.method).toBe('get');
+  expect(listCallRecordings.path).toBe('/calls/{id}/recordings');
+  expect(listCallRecordings.group).toBe('Calls');
+  expect(listCallRecordings.summary).toBe(
+    "List a call's recordings and voicemails, with a link to listen to each.",
+  );
+  expect(voiceCallEndpoints).toContain(listCallRecordings);
 });

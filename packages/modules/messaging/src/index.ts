@@ -231,7 +231,11 @@ export {
   type FormConsentOutcome,
 } from './form-consent.js';
 export { allowedOrigin, canonicalWebOrigin, MAX_ORIGIN_LENGTH } from './webchat-origin.js';
-export { createCallRoutes } from './call-routes.js';
+export {
+  createCallRoutes,
+  type CallRouteOptions,
+  RECORDING_LINK_LIFETIME_SECONDS,
+} from './call-routes.js';
 export { createTwilioCallProvider, RING_SECONDS } from './call-provider.js';
 export {
   createIssueVoiceGrantTask,

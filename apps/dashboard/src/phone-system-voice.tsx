@@ -253,9 +253,7 @@ export function VoiceSettingsForm({
         </Group>
         <Group title={t`Recording and transcription`}>
           <NotYet>
-            <Trans>
-              Recordings are kept but can't be played here yet, and calls aren't transcribed yet.
-            </Trans>
+            <Trans>Calls aren't transcribed yet.</Trans>
           </NotYet>
           <SwitchRow
             label={t`Delete old recordings`}

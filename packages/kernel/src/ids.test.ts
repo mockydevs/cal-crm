@@ -18,6 +18,7 @@ describe('messaging public ids', () => {
     'phone_number',
     'call',
     'call_leg',
+    'call_recording',
   ] as const;
 
   it.each(kinds)('round-trips a %s and refuses every other messaging kind', (kind) => {

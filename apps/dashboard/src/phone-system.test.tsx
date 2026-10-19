@@ -889,9 +889,7 @@ describe('the voice settings', () => {
       within(group('Outgoing calls')).getByText(/None of these are used on calls yet\./),
     ).toBeDefined();
     expect(
-      within(group('Recording and transcription')).getByText(
-        /Recordings are kept but can't be played here yet, and calls aren't transcribed yet\./,
-      ),
+      within(group('Recording and transcription')).getByText(/Calls aren't transcribed yet\./),
     ).toBeDefined();
     expect(
       within(group('Missed-call text')).getByText(/Missed-call texts aren't sent yet\./),

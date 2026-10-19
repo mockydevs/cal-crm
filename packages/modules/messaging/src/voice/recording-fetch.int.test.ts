@@ -49,6 +49,13 @@ const filesPort: RecordingFiles = {
     storageMap.set(id, file.content);
     return { id };
   },
+  async link(_services, _invocation, fileId) {
+    await Promise.resolve();
+    return {
+      path: `/files/${fileId}/content?token=fake`,
+      expiresAt: new Date(Date.now() + 600000).toISOString(),
+    };
+  },
 };
 
 beforeAll(async () => {

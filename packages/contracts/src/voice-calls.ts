@@ -234,6 +234,48 @@ export const getCallingAvailability = defineEndpoint({
   },
 });
 
+export const callRecordingAudio = z
+  .strictObject({
+    url: z.url(),
+    expiresAt: timestamp,
+  })
+  .meta({ id: 'CallRecordingAudio' });
+export type CallRecordingAudio = z.output<typeof callRecordingAudio>;
+
+export const callRecording = z
+  .strictObject({
+    id: publicId('call_recording'),
+    kind: z.enum(['call', 'voicemail']),
+    status: z.enum(['completed', 'in-progress', 'absent']),
+    durationSeconds: z.int().min(0).nullable(),
+    createdAt: timestamp,
+    audio: callRecordingAudio.nullable(),
+    unavailable: z.enum(['not_found', 'too_large', 'not_ready']).nullable(),
+  })
+  .meta({ id: 'CallRecording' });
+export type CallRecording = z.output<typeof callRecording>;
+
+export const callRecordings = z
+  .strictObject({
+    data: z.array(callRecording).max(20),
+  })
+  .meta({ id: 'CallRecordings' });
+export type CallRecordings = z.output<typeof callRecordings>;
+
+export const listCallRecordings = defineEndpoint({
+  operationId: 'listCallRecordings',
+  method: 'get',
+  path: '/calls/{id}/recordings',
+  summary: "List a call's recordings and voicemails, with a link to listen to each.",
+  group: 'Calls',
+  params: callParams,
+  response: {
+    status: 200,
+    description: "The call's recordings and voicemails, with a link to listen to each.",
+    schema: callRecordings,
+  },
+});
+
 export const voiceCallEndpoints = [
   listCalls,
   getCall,
@@ -242,4 +284,5 @@ export const voiceCallEndpoints = [
   requestVoiceGrant,
   getVoiceGrant,
   getCallingAvailability,
+  listCallRecordings,
 ] as const;

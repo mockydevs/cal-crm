@@ -164,8 +164,9 @@ beforeAll(async () => {
   // Calls as an install where Phone System says they can be made: until then every request
   // is refused before its command runs anything, which
   // packages/modules/messaging/src/call-lifecycle.int.test.ts proves.
-  const callRoutes = createCallRoutes(() =>
-    Promise.resolve({ available: true, unavailable: null }),
+  const callRoutes = createCallRoutes(
+    () => Promise.resolve({ available: true, unavailable: null }),
+    { files, apiUrl: `${PUBLIC_URL}${API_PREFIX}` },
   );
   const callOperations = new Set(callRoutes.map(({ endpoint }) => endpoint.operationId));
   const verificationRoutes = createEmailVerificationRoutes({
@@ -3476,7 +3477,7 @@ const changesNothing: Readonly<Record<string, string>> = {
     'It counts what the caller may see and answers; nothing is saved. It still needs reports.view, which packages/modules/reporting/src/engine.int.test.ts proves.',
   getAssistantContext:
     'It reads what is missing on a page and whether a model could be asked; nothing is saved and no model is called.',
-  createFileLink: "It signs a link to read a file, and reading isn't gated.",
+  createFileLink: "It signs a link to read a file, and reading isn't gated (ADR-020).",
   createRecordFileLink:
     'It signs a five-minute link to a file of a record the caller can see; nothing is saved. apps/server/src/record-files-http.int.test.ts proves another record or business gets none.',
   inspectImportFile:
@@ -3493,11 +3494,11 @@ const changesNothing: Readonly<Record<string, string>> = {
   validateAutomation:
     'It checks a document it was sent and answers what it found; nothing is saved.',
   previewLeadSource:
-    'It reads an address it was sent as a submission would and answers what a lead arriving by it would be; nothing is saved. A form it names is read as anyone in the business may read it, which packages/modules/forms/src/lead-source.int.test.ts proves.',
+    'It reads an address it was sent as a submission would and answers what a lead arriving by it would be; nothing is saved (ADR-091). A form it names is read as anyone in the business may read it, which packages/modules/forms/src/lead-source.int.test.ts proves.',
   previewMessageTemplate:
     'It fills in text it was sent with sample values it was sent; nothing is saved or sent.',
   renderEmailPreview:
-    'It fills in a template or content it was sent, with sample values or the values of a contact anyone in the business may read; nothing is saved, queued or sent, and no link is issued. packages/modules/messaging/src/email-formatted.int.test.ts proves another business finds neither the template nor the contact.',
+    'It fills in a template or content it was sent, with sample values or the values of a contact anyone in the business may read; nothing is saved, queued or sent, and no link is issued (ADR-092). packages/modules/messaging/src/email-formatted.int.test.ts proves another business finds neither the template nor the contact.',
 };
 
 /**
@@ -3552,6 +3553,8 @@ let matrixSmsConnection = '';
 let matrixSmsNumber = '';
 /** A registered number that takes calls, for the Phone System settings. */
 let matrixPhoneNumber = '';
+/** A call of the business, to read its details and recordings. */
+let matrixCall = '';
 /** An import of the business that has ended, and the stored file it read. */
 let matrixImport = '';
 let matrixImportFile = '';
@@ -4287,6 +4290,19 @@ async function signedInWith(role: BuiltInRole): Promise<Call> {
       ],
     );
     matrixPhoneNumber = toPublicId('phone_number', line.id);
+    const callRow = await sql.one<{ id: string }>(
+      `insert into messaging.calls (business_id, direction, phone_number_id, provider_connection_id,
+         local_e164, remote_e164, requested_by_kind, idempotency_key, request_hash)
+       values ($1, 'outbound', $2, $3, $4, '+15005550006', 'system', $5, repeat('a', 64)) returning id`,
+      [
+        business.id,
+        line.id,
+        connection.id,
+        `+1500556${String(1000 + people)}`,
+        `matrix-call-${String(people).padStart(16, '0')}`,
+      ],
+    );
+    matrixCall = toPublicId('call', callRow.id);
     const member = await sql.one<{ id: string }>(
       `insert into tenancy.roles (agency_id, scope, key, name, is_builtin) values ($1, 'business', 'member', 'Member', true) returning id`,
       [agency.id],
@@ -4803,6 +4819,36 @@ describe('the permission matrix', () => {
       }
       expect(answer.statusCode, answer.body).toBe(200);
       expect(answer.json()).toEqual({ available: true, unavailable: null });
+    },
+  );
+
+  it.each(builtInRoles)(
+    'lets $scope $key read a call and its recordings exactly when it may read calls',
+    async (role) => {
+      const call = await signedInWith(role);
+      const granted = permissionsOf(
+        { scope: role.scope, key: role.key, isBuiltin: true, permissions: [] },
+        'business',
+      );
+      const readCall = await call('GET', `/calls/${matrixCall}`, {
+        inBusiness: true,
+        payload: undefined,
+      });
+      const recordings = await call('GET', `/calls/${matrixCall}/recordings`, {
+        inBusiness: true,
+        payload: undefined,
+      });
+      if (!granted.has('calls.read')) {
+        expect(readCall.statusCode, readCall.body).toBe(403);
+        expect(problem.parse(readCall.json()).permission).toBe('calls.read');
+        expect(recordings.statusCode, recordings.body).toBe(403);
+        expect(problem.parse(recordings.json()).permission).toBe('calls.read');
+        return;
+      }
+      expect(readCall.statusCode, readCall.body).toBe(200);
+      expect(readCall.json()).toHaveProperty('id', matrixCall);
+      expect(recordings.statusCode, recordings.body).toBe(200);
+      expect(recordings.json()).toEqual({ data: [] });
     },
   );
 

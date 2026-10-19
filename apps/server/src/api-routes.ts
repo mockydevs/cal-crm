@@ -322,8 +322,14 @@ export const apiRoutes = (
     ...createConsentRoutes({ user: readUserNames, api_key: readApiKeyNames }),
     // Settings → Phone System: calling defaults and each number's settings.
     ...createPhoneSystemRoutes(),
-    // Calls are refused until Phone System says they can be made.
-    ...createCallRoutes(readPhoneCalling),
+    // Calls are refused until Phone System says they can be made. A completed recording is
+    // linked by the files service, where this role has one.
+    ...createCallRoutes(
+      readPhoneCalling,
+      commerce.files === undefined || publicUrl === undefined
+        ? {}
+        : { files: commerce.files, apiUrl: `${publicUrl}${API_PREFIX}` },
+    ),
     ...activityRoutes({
       actorNames: {
         user: readUserNames,

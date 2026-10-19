@@ -1049,6 +1049,17 @@ describe('the API isolation suite', () => {
         ],
       ),
     );
+    // A recording of that call, completed and kept for B alone.
+    const recordingId = await database.as('crm_owner', (sql) =>
+      sql.one<{ id: string }>(
+        `insert into messaging.call_recordings (business_id, call_id, provider_connection_id,
+           provider_recording_sid, kind, status, duration_seconds)
+         select c.business_id, c.id, c.provider_connection_id, 'RE' || repeat('b', 32),
+           'call', 'completed', 30
+         from messaging.calls c where c.id = $1 returning id`,
+        [callId.id],
+      ),
+    );
     // Calling set up on B's account, and a calling token one of B's people asked for.
     const voiceGrantId = await database.as('crm_owner', async (sql) => {
       const connection = parsePublicId('sms_connection', smsConnectionId);
@@ -1246,6 +1257,7 @@ describe('the API isolation suite', () => {
       sms_connection: smsConnectionId,
       phone_number: phoneNumberId,
       call: toPublicId('call', callId.id),
+      call_recording: toPublicId('call_recording', recordingId.id),
       voice_grant: toPublicId('voice_grant', voiceGrantId.id),
       // Not an id, but B's alone: the revision B's manager would save the number from.
       phone_number_revision: phoneSettings.revision,

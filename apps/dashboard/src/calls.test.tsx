@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import type { Call, CallDetail, CallLeg } from '@repo/contracts';
+import type { Call, CallDetail, CallLeg, CallRecording } from '@repo/contracts';
 import { ApiError } from '@repo/sdk';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { cleanup, render, screen, waitFor, within } from '@testing-library/react';
@@ -145,6 +145,7 @@ function serve(
         canManage: true,
       };
     if (operation === 'listCalls') return { items, nextCursor: null };
+    if (operation === 'listCallRecordings') return { data: [] };
     if (operation === 'getCall') {
       const { params } = input as { params: { id: string } };
       const found = items.find((each) => each.id === params.id);
@@ -180,6 +181,29 @@ const callsTo = (operation: string): unknown[] =>
   server.calls.filter((call) => call.operation === operation).map((call) => call.input);
 const rowWith = async (text: string): Promise<HTMLElement> =>
   (await screen.findByText(text)).closest('tr') as HTMLElement;
+
+async function details(
+  user: ReturnType<typeof userEvent.setup>,
+  remote: string,
+): Promise<HTMLElement> {
+  const row = await rowWith(remote);
+  await user.click(within(row).getByRole('button', { name: /^Details of the call/ }));
+  return screen.findByRole('dialog', { name: 'Call details' });
+}
+
+const recordingOf = (patch: Partial<CallRecording> = {}): CallRecording => ({
+  id: 'crec_01k8e2wzr0e008000000000001',
+  kind: 'call',
+  status: 'completed',
+  durationSeconds: 92,
+  createdAt: '2026-10-15T10:00:00.000Z',
+  audio: {
+    url: 'https://api.example.com/files/fil_01k8e2wzr0e008000000000001/content?token=abc',
+    expiresAt: '2026-10-15T10:10:00.000Z',
+  },
+  unavailable: null,
+  ...patch,
+});
 
 describe('who may see calls', () => {
   it('asks for no call without permission to read them', async () => {
@@ -332,15 +356,6 @@ describe('the call list', () => {
 });
 
 describe('a call’s details', () => {
-  async function details(
-    user: ReturnType<typeof userEvent.setup>,
-    remote: string,
-  ): Promise<HTMLElement> {
-    const row = await rowWith(remote);
-    await user.click(within(row).getByRole('button', { name: /^Details of the call/ }));
-    return screen.findByRole('dialog', { name: 'Call details' });
-  }
-
   it('shows the legs, why a call was refused, and a record that needs checking', async () => {
     const refused = callOf({ state: 'refused', failure: 'do_not_call' });
     const connected = callOf({
@@ -538,5 +553,152 @@ describe('a call’s details', () => {
     const panel = await details(user, '+14155550199');
     const button = within(panel).getByRole<HTMLButtonElement>('button', { name: 'Call back' });
     expect(button.disabled).toBe(true);
+  });
+});
+
+describe('a call’s recordings', () => {
+  it('shows call recordings and voicemails with duration and audio player', async () => {
+    const call = callOf();
+    const rec1 = recordingOf({
+      id: 'crec_01k8e2wzr0e008000000000001',
+      kind: 'call',
+      durationSeconds: 92,
+      audio: {
+        url: 'https://api.example.com/files/rec1.mp3',
+        expiresAt: '2026-10-15T10:10:00.000Z',
+      },
+    });
+    const rec2 = recordingOf({
+      id: 'crec_01k8e2wzr0e008000000000002',
+      kind: 'voicemail',
+      durationSeconds: 41,
+      audio: {
+        url: 'https://api.example.com/files/rec2.mp3',
+        expiresAt: '2026-10-15T10:10:00.000Z',
+      },
+    });
+    serve([call], {
+      listCallRecordings: () => ({ data: [rec1, rec2] }),
+    });
+    const user = open();
+    const panel = await details(user, '+14155550199');
+    const section = await within(panel).findByRole('region', { name: 'Recordings' });
+    expect(within(section).getByText('Call recording')).toBeDefined();
+    expect(within(section).getByText('1:32')).toBeDefined();
+    const audio1 = within(section).getByLabelText<HTMLAudioElement>('Call recording, 1:32');
+    expect(audio1.tagName).toBe('AUDIO');
+    expect(audio1.getAttribute('src')).toBe('https://api.example.com/files/rec1.mp3');
+    expect(audio1.getAttribute('preload')).toBe('none');
+    expect(audio1.hasAttribute('controls')).toBe(true);
+
+    expect(within(section).getByText('Voicemail')).toBeDefined();
+    expect(within(section).getByText('0:41')).toBeDefined();
+    const audio2 = within(section).getByLabelText<HTMLAudioElement>('Voicemail, 0:41');
+    expect(audio2.getAttribute('src')).toBe('https://api.example.com/files/rec2.mp3');
+  });
+
+  it('shows unavailable states for recordings that cannot be played', async () => {
+    const call = callOf();
+    const notReady = recordingOf({
+      id: 'crec_01k8e2wzr0e008000000000001',
+      kind: 'call',
+      unavailable: 'not_ready',
+      audio: null,
+    });
+    const notFound = recordingOf({
+      id: 'crec_01k8e2wzr0e008000000000002',
+      kind: 'call',
+      unavailable: 'not_found',
+      audio: null,
+    });
+    const tooLarge = recordingOf({
+      id: 'crec_01k8e2wzr0e008000000000003',
+      kind: 'call',
+      unavailable: 'too_large',
+      audio: null,
+    });
+    serve([call], {
+      listCallRecordings: () => ({ data: [notReady, notFound, tooLarge] }),
+    });
+    const user = open();
+    const panel = await details(user, '+14155550199');
+    const section = await within(panel).findByRole('region', { name: 'Recordings' });
+    expect(within(section).getByText('Getting the recording…')).toBeDefined();
+    expect(within(section).getByText('The recording is no longer available.')).toBeDefined();
+    expect(within(section).getByText('The recording was too large to keep.')).toBeDefined();
+    expect(within(section).queryByRole('audio')).toBeNull();
+  });
+
+  it('does not show absent recordings', async () => {
+    const call = callOf();
+    const absent = recordingOf({
+      id: 'crec_01k8e2wzr0e008000000000001',
+      kind: 'call',
+      status: 'absent',
+      audio: null,
+    });
+    serve([call], {
+      listCallRecordings: () => ({ data: [absent] }),
+    });
+    const user = open();
+    const panel = await details(user, '+14155550199');
+    expect(within(panel).queryByRole('region', { name: 'Recordings' })).toBeNull();
+  });
+
+  it('shows no recordings section when the list is empty', async () => {
+    const call = callOf();
+    serve([call], {
+      listCallRecordings: () => ({ data: [] }),
+    });
+    const user = open();
+    const panel = await details(user, '+14155550199');
+    expect(within(panel).queryByRole('region', { name: 'Recordings' })).toBeNull();
+  });
+
+  it('shows no recordings section and does not break the panel when request fails or is refused', async () => {
+    const call = callOf();
+    serve([call], {
+      listCallRecordings: () => {
+        throw refusal(403);
+      },
+    });
+    const user = open();
+    const panel = await details(user, '+14155550199');
+    expect(within(panel).getByText('Call legs')).toBeDefined();
+    expect(within(panel).queryByRole('region', { name: 'Recordings' })).toBeNull();
+  });
+
+  it('refetches once when audio element reports an error', async () => {
+    const call = callOf();
+    let queryCount = 0;
+    serve([call], {
+      listCallRecordings: () => {
+        queryCount += 1;
+        return {
+          data: [
+            recordingOf({
+              id: 'crec_01k8e2wzr0e008000000000001',
+              audio: {
+                url: `https://api.example.com/files/rec.mp3?v=${String(queryCount)}`,
+                expiresAt: '2026-10-15T10:10:00.000Z',
+              },
+            }),
+          ],
+        };
+      },
+    });
+    const user = open();
+    const panel = await details(user, '+14155550199');
+    const audio = await within(panel).findByLabelText<HTMLAudioElement>('Call recording, 1:32');
+    expect(queryCount).toBe(1);
+
+    audio.dispatchEvent(new Event('error'));
+    await waitFor(() => {
+      expect(queryCount).toBe(2);
+    });
+
+    audio.dispatchEvent(new Event('error'));
+    await new Promise((r) => setTimeout(r, 50));
+    expect(queryCount).toBe(2);
   });
 });

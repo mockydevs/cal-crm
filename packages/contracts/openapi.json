@@ -19144,13 +19144,13 @@
             "in": "query",
             "name": "library",
             "schema": {
-              "description": "Puts the file in the business's media library. It needs the permission to change the library as well.",
+              "description": "Puts the file in the business's media library (ADR-089). It needs the permission to change the library as well.",
               "type": "string",
               "enum": [
                 "true"
               ]
             },
-            "description": "Puts the file in the business's media library. It needs the permission to change the library as well."
+            "description": "Puts the file in the business's media library (ADR-089). It needs the permission to change the library as well."
           },
           {
             "in": "query",
@@ -26252,6 +26252,76 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PhoneCalling"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An error, as problem details (RFC 9457).",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calls/{id}/recordings": {
+      "get": {
+        "operationId": "listCallRecordings",
+        "summary": "List a call's recordings and voicemails, with a link to listen to each.",
+        "tags": [
+          "Calls"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "pattern": "^call_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+              "description": "A call id.",
+              "examples": [
+                "call_01h455vb4pex5vsknk084sn02q"
+              ]
+            },
+            "required": true,
+            "description": "A call id."
+          },
+          {
+            "in": "header",
+            "name": "Business-Id",
+            "schema": {
+              "description": "Optional legacy account selector. An API key already identifies its account. Do not combine with Business-Slug. Cookie users retain their workplace rules.",
+              "type": "string",
+              "pattern": "^biz_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+              "examples": [
+                "biz_01h455vb4pex5vsknk084sn02q"
+              ]
+            },
+            "description": "Optional legacy account selector. An API key already identifies its account. Do not combine with Business-Slug. Cookie users retain their workplace rules."
+          },
+          {
+            "in": "header",
+            "name": "Business-Slug",
+            "schema": {
+              "description": "API keys only: optional per-request business slug from account discovery. The key must permit that active account. Omit both selectors to use the key account; no location ID is needed to connect.",
+              "type": "string",
+              "pattern": "^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+            },
+            "description": "API keys only: optional per-request business slug from account discovery. The key must permit that active account. Omit both selectors to use the key account; no location ID is needed to connect."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The call's recordings and voicemails, with a link to listen to each.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CallRecordings"
                 }
               }
             }
@@ -60152,7 +60222,7 @@
             "additionalProperties": false
           }
         ],
-        "description": "A page in the current document format: a visual page of sections, rows, columns and elements, or a code page of files.",
+        "description": "A page in the current document format (ADR-076): a visual page of sections, rows, columns and elements, or a code page of files.",
         "type": "object"
       },
       "SitePageStyle": {
@@ -64042,7 +64112,7 @@
             }
           },
           "permission": {
-            "description": "For a 403 a role could fix: the permission the request needs.",
+            "description": "For a 403 a role could fix: the permission the request needs (ADR-020).",
             "examples": [
               "tags.manage"
             ],
@@ -69050,7 +69120,7 @@
             ]
           },
           "source": {
-            "description": "The lead source: one name for how they arrived, such as \"Google Ads\". Null for a touch that was not a visit to a page.",
+            "description": "The lead source: one name for how they arrived, such as \"Google Ads\" (ADR-091). Null for a touch that was not a visit to a page.",
             "examples": [
               "Google Ads"
             ],
@@ -84314,6 +84384,121 @@
           "token",
           "expiresAt",
           "failure"
+        ],
+        "additionalProperties": false
+      },
+      "CallRecordings": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "maxItems": 20,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CallRecording"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "additionalProperties": false
+      },
+      "CallRecording": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^crec_[0-7][0-9a-hjkmnp-tv-z]{25}$",
+            "description": "A call recording id.",
+            "examples": [
+              "crec_01h455vb4pex5vsknk084sn02q"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "call",
+              "voicemail"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "in-progress",
+              "absent"
+            ]
+          },
+          "durationSeconds": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+          },
+          "audio": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CallRecordingAudio"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "unavailable": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "not_found",
+                  "too_large",
+                  "not_ready"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "status",
+          "durationSeconds",
+          "createdAt",
+          "audio",
+          "unavailable"
+        ],
+        "additionalProperties": false
+      },
+      "CallRecordingAudio": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z|([+-](?:[01]\\d|2[0-3]):[0-5]\\d)))$"
+          }
+        },
+        "required": [
+          "url",
+          "expiresAt"
         ],
         "additionalProperties": false
       },

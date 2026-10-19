@@ -150,6 +150,7 @@ msgstr "Call legs"
 msgid "Call legs table"
 msgstr "Call legs table"
 
+#: src/calls.tsx
 #: src/phone-system-number.tsx
 msgid "Call recording"
 msgstr "Call recording"
@@ -185,6 +186,10 @@ msgstr "Calls"
 #: src/phone-system-parts.tsx
 msgid "Calls aren't available yet"
 msgstr "Calls aren't available yet"
+
+#: src/phone-system-voice.tsx
+msgid "Calls aren't transcribed yet."
+msgstr "Calls aren't transcribed yet."
 
 #: src/phone-system-parts.tsx
 msgid "Calls can be made from this business's numbers and are answered here."
@@ -380,6 +385,10 @@ msgstr "From 1 to 3,650 days."
 #: src/phone-system-number.tsx
 msgid "From 5 to 120 seconds. 20 or more is advised, so there is time to answer."
 msgstr "From 5 to 120 seconds. 20 or more is advised, so there is time to answer."
+
+#: src/calls.tsx
+msgid "Getting the recording…"
+msgstr "Getting the recording…"
 
 #: src/phone-system-parts.tsx
 msgid "Give the number a name."
@@ -695,9 +704,9 @@ msgstr "Record calls"
 msgid "Recording and transcription"
 msgstr "Recording and transcription"
 
-#: src/phone-system-voice.tsx
-msgid "Recordings are kept but can't be played here yet, and calls aren't transcribed yet."
-msgstr "Recordings are kept but can't be played here yet, and calls aren't transcribed yet."
+#: src/calls.tsx
+msgid "Recordings"
+msgstr "Recordings"
 
 #: src/sms-settings.tsx
 msgid "Refresh numbers"
@@ -988,6 +997,14 @@ msgstr "The provider's answer was lost, so this call may or may not have rung. I
 msgid "The provider's reports disagree with this record. Check the call in your Twilio console."
 msgstr "The provider's reports disagree with this record. Check the call in your Twilio console."
 
+#: src/calls.tsx
+msgid "The recording is no longer available."
+msgstr "The recording is no longer available."
+
+#: src/calls.tsx
+msgid "The recording was too large to keep."
+msgstr "The recording was too large to keep."
+
 #: src/sms-settings.tsx
 msgid "The refresh couldn't start. Check your connection and try again."
 msgstr "The refresh couldn't start. Check your connection and try again."
@@ -1169,6 +1186,7 @@ msgstr "Use the full number with its country code, such as +14155550123."
 msgid "Voice settings"
 msgstr "Voice settings"
 
+#: src/calls.tsx
 #: src/phone-system.tsx
 msgid "Voicemail"
 msgstr "Voicemail"
