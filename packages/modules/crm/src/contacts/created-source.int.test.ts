@@ -106,6 +106,7 @@ it('is what the module that makes the contact says, for the system and for the c
   for (const [actorKind, through, source] of [
     ['system', 'create', 'email'],
     ['system', 'create', 'sms'],
+    ['system', 'create', 'call'],
     ['contact', 'create', 'webchat'],
     ['contact', 'intake', 'booking'],
   ] as const) {

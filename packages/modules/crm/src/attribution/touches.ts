@@ -39,6 +39,7 @@ const mediumOfSource: Readonly<Record<ContactSource, AttributionMedium>> = {
   assistant: 'assistant',
   email: 'message',
   sms: 'message',
+  call: 'message',
   webchat: 'chat',
   form: 'form',
   booking: 'calendar',

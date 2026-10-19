@@ -8677,6 +8677,10 @@ msgid "from a form"
 msgstr "from a form"
 
 #: src/contact-details.tsx
+msgid "from a phone call"
+msgstr "from a phone call"
+
+#: src/contact-details.tsx
 msgid "from a text message they sent"
 msgstr "from a text message they sent"
 
@@ -14310,6 +14314,10 @@ msgstr "Phone {number}"
 #: src/contact-add-panel.tsx
 msgid "Phone {number} is the primary"
 msgstr "Phone {number} is the primary"
+
+#: src/reporting/words.ts
+msgid "Phone call"
+msgstr "Phone call"
 
 #: src/user-phone-field.tsx
 msgid "Phone country"

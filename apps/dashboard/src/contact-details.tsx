@@ -511,6 +511,7 @@ export function ContactOrigin({
     import: t`from an import`,
     email: t`from an email they sent`,
     sms: t`from a text message they sent`,
+    call: t`from a phone call`,
     webchat: t`from a web chat`,
     automation: t`by an automation`,
     assistant: t`by the assistant`,

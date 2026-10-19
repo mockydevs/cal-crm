@@ -80,7 +80,7 @@ const apply = defineCommand({
       if (terminal === null || value.legId !== null) return reply(400);
       result = await recordInboundTerminal(trx, { connectionId: value.connectionId, terminal });
       if (result.result === 'advanced' && result.callId !== null) {
-        await maybeSendMissedCallText(trx, command.context, result.callId);
+        await maybeSendMissedCallText(trx, command, result.callId);
       }
     }
     if (result.callId === null) return reply(404);

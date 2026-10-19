@@ -115,6 +115,7 @@ export const contactSources = [
   'import',
   'email',
   'sms',
+  'call',
   'webchat',
   'automation',
   'assistant',

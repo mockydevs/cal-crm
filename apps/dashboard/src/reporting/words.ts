@@ -64,6 +64,7 @@ const createdSources: Words = {
   import: msg`Import`,
   email: msg`Email`,
   sms: msg`SMS`,
+  call: msg`Phone call`,
   webchat: msg`Web chat`,
   automation: msg`Automation`,
   assistant: msg`Assistant`,

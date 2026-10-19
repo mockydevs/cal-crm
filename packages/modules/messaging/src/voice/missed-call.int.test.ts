@@ -526,10 +526,156 @@ it('sends nothing when the missed-call text is off, or its message is empty', as
   expect(emptyMessages).toHaveLength(0);
 });
 
-it("sends nothing to a caller who isn't a contact", async () => {
+it('creates a contact for a missed call from a new number, and texts it back', async () => {
   const b = await world({ matchContact: false });
   await b.worker.handle(b.inboundRequest());
   await b.worker.handle(b.endedRequest({ CallStatus: 'canceled' }));
+
+  const contacts = await b.query<{ id: string; created_source: string }>(
+    'select id, created_source from crm.contacts where business_id = $1',
+    [b.business.id],
+  );
+  const newContacts = contacts.filter((c) => c.id !== b.contact.id);
+  expect(newContacts).toHaveLength(1);
+  const created = newContacts[0];
+  if (created === undefined) throw new Error('Expected created contact');
+  expect(created.created_source).toBe('call');
+
+  const identities = await b.query<{ id: string; kind: string; value_normalized: string }>(
+    'select id, kind, value_normalized from crm.contact_identities where business_id = $1 and contact_id = $2',
+    [b.business.id, created.id],
+  );
+  expect(identities).toHaveLength(1);
+  expect(identities[0]).toMatchObject({
+    kind: 'phone',
+    value_normalized: b.from,
+  });
+
+  const calls = await b.query<{ contact_id: string | null; contact_identity_id: string | null }>(
+    'select contact_id, contact_identity_id from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls).toHaveLength(1);
+  expect(calls[0]).toMatchObject({
+    contact_id: created.id,
+    contact_identity_id: identities[0]?.id,
+  });
+
+  const messages = await b.query<{
+    channel: string;
+    direction: string;
+    channel_account_id: string;
+    body_text: string;
+    to_addresses: readonly string[];
+  }>(
+    'select channel, direction, channel_account_id, body_text, to_addresses from messaging.messages where business_id = $1',
+    [b.business.id],
+  );
+  expect(messages).toHaveLength(1);
+  expect(messages[0]).toMatchObject({
+    channel: 'sms',
+    direction: 'outbound',
+    channel_account_id: b.phoneNumberId,
+    body_text: b.missedCallText,
+    to_addresses: [b.from],
+  });
+});
+
+it('finds the existing contact instead of making a second', async () => {
+  const b = await world({ matchContact: false });
+  const identity = await database.withTenant(b.business.context, (sql) =>
+    sql.one<{ id: string }>(
+      `insert into crm.contact_identities (business_id, contact_id, kind, value, value_normalized)
+       values ($1, $2, 'phone', $3, $3) returning id`,
+      [b.business.id, b.contact.id, b.from],
+    ),
+  );
+  await b.worker.handle(b.inboundRequest());
+  await b.query(
+    'update messaging.calls set contact_id = null, contact_identity_id = null where business_id = $1',
+    [b.business.id],
+  );
+  await b.worker.handle(b.endedRequest({ CallStatus: 'canceled' }));
+
+  const contacts = await b.query<{ id: string }>(
+    'select id from crm.contacts where business_id = $1',
+    [b.business.id],
+  );
+  expect(contacts).toHaveLength(1);
+  expect(contacts[0]?.id).toBe(b.contact.id);
+
+  const calls = await b.query<{ contact_id: string | null; contact_identity_id: string | null }>(
+    'select contact_id, contact_identity_id from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls[0]).toMatchObject({
+    contact_id: b.contact.id,
+    contact_identity_id: identity.id,
+  });
+
+  const messages = await b.query('select id from messaging.messages where business_id = $1', [
+    b.business.id,
+  ]);
+  expect(messages).toHaveLength(1);
+});
+
+it('creates nothing for a hidden number', async () => {
+  const b = await world({ matchContact: false });
+  await b.worker.handle(b.inboundRequest({ From: 'anonymous' }));
+  await b.worker.handle(b.endedRequest({ From: 'anonymous', CallStatus: 'canceled' }));
+
+  const contacts = await b.query<{ id: string }>(
+    'select id from crm.contacts where business_id = $1',
+    [b.business.id],
+  );
+  expect(contacts).toHaveLength(1);
+
+  const calls = await b.query<{ contact_identity_id: string | null }>(
+    'select contact_identity_id from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls[0]?.contact_identity_id).toBeNull();
+
+  const messages = await b.query('select id from messaging.messages where business_id = $1', [
+    b.business.id,
+  ]);
+  expect(messages).toHaveLength(0);
+});
+
+it('creates nothing when the missed-call text is off', async () => {
+  const b = await world({ matchContact: false, missedCallTextEnabled: false });
+  await b.worker.handle(b.inboundRequest());
+  await b.worker.handle(b.endedRequest({ CallStatus: 'canceled' }));
+
+  const contacts = await b.query<{ id: string }>(
+    'select id from crm.contacts where business_id = $1',
+    [b.business.id],
+  );
+  expect(contacts).toHaveLength(1);
+
+  const calls = await b.query<{ contact_identity_id: string | null }>(
+    'select contact_identity_id from messaging.calls where business_id = $1',
+    [b.business.id],
+  );
+  expect(calls[0]?.contact_identity_id).toBeNull();
+
+  const messages = await b.query('select id from messaging.messages where business_id = $1', [
+    b.business.id,
+  ]);
+  expect(messages).toHaveLength(0);
+});
+
+it('creates nothing for a number the CRM refuses', async () => {
+  const b = await world({ matchContact: false });
+  const invalid = '+10123456789';
+  await b.worker.handle(b.inboundRequest({ From: invalid }));
+  await b.worker.handle(b.endedRequest({ From: invalid, CallStatus: 'canceled' }));
+
+  const contacts = await b.query<{ id: string }>(
+    'select id from crm.contacts where business_id = $1',
+    [b.business.id],
+  );
+  expect(contacts).toHaveLength(1);
 
   const calls = await b.query<{ contact_identity_id: string | null }>(
     'select contact_identity_id from messaging.calls where business_id = $1',
