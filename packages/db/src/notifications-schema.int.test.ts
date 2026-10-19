@@ -44,6 +44,8 @@ const KINDS = [
   'automation.notice',
   // A member's Google Calendar stopped answering (0106).
   'calendar.google_disconnected',
+  // A connected integration needs someone to act (0132).
+  'integration.needs_attention',
 ];
 
 const EVENT_TYPES = [

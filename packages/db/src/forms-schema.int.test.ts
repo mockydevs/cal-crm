@@ -127,6 +127,9 @@ describe('the tables', () => {
     expect(grants).toEqual([
       // The day's counts of views and submissions (migration 0078): added to, never deleted.
       { table_name: 'daily_stats', grantee: 'crm_app', privileges: ['INSERT', 'SELECT', 'UPDATE'] },
+      // External tracking (migration 0131): what the script on a business's own site sends in,
+      // kept as it arrived, never changed or deleted by the app.
+      { table_name: 'external_submissions', grantee: 'crm_app', privileges: ['INSERT', 'SELECT'] },
       {
         table_name: 'forms',
         grantee: 'crm_app',
@@ -134,6 +137,22 @@ describe('the tables', () => {
       },
       // No UPDATE: a stored submission is never changed.
       { table_name: 'submissions', grantee: 'crm_app', privileges: ['DELETE', 'INSERT', 'SELECT'] },
+      { table_name: 'tracking_events', grantee: 'crm_app', privileges: ['INSERT', 'SELECT'] },
+      {
+        table_name: 'tracking_page_days',
+        grantee: 'crm_app',
+        privileges: ['INSERT', 'SELECT', 'UPDATE'],
+      },
+      {
+        table_name: 'tracking_settings',
+        grantee: 'crm_app',
+        privileges: ['INSERT', 'SELECT', 'UPDATE'],
+      },
+      {
+        table_name: 'tracking_visitors',
+        grantee: 'crm_app',
+        privileges: ['INSERT', 'SELECT', 'UPDATE'],
+      },
     ]);
   });
 
