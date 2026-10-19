@@ -1356,6 +1356,23 @@ describe('the API isolation suite', () => {
       ...(await addCampaignRecords(database, b.id)),
       // Not an id: the Google account of B's member who connected one.
       ...(await addGoogleRecords(database, b.id)),
+      // Invoice reminder for B
+      ...(await (async () => {
+        const reminderId = randomUUID();
+        const row = await database.as('crm_owner', (sql) =>
+          sql.one<{ updated_at: Date }>(
+            `insert into commerce.invoice_reminders
+               (business_id, id, name, every_amount, every_unit, direction, anchor, max_sends, subject, body)
+             values ($1, $2, 'Reminder B', 3, 'days', 'after', 'due_date', 3, 'Due', 'Pay')
+             returning updated_at`,
+            [b.id, reminderId],
+          ),
+        );
+        return {
+          invoice_reminder: reminderId,
+          invoice_reminder_updated_at: row.updated_at.toISOString(),
+        };
+      })()),
     };
     return {
       ids,
@@ -1390,6 +1407,24 @@ describe('the API isolation suite', () => {
       // Commerce: what B's own member could send about B's product, invoice and payment and
       // have accepted.
       ...commerceInputs(records),
+      createInvoiceReminder: {
+        payload: {
+          name: 'Reminder from A',
+          everyAmount: 3,
+          everyUnit: 'days',
+          direction: 'after',
+          anchor: 'due_date',
+          maxSends: 3,
+          subject: 'Reminder: invoice {{ invoice.number }}',
+          body: 'Hello {{ contact.name }}, your invoice is due on {{ invoice.due_date }}. View: {{ invoice.url }}',
+        },
+      },
+      updateInvoiceReminder: {
+        payload: {
+          name: 'Updated reminder from A',
+          updatedAt: records['invoice_reminder_updated_at'] ?? '2026-10-01T08:00:00.000Z',
+        },
+      },
       // Media Storage: what B's own member could send about B's library.
       ...mediaInputs(records),
       // Reporting: a query, and B's report saved, copied and deleted.
@@ -2028,6 +2063,10 @@ describe('the API isolation suite', () => {
       const number = numbered[name];
       if (number !== undefined) {
         path = path.replace(`{${name}}`, number);
+        continue;
+      }
+      if (endpoint.path.startsWith('/invoice-reminders/')) {
+        path = path.replace(`{${name}}`, records['invoice_reminder'] ?? '');
         continue;
       }
       const kind = kindOf(schema as z.ZodType);

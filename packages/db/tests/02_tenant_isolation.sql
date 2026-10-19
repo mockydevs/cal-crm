@@ -704,6 +704,7 @@ declare
   product_1 uuid;
   invoice_1 uuid;
   contact_1 uuid;
+  reminder_1 uuid;
 begin
   select id into contact_1 from crm.contacts where business_id = b order by id limit 1;
   insert into commerce.settings (business_id, payment_terms_days, tax_number, default_tax_rate)
@@ -734,6 +735,16 @@ begin
   -- Its public address (0080): the digest of a token, never the token.
   insert into commerce.document_links (business_id, document_id, digest, created_by_kind, created_by_id)
     values (b, invoice_1, repeat('c0', 32), 'user', u);
+  -- Invoice reminders (0139): when, how often and what they say; and each send made.
+  insert into commerce.invoice_reminders (
+    business_id, name, enabled, every_amount, every_unit, direction, anchor, max_sends, subject, body
+  ) values (
+    b, 'Overdue reminder', true, 3, 'days', 'after', 'due_date', 3,
+    'Your invoice {{invoice.number}} is overdue',
+    'Please pay invoice {{invoice.number}} at {{invoice.url}}'
+  ) returning id into reminder_1;
+  insert into commerce.invoice_reminder_sends (business_id, reminder_id, document_id, step)
+    values (b, reminder_1, invoice_1, 1);
 end $$;
 
 -- Integrations (0132): a connected account with its sealed credentials, an OAuth attempt,

@@ -429,6 +429,14 @@ export async function start(
     logger.error({ source: 'ai', operationId, err: error }, 'assistant tool failed');
   });
 
+  // What commerce prints, shares and sends with: the files service where this role has one,
+  // and the secret every public surface of the install is keyed by.
+  const commerce: CommerceInstall = {
+    files,
+    publicUrl: config.publicUrl,
+    publicIntakeSecret: config.publicIntake?.secret,
+  };
+
   // A worker role that can't reach its queue doesn't start, so that it's restarted.
   const worker =
     config.databaseWorkerUrl === undefined
@@ -533,6 +541,7 @@ export async function start(
           ...(vault === undefined ? {} : { mailboxVault: vault.sealing, vault: vault.opening }),
           ...(files === undefined ? {} : { files }),
           ...(outside.twilioFetch === undefined ? {} : { twilioFetch: outside.twilioFetch }),
+          commerce: commerceOptions(commerce),
           logger,
           shutdownTimeoutMs: config.shutdownTimeoutMs,
         }).catch(async (error: unknown) => {
@@ -566,13 +575,6 @@ export async function start(
         })
       : undefined;
 
-  // What commerce prints, shares and sends with: the files service where this role has one,
-  // and the secret every public surface of the install is keyed by.
-  const commerce: CommerceInstall = {
-    files,
-    publicUrl: config.publicUrl,
-    publicIntakeSecret: config.publicIntake?.secret,
-  };
   const resolvedRoutes =
     typeof routes === 'function'
       ? routes(

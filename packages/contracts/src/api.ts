@@ -341,6 +341,7 @@ export const endpoints: readonly Endpoint[] = [
   ...siteDomainEndpoints,
   ...commerceEndpoints,
   ...mediaEndpoints,
+  ...invoiceReminderEndpoints,
 ];
 import { importEndpoints } from './imports.js';
 import { notificationEndpoints } from './notifications.js';
@@ -385,6 +386,7 @@ import { siteStepEndpoints } from './sites-steps.js';
 import { siteTemplateEndpoints } from './sites-templates.js';
 import { siteDomainEndpoints } from './sites-domains.js';
 import { commerceEndpoints } from './commerce.js';
+import { invoiceReminderEndpoints } from './invoice-reminders.js';
 import { mediaEndpoints } from './media.js';
 import { aiSettingsEndpoints } from './ai.js';
 import { assistantEndpoints } from './ai-proposals.js';

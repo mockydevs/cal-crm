@@ -303,6 +303,9 @@ const teamWork = [
   // The catalogue, quotes, invoices, payments and their settings: payments.manage is
   // owners' and admins'. Members see them (payments.read) and change none.
   ...COMMERCE_COMMANDS,
+  'invoice_reminder.create',
+  'invoice_reminder.update',
+  'invoice_reminder.delete',
   // Saved reports: reports.manage is owners' and admins'. Members read reports
   // (reports.view) and change none.
   ...REPORTING_COMMANDS,
@@ -730,6 +733,57 @@ const examples: Readonly<Record<string, Example>> = {
     () => matrixBusiness,
     () => matrixContact,
   ),
+  'invoice_reminder.create': {
+    run: (call) =>
+      call('POST', '/invoice-reminders', {
+        inBusiness: true,
+        payload: {
+          name: 'Reminder',
+          everyAmount: 3,
+          everyUnit: 'days',
+          direction: 'after',
+          anchor: 'due_date',
+          maxSends: 3,
+          subject: 'Invoice due',
+          body: 'Hello {{ contact.name }}',
+        },
+      }),
+  },
+  'invoice_reminder.update': {
+    run: async (call) => {
+      const reminderId = randomUUID();
+      const row = await database.as('crm_owner', (sql) =>
+        sql.one<{ updated_at: Date }>(
+          `insert into commerce.invoice_reminders
+             (business_id, id, name, every_amount, every_unit, direction, anchor, max_sends, subject, body)
+           values ($1, $2, 'Reminder', 3, 'days', 'after', 'due_date', 3, 'Due', 'Pay')
+           returning updated_at`,
+          [matrixBusiness, reminderId],
+        ),
+      );
+      return call('PATCH', `/invoice-reminders/${reminderId}`, {
+        inBusiness: true,
+        payload: { name: 'Updated', updatedAt: row.updated_at.toISOString() },
+      });
+    },
+  },
+  'invoice_reminder.delete': {
+    run: async (call) => {
+      const reminderId = randomUUID();
+      await database.as('crm_owner', (sql) =>
+        sql.query(
+          `insert into commerce.invoice_reminders
+             (business_id, id, name, every_amount, every_unit, direction, anchor, max_sends, subject, body)
+           values ($1, $2, 'Reminder', 3, 'days', 'after', 'due_date', 3, 'Due', 'Pay')`,
+          [matrixBusiness, reminderId],
+        ),
+      );
+      return call('DELETE', `/invoice-reminders/${reminderId}`, {
+        inBusiness: true,
+        payload: undefined,
+      });
+    },
+  },
   // Media Storage: each on a folder and a library file added for that try.
   ...mediaExamples(
     () => database,

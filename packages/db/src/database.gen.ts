@@ -1031,6 +1031,32 @@ export interface CommerceDocuments {
   voided_at: Timestamp | null;
 }
 
+export interface CommerceInvoiceReminderSends {
+  business_id: string;
+  document_id: string;
+  message_id: string | null;
+  reminder_id: string;
+  sent_at: Generated<Timestamp>;
+  step: number;
+}
+
+export interface CommerceInvoiceReminders {
+  anchor: string;
+  body: string;
+  business_id: string;
+  created_at: Generated<Timestamp>;
+  direction: string;
+  enabled: Generated<boolean>;
+  enabled_since: Generated<Timestamp>;
+  every_amount: number;
+  every_unit: string;
+  id: Generated<string>;
+  max_sends: Generated<number>;
+  name: string;
+  subject: string;
+  updated_at: Generated<Timestamp>;
+}
+
 export interface CommercePayments {
   amount: Numeric;
   balance_after: Numeric;
@@ -3369,6 +3395,8 @@ export interface DB {
   "commerce.document_lines": CommerceDocumentLines;
   "commerce.document_links": CommerceDocumentLinks;
   "commerce.documents": CommerceDocuments;
+  "commerce.invoice_reminder_sends": CommerceInvoiceReminderSends;
+  "commerce.invoice_reminders": CommerceInvoiceReminders;
   "commerce.payments": CommercePayments;
   "commerce.products": CommerceProducts;
   "commerce.sequences": CommerceSequences;

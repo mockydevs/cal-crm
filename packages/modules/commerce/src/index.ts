@@ -9,10 +9,12 @@ import {
   acceptQuote,
   archiveProduct,
   convertQuoteToInvoice,
+  createInvoiceReminder,
   createProduct,
   createSalesDocument,
   createSalesDocumentLink,
   declineQuote,
+  deleteInvoiceReminder,
   deleteProduct,
   deleteSalesDocument,
   duplicateSalesDocument,
@@ -23,6 +25,7 @@ import {
   getSalesDocument,
   getSalesDocumentPdf,
   issueSalesDocument,
+  listInvoiceReminders,
   listPayments,
   listProducts,
   listSalesDocuments,
@@ -35,6 +38,7 @@ import {
   sendSalesDocument,
   setSalesDocumentNote,
   updateCommerceSettings,
+  updateInvoiceReminder,
   updateProduct,
   updateSalesDocument,
   voidInvoice,
@@ -48,6 +52,7 @@ import { pdfOf, readPrintableDocument, readPrintableReceipt } from './printing.j
 import { createSendCommands } from './sending.js';
 import { createProductCommands, readProduct, readProducts } from './products.js';
 import { createSettingsCommand, readSettings } from './settings.js';
+import { createInvoiceReminderCommands, readInvoiceReminders } from './reminders.js';
 import { requireRead, type CommerceOptions } from './shared.js';
 
 export type {
@@ -88,6 +93,15 @@ export {
 } from './products.js';
 export { createSendCommands, type SendCommands } from './sending.js';
 export { createSettingsCommand, readSettings, type UpdateSettingsCommand } from './settings.js';
+export {
+  createInvoiceReminderCommands,
+  readInvoiceReminders,
+  sendInvoiceRemindersSweep,
+  type CreateInvoiceReminderCommand,
+  type DeleteInvoiceReminderCommand,
+  type InvoiceReminderCommands,
+  type UpdateInvoiceReminderCommand,
+} from './reminders.js';
 
 /**
  * The API's routes for products, quotes, invoices, payments and their settings, given the
@@ -101,6 +115,7 @@ export function createCommerceRoutes(options: CommerceOptions): readonly ApiRout
   const payments = createPaymentCommands(options);
   const settings = createSettingsCommand(options);
   const sends = createSendCommands(options, documents);
+  const invoiceReminders = createInvoiceReminderCommands(options);
 
   // Products ------------------------------------------------------------------------------
   const productList = {
@@ -398,6 +413,48 @@ export function createCommerceRoutes(options: CommerceOptions): readonly ApiRout
     run: ({ invocation, body }, services) => runCommand(services, settings, body, invocation),
   } satisfies Route<typeof updateCommerceSettings>;
 
+  // Invoice Reminders ---------------------------------------------------------------------
+  const invoiceReminderList = {
+    endpoint: listInvoiceReminders,
+    async run({ invocation }, services) {
+      await requireRead(services, invocation, 'invoice_reminders.read');
+      const businessId = requireBusiness(invocation.context);
+      return withTenant(services.db, invocation.context, (trx) =>
+        readInvoiceReminders(trx, invocation, businessId),
+      );
+    },
+  } satisfies Route<typeof listInvoiceReminders>;
+
+  const invoiceReminderCreate = {
+    endpoint: createInvoiceReminder,
+    command: invoiceReminders.create,
+    run: ({ invocation, body }, services) =>
+      runCommand(services, invoiceReminders.create, body, invocation),
+  } satisfies Route<typeof createInvoiceReminder>;
+
+  const invoiceReminderUpdate = {
+    endpoint: updateInvoiceReminder,
+    command: invoiceReminders.update,
+    run: ({ invocation, params, body }, services) => {
+      const input = parseInput(updateInvoiceReminder.params, params);
+      return runCommand(
+        services,
+        invoiceReminders.update,
+        { id: input.id, values: body },
+        invocation,
+      );
+    },
+  } satisfies Route<typeof updateInvoiceReminder>;
+
+  const invoiceReminderDelete = {
+    endpoint: deleteInvoiceReminder,
+    command: invoiceReminders.delete,
+    run: ({ invocation, params }, services) => {
+      const input = parseInput(deleteInvoiceReminder.params, params);
+      return runCommand(services, invoiceReminders.delete, { id: input.id }, invocation);
+    },
+  } satisfies Route<typeof deleteInvoiceReminder>;
+
   return [
     productList,
     productCreate,
@@ -425,6 +482,10 @@ export function createCommerceRoutes(options: CommerceOptions): readonly ApiRout
     paymentReverse,
     settingsRead,
     settingsUpdate,
+    invoiceReminderList,
+    invoiceReminderCreate,
+    invoiceReminderUpdate,
+    invoiceReminderDelete,
     documentPdf,
     receiptPdf,
     documentLink,

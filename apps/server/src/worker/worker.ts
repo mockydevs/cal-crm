@@ -16,6 +16,7 @@ import {
 } from '@repo/module-automation';
 import { scheduleGoogleRefreshes } from '@repo/module-calendar';
 import { purgeExpiredTrash, recoverStalledImports } from '@repo/module-crm';
+import { sendInvoiceRemindersSweep, type CommerceOptions } from '@repo/module-commerce';
 import { expireExternalTracking } from '@repo/module-forms';
 import {
   expireCallRecordings,
@@ -58,6 +59,7 @@ export interface WorkerOptions {
   /** For removing discarded recording audio from storage. */
   readonly files?: RecordingRetentionFiles | undefined;
   readonly twilioFetch?: typeof fetch | undefined;
+  readonly commerce?: CommerceOptions | undefined;
   readonly logger: Pino;
   /** How long stop() lets running jobs go on. One still running then fails, to retry. */
   readonly shutdownTimeoutMs: number;
@@ -101,6 +103,8 @@ export const MAINTAIN_NOTIFICATIONS = 'notifications.maintain';
 export const SCHEDULE_GOOGLE = 'calendar.google.schedule';
 /** Queues the integration checks that are due, and clears what has expired. */
 export const SCHEDULE_INTEGRATIONS = 'integrations.schedule';
+/** Sweeps unpaid invoices to deliver due reminder emails. */
+export const SEND_INVOICE_REMINDERS = 'commerce.send_invoice_reminders';
 
 // What private.enqueue_job wraps each job's data in (0013_jobs.sql). The event behind the
 // job came with 0020; a job queued before it has none.
@@ -386,6 +390,11 @@ export async function startWorker(options: WorkerOptions): Promise<Worker> {
             },
           }
         : {}),
+      [SEND_INVOICE_REMINDERS]: async () => {
+        if (options.commerce === undefined) return;
+        const sent = await sendInvoiceRemindersSweep(services, options.commerce);
+        if (sent > 0) logger.info({ sent }, 'sent invoice reminders');
+      },
     },
     // Daily at 03:00, 03:30 and 04:00 UTC; a worker that was down then catches up when it starts.
     parsedCronItems: parseCronItems([
@@ -410,6 +419,11 @@ export async function startWorker(options: WorkerOptions): Promise<Worker> {
         task: MAINTAIN_VOICE,
         match: '*/10 * * * *',
         options: { backfillPeriod: 600_000, queueName: MAINTAIN_VOICE },
+      },
+      {
+        task: SEND_INVOICE_REMINDERS,
+        match: '*/15 * * * *',
+        options: { backfillPeriod: 900_000, queueName: SEND_INVOICE_REMINDERS },
       },
       {
         task: MAINTAIN_AI,
