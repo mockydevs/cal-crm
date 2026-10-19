@@ -298,11 +298,6 @@ export function VoiceSettingsForm({
           />
         </Group>
         <Group title={t`Missed-call text`}>
-          <NotYet>
-            <Trans>
-              Missed-call texts aren't sent yet. What you set here is saved and used once they are.
-            </Trans>
-          </NotYet>
           <SwitchRow
             label={t`Text a caller back after a missed call`}
             description={t`One text, sent with the same consent and quiet-hours checks as any message.`}
@@ -311,6 +306,9 @@ export function VoiceSettingsForm({
               change({ missedCallText: { ...draft.missedCallText, enabled } });
             }}
           />
+          <p className="text-sm text-muted-foreground">
+            <Trans>Only callers who are already contacts get the text.</Trans>
+          </p>
           {draft.missedCallText.enabled ? (
             <Labeled label={t`Text`} problem={words('/missedCallText/message')}>
               {(control) => (

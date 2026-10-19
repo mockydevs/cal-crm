@@ -19,6 +19,7 @@ import { authenticateVoiceCallback } from './voice-context.js';
 import { parseVoiceProgress } from './voice-progress.js';
 import { parseVoiceTerminal } from './voice-terminal.js';
 import { renderHangup } from './voice-twiml.js';
+import { maybeSendMissedCallText } from './missed-call.js';
 import type { verifyVoiceRequest } from './voice-request.js';
 
 export interface VoiceCallbackReply {
@@ -78,6 +79,9 @@ const apply = defineCommand({
       const terminal = parseVoiceTerminal(value.params, connection.account_ref);
       if (terminal === null || value.legId !== null) return reply(400);
       result = await recordInboundTerminal(trx, { connectionId: value.connectionId, terminal });
+      if (result.result === 'advanced' && result.callId !== null) {
+        await maybeSendMissedCallText(trx, command.context, result.callId);
+      }
     }
     if (result.callId === null) return reply(404);
     if (result.result === 'advanced') {

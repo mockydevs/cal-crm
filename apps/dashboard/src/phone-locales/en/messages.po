@@ -508,10 +508,6 @@ msgstr "Make default"
 msgid "Missed-call text"
 msgstr "Missed-call text"
 
-#: src/phone-system-voice.tsx
-msgid "Missed-call texts aren't sent yet. What you set here is saved and used once they are."
-msgstr "Missed-call texts aren't sent yet. What you set here is saved and used once they are."
-
 #: src/sms-settings.tsx
 msgid "Name"
 msgstr "Name"
@@ -618,6 +614,10 @@ msgstr "Numbers from Twilio"
 #: src/phone-system-voice.tsx
 msgid "One text, sent with the same consent and quiet-hours checks as any message."
 msgstr "One text, sent with the same consent and quiet-hours checks as any message."
+
+#: src/phone-system-voice.tsx
+msgid "Only callers who are already contacts get the text."
+msgstr "Only callers who are already contacts get the text."
 
 #: src/phone-system-voice.tsx
 msgid "Only calls that are recorded are transcribed."

@@ -891,8 +891,11 @@ describe('the voice settings', () => {
     expect(
       within(group('Recording and transcription')).getByText(/Calls aren't transcribed yet\./),
     ).toBeDefined();
+    expect(within(group('Missed-call text')).queryByText(/yet\./)).toBeNull();
     expect(
-      within(group('Missed-call text')).getByText(/Missed-call texts aren't sent yet\./),
+      within(group('Missed-call text')).getByText(
+        'Only callers who are already contacts get the text.',
+      ),
     ).toBeDefined();
   });
 

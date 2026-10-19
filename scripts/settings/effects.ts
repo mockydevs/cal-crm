@@ -14,11 +14,11 @@ const TRACKING = 'packages/modules/forms/src/tracking/tracking.int.test.ts';
 
 const INBOUND_CALL = 'packages/modules/messaging/src/voice/inbound-call.int.test.ts';
 const INBOUND_ADVANCE = 'packages/modules/messaging/src/voice/inbound-advance.int.test.ts';
+const MISSED_CALL = 'packages/modules/messaging/src/voice/missed-call.int.test.ts';
 const CALL_HANDLING =
   'Nothing reads it yet: call connect, whisper and the outbound caller ID are not built yet.';
 const RECORDING =
   'Nothing reads it yet: call recording, voicemail and transcripts are not built yet.';
-const MISSED_CALL = 'Nothing reads it yet: the missed-call text is not built yet.';
 
 export const effects: Effects = {
   'ai.settings': {
@@ -191,8 +191,11 @@ export const effects: Effects = {
     outbound_connect_agent: { gap: RECORDING },
     recording_retention_days: { gap: RECORDING },
     transcription_enabled: { gap: RECORDING },
-    missed_call_text_enabled: { gap: MISSED_CALL },
-    missed_call_text: { gap: MISSED_CALL },
+    missed_call_text_enabled: proof(
+      MISSED_CALL,
+      'sends nothing when the missed-call text is off, or its message is empty',
+    ),
+    missed_call_text: proof(MISSED_CALL, 'texts a contact back once after their call rang out'),
   },
   'messaging.phone_number_settings': {
     phone_number_id: { notASetting: 'The number these settings belong to: part of the key.' },
