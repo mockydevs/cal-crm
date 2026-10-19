@@ -101,6 +101,7 @@ import {
   smsDeliveryAvailable,
   createVoiceCallbackWorker,
   createPointVoiceNumbersTask,
+  createFetchCallRecordingTask,
   createNumberTransport,
   readEmailableIntegration,
   readMailboxIntegration,
@@ -520,6 +521,13 @@ export async function start(
                     ),
                     config.publicUrl,
                   ),
+                  ...(files === undefined
+                    ? []
+                    : [
+                        createFetchCallRecordingTask(vault.opening, files, {
+                          fetcher: outside.twilioFetch,
+                        }),
+                      ]),
                 ]
               : resolvedTasks,
           ...(vault === undefined ? {} : { mailboxVault: vault.sealing }),

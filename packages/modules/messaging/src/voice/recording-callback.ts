@@ -7,6 +7,7 @@ import { ForbiddenError } from '@repo/kernel';
 import { sql } from 'kysely';
 import * as z from 'zod';
 import { lockBusiness } from '../outbound.js';
+import { fetchCallRecordingReference } from './recording-fetch.js';
 import type { VoiceCallbackReply } from './voice-worker.js';
 
 export const reply = (statusCode: number): VoiceCallbackReply => ({
@@ -107,12 +108,13 @@ export const recordRecordingCommand: Command<typeof input, VoiceCallbackReply> =
       .forUpdate()
       .executeTakeFirst();
 
+    let recordingId: string;
     let isNew = false;
     let statusChanged = false;
 
     if (existing === undefined) {
       isNew = true;
-      await trx
+      const inserted = await trx
         .insertInto('messaging.call_recordings')
         .values({
           business_id: businessId,
@@ -124,8 +126,11 @@ export const recordRecordingCommand: Command<typeof input, VoiceCallbackReply> =
           duration_seconds: durationSeconds,
           channels,
         })
-        .execute();
+        .returning('id')
+        .executeTakeFirstOrThrow();
+      recordingId = inserted.id;
     } else {
+      recordingId = existing.id;
       const shouldKeepCompleted =
         existing.status === 'completed' && parsed.data.RecordingStatus === 'in-progress';
       const newStatus = shouldKeepCompleted ? existing.status : parsed.data.RecordingStatus;
@@ -150,6 +155,13 @@ export const recordRecordingCommand: Command<typeof input, VoiceCallbackReply> =
         })
         .where('id', '=', existing.id)
         .execute();
+    }
+
+    const becameCompleted =
+      (isNew && parsed.data.RecordingStatus === 'completed') ||
+      (!isNew && statusChanged && parsed.data.RecordingStatus === 'completed');
+    if (becameCompleted) {
+      command.enqueue(fetchCallRecordingReference, { recordingId });
     }
 
     if (isNew || statusChanged) {

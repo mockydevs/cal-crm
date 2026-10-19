@@ -274,3 +274,9 @@ export {
   readMailboxIntegration,
   readTwilioIntegration,
 } from './integration-readings.js';
+export {
+  createFetchCallRecordingTask,
+  fetchCallRecordingReference,
+  type FetchCallRecordingTaskOptions,
+  type RecordingFiles,
+} from './voice/recording-fetch.js';

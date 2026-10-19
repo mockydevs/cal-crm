@@ -268,7 +268,7 @@ interface FileRow {
  * files.files.purpose). contact_export: a bulk export's CSV of contacts. record_file: a
  * document of a record or a file of its file upload field, linked only through its record.
  */
-export type FilePurpose = 'contact_export' | 'record_file';
+export type FilePurpose = 'contact_export' | 'record_file' | 'call_recording';
 
 /** A file as the API shows it. */
 function asStoredFile(row: FileRow): StoredFile {
