@@ -30,6 +30,9 @@ it('keeps the token of a document’s public address out of what is logged', () 
     `/d/${token}/pdf`,
     `/d/${token}/logo`,
     `/d/${token}/accept`,
+    `/d/${token}/pay`,
+    `/d/${token}/pay/0199a3f2-3c4d-7e5f-8a9b-0c1d2e3f4a5b`,
+    `/d/${token}/paid`,
     `/d/${token}?utm_source=mail`,
     '/d',
     '/d/',
@@ -82,4 +85,14 @@ it("keeps a provider's code and state, and an update address's capability, out o
     '/api/v1/integrations/standin/connect',
   );
   expect(redactedRequestUrl('/api/v1/integrations')).toBe('/api/v1/integrations');
+});
+
+it("keeps the token of a Stripe account's webhook address out of what is logged", () => {
+  const token = 'A'.repeat(43);
+  for (const path of [
+    `/webhooks/stripe/${token}`,
+    `/webhooks/stripe/${token}?x=1`,
+    '/webhooks/stripe',
+  ])
+    expect(redactedRequestUrl(path)).toBe('/webhooks/stripe/[redacted]');
 });

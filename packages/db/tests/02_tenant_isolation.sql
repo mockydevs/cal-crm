@@ -850,6 +850,13 @@ insert into tenancy.marketplace_oauth_tokens (business_id, agency_id, install_id
   where c.business_id = :'b1';
 reset role;
 
+-- Only private.accept_stripe_webhook writes Stripe's events (0143); it queues a Graphile job,
+-- which not every run of these suites has, so the owner keeps one for business 1 instead.
+set role crm_owner;
+insert into commerce.stripe_webhooks (business_id, signature, body, received_at)
+  values (:'b1', 't=1,v1=00', convert_to('{}', 'UTF8'), now());
+reset role;
+
 -- 4. Every tenant table really has business 1 data, so the checks below mean something ------
 
 set role crm_app;

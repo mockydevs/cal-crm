@@ -1168,6 +1168,17 @@ export interface CommerceStripeEndpointRemovals {
   webhook_endpoint_id: string;
 }
 
+export interface CommerceStripeWebhooks {
+  body: Buffer;
+  business_id: string;
+  event_id: string | null;
+  id: Generated<string>;
+  outcome: string | null;
+  processed_at: Timestamp | null;
+  received_at: Timestamp;
+  signature: string;
+}
+
 export interface CrmBulkActions {
   action: string;
   actor_id: string | null;
@@ -3445,6 +3456,7 @@ export interface DB {
   "commerce.stripe_checkouts": CommerceStripeCheckouts;
   "commerce.stripe_connections": CommerceStripeConnections;
   "commerce.stripe_endpoint_removals": CommerceStripeEndpointRemovals;
+  "commerce.stripe_webhooks": CommerceStripeWebhooks;
   "crm.bulk_actions": CrmBulkActions;
   "crm.companies": CrmCompanies;
   "crm.contact_attributions": CrmContactAttributions;

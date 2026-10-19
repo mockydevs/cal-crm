@@ -67,6 +67,13 @@ export {
 } from './stripe-connect.js';
 export { createStripeCheckoutReference, createStripeCheckoutTask } from './stripe-checkout.js';
 export {
+  acceptStripeWebhook,
+  applyStripeWebhookReference,
+  createApplyStripeWebhookTask,
+  STRIPE_WEBHOOK_MAX_BYTES,
+  type StripeWebhookAcceptance,
+} from './stripe-webhook.js';
+export {
   createStripeTransport,
   STRIPE_API_VERSION,
   type StripeTransport,

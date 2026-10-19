@@ -19,6 +19,8 @@ import { createAuthentication, readUserNames, type Authentication } from '@repo/
 import {
   createRemoveStripeEndpointsTask,
   createSetUpStripeTask,
+  acceptStripeWebhook,
+  createApplyStripeWebhookTask,
   createStripeCheckoutTask,
   createStripeTransport,
 } from '@repo/module-commerce';
@@ -542,7 +544,8 @@ export async function start(
                           fetcher: outside.twilioFetch,
                         }),
                       ]),
-                  // Card payments: the webhook endpoint on each business's own Stripe account.
+                  // Card payments on each business's own Stripe account: its webhook endpoint, the
+                  // Checkout Sessions customers pay through, and the events that record payments.
                   createSetUpStripeTask(vault.opening, createStripeTransport(), config.publicUrl),
                   createRemoveStripeEndpointsTask(vault.opening, createStripeTransport()),
                   createStripeCheckoutTask(
@@ -550,6 +553,7 @@ export async function start(
                     createStripeTransport(),
                     config.publicUrl,
                   ),
+                  createApplyStripeWebhookTask(commerceOptions(commerce), vault.opening),
                 ]
               : resolvedTasks,
           ...(vault === undefined ? {} : { mailboxVault: vault.sealing, vault: vault.opening }),
@@ -859,6 +863,9 @@ export async function start(
     ...(publicSites === undefined ? {} : { publicSites }),
     ...(media === undefined ? {} : { publicMedia: { media, db, rateLimit: publicIntakeLimit } }),
     ...(serveApi ? { smsWebhooks: { accept: (request) => acceptSmsWebhook(db, request) } } : {}),
+    ...(serveApi
+      ? { stripeWebhooks: { accept: (request) => acceptStripeWebhook(db, request) } }
+      : {}),
     ...(vault?.opening !== undefined
       ? {
           voiceWebhooks: createVoiceCallbackWorker(

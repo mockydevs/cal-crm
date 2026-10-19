@@ -48,6 +48,7 @@ import { registerUnsubscribe } from './unsubscribe.js';
 import { registerPublicBooking, type PublicBookingTransport } from './public-booking.js';
 import { BOOKING_PAGE_FRAMING, isBookingPagePath } from './booking-embed.js';
 import { registerSmsWebhooks, type SmsWebhookTransport } from './sms-webhooks.js';
+import { registerStripeWebhooks, type StripeWebhookTransport } from './stripe-webhooks.js';
 import { registerVoiceWebhooks, type VoiceWebhookTransport } from './voice-webhooks.js';
 import { registerGoogleCallback, type GoogleCallbackTransport } from './google-callback.js';
 import {
@@ -86,6 +87,8 @@ export interface ServerOptions {
   readonly publicBooking?: PublicBookingTransport;
   /** Public quarantine intake; signature verification belongs to the opening worker. */
   readonly smsWebhooks?: SmsWebhookTransport;
+  /** A business's Stripe events, kept for the worker, which checks their signatures. */
+  readonly stripeWebhooks?: StripeWebhookTransport;
   /** Direct on the opening-vault worker/all role; fixed-target relay on app role. */
   readonly voiceWebhooks?: VoiceWebhookTransport;
   /** Where a trigger link is opened: GET /l/<token>, which redirects. */
@@ -401,6 +404,9 @@ export async function buildServer(options: ServerOptions): Promise<Server> {
   }
   if (options.serveApi && options.smsWebhooks !== undefined) {
     await registerSmsWebhooks(app, options.smsWebhooks);
+  }
+  if (options.serveApi && options.stripeWebhooks !== undefined) {
+    await registerStripeWebhooks(app, options.stripeWebhooks);
   }
   if (options.voiceWebhooks !== undefined) {
     await registerVoiceWebhooks(app, options.voiceWebhooks);

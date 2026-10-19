@@ -47,6 +47,9 @@ export function redactedRequestUrl(url: string): string {
     return '/d/[redacted]';
   if (prefixes.some((prefix) => prefix.startsWith('/webhooks/twilio')))
     return '/webhooks/twilio/[redacted]';
+  // A Stripe account's address: its last part is the token that admits its events.
+  if (prefixes.some((prefix) => prefix.startsWith('/webhooks/stripe')))
+    return '/webhooks/stripe/[redacted]';
   // Google's redirect back after consent carries a one-time code and the state in its
   // query: neither is logged, and the answer is never stored.
   if (url.split('?', 1)[0]?.startsWith('/api/v1/integrations/google/callback') === true)
