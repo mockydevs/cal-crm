@@ -108,3 +108,61 @@ export async function fetchRecordingMp3(
 
   return { outcome: 'fetched', content: new Uint8Array(Buffer.concat(chunks)) };
 }
+
+export type DeleteRecordingResult =
+  | { readonly outcome: 'deleted' }
+  | { readonly outcome: 'rejected'; readonly status?: number }
+  | { readonly outcome: 'unknown' };
+
+/**
+ * Deletes a recording resource from Twilio directly via DELETE /2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}.json
+ * (verified in twilio@6.1.2 lib/rest/api/v2010/account/recording.js: method "delete").
+ * A 404 means it is already gone (treat as done). https://www.twilio.com/docs/voice/api/recording#delete-a-recording-resource
+ * Rejects without touching the network if credentials or SID are malformed.
+ * Does not leak credentials, URLs, or SIDs into errors or logs.
+ */
+export async function deleteRecording(
+  fetcher: typeof fetch,
+  credentials: TwilioCredentials,
+  recordingSid: string,
+): Promise<DeleteRecordingResult> {
+  if (!RECORDING_SID.test(recordingSid) || !ACCOUNT_SID.test(credentials.accountSid)) {
+    return { outcome: 'rejected' };
+  }
+
+  const identity = credentials.apiKey?.sid ?? credentials.accountSid;
+  const secret = credentials.apiKey?.secret ?? credentials.authToken;
+  const auth = `Basic ${Buffer.from(`${identity}:${secret}`, 'utf8').toString('base64')}`;
+  const targetUrl = new URL(
+    `/2010-04-01/Accounts/${credentials.accountSid}/Recordings/${recordingSid}.json`,
+    'https://api.twilio.com',
+  );
+
+  let response: Response;
+  try {
+    response = await fetcher(targetUrl, {
+      method: 'DELETE',
+      headers: {
+        authorization: auth,
+      },
+      redirect: 'error',
+      signal: AbortSignal.timeout(30_000),
+    });
+  } catch {
+    return { outcome: 'unknown' };
+  }
+
+  if (response.status >= 500) {
+    return { outcome: 'unknown' };
+  }
+
+  if (response.status === 204 || response.status === 404) {
+    return { outcome: 'deleted' };
+  }
+
+  if (response.status >= 400 && response.status < 500) {
+    return { outcome: 'rejected', status: response.status };
+  }
+
+  return { outcome: 'unknown' };
+}

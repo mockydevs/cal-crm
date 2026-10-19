@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import type { TwilioCredentials } from '../twilio-api.js';
-import { fetchRecordingMp3 } from './recording-media.js';
+import { deleteRecording, fetchRecordingMp3 } from './recording-media.js';
 
 describe('fetchRecordingMp3', () => {
   const accountSid = `AC${'1'.repeat(32)}`;
@@ -213,5 +213,138 @@ describe('fetchRecordingMp3', () => {
       maxBytes: 1024,
     });
     expect(result).toEqual({ outcome: 'fetched', content: originalBytes });
+  });
+});
+
+describe('deleteRecording', () => {
+  const accountSid = `AC${'1'.repeat(32)}`;
+  const recordingSid = `RE${'2'.repeat(32)}`;
+  const credentials: TwilioCredentials = {
+    accountSid,
+    authToken: 'synthetic-auth-token',
+  };
+
+  it('deletes with the exact URL, method and Authorization header', async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response(null, {
+        status: 204,
+      }),
+    );
+
+    const result = await deleteRecording(fetcher, credentials, recordingSid);
+
+    expect(result).toEqual({ outcome: 'deleted' });
+    expect(fetcher).toHaveBeenCalledOnce();
+    const [targetUrl, init] = fetcher.mock.calls[0] ?? [];
+    expect(targetUrl).toEqual(
+      new URL(
+        `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Recordings/${recordingSid}.json`,
+      ),
+    );
+    expect(init).toMatchObject({
+      method: 'DELETE',
+      redirect: 'error',
+    });
+    const expectedAuth = `Basic ${Buffer.from(`${accountSid}:synthetic-auth-token`).toString('base64')}`;
+    expect((init?.headers as Record<string, string> | undefined)?.['authorization']).toBe(
+      expectedAuth,
+    );
+  });
+
+  it('uses API key credentials when present for Authorization', async () => {
+    const credsWithApiKey: TwilioCredentials = {
+      accountSid,
+      authToken: 'synthetic-auth-token',
+      apiKey: { sid: `SK${'3'.repeat(32)}`, secret: 'synthetic-key-secret' },
+    };
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response(null, {
+        status: 204,
+      }),
+    );
+
+    await deleteRecording(fetcher, credsWithApiKey, recordingSid);
+
+    const expectedAuth = `Basic ${Buffer.from(`SK${'3'.repeat(32)}:synthetic-key-secret`).toString('base64')}`;
+    const [, init] = fetcher.mock.calls[0] ?? [];
+    expect((init?.headers as Record<string, string> | undefined)?.['authorization']).toBe(
+      expectedAuth,
+    );
+  });
+
+  it('treats 404 as already deleted', async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response('Not Found', {
+        status: 404,
+        headers: { 'content-type': 'text/plain' },
+      }),
+    );
+
+    const result = await deleteRecording(fetcher, credentials, recordingSid);
+    expect(result).toEqual({ outcome: 'deleted' });
+  });
+
+  it('refuses malformed recording SID or account SID without fetching', async () => {
+    const fetcher = vi.fn<typeof fetch>();
+
+    const result1 = await deleteRecording(fetcher, credentials, 'invalid-sid');
+    expect(result1).toEqual({ outcome: 'rejected' });
+    expect(fetcher).not.toHaveBeenCalled();
+
+    const result2 = await deleteRecording(fetcher, credentials, `CA${'2'.repeat(32)}`);
+    expect(result2).toEqual({ outcome: 'rejected' });
+    expect(fetcher).not.toHaveBeenCalled();
+
+    const badAccountCreds: TwilioCredentials = {
+      accountSid: 'invalid-account',
+      authToken: 'token',
+    };
+    const result3 = await deleteRecording(fetcher, badAccountCreds, recordingSid);
+    expect(result3).toEqual({ outcome: 'rejected' });
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+
+  it('returns rejected with status on 401 and other 4xx', async () => {
+    const fetcher401 = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response('Unauthorized', {
+        status: 401,
+        headers: { 'content-type': 'text/plain' },
+      }),
+    );
+    const result401 = await deleteRecording(fetcher401, credentials, recordingSid);
+    expect(result401).toEqual({ outcome: 'rejected', status: 401 });
+
+    const fetcher403 = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response('Forbidden', {
+        status: 403,
+        headers: { 'content-type': 'text/plain' },
+      }),
+    );
+    const result403 = await deleteRecording(fetcher403, credentials, recordingSid);
+    expect(result403).toEqual({ outcome: 'rejected', status: 403 });
+  });
+
+  it('returns unknown on 500', async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
+      new Response('Internal Server Error', {
+        status: 500,
+        headers: { 'content-type': 'text/plain' },
+      }),
+    );
+
+    const result = await deleteRecording(fetcher, credentials, recordingSid);
+    expect(result).toEqual({ outcome: 'unknown' });
+  });
+
+  it('returns unknown on network error or timeout', async () => {
+    const fetcherNetworkError = vi
+      .fn<typeof fetch>()
+      .mockRejectedValue(new Error('connection reset'));
+    const result1 = await deleteRecording(fetcherNetworkError, credentials, recordingSid);
+    expect(result1).toEqual({ outcome: 'unknown' });
+
+    const fetcherTimeout = vi.fn<typeof fetch>().mockRejectedValue(new DOMException('Timeout'));
+    const result2 = await deleteRecording(fetcherTimeout, credentials, recordingSid);
+    expect(result2).toEqual({ outcome: 'unknown' });
   });
 });

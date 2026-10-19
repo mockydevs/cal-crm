@@ -530,7 +530,9 @@ export async function start(
                       ]),
                 ]
               : resolvedTasks,
-          ...(vault === undefined ? {} : { mailboxVault: vault.sealing }),
+          ...(vault === undefined ? {} : { mailboxVault: vault.sealing, vault: vault.opening }),
+          ...(files === undefined ? {} : { files }),
+          ...(outside.twilioFetch === undefined ? {} : { twilioFetch: outside.twilioFetch }),
           logger,
           shutdownTimeoutMs: config.shutdownTimeoutMs,
         }).catch(async (error: unknown) => {

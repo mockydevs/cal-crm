@@ -18,6 +18,7 @@ import { scheduleGoogleRefreshes } from '@repo/module-calendar';
 import { purgeExpiredTrash, recoverStalledImports } from '@repo/module-crm';
 import { expireExternalTracking } from '@repo/module-forms';
 import {
+  expireCallRecordings,
   expireMailboxAttempts,
   expireInstallMessages,
   expireSmsConnectionAttempts,
@@ -27,10 +28,11 @@ import {
   scheduleEmailCampaigns,
   scheduleMailboxChecks,
   scheduleMailboxSyncs,
+  type RecordingRetentionFiles,
 } from '@repo/module-messaging';
 import { maintainIntegrations, scheduleIntegrationChecks } from '@repo/module-integrations';
 import { expireNotifications } from '@repo/module-notifications';
-import type { SealingVault } from '@repo/module-vault';
+import type { SealingVault, Vault } from '@repo/module-vault';
 import {
   Logger,
   parseCronItems,
@@ -51,6 +53,11 @@ export interface WorkerOptions {
   readonly tasks: readonly AnyTask[];
   /** Pending credentials are removed after ten minutes, even if verification never ran. */
   readonly mailboxVault?: SealingVault;
+  /** For opening provider credentials and voice signing keys. */
+  readonly vault?: Vault | undefined;
+  /** For removing discarded recording audio from storage. */
+  readonly files?: RecordingRetentionFiles | undefined;
+  readonly twilioFetch?: typeof fetch | undefined;
   readonly logger: Pino;
   /** How long stop() lets running jobs go on. One still running then fails, to retry. */
   readonly shutdownTimeoutMs: number;
@@ -72,6 +79,8 @@ export const MAINTAIN_PARTITIONS = 'partitions.maintain';
 
 /** Purges what's been in each business's trash past its retention days. */
 export const PURGE_TRASH = 'trash.purge';
+/** Removes recordings past their business's retention days from provider and storage. */
+export const EXPIRE_CALL_RECORDINGS = 'messaging.expire_call_recordings';
 export const EXPIRE_MAILBOX_ATTEMPTS = 'mailboxes.expire_attempts';
 export const SCHEDULE_MAILBOX_CHECKS = 'mailboxes.schedule_checks';
 export const SCHEDULE_MAILBOX_SYNCS = 'mailboxes.schedule_syncs';
@@ -267,6 +276,14 @@ export async function startWorker(options: WorkerOptions): Promise<Worker> {
         const tracking = await expireExternalTracking(services);
         if (tracking > 0) logger.info({ tracking }, 'removed expired external tracking data');
       },
+      [EXPIRE_CALL_RECORDINGS]: async () => {
+        const expired = await expireCallRecordings(services, {
+          vault: options.vault,
+          files: options.files,
+          fetcher: options.twilioFetch,
+        });
+        if (expired > 0) logger.info({ expired }, 'expired call recordings');
+      },
       [MAINTAIN_SMS]: async () => {
         if (mailboxVault !== undefined) {
           const expired = await expireSmsConnectionAttempts(services, mailboxVault);
@@ -370,10 +387,15 @@ export async function startWorker(options: WorkerOptions): Promise<Worker> {
           }
         : {}),
     },
-    // Daily at 03:00 and 03:30 UTC; a worker that was down then catches up when it starts.
+    // Daily at 03:00, 03:30 and 04:00 UTC; a worker that was down then catches up when it starts.
     parsedCronItems: parseCronItems([
       { task: MAINTAIN_PARTITIONS, match: '0 3 * * *', options: { backfillPeriod: 86_400_000 } },
       { task: PURGE_TRASH, match: '30 3 * * *', options: { backfillPeriod: 86_400_000 } },
+      {
+        task: EXPIRE_CALL_RECORDINGS,
+        match: '0 4 * * *',
+        options: { backfillPeriod: 86_400_000 },
+      },
       {
         task: MAINTAIN_SMS,
         match: '*/5 * * * *',

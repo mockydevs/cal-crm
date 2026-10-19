@@ -15,6 +15,7 @@ const TRACKING = 'packages/modules/forms/src/tracking/tracking.int.test.ts';
 const INBOUND_CALL = 'packages/modules/messaging/src/voice/inbound-call.int.test.ts';
 const INBOUND_ADVANCE = 'packages/modules/messaging/src/voice/inbound-advance.int.test.ts';
 const MISSED_CALL = 'packages/modules/messaging/src/voice/missed-call.int.test.ts';
+const RECORDING_RETENTION = 'packages/modules/messaging/src/voice/recording-retention.int.test.ts';
 const CALL_HANDLING =
   'Nothing reads it yet: call connect, whisper and the outbound caller ID are not built yet.';
 const RECORDING =
@@ -189,7 +190,10 @@ export const effects: Effects = {
       gap: 'Nothing reads it yet: placing a call does not warn about the contact’s quiet hours.',
     },
     outbound_connect_agent: { gap: RECORDING },
-    recording_retention_days: { gap: RECORDING },
+    recording_retention_days: proof(
+      RECORDING_RETENTION,
+      'deletes a recording older than the business keeps them, from the provider and its files',
+    ),
     transcription_enabled: { gap: RECORDING },
     missed_call_text_enabled: proof(
       MISSED_CALL,

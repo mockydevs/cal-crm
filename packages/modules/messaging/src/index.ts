@@ -284,3 +284,10 @@ export {
   type FetchCallRecordingTaskOptions,
   type RecordingFiles,
 } from './voice/recording-fetch.js';
+export {
+  createExpireCallRecordingsTask,
+  expireCallRecordings,
+  expireCallRecordingsReference,
+  type ExpireCallRecordingsOptions,
+  type RecordingRetentionFiles,
+} from './voice/recording-retention.js';

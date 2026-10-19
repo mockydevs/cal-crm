@@ -2167,6 +2167,7 @@ export interface MessagingCallRecordings {
   call_id: string;
   channels: number | null;
   created_at: Generated<Timestamp>;
+  deleted_at: Timestamp | null;
   duration_seconds: number | null;
   fetch_failure: string | null;
   file_id: string | null;
