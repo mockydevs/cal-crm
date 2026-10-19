@@ -65,6 +65,7 @@ export {
   type StripeSealing,
   type StripeVault,
 } from './stripe-connect.js';
+export { createStripeCheckoutReference, createStripeCheckoutTask } from './stripe-checkout.js';
 export {
   createStripeTransport,
   STRIPE_API_VERSION,
@@ -83,6 +84,7 @@ export type {
 export {
   createPublicDocumentHandlers,
   type PublicAnswer,
+  type PublicCardPayments,
   type PublicDocumentHandlers,
   type PublicDocumentRequest,
 } from './public.js';

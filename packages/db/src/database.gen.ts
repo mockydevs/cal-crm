@@ -1127,6 +1127,24 @@ export interface CommerceSettings {
   updated_at: Generated<Timestamp>;
 }
 
+export interface CommerceStripeCheckouts {
+  amount: Numeric | null;
+  business_id: string;
+  created_at: Generated<Timestamp>;
+  currency: string | null;
+  document_id: string;
+  expires_at: Timestamp | null;
+  failure: string | null;
+  id: Generated<string>;
+  livemode: boolean | null;
+  payment_id: string | null;
+  return_secret_id: string | null;
+  session_id: string | null;
+  session_url: string | null;
+  status: Generated<string>;
+  updated_at: Generated<Timestamp>;
+}
+
 export interface CommerceStripeConnections {
   business_id: string;
   connected_at: Timestamp | null;
@@ -3424,6 +3442,7 @@ export interface DB {
   "commerce.products": CommerceProducts;
   "commerce.sequences": CommerceSequences;
   "commerce.settings": CommerceSettings;
+  "commerce.stripe_checkouts": CommerceStripeCheckouts;
   "commerce.stripe_connections": CommerceStripeConnections;
   "commerce.stripe_endpoint_removals": CommerceStripeEndpointRemovals;
   "crm.bulk_actions": CrmBulkActions;

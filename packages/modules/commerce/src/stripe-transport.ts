@@ -7,6 +7,9 @@
 //   Idempotency-Key of up to 255 characters; a retry returns the saved answer, even a 500).
 //   Webhook endpoints: https://docs.stripe.com/api/webhook_endpoints/create.md (the signing
 //   `secret` is returned only when the endpoint is created).
+//   Checkout Sessions: https://docs.stripe.com/api/checkout/sessions/create.md (hosted page;
+//   expires_at 30 minutes to 24 hours ahead; client_reference_id and integration_identifier up to
+//   200 characters; payment_method_types is left out so the account's own methods are offered).
 import * as z from 'zod';
 
 /** The API version every request and the webhook endpoint use. */
@@ -18,6 +21,7 @@ export const WEBHOOK_ENDPOINT_ID = /^we_[A-Za-z0-9]{8,64}$/;
 
 const ALLOWED: readonly { readonly method: 'POST' | 'DELETE'; readonly path: RegExp }[] = [
   { method: 'POST', path: /^\/v1\/webhook_endpoints$/ },
+  { method: 'POST', path: /^\/v1\/checkout\/sessions$/ },
   { method: 'DELETE', path: /^\/v1\/webhook_endpoints\/we_[A-Za-z0-9]{8,64}$/ },
 ];
 
@@ -200,4 +204,104 @@ export async function deleteWebhookEndpoint(
   // Already gone counts as deleted.
   if (response.status === 200 || response.status === 404) return { outcome: 'deleted' };
   return rejection(response.status);
+}
+
+export const CHECKOUT_SESSION_ID = /^cs_[A-Za-z0-9_]{8,250}$/;
+
+const createdSession = z.object({
+  id: z.string().regex(CHECKOUT_SESSION_ID),
+  url: z
+    .string()
+    .max(4096)
+    .refine((value) => value.startsWith('https://checkout.stripe.com/')),
+  expires_at: z.number().int().positive(),
+  livemode: z.boolean(),
+  amount_total: z.number().int().nonnegative(),
+  currency: z.string().regex(/^[a-z]{3}$/),
+});
+
+export interface CheckoutSessionInput {
+  /** Lowercase, as Stripe takes it. */
+  readonly currency: string;
+  /** In the currency's minor unit. */
+  readonly unitAmount: string;
+  /** What the customer reads on Stripe's page, e.g. "Invoice INV-0042". */
+  readonly name: string;
+  /** This install's own id of the checkout. */
+  readonly reference: string;
+  readonly successUrl: string;
+  readonly cancelUrl: string;
+  /** Seconds since the epoch. */
+  readonly expiresAt: number;
+  readonly integrationIdentifier: string;
+  readonly idempotencyKey: string;
+}
+
+export interface CreatedCheckoutSession {
+  readonly id: string;
+  readonly url: string;
+  readonly expiresAt: Date;
+  readonly livemode: boolean;
+  readonly amountTotal: number;
+  readonly currency: string;
+}
+
+/** One hosted Checkout Session for one line: the invoice's balance. */
+export async function createCheckoutSession(
+  transport: StripeTransport,
+  key: string,
+  input: CheckoutSessionInput,
+): Promise<StripeOutcome<{ readonly session: CreatedCheckoutSession }>> {
+  if (
+    !RESTRICTED_KEY.test(key) ||
+    !/^[a-z]{3}$/.test(input.currency) ||
+    !/^[1-9][0-9]{0,11}$/.test(input.unitAmount) ||
+    input.name.length === 0 ||
+    input.name.length > 250 ||
+    input.reference.length === 0 ||
+    input.reference.length > 200 ||
+    input.integrationIdentifier.length > 200 ||
+    !httpsUrl.safeParse(input.successUrl).success ||
+    !httpsUrl.safeParse(input.cancelUrl).success ||
+    input.idempotencyKey.length === 0 ||
+    input.idempotencyKey.length > 255
+  )
+    return invalid;
+  const form = new URLSearchParams([
+    ['mode', 'payment'],
+    ['line_items[0][price_data][currency]', input.currency],
+    ['line_items[0][price_data][unit_amount]', input.unitAmount],
+    ['line_items[0][price_data][product_data][name]', input.name],
+    ['line_items[0][quantity]', '1'],
+    ['client_reference_id', input.reference],
+    ['metadata[checkout]', input.reference],
+    ['success_url', input.successUrl],
+    ['cancel_url', input.cancelUrl],
+    ['expires_at', String(input.expiresAt)],
+    ['integration_identifier', input.integrationIdentifier],
+    ['submit_type', 'pay'],
+  ]);
+  const response = await exchange(transport, {
+    method: 'POST',
+    path: '/v1/checkout/sessions',
+    key,
+    form,
+    idempotencyKey: input.idempotencyKey,
+  });
+  if (response === 'unknown') return unknown;
+  if (response.status !== 200) return rejection(response.status);
+  const parsed = createdSession.safeParse(response.body);
+  // A session without its address can't be shown; asking again returns the same one.
+  if (!parsed.success) return unknown;
+  return {
+    outcome: 'accepted',
+    session: {
+      id: parsed.data.id,
+      url: parsed.data.url,
+      expiresAt: new Date(parsed.data.expires_at * 1000),
+      livemode: parsed.data.livemode,
+      amountTotal: parsed.data.amount_total,
+      currency: parsed.data.currency,
+    },
+  };
 }

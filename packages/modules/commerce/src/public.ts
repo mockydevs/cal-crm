@@ -13,7 +13,10 @@
 // - a sent quote that has not expired can be accepted or declined, once. The answer runs
 //   the quote's own command as the contact the quote is for, under the quote's row lock,
 //   with the address checked again there. Pressing the same button again changes nothing
-//   and says what already stands.
+//   and says what already stands;
+// - an invoice can be paid by card when the business connected its Stripe account: "Pay now"
+//   asks for a checkout (stripe-checkout.ts), the page waits while the worker makes it, then
+//   sends the customer to Stripe's own page, which sends them back here.
 import type { Readable } from 'node:stream';
 
 import {
@@ -40,12 +43,19 @@ import * as z from 'zod';
 
 import { createDocumentCommands, lockedDocument, readDocument, stateOf } from './documents.js';
 import { linkDigest } from './links.js';
-import { documentPage, unavailablePage } from './print-html.js';
+import { documentPage, unavailablePage, waitingPage } from './print-html.js';
 import { MAX_LOGO_BYTES } from './print-pdf.js';
 import { printedDate } from './print.js';
 import { pdfOf, printableOf, type Printable } from './printing.js';
 import { kindOf, statusOf } from './rules.js';
 import { businessToday, heldBusiness, MANAGE, type CommerceOptions } from './shared.js';
+import {
+  cardPayable,
+  createRequestCheckoutCommand,
+  readCheckoutState,
+  type CheckoutFailure,
+} from './stripe-checkout.js';
+import type { StripeSealing } from './stripe-connect.js';
 
 /** What the transport says about a request. The address is the one the server saw. */
 export interface PublicDocumentRequest {
@@ -91,9 +101,43 @@ export interface PublicDocumentHandlers {
     answer: QuoteAnswer,
     request: PublicDocumentRequest,
   ) => Promise<PublicAnswer<{ readonly answered: boolean; readonly html: string }>>;
+  /**
+   * "Pay now" on an invoice: the checkout to wait for, or the page saying why the invoice can't
+   * be paid by card now.
+   */
+  readonly pay: (
+    token: string,
+    request: PublicDocumentRequest,
+  ) => Promise<PublicAnswer<{ readonly checkoutId: string } | { readonly html: string }>>;
+  /** A checkout of the invoice: Stripe's page to go to, or a page to show (waiting, or why not). */
+  readonly payment: (
+    token: string,
+    checkoutId: string,
+    request: PublicDocumentRequest,
+  ) => Promise<PublicAnswer<{ readonly redirect: string } | { readonly html: string }>>;
+  /** The page Stripe sends the customer back to once they paid. */
+  readonly paid: (token: string, request: PublicDocumentRequest) => Promise<PublicAnswer<string>>;
   /** The page of an address that opens nothing. */
   readonly unavailable: () => string;
 }
+
+/** Card payments, where the install has a vault to seal the page's address in. */
+export interface PublicCardPayments {
+  readonly vault: StripeSealing;
+}
+
+const NOT_NOW = 'Card payment isn’t available for this invoice right now. Please try again later.';
+
+/** Why the invoice can't be paid by card, in words for its customer. */
+const cardRefusal: Readonly<Record<CheckoutFailure, string>> = {
+  not_connected: NOT_NOW,
+  key_rejected: NOT_NOW,
+  missing_permission: NOT_NOW,
+  provider_error: 'Card payment couldn’t be started. Please try again in a few minutes.',
+  not_payable: 'This invoice can no longer be paid here.',
+  unsupported_currency: 'Card payment isn’t available in this invoice’s currency.',
+  below_minimum: 'The amount left to pay is below the smallest card payment.',
+};
 
 interface Scope {
   readonly agencyId: string;
@@ -134,6 +178,7 @@ function noticeOf(document: SalesDocument): string | undefined {
 export function createPublicDocumentHandlers(
   db: Database,
   options: CommerceOptions,
+  cards?: PublicCardPayments,
 ): PublicDocumentHandlers {
   const services: Services = { db, authorize: allowEveryone };
   const documents = createDocumentCommands(options);
@@ -194,16 +239,25 @@ export function createPublicDocumentHandlers(
     return document.status === 'draft' || document.status === 'void' ? undefined : document;
   }
 
+  interface Found {
+    readonly document: SalesDocument;
+    readonly printable: Printable;
+    /** Whether "Pay now" is shown. */
+    readonly payable: boolean;
+  }
+
   /** Reads the document and what it is printed from, in one transaction. */
-  async function read(
-    scope: Scope,
-    request: PublicDocumentRequest,
-  ): Promise<{ readonly document: SalesDocument; readonly printable: Printable } | undefined> {
+  async function read(scope: Scope, request: PublicDocumentRequest): Promise<Found | undefined> {
     const invocation = reader(scope, request);
     return withTenant(db, invocation.context, async (trx) => {
       const document = await open(trx, scope, invocation);
       if (document === undefined) return undefined;
-      return { document, printable: await printableOf(options, trx, invocation, document) };
+      return {
+        document,
+        printable: await printableOf(options, trx, invocation, document),
+        payable:
+          cards !== undefined && (await cardPayable(trx, scope.businessId, scope.documentId)),
+      };
     });
   }
 
@@ -212,11 +266,7 @@ export function createPublicDocumentHandlers(
     PAGE_LOGO_TYPES.has(printable.logo.contentType) &&
     printable.logo.size <= MAX_LOGO_BYTES;
 
-  const pageOf = (
-    scope: Scope,
-    found: { readonly document: SalesDocument; readonly printable: Printable },
-    notice?: string,
-  ): string =>
+  const pageOf = (scope: Scope, found: Found, notice?: string): string =>
     documentPage({
       printed: found.printable.printed,
       path: `${SALES_DOCUMENT_LINK_PATH}/${scope.token}`,
@@ -224,6 +274,7 @@ export function createPublicDocumentHandlers(
       answerable:
         found.document.contactId !== null &&
         quoteAnswerRefusal(found.document, found.document.expired) === undefined,
+      payable: found.payable,
       notice: notice ?? noticeOf(found.document),
     });
 
@@ -353,6 +404,79 @@ export function createPublicDocumentHandlers(
       return after === undefined
         ? { outcome: 'gone' }
         : { outcome: 'ok', value: { answered: true, html: pageOf(scope, after) } };
+    },
+
+    async pay(token, request) {
+      const scope = await scopeOf(token);
+      if (scope === undefined) return { outcome: 'unknown' };
+      const before = await read(scope, request);
+      if (before === undefined) return { outcome: 'gone' };
+      if (cards === undefined)
+        return { outcome: 'ok', value: { html: pageOf(scope, before, NOT_NOW) } };
+      let result;
+      try {
+        result = await runCommand(
+          services,
+          createRequestCheckoutCommand(options, cards.vault, scope.token),
+          { documentId: scope.documentId, digest: scope.digest },
+          {
+            context: reader(scope, request).context,
+            // The one thing the address lets its holder do here; the command checks the address
+            // again under the invoice's lock.
+            permissions: new Set([MANAGE]),
+            ip: request.ipAddress,
+            ...(request.userAgent === undefined ? {} : { userAgent: request.userAgent }),
+          },
+        );
+      } catch (error) {
+        if (error instanceof NotFoundError) return { outcome: 'gone' };
+        throw error;
+      }
+      if (result.outcome === 'requested')
+        return { outcome: 'ok', value: { checkoutId: result.checkoutId } };
+      const now = await read(scope, request);
+      return now === undefined
+        ? { outcome: 'gone' }
+        : { outcome: 'ok', value: { html: pageOf(scope, now, cardRefusal[result.reason]) } };
+    },
+
+    async payment(token, checkoutId, request) {
+      if (!z.uuid().safeParse(checkoutId).success) return { outcome: 'unknown' };
+      const scope = await scopeOf(token);
+      if (scope === undefined) return { outcome: 'unknown' };
+      const path = `${SALES_DOCUMENT_LINK_PATH}/${scope.token}`;
+      const invocation = reader(scope, request);
+      const checkout = await withTenant(db, invocation.context, async (trx) =>
+        (await open(trx, scope, invocation)) === undefined
+          ? null
+          : readCheckoutState(trx, options, scope.documentId, checkoutId),
+      );
+      if (checkout === null) return { outcome: 'gone' };
+      if (checkout === undefined) return { outcome: 'unknown' };
+      if (checkout.state === 'open') return { outcome: 'ok', value: { redirect: checkout.url } };
+      if (checkout.state === 'preparing')
+        return { outcome: 'ok', value: { html: waitingPage(path) } };
+      if (checkout.state === 'paid') return { outcome: 'ok', value: { redirect: path } };
+      const found = await read(scope, request);
+      if (found === undefined) return { outcome: 'gone' };
+      const notice =
+        checkout.state === 'expired'
+          ? 'That payment page expired. Press Pay now to start again.'
+          : cardRefusal[checkout.failure];
+      return { outcome: 'ok', value: { html: pageOf(scope, found, notice) } };
+    },
+
+    async paid(token, request) {
+      const scope = await scopeOf(token);
+      if (scope === undefined) return { outcome: 'unknown' };
+      const found = await read(scope, request);
+      if (found === undefined) return { outcome: 'gone' };
+      // Stripe's notice that it was paid may come a moment after the customer is back.
+      const notice =
+        found.document.status === 'paid'
+          ? undefined
+          : 'Thank you. Your payment is being confirmed; this page shows it once it is.';
+      return { outcome: 'ok', value: pageOf(scope, found, notice) };
     },
 
     unavailable: unavailablePage,

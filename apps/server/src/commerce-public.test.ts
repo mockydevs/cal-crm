@@ -15,6 +15,8 @@ const documentHtml = '<!doctype html><title>Quote Q-0007</title><p>Harbor Lights
 const unavailableHtml = '<!doctype html><p>This document is no longer available.</p>';
 const pdfBytes = new Uint8Array(Buffer.from('%PDF-1.7 synthetic quote'));
 const logoBytes = Buffer.from('synthetic-png-bytes');
+const checkoutId = '0199a3f2-3c4d-7e5f-8a9b-0c1d2e3f4a5b';
+const stripeUrl = 'https://checkout.stripe.com/c/pay/cs_test_a1B2c3D4e5#fid';
 const config: Config = {
   nodeEnv: 'test',
   role: 'app',
@@ -69,6 +71,15 @@ async function start() {
     answer: vi
       .fn<PublicDocumentHandlers['answer']>()
       .mockResolvedValue({ outcome: 'ok', value: { answered: true, html: documentHtml } }),
+    pay: vi
+      .fn<PublicDocumentHandlers['pay']>()
+      .mockResolvedValue({ outcome: 'ok', value: { checkoutId } }),
+    payment: vi
+      .fn<PublicDocumentHandlers['payment']>()
+      .mockResolvedValue({ outcome: 'ok', value: { redirect: stripeUrl } }),
+    paid: vi
+      .fn<PublicDocumentHandlers['paid']>()
+      .mockResolvedValue({ outcome: 'ok', value: documentHtml }),
     unavailable: vi.fn<PublicDocumentHandlers['unavailable']>().mockReturnValue(unavailableHtml),
   };
   const rateLimit = vi.fn<PublicBookingRateLimit>().mockResolvedValue({ allowed: true });
@@ -213,6 +224,61 @@ it.each(['accept', 'decline'] as const)(
   },
 );
 
+it("takes Pay now from the path alone and sends the customer to the checkout's own address", async () => {
+  const { app, handlers, rateLimit } = await start();
+  const response = await app.inject({
+    method: 'POST',
+    url: `${path}/pay`,
+    remoteAddress: '192.0.2.8',
+    headers: form,
+    payload: 'amount=1&documentId=forged',
+  });
+  // 303, so reloading never asks for another checkout.
+  expect(response.statusCode).toBe(303);
+  expect(response.headers.location).toBe(`${path}/pay/${checkoutId}`);
+  expect(response.headers).toMatchObject(privateHeaders);
+  expect(vi.mocked(handlers.pay).mock.calls[0]?.[0]).toBe(token);
+  expect(handlers.answer).not.toHaveBeenCalled();
+  expect(rateLimit.mock.calls[0]?.[1]).toBe('write');
+});
+
+it("sends the customer on to Stripe's page, or shows the waiting page until it is ready", async () => {
+  const { app, handlers } = await start();
+  const ready = await app.inject(`${path}/pay/${checkoutId}`);
+  expect(ready.statusCode).toBe(303);
+  expect(ready.headers.location).toBe(stripeUrl);
+  expect(vi.mocked(handlers.payment).mock.calls[0]?.slice(0, 2)).toEqual([token, checkoutId]);
+
+  const waitingHtml = '<!doctype html><meta http-equiv="refresh" content="2"><p>Preparing</p>';
+  vi.mocked(handlers.payment).mockResolvedValue({ outcome: 'ok', value: { html: waitingHtml } });
+  const waiting = await app.inject(`${path}/pay/${checkoutId}`);
+  expect(waiting.statusCode).toBe(200);
+  expect(waiting.body).toBe(waitingHtml);
+  expect(waiting.headers['content-security-policy']).toBe(DOCUMENT_PAGE_POLICY);
+  expect(waiting.headers).toMatchObject(privateHeaders);
+});
+
+it('shows why Pay now was refused on the page itself, and the page Stripe sends back to', async () => {
+  const { app, handlers } = await start();
+  const refusedHtml = '<!doctype html><p>Card payment isn’t available.</p>';
+  vi.mocked(handlers.pay).mockResolvedValue({ outcome: 'ok', value: { html: refusedHtml } });
+  const refused = await app.inject({
+    method: 'POST',
+    url: `${path}/pay`,
+    headers: form,
+    payload: '',
+  });
+  expect(refused.statusCode).toBe(409);
+  expect(refused.body).toBe(refusedHtml);
+  expect(refused.headers.location).toBeUndefined();
+
+  const back = await app.inject(`${path}/paid`);
+  expect(back.statusCode).toBe(200);
+  expect(back.body).toBe(documentHtml);
+  expect(back.headers['content-security-policy']).toBe(DOCUMENT_PAGE_POLICY);
+  expect(vi.mocked(handlers.paid).mock.calls[0]?.[0]).toBe(token);
+});
+
 it('shows why an answer was refused on the page itself, without a redirect', async () => {
   const { app, handlers } = await start();
   const refusedHtml = '<!doctype html><p>This quote has expired.</p>';
@@ -315,6 +381,9 @@ it('mounts no public document address for a role that does not serve the API', a
     pdf: vi.fn<PublicDocumentHandlers['pdf']>(),
     logo: vi.fn<PublicDocumentHandlers['logo']>(),
     answer: vi.fn<PublicDocumentHandlers['answer']>(),
+    pay: vi.fn<PublicDocumentHandlers['pay']>(),
+    payment: vi.fn<PublicDocumentHandlers['payment']>(),
+    paid: vi.fn<PublicDocumentHandlers['paid']>(),
     unavailable: vi.fn<PublicDocumentHandlers['unavailable']>(),
   };
   const rateLimit = vi.fn<PublicBookingRateLimit>().mockResolvedValue({ allowed: true });

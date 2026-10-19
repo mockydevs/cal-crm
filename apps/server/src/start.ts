@@ -19,6 +19,7 @@ import { createAuthentication, readUserNames, type Authentication } from '@repo/
 import {
   createRemoveStripeEndpointsTask,
   createSetUpStripeTask,
+  createStripeCheckoutTask,
   createStripeTransport,
 } from '@repo/module-commerce';
 import {
@@ -544,6 +545,11 @@ export async function start(
                   // Card payments: the webhook endpoint on each business's own Stripe account.
                   createSetUpStripeTask(vault.opening, createStripeTransport(), config.publicUrl),
                   createRemoveStripeEndpointsTask(vault.opening, createStripeTransport()),
+                  createStripeCheckoutTask(
+                    vault.opening,
+                    createStripeTransport(),
+                    config.publicUrl,
+                  ),
                 ]
               : resolvedTasks,
           ...(vault === undefined ? {} : { mailboxVault: vault.sealing, vault: vault.opening }),
@@ -796,7 +802,13 @@ export async function start(
   const publicDocuments =
     publicIntakeLimit === undefined
       ? undefined
-      : registeredPublicDocuments(db, commerceOptions(commerce), publicIntakeLimit);
+      : registeredPublicDocuments(
+          db,
+          commerceOptions(commerce),
+          publicIntakeLimit,
+          // Card payments seal the page's address for the worker, so they need the vault.
+          vault === undefined ? undefined : { vault: vault.sealing },
+        );
   // A site's published pages (/s/<key>/<path>) and the preview of a draft. Mounted, like
   // every public surface, only with the limiter; its secret also keys the preview links.
   const publicSites =

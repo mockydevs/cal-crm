@@ -778,6 +778,7 @@ do $$
 declare
   b constant uuid := current_setting('test.b1');
   secret_1 uuid;
+  document_1 uuid;
 begin
   -- One of the business's own secrets: the count of what each business sees stays as it is.
   select id into secret_1 from vault.secrets where business_id = b order by id limit 1;
@@ -788,6 +789,14 @@ begin
             secret_1, now());
   insert into commerce.stripe_endpoint_removals (business_id, key_secret_id, webhook_endpoint_id)
     values (b, secret_1, 'we_0000000000000002');
+  -- A customer paying an invoice by card (0142): a session made and waiting at Stripe.
+  select id into document_1 from commerce.documents
+    where business_id = b and kind = 'invoice' order by id limit 1;
+  insert into commerce.stripe_checkouts (business_id, document_id, status, amount, currency,
+                                         session_id, session_url, expires_at, livemode)
+    values (b, document_1, 'open', 1500, 'KES', 'cs_test_0000000000000001',
+            'https://checkout.stripe.com/c/pay/cs_test_0000000000000001', now() + interval '1 hour',
+            false);
 end $$;
 
 -- 3. Business 2 (same agency) and business 3 (another agency): just enough to compare --------

@@ -84,11 +84,13 @@ export interface DocumentPage {
   readonly logo: boolean;
   /** Whether the customer can accept or decline here, now. */
   readonly answerable: boolean;
+  /** Whether the customer can pay the invoice by card here, now. */
+  readonly payable?: boolean | undefined;
   /** One line above the document: what happened, or why something cannot be done. */
   readonly notice?: string | undefined;
 }
 
-const shell = (title: string, body: string): string =>
+const shell = (title: string, body: string, refreshSeconds?: number): string =>
   [
     '<!doctype html>',
     '<html lang="en">',
@@ -97,6 +99,9 @@ const shell = (title: string, body: string): string =>
     '<meta name="viewport" content="width=device-width, initial-scale=1">',
     '<meta name="robots" content="noindex, nofollow">',
     '<meta name="referrer" content="no-referrer">',
+    ...(refreshSeconds === undefined
+      ? []
+      : [`<meta http-equiv="refresh" content="${String(refreshSeconds)}">`]),
     `<title>${escapeHtml(title)}</title>`,
     `<style>${DOCUMENT_PAGE_STYLE}</style>`,
     '</head>',
@@ -124,7 +129,7 @@ export function documentPage(page: DocumentPage): string {
       ? ''
       : `<p class="notice" role="status">${escapeHtml(page.notice)}</p>`,
     '<div class="bar">',
-    `<span>${page.answerable ? form('accept', 'Accept quote', true) + ' ' + form('decline', 'Decline', false) : ''}</span>`,
+    `<span>${page.answerable ? form('accept', 'Accept quote', true) + ' ' + form('decline', 'Decline', false) : ''}${page.payable === true ? form('pay', 'Pay now', true) : ''}</span>`,
     `<a class="button" href="${path}/pdf">Download PDF</a>`,
     '</div>',
     '<article class="sheet">',
@@ -192,5 +197,17 @@ export function unavailablePage(): string {
   return shell(
     'No longer available',
     '<article class="sheet"><p class="name">This document is no longer available.</p><p class="muted">Ask whoever sent it to you for a new link.</p></article>',
+  );
+}
+
+/**
+ * While the card payment is being prepared: the page asks again every two seconds by itself,
+ * with no script, and goes on to Stripe's page as soon as it is ready.
+ */
+export function waitingPage(documentPath: string): string {
+  return shell(
+    'Preparing secure payment',
+    `<article class="sheet"><p class="name" role="status">Preparing secure payment…</p><p class="muted">This page moves on by itself in a moment.</p><p><a class="button" href="${documentPath}">Back to the invoice</a></p></article>`,
+    2,
   );
 }

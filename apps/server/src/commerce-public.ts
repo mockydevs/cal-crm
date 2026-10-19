@@ -6,6 +6,9 @@
 //   GET  /d/<token>/logo     the seller's logo, for the page's own image
 //   POST /d/<token>/accept   a quote's customer accepts it, then is sent back to the page
 //   POST /d/<token>/decline  the same, declining
+//   POST /d/<token>/pay      "Pay now" on an invoice: asks for a card checkout, then waits for it
+//   GET  /d/<token>/pay/<id> the checkout: Stripe's page once it is ready, a waiting page before
+//   GET  /d/<token>/paid     where Stripe sends the customer back after paying
 //
 // Order of checks, before any handler: the shared rate limit, by address (fail closed).
 // The page runs no script, loads nothing from anywhere else and cannot be framed; the
@@ -19,6 +22,7 @@ import {
   DOCUMENT_PAGE_POLICY,
   type CommerceOptions,
   type PublicAnswer,
+  type PublicCardPayments,
   type PublicDocumentHandlers,
   type PublicDocumentRequest,
 } from '@repo/module-commerce';
@@ -38,8 +42,9 @@ export function registeredPublicDocuments(
   db: Database,
   options: CommerceOptions,
   rateLimit: PublicBookingRateLimit,
+  cards?: PublicCardPayments,
 ): PublicDocumentTransport {
-  return { handlers: createPublicDocumentHandlers(db, options), rateLimit };
+  return { handlers: createPublicDocumentHandlers(db, options, cards), rateLimit };
 }
 
 /** What is kept of a browser's name for itself. */
@@ -180,6 +185,35 @@ export async function registerPublicDocuments(
             .header('content-length', String(logo.size))
             .header('content-security-policy', "default-src 'none'; sandbox")
             .send(logo.body),
+        ),
+      );
+      publicApp.post<Token>('/:token/pay', { bodyLimit: BODY_LIMIT }, async (request, reply) => {
+        const { token } = request.params;
+        return answered(reply, await handlers.pay(token, requestOf(request)), (result) =>
+          'checkoutId' in result
+            ? // To the checkout's own address, so reloading it never asks for another.
+              reply.redirect(`${SALES_DOCUMENT_LINK_PATH}/${token}/pay/${result.checkoutId}`, 303)
+            : page(reply, 409, result.html),
+        );
+      });
+      publicApp.get<{ Params: { token: string; checkout: string } }>(
+        '/:token/pay/:checkout',
+        options,
+        async (request, reply) => {
+          const { token, checkout } = request.params;
+          return answered(
+            reply,
+            await handlers.payment(token, checkout, requestOf(request)),
+            (result) =>
+              'redirect' in result
+                ? reply.redirect(result.redirect, 303)
+                : page(reply, 200, result.html),
+          );
+        },
+      );
+      publicApp.get<Token>('/:token/paid', options, async (request, reply) =>
+        answered(reply, await handlers.paid(request.params.token, requestOf(request)), (html) =>
+          page(reply, 200, html),
         ),
       );
       publicApp.post<{ Params: { token: string; answer: string } }>(

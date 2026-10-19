@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  createCheckoutSession,
   createStripeTransport,
   createWebhookEndpoint,
   deleteWebhookEndpoint,
@@ -37,8 +38,10 @@ const endpoint = {
 };
 
 describe('the requests it allows', () => {
-  it('allows creating and deleting webhook endpoints, and nothing else', () => {
+  it('allows webhook endpoints and Checkout Sessions, and nothing else', () => {
     expect(isAllowedStripeRequest('POST', '/v1/webhook_endpoints')).toBe(true);
+    expect(isAllowedStripeRequest('POST', '/v1/checkout/sessions')).toBe(true);
+    expect(isAllowedStripeRequest('POST', '/v1/checkout/sessions/cs_test_1/expire')).toBe(false);
     expect(isAllowedStripeRequest('DELETE', `/v1/webhook_endpoints/${endpoint.id}`)).toBe(true);
     expect(isAllowedStripeRequest('GET', '/v1/webhook_endpoints')).toBe(false);
     expect(isAllowedStripeRequest('POST', '/v1/charges')).toBe(false);
@@ -179,5 +182,104 @@ describe('deleting a webhook endpoint', () => {
       status: null,
     });
     expect(seen).toEqual([]);
+  });
+});
+
+const session = {
+  id: 'cs_test_a11YYufWQzNY63zpQ6QSNRQhkUpVph4WRmzW0zWJO2znZKdVujZ0N0S22u',
+  object: 'checkout.session',
+  url: 'https://checkout.stripe.com/c/pay/cs_test_a11YYufWQzNY63zpQ6QSNRQhkUpVph4WRmzW0zWJO2znZKdVujZ0N0S22u#fid',
+  expires_at: 1_679_686_615,
+  livemode: false,
+  amount_total: 1099,
+  currency: 'usd',
+  status: 'open',
+  payment_status: 'unpaid',
+};
+
+const checkout = {
+  currency: 'usd',
+  unitAmount: '1099',
+  name: 'Invoice INV-0042',
+  reference: '0199a3f2-3c4d-7e5f-8a9b-0c1d2e3f4a5b',
+  successUrl: 'https://crm.example.com/d/token?paid=1',
+  cancelUrl: 'https://crm.example.com/d/token',
+  expiresAt: 1_679_686_615,
+  integrationIdentifier: 'cal-crm-invoice-abcdefgh',
+  idempotencyKey: 'cal-crm-checkout-0199a3f2',
+};
+
+describe('creating a Checkout Session', () => {
+  it('sends one line for the balance, the return addresses and an idempotency key', async () => {
+    const seen: Seen[] = [];
+    const transport = createStripeTransport({ fetcher: fakeFetch(200, session, seen) });
+    const result = await createCheckoutSession(transport, KEY, checkout);
+    expect(result).toEqual({
+      outcome: 'accepted',
+      session: {
+        id: session.id,
+        url: session.url,
+        expiresAt: new Date(1_679_686_615_000),
+        livemode: false,
+        amountTotal: 1099,
+        currency: 'usd',
+      },
+    });
+    const [call] = seen;
+    expect(call?.url).toBe('https://api.stripe.com/v1/checkout/sessions');
+    expect(call?.init.method).toBe('POST');
+    const headers = new Headers(call?.init.headers);
+    expect(headers.get('idempotency-key')).toBe(checkout.idempotencyKey);
+    expect(headers.get('stripe-version')).toBe(STRIPE_API_VERSION);
+    const form = new URLSearchParams(call?.init.body as string);
+    expect([...form.entries()]).toEqual([
+      ['mode', 'payment'],
+      ['line_items[0][price_data][currency]', 'usd'],
+      ['line_items[0][price_data][unit_amount]', '1099'],
+      ['line_items[0][price_data][product_data][name]', 'Invoice INV-0042'],
+      ['line_items[0][quantity]', '1'],
+      ['client_reference_id', checkout.reference],
+      ['metadata[checkout]', checkout.reference],
+      ['success_url', checkout.successUrl],
+      ['cancel_url', checkout.cancelUrl],
+      ['expires_at', '1679686615'],
+      ['integration_identifier', checkout.integrationIdentifier],
+      ['submit_type', 'pay'],
+    ]);
+    expect(form.has('payment_method_types[]')).toBe(false);
+  });
+
+  it('refuses what Stripe could not charge, without calling it', async () => {
+    const seen: Seen[] = [];
+    const transport = createStripeTransport({ fetcher: fakeFetch(200, session, seen) });
+    for (const changed of [
+      { unitAmount: '0' },
+      { unitAmount: '10.99' },
+      { currency: 'USD' },
+      { successUrl: 'http://crm.example.com/d/token' },
+      { reference: 'x'.repeat(201) },
+    ])
+      expect(await createCheckoutSession(transport, KEY, { ...checkout, ...changed })).toEqual({
+        outcome: 'rejected',
+        reason: 'invalid',
+        status: null,
+      });
+    expect(seen).toEqual([]);
+  });
+
+  it('maps a refused key and a missing permission, and treats a page elsewhere as unknown', async () => {
+    const at = (status: number, body: unknown) =>
+      createCheckoutSession(
+        createStripeTransport({ fetcher: fakeFetch(status, body) }),
+        KEY,
+        checkout,
+      );
+    expect(await at(401, {})).toMatchObject({ outcome: 'rejected', reason: 'unauthorized' });
+    expect(await at(403, {})).toMatchObject({ outcome: 'rejected', reason: 'forbidden' });
+    expect(await at(400, {})).toMatchObject({ outcome: 'rejected', reason: 'refused' });
+    expect(await at(500, {})).toEqual({ outcome: 'unknown' });
+    expect(await at(200, { ...session, url: 'https://evil.example.com/pay' })).toEqual({
+      outcome: 'unknown',
+    });
   });
 });
