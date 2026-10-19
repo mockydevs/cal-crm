@@ -195,8 +195,8 @@ msgid "Calls aren't recorded yet. What you set here is saved and used once they 
 msgstr "Calls aren't recorded yet. What you set here is saved and used once they are."
 
 #: src/phone-system-parts.tsx
-msgid "Calls can be made from this business's numbers. Calls to them aren't answered here yet."
-msgstr "Calls can be made from this business's numbers. Calls to them aren't answered here yet."
+msgid "Calls can be made from this business's numbers and are answered here."
+msgstr "Calls can be made from this business's numbers and are answered here."
 
 #: src/phone-system-number.tsx
 msgid "Calls can't be made or taken yet. What you set here is saved and used once they can."
@@ -225,14 +225,6 @@ msgstr "Calls to and from the business's numbers, newest first."
 #: src/phone-system-number.tsx
 msgid "Calls to and from this number are recorded."
 msgstr "Calls to and from this number are recorded."
-
-#: src/phone-system-voice.tsx
-msgid "Calls to this business's numbers aren't put through to anyone yet. What you set here is saved and used once they are."
-msgstr "Calls to this business's numbers aren't put through to anyone yet. What you set here is saved and used once they are."
-
-#: src/phone-system-number.tsx
-msgid "Calls to this number aren't put through to anyone yet. What you set here is saved and used once they are."
-msgstr "Calls to this number aren't put through to anyone yet. What you set here is saved and used once they are."
 
 #: src/phone-system.tsx
 msgid "Can't take calls"
@@ -583,6 +575,10 @@ msgstr "No SMS connections yet. Connect Twilio to get started."
 #: src/phone-system-calling.tsx
 msgid "No Twilio account is connected yet. Connect one below to set up calling."
 msgstr "No Twilio account is connected yet. Connect one below to set up calling."
+
+#: src/phone-system-number.tsx
+msgid "No voicemail is taken yet: a caller nobody answers is hung up on."
+msgstr "No voicemail is taken yet: a caller nobody answers is hung up on."
 
 #: src/phone-system-number.tsx
 #: src/phone-system.tsx

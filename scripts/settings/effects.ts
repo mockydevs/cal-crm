@@ -12,8 +12,9 @@ const OWNERS = 'packages/modules/crm/src/pipelines/settings.int.test.ts';
 const OUTBOUND = 'packages/modules/messaging/src/outbound.int.test.ts';
 const TRACKING = 'packages/modules/forms/src/tracking/tracking.int.test.ts';
 
-const INBOUND_ROUTING =
-  'Honoured by resolveInboundRoute (voice-routing.test.ts), which nothing calls yet: inbound calls are not routed yet.';
+const INBOUND_CALL = 'packages/modules/messaging/src/voice/inbound-call.int.test.ts';
+const VOICEMAIL_BACKUP =
+  'Stored with the route, but no voicemail is taken yet: a caller nobody answered is hung up on.';
 const CALL_HANDLING =
   'Nothing reads it yet: call connect, whisper and the outbound caller ID are not built yet.';
 const RECORDING =
@@ -172,9 +173,18 @@ export const effects: Effects = {
       'packages/modules/messaging/src/call-lifecycle.int.test.ts',
       'stores a requested call from the default number, queues the worker once, and answers a retry with the same call',
     ),
-    inbound_prefer_assigned_user: { gap: INBOUND_ROUTING },
-    inbound_allow_anonymous: { gap: INBOUND_ROUTING },
-    inbound_fallback_e164: { gap: INBOUND_ROUTING },
+    inbound_prefer_assigned_user: proof(
+      INBOUND_CALL,
+      'rings the assigned number owner first when inbound_prefer_assigned_user is on, and skips them when off',
+    ),
+    inbound_allow_anonymous: proof(
+      INBOUND_CALL,
+      'allows anonymous callers when inbound_allow_anonymous is on, and hangs up when off',
+    ),
+    inbound_fallback_e164: proof(
+      INBOUND_CALL,
+      'adds the business fallback number to the route when set, and not when cleared',
+    ),
     outbound_caller_id: { gap: CALL_HANDLING },
     outbound_quiet_hours_warning: {
       gap: 'Nothing reads it yet: placing a call does not warn about the contact’s quiet hours.',
@@ -187,15 +197,39 @@ export const effects: Effects = {
   },
   'messaging.phone_number_settings': {
     phone_number_id: { notASetting: 'The number these settings belong to: part of the key.' },
-    owner_user_id: { gap: INBOUND_ROUTING },
-    primary_user_id: { gap: INBOUND_ROUTING },
-    ring_also_user_ids: { gap: INBOUND_ROUTING },
-    forward_to_e164: { gap: INBOUND_ROUTING },
-    use_business_fallback: { gap: INBOUND_ROUTING },
-    ring_timeout_seconds: { gap: INBOUND_ROUTING },
-    voicemail_backup: { gap: INBOUND_ROUTING },
-    forwarded_caller_id: { gap: INBOUND_ROUTING },
-    prefer_contact_owner: { gap: INBOUND_ROUTING },
+    owner_user_id: proof(
+      INBOUND_CALL,
+      'rings the number owner when owner_user_id is set, and skips them when null',
+    ),
+    primary_user_id: proof(
+      INBOUND_CALL,
+      'rings the primary user set on the number, and changes when primary_user_id changes',
+    ),
+    ring_also_user_ids: proof(
+      INBOUND_CALL,
+      'rings additional team members in parallel when ring_also_user_ids is set, and not when empty',
+    ),
+    forward_to_e164: proof(
+      INBOUND_CALL,
+      'rings the outside number set to forward to, and not when it is cleared',
+    ),
+    use_business_fallback: proof(
+      INBOUND_CALL,
+      'falls back to the business number when use_business_fallback is on, and not when off',
+    ),
+    ring_timeout_seconds: proof(
+      INBOUND_CALL,
+      'changes the dial timeout when ring_timeout_seconds changes',
+    ),
+    voicemail_backup: { gap: VOICEMAIL_BACKUP },
+    forwarded_caller_id: proof(
+      INBOUND_CALL,
+      'uses caller or business number as callerId when forwarded_caller_id changes',
+    ),
+    prefer_contact_owner: proof(
+      INBOUND_CALL,
+      'rings the contact owner first when prefer_contact_owner is on, and not when off',
+    ),
     call_connect_confirmation: { gap: CALL_HANDLING },
     whisper_enabled: { gap: CALL_HANDLING },
     whisper_message: { gap: CALL_HANDLING },

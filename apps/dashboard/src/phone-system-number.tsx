@@ -369,14 +369,6 @@ export function NumberEditor({
                           the outside number, then the business fallback number.
                         </Trans>
                       </p>
-                      {calling?.available === true ? (
-                        <NotYet>
-                          <Trans>
-                            Calls to this number aren't put through to anyone yet. What you set here
-                            is saved and used once they are.
-                          </Trans>
-                        </NotYet>
-                      ) : null}
                       <MemberSelect
                         label={t`First, a team member`}
                         none={t`No one`}
@@ -469,6 +461,13 @@ export function NumberEditor({
                           />
                         )}
                       </Labeled>
+                      {calling?.available === true ? (
+                        <NotYet>
+                          <Trans>
+                            No voicemail is taken yet: a caller nobody answers is hung up on.
+                          </Trans>
+                        </NotYet>
+                      ) : null}
                       <SwitchRow
                         label={t`Voicemail backup`}
                         description={t`Take a voicemail when nobody answers.`}

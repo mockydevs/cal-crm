@@ -334,7 +334,7 @@ describe('the number inventory', () => {
     open();
     expect(
       await screen.findByText(
-        "Calls can be made from this business's numbers. Calls to them aren't answered here yet.",
+        "Calls can be made from this business's numbers and are answered here.",
       ),
     ).toBeDefined();
   });
@@ -784,10 +784,19 @@ describe('a number configuration', () => {
     const dialog = await edit(user, 'Front desk');
     expect(within(dialog).queryByText(/Calls can't be made or taken yet/)).toBeNull();
     expect(within(dialog).getByText(/Calls aren't recorded yet\./)).toBeDefined();
-    expect(
-      within(dialog).getByText(/Calls to this number aren't put through to anyone yet\./),
-    ).toBeDefined();
     expect(within(dialog).getByText(/None of these are used on calls yet\./)).toBeDefined();
+  });
+
+  it('shows that voicemail backup is not taken yet once calls can be made', async () => {
+    serve({
+      getPhoneSystemSettings: () => settingsOf({ calling: { available: true, unavailable: null } }),
+    });
+    const user = open();
+    const dialog = await edit(user, 'Front desk');
+    await user.click(within(dialog).getByRole('tab', { name: 'Call forwarding' }));
+    expect(
+      within(dialog).getByText('No voicemail is taken yet: a caller nobody answers is hung up on.'),
+    ).toBeDefined();
   });
 });
 
@@ -873,11 +882,7 @@ describe('the voice settings', () => {
     const form = await voiceTab(user);
     const group = (name: string): HTMLElement => within(form).getByRole('region', { name });
     expect(within(group('Default number')).queryByText(/yet\./)).toBeNull();
-    expect(
-      within(group('Incoming calls')).getByText(
-        /Calls to this business's numbers aren't put through to anyone yet\./,
-      ),
-    ).toBeDefined();
+    expect(within(group('Incoming calls')).queryByText(/yet\./)).toBeNull();
     expect(
       within(group('Outgoing calls')).getByText(/None of these are used on calls yet\./),
     ).toBeDefined();

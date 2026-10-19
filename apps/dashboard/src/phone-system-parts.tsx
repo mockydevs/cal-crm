@@ -196,7 +196,7 @@ export function CallingNotice({ calling }: { readonly calling: PhoneCalling }): 
         role="status"
         className="rounded-xl border border-border bg-card px-4 py-3 text-md leading-relaxed"
       >
-        {t`Calls can be made from this business's numbers. Calls to them aren't answered here yet.`}
+        {t`Calls can be made from this business's numbers and are answered here.`}
       </p>
     );
   const text = {

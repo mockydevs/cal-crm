@@ -676,3 +676,306 @@ it("books each ringing person's progress on their own leg, and the call connects
   expect(calls[0]?.state).toBe('connected');
   expect(calls[0]?.needs_reconciliation).toBe(false);
 });
+
+it('rings the assigned number owner first when inbound_prefer_assigned_user is on, and skips them when off', async () => {
+  const b = await world();
+  const ownerUser = await database.fixtures.user();
+  await database.as('crm_owner', (sql) =>
+    sql.query(
+      `insert into tenancy.memberships (agency_id, business_id, user_id, role_id) values ($1, $2, $3, $4)`,
+      [b.agency.id, b.business.id, ownerUser.id, b.role.id],
+    ),
+  );
+  await b.query(
+    'update messaging.phone_number_settings set owner_user_id = $1, primary_user_id = $2 where phone_number_id = $3',
+    [ownerUser.id, b.user.id, b.phoneNumberId],
+  );
+
+  const resOn = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resOn.statusCode).toBe(200);
+  const ownerIdentity = voiceIdentity(b.business.id, ownerUser.id);
+  const primaryIdentity = voiceIdentity(b.business.id, b.user.id);
+  expect(resOn.body).toContain(ownerIdentity);
+  expect(resOn.body).not.toContain(primaryIdentity);
+
+  await b.query(
+    'update messaging.phone_system_settings set inbound_prefer_assigned_user = false where business_id = $1',
+    [b.business.id],
+  );
+  const resOff = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resOff.statusCode).toBe(200);
+  expect(resOff.body).toContain(primaryIdentity);
+  expect(resOff.body).not.toContain(ownerIdentity);
+});
+
+it('allows anonymous callers when inbound_allow_anonymous is on, and hangs up when off', async () => {
+  const b = await world({ allowAnonymous: true });
+
+  const resOn = await b.worker.handle(b.request({ CallSid: sid('CA'), From: 'anonymous' }));
+  expect(resOn.statusCode).toBe(200);
+  expect(resOn.body).toContain('<Dial');
+
+  await b.query(
+    'update messaging.phone_system_settings set inbound_allow_anonymous = false where business_id = $1',
+    [b.business.id],
+  );
+  const resOff = await b.worker.handle(b.request({ CallSid: sid('CA'), From: 'anonymous' }));
+  expect(resOff.statusCode).toBe(200);
+  expect(resOff.body).toBe(renderHangup());
+});
+
+it('adds the business fallback number to the route when set, and not when cleared', async () => {
+  const b = await world();
+  const fallbackE164 = '+12025550777';
+  await b.query(
+    'update messaging.phone_number_settings set use_business_fallback = true where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+
+  await b.query(
+    'update messaging.phone_system_settings set inbound_fallback_e164 = $1 where business_id = $2',
+    [fallbackE164, b.business.id],
+  );
+  const resWith = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resWith.statusCode).toBe(200);
+  const routesWith = await b.query<{ steps: string }>(
+    'select steps::text from messaging.call_routes where business_id = $1 order by created_at desc limit 1',
+    [b.business.id],
+  );
+  expect(routesWith[0]?.steps).toContain(fallbackE164);
+
+  await b.query(
+    'update messaging.phone_system_settings set inbound_fallback_e164 = null where business_id = $1',
+    [b.business.id],
+  );
+  const resWithout = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resWithout.statusCode).toBe(200);
+  const routesWithout = await b.query<{ steps: string }>(
+    'select steps::text from messaging.call_routes where business_id = $1 order by created_at desc limit 1',
+    [b.business.id],
+  );
+  expect(routesWithout[0]?.steps).not.toContain(fallbackE164);
+});
+
+it('rings the number owner when owner_user_id is set, and skips them when null', async () => {
+  const b = await world();
+  const ownerUser = await database.fixtures.user();
+  await database.as('crm_owner', (sql) =>
+    sql.query(
+      `insert into tenancy.memberships (agency_id, business_id, user_id, role_id) values ($1, $2, $3, $4)`,
+      [b.agency.id, b.business.id, ownerUser.id, b.role.id],
+    ),
+  );
+  const ownerIdentity = voiceIdentity(b.business.id, ownerUser.id);
+  const primaryIdentity = voiceIdentity(b.business.id, b.user.id);
+
+  await b.query(
+    'update messaging.phone_number_settings set owner_user_id = $1, primary_user_id = $2 where phone_number_id = $3',
+    [ownerUser.id, b.user.id, b.phoneNumberId],
+  );
+  const resSet = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resSet.statusCode).toBe(200);
+  expect(resSet.body).toContain(ownerIdentity);
+
+  await b.query(
+    'update messaging.phone_number_settings set owner_user_id = null where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+  const resNull = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resNull.statusCode).toBe(200);
+  expect(resNull.body).toContain(primaryIdentity);
+  expect(resNull.body).not.toContain(ownerIdentity);
+});
+
+it('rings the primary user set on the number, and changes when primary_user_id changes', async () => {
+  const b = await world();
+  const user2 = await database.fixtures.user();
+  await database.as('crm_owner', (sql) =>
+    sql.query(
+      `insert into tenancy.memberships (agency_id, business_id, user_id, role_id) values ($1, $2, $3, $4)`,
+      [b.agency.id, b.business.id, user2.id, b.role.id],
+    ),
+  );
+  const id1 = voiceIdentity(b.business.id, b.user.id);
+  const id2 = voiceIdentity(b.business.id, user2.id);
+
+  const res1 = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(res1.statusCode).toBe(200);
+  expect(res1.body).toContain(id1);
+  expect(res1.body).not.toContain(id2);
+
+  await b.query(
+    'update messaging.phone_number_settings set primary_user_id = $1 where phone_number_id = $2',
+    [user2.id, b.phoneNumberId],
+  );
+  const res2 = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(res2.statusCode).toBe(200);
+  expect(res2.body).toContain(id2);
+  expect(res2.body).not.toContain(id1);
+});
+
+it('rings additional team members in parallel when ring_also_user_ids is set, and not when empty', async () => {
+  const b = await world();
+  const user2 = await database.fixtures.user();
+  await database.as('crm_owner', (sql) =>
+    sql.query(
+      `insert into tenancy.memberships (agency_id, business_id, user_id, role_id) values ($1, $2, $3, $4)`,
+      [b.agency.id, b.business.id, user2.id, b.role.id],
+    ),
+  );
+  const id2 = voiceIdentity(b.business.id, user2.id);
+
+  await b.query(
+    'update messaging.phone_number_settings set ring_also_user_ids = array[$1::uuid] where phone_number_id = $2',
+    [user2.id, b.phoneNumberId],
+  );
+  const resWith = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resWith.statusCode).toBe(200);
+  expect(resWith.body).toContain(id2);
+
+  await b.query(
+    'update messaging.phone_number_settings set ring_also_user_ids = array[]::uuid[] where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+  const resWithout = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resWithout.statusCode).toBe(200);
+  expect(resWithout.body).not.toContain(id2);
+});
+
+it('rings the outside number set to forward to, and not when it is cleared', async () => {
+  const b = await world();
+  const forwardE164 = '+12025550888';
+  await b.query(
+    'update messaging.phone_number_settings set primary_user_id = null, forward_to_e164 = $1 where phone_number_id = $2',
+    [forwardE164, b.phoneNumberId],
+  );
+
+  const resSet = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resSet.statusCode).toBe(200);
+  expect(resSet.body).toContain(`<Number statusCallback=`);
+  expect(resSet.body).toContain(`>${forwardE164}</Number>`);
+
+  await b.query(
+    'update messaging.phone_number_settings set forward_to_e164 = null where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+  const resCleared = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resCleared.statusCode).toBe(200);
+  expect(resCleared.body).toBe(renderHangup());
+});
+
+it('falls back to the business number when use_business_fallback is on, and not when off', async () => {
+  const b = await world();
+  const fallbackE164 = '+12025550777';
+  await b.query(
+    'update messaging.phone_system_settings set inbound_fallback_e164 = $1 where business_id = $2',
+    [fallbackE164, b.business.id],
+  );
+
+  await b.query(
+    'update messaging.phone_number_settings set use_business_fallback = true where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+  const resOn = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resOn.statusCode).toBe(200);
+  const routesOn = await b.query<{ steps: string }>(
+    'select steps::text from messaging.call_routes where business_id = $1 order by created_at desc limit 1',
+    [b.business.id],
+  );
+  expect(routesOn[0]?.steps).toContain(fallbackE164);
+
+  await b.query(
+    'update messaging.phone_number_settings set use_business_fallback = false where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+  const resOff = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resOff.statusCode).toBe(200);
+  const routesOff = await b.query<{ steps: string }>(
+    'select steps::text from messaging.call_routes where business_id = $1 order by created_at desc limit 1',
+    [b.business.id],
+  );
+  expect(routesOff[0]?.steps).not.toContain(fallbackE164);
+});
+
+it('changes the dial timeout when ring_timeout_seconds changes', async () => {
+  const b = await world();
+
+  await b.query(
+    'update messaging.phone_number_settings set ring_timeout_seconds = 30 where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+  const res30 = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(res30.statusCode).toBe(200);
+  expect(res30.body).toContain('timeout="25"');
+
+  await b.query(
+    'update messaging.phone_number_settings set ring_timeout_seconds = 15 where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+  const res15 = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(res15.statusCode).toBe(200);
+  expect(res15.body).toContain('timeout="10"');
+});
+
+it('uses caller or business number as callerId when forwarded_caller_id changes', async () => {
+  const b = await world();
+
+  await b.query(
+    "update messaging.phone_number_settings set forwarded_caller_id = 'caller' where phone_number_id = $1",
+    [b.phoneNumberId],
+  );
+  const resCaller = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resCaller.statusCode).toBe(200);
+  expect(resCaller.body).toContain(`callerId="${b.from}"`);
+
+  await b.query(
+    "update messaging.phone_number_settings set forwarded_caller_id = 'business_number' where phone_number_id = $1",
+    [b.phoneNumberId],
+  );
+  const resBusiness = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resBusiness.statusCode).toBe(200);
+  expect(resBusiness.body).toContain(`callerId="${b.to}"`);
+});
+
+it('rings the contact owner first when prefer_contact_owner is on, and not when off', async () => {
+  const b = await world();
+  const ownerUser = await database.fixtures.user();
+  await database.as('crm_owner', (sql) =>
+    sql.query(
+      `insert into tenancy.memberships (agency_id, business_id, user_id, role_id) values ($1, $2, $3, $4)`,
+      [b.agency.id, b.business.id, ownerUser.id, b.role.id],
+    ),
+  );
+
+  const contact = await database.fixtures.contact(b.business.context);
+  await b.query('update crm.contacts set owner_user_id = $1 where id = $2', [
+    ownerUser.id,
+    contact.id,
+  ]);
+  await b.query(
+    `insert into crm.contact_identities (business_id, contact_id, kind, value, value_normalized)
+     values ($1, $2, 'phone', $3, $3)`,
+    [b.business.id, contact.id, b.from],
+  );
+
+  const ownerIdentity = voiceIdentity(b.business.id, ownerUser.id);
+  const primaryIdentity = voiceIdentity(b.business.id, b.user.id);
+
+  await b.query(
+    'update messaging.phone_number_settings set prefer_contact_owner = true where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+  const resOn = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resOn.statusCode).toBe(200);
+  expect(resOn.body).toContain(ownerIdentity);
+  expect(resOn.body).not.toContain(primaryIdentity);
+
+  await b.query(
+    'update messaging.phone_number_settings set prefer_contact_owner = false where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
+  const resOff = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(resOff.statusCode).toBe(200);
+  expect(resOff.body).toContain(primaryIdentity);
+  expect(resOff.body).not.toContain(ownerIdentity);
+});

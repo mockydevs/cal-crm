@@ -158,12 +158,6 @@ export function VoiceSettingsForm({
           </Labeled>
         </Group>
         <Group title={t`Incoming calls`}>
-          <NotYet>
-            <Trans>
-              Calls to this business's numbers aren't put through to anyone yet. What you set here
-              is saved and used once they are.
-            </Trans>
-          </NotYet>
           <SwitchRow
             label={t`Ring the assigned person first`}
             description={t`A call to a number assigned to someone rings them before anyone else.`}
