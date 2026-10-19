@@ -214,7 +214,7 @@ it('refuses malformed, unbound and disconnected callbacks without changing a cal
       )
     ).statusCode,
   ).toBe(404);
-  expect((await worker.handle(b.request('voicemail'))).statusCode).toBe(503);
+  expect((await worker.handle(b.request('accept'))).statusCode).toBe(503);
   await b.query("update messaging.provider_connections set status='disconnected' where id=$1", [
     b.connectionId,
   ]);

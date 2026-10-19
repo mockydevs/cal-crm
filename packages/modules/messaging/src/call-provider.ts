@@ -3,6 +3,7 @@
 // other party, whose leg reports to its own stored leg. Requests are signed with the
 // account's Standard key from calling setup. Nothing here decides whether a call may be
 // made: the place task has already checked and reserved it.
+import { requireBusiness } from '@repo/commands';
 import { withTenant, type Database } from '@repo/db';
 import type { TenantContext } from '@repo/kernel';
 import { SecretUnreadableError, type Vault } from '@repo/module-vault';
@@ -33,6 +34,10 @@ const signingKey = z.strictObject({
 interface Account {
   readonly credentials: TwilioCredentials;
   readonly webhookToken: string;
+  readonly recording: {
+    readonly enabled: boolean;
+    readonly announcement?: string | undefined;
+  };
 }
 
 /** The connection's account, signed with its voice key; null when either can't be opened. */
@@ -41,7 +46,9 @@ async function openAccount(
   vault: Vault,
   context: TenantContext,
   connectionId: string,
+  callId?: string,
 ): Promise<Account | null> {
+  const businessId = requireBusiness(context);
   return withTenant(db, context, async (trx) => {
     const row = await trx
       .selectFrom('messaging.provider_connections as connection')
@@ -70,6 +77,36 @@ async function openAccount(
     }
     const key = signingKey.safeParse(opened);
     if (!key.success) return null;
+
+    let recording = { enabled: false, announcement: undefined as string | undefined };
+    if (callId !== undefined) {
+      const call = await trx
+        .selectFrom('messaging.calls as c')
+        .innerJoin('messaging.phone_number_settings as s', (join) =>
+          join
+            .onRef('s.phone_number_id', '=', 'c.phone_number_id')
+            .onRef('s.business_id', '=', 'c.business_id'),
+        )
+        .select([
+          's.recording_enabled',
+          's.recording_announcement_enabled',
+          's.recording_announcement',
+        ])
+        .where('c.id', '=', callId)
+        .where('c.business_id', '=', businessId)
+        .executeTakeFirst();
+
+      if (call?.recording_enabled) {
+        recording = {
+          enabled: true,
+          announcement:
+            call.recording_announcement_enabled && call.recording_announcement !== null
+              ? call.recording_announcement
+              : undefined,
+        };
+      }
+    }
+
     return {
       credentials: {
         accountSid: account.accountSid,
@@ -77,6 +114,7 @@ async function openAccount(
         apiKey: { sid: key.data.sid, secret: key.data.secret },
       },
       webhookToken: account.webhookToken,
+      recording,
     };
   });
 }
@@ -99,7 +137,7 @@ export function createTwilioCallProvider(options: {
   const { db, vault, transport, publicUrl } = options;
   return {
     async place(call: PlacedCall, context: TenantContext): Promise<CallProviderResult> {
-      const account = await openAccount(db, vault, context, call.connectionId);
+      const account = await openAccount(db, vault, context, call.connectionId, call.callId);
       if (account === null) return unopened;
       const url = (kind: 'progress' | 'dial-result', stepId: string) =>
         voiceWebhookUrl(publicUrl, account.webhookToken, { kind, stepId });
@@ -108,13 +146,25 @@ export function createTwilioCallProvider(options: {
       const dialResult = url('dial-result', call.legId);
       // An install without a public https address can't hear from Twilio, so places nothing.
       if (rootProgress === null || remoteProgress === null || dialResult === null) return unopened;
+      const recordingUrl = voiceWebhookUrl(publicUrl, account.webhookToken, { kind: 'recording' });
+      // Outbound calls ring the team member's browser first. Any announcement on this
+      // initial TwiML is heard by the team member, not the contact being dialed. Because
+      // recording without consent disclosure violates privacy rules, fail safe: do not
+      // record when the number requires an announcement, until an answer handler can play
+      // the disclosure directly to the contact.
+      const announcementNeeded =
+        account.recording.enabled && account.recording.announcement !== undefined;
+      const recording =
+        account.recording.enabled && !announcementNeeded && recordingUrl !== null
+          ? { enabled: true as const, statusCallback: recordingUrl }
+          : { enabled: false as const };
       const twiml = renderDial({
         destinations: [{ kind: 'number', address: call.to }],
         actionUrl: dialResult,
         progressUrl: remoteProgress,
         timeoutSeconds: RING_SECONDS,
         callerId: call.from,
-        recording: { enabled: false },
+        recording,
       });
       return asProviderResult(
         await createVoiceCall(transport, account.credentials, {

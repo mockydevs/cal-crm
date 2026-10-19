@@ -111,6 +111,22 @@ export function createInboundCallCommand(
         .executeTakeFirst();
       if (phoneNumber === undefined) return hangupReply;
 
+      const numberSettings = await readPhoneNumberSettings(
+        trx,
+        command,
+        toPublicId('phone_number', phoneNumber.id),
+      );
+      const recordingUrl = voiceWebhookUrl(publicUrl, value.webhookToken, { kind: 'recording' });
+      const voice = numberSettings.voice;
+      const recording =
+        voice?.recording.enabled && recordingUrl !== null
+          ? { enabled: true as const, statusCallback: recordingUrl }
+          : { enabled: false as const };
+      const announcement =
+        voice?.recording.announcement.enabled && voice.recording.announcement.message !== null
+          ? voice.recording.announcement.message
+          : undefined;
+
       const recorded = await recordInboundCall(trx, command.context, {
         phoneNumberId: phoneNumber.id,
         connectionId: value.connectionId,
@@ -217,7 +233,8 @@ export function createInboundCallCommand(
           progressUrl,
           timeoutSeconds: existingRoute.timeout_seconds,
           callerId: existingRoute.caller_id,
-          recording: { enabled: false },
+          recording,
+          announcement,
         });
         return {
           statusCode: 200,
@@ -231,11 +248,6 @@ export function createInboundCallCommand(
         return refuseCall(trx, command, callId, 'do_not_call');
       }
 
-      const numberSettings = await readPhoneNumberSettings(
-        trx,
-        command,
-        toPublicId('phone_number', phoneNumber.id),
-      );
       const systemSettings = await readPhoneSystemSettings(trx, command);
 
       let contactOwnerUserId: string | null = null;
@@ -386,7 +398,8 @@ export function createInboundCallCommand(
         progressUrl,
         timeoutSeconds: route.timeoutSeconds,
         callerId: route.callerId,
-        recording: { enabled: false },
+        recording,
+        announcement,
       });
 
       const callState = await trx

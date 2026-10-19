@@ -254,8 +254,7 @@ export function VoiceSettingsForm({
         <Group title={t`Recording and transcription`}>
           <NotYet>
             <Trans>
-              Calls aren't recorded or transcribed yet. What you set here is saved and used once
-              they are.
+              Recordings are kept but can't be played here yet, and calls aren't transcribed yet.
             </Trans>
           </NotYet>
           <SwitchRow

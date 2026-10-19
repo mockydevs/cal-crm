@@ -316,6 +316,10 @@ begin
     select b, id, '[[{"kind": "client", "address": "dana", "membershipId": "00000000-0000-0000-0000-000000000000"}]]',
            true, 15, '+14155550124'
     from inbound;
+  -- A call recording reported by Twilio on the incoming call (0135).
+  insert into messaging.call_recordings (business_id, call_id, provider_connection_id, provider_recording_sid, kind, status)
+    select b, call_id, connection, 'RE' || substr(md5(b::text), 1, 32), 'call', 'in-progress'
+    from messaging.call_routes where business_id = b;
   -- Browser calling set up on the connection: its key's SID, the secret in the vault (0114).
   insert into messaging.voice_setups (business_id, connection_id, status, key_sid, secret_id, requested_by, finished_at)
     values (b, connection, 'ready', 'SK' || substr(md5(b::text), 1, 32), business_secret, u, now());

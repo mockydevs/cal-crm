@@ -4,14 +4,19 @@
 // https://www.twilio.com/docs/voice/twiml/dial
 // https://www.twilio.com/docs/voice/twiml/changelog
 import { defineCommand, type Command } from '@repo/commands';
-import { ForbiddenError, parsePublicId, toPublicId } from '@repo/kernel';
+import { ForbiddenError, NotFoundError, parsePublicId, toPublicId } from '@repo/kernel';
 import { sql } from 'kysely';
 import * as z from 'zod';
 import { addCallLeg, type ReadCallGrants } from '../call-ledger.js';
 import { lockBusiness } from '../outbound.js';
-import { renderDial, renderHangup } from './voice-twiml.js';
+import { readPhoneNumberSettings } from '../phone-settings.js';
+import { renderDial, renderHangup, renderVoicemail } from './voice-twiml.js';
 import { voiceWebhookUrl } from './voice-url.js';
 import type { VoiceCallbackReply } from './voice-worker.js';
+
+/** A greeting setting may replace this default greeting. */
+export const DEFAULT_VOICEMAIL_GREETING =
+  'Sorry, nobody can take your call right now. Please leave a message after the tone.';
 
 const hangupReply: VoiceCallbackReply = {
   statusCode: 200,
@@ -84,11 +89,30 @@ export function createInboundAdvanceCommand(
 
       const call = await trx
         .selectFrom('messaging.calls')
-        .select(['id', 'state', 'outcome', 'contact_id'])
+        .select(['id', 'state', 'outcome', 'contact_id', 'phone_number_id'])
         .where('id', '=', leg.call_id)
         .where('business_id', '=', businessId)
         .executeTakeFirst();
       if (call === undefined) return hangupReply;
+
+      let recordingEnabled = false;
+      if (call.phone_number_id !== null) {
+        try {
+          const numberSettings = await readPhoneNumberSettings(
+            trx,
+            command,
+            toPublicId('phone_number', call.phone_number_id),
+          );
+          recordingEnabled = numberSettings.voice?.recording.enabled ?? false;
+        } catch (error) {
+          if (!(error instanceof NotFoundError)) throw error;
+        }
+      }
+      const recordingUrl = voiceWebhookUrl(publicUrl, value.webhookToken, { kind: 'recording' });
+      const recording =
+        recordingEnabled && recordingUrl !== null
+          ? { enabled: true as const, statusCallback: recordingUrl }
+          : { enabled: false as const };
 
       const rootLeg = await trx
         .selectFrom('messaging.call_legs')
@@ -194,7 +218,7 @@ export function createInboundAdvanceCommand(
           progressUrl,
           timeoutSeconds: route.timeout_seconds,
           callerId: route.caller_id,
-          recording: { enabled: false },
+          recording,
         });
         return {
           statusCode: 200,
@@ -341,7 +365,7 @@ export function createInboundAdvanceCommand(
           progressUrl,
           timeoutSeconds: route.timeout_seconds,
           callerId: route.caller_id,
-          recording: { enabled: false },
+          recording,
         });
 
         await emitProgressed();
@@ -353,7 +377,6 @@ export function createInboundAdvanceCommand(
         };
       }
 
-      // When voicemail is enabled this will transition to voicemail; until then the call hangs up.
       await trx
         .updateTable('messaging.call_routes')
         .set({
@@ -365,6 +388,27 @@ export function createInboundAdvanceCommand(
         .execute();
 
       await emitProgressed();
+
+      if (route.voicemail) {
+        const actionUrl = voiceWebhookUrl(publicUrl, value.webhookToken, { kind: 'voicemail' });
+        const voicemailRecordingUrl = voiceWebhookUrl(publicUrl, value.webhookToken, {
+          kind: 'recording',
+        });
+        if (actionUrl !== null && voicemailRecordingUrl !== null) {
+          const body = renderVoicemail({
+            greeting: DEFAULT_VOICEMAIL_GREETING,
+            actionUrl,
+            recordingUrl: voicemailRecordingUrl,
+            maxSeconds: 120,
+          });
+          return {
+            statusCode: 200,
+            contentType: 'application/xml',
+            body,
+          };
+        }
+      }
+
       return hangupReply;
     },
   });

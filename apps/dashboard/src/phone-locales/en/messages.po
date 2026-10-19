@@ -186,14 +186,6 @@ msgstr "Calls"
 msgid "Calls aren't available yet"
 msgstr "Calls aren't available yet"
 
-#: src/phone-system-voice.tsx
-msgid "Calls aren't recorded or transcribed yet. What you set here is saved and used once they are."
-msgstr "Calls aren't recorded or transcribed yet. What you set here is saved and used once they are."
-
-#: src/phone-system-number.tsx
-msgid "Calls aren't recorded yet. What you set here is saved and used once they are."
-msgstr "Calls aren't recorded yet. What you set here is saved and used once they are."
-
 #: src/phone-system-parts.tsx
 msgid "Calls can be made from this business's numbers and are answered here."
 msgstr "Calls can be made from this business's numbers and are answered here."
@@ -577,10 +569,6 @@ msgid "No Twilio account is connected yet. Connect one below to set up calling."
 msgstr "No Twilio account is connected yet. Connect one below to set up calling."
 
 #: src/phone-system-number.tsx
-msgid "No voicemail is taken yet: a caller nobody answers is hung up on."
-msgstr "No voicemail is taken yet: a caller nobody answers is hung up on."
-
-#: src/phone-system-number.tsx
 #: src/phone-system.tsx
 msgid "Nobody"
 msgstr "Nobody"
@@ -706,6 +694,10 @@ msgstr "Record calls"
 #: src/phone-system-voice.tsx
 msgid "Recording and transcription"
 msgstr "Recording and transcription"
+
+#: src/phone-system-voice.tsx
+msgid "Recordings are kept but can't be played here yet, and calls aren't transcribed yet."
+msgstr "Recordings are kept but can't be played here yet, and calls aren't transcribed yet."
 
 #: src/sms-settings.tsx
 msgid "Refresh numbers"

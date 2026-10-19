@@ -783,11 +783,11 @@ describe('a number configuration', () => {
     const user = open();
     const dialog = await edit(user, 'Front desk');
     expect(within(dialog).queryByText(/Calls can't be made or taken yet/)).toBeNull();
-    expect(within(dialog).getByText(/Calls aren't recorded yet\./)).toBeDefined();
+    expect(within(dialog).queryByText(/Calls aren't recorded yet\./)).toBeNull();
     expect(within(dialog).getByText(/None of these are used on calls yet\./)).toBeDefined();
   });
 
-  it('shows that voicemail backup is not taken yet once calls can be made', async () => {
+  it('shows that voicemail backup is taken once calls can be made', async () => {
     serve({
       getPhoneSystemSettings: () => settingsOf({ calling: { available: true, unavailable: null } }),
     });
@@ -795,8 +795,10 @@ describe('a number configuration', () => {
     const dialog = await edit(user, 'Front desk');
     await user.click(within(dialog).getByRole('tab', { name: 'Call forwarding' }));
     expect(
-      within(dialog).getByText('No voicemail is taken yet: a caller nobody answers is hung up on.'),
-    ).toBeDefined();
+      within(dialog).queryByText(
+        'No voicemail is taken yet: a caller nobody answers is hung up on.',
+      ),
+    ).toBeNull();
   });
 });
 
@@ -888,7 +890,7 @@ describe('the voice settings', () => {
     ).toBeDefined();
     expect(
       within(group('Recording and transcription')).getByText(
-        /Calls aren't recorded or transcribed yet\./,
+        /Recordings are kept but can't be played here yet, and calls aren't transcribed yet\./,
       ),
     ).toBeDefined();
     expect(

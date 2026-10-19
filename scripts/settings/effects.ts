@@ -13,8 +13,7 @@ const OUTBOUND = 'packages/modules/messaging/src/outbound.int.test.ts';
 const TRACKING = 'packages/modules/forms/src/tracking/tracking.int.test.ts';
 
 const INBOUND_CALL = 'packages/modules/messaging/src/voice/inbound-call.int.test.ts';
-const VOICEMAIL_BACKUP =
-  'Stored with the route, but no voicemail is taken yet: a caller nobody answered is hung up on.';
+const INBOUND_ADVANCE = 'packages/modules/messaging/src/voice/inbound-advance.int.test.ts';
 const CALL_HANDLING =
   'Nothing reads it yet: call connect, whisper and the outbound caller ID are not built yet.';
 const RECORDING =
@@ -221,7 +220,10 @@ export const effects: Effects = {
       INBOUND_CALL,
       'changes the dial timeout when ring_timeout_seconds changes',
     ),
-    voicemail_backup: { gap: VOICEMAIL_BACKUP },
+    voicemail_backup: proof(
+      INBOUND_ADVANCE,
+      'takes a voicemail after the last step when voicemail backup is on',
+    ),
     forwarded_caller_id: proof(
       INBOUND_CALL,
       'uses caller or business number as callerId when forwarded_caller_id changes',
@@ -233,8 +235,17 @@ export const effects: Effects = {
     call_connect_confirmation: { gap: CALL_HANDLING },
     whisper_enabled: { gap: CALL_HANDLING },
     whisper_message: { gap: CALL_HANDLING },
-    recording_enabled: { gap: RECORDING },
-    recording_announcement_enabled: { gap: RECORDING },
-    recording_announcement: { gap: RECORDING },
+    recording_enabled: proof(
+      INBOUND_CALL,
+      'records the call and announces it when the number records',
+    ),
+    recording_announcement_enabled: proof(
+      INBOUND_CALL,
+      'neither records nor announces when recording is off',
+    ),
+    recording_announcement: proof(
+      INBOUND_CALL,
+      'records the call and announces it when the number records',
+    ),
   },
 };

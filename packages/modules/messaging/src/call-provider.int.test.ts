@@ -45,6 +45,8 @@ function twilioCallResponse(accountSid: string, sid: string, status = 'queued') 
   });
 }
 
+let fromSequence = 100;
+
 async function fixture(
   setupStatus: 'ready' | 'requested' | 'creating' | 'failed' | 'unknown' = 'ready',
   connectionStatus: 'connected' | 'disconnected' = 'connected',
@@ -56,7 +58,7 @@ async function fixture(
   const key = { sid: `SK${hex(32)}`, secret: hex(32), type: 'standard' as const };
   const webhookToken = newWebhookToken();
   const authToken = hex(32);
-  const fromNumber = '+12025550100';
+  const fromNumber = `+1202555${String(fromSequence++).padStart(4, '0')}`;
 
   const { connectionId, keySecretId } = await withTenant(db, tenant.context, async (trx) => {
     const credentials = await vault.store(
@@ -290,5 +292,178 @@ describe('call provider port', () => {
 
     expect(result).toEqual({ outcome: 'rejected', code: null });
     expect(requests).toHaveLength(0);
+  });
+
+  it("doesn't record an outbound call whose announcement the contact couldn't hear", async () => {
+    const f = await fixture();
+    const callSid = `CA${hex(32)}`;
+    const requests: VoiceRequest[] = [];
+    const transport: VoiceTransport = (req) => {
+      requests.push(req);
+      return Promise.resolve({
+        status: 201,
+        body: twilioCallResponse(f.accountSid, callSid, 'queued'),
+      });
+    };
+
+    await withTenant(db, f.tenant.context, async (trx) => {
+      const channel = await trx
+        .insertInto('messaging.channel_accounts')
+        .values({
+          business_id: f.tenant.id,
+          channel: 'sms',
+          name: 'Line 1',
+          status: 'active',
+        })
+        .returning('id')
+        .executeTakeFirstOrThrow();
+
+      await trx
+        .insertInto('messaging.phone_numbers')
+        .values({
+          id: channel.id,
+          business_id: f.tenant.id,
+          e164: f.placedCall.from,
+          provider_connection_id: f.connectionId,
+          provider_number_ref: `PN${hex(32)}`,
+          capabilities: ['voice'],
+        })
+        .execute();
+
+      await trx
+        .insertInto('messaging.phone_number_settings')
+        .values({
+          business_id: f.tenant.id,
+          phone_number_id: channel.id,
+          recording_enabled: true,
+          recording_announcement_enabled: true,
+          recording_announcement: 'This call is recorded for quality.',
+        })
+        .execute();
+
+      await trx
+        .insertInto('messaging.calls')
+        .values({
+          id: f.placedCall.callId,
+          business_id: f.tenant.id,
+          direction: 'outbound',
+          phone_number_id: channel.id,
+          provider_connection_id: f.connectionId,
+          local_e164: f.placedCall.from,
+          remote_e164: f.placedCall.to,
+          requested_by_kind: 'user',
+          requested_by_id: f.user.id,
+          state: 'dialing',
+          idempotency_key: 'idem-test-outbound-announcement',
+          request_hash: 'c'.repeat(64),
+          reserved_at: new Date(),
+        })
+        .execute();
+    });
+
+    const provider = createTwilioCallProvider({ db, vault, transport, publicUrl });
+    const result = await provider.place(f.placedCall, f.tenant.context);
+    expect(result.outcome).toBe('accepted');
+
+    expect(requests).toHaveLength(1);
+    const params = new URLSearchParams(requests[0]?.body ?? '');
+    const twiml = params.get('Twiml') ?? '';
+    expect(twiml).not.toContain('<Say>');
+    expect(twiml).toContain('record="do-not-record"');
+    expect(twiml).not.toContain('recordingStatusCallback');
+  });
+
+  it('records an outbound call from a number that records without an announcement', async () => {
+    const f = await fixture();
+    const callSid = `CA${hex(32)}`;
+    const requests: VoiceRequest[] = [];
+    const transport: VoiceTransport = (req) => {
+      requests.push(req);
+      return Promise.resolve({
+        status: 201,
+        body: twilioCallResponse(f.accountSid, callSid, 'queued'),
+      });
+    };
+
+    await withTenant(db, f.tenant.context, async (trx) => {
+      const channel = await trx
+        .insertInto('messaging.channel_accounts')
+        .values({
+          business_id: f.tenant.id,
+          channel: 'sms',
+          name: 'Line 2',
+          status: 'active',
+        })
+        .returning('id')
+        .executeTakeFirstOrThrow();
+
+      await trx
+        .insertInto('messaging.phone_numbers')
+        .values({
+          id: channel.id,
+          business_id: f.tenant.id,
+          e164: f.placedCall.from,
+          provider_connection_id: f.connectionId,
+          provider_number_ref: `PN${hex(32)}`,
+          capabilities: ['voice'],
+        })
+        .execute();
+
+      await trx
+        .insertInto('messaging.phone_number_settings')
+        .values({
+          business_id: f.tenant.id,
+          phone_number_id: channel.id,
+          recording_enabled: true,
+          recording_announcement_enabled: false,
+          recording_announcement: null,
+        })
+        .execute();
+
+      await trx
+        .insertInto('messaging.calls')
+        .values({
+          id: f.placedCall.callId,
+          business_id: f.tenant.id,
+          direction: 'outbound',
+          phone_number_id: channel.id,
+          provider_connection_id: f.connectionId,
+          local_e164: f.placedCall.from,
+          remote_e164: f.placedCall.to,
+          requested_by_kind: 'user',
+          requested_by_id: f.user.id,
+          state: 'dialing',
+          idempotency_key: 'idem-test-outbound-no-announcement',
+          request_hash: 'd'.repeat(64),
+          reserved_at: new Date(),
+        })
+        .execute();
+    });
+
+    const provider = createTwilioCallProvider({ db, vault, transport, publicUrl });
+    const result = await provider.place(f.placedCall, f.tenant.context);
+    expect(result.outcome).toBe('accepted');
+
+    expect(requests).toHaveLength(1);
+    const params = new URLSearchParams(requests[0]?.body ?? '');
+    const twiml = params.get('Twiml') ?? '';
+    expect(twiml).not.toContain('<Say>');
+    expect(twiml).toContain('record="record-from-answer-dual"');
+    expect(twiml).toContain(
+      `recordingStatusCallback="https://crm.example.test/webhooks/twilio/voice/${f.webhookToken}/recording"`,
+    );
+  });
+
+  it('fails loudly when called without a business in the tenant context', async () => {
+    const f = await fixture();
+    const transport: VoiceTransport = () => Promise.resolve({ status: 201, body: '{}' });
+    const provider = createTwilioCallProvider({ db, vault, transport, publicUrl });
+    const contextWithoutBusiness = {
+      agencyId: f.agency.id,
+      actorKind: 'system' as const,
+      correlationId: randomUUID(),
+    };
+
+    await expect(provider.place(f.placedCall, contextWithoutBusiness)).rejects.toThrow();
   });
 });

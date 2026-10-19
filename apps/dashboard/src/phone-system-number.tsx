@@ -288,14 +288,6 @@ export function NumberEditor({
                       <legend className="px-1 text-sm font-medium">
                         <Trans>Call recording</Trans>
                       </legend>
-                      {calling?.available === true ? (
-                        <NotYet>
-                          <Trans>
-                            Calls aren't recorded yet. What you set here is saved and used once they
-                            are.
-                          </Trans>
-                        </NotYet>
-                      ) : null}
                       <SwitchRow
                         label={t`Record calls`}
                         description={t`Calls to and from this number are recorded.`}
@@ -461,13 +453,6 @@ export function NumberEditor({
                           />
                         )}
                       </Labeled>
-                      {calling?.available === true ? (
-                        <NotYet>
-                          <Trans>
-                            No voicemail is taken yet: a caller nobody answers is hung up on.
-                          </Trans>
-                        </NotYet>
-                      ) : null}
                       <SwitchRow
                         label={t`Voicemail backup`}
                         description={t`Take a voicemail when nobody answers.`}

@@ -979,3 +979,39 @@ it('rings the contact owner first when prefer_contact_owner is on, and not when 
   expect(resOff.body).toContain(primaryIdentity);
   expect(resOff.body).not.toContain(ownerIdentity);
 });
+
+it('records the call and announces it when the number records', async () => {
+  const b = await world();
+  await b.query(
+    `update messaging.phone_number_settings
+     set recording_enabled = true,
+         recording_announcement_enabled = true,
+         recording_announcement = 'Please note that calls are recorded.'
+     where phone_number_id = $1`,
+    [b.phoneNumberId],
+  );
+  const res = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(res.statusCode).toBe(200);
+  expect(res.body).toContain('<Say>Please note that calls are recorded.</Say>');
+  expect(res.body).toContain('record="record-from-answer-dual"');
+  expect(res.body).toContain(
+    `recordingStatusCallback="https://crm.example.test/webhooks/twilio/voice/${b.token}/recording"`,
+  );
+});
+
+it('neither records nor announces when recording is off', async () => {
+  const b = await world();
+  await b.query(
+    `update messaging.phone_number_settings
+     set recording_enabled = false,
+         recording_announcement_enabled = false,
+         recording_announcement = null
+     where phone_number_id = $1`,
+    [b.phoneNumberId],
+  );
+  const res = await b.worker.handle(b.request({ CallSid: sid('CA') }));
+  expect(res.statusCode).toBe(200);
+  expect(res.body).not.toContain('<Say>');
+  expect(res.body).toContain('record="do-not-record"');
+  expect(res.body).not.toContain('recordingStatusCallback=');
+});

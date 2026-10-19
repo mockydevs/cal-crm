@@ -14,9 +14,11 @@ import { lockBusiness } from '../outbound.js';
 import { webhookDigest } from '../sms-webhook-url.js';
 import { createInboundAdvanceCommand } from './inbound-advance.js';
 import { createInboundCallCommand } from './inbound-call.js';
+import { recordRecordingCommand } from './recording-callback.js';
 import { authenticateVoiceCallback } from './voice-context.js';
 import { parseVoiceProgress } from './voice-progress.js';
 import { parseVoiceTerminal } from './voice-terminal.js';
+import { renderHangup } from './voice-twiml.js';
 import type { verifyVoiceRequest } from './voice-request.js';
 
 export interface VoiceCallbackReply {
@@ -149,6 +151,25 @@ export function createVoiceCallbackWorker(
             callSid: call.callSid,
             from: call.from,
             to: call.to,
+          },
+          { context: checked.context, permissions: 'all' },
+        );
+      }
+      if (target.kind === 'voicemail') {
+        return {
+          statusCode: 200,
+          contentType: 'application/xml',
+          body: renderHangup(),
+        };
+      }
+      if (target.kind === 'recording') {
+        return runCommand(
+          services,
+          recordRecordingCommand,
+          {
+            connectionId: checked.connectionId,
+            digest: webhookDigest(target.token),
+            params,
           },
           { context: checked.context, permissions: 'all' },
         );

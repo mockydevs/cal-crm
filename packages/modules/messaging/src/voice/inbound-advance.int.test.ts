@@ -411,8 +411,62 @@ it('treats a hang-up during screening as nobody answering', async () => {
   expect(route1.finished_at).toBeNull();
 });
 
-it('hangs up after the last step', async () => {
+it('takes a voicemail after the last step when voicemail backup is on', async () => {
   const b = await world({ preferContactOwner: true, preferAssignedUser: false });
+  await b.worker.handle(b.inboundRequest());
+
+  const route0 = await b.queryFirst<{ step_leg_id: string }>(
+    'select step_leg_id from messaging.call_routes where business_id = $1',
+    [b.business.id],
+  );
+
+  const step1Res = await b.worker.handle(
+    b.dialResultRequest(route0.step_leg_id, {
+      DialBridged: 'false',
+      DialCallStatus: 'no-answer',
+    }),
+  );
+  expect(step1Res.statusCode).toBe(200);
+
+  const route1 = await b.queryFirst<{ step: number; step_leg_id: string }>(
+    'select step, step_leg_id from messaging.call_routes where business_id = $1',
+    [b.business.id],
+  );
+  expect(route1.step).toBe(1);
+
+  const lastRes = await b.worker.handle(
+    b.dialResultRequest(route1.step_leg_id, {
+      DialBridged: 'false',
+      DialCallStatus: 'no-answer',
+    }),
+  );
+  expect(lastRes.statusCode).toBe(200);
+  expect(lastRes.contentType).toBe('application/xml');
+  expect(lastRes.body).toContain('<Record');
+  expect(lastRes.body).toContain(
+    'Sorry, nobody can take your call right now. Please leave a message after the tone.',
+  );
+  expect(lastRes.body).toContain(
+    `action="https://crm.example.test/webhooks/twilio/voice/${b.token}/voicemail"`,
+  );
+  expect(lastRes.body).toContain(
+    `recordingStatusCallback="https://crm.example.test/webhooks/twilio/voice/${b.token}/recording"`,
+  );
+
+  const routeFinal = await b.queryFirst<{ step: number; finished_at: string | null }>(
+    'select step, finished_at from messaging.call_routes where business_id = $1',
+    [b.business.id],
+  );
+  expect(routeFinal.step).toBe(2);
+  expect(routeFinal.finished_at).not.toBeNull();
+});
+
+it('hangs up after the last step when voicemail backup is off', async () => {
+  const b = await world({ preferContactOwner: true, preferAssignedUser: false });
+  await b.query(
+    'update messaging.phone_number_settings set voicemail_backup = false where phone_number_id = $1',
+    [b.phoneNumberId],
+  );
   await b.worker.handle(b.inboundRequest());
 
   const route0 = await b.queryFirst<{ step_leg_id: string }>(

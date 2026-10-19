@@ -2162,6 +2162,22 @@ export interface MessagingCallProgress {
   status: string;
 }
 
+export interface MessagingCallRecordings {
+  business_id: string;
+  call_id: string;
+  channels: number | null;
+  created_at: Generated<Timestamp>;
+  duration_seconds: number | null;
+  fetch_failure: string | null;
+  file_id: string | null;
+  id: Generated<string>;
+  kind: string;
+  provider_connection_id: string;
+  provider_recording_sid: string;
+  status: string;
+  updated_at: Generated<Timestamp>;
+}
+
 export interface MessagingCallRoutes {
   business_id: string;
   call_id: string;
@@ -3422,6 +3438,7 @@ export interface DB {
   "integrations.external_ids": IntegrationsExternalIds;
   "messaging.call_legs": MessagingCallLegs;
   "messaging.call_progress": MessagingCallProgress;
+  "messaging.call_recordings": MessagingCallRecordings;
   "messaging.call_routes": MessagingCallRoutes;
   "messaging.calls": MessagingCalls;
   "messaging.channel_accounts": MessagingChannelAccounts;
