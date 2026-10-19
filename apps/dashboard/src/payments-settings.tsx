@@ -13,6 +13,7 @@ import { Link } from '@tanstack/react-router';
 import { Building2 } from 'lucide-react';
 import { useId, useState, type ReactElement, type ReactNode } from 'react';
 import { apiIn } from './api';
+import { ReminderSettingsCard } from './invoice-reminders';
 import {
   PageIntro,
   ReadOnlyNote,
@@ -465,6 +466,8 @@ function SettingsForm({
           </Boxed>
         </div>
       </fieldset>
+
+      <ReminderSettingsCard canManage={settings.canManage} />
 
       <fieldset disabled={disabled} className={cardClassName}>
         <legend className="sr-only">

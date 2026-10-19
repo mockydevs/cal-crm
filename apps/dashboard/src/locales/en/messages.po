@@ -328,6 +328,10 @@ msgstr "{address} can't be sent to: it was blocked."
 msgid "{address} can't be sent to: it was unsubscribed."
 msgstr "{address} can't be sent to: it was unsubscribed."
 
+#: src/invoice-reminders.tsx
+msgid "{amount} {unit} before {anchor}"
+msgstr "{amount} {unit} before {anchor}"
+
 #: src/automation-runs.tsx
 msgid "{automationName}, version {versionNumber}. Started <0>{started}</0>."
 msgstr "{automationName}, version {versionNumber}. Started <0>{started}</0>."
@@ -431,6 +435,10 @@ msgstr "{count} files · {held}"
 #: src/tags.tsx
 msgid "{count} tags"
 msgstr "{count} tags"
+
+#: src/invoice-reminders.tsx
+msgid "{count} times"
+msgstr "{count} times"
 
 #: src/automation-contact-fields.tsx
 msgid "{countedFrom} (not found)"
@@ -1216,6 +1224,10 @@ msgstr "1 tag"
 msgid "1 tag has no description, so the assistant can’t tell what it means."
 msgstr "1 tag has no description, so the assistant can’t tell what it means."
 
+#: src/invoice-reminders.tsx
+msgid "1 time"
+msgstr "1 time"
+
 #: src/routes/reset-password.tsx
 #: src/routes/setup.tsx
 msgid "8 characters or more. A few unrelated words make a strong one."
@@ -1236,6 +1248,10 @@ msgstr "A built-in rule stopped it"
 #: src/audit-logs.tsx
 msgid "A bulk action is listed as Updated whatever it did, deleting included; it names how many records it touched, not which."
 msgstr "A bulk action is listed as Updated whatever it did, deleting included; it names how many records it touched, not which."
+
+#: src/invoice-reminders.tsx
+msgid "A business may have at most {maxReminders} invoice reminders."
+msgstr "A business may have at most {maxReminders} invoice reminders."
 
 #: src/media/dialogs.tsx
 msgid "A calendar's logo or cover"
@@ -1604,6 +1620,10 @@ msgstr "A record's ID finds the changes to that record itself: a contact's ID fi
 #: src/domain-redirects.tsx
 msgid "A redirect lives on a connected domain. Connect a domain first."
 msgstr "A redirect lives on a connected domain. Connect a domain first."
+
+#: src/invoice-reminders.tsx
+msgid "A reminder before its date can only be before the due date."
+msgstr "A reminder before its date can only be before the due date."
 
 #: src/automation-settings-tab.tsx
 msgid "A reply counts when this contact's run has already sent them a message on the same channel. A text answering an email doesn't, and neither does a message a person sent by hand."
@@ -2152,6 +2172,10 @@ msgstr "Add product"
 #: src/domain-redirects.tsx
 msgid "Add redirect"
 msgstr "Add redirect"
+
+#: src/invoice-reminders.tsx
+msgid "Add reminder"
+msgstr "Add reminder"
 
 #: src/user-form.tsx
 msgid "Add signature to outgoing emails"
@@ -2722,6 +2746,10 @@ msgstr "An owner isn't removed here."
 #: src/trigger-links.tsx
 msgid "Analyze"
 msgstr "Analyze"
+
+#: src/invoice-reminders.tsx
+msgid "Anchor date"
+msgstr "Anchor date"
 
 #: src/automation-filter-editor.tsx
 msgid "AND"
@@ -4063,6 +4091,7 @@ msgstr "Can't scan it? Type this key into the app instead:"
 #: src/domains.tsx
 #: src/email.tsx
 #: src/import-flow.tsx
+#: src/invoice-reminders.tsx
 #: src/list-filters-form.tsx
 #: src/manage-fields-form.tsx
 #: src/manual-actions.tsx
@@ -6378,6 +6407,7 @@ msgstr "Default terms and conditions"
 #: src/custom-values.tsx
 #: src/deals.tsx
 #: src/domain-redirects.tsx
+#: src/invoice-reminders.tsx
 #: src/media/library.tsx
 #: src/pipelines.tsx
 #: src/reporting/report-builder.tsx
@@ -6391,6 +6421,10 @@ msgstr "Delete"
 #: src/saved-view-panel.tsx
 msgid "Delete “{confirmedName}”? This removes the saved view, keeping your current filters."
 msgstr "Delete “{confirmedName}”? This removes the saved view, keeping your current filters."
+
+#: src/invoice-reminders.tsx
+msgid "Delete \"{deletingName}\"? This cannot be undone."
+msgstr "Delete \"{deletingName}\"? This cannot be undone."
 
 #: src/media/library.tsx
 msgid "Delete \"{openName}\"?"
@@ -6425,6 +6459,10 @@ msgstr "Delete {name}?"
 #: src/media/library.tsx
 msgid "Delete {openCount} files?"
 msgstr "Delete {openCount} files?"
+
+#: src/invoice-reminders.tsx
+msgid "Delete {reminderName}"
+msgstr "Delete {reminderName}"
 
 #: src/tasks.tsx
 msgid "Delete {removing}?"
@@ -6465,6 +6503,7 @@ msgstr "Delete folder"
 msgid "Delete folder \"{openName}\"?"
 msgstr "Delete folder \"{openName}\"?"
 
+#: src/invoice-reminders.tsx
 #: src/payments-document.tsx
 #: src/payments-products.tsx
 msgid "Delete for good"
@@ -6511,6 +6550,10 @@ msgstr "Delete records in the trash forever"
 #: src/domain-redirects.tsx
 msgid "Delete redirect"
 msgstr "Delete redirect"
+
+#: src/invoice-reminders.tsx
+msgid "Delete reminder?"
+msgstr "Delete reminder?"
 
 #: src/reporting/reports-dialogs.tsx
 msgid "Delete report"
@@ -6677,6 +6720,7 @@ msgstr "Details of {what}, {when}"
 msgid "Direct Traffic"
 msgstr "Direct Traffic"
 
+#: src/invoice-reminders.tsx
 #: src/reporting/widget-editor.tsx
 msgid "Direction"
 msgstr "Direction"
@@ -7238,6 +7282,7 @@ msgstr "Earlier page visits linked"
 #: src/custom-fields.tsx
 #: src/custom-values.tsx
 #: src/domain-redirects.tsx
+#: src/invoice-reminders.tsx
 #: src/pipelines.tsx
 #: src/routes/_app.b.$slug.contacts.$contactId.index.tsx
 #: src/routes/_app.b.$slug.contacts.companies.$companyId.index.tsx
@@ -7264,6 +7309,10 @@ msgstr "Edit {label}"
 #: src/webchat-settings.tsx
 msgid "Edit {name}"
 msgstr "Edit {name}"
+
+#: src/invoice-reminders.tsx
+msgid "Edit {reminderName}"
+msgstr "Edit {reminderName}"
 
 #: src/tasks.tsx
 msgid "Edit {title}"
@@ -7340,6 +7389,10 @@ msgstr "Edit product"
 #: src/domain-redirects.tsx
 msgid "Edit redirect"
 msgstr "Edit redirect"
+
+#: src/invoice-reminders.tsx
+msgid "Edit reminder"
+msgstr "Edit reminder"
 
 #: src/reporting/report-page.tsx
 msgid "Edit report"
@@ -7502,6 +7555,10 @@ msgstr "Email signature"
 msgid "Email snippets"
 msgstr "Email snippets"
 
+#: src/invoice-reminders.tsx
+msgid "Email subject"
+msgstr "Email subject"
+
 #: src/automation-fields.ts
 msgid "Email template"
 msgstr "Email template"
@@ -7529,6 +7586,10 @@ msgstr "Emailed to the customer"
 #: src/shell/modules.ts
 msgid "Emails"
 msgstr "Emails"
+
+#: src/invoice-reminders.tsx
+msgid "Emails that remind a customer about an invoice they haven't paid. Each applies to invoices sent after it's turned on."
+msgstr "Emails that remind a customer about an invoice they haven't paid. Each applies to invoices sent after it's turned on."
 
 #: src/calendar-embed-dialog.tsx
 #: src/calendars.tsx
@@ -7802,6 +7863,14 @@ msgstr "Event {place}"
 #: src/automation-catalogue.ts
 msgid "Events"
 msgstr "Events"
+
+#: src/invoice-reminders.tsx
+msgid "Every"
+msgstr "Every"
+
+#: src/invoice-reminders.tsx
+msgid "Every {amount} {unit} after {anchor}, up to {times}"
+msgstr "Every {amount} {unit} after {anchor}, up to {times}"
 
 #: src/automation-summary.ts
 msgid "every channel"
@@ -8556,6 +8625,10 @@ msgstr "Forms"
 msgid "Found"
 msgstr "Found"
 
+#: src/invoice-reminders.tsx
+msgid "Frequency"
+msgstr "Frequency"
+
 #: src/automation-resume-window.tsx
 msgid "Fri"
 msgstr "Fri"
@@ -9309,12 +9382,17 @@ msgstr "Includes"
 msgid "Increase {label}"
 msgstr "Increase {label}"
 
+#: src/invoice-reminders.tsx
+msgid "Insert {field}"
+msgstr "Insert {field}"
+
 #: src/automation-merge-insert.tsx
 #: src/automation-record-controls.tsx
 msgid "Insert a field into: {label}"
 msgstr "Insert a field into: {label}"
 
 #: src/calendar-settings-basic.tsx
+#: src/invoice-reminders.tsx
 msgid "Insert a merge field"
 msgstr "Insert a merge field"
 
@@ -10916,6 +10994,7 @@ msgstr "Loading workflows…"
 #: src/dashboard-widgets.tsx
 #: src/inbox-contact.tsx
 #: src/inbox.tsx
+#: src/invoice-reminders.tsx
 #: src/list-toolbar.tsx
 #: src/media/library.tsx
 #: src/payments-document.tsx
@@ -11353,6 +11432,7 @@ msgstr "Merged into <0>the contact kept</0>"
 #: src/automation-attribution-words.ts
 #: src/automation-fields.ts
 #: src/contact-list.tsx
+#: src/invoice-reminders.tsx
 #: src/reporting/words.ts
 #: src/snippet-panel.tsx
 msgid "Message"
@@ -11776,6 +11856,7 @@ msgstr "name"
 #: src/custom-values.tsx
 #: src/domains.tsx
 #: src/email-checks.tsx
+#: src/invoice-reminders.tsx
 #: src/media/library.tsx
 #: src/payments-product-panel.tsx
 #: src/payments-products.tsx
@@ -12605,6 +12686,10 @@ msgstr "No redirects yet. A redirect sends an address on one of your domains to 
 msgid "No referrer"
 msgstr "No referrer"
 
+#: src/invoice-reminders.tsx
+msgid "No reminders yet."
+msgstr "No reminders yet."
+
 #: src/inbox-assistant-rules.ts
 msgid "No reply can reach this contact right now, so no draft was written. The reply options below say what is missing."
 msgstr "No reply can reach this contact right now, so no draft was written. The reply options below say what is missing."
@@ -13261,6 +13346,7 @@ msgid "Oldest"
 msgstr "Oldest"
 
 #: src/contact-preferences.tsx
+#: src/invoice-reminders.tsx
 #: src/routes/_app.b.$slug.settings.sign-in.tsx
 #: src/webchat-settings.tsx
 msgid "On"
@@ -13293,6 +13379,10 @@ msgstr "On which channel"
 #: src/calendar-settings-forms.tsx
 msgid "On, the booking page shows a box with the wording below and keeps what the visitor agreed to as proof. Off, there is no box and no confirmation email is sent."
 msgstr "On, the booking page shows a box with the wording below and keeps what the visitor agreed to as proof. Off, there is no box and no confirmation email is sent."
+
+#: src/invoice-reminders.tsx
+msgid "On: {reminderName}"
+msgstr "On: {reminderName}"
 
 #: src/automation-runs.tsx
 msgid "Once the workflow is published and something starts it, each contact it runs for is listed here, with every action taken."
@@ -15118,9 +15208,17 @@ msgstr "Reloading replaces your unsaved changes."
 msgid "Reloading…"
 msgstr "Reloading…"
 
+#: src/invoice-reminders.tsx
+msgid "Reminder settings"
+msgstr "Reminder settings"
+
 #: src/notifications-panel.tsx
 msgid "Reminder: a task is due soon: {title}"
 msgstr "Reminder: a task is due soon: {title}"
+
+#: src/invoice-reminders.tsx
+msgid "reminders"
+msgstr "reminders"
 
 #: src/calendar-reminders-hint.tsx
 msgid "Reminders"
@@ -15955,6 +16053,10 @@ msgstr "Save private list views"
 #: src/quiet-hours-settings.tsx
 msgid "Save quiet hours"
 msgstr "Save quiet hours"
+
+#: src/invoice-reminders.tsx
+msgid "Save reminder"
+msgstr "Save reminder"
 
 #: src/tag-editors.tsx
 msgid "Save rules"
@@ -17085,6 +17187,7 @@ msgstr "Someone books an appointment on {calendar}"
 msgid "Someone changed it since this list was read. The list is up to date now; try again."
 msgstr "Someone changed it since this list was read. The list is up to date now; try again."
 
+#: src/invoice-reminders.tsx
 #: src/payments-settings.tsx
 msgid "Someone changed these settings since you opened them. Reload the saved version, then make your changes again."
 msgstr "Someone changed these settings since you opened them. Reload the saved version, then make your changes again."
@@ -18778,6 +18881,10 @@ msgstr "The draft was cut off before it was finished, so it wasn’t kept. Try a
 msgid "The draft was saved, but it wasn't issued. Check your connection and try again."
 msgstr "The draft was saved, but it wasn't issued. Check your connection and try again."
 
+#: src/invoice-reminders.tsx
+msgid "the due date"
+msgstr "the due date"
+
 #: src/note-editor-loader.tsx
 msgid "The editor couldn't load. Your notes are still here. Reload the page to try again."
 msgstr "The editor couldn't load. Your notes are still here. Reload the page to try again."
@@ -19315,6 +19422,10 @@ msgstr "The redirects couldn't be loaded."
 msgid "The redirects couldn't be loaded. Check your connection."
 msgstr "The redirects couldn't be loaded. Check your connection."
 
+#: src/invoice-reminders.tsx
+msgid "The reminder wasn't saved. Check your connection and try again."
+msgstr "The reminder wasn't saved. Check your connection and try again."
+
 #: src/inbox-composer.tsx
 msgid "The reply wasn't sent. Check your connection and try again. Trying again won't send it twice."
 msgstr "The reply wasn't sent. Check your connection and try again. Trying again won't send it twice."
@@ -19421,6 +19532,10 @@ msgstr "The sending account or the business isn't active."
 #: src/inbox-rules.ts
 msgid "The sending account's server refused the message."
 msgstr "The sending account's server refused the message."
+
+#: src/invoice-reminders.tsx
+msgid "the sent date"
+msgstr "the sent date"
 
 #: src/email.tsx
 msgid "The server did not offer the required encrypted connection."
@@ -21156,6 +21271,7 @@ msgstr "Undone: the form is a draft again."
 msgid "Undone."
 msgstr "Undone."
 
+#: src/invoice-reminders.tsx
 #: src/payments-document-editor.tsx
 #: src/payments-product-panel.tsx
 #: src/payments-products.tsx
@@ -21323,6 +21439,10 @@ msgstr "up"
 #: src/reporting/charts.tsx
 msgid "up from {earlier}"
 msgstr "up from {earlier}"
+
+#: src/invoice-reminders.tsx
+msgid "Up to"
+msgstr "Up to"
 
 #: src/contact-details.tsx
 msgid "Up to {MAX_CONTACT_FOLLOWERS} people can follow a contact."
