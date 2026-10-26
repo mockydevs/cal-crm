@@ -7,7 +7,7 @@
 # Configuration is read at start; see apps/server/README.md.
 
 # Node 24, the version in .nvmrc, pinned by digest so every build starts from the same image.
-FROM node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43 AS base
+FROM node:26.12.1-alpine@sha256:40cd011b55415bc894e45b02fdd5a5dfde056921b7d23a64c74f80497af48797 AS base
 ENV PNPM_HOME=/pnpm
 ENV PATH=$PNPM_HOME:$PATH
 # corepack provides the pnpm version pinned in package.json's packageManager field.
@@ -37,7 +37,7 @@ RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
 
 # The server and the dashboard: the default and last target. The database is not part of
 # an install's images: it is an external PostgreSQL 18 with pgvector (compose.yml).
-FROM node:24.19.0-alpine@sha256:d32cdf619f63fe0471182d08996dd516c6275bb5fd31ae06e55a570bd9e1ad43 AS runtime
+FROM node:26.12.1-alpine@sha256:40cd011b55415bc894e45b02fdd5a5dfde056921b7d23a64c74f80497af48797 AS runtime
 # tini runs as PID 1: it passes Docker's SIGTERM on to Node and reaps zombie processes.
 # apk upgrade takes Alpine's security fixes as they're released, between base image updates.
 # npm, npx, corepack and yarn ship with the base image but never run here, and npm's own
